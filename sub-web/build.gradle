@@ -1,0 +1,36 @@
+buildscript {
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+dependencies {
+  compile project(':sub-common')
+  compile project(':sub-web')
+  compile project(':sub-core')
+  compile project(':sub-netty')
+  compile project(':sub-shiro')
+
+  compile('com.baomidou:mybatis-plus-boot-starter:3.0.6')
+  compile('mysql:mysql-connector-java:5.1.47')
+  compile('com.google.guava:guava:27.0.1-jre')
+
+  compile('org.springframework.boot:spring-boot-starter-actuator')
+  compile('org.springframework.boot:spring-boot-starter-aop')
+  compile('org.springframework.boot:spring-boot-starter-cache')
+  compile('org.springframework.boot:spring-boot-starter-data-redis')
+  compile('org.springframework.boot:spring-boot-starter-web')
+  compile('org.springframework.boot:spring-boot-starter-web-services')
+  compile('org.springframework.boot:spring-boot-starter-websocket')
+  compile('org.springframework.session:spring-session-data-redis')
+  compile('org.apache.commons:commons-pool2')
+  runtimeOnly('org.springframework.boot:spring-boot-devtools')
+  compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+  testCompile('org.springframework.boot:spring-boot-starter-test')
+  testCompile('org.freemarker:freemarker')
+  testCompileOnly('org.projectlombok:lombok')
+}

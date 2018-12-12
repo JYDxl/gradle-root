@@ -1,0 +1,35 @@
+spring:
+  redis:
+    host: localhost
+    port: 6380
+    database: 0
+    password: l
+    timeout: 1s
+    lettuce:
+      pool:
+        max-idle: 16
+        min-idle: 0
+        max-active: 16
+        max-wait: -1ms
+      shutdown-timeout: 1s
+
+  datasource:
+    url: jdbc:mysql://localhost:3357/generator?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: l
+    type: com.zaxxer.hikari.HikariDataSource
+    name: datasource-mysql
+    jmx-enabled: true
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+
+logging:
+  level:
+    org.github: debug
+    io.netty: debug
