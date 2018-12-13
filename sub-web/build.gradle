@@ -15,6 +15,7 @@ dependencies {
   compile project(':sub-netty')
   compile project(':sub-shiro')
 
+  compile('io.netty:netty-transport-native-epoll:4.1.31.Final')
   compile('com.baomidou:mybatis-plus-boot-starter:3.0.6')
   compile('mysql:mysql-connector-java:5.1.47')
   compile('com.google.guava:guava:27.0.1-jre')

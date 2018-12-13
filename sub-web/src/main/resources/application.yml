@@ -21,6 +21,8 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     name: datasource-mysql
     jmx-enabled: true
+    hikari:
+      pool-name: pool-hikari
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
