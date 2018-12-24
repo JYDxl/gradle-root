@@ -8,9 +8,10 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+test.enabled = false
+
 dependencies {
   compile project(':sub-common')
-  compile project(':sub-web')
   compile project(':sub-core')
   compile project(':sub-netty')
   compile project(':sub-shiro')

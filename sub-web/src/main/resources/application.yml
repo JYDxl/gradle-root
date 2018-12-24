@@ -12,7 +12,6 @@ spring:
         max-active: 16
         max-wait: -1ms
       shutdown-timeout: 1s
-
   datasource:
     url: jdbc:mysql://localhost:3357/generator?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true
     driver-class-name: com.mysql.jdbc.Driver
@@ -23,7 +22,6 @@ spring:
     jmx-enabled: true
     hikari:
       pool-name: pool-hikari
-
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: Asia/Shanghai
