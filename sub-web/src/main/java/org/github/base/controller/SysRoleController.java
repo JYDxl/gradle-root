@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author JYD_XL
- * @since 2018-12-12
+ * @since 2018-12-30
  */
 @RestController
 @RequestMapping("/base/sys-role-entity")

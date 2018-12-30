@@ -2,18 +2,20 @@ package org.github;
 
 import lombok.val;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
-import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+
+import static com.baomidou.mybatisplus.annotation.IdType.ID_WORKER_STR;
+import static com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel;
+import static java.lang.System.getProperty;
 
 public class MyBatisGenerator {
   public static void main(String[] args) {
-    val path         = System.getProperty("user.dir");
+    val path         = getProperty("user.dir");
     val globalConfig = new GlobalConfig();
     globalConfig
       .setOutputDir(path + "/sub-web/src/main/java")
@@ -21,7 +23,7 @@ public class MyBatisGenerator {
       .setOpen(false)
       .setAuthor("JYD_XL")
       .setBaseResultMap(true)
-      .setIdType(IdType.ID_WORKER_STR)
+      .setIdType(ID_WORKER_STR)
       .setEntityName("%sEntity")
       .setMapperName("%sMapper")
       .setXmlName("%sMapper")
@@ -31,7 +33,7 @@ public class MyBatisGenerator {
 
     val dataSourceConfig = new DataSourceConfig();
     dataSourceConfig
-      .setUrl("jdbc:mysql://localhost:3357/generator?useSSL=false&useUnicode=true&characterEncoding=utf8")
+      .setUrl("jdbc:mysql://localhost:3357/shiro?useSSL=false")
       .setDriverName("com.mysql.jdbc.Driver")
       .setUsername("root")
       .setPassword("l");
@@ -45,7 +47,7 @@ public class MyBatisGenerator {
     val strategyConfig = new StrategyConfig();
     strategyConfig
       .setSkipView(true)
-      .setNaming(NamingStrategy.underline_to_camel)
+      .setNaming(underline_to_camel)
       .setEntityLombokModel(true)
       .setRestControllerStyle(true)
       .setControllerMappingHyphenStyle(true)
