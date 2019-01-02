@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'gradle-root'
-include 'sub-core', 'sub-web', 'sub-common', 'sub-netty', 'sub-shiro'
+include 'sub-core', 'sub-web', 'sub-model', 'sub-netty', 'sub-shiro'
