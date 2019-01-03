@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.getProperty
 
 fun main(args: Array<String>) {
-  val autoGenerator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
+  val generator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
 
   GlobalConfig().apply {
     val path = getProperty("user.dir")!!
@@ -22,12 +22,7 @@ fun main(args: Array<String>) {
     isBaseResultMap = true
     idType = ID_WORKER_STR
     entityName = "%sEntity"
-    mapperName = "%sMapper"
-    xmlName = "%sMapper"
-    serviceName = "I%sService"
-    serviceImplName = "%sServiceImpl"
-    controllerName = "%sController"
-    autoGenerator.globalConfig = this
+    generator.globalConfig = this
   }
 
   DataSourceConfig().apply {
@@ -35,26 +30,24 @@ fun main(args: Array<String>) {
     driverName = "com.mysql.jdbc.Driver"
     username = "root"
     password = "l"
-    autoGenerator.dataSource = this
+    generator.dataSource = this
   }
 
   PackageConfig().apply {
     parent = "org.github"
     xml = "mapper.base"
     moduleName = "base"
-    autoGenerator.packageInfo = this
+    generator.packageInfo = this
   }
 
   StrategyConfig().apply {
-    isSkipView = false
     naming = underline_to_camel
     isEntityLombokModel = true
-    isEntityBuilderModel = false
     isRestControllerStyle = true
     isControllerMappingHyphenStyle = true
     setInclude(".+")
-    autoGenerator.strategy = this
+    generator.strategy = this
   }
 
-  autoGenerator.execute()
+  generator.execute()
 }
