@@ -83,6 +83,8 @@ const val PREFIX_HTML = "html/"
 const val DEFAULT_EXCEL = "excel.xlsx"
 /** 默认批量下载文件名.  */
 const val DEFAULT_ZIP = "package.zip"
+/** do not use. */
+const val DO_NOT_USE = "DO NOT USE"
 
 /** 变量及方法名正则校验.  */
 val PARAM_PATTERN = compile("^[A-Za-z_$]+[A-Za-z0-9_$]*$")!!
@@ -98,6 +100,8 @@ val JOINER_EMPTY = on(EMPTY).skipNulls()!!
 val JOINER_SPACE = on(SPACE).skipNulls()!!
 /** 默认字符串连接器.  */
 val JOINER = JOINER_SPACE
+/** JSON序列化工具.  */
+val JSON_WRAPPER: IWrapper = JSONWrapper
 /** Excel空数据集.  */
 val INIT = arrayOf<Array<String>>()
 /** default result list.  */
@@ -106,5 +110,3 @@ val ARRAY = arrayOf<Any>()
 val API_VERSION = System.getProperty("apiVersion", "unknown")!!
 /** APP根目录.  */
 val PROJECT_DIR = System.getProperty("projectDir", "unknown")!!
-/** do not use. */
-const val DO_NOT_USE = "DO NOT USE"
