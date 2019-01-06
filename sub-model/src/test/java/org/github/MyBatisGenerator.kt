@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.generator.config.DataSourceConfig
 import com.baomidou.mybatisplus.generator.config.GlobalConfig
 import com.baomidou.mybatisplus.generator.config.PackageConfig
 import com.baomidou.mybatisplus.generator.config.StrategyConfig
+import com.baomidou.mybatisplus.generator.config.TemplateConfig
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.getProperty
@@ -22,6 +23,7 @@ fun main(args: Array<String>) {
     isBaseResultMap = true
     idType = ID_WORKER_STR
     entityName = "%sEntity"
+    serviceImplName = "%sService"
     generator.globalConfig = this
   }
 
@@ -47,6 +49,16 @@ fun main(args: Array<String>) {
     isControllerMappingHyphenStyle = true
     setInclude(".+")
     generator.strategy = this
+  }
+
+  TemplateConfig().apply {
+    controller = "/generator/controller.java"
+    service = "/generator/service.java"
+    mapper = "/generator/mapper.java"
+    xml = "/generator/mapper.xml"
+    serviceImpl = "/generator/serviceImpl.java"
+    setEntity("/generator/entity.java")
+    generator.template = this
   }
 
   generator.execute()

@@ -18,10 +18,6 @@ import static org.github.spring.footstone.IConstKt.EMPTY;
 /**
  * Top interface of all.
  *
- * 1.该接口的核心方法为{@link Returnable#get}.
- * 2.该接口默认返回字符串{@code text/plain; charset=UTF-8}.
- * 3.该接口为函数接口{@link FunctionalInterface}.
- *
  * <pre>
  *     return Returnable.of();
  * </pre>
