@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.github.base.mapper.SysCodeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.github.base.entity.SysCodeEntity">
+        <id column="code_id" property="codeId"/>
+        <result column="code_name" property="codeName"/>
+        <result column="code_value" property="codeValue"/>
+        <result column="show_num" property="showNum"/>
+        <result column="code_type_id" property="codeTypeId"/>
+        <result column="use_type" property="useType"/>
+    </resultMap>
+
+</mapper>
