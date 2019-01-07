@@ -15,12 +15,10 @@ fun main(args: Array<String>) {
   val generator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
 
   GlobalConfig().apply {
-    val path = getProperty("user.dir")!!
-    outputDir = "$path/sub-model/src/main/java"
+    outputDir = "${getProperty("user.dir")}/sub-model/src/main/java"
     isFileOverride = true
     isOpen = false
     author = "JYD_XL"
-    isBaseResultMap = true
     idType = ID_WORKER_STR
     entityName = "%sEntity"
     serviceImplName = "%sService"
@@ -37,7 +35,6 @@ fun main(args: Array<String>) {
 
   PackageConfig().apply {
     parent = "org.github"
-    xml = "mapper.base"
     moduleName = "base"
     generator.packageInfo = this
   }
@@ -45,19 +42,17 @@ fun main(args: Array<String>) {
   StrategyConfig().apply {
     naming = underline_to_camel
     isEntityLombokModel = true
-    isRestControllerStyle = true
-    isControllerMappingHyphenStyle = true
     setInclude(".+")
     generator.strategy = this
   }
 
   TemplateConfig().apply {
-    controller = "/generator/controller.java"
-    service = "/generator/service.java"
-    mapper = "/generator/mapper.java"
-    xml = "/generator/mapper.xml"
-    serviceImpl = "/generator/serviceImpl.java"
-    setEntity("/generator/entity.java")
+    service = "service.java"
+    serviceImpl = "serviceImpl.java"
+    mapper = "mapper.java"
+    controller = null
+    xml = null
+    setEntity("entity.java")
     generator.template = this
   }
 

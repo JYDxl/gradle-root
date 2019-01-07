@@ -1,5 +1,6 @@
 package org.github;
 
+import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.github.base.entity.TipLoginLogEntity;
@@ -9,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -30,13 +32,18 @@ public class ApplicationTests {
   @Autowired
   private TipLoginLogMapper tipLoginLogMapper;
 
+  @Autowired
+  private ApplicationContext applicationContext;
+
   @Test
   public void contextLoads() throws JsonProcessingException {
+    val env   = applicationContext.getEnvironment();
     val now   = commonMapper.now();
     val query = Wrappers.<TipLoginLogEntity>lambdaQuery();
-    query.eq(TipLoginLogEntity::getLogUser, "hanjian");
+    query.eq(TipLoginLogEntity::getLogUser, "hanjian").le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
     val page = tipLoginLogMapper.selectPage(new Page<>(), query);
-    log.debug(objectMapper.writeValueAsString(now));
-    log.debug(objectMapper.writeValueAsString(page));
+    log.info(objectMapper.writeValueAsString(now));
+    log.info(String.valueOf(page.getTotal()));
+    log.info(env.getProperty("os.name"));
   }
 }

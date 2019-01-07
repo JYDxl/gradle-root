@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-06
+ * @since 2019-01-07
  */
 @Service
 public class SysOrgService extends ServiceImpl<SysOrgMapper, SysOrgEntity> implements ISysOrgService {}
