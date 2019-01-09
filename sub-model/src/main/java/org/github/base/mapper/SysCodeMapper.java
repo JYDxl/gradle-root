@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-07
+ * @since 2019-01-08
  */
 @Repository
 public interface SysCodeMapper extends BaseMapper<SysCodeEntity> {}
