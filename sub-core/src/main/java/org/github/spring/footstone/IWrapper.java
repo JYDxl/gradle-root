@@ -25,11 +25,7 @@ package org.github.spring.footstone;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NotNull;
-
 
 /**
  * 数据包装接口.
@@ -47,7 +43,7 @@ public interface IWrapper {
    * @throws IOException IO异常
    */
   @Nonnull
-  <T> T readValue(@NotNull InputStream input, @NotNull Class<T> clazz) throws IOException;
+  <T> T readValue(@Nonnull InputStream input, @Nonnull Class<T> clazz) throws IOException;
 
   /**
    * 读取数据.
@@ -59,7 +55,7 @@ public interface IWrapper {
    * @throws IOException IO异常
    */
   @Nonnull
-  <T> T readValue(@NotNull String json, @NotNull Class<T> clazz) throws IOException;
+  <T> T readValue(@Nonnull String json, @Nonnull Class<T> clazz) throws IOException;
 
   /**
    * 写入数据.
@@ -68,7 +64,7 @@ public interface IWrapper {
    * @param value  Object
    * @throws IOException IO异常
    */
-  void writeValue(@NotNull OutputStream output, @NotNull Object value) throws IOException;
+  void writeValue(@Nonnull OutputStream output, @Nonnull Object value) throws IOException;
 
   /**
    * 将对象转为字节数据.
@@ -77,7 +73,7 @@ public interface IWrapper {
    * @return byte[]
    */
   @Nonnull
-  byte[] writeValueAsBytes(@NotNull Object value);
+  byte[] writeValueAsBytes(@Nonnull Object value);
 
   /**
    * 将对象转为字符串.
@@ -86,5 +82,5 @@ public interface IWrapper {
    * @return String
    */
   @Nonnull
-  String writeValueAsString(@NotNull Object value);
+  String writeValueAsString(@Nonnull Object value);
 }

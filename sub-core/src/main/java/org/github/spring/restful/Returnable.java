@@ -3,14 +3,10 @@ package org.github.spring.restful;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.Writer;
-
+import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.github.spring.enumeration.ContentType;
-
-import org.jetbrains.annotations.NotNull;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.github.spring.enumeration.ContentType.TEXT;
 import static org.github.spring.footstone.IConstKt.EMPTY;
@@ -29,19 +25,19 @@ import static org.github.spring.footstone.IConstKt.EMPTY;
 public interface Returnable extends Serializable {
   /** 通过字符流{@link Writer}处理数据. */
   @Deprecated
-  default void accept(@NotNull Writer writer) throws Exception {
+  default void accept(@Nonnull Writer writer) throws Exception {
     writer.write(get());
   }
 
   /** 通过字节流{@link OutputStream}处理数据. */
   @Deprecated
-  default void accept(@NotNull OutputStream output) throws Exception {
+  default void accept(@Nonnull OutputStream output) throws Exception {
     throw new UnsupportedOperationException();
   }
 
   /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
   @Deprecated
-  default void collect(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws Exception {
+  default void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
     response.setContentType(contentType().get());
     response.setCharacterEncoding(UTF_8.name());
     if (functional()) {
@@ -53,7 +49,7 @@ public interface Returnable extends Serializable {
 
   /** 获取返回类型. */
   @Deprecated
-  @NotNull
+  @Nonnull
   default ContentType contentType() {
     return TEXT;
   }
@@ -65,7 +61,7 @@ public interface Returnable extends Serializable {
   }
 
   /** 获取数据. */
-  @NotNull
+  @Nonnull
   String get() throws Exception;
 
   /** 清空数据. */
@@ -81,20 +77,20 @@ public interface Returnable extends Serializable {
   }
 
   /** Generator. */
-  @NotNull
-  static Returnable of(@NotNull Returnable data) {
+  @Nonnull
+  static Returnable of(@Nonnull Returnable data) {
     return data;
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("NullableProblems")
-  static Returnable of(@NotNull Object data) {
+  static Returnable of(@Nonnull Object data) {
     return data::toString;
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   static Returnable of() {
     return of(EMPTY);
   }

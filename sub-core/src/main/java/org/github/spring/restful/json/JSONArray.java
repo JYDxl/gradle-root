@@ -3,9 +3,7 @@ package org.github.spring.restful.json;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
-
-import org.jetbrains.annotations.NotNull;
-
+import javax.annotation.Nonnull;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static org.github.spring.footstone.IConstKt.getARRAY;
@@ -26,7 +24,7 @@ import static org.github.spring.footstone.IConstKt.getARRAY;
  */
 public class JSONArray<E> extends JSONBasic implements JSON {
   /** data. */
-  @NotNull
+  @Nonnull
   private Object[] data = getARRAY();
 
   /** Constructor. */
@@ -42,7 +40,7 @@ public class JSONArray<E> extends JSONBasic implements JSON {
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
-  public JSONArray(@NotNull Collection<? extends E> data) {
+  public JSONArray(@Nonnull Collection<? extends E> data) {
     this.withData(data);
   }
 
@@ -54,32 +52,32 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   }
 
   /** GET data. */
-  @NotNull
+  @Nonnull
   public Object[] getData() {
     return data;
   }
 
   /** SET data. */
-  public void setData(@NotNull Object[] data) {
+  public void setData(@Nonnull Object[] data) {
     this.data = data;
   }
 
   /** GET data. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("unchecked")
   public E[] toArray() {
     return (E[]) this.getData();
   }
 
   /** GET data. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("unchecked")
   public List<E> toList() {
     return (List<E>) asList(data);
   }
 
   /** GET data. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("unchecked")
   public Stream<E> toStream() {
     return (Stream<E>) stream(data);
@@ -89,36 +87,36 @@ public class JSONArray<E> extends JSONBasic implements JSON {
 
 
   @SafeVarargs
-  @NotNull
+  @Nonnull
   public final JSONArray<E> withData(E... data) {
     this.data = data;
     return this;
   }
 
   /** WITH data. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("UnusedReturnValue")
-  public JSONArray<E> withData(@NotNull Collection<? extends E> data) {
+  public JSONArray<E> withData(@Nonnull Collection<? extends E> data) {
     this.data = data.toArray();
     return this;
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   public static JSONArray of() {
     return new JSONArray();
   }
 
   /** Generator. */
   @SafeVarargs
-  @NotNull
+  @Nonnull
   public static <V> JSONArray<V> of(V... data) {
     return new JSONArray<>(data);
   }
 
   /** Generator. */
-  @NotNull
-  public static <V> JSONArray<V> of(@NotNull Collection<? extends V> data) {
+  @Nonnull
+  public static <V> JSONArray<V> of(@Nonnull Collection<? extends V> data) {
     return new JSONArray<>(data);
   }
 }

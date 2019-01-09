@@ -1,10 +1,8 @@
 package org.github.spring.restful.view;
 
 
+import javax.annotation.Nonnull;
 import org.github.spring.restful.Returnable;
-
-import org.jetbrains.annotations.NotNull;
-
 import static org.github.spring.footstone.IConstKt.ROOT;
 import static org.github.spring.footstone.IConstKt.getJOINER_EMPTY;
 
@@ -22,7 +20,7 @@ import static org.github.spring.footstone.IConstKt.getJOINER_EMPTY;
 @SuppressWarnings("ALL")
 public interface View extends Returnable {
   @Override
-  @NotNull
+  @Nonnull
   String get() throws Exception;
 
   @Deprecated
@@ -36,12 +34,12 @@ public interface View extends Returnable {
   }
 
   /** Generator. */
-  static View of(@NotNull View view) {
+  static View of(@Nonnull View view) {
     return view;
   }
 
   /** Generator. */
-  static View of(@NotNull String view) {
+  static View of(@Nonnull String view) {
     return of(view::toString);
   }
 

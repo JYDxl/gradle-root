@@ -1,14 +1,10 @@
 package org.github.spring.restful.json;
 
+import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.github.spring.enumeration.ContentType;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import static org.github.spring.enumeration.ContentType.JSONP;
 import static org.github.spring.footstone.IConstKt.CALL_BACK;
 import static org.github.spring.footstone.IConstKt.getJOINER_EMPTY;
@@ -45,13 +41,13 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   /** Constructor. */
-  public JSONP(@NotNull String callback, T data) {
+  public JSONP(@Nonnull String callback, T data) {
     this.withCallback(callback).withData(data);
   }
 
   @Deprecated
   @Override
-  public void collect(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws Exception {
+  public void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
     if (CALL_BACK.equals(callback)) setCallback(request.getParameter(CALL_BACK));
     super.collect(request, response);
   }
@@ -63,14 +59,14 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public String get() {
     return getJOINER_EMPTY().join(callback, "(", super.get(), ")");
   }
 
   @Deprecated
   @Override
-  @NotNull
+  @Nonnull
   public ContentType contentType() {
     return JSONP;
   }
@@ -87,12 +83,12 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   /** SET callback. */
-  public void setCallback(@NotNull String callback) {
+  public void setCallback(@Nonnull String callback) {
     if (getPARAM_PATTERN().matcher(callback).matches()) this.callback = callback;
   }
 
   /** WITH callback. */
-  public org.github.spring.restful.json.JSONP<T> withCallback(@NotNull String callback) {
+  public org.github.spring.restful.json.JSONP<T> withCallback(@Nonnull String callback) {
     this.setCallback(callback);
     return this;
   }

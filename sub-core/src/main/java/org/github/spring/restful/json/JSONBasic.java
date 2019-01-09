@@ -1,14 +1,10 @@
 package org.github.spring.restful.json;
 
+import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.github.spring.footstone.AbstractEntity;
-
-import org.jetbrains.annotations.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.github.spring.footstone.IConstKt.RET_ERROR_CODE;
 import static org.github.spring.footstone.IConstKt.RET_ERROR_MSG;
@@ -33,7 +29,7 @@ public class JSONBasic extends AbstractEntity implements JSON {
   private int retCode = RET_OK_CODE;
 
   /** 返回的信息. */
-  @NotNull
+  @Nonnull
   private String retMsg = RET_OK_MSG;
 
   /** HTTP状态码. */
@@ -46,20 +42,20 @@ public class JSONBasic extends AbstractEntity implements JSON {
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
-  public JSONBasic(int retCode, @NotNull String retMsg) {
+  public JSONBasic(int retCode, @Nonnull String retMsg) {
     withRetCode(retCode).withRetMsg(retMsg);
   }
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
-  public JSONBasic(int status, int retCode, @NotNull String retMsg) {
+  public JSONBasic(int status, int retCode, @Nonnull String retMsg) {
     withStatus(status).withRetCode(retCode).withRetMsg(retMsg);
   }
 
   @Deprecated
   @Override
   @SuppressWarnings("deprecation")
-  public void collect(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response) throws Exception {
+  public void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
     if (SC_OK == status) {
       JSON.super.collect(request, response);
     } else {
@@ -81,13 +77,13 @@ public class JSONBasic extends AbstractEntity implements JSON {
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public String get() {
     return toString();
   }
 
   /** GET API version. */
-  @NotNull
+  @Nonnull
   public String getApiVersion() {
     return getAPI_VERSION();
   }
@@ -104,14 +100,14 @@ public class JSONBasic extends AbstractEntity implements JSON {
   }
 
   /** GET retMsg. */
-  @NotNull
+  @Nonnull
   public String getRetMsg() {
     return retMsg;
   }
 
   /** SET retMsg. */
   @SuppressWarnings("WeakerAccess")
-  public void setRetMsg(@NotNull String retMsg) {
+  public void setRetMsg(@Nonnull String retMsg) {
     this.retMsg = retMsg;
   }
 
@@ -127,7 +123,7 @@ public class JSONBasic extends AbstractEntity implements JSON {
   }
 
   /** WITH retCode. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("WeakerAccess")
   public JSONBasic withRetCode(int retCode) {
     setRetCode(retCode);
@@ -135,15 +131,15 @@ public class JSONBasic extends AbstractEntity implements JSON {
   }
 
   /** WITH retMsg. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
-  public JSONBasic withRetMsg(@NotNull String retMsg) {
+  public JSONBasic withRetMsg(@Nonnull String retMsg) {
     setRetMsg(retMsg);
     return this;
   }
 
   /** WITH status. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings("WeakerAccess")
   public JSONBasic withStatus(int status) {
     setStatus(status);
@@ -151,25 +147,25 @@ public class JSONBasic extends AbstractEntity implements JSON {
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   public static JSONBasic of() {
     return new JSONBasic();
   }
 
   /** Generator. */
-  @NotNull
-  public static JSONBasic of(int code, @NotNull String msg) {
+  @Nonnull
+  public static JSONBasic of(int code, @Nonnull String msg) {
     return new JSONBasic(code, msg);
   }
 
   /** Generator. */
-  @NotNull
-  public static JSONBasic of(int status, int code, @NotNull String msg) {
+  @Nonnull
+  public static JSONBasic of(int status, int code, @Nonnull String msg) {
     return new JSONBasic(status, code, msg);
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   public static JSONBasic error() {
     return of(SC_OK, RET_ERROR_CODE, RET_ERROR_MSG);
   }

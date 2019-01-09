@@ -1,8 +1,6 @@
 package org.github.spring.restful.json;
 
-
-import org.jetbrains.annotations.NotNull;
-
+import javax.annotation.Nonnull;
 import static org.github.spring.footstone.IConstKt.COUNT;
 
 /**
@@ -40,13 +38,13 @@ public class JSONCount extends JSONBasic implements JSON {
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
-  public JSONCount(@NotNull Long data) {
+  public JSONCount(@Nonnull Long data) {
     this.withData(data);
   }
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
-  public JSONCount(@NotNull Integer data) {
+  public JSONCount(@Nonnull Integer data) {
     this.withData(data);
   }
 
@@ -68,7 +66,7 @@ public class JSONCount extends JSONBasic implements JSON {
   }
 
   /** WITH data. */
-  @NotNull
+  @Nonnull
   @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
   public JSONCount withData(long data) {
     this.setData(data);
@@ -76,32 +74,32 @@ public class JSONCount extends JSONBasic implements JSON {
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   public static JSONCount of() {
     return new JSONCount();
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   public static JSONCount of(long data) {
     return new JSONCount(data);
   }
 
   /** Generator. */
-  @NotNull
+  @Nonnull
   public static JSONCount of(int data) {
     return new JSONCount(data);
   }
 
   /** Generator. */
-  @NotNull
-  public static JSONCount of(@NotNull Long data) {
+  @Nonnull
+  public static JSONCount of(@Nonnull Long data) {
     return new JSONCount(data);
   }
 
   /** Generator. */
-  @NotNull
-  public static JSONCount of(@NotNull Integer data) {
+  @Nonnull
+  public static JSONCount of(@Nonnull Integer data) {
     return new JSONCount(data);
   }
 }
