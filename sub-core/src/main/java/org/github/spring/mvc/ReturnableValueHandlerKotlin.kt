@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse
  * @see HandlerMethodReturnValueHandler
  */
 class ReturnableValueHandlerKotlin : HandlerMethodReturnValueHandler {
-
   override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.nestedParameterType)
 
   @Suppress("DEPRECATION")
