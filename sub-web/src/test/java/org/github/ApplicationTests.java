@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.github.base.entity.TipLoginLogEntity;
-import org.github.base.entity.TipOptLogEntity;
 import org.github.base.service.ITipLoginLogService;
 import org.github.base.service.ITipOptLogService;
 import org.github.common.mapper.CommonMapper;
@@ -45,19 +44,12 @@ public class ApplicationTests {
     val env   = applicationContext.getEnvironment();
     val now   = commonMapper.now();
     val query = Wrappers.<TipLoginLogEntity>lambdaQuery();
-    query.eq(TipLoginLogEntity::getLogUser, "hanjian").le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
+    query
+      .eq(TipLoginLogEntity::getLogUser, "hanjian")
+      .le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
     val page = tipLoginLogService.page(new Page<>(), query);
     log.info(objectMapper.writeValueAsString(now));
     log.info(String.valueOf(page.getTotal()));
     log.info(env.getProperty("os.name"));
-  }
-
-  @Test
-  public void testLogId() {
-    val entity = new TipOptLogEntity();
-    entity.setOptUser("admin");
-    entity.setOptContent("niconico");
-    tipOptLogService.save(entity);
-    log.info(entity.toString());
   }
 }

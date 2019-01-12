@@ -35,8 +35,3 @@ logging:
   level:
     org.github: debug
     io.netty: debug
-
-info:
-  author:
-    username: l
-    password: l
