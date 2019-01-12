@@ -15,7 +15,8 @@ fun main(args: Array<String>) {
   val generator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
 
   GlobalConfig().apply {
-    outputDir = "${getProperty("user.dir")}/sub-model/src/main/java"
+    val path = getProperty("user.dir")!!
+    outputDir = "$path/sub-model/src/main/java"
     isFileOverride = true
     isOpen = false
     author = "JYD_XL"

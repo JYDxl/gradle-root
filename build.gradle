@@ -17,9 +17,9 @@ buildscript {
   }
 
   dependencies {
-    classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
-    classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}"
+    classpath('org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE')
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+    classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
   }
 }
 
@@ -28,7 +28,7 @@ allprojects {
   version = '0.0.1-SNAPSHOT'
 
   ext {
-    mybatisVersion = '3.0.7.1'
+    mybatisPlusVersion = '3.0.7.1'
     lombokVersion = '1.18.4'
     mysqlVersion = '5.1.47'
     nettyVersion = '4.1.31.Final'
@@ -69,17 +69,17 @@ subprojects {
   }
 
   dependencies {
-    compile 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-    compile 'org.jetbrains.kotlin:kotlin-reflect'
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+    compile('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+    compile('org.jetbrains.kotlin:kotlin-reflect')
 
-    compile 'org.apache.commons:commons-lang3:3.8.1'
-    compile 'com.google.guava:guava:27.0.1-jre'
-    compile 'com.squareup.okhttp3:okhttp:3.12.1'
+    compile('org.apache.commons:commons-lang3:3.8.1')
+    compile('com.google.guava:guava:27.0.1-jre')
+    compile('com.squareup.okhttp3:okhttp:3.12.1')
 
-    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
-    compileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
-    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
   }
 }

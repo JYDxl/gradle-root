@@ -1,0 +1,42 @@
+spring:
+  redis:
+    port: 6380
+    password: l
+    timeout: 1s
+    lettuce:
+      pool:
+        max-active: 16
+        max-idle: 16
+      shutdown-timeout: 1s
+  datasource:
+    url: jdbc:mysql://localhost:3357/shiro?useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: l
+    type: com.zaxxer.hikari.HikariDataSource
+    jmx-enabled: true
+    hikari:
+      pool-name: pool-hikari
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+  profiles:
+    active: dev
+  http:
+    encoding:
+      force: true
+      force-request: true
+      force-response: true
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+
+logging:
+  level:
+    org.github: debug
+    io.netty: debug
+
+info:
+  author:
+    username: l
+    password: l
