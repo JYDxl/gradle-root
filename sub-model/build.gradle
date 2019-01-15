@@ -3,6 +3,5 @@ dependencies {
   testCompile("mysql:mysql-connector-java:${mysqlVersion}")
   testCompile("com.baomidou:mybatis-plus-generator:${mybatisPlusVersion}")
 
-  compile('org.springframework.boot:spring-boot-starter-web')
   testCompile('org.freemarker:freemarker')
 }
