@@ -47,9 +47,15 @@ public class ApplicationTests {
     query
       .eq(TipLoginLogEntity::getLogUser, "hanjian")
       .le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
-    val page = tipLoginLogService.page(new Page<>(), query);
+    val page = tipLoginLogService.page(new Page<>(2, 10), query);
     log.info(objectMapper.writeValueAsString(now));
     log.info(String.valueOf(page.getTotal()));
     log.info(env.getProperty("os.name"));
+  }
+
+  @Test
+  public void page() throws JsonProcessingException {
+    val page = commonMapper.page(new Page());
+    log.info(objectMapper.writeValueAsString(page));
   }
 }
