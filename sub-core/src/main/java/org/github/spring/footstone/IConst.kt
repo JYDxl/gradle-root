@@ -100,8 +100,6 @@ val JOINER_EMPTY = on(EMPTY).skipNulls()!!
 val JOINER_SPACE = on(SPACE).skipNulls()!!
 /** 默认字符串连接器.  */
 val JOINER = JOINER_SPACE
-/** JSON序列化工具.  */
-val JSON_WRAPPER: IWrapper = JSONWrapper
 /** Excel空数据集.  */
 val INIT = arrayOf<Array<String>>()
 /** default result list.  */

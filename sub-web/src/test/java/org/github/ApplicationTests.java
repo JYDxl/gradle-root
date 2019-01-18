@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.github.base.entity.TipLoginLogEntity;
 import org.github.base.service.ITipLoginLogService;
-import org.github.base.service.ITipOptLogService;
 import org.github.common.mapper.CommonMapper;
+import org.github.ops.ObjectOpsKt;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,19 +26,13 @@ public class ApplicationTests {
   private CommonMapper commonMapper;
 
   @Autowired
-  private ObjectMapper objectMapper;
-
-  @Autowired
   private ITipLoginLogService tipLoginLogService;
 
   @Autowired
   private ApplicationContext applicationContext;
 
-  @Autowired
-  private ITipOptLogService tipOptLogService;
-
   @Test
-  public void contextLoads() throws JsonProcessingException {
+  public void contextLoads() {
     val env   = applicationContext.getEnvironment();
     val now   = commonMapper.now();
     val query = Wrappers.<TipLoginLogEntity>lambdaQuery();
@@ -48,14 +40,15 @@ public class ApplicationTests {
       .eq(TipLoginLogEntity::getLogUser, "hanjian")
       .le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
     val page = tipLoginLogService.page(new Page<>(2, 10), query);
-    log.info(objectMapper.writeValueAsString(now));
+    log.info(ObjectOpsKt.json(now));
+    log.info(ObjectOpsKt.json(page));
     log.info(String.valueOf(page.getTotal()));
     log.info(env.getProperty("os.name"));
   }
 
   @Test
-  public void page() throws JsonProcessingException {
+  public void page() {
     val page = commonMapper.page(new Page());
-    log.info(objectMapper.writeValueAsString(page));
+    log.info(ObjectOpsKt.json(page));
   }
 }

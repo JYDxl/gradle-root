@@ -1,12 +1,13 @@
 package org.github.spring.restful.json;
 
 import java.io.OutputStream;
+import java.util.Objects;
 import javax.annotation.Nonnull;
+import org.github.ops.ObjectOpsKt;
 import org.github.spring.enumeration.ContentType;
 import org.github.spring.restful.Returnable;
 import static org.github.spring.enumeration.ContentType.JSON;
 import static org.github.spring.footstone.IConstKt.EMPTY_JSON;
-import static org.github.spring.footstone.IConstKt.getJSON_WRAPPER;
 
 /**
  * Top interface of json.
@@ -25,7 +26,7 @@ public interface JSON extends Returnable {
   @Override
   @SuppressWarnings("deprecation")
   default void accept(@Nonnull OutputStream output) throws Exception {
-    getJSON_WRAPPER().writeValue(output, this);
+    ObjectOpsKt.writeValue(this, output);
   }
 
   @Nonnull
@@ -56,7 +57,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @Nonnull
   static JSON of(@Nonnull Object json) {
-    return of(getJSON_WRAPPER().writeValueAsString(json));
+    return of(Objects.requireNonNull(ObjectOpsKt.json(json)));
   }
 
   /** Generator. */
