@@ -1,12 +1,11 @@
 package org.github.spring.restful.json;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
-import static java.util.Arrays.asList;
-import static java.util.Arrays.stream;
-import static org.github.spring.footstone.IConstKt.getARRAY;
+import org.github.spring.footstone.IConstKt;
 
 /**
  * JSON of array.
@@ -25,7 +24,7 @@ import static org.github.spring.footstone.IConstKt.getARRAY;
 public class JSONArray<E> extends JSONBasic implements JSON {
   /** data. */
   @Nonnull
-  private Object[] data = getARRAY();
+  private Object[] data = IConstKt.getARRAY();
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
@@ -47,7 +46,7 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   @Override
   @SuppressWarnings("deprecation")
   public void release() {
-    data = getARRAY();
+    data = IConstKt.getARRAY();
     super.release();
   }
 
@@ -73,18 +72,17 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   @Nonnull
   @SuppressWarnings("unchecked")
   public List<E> toList() {
-    return (List<E>) asList(data);
+    return (List<E>) Arrays.asList(data);
   }
 
   /** GET data. */
   @Nonnull
   @SuppressWarnings("unchecked")
   public Stream<E> toStream() {
-    return (Stream<E>) stream(data);
+    return (Stream<E>) Arrays.stream(data);
   }
 
   /** WITH data. */
-
 
   @SafeVarargs
   @Nonnull

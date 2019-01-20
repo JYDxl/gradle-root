@@ -1,4 +1,4 @@
-package org.github.spring.enumeration
+package org.github.spring.enumerate
 
 import java.util.function.Supplier
 

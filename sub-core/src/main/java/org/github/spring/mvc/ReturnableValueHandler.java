@@ -1,5 +1,6 @@
 package org.github.spring.mvc;
 
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,8 +11,6 @@ import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import static java.util.Objects.requireNonNull;
-import static org.github.spring.restful.Returnable.of;
 
 /**
  * Returnable返回类型解析器，Java版.
@@ -29,11 +28,11 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
   @SuppressWarnings("deprecation")
   @Override
   public void handleReturnValue(Object returnValue, @Nonnull MethodParameter returnType, @Nonnull ModelAndViewContainer mavContainer, @Nonnull NativeWebRequest webRequest) throws Exception {
-    val value = ((Returnable) (returnValue == null ? of() : returnValue));
+    val value = ((Returnable) (returnValue == null ? Returnable.of() : returnValue));
     val req   = webRequest.getNativeRequest(HttpServletRequest.class);
     val resp  = webRequest.getNativeResponse(HttpServletResponse.class);
-    requireNonNull(req);
-    requireNonNull(resp);
+    Objects.requireNonNull(req);
+    Objects.requireNonNull(resp);
     if (value.terminal()) {
       value.collect(req, resp);
     } else {

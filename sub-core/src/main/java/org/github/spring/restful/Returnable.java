@@ -3,13 +3,12 @@ package org.github.spring.restful;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.github.spring.enumeration.ContentType;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.github.spring.enumeration.ContentType.TEXT;
-import static org.github.spring.footstone.IConstKt.EMPTY;
+import org.github.spring.enumerate.ContentType;
+import org.github.spring.footstone.IConstKt;
 
 /**
  * Top interface of all.
@@ -32,14 +31,14 @@ public interface Returnable extends Serializable {
   /** 通过字节流{@link OutputStream}处理数据. */
   @Deprecated
   default void accept(@Nonnull OutputStream output) throws Exception {
-    throw new UnsupportedOperationException();
+    throw new Exception();
   }
 
   /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
   @Deprecated
   default void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
     response.setContentType(contentType().get());
-    response.setCharacterEncoding(UTF_8.name());
+    response.setCharacterEncoding(StandardCharsets.UTF_8.name());
     if (functional()) {
       accept(response.getWriter());
     } else {
@@ -51,7 +50,7 @@ public interface Returnable extends Serializable {
   @Deprecated
   @Nonnull
   default ContentType contentType() {
-    return TEXT;
+    return ContentType.TEXT;
   }
 
   /** 直接通过函数接口传递数据? */
@@ -92,6 +91,6 @@ public interface Returnable extends Serializable {
   /** Generator. */
   @Nonnull
   static Returnable of() {
-    return of(EMPTY);
+    return of(IConstKt.EMPTY);
   }
 }

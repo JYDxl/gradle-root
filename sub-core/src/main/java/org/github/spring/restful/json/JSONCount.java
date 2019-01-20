@@ -1,7 +1,7 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
-import static org.github.spring.footstone.IConstKt.COUNT;
+import org.github.spring.footstone.IConstKt;
 
 /**
  * JSON of count.
@@ -18,7 +18,7 @@ import static org.github.spring.footstone.IConstKt.COUNT;
  */
 public class JSONCount extends JSONBasic implements JSON {
   /** data. */
-  private long data = COUNT;
+  private long data = IConstKt.COUNT;
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
@@ -51,7 +51,7 @@ public class JSONCount extends JSONBasic implements JSON {
   @Override
   @SuppressWarnings("deprecation")
   public void release() {
-    data = COUNT;
+    data = IConstKt.COUNT;
     super.release();
   }
 

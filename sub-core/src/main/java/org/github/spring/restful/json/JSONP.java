@@ -3,12 +3,9 @@ package org.github.spring.restful.json;
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.github.spring.enumeration.ContentType;
+import org.github.spring.enumerate.ContentType;
+import org.github.spring.footstone.IConstKt;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import static org.github.spring.enumeration.ContentType.JSONP;
-import static org.github.spring.footstone.IConstKt.CALL_BACK;
-import static org.github.spring.footstone.IConstKt.getJOINER_EMPTY;
-import static org.github.spring.footstone.IConstKt.getPARAM_PATTERN;
 
 /**
  * JSON_ENCODER of jsonp.
@@ -30,7 +27,7 @@ import static org.github.spring.footstone.IConstKt.getPARAM_PATTERN;
 @SuppressWarnings("ALL")
 public class JSONP<T> extends JSONData<T> implements JSON {
   /** callback. */
-  private String callback = CALL_BACK;
+  private String callback = IConstKt.CALL_BACK;
 
   /** Constructor. */
   public JSONP() {}
@@ -48,7 +45,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   @Deprecated
   @Override
   public void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
-    if (CALL_BACK.equals(callback)) setCallback(request.getParameter(CALL_BACK));
+    if (IConstKt.CALL_BACK.equals(callback)) setCallback(request.getParameter(IConstKt.CALL_BACK));
     super.collect(request, response);
   }
 
@@ -61,19 +58,19 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   @Override
   @Nonnull
   public String get() {
-    return getJOINER_EMPTY().join(callback, "(", super.get(), ")");
+    return IConstKt.getJOINER_EMPTY().join(callback, "(", super.get(), ")");
   }
 
   @Deprecated
   @Override
   @Nonnull
   public ContentType contentType() {
-    return JSONP;
+    return ContentType.JSONP;
   }
 
   @Override
   public void release() {
-    callback = CALL_BACK;
+    callback = IConstKt.CALL_BACK;
     super.release();
   }
 
@@ -84,7 +81,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   /** SET callback. */
   public void setCallback(@Nonnull String callback) {
-    if (getPARAM_PATTERN().matcher(callback).matches()) this.callback = callback;
+    if (IConstKt.getPARAM_PATTERN().matcher(callback).matches()) this.callback = callback;
   }
 
   /** WITH callback. */

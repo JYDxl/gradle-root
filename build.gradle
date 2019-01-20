@@ -75,6 +75,7 @@ subprojects {
     compile('org.apache.commons:commons-lang3:3.8.1')
     compile('com.google.guava:guava:27.0.1-jre')
     compile('com.squareup.okhttp3:okhttp:3.12.1')
+    compile('org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.1.0')
 
     annotationProcessor('org.projectlombok:lombok')
     compileOnly('org.projectlombok:lombok')

@@ -13,7 +13,6 @@ public interface CommonMapper {
   @Nonnull
   LocalDateTime now();
 
-  @Select("select * from tip_login_log")
   @Nonnull
   Page<TipLoginLogEntity> page(Page page);
 }

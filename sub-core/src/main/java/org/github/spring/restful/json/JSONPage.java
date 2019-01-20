@@ -1,8 +1,7 @@
 package org.github.spring.restful.json;
 
 import java.util.Collection;
-
-import static org.github.spring.footstone.IConstKt.COUNT;
+import org.github.spring.footstone.IConstKt;
 
 /**
  * JSON_ENCODER of page.
@@ -23,7 +22,7 @@ import static org.github.spring.footstone.IConstKt.COUNT;
 @SuppressWarnings("ALL")
 public class JSONPage<E> extends JSONArray<E> implements JSON {
   /** total. */
-  private long total = COUNT;
+  private long total = IConstKt.COUNT;
 
   /** Constructor. */
   public JSONPage() {}
@@ -85,7 +84,7 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
 
   @Override
   public void release() {
-    total = COUNT;
+    total = IConstKt.COUNT;
     super.release();
   }
 

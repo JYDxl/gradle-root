@@ -4,13 +4,8 @@ import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.github.spring.footstone.AbstractEntity;
+import org.github.spring.footstone.IConstKt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import static javax.servlet.http.HttpServletResponse.SC_OK;
-import static org.github.spring.footstone.IConstKt.RET_ERROR_CODE;
-import static org.github.spring.footstone.IConstKt.RET_ERROR_MSG;
-import static org.github.spring.footstone.IConstKt.RET_OK_CODE;
-import static org.github.spring.footstone.IConstKt.RET_OK_MSG;
-import static org.github.spring.footstone.IConstKt.getAPI_VERSION;
 
 /**
  * JSON of basic.
@@ -26,15 +21,15 @@ import static org.github.spring.footstone.IConstKt.getAPI_VERSION;
  */
 public class JSONBasic extends AbstractEntity implements JSON {
   /** 返回的状态码. */
-  private int retCode = RET_OK_CODE;
+  private int retCode = IConstKt.RET_OK_CODE;
 
   /** 返回的信息. */
   @Nonnull
-  private String retMsg = RET_OK_MSG;
+  private String retMsg = IConstKt.RET_OK_MSG;
 
   /** HTTP状态码. */
   @JsonIgnore
-  private int status = SC_OK;
+  private int status = HttpServletResponse.SC_OK;
 
   /** Constructor. */
   @SuppressWarnings("WeakerAccess")
@@ -56,7 +51,7 @@ public class JSONBasic extends AbstractEntity implements JSON {
   @Override
   @SuppressWarnings("deprecation")
   public void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
-    if (SC_OK == status) {
+    if (HttpServletResponse.SC_OK == status) {
       JSON.super.collect(request, response);
     } else {
       response.sendError(status, retMsg);
@@ -73,7 +68,7 @@ public class JSONBasic extends AbstractEntity implements JSON {
   @Override
   @SuppressWarnings("deprecation")
   public void release() {
-    withStatus(SC_OK).withRetCode(RET_OK_CODE).withRetMsg(RET_OK_MSG);
+    withStatus(HttpServletResponse.SC_OK).withRetCode(IConstKt.RET_OK_CODE).withRetMsg(IConstKt.RET_OK_MSG);
   }
 
   @Override
@@ -85,7 +80,7 @@ public class JSONBasic extends AbstractEntity implements JSON {
   /** GET API version. */
   @Nonnull
   public String getApiVersion() {
-    return getAPI_VERSION();
+    return IConstKt.getAPI_VERSION();
   }
 
   /** GET retCode. */
@@ -167,6 +162,6 @@ public class JSONBasic extends AbstractEntity implements JSON {
   /** Generator. */
   @Nonnull
   public static JSONBasic error() {
-    return of(SC_OK, RET_ERROR_CODE, RET_ERROR_MSG);
+    return of(HttpServletResponse.SC_OK, IConstKt.RET_ERROR_CODE, IConstKt.RET_ERROR_MSG);
   }
 }

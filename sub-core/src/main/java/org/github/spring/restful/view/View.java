@@ -1,10 +1,8 @@
 package org.github.spring.restful.view;
 
-
 import javax.annotation.Nonnull;
+import org.github.spring.footstone.IConstKt;
 import org.github.spring.restful.Returnable;
-import static org.github.spring.footstone.IConstKt.ROOT;
-import static org.github.spring.footstone.IConstKt.getJOINER_EMPTY;
 
 /**
  * Top interface of view.
@@ -45,11 +43,11 @@ public interface View extends Returnable {
 
   /** Generator. */
   static View of(Object... part) {
-    return of(getJOINER_EMPTY().join(part));
+    return of(IConstKt.getJOINER_EMPTY().join(part));
   }
 
   /** Generator. */
   static View of() {
-    return of(ROOT);
+    return of(IConstKt.ROOT);
   }
 }
