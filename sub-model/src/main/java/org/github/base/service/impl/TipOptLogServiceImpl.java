@@ -1,7 +1,7 @@
 package org.github.base.service.impl;
 
 import org.github.base.entity.TipOptLogEntity;
-import org.github.base.mapper.TipOptLogMapper;
+import org.github.base.mapper.ITipOptLogMapper;
 import org.github.base.service.ITipOptLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-08
+ * @since 2019-01-26
  */
 @Service
-public class TipOptLogService extends ServiceImpl<TipOptLogMapper, TipOptLogEntity> implements ITipOptLogService {}
+public class TipOptLogServiceImpl extends ServiceImpl<ITipOptLogMapper, TipOptLogEntity> implements ITipOptLogService {}

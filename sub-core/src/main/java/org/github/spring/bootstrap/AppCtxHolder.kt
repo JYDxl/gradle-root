@@ -1,6 +1,5 @@
 package org.github.spring.bootstrap
 
-import org.github.spring.annotation.Pray
 import org.github.spring.footstone.DO_NOT_USE
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
@@ -20,7 +19,6 @@ class AppCtxHolder : ApplicationContextAware {
 
   companion object {
     /** GET ApplicationContext.  */
-    @Pray
     fun getAppCtx() = context
 
     /** ApplicationContext.  */

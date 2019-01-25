@@ -1,7 +1,7 @@
 package org.github.base.service.impl;
 
 import org.github.base.entity.SysUserEntity;
-import org.github.base.mapper.SysUserMapper;
+import org.github.base.mapper.ISysUserMapper;
 import org.github.base.service.ISysUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-08
+ * @since 2019-01-26
  */
 @Service
-public class SysUserService extends ServiceImpl<SysUserMapper, SysUserEntity> implements ISysUserService {}
+public class SysUserServiceImpl extends ServiceImpl<ISysUserMapper, SysUserEntity> implements ISysUserService {}

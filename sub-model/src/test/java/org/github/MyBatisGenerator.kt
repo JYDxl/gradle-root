@@ -1,6 +1,6 @@
 package org.github
 
-import com.baomidou.mybatisplus.annotation.IdType.ID_WORKER_STR
+import com.baomidou.mybatisplus.annotation.IdType.UUID
 import com.baomidou.mybatisplus.generator.AutoGenerator
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig
 import com.baomidou.mybatisplus.generator.config.GlobalConfig
@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.getProperty
 
-fun main(args: Array<String>) {
+fun main() {
   val generator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
 
   GlobalConfig().apply {
@@ -20,9 +20,11 @@ fun main(args: Array<String>) {
     isFileOverride = true
     isOpen = false
     author = "JYD_XL"
-    idType = ID_WORKER_STR
+    idType = UUID
     entityName = "%sEntity"
-    serviceImplName = "%sService"
+    mapperName = "I%sMapper"
+    serviceName = "I%sService"
+    serviceImplName = "%sServiceImpl"
     generator.globalConfig = this
   }
 
@@ -43,16 +45,19 @@ fun main(args: Array<String>) {
   StrategyConfig().apply {
     naming = underline_to_camel
     isEntityLombokModel = true
+    isEntityTableFieldAnnotationEnable = true
+    versionFieldName = "version"
+    logicDeleteFieldName = "deleted"
     setInclude(".+")
     generator.strategy = this
   }
 
   TemplateConfig().apply {
+    controller = null
+    xml = null
     service = "service.java"
     serviceImpl = "serviceImpl.java"
     mapper = "mapper.java"
-    controller = null
-    xml = null
     setEntity("entity.java")
     generator.template = this
   }

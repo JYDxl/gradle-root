@@ -1,6 +1,6 @@
 package org.github.spring.footstone
 
-import org.apache.ibatis.session.RowBounds
+//import org.apache.ibatis.session.RowBounds
 import java.lang.Boolean.parseBoolean
 import java.lang.Integer.parseInt
 import java.util.Optional
@@ -43,11 +43,11 @@ class PageHelperModel : AbstractEntity() {
     return if (pageFlag) pageSize else 0
   }
 
-  /** Get RowBounds.  */
-  @Deprecated("")
-  fun createRowBounds(): RowBounds {
-    return RowBounds(pageNumber, this.calculate())
-  }
+//  /** Get RowBounds.  */
+//  @Deprecated("")
+//  fun createRowBounds(): RowBounds {
+//    return RowBounds(pageNumber, this.calculate())
+//  }
 
   /**
    * 获取排序信息,使用手写SQL时使用.

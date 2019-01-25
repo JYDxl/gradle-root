@@ -1,7 +1,7 @@
 package org.github.base.service.impl;
 
 import org.github.base.entity.SysRoleMenuEntity;
-import org.github.base.mapper.SysRoleMenuMapper;
+import org.github.base.mapper.ISysRoleMenuMapper;
 import org.github.base.service.ISysRoleMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-08
+ * @since 2019-01-26
  */
 @Service
-public class SysRoleMenuService extends ServiceImpl<SysRoleMenuMapper, SysRoleMenuEntity> implements ISysRoleMenuService {}
+public class SysRoleMenuServiceImpl extends ServiceImpl<ISysRoleMenuMapper, SysRoleMenuEntity> implements ISysRoleMenuService {}

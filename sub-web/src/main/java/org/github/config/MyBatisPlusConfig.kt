@@ -1,5 +1,7 @@
 package org.github.config
 
+import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor
 import org.mybatis.spring.annotation.MapperScan
@@ -18,4 +20,10 @@ class MyBatisPlusConfig {
   @Profile("dev", "test")
   @Bean
   fun performanceInterceptor() = PerformanceInterceptor().apply { isFormat = true }
+
+  @Bean
+  fun logicSqlInjector() = LogicSqlInjector()
+
+  @Bean
+  fun optimisticLockerInterceptor() = OptimisticLockerInterceptor()
 }

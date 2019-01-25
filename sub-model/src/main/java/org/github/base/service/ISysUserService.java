@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-08
+ * @since 2019-01-26
  */
 public interface ISysUserService extends IService<SysUserEntity> {}

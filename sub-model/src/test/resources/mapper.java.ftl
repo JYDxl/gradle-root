@@ -1,7 +1,7 @@
 package ${package.Mapper};
 
 import ${package.Entity}.${entity};
-import org.springframework.stereotype.Repository;
+import org.github.spring.annotation.MyBatisMapper;
 import ${superMapperClassPackage};
 
 /**
@@ -15,6 +15,6 @@ import ${superMapperClassPackage};
 <#if kotlin>
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
 <#else>
-@Repository
+@MyBatisMapper
 public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {}
 </#if>

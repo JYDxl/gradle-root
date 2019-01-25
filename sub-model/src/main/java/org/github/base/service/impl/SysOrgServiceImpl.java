@@ -1,7 +1,7 @@
 package org.github.base.service.impl;
 
 import org.github.base.entity.SysOrgEntity;
-import org.github.base.mapper.SysOrgMapper;
+import org.github.base.mapper.ISysOrgMapper;
 import org.github.base.service.ISysOrgService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-08
+ * @since 2019-01-26
  */
 @Service
-public class SysOrgService extends ServiceImpl<SysOrgMapper, SysOrgEntity> implements ISysOrgService {}
+public class SysOrgServiceImpl extends ServiceImpl<ISysOrgMapper, SysOrgEntity> implements ISysOrgService {}

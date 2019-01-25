@@ -1,7 +1,7 @@
 package org.github.base.mapper;
 
 import org.github.base.entity.SysOrgEntity;
-import org.springframework.stereotype.Repository;
+import org.github.spring.annotation.MyBatisMapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-08
+ * @since 2019-01-26
  */
-@Repository
-public interface SysOrgMapper extends BaseMapper<SysOrgEntity> {}
+@MyBatisMapper
+public interface ISysOrgMapper extends BaseMapper<SysOrgEntity> {}

@@ -1,4 +1,6 @@
 dependencies {
+  compile project(':sub-core')
+
   compile("com.baomidou:mybatis-plus-boot-starter:${mybatisPlusVersion}")
   testCompile("mysql:mysql-connector-java:${mysqlVersion}")
   testCompile("com.baomidou:mybatis-plus-generator:${mybatisPlusVersion}")

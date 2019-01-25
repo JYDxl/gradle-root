@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter.ofPattern
 @Configuration
 class JacksonConfig {
   @Bean
-  fun jackson2ObjectMapperBuilderCustomizer(localDateTimeSerializer: LocalDateTimeSerializer) = Jackson2ObjectMapperBuilderCustomizer { it.serializerByType(LocalDateTime::class.java, localDateTimeSerializer) }
+  fun jackson2ObjectMapperBuilderCustomizer(serializer: LocalDateTimeSerializer) = Jackson2ObjectMapperBuilderCustomizer { it.serializerByType(LocalDateTime::class.java, serializer) }
 
   @Bean
-  fun localDateTimeSerializer(prop: JacksonProperties) = LocalDateTimeSerializer(ofPattern(prop.dateFormat))
+  fun localDateTimeSerializer(props: JacksonProperties) = LocalDateTimeSerializer(ofPattern(props.dateFormat))
 }
