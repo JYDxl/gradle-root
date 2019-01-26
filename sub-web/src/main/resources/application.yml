@@ -20,6 +20,8 @@ spring:
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
+#    TODO 待验证
+    default-property-inclusion: non_null
   profiles:
     active: dev
   http:

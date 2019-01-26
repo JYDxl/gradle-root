@@ -4,28 +4,32 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.function.Supplier;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.github.spring.enumerate.ContentType;
 import org.github.spring.footstone.IConstKt;
+import com.google.common.base.MoreObjects;
 
 /**
- * Top interface of all.
+ * 所有可返回类型顶层接口.
  *
  * <pre>
  *     return Returnable.of();
  * </pre>
  *
  * @author JYD_XL
- * @see Serializable
+ * @see java.io.Serializable
+ * @see java.util.function.Supplier
  */
-@FunctionalInterface
-public interface Returnable extends Serializable {
+@FunctionalInterface //TODO 待整理, 包括各实现类
+public interface Returnable extends Serializable, Supplier<String> {
   /** 通过字符流{@link Writer}处理数据. */
   @Deprecated
   default void accept(@Nonnull Writer writer) throws Exception {
-    writer.write(get());
+    writer.write(MoreObjects.firstNonNull(get(), IConstKt.EMPTY));
   }
 
   /** 通过字节流{@link OutputStream}处理数据. */
@@ -60,14 +64,12 @@ public interface Returnable extends Serializable {
   }
 
   /** 获取数据. */
-  @Nonnull
-  String get() throws Exception;
+  @Override
+  @Nullable
+  String get();
 
   /** 清空数据. */
-  @Deprecated
-  default void release() {
-    // 接口没有状态, 直接通过函数接口传递的数据无法保存, 因而无法执行清理操作, 此处的默认实现为空...
-  }
+  default void release() {}
 
   /** 请求已被完全处理? 未处理完毕的请求将交由Spring继续处理.(现阶段只对视图有效.) */
   @Deprecated
@@ -83,7 +85,6 @@ public interface Returnable extends Serializable {
 
   /** Generator. */
   @Nonnull
-  @SuppressWarnings("NullableProblems")
   static Returnable of(@Nonnull Object data) {
     return data::toString;
   }

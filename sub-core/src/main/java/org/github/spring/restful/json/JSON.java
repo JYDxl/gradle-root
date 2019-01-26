@@ -37,7 +37,7 @@ public interface JSON extends Returnable {
 
   @Override
   @Nonnull
-  String get() throws Exception;
+  String get();
 
   /** Generator. */
   @Nonnull

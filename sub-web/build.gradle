@@ -1,19 +1,18 @@
 bootJar.enabled = true
+test.enabled = false //TODO
 jar.enabled = false
 
 dependencies {
   compile project(':sub-core')
   compile project(':sub-model')
   compile project(':sub-netty')
-  compile project(':sub-shiro')
 
-  compile("io.netty:netty-transport-native-epoll:${nettyVersion}")
   compile("mysql:mysql-connector-java:${mysqlVersion}")
 
   compile('org.springframework.boot:spring-boot-starter-actuator')
   compile('org.springframework.boot:spring-boot-starter-aop')
   compile('org.springframework.boot:spring-boot-starter-cache')
-  compile('org.springframework.boot:spring-boot-starter-data-redis')
+  compile('org.springframework.boot:spring-boot-starter-data-redis') { exclude group: 'io.netty' }
   compile('org.springframework.boot:spring-boot-starter-websocket')
   compile('org.springframework.session:spring-session-data-redis')
   compile('org.apache.commons:commons-pool2')

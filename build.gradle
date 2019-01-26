@@ -28,7 +28,6 @@ allprojects {
   ext {
     mybatisPlusVersion = '3.0.7.1'
     mysqlVersion = '5.1.47'
-    nettyVersion = '4.1.31.Final'
   }
 }
 
@@ -69,8 +68,9 @@ subprojects {
     compile('org.jetbrains.kotlin:kotlin-reflect')
 
     compile('org.apache.commons:commons-lang3:3.8.1')
-    compile('com.google.guava:guava:27.0.1-jre')
     compile('com.squareup.okhttp3:okhttp:3.12.1')
+    compile('com.google.guava:guava:27.0.1-jre')
+    compile('io.netty:netty-all:4.1.33.Final')
     compile('org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.1.1')
 
     annotationProcessor('org.projectlombok:lombok')

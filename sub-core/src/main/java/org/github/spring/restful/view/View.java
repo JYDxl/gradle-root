@@ -19,7 +19,7 @@ import org.github.spring.restful.Returnable;
 public interface View extends Returnable {
   @Override
   @Nonnull
-  String get() throws Exception;
+  String get();
 
   @Deprecated
   @Override
