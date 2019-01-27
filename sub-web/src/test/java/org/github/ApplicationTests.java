@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+@ActiveProfiles({"dev", "test"})
 @SpringBootTest
 @Slf4j
 public class ApplicationTests {

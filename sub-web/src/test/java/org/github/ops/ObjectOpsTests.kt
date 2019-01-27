@@ -11,7 +11,7 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
-@ActiveProfiles("test")
+@ActiveProfiles("dev", "test")
 @SpringBootTest
 class ObjectOpsTests {
   @Autowired
@@ -21,6 +21,8 @@ class ObjectOpsTests {
   fun json() {
     val list: MutableList<TipLoginLogEntity> = tipLoginLogService.list()
     log.info(list.json())
+    val entity = TipLoginLogEntity()
+    log.info(entity.json())
   }
 }
 

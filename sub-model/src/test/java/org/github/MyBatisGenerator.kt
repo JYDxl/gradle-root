@@ -29,7 +29,7 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://localhost:3357/shiro?useSSL=false"
+    url = "jdbc:mysql://localhost:3357/security?useSSL=false"
     driverName = "com.mysql.jdbc.Driver"
     username = "root"
     password = "l"

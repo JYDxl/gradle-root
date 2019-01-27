@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor
+import org.github.spring.annotation.MyBatisMapper
 import org.mybatis.spring.annotation.MapperScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,12 +13,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan("org.github.**.mapper")
+@MapperScan("org.github.**.mapper", annotationClass = MyBatisMapper::class)
 class MyBatisPlusConfig {
   @Bean
   fun paginationInterceptor() = PaginationInterceptor()
 
-  @Profile("dev", "test")
+  @Profile("dev")
   @Bean
   fun performanceInterceptor() = PerformanceInterceptor().apply { isFormat = true }
 

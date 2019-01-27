@@ -2,9 +2,9 @@ package org.github.ops
 
 import org.slf4j.Logger
 
-fun Logger.info(entity: Any?) = info(entity.toString())
+fun Logger.info(model: Any?) = info(model.toString())
 
-fun Logger.warn(entity: Any?) = warn(entity.toString())
+fun Logger.warn(model: Any?) = warn(model.toString())
 
 fun Logger.debug(model: Any?) = debug(model.toString())
 

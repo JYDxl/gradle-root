@@ -1,5 +1,4 @@
 bootJar.enabled = true
-test.enabled = false //TODO
 jar.enabled = false
 
 dependencies {

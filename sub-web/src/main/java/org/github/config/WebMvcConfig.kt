@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class WebMvcConfig : WebMvcConfigurer {
   override fun addReturnValueHandlers(handlers: MutableList<HandlerMethodReturnValueHandler>) {
     handlers += returnableValueHandlerKotlin()
+    handlers += returnableValueHandler()
   }
 
   @Bean

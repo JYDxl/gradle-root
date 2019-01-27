@@ -9,18 +9,17 @@ spring:
         max-idle: 16
       shutdown-timeout: 1s
   datasource:
-    url: jdbc:mysql://localhost:3357/shiro?useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3357/security?useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: l
     type: com.zaxxer.hikari.HikariDataSource
     jmx-enabled: true
     hikari:
-      pool-name: pool-hikari
+      pool-name: hikari-mysql
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
-#    TODO 待验证
     default-property-inclusion: non_null
   profiles:
     active: dev
