@@ -30,10 +30,11 @@ allprojects {
     kotlinxCoroutinesVersion = '1.1.1'
     commonsLang3Version = '3.8.1'
     mybatisPlusVersion = '3.0.7.1'
+    protobufVersion = '3.6.1'
     okhttp3Version = '3.12.1'
-    nettyVersion = '4.1.33.Final'
-    guavaVersion = '27.0.1-jre'
     mysqlVersion = '5.1.47'
+    guavaVersion = '27.0.1-jre'
+    nettyVersion = '4.1.33.Final'
   }
 }
 
