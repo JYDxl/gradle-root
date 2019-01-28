@@ -7,6 +7,7 @@
 
 buildscript {
   ext {
+    springBootVersion = '2.1.2.RELEASE'
     kotlinVersion = '1.3.20'
   }
 
@@ -15,7 +16,7 @@ buildscript {
   }
 
   dependencies {
-    classpath('org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE')
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
     classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
   }
@@ -26,7 +27,12 @@ allprojects {
   version = '0.0.1-SNAPSHOT'
 
   ext {
+    kotlinxCoroutinesVersion = '1.1.1'
+    commonsLang3Version = '3.8.1'
     mybatisPlusVersion = '3.0.7.1'
+    okhttp3Version = '3.12.1'
+    nettyVersion = '4.1.33.Final'
+    guavaVersion = '27.0.1-jre'
     mysqlVersion = '5.1.47'
   }
 }
@@ -67,11 +73,11 @@ subprojects {
     compile('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     compile('org.jetbrains.kotlin:kotlin-reflect')
 
-    compile('org.apache.commons:commons-lang3:3.8.1')
-    compile('com.squareup.okhttp3:okhttp:3.12.1')
-    compile('com.google.guava:guava:27.0.1-jre')
-    compile('io.netty:netty-all:4.1.33.Final')
-    compile('org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.1.1')
+    compile("org.apache.commons:commons-lang3:${commonsLang3Version}")
+    compile("com.squareup.okhttp3:okhttp:${okhttp3Version}")
+    compile("com.google.guava:guava:${guavaVersion}")
+    compile("io.netty:netty-all:${nettyVersion}")
+    compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${kotlinxCoroutinesVersion}")
 
     annotationProcessor('org.projectlombok:lombok')
     compileOnly('org.projectlombok:lombok')
