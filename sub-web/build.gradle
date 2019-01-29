@@ -5,8 +5,6 @@ dependencies {
   compile project(':sub-core')
   compile project(':sub-model')
   compile project(':sub-netty')
-  compile project(':sub-shiro')
-  compile project(':sub-security')
 
   compile("mysql:mysql-connector-java:${mysqlVersion}")
 
