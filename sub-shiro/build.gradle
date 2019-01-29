@@ -1,1 +1,5 @@
-dependencies {}
+dependencies {
+  compile("org.apache.shiro:shiro-spring-boot-starter:${shiroVersion}")
+
+  compileOnly('org.springframework.boot:spring-boot-starter-web')
+}

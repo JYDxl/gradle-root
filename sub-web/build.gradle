@@ -5,6 +5,8 @@ dependencies {
   compile project(':sub-core')
   compile project(':sub-model')
   compile project(':sub-netty')
+  compile project(':sub-shiro')
+  compile project(':sub-security')
 
   compile("mysql:mysql-connector-java:${mysqlVersion}")
 
@@ -17,5 +19,6 @@ dependencies {
   compile('org.apache.commons:commons-pool2')
   runtimeOnly('org.springframework.boot:spring-boot-devtools')
   testCompile('org.springframework.boot:spring-boot-starter-test') { exclude module: 'android-json' }
+  testCompile('org.springframework.security:spring-security-test')
   annotationProcessor('org.springframework.boot:spring-boot-configuration-processor')
 }
