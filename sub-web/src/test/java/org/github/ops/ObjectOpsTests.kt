@@ -1,9 +1,10 @@
 package org.github.ops
 
-import com.google.common.collect.ArrayListMultimap
-import com.google.common.collect.ListMultimap
+import com.google.common.collect.ImmutableList
+import com.google.common.collect.ImmutableListMultimap
 import org.github.base.service.ISysMenuService
 import org.github.base.service.ITipLoginLogService
+import org.github.spring.footstone.EMPTY
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,16 +29,16 @@ class ObjectOpsTests {
 
   @Test
   fun recursive() {
-    val list: List<SysMenuTree> = sysMenuService.list().map { SysMenuTree(it.menuId, it.pid, it.menuName) }
-    val multimap: ListMultimap<String, SysMenuTree> = ArrayListMultimap.create<String, SysMenuTree>().apply { list.forEach { this.put(it.pid, it) } }
-    val result: List<SysMenuTree> = ArrayList(multimap.get(null))
+    val list = sysMenuService.list().map { SysMenuTree(it.menuId, it.pid, it.menuName) }
+    val multimap: ImmutableListMultimap<String, SysMenuTree> = ImmutableListMultimap.builder<String, SysMenuTree>().apply { list.forEach { put(it.pid.orEmpty(), it) } }.build()
+    val result: ImmutableList<SysMenuTree> = multimap.get(EMPTY)
     recursive(multimap, result)
     log.info(result.json())
   }
 
-  private tailrec fun recursive(multimap: ListMultimap<String, SysMenuTree>, list: List<SysMenuTree>) {
-    for (node in list) {
-      val subNodes: List<SysMenuTree> = multimap.get(node.id)
+  private tailrec fun recursive(multimap: ImmutableListMultimap<String, SysMenuTree>, list: ImmutableList<SysMenuTree>) {
+    for (node: SysMenuTree in list) {
+      val subNodes: ImmutableList<SysMenuTree> = multimap.get(node.id)
       if (subNodes.isNotEmpty()) {
         node.children = subNodes
         return recursive(multimap, subNodes)
