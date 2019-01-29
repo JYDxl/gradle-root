@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
 import org.github.netty.protobuf.SubscribeRespProto.SubscribeResp
-import org.slf4j.LoggerFactory.getLogger
+import org.github.ops.log
 
 @Sharable
 class ServerChannelHandler : ChannelInboundHandlerAdapter() {
@@ -27,7 +27,9 @@ class ServerChannelHandler : ChannelInboundHandlerAdapter() {
   override fun channelInactive(ctx: ChannelHandlerContext) {
     log.info("IN_ACTIVE")
   }
-}
 
-/** log. */
-private val log = getLogger(ServerChannelHandler::class.java)!!
+  companion object {
+    /** log. */
+    private val log = ServerChannelHandler::class.log
+  }
+}

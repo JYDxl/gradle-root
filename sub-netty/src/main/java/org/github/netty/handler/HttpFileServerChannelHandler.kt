@@ -8,7 +8,7 @@ import io.netty.handler.codec.http.DefaultFullHttpResponse
 import io.netty.handler.codec.http.FullHttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus.OK
 import io.netty.handler.codec.http.HttpVersion.HTTP_1_1
-import org.slf4j.LoggerFactory.getLogger
+import org.github.ops.log
 
 @Sharable
 class HttpFileServerChannelHandler : SimpleChannelInboundHandler<FullHttpRequest>() {
@@ -25,7 +25,9 @@ class HttpFileServerChannelHandler : SimpleChannelInboundHandler<FullHttpRequest
   override fun channelInactive(ctx: ChannelHandlerContext) {
     log.info("IN_ACTIVE")
   }
-}
 
-/** log. */
-private val log = getLogger(HttpFileServerChannelHandler::class.java)!!
+  companion object {
+    /** log. */
+    private val log = HttpFileServerChannelHandler::class.log
+  }
+}

@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
 import org.github.netty.protobuf.SubscribeRespProto.SubscribeResp
-import org.slf4j.LoggerFactory.getLogger
+import org.github.ops.log
 
 class ClientChannelHandler : ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
@@ -26,7 +26,9 @@ class ClientChannelHandler : ChannelInboundHandlerAdapter() {
     msg as SubscribeResp
     log.info(printer().print(msg))
   }
-}
 
-/** log. */
-private val log = getLogger(ClientChannelHandler::class.java)!!
+  companion object {
+    /** log. */
+    private val log = ClientChannelHandler::class.log
+  }
+}

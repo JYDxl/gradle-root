@@ -17,7 +17,7 @@ class WebMvcConfig : WebMvcConfigurer {
   }
 
   @Bean
-  fun returnableValueHandlerKotlin() = ReturnableValueHandlerKotlin()
+  fun returnableValueHandlerKotlin() = ReturnableValueHandlerKotlin
 
   @Bean
   fun returnableValueHandler() = ReturnableValueHandler()
