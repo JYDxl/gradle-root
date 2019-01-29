@@ -4,7 +4,6 @@ import org.github.base.entity.TipLoginLogEntity
 import org.github.base.service.ITipLoginLogService
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
@@ -24,6 +23,8 @@ class ObjectOpsTests {
     val entity = TipLoginLogEntity()
     log.info(entity.json())
   }
-}
 
-private val log = LoggerFactory.getLogger(ObjectOpsTests::class.java)!!
+  companion object {
+    private val log = ObjectOpsTests::class.log
+  }
+}
