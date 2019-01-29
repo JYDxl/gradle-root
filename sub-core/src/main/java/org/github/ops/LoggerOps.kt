@@ -1,13 +1,16 @@
 package org.github.ops
 
 import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import java.util.function.Supplier
+import kotlin.reflect.KClass
 
-fun Logger.info(model: Any?) = info(model.toString())
+//TODO JYD_XL format
+//TODO 测试
+fun Logger.debug(supplier: Supplier<String?>, ex: Throwable? = null) = if(this.isDebugEnabled) this.debug(supplier.get().toString(), ex) else Unit
 
-fun Logger.warn(model: Any?) = warn(model.toString())
+fun Logger.trace(supplier: Supplier<String?>, ex: Throwable? = null) = if(this.isTraceEnabled) this.trace(supplier.get().toString(), ex) else Unit
 
-fun Logger.debug(model: Any?) = debug(model.toString())
+//fun log(clazz: KClass<*>) = LoggerFactory.getLogger(clazz::class.java)!!
 
-fun Logger.trace(model: Any?) = trace(model.toString())
-
-fun Logger.error(model: Any?) = error(model.toString())
+val KClass<*>.log get() = LoggerFactory.getLogger(this::class.java)!!

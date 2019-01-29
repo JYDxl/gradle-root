@@ -14,13 +14,10 @@ import org.github.spring.footstone.IConstKt;
 import com.google.common.base.MoreObjects;
 
 /**
- * 所有可返回类型顶层接口.
- *
- * <pre>
- *     return Returnable.of();
- * </pre>
+ * 可返回类型顶层接口.
  *
  * @author JYD_XL
+ * @since 2019-01-29
  * @see java.io.Serializable
  * @see java.util.function.Supplier
  */
@@ -29,7 +26,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** 通过字符流{@link Writer}处理数据. */
   @Deprecated
   default void accept(@Nonnull Writer writer) throws Exception {
-    writer.write(MoreObjects.firstNonNull(get(), IConstKt.EMPTY));
+    writer.write(MoreObjects.firstNonNull(get(), IConstKt.NULL));
   }
 
   /** 通过字节流{@link OutputStream}处理数据. */

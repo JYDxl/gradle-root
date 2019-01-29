@@ -25,6 +25,8 @@ const val FORMAT_ONLY_DAY = "dd"
 const val FORMAT_ONLY_MONTH = "MM"
 /** 空字符串.  */
 const val EMPTY = ""
+/** null字符串. */
+const val NULL = "null"
 /** 空字符串，XML版.  */
 const val EMPTY_XML = "<root/>"
 /** 空字符串，JSON版.  */
