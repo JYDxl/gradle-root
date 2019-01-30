@@ -3,69 +3,59 @@ package org.github.spring.restful.json;
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.github.spring.enumerate.ContentType;
 import org.github.spring.footstone.IConstKt;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.jetbrains.annotations.Contract;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * JSON_ENCODER of jsonp.
- *
- * <pre>
- *   return JSONP.of();
- * </pre>
+ * JSON of jsonp.
  *
  * @param <T> data
  * @author JYD_XL
+ * @see java.io.Serializable
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.footstone.AbstractEntity
  * @see org.github.spring.restful.json.JSONBasic
  * @see org.github.spring.restful.json.JSONData
  */
-@JsonIgnoreProperties("callback")
-@SuppressWarnings("ALL")
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class JSONP<T> extends JSONData<T> implements JSON {
   /** callback. */
+  @JsonIgnore
+  @NonNull
   private String callback = IConstKt.CALL_BACK;
 
-  /** Constructor. */
-  public JSONP() {}
-
-  /** Constructor. */
-  public JSONP(T data) {
-    this.withData(data);
-  }
-
-  /** Constructor. */
-  public JSONP(@Nonnull String callback, T data) {
-    this.withCallback(callback).withData(data);
-  }
-
-  @Deprecated
   @Override
   public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse resp) throws Exception {
     if (IConstKt.CALL_BACK.equals(callback)) setCallback(req.getParameter(IConstKt.CALL_BACK));
     super.collect(req, resp);
   }
 
-  @Deprecated
   @Override
-  public boolean functional() {
-    return true;
+  @Nonnull
+  public ContentType contentType() {
+    return ContentType.JSONP;
   }
 
   @Override
   @Nonnull
   public String get() {
-    return IConstKt.getJOINER_EMPTY().join(callback, "(", super.get(), ")");
+    return IConstKt.getEmptyJoiner().join(callback, "(", super.get(), ")");
   }
 
-  @Deprecated
   @Override
-  @Nonnull
-  public ContentType contentType() {
-    return ContentType.JSONP;
+  public boolean functional() {
+    return true;
   }
 
   @Override
@@ -74,35 +64,27 @@ public class JSONP<T> extends JSONData<T> implements JSON {
     super.release();
   }
 
-  /** GET callback. */
-  public String getCallback() {
-    return callback;
-  }
-
-  /** SET callback. */
-  public void setCallback(@Nonnull String callback) {
-    if (IConstKt.getPARAM_PATTERN().matcher(callback).matches()) this.callback = callback;
+  @Override
+  public String toString() {
+    return super.toString();
   }
 
   /** WITH callback. */
-  public org.github.spring.restful.json.JSONP<T> withCallback(@Nonnull String callback) {
-    this.setCallback(callback);
+  public JSONP<T> withCallback(@Nonnull String callback) {
+    setCallback(callback);
     return this;
   }
 
   /** Generator. */
-  public static org.github.spring.restful.json.JSONP of() {
+  @Contract(" -> new")
+  @Nonnull
+  public static JSONP of() {
     return new JSONP();
   }
 
   /** Generator. */
-  public static <V> org.github.spring.restful.json.JSONP<V> of(V data) {
-    return new JSONP<>(data);
-  }
-
-  /** Generator. */
-  @SafeVarargs
-  public static <V> org.github.spring.restful.json.JSONP<V[]> of(V... data) {
-    return new JSONP<>(data);
+  @Nonnull
+  public static <V> JSONP<V> of(V data) {
+    return (JSONP<V>) new JSONP<>().withData(data);
   }
 }

@@ -3,109 +3,85 @@ package org.github.spring.restful.json;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Stream;
 import javax.annotation.Nonnull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.github.spring.footstone.IConstKt;
+import org.jetbrains.annotations.Contract;
 
 /**
  * JSON of array.
  *
- * <pre>
- *   return JSONArray.of();
- * </pre>
- *
  * @param <E> element
  * @author JYD_XL
+ * @see java.io.Serializable
+ * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.footstone.AbstractEntity
  * @see org.github.spring.restful.json.JSONBasic
  */
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class JSONArray<E> extends JSONBasic implements JSON {
   /** data. */
-  @Nonnull
-  private Object[] data = IConstKt.getARRAY();
-
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONArray() {}
-
-  /** Constructor. */
-  @SafeVarargs
-  @SuppressWarnings("WeakerAccess")
-  public JSONArray(E... data) {
-    this.withData(data);
-  }
-
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONArray(@Nonnull Collection<? extends E> data) {
-    this.withData(data);
-  }
+  @NonNull
+  private Object[] data = IConstKt.getArray();
 
   @Override
-  @SuppressWarnings("deprecation")
   public void release() {
-    data = IConstKt.getARRAY();
+    data = IConstKt.getArray();
     super.release();
   }
 
-  /** GET data. */
-  @Nonnull
-  public Object[] getData() {
-    return data;
-  }
-
-  /** SET data. */
-  public void setData(@Nonnull Object[] data) {
-    this.data = data;
+  @Override
+  public String toString() {
+    return super.toString();
   }
 
   /** GET data. */
-  @Nonnull
   @SuppressWarnings("unchecked")
+  @Nonnull
   public E[] toArray() {
-    return (E[]) this.getData();
+    return (E[]) data;
   }
 
   /** GET data. */
-  @Nonnull
   @SuppressWarnings("unchecked")
+  @Nonnull
   public List<E> toList() {
     return (List<E>) Arrays.asList(data);
   }
 
-  /** GET data. */
-  @Nonnull
-  @SuppressWarnings("unchecked")
-  public Stream<E> toStream() {
-    return (Stream<E>) Arrays.stream(data);
-  }
-
   /** WITH data. */
-
+  @Contract("_ -> this")
   @SafeVarargs
   @Nonnull
   public final JSONArray<E> withData(E... data) {
-    this.data = data;
+    setData(data);
     return this;
   }
 
   /** WITH data. */
   @Nonnull
-  @SuppressWarnings("UnusedReturnValue")
   public JSONArray<E> withData(@Nonnull Collection<? extends E> data) {
-    this.data = data.toArray();
+    setData(data.toArray());
     return this;
   }
 
   /** Generator. */
+  @Contract(" -> new")
   @Nonnull
   public static JSONArray of() {
     return new JSONArray();
   }
 
   /** Generator. */
+  @Contract("_ -> new")
   @SafeVarargs
   @Nonnull
   public static <V> JSONArray<V> of(V... data) {
@@ -113,8 +89,9 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   }
 
   /** Generator. */
+  @Contract("_ -> new")
   @Nonnull
   public static <V> JSONArray<V> of(@Nonnull Collection<? extends V> data) {
-    return new JSONArray<>(data);
+    return new JSONArray<>(data.toArray());
   }
 }

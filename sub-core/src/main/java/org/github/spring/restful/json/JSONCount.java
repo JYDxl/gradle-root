@@ -1,105 +1,60 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.github.spring.footstone.IConstKt;
+import org.jetbrains.annotations.Contract;
 
 /**
  * JSON of count.
  *
- * <pre>
- *   return JSONCount.of();
- * </pre>
- *
  * @author JYD_XL
+ * @see java.io.Serializable
+ * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.footstone.AbstractEntity
  * @see org.github.spring.restful.json.JSONBasic
  */
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class JSONCount extends JSONBasic implements JSON {
   /** data. */
   private long data = IConstKt.COUNT;
 
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONCount() {}
-
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONCount(long data) {
-    this.withData(data);
-  }
-
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONCount(int data) {
-    this.withData(data);
-  }
-
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONCount(@Nonnull Long data) {
-    this.withData(data);
-  }
-
-  /** Constructor. */
-  @SuppressWarnings("WeakerAccess")
-  public JSONCount(@Nonnull Integer data) {
-    this.withData(data);
-  }
-
   @Override
-  @SuppressWarnings("deprecation")
   public void release() {
     data = IConstKt.COUNT;
     super.release();
   }
 
-  /** GET data. */
-  public long getData() {
-    return data;
-  }
-
-  /** SET data. */
-  public void setData(long data) {
-    this.data = data;
+  @Override
+  public String toString() {
+    return super.toString();
   }
 
   /** WITH data. */
   @Nonnull
-  @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
   public JSONCount withData(long data) {
-    this.setData(data);
+    setData(data);
     return this;
   }
 
   /** Generator. */
+  @Contract(" -> new")
   @Nonnull
   public static JSONCount of() {
     return new JSONCount();
   }
 
   /** Generator. */
+  @Contract("_ -> new")
   @Nonnull
   public static JSONCount of(long data) {
-    return new JSONCount(data);
-  }
-
-  /** Generator. */
-  @Nonnull
-  public static JSONCount of(int data) {
-    return new JSONCount(data);
-  }
-
-  /** Generator. */
-  @Nonnull
-  public static JSONCount of(@Nonnull Long data) {
-    return new JSONCount(data);
-  }
-
-  /** Generator. */
-  @Nonnull
-  public static JSONCount of(@Nonnull Integer data) {
     return new JSONCount(data);
   }
 }

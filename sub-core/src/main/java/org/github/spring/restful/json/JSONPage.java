@@ -1,86 +1,34 @@
 package org.github.spring.restful.json;
 
-import java.util.Collection;
+import javax.annotation.Nonnull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.github.spring.footstone.IConstKt;
+import org.github.util.BeansUtilKt;
+import org.jetbrains.annotations.Contract;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
- * JSON_ENCODER of page.
- *
- * <pre>
- *   return JSONPage.of();
- * </pre>
+ * JSON of page.
  *
  * @param <E> element
  * @author JYD_XL
  * @see java.io.Serializable
+ * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.footstone.AbstractEntity
  * @see org.github.spring.restful.json.JSONBasic
  * @see org.github.spring.restful.json.JSONArray
  */
-@SuppressWarnings("ALL")
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class JSONPage<E> extends JSONArray<E> implements JSON {
   /** total. */
   private long total = IConstKt.COUNT;
-
-  /** Constructor. */
-  public JSONPage() {}
-
-  /** Constructor. */
-  @SafeVarargs
-  public JSONPage(long total, E... data) {
-    this.withTotal(total).withData(data);
-  }
-
-  /** Constructor. */
-  public JSONPage(long total, Collection<? extends E> data) {
-    this.withTotal(total).withData(data);
-  }
-
-  // /** Constructor. */
-  // public JSONPage(@NotNull List<? extends E> page) {
-  //   this((Page<? extends E>) page);
-  // }
-  //
-  // /** Constructor. */
-  // public JSONPage(@NotNull List<? super E> page, @NotNull Class<? extends E> data) {
-  //   this((Page<? super E>) page, data);
-  // }
-  //
-  // /** Constructor. */
-  // public JSONPage(@NotNull List<? super E> page, E[] data) {
-  //   this((Page<? super E>) page, data);
-  // }
-  //
-  // /** Constructor. */
-  // public JSONPage(@NotNull List<? super E> page, Collection<? extends E> data) {
-  //   this((Page<? super E>) page, data);
-  // }
-  //
-  // /** Constructor. */
-  // @Deprecated
-  // public JSONPage(@NotNull Page<? extends E> page) {
-  //   this(page.getTotal(), (E[]) page.toArray());
-  // }
-  //
-  // /** Constructor. */
-  // @Deprecated
-  // public JSONPage(@NotNull Page<? super E> page, @NotNull Class<? extends E> data) {
-  //   this(page.getTotal(), (E[]) copy(data, page));
-  // }
-  //
-  // /** Constructor. */
-  // @SafeVarargs
-  // @Deprecated
-  // public JSONPage(@NotNull Page<? super E> page, E... data) {
-  //   this(page.getTotal(), data);
-  // }
-  //
-  // /** Constructor. */
-  // public JSONPage(@NotNull Page<? super E> page, Collection<? extends E> data) {
-  //   this(page.getTotal(), data);
-  // }
 
   @Override
   public void release() {
@@ -88,45 +36,34 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
     super.release();
   }
 
-  /** GET total. */
-  public long getTotal() {
-    return total;
-  }
-
-  /** SET total. */
-  public void setTotal(long total) {
-    this.total = total;
+  @Override
+  public String toString() {
+    return super.toString();
   }
 
   /** WITH total. */
+  @Nonnull
   public JSONPage<E> withTotal(long total) {
-    this.setTotal(total);
+    setTotal(total);
     return this;
   }
 
   /** Generator. */
+  @Contract(" -> new")
+  @Nonnull
   public static JSONPage of() {
     return new JSONPage();
   }
 
-  // /** Generator. */
-  // public static <V> JSONPage<V> of(@NotNull List<? extends V> page) {
-  //   return new JSONPage<>(page);
-  // }
-  //
-  // /** Generator. */
-  // public static <V> JSONPage<V> of(@NotNull List<? super V> page, @NotNull Class<? extends V> data) {
-  //   return new JSONPage<>(page, data);
-  // }
-  //
-  // /** Generator. */
-  // @SafeVarargs
-  // public static <V> JSONPage<V> of(@NotNull List<? super V> page, V... data) {
-  //   return new JSONPage<>(page, data);
-  // }
-  //
-  // /** Generator. */
-  // public static <V> JSONPage<V> of(@NotNull List<? super V> page, Collection<? extends V> data) {
-  //   return new JSONPage<>(page, data);
-  // }
+  /** Generator. */
+  @Nonnull
+  public static <V> JSONPage<V> of(@Nonnull IPage<? extends V> page) {
+    return (JSONPage<V>) new JSONPage<>(page.getTotal()).withData(page.getRecords());
+  }
+
+  /** Generator. */
+  @Nonnull
+  public static <V> JSONPage<V> of(@Nonnull IPage<? super V> page, @Nonnull Class<? extends V> data) {
+    return (JSONPage<V>) new JSONPage<>(page.getTotal()).withData(BeansUtilKt.copy(data, page.getRecords()));
+  }
 }

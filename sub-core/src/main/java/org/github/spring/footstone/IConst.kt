@@ -97,7 +97,7 @@ val DATE_FORMAT_DAY: DateFormat = withInitial { SimpleDateFormat(FORMAT_DATE) }.
 /** 默认时区.  */
 val TIME_ZONE_CHINA = getTimeZone(TIME_ZONE)!!
 /** 字符串连接器，empty版.  */
-val JOINER_EMPTY = on(EMPTY).skipNulls()!!
+val emptyJoiner = on(EMPTY).skipNulls()!!
 /** 字符串连接器，space版.  */
 val JOINER_SPACE = on(SPACE).skipNulls()!!
 /** 默认字符串连接器.  */
@@ -105,7 +105,7 @@ val JOINER = JOINER_SPACE
 /** Excel空数据集.  */
 val INIT = arrayOf<Array<String>>()
 /** default result list.  */
-val ARRAY = arrayOf<Any>()
+val array = arrayOf<Any>()
 /** API版本.  */
 val API_VERSION = System.getProperty("apiVersion", "unknown")!!
 /** APP根目录.  */
