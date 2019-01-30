@@ -6,49 +6,41 @@ import org.github.ops.ObjectOpsKt;
 import org.github.spring.enumerate.ContentType;
 import org.github.spring.footstone.IConstKt;
 import org.github.spring.restful.Returnable;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Top interface of json.
  *
- * <pre>
- *   return JSON.of();
- * </pre>
- *
  * @author JYD_XL
  * @see java.io.Serializable
+ * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  */
 @FunctionalInterface
 public interface JSON extends Returnable {
-  @Deprecated
   @Override
-  @SuppressWarnings("deprecation")
   default void accept(@Nonnull OutputStream output) {
     ObjectOpsKt.writeValue(this, output);
   }
 
-  @Nonnull
-  @Deprecated
   @Override
-  @SuppressWarnings("deprecation")
+  @Nonnull
   default ContentType contentType() {
     return ContentType.JSON;
   }
 
-  @Override
-  @Nonnull
-  String get();
-
   /** Generator. */
+  @Contract(value = "_ -> param1", pure = true)
   @Nonnull
-  static JSON of(JSON json) {
+  static JSON of(@Nonnull JSON json) {
     return json;
   }
 
   /** Generator. */
+  @Contract(pure = true)
   @Nonnull
   static JSON of(@Nonnull String json) {
-    return () -> json;
+    return json::toString;
   }
 
   /** Generator. */
@@ -58,7 +50,7 @@ public interface JSON extends Returnable {
   }
 
   /** Generator. */
-
+  @Contract(pure = true)
   @Nonnull
   static JSON of() {
     return of(IConstKt.EMPTY_JSON);

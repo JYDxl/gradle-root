@@ -44,9 +44,9 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   @Deprecated
   @Override
-  public void collect(@Nonnull HttpServletRequest request, @Nonnull HttpServletResponse response) throws Exception {
-    if (IConstKt.CALL_BACK.equals(callback)) setCallback(request.getParameter(IConstKt.CALL_BACK));
-    super.collect(request, response);
+  public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse resp) throws Exception {
+    if (IConstKt.CALL_BACK.equals(callback)) setCallback(req.getParameter(IConstKt.CALL_BACK));
+    super.collect(req, resp);
   }
 
   @Deprecated
