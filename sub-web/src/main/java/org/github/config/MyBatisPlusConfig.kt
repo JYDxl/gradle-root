@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.injector.LogicSqlInjector
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor
-import org.github.spring.annotation.MyBatisMapper
+import org.github.mybatis.MyBatisMapper
 import org.mybatis.spring.annotation.MapperScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

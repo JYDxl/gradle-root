@@ -1,4 +1,4 @@
-package org.github.spring.annotation
+package org.github.mybatis
 
 import org.springframework.stereotype.Component
 

@@ -1,7 +1,7 @@
 package ${package.Mapper};
 
 import ${package.Entity}.${entity};
-import org.github.spring.annotation.MyBatisMapper;
+import org.github.mybatis.MyBatisMapper;
 import ${superMapperClassPackage};
 
 /**
