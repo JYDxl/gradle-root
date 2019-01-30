@@ -83,8 +83,9 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   /** Generator. */
+  @SuppressWarnings("unchecked")
   @Nonnull
   public static <V> JSONP<V> of(V data) {
-    return (JSONP<V>) new JSONP<>().withData(data);
+    return (JSONP) new JSONP<>().withData(data);
   }
 }
