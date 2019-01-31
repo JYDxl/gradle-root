@@ -5,9 +5,9 @@ import org.junit.Test
 class LoggerOpsTests {
   @Test
   fun testLog() {
+    log.trace { null }
     log.info { null }
     log.warn { null }
-    log.trace { null }
     log.debug { null }
     log.error { null }
   }
