@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler
 import org.springframework.web.servlet.config.annotation.EnableWebMvc
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
@@ -14,6 +15,10 @@ class WebMvcConfig : WebMvcConfigurer {
   override fun addReturnValueHandlers(handlers: MutableList<HandlerMethodReturnValueHandler>) {
     handlers += ReturnableValueHandlerKotlin
     handlers += returnableValueHandler()
+  }
+
+  override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+    registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
   }
 
   @Bean

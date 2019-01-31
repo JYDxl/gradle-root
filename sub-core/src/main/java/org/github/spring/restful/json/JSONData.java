@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.Contract;
 
 /**
  * JSON of data.
@@ -34,7 +33,7 @@ public class JSONData<T> extends JSONBasic implements JSON {
 
   @Override
   public String toString() {
-    return super.toString();
+    return get();
   }
 
   /** WITH data. */
@@ -44,14 +43,12 @@ public class JSONData<T> extends JSONBasic implements JSON {
   }
 
   /** Generator. */
-  @Contract(" -> new")
   @Nonnull
   public static JSONData of() {
     return new JSONData();
   }
 
   /** Generator. */
-  @Contract("_ -> new")
   @Nonnull
   public static <V> JSONData<V> of(V data) {
     return new JSONData<>(data);

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.github.spring.footstone.IConstKt;
-import org.jetbrains.annotations.Contract;
 
 /**
  * JSON of count.
@@ -34,7 +33,7 @@ public class JSONCount extends JSONBasic implements JSON {
 
   @Override
   public String toString() {
-    return super.toString();
+    return get();
   }
 
   /** WITH data. */
@@ -45,14 +44,12 @@ public class JSONCount extends JSONBasic implements JSON {
   }
 
   /** Generator. */
-  @Contract(" -> new")
   @Nonnull
   public static JSONCount of() {
     return new JSONCount();
   }
 
   /** Generator. */
-  @Contract("_ -> new")
   @Nonnull
   public static JSONCount of(long data) {
     return new JSONCount(data);

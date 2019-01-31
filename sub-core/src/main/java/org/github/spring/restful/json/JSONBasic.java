@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.github.ops.ObjectOpsKt;
 import org.github.spring.footstone.IConstKt;
-import org.jetbrains.annotations.Contract;
 
 /**
  * JSON of basic.
@@ -65,14 +64,12 @@ public class JSONBasic implements JSON {
   }
 
   /** Generator. */
-  @Contract(" -> new")
   @Nonnull
   public static JSONBasic of() {
     return new JSONBasic();
   }
 
   /** Generator. */
-  @Contract("_, _ -> new")
   @Nonnull
   public static JSONBasic of(int code, @Nonnull String msg) {
     return new JSONBasic(code, msg);

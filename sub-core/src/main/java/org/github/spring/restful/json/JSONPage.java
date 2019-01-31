@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.github.spring.footstone.IConstKt;
 import org.github.util.BeansUtilKt;
-import org.jetbrains.annotations.Contract;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
@@ -38,7 +37,7 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
 
   @Override
   public String toString() {
-    return super.toString();
+    return get();
   }
 
   /** WITH total. */
@@ -49,7 +48,6 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
   }
 
   /** Generator. */
-  @Contract(" -> new")
   @Nonnull
   public static JSONPage of() {
     return new JSONPage();

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.github.spring.enumerate.ContentType;
 import org.github.spring.footstone.IConstKt;
-import org.jetbrains.annotations.Contract;
 import com.google.common.base.MoreObjects;
 
 /**
@@ -42,7 +41,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse resp) throws Exception {
     resp.setContentType(contentType().get());
     resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
-    if (functional()) {
+    if(functional()) {
       accept(resp.getWriter());
     } else {
       accept(resp.getOutputStream());
@@ -69,21 +68,18 @@ public interface Returnable extends Serializable, Supplier<String> {
   }
 
   /** Generator. */
-  @Contract(value = "_ -> param1", pure = true)
   @Nonnull
   static Returnable of(@Nonnull Returnable data) {
     return data;
   }
 
   /** Generator. */
-  @Contract(pure = true)
   @Nonnull
   static Returnable of(@Nonnull Object data) {
     return data::toString;
   }
 
   /** Generator. */
-  @Contract(pure = true)
   @Nonnull
   static Returnable of() {
     return of(IConstKt.EMPTY);

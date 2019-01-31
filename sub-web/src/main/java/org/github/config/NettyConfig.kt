@@ -4,6 +4,7 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.buffer.Unpooled.copiedBuffer
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_BACKLOG
+import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.epoll.EpollSocketChannel
@@ -27,11 +28,10 @@ import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
 import kotlin.text.Charsets.UTF_8
 
-@Configuration
+//@Configuration
 class NettyConfig : InitializingBean {
   @Scope(SCOPE_PROTOTYPE)
   @Bean
@@ -96,6 +96,7 @@ class NettyConfig : InitializingBean {
       .group(boss, worker)
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_BACKLOG, 1024)
+      .option(SO_REUSEADDR, true)
       .handler(loggingHandler())
       .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {

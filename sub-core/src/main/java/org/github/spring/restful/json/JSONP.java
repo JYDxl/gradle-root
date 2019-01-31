@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.github.spring.enumerate.ContentType;
 import org.github.spring.footstone.IConstKt;
-import org.jetbrains.annotations.Contract;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.MoreObjects;
 
 /**
  * JSON of jsonp.
@@ -37,7 +37,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   @Override
   public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse resp) throws Exception {
-    if (IConstKt.CALL_BACK.equals(callback)) setCallback(req.getParameter(IConstKt.CALL_BACK));
+    if(IConstKt.CALL_BACK.equals(callback)) setCallback(MoreObjects.firstNonNull(req.getParameter(IConstKt.CALL_BACK), IConstKt.CALL_BACK));
     super.collect(req, resp);
   }
 
@@ -66,7 +66,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   @Override
   public String toString() {
-    return super.toString();
+    return super.get();
   }
 
   /** WITH callback. */
@@ -76,7 +76,6 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   /** Generator. */
-  @Contract(" -> new")
   @Nonnull
   public static JSONP of() {
     return new JSONP();

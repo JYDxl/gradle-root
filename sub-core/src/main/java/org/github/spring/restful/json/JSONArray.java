@@ -10,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.github.spring.footstone.IConstKt;
-import org.jetbrains.annotations.Contract;
 
 /**
  * JSON of array.
@@ -40,7 +39,7 @@ public class JSONArray<E> extends JSONBasic implements JSON {
 
   @Override
   public String toString() {
-    return super.toString();
+    return get();
   }
 
   /** GET data. */
@@ -58,7 +57,6 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   }
 
   /** WITH data. */
-  @Contract("_ -> this")
   @SafeVarargs
   @Nonnull
   public final JSONArray<E> withData(E... data) {
@@ -74,14 +72,12 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   }
 
   /** Generator. */
-  @Contract(" -> new")
   @Nonnull
   public static JSONArray of() {
     return new JSONArray();
   }
 
   /** Generator. */
-  @Contract("_ -> new")
   @SafeVarargs
   @Nonnull
   public static <V> JSONArray<V> of(V... data) {
@@ -89,7 +85,6 @@ public class JSONArray<E> extends JSONBasic implements JSON {
   }
 
   /** Generator. */
-  @Contract("_ -> new")
   @Nonnull
   public static <V> JSONArray<V> of(@Nonnull Collection<? extends V> data) {
     return new JSONArray<>(data.toArray());
