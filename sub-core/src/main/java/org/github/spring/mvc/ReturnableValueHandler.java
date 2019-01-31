@@ -27,12 +27,13 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
 
   @Override
   public void handleReturnValue(Object returnValue, @Nonnull MethodParameter returnType, @Nonnull ModelAndViewContainer mavContainer, @Nonnull NativeWebRequest webRequest) throws Exception {
-    val value = ((Returnable) (returnValue == null ? Returnable.of() : returnValue));
+    Objects.requireNonNull(returnValue);
+    val value = (Returnable) returnValue;
     val req   = webRequest.getNativeRequest(HttpServletRequest.class);
     val resp  = webRequest.getNativeResponse(HttpServletResponse.class);
     Objects.requireNonNull(req);
     Objects.requireNonNull(resp);
-    if (value.terminal()) {
+    if(value.terminal()) {
       value.collect(req, resp);
     } else {
       mavContainer.setViewName(value.get());
