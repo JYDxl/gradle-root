@@ -17,7 +17,7 @@ class ClientChannelHandler : ChannelInboundHandlerAdapter() {
       addAllAddress(list)
     }.build()!!
 
-    for (i in 1..10) {
+    for(i in 1..10) {
       ctx.writeAndFlush(req)
     }
   }

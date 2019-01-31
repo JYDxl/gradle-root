@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping("/rest/")
 class RestAction {
   @RequestMapping("returnable")
-  fun returnable() = Returnable.of()
+  fun returnable() = Returnable { null }
 
   @RequestMapping("json")
-  fun json() = JSON.of()
+  fun json() = JSON { null }
 
   @RequestMapping("json/basic")
   fun jsonBasic() = JSONBasic.error()

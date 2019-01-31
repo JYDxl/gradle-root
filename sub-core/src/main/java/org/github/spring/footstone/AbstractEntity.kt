@@ -29,7 +29,7 @@ abstract class AbstractEntity : Serializable {
       model.setPageNumber(request.getParameter(PAGE_NUMBER))
       model.sortName = request.getParameter(SORT_NAME)
       model.sortOrder = request.getParameter(SORT_ORDER)
-    } catch (e: Exception) {
+    } catch(e: Exception) {
       log.error(e.message, e)
     }
     return model

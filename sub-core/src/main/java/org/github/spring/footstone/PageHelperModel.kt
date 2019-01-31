@@ -20,7 +20,7 @@ class PageHelperModel : AbstractEntity() {
   /** SET sortOrder.  */
   var sortOrder = ASC
     set(sortOrder) {
-      if (ASC.equals(sortOrder, ignoreCase = true) || "DESC".equals(sortOrder, ignoreCase = true)) field = sortOrder.toUpperCase()
+      if(ASC.equals(sortOrder, ignoreCase = true) || "DESC".equals(sortOrder, ignoreCase = true)) field = sortOrder.toUpperCase()
     }
 
   /** page number.  */
@@ -40,14 +40,14 @@ class PageHelperModel : AbstractEntity() {
 
   /** calculate page size,part or full.  */
   private fun calculate(): Int {
-    return if (pageFlag) pageSize else 0
+    return if(pageFlag) pageSize else 0
   }
 
-//  /** Get RowBounds.  */
-//  @Deprecated("")
-//  fun createRowBounds(): RowBounds {
-//    return RowBounds(pageNumber, this.calculate())
-//  }
+  //  /** Get RowBounds.  */
+  //  @Deprecated("")
+  //  fun createRowBounds(): RowBounds {
+  //    return RowBounds(pageNumber, this.calculate())
+  //  }
 
   /**
    * 获取排序信息,使用手写SQL时使用.
@@ -64,10 +64,10 @@ class PageHelperModel : AbstractEntity() {
    * @return 排序信息
    */
   private fun createSortInfoByDefault(): String? {
-    if (sortName.isBlank()) return null
+    if(sortName.isBlank()) return null
     val column = StringBuilder()
-    for (i in 0 until this.sortName.length) {
-      if (Character.isUpperCase(this.sortName[i])) {
+    for(i in 0 until this.sortName.length) {
+      if(Character.isUpperCase(this.sortName[i])) {
         column.append(UNDER_LINE).append(Character.toLowerCase(this.sortName[i]))
       } else {
         column.append(this.sortName[i])
@@ -78,19 +78,19 @@ class PageHelperModel : AbstractEntity() {
 
   /** SET method.  */
   fun setPageFlag(flag: String?) {
-    if (flag.isNullOrBlank()) return
+    if(flag.isNullOrBlank()) return
     pageFlag = parseBoolean(flag)
   }
 
   /** SET pageNumber.  */
   fun setPageNumber(number: String?) {
-    if (number.isNullOrBlank()) return
+    if(number.isNullOrBlank()) return
     pageNumber = parseInt(number)
   }
 
   /** SET pageSize.  */
   fun setPageSize(size: String?) {
-    if (size.isNullOrBlank()) return
+    if(size.isNullOrBlank()) return
     pageSize = parseInt(size)
   }
 

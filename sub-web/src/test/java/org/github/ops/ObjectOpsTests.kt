@@ -37,9 +37,9 @@ class ObjectOpsTests {
   }
 
   private tailrec fun recursive(multimap: ImmutableListMultimap<String, SysMenuTree>, list: ImmutableList<SysMenuTree>) {
-    for (node: SysMenuTree in list) {
+    for(node: SysMenuTree in list) {
       val subNodes: ImmutableList<SysMenuTree> = multimap.get(node.id)
-      if (subNodes.isNotEmpty()) {
+      if(subNodes.isNotEmpty()) {
         node.children = subNodes
         return recursive(multimap, subNodes)
       }
