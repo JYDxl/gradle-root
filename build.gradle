@@ -50,6 +50,7 @@ subprojects {
   targetCompatibility = 1.8
 
   bootJar.enabled = false
+  test.enabled = false
   jar.enabled = true
 
   compileKotlin {

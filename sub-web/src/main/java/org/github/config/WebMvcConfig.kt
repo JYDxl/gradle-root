@@ -12,12 +12,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @EnableWebMvc
 class WebMvcConfig : WebMvcConfigurer {
   override fun addReturnValueHandlers(handlers: MutableList<HandlerMethodReturnValueHandler>) {
-    handlers += returnableValueHandlerKotlin()
+    handlers += ReturnableValueHandlerKotlin
     handlers += returnableValueHandler()
   }
-
-  @Bean
-  fun returnableValueHandlerKotlin() = ReturnableValueHandlerKotlin
 
   @Bean
   fun returnableValueHandler() = ReturnableValueHandler()
