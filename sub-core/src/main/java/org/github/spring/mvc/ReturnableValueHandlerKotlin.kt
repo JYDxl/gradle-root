@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse
 object ReturnableValueHandlerKotlin : HandlerMethodReturnValueHandler {
   override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.nestedParameterType)
 
+  //TODO JYD_XL test
   override fun handleReturnValue(value: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
     value as Returnable
     val req = webRequest.getNativeRequest(HttpServletRequest::class.java)!!

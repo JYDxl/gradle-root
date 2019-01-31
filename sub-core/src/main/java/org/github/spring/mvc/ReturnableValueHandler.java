@@ -25,10 +25,10 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
     return Returnable.class.isAssignableFrom(returnType.getParameterType());
   }
 
+  //TODO JYD_XL test
   @Override
   public void handleReturnValue(Object returnValue, @Nonnull MethodParameter returnType, @Nonnull ModelAndViewContainer mavContainer, @Nonnull NativeWebRequest webRequest) throws Exception {
-    Objects.requireNonNull(returnValue);
-    val value = (Returnable) returnValue;
+    val value = (Returnable) Objects.requireNonNull(returnValue);
     val req   = webRequest.getNativeRequest(HttpServletRequest.class);
     val resp  = webRequest.getNativeResponse(HttpServletResponse.class);
     Objects.requireNonNull(req);
