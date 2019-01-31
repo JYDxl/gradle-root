@@ -56,14 +56,16 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
   }
 
   /** Generator. */
+  @SuppressWarnings("unchecked")
   @Nonnull
   public static <V> JSONPage<V> of(@Nonnull IPage<? extends V> page) {
-    return (JSONPage<V>) new JSONPage<>(page.getTotal()).withData(page.getRecords());
+    return (JSONPage) new JSONPage<>(page.getTotal()).withData(page.getRecords());
   }
 
   /** Generator. */
+  @SuppressWarnings("unchecked")
   @Nonnull
   public static <V> JSONPage<V> of(@Nonnull IPage<? super V> page, @Nonnull Class<? extends V> data) {
-    return (JSONPage<V>) new JSONPage<>(page.getTotal()).withData(BeansUtilKt.copy(data, page.getRecords()));
+    return (JSONPage) new JSONPage<>(page.getTotal()).withData(BeansUtilKt.copy(data, page.getRecords()));
   }
 }
