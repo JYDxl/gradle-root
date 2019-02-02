@@ -2,6 +2,7 @@ package org.github.config
 
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.buffer.Unpooled.copiedBuffer
+import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_BACKLOG
 import io.netty.channel.ChannelOption.SO_REUSEADDR
@@ -25,14 +26,52 @@ import io.netty.handler.stream.ChunkedWriteHandler
 import org.github.netty.handler.HttpFileServerChannelHandler
 import org.github.netty.handler.ServerChannelHandler
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
+import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
 import kotlin.text.Charsets.UTF_8
 
-//@Configuration
-class NettyConfig : InitializingBean {
+@Configuration
+class NettyConfig : InitializingBean, DisposableBean {
+  /** server socket. */
+  private lateinit var serverSocket: Channel
+
+  override fun destroy() {
+    serverSocket.close()
+  }
+
+  override fun afterPropertiesSet() {
+    val boss = EpollEventLoopGroup()
+    val worker = EpollEventLoopGroup()
+    ServerBootstrap()
+      .group(boss, worker)
+      .channel(EpollServerSocketChannel::class.java)
+      .option(SO_BACKLOG, 1024)
+      .option(SO_REUSEADDR, true)
+      .handler(loggingHandler())
+      .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
+        override fun initChannel(channel: EpollSocketChannel) {
+          channel.pipeline()!!.apply {
+            addLast(loggingHandler())
+            addLast(httpRequestDecoder())
+            addLast(httpObjectAggregator())
+            addLast(httpResponseEncoder())
+            addLast(chunkedWriteHandler())
+            addLast(httpFileServerChannelHandler())
+          }
+        }
+      })
+      .bind(8090)
+      .sync()
+      .channel()
+      .apply { serverSocket = this }
+      .closeFuture()
+      .addListener { worker.shutdownGracefully();boss.shutdownGracefully() }
+  }
+
   @Scope(SCOPE_PROTOTYPE)
   @Bean
   fun lineBasedFrameDecoder() = LineBasedFrameDecoder(1024)
@@ -88,35 +127,4 @@ class NettyConfig : InitializingBean {
 
   @Bean
   fun httpFileServerChannelHandler() = HttpFileServerChannelHandler()
-
-  override fun afterPropertiesSet() {
-    val boss = EpollEventLoopGroup()
-    val worker = EpollEventLoopGroup()
-    ServerBootstrap()
-      .group(boss, worker)
-      .channel(EpollServerSocketChannel::class.java)
-      .option(SO_BACKLOG, 1024)
-      .option(SO_REUSEADDR, true)
-      .handler(loggingHandler())
-      .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
-        override fun initChannel(channel: EpollSocketChannel) {
-          channel.pipeline()!!.apply {
-            addLast(loggingHandler())
-            addLast(httpRequestDecoder())
-            addLast(httpObjectAggregator())
-            addLast(httpResponseEncoder())
-            addLast(chunkedWriteHandler())
-            addLast(httpFileServerChannelHandler())
-          }
-        }
-      })
-      .bind(8090)
-      .sync()
-      .channel()
-      .closeFuture()
-      .addListener {
-        boss.shutdownGracefully()
-        worker.shutdownGracefully()
-      }
-  }
 }

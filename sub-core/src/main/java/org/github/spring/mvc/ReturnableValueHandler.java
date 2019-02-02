@@ -16,7 +16,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
  * Returnable返回类型解析器，Java版.
  *
  * @author JYD_XL
- * @see HandlerMethodReturnValueHandler
+ * @see org.springframework.web.method.support.HandlerMethodReturnValueHandler
  */
 @Slf4j
 public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
@@ -28,10 +28,8 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
   @Override
   public void handleReturnValue(Object returnValue, @Nonnull MethodParameter returnType, @Nonnull ModelAndViewContainer mavContainer, @Nonnull NativeWebRequest webRequest) throws Exception {
     val value = (Returnable) Objects.requireNonNull(returnValue);
-    val req   = webRequest.getNativeRequest(HttpServletRequest.class);
-    val resp  = webRequest.getNativeResponse(HttpServletResponse.class);
-    Objects.requireNonNull(req);
-    Objects.requireNonNull(resp);
+    val req   = Objects.requireNonNull(webRequest.getNativeRequest(HttpServletRequest.class));
+    val resp  = Objects.requireNonNull(webRequest.getNativeResponse(HttpServletResponse.class));
     if(value.terminal()) {
       value.collect(req, resp);
     } else {
