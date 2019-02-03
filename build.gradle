@@ -33,7 +33,6 @@ allprojects {
     protobufVersion = '3.6.1'
     okhttp3Version = '3.12.1'
     nettyVersion = '4.1.33.Final'
-    shiroVersion = '1.4.0'
     mysqlVersion = '5.1.47'
     guavaVersion = '27.0.1-jre'
   }
