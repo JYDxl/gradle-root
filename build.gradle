@@ -28,7 +28,6 @@ allprojects {
 
   ext {
     kotlinxCoroutinesVersion = '1.1.1'
-    commonsLang3Version = '3.8.1'
     mybatisPlusVersion = '3.0.7.1'
     protobufVersion = '3.6.1'
     okhttp3Version = '3.12.1'
@@ -74,7 +73,6 @@ subprojects {
     compile('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     compile('org.jetbrains.kotlin:kotlin-reflect')
 
-    compile("org.apache.commons:commons-lang3:$commonsLang3Version")
     compile("com.squareup.okhttp3:okhttp:$okhttp3Version")
     compile("com.google.guava:guava:$guavaVersion")
     compile("io.netty:netty-all:$nettyVersion")

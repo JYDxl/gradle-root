@@ -17,8 +17,8 @@ class RestAction {
   fun json() = JSON { null }
 
   @RequestMapping("json/basic")
-  fun jsonBasic() = JSONBasic.error()
+  fun jsonBasic() = JSONBasic.of()
 
   @RequestMapping("json/callback")
-  fun jsonCallback(): JSONP<Any?> = JSONP.of()
+  fun jsonCallback(): Returnable = JSONP.of()
 }
