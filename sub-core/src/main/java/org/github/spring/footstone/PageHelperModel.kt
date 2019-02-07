@@ -13,7 +13,7 @@ import java.util.Optional
  */
 class PageHelperModel : AbstractEntity() {
   var sortName: String = ""
-    set(sortName) = Optional.ofNullable(sortName).filter { v -> PARAM_PATTERN.matcher(v).matches() }.ifPresent { v -> field = v }
+    set(sortName) = Optional.ofNullable(sortName).filter { v -> paramPattern.matches(v) }.ifPresent { v -> field = v }
 
   /** sort order.  */
   /** GET sortOrder.  */
@@ -26,17 +26,17 @@ class PageHelperModel : AbstractEntity() {
   /** page number.  */
   /** GET pageNumber.  */
   /** SET pageNumber.  */
-  var pageNumber = NUMBER
+  private var pageNumber = NUMBER
 
   /** page flag.  */
   /** GET method.  */
   /** SET method.  */
-  var pageFlag = FLAG
+  private var pageFlag = FLAG
 
   /** page size.  */
   /** GET pageSize.  */
   /** SET pageSize.  */
-  var pageSize = SIZE
+  private var pageSize = SIZE
 
   /** calculate page size,part or full.  */
   private fun calculate(): Int {
@@ -55,7 +55,7 @@ class PageHelperModel : AbstractEntity() {
    * @return 排序信息
    */
   private fun createSortInfoByCustom(): String? {
-    return Optional.ofNullable(this.sortName).filter({ it.isNotBlank() }).map { v -> v + SPACE + this.sortOrder }.orElse(null)
+    return Optional.ofNullable(this.sortName).filter { it.isNotBlank() }.map { v -> v + SPACE + this.sortOrder }.orElse(null)
   }
 
   /**

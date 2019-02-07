@@ -50,7 +50,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   @Override
   @Nonnull
   public String get() {
-    return IConstKt.getEmptyJoiner().join(callback, "(", super.get(), ")");
+    return IConstKt.getJoiner().join(callback, "(", super.get(), ")");
   }
 
   @Override
