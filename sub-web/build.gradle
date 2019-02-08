@@ -7,7 +7,7 @@ dependencies {
   compile project(':sub-model')
   compile project(':sub-netty')
 
-  compile("mysql:mysql-connector-java:$mysqlVersion")
+  compile("mysql:mysql-connector-java:$mysql_version")
 
   compile('org.springframework.boot:spring-boot-starter-actuator')
   compile('org.springframework.boot:spring-boot-starter-aop')
