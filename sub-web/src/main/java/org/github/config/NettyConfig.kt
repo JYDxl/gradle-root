@@ -35,7 +35,7 @@ import org.springframework.context.annotation.Scope
 import kotlin.text.Charsets.UTF_8
 
 @Configuration
-class NettyConfig : InitializingBean, DisposableBean {
+class NettyConfig: InitializingBean, DisposableBean {
   /** server socket. */
   private lateinit var serverSocket: Channel
 
@@ -52,7 +52,7 @@ class NettyConfig : InitializingBean, DisposableBean {
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
       .handler(loggingHandler())
-      .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
+      .childHandler(object: ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
