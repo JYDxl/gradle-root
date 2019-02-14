@@ -6,5 +6,6 @@ jdk:
   - openjdk11
 
 script:
+  - gradle wrapper
   - gradle clean
   - gradle build --scan -s
