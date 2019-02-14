@@ -1,11 +1,9 @@
 language: java
-install: true
 
 jdk:
   - openjdk8
   - openjdk11
 
 script:
-  - gradle init
-  - gradle clean
-  - gradle build --scan -s
+  - ./gradlew clean
+  - ./gradlew build --scan -s
