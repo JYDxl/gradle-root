@@ -22,11 +22,11 @@ import org.github.spring.footstone.IConstKt;
 @Data
 public class JSONBasic implements JSON {
   /** 返回的状态码. */
-  private int retCode = IConstKt.RET_OK_CODE;
+  private int resCode = IConstKt.RES_OK_CODE;
 
   /** 返回的信息. */
   @NonNull
-  private String retMsg = IConstKt.RET_OK_MSG;
+  private String resMsg = IConstKt.RES_OK_MSG;
 
   @Override
   @Nonnull
@@ -41,7 +41,7 @@ public class JSONBasic implements JSON {
 
   @Override
   public void release() {
-    withRetCode(IConstKt.RET_OK_CODE).withRetMsg(IConstKt.RET_OK_MSG);
+    withResCode(IConstKt.RES_OK_CODE).withResMsg(IConstKt.RES_OK_MSG);
   }
 
   @Override
@@ -49,17 +49,17 @@ public class JSONBasic implements JSON {
     return get();
   }
 
-  /** WITH retCode. */
+  /** WITH resCode. */
   @Nonnull
-  public JSONBasic withRetCode(int retCode) {
-    setRetCode(retCode);
+  public JSONBasic withResCode(int resCode) {
+    setResCode(resCode);
     return this;
   }
 
-  /** WITH retMsg. */
+  /** WITH resMsg. */
   @Nonnull
-  public JSONBasic withRetMsg(@Nonnull String retMsg) {
-    setRetMsg(retMsg);
+  public JSONBasic withResMsg(@Nonnull String resMsg) {
+    setResMsg(resMsg);
     return this;
   }
 

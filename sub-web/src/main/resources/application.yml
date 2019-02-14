@@ -28,6 +28,11 @@ spring:
       force: true
       force-request: true
       force-response: true
+      enabled: true
+      charset: utf-8
+    log-request-details: true
+    converters:
+      preferred-json-mapper: jackson
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
@@ -37,5 +42,6 @@ mybatis-plus:
 
 logging:
   level:
+    web: debug
     org.github: debug
     io.netty: debug
