@@ -2,7 +2,6 @@ package org.github.config
 
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.buffer.Unpooled.copiedBuffer
-import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_BACKLOG
 import io.netty.channel.ChannelOption.SO_REUSEADDR
@@ -23,11 +22,10 @@ import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
+import org.github.netty.ServerChannelHolder
 import org.github.netty.handler.HttpFileServerChannelHandler
 import org.github.netty.handler.ServerChannelHandler
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
-import org.springframework.beans.factory.DisposableBean
-import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -35,18 +33,12 @@ import org.springframework.context.annotation.Scope
 import kotlin.text.Charsets.UTF_8
 
 @Configuration
-class NettyConfig: InitializingBean, DisposableBean {
-  /** server socket. */
-  private lateinit var serverSocket: Channel
-
-  override fun destroy() {
-    serverSocket.close()
-  }
-
-  override fun afterPropertiesSet() {
+class NettyConfig {
+  @Bean
+  fun serverChannelHolder(): ServerChannelHolder {
     val boss = EpollEventLoopGroup()
     val worker = EpollEventLoopGroup()
-    ServerBootstrap()
+    return ServerBootstrap()
       .group(boss, worker)
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_BACKLOG, 1024)
@@ -64,12 +56,12 @@ class NettyConfig: InitializingBean, DisposableBean {
           }
         }
       })
-      .bind(8090)
+      .bind(8081)
       .sync()
       .channel()
-      .apply { serverSocket = this }
       .closeFuture()
-      .addListener { worker.shutdownGracefully();boss.shutdownGracefully() }
+      .addListener { worker.shutdownGracefully(); boss.shutdownGracefully() }
+      .let { ServerChannelHolder(it.channel()) }
   }
 
   @Scope(SCOPE_PROTOTYPE)
