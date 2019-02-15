@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-30
+ * @since 2019-02-15
  */
 @MyBatisMapper
 public interface ISysMenuMapper extends BaseMapper<SysMenuEntity> {}

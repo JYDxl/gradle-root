@@ -3,10 +3,9 @@ package org.github.base.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-30
+ * @since 2019-02-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -32,28 +31,22 @@ public class TipLoginLogEntity implements Serializable {
     private String logId;
 
     /** log_user */
-    @TableField("log_user")
     private String logUser;
 
     /** log_time */
-    @TableField("log_time")
     private LocalDateTime logTime;
 
     /** log_ip */
-    @TableField("log_ip")
     private String logIp;
 
     /** log_action */
-    @TableField("log_action")
     private String logAction;
 
     /** delete flag */
-    @TableField("deleted")
     @TableLogic
     private Integer deleted;
 
     /** update version */
-    @TableField("version")
     @Version
     private Integer version;
 

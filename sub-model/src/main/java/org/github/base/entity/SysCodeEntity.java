@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-01-30
+ * @since 2019-02-15
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,32 +30,25 @@ public class SysCodeEntity implements Serializable {
     private String codeId;
 
     /** 名称 */
-    @TableField("code_name")
     private String codeName;
 
     /** 码值 */
-    @TableField("code_value")
     private String codeValue;
 
     /** 显示顺序 */
-    @TableField("show_num")
     private Integer showNum;
 
     /** 码值类型 */
-    @TableField("code_type_id")
     private String codeTypeId;
 
     /** 1:可用，2：不可用 */
-    @TableField("use_type")
     private String useType;
 
     /** delete flag */
-    @TableField("deleted")
     @TableLogic
     private Integer deleted;
 
     /** update version */
-    @TableField("version")
     @Version
     private Integer version;
 
