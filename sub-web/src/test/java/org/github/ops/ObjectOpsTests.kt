@@ -2,6 +2,7 @@ package org.github.ops
 
 import com.google.common.collect.ImmutableList
 import com.google.common.collect.ImmutableListMultimap
+import org.github.base.entity.SysMenuEntity
 import org.github.base.service.ISysMenuService
 import org.github.base.service.ITipLoginLogService
 import org.github.spring.footstone.EMPTY
@@ -25,6 +26,21 @@ class ObjectOpsTests {
   @Test
   fun json() {
     log.info(tipLoginLogService.list().json())
+  }
+
+  @Test
+  fun map() {
+    val item = SysMenuTree("id", null, "name")
+    val map = item.map()
+    log.info(map.json())
+  }
+
+  @Test
+  fun bean() {
+    val entity = sysMenuService.list()[0]!!
+    val map = entity.map()
+    val bean = map.bean(SysMenuEntity::class.java)
+    println(bean)
   }
 
   @Test
