@@ -14,7 +14,7 @@ import org.github.spring.restful.Returnable;
  * @see org.github.spring.restful.Returnable
  */
 @FunctionalInterface
-public interface View extends Returnable {
+public interface VIEW extends Returnable {
   @Override
   @Nonnull
   default ContentType getContentType() {
@@ -28,20 +28,20 @@ public interface View extends Returnable {
 
   /** Generator. */
   @Nonnull
-  static View of(@Nonnull String view) {
+  static VIEW of(@Nonnull String view) {
     return view::toString;
   }
 
   /** Generator. */
   @Nonnull
-  static View of() {
+  static VIEW of() {
     return of(IConstKt.ROOT);
   }
 
   /** Generator. */
   @Deprecated
   @Nonnull
-  static View nil() {
+  static VIEW nil() {
     return IConstKt.getViewNil();
   }
 }
