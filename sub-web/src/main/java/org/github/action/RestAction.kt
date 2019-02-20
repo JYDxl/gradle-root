@@ -4,12 +4,17 @@ import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSON
 import org.github.spring.restful.json.JSONBasic
 import org.github.spring.restful.json.JSONP
-import org.springframework.stereotype.Controller
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.ApplicationContext
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
-@Controller
+@RestController
 @RequestMapping("/rest/")
 class RestAction {
+  @Autowired
+  private lateinit var applicationContext: ApplicationContext
+
   @RequestMapping("returnable")
   fun returnable() = Returnable { null }
 

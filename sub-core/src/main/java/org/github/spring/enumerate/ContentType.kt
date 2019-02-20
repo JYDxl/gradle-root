@@ -1,20 +1,20 @@
 package org.github.spring.enumerate
 
-import java.util.function.Supplier
-
 /**
  * Content Type.
  *
  * @author JYD_XL
  */
-enum class ContentType(private val content: String) : Supplier<String> {
-  BIN("application/octet-stream"),
+enum class ContentType(private val contentType: String) {
+  BIN("application/octet-stream;charset=UTF-8"),
 
-  TEXT("text/plain"),
+  TEXT("text/plain;charset=UTF-8"),
 
-  JSON("application/json"),
+  HTML("text/html;charset=UTF-8"),
 
-  JSONP("application/javascript");
+  JSON("application/json;charset=UTF-8"),
 
-  override fun get() = content
+  JSONP("application/javascript;charset=UTF-8");
+
+  override fun toString() = contentType
 }

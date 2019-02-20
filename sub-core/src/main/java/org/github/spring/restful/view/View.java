@@ -1,6 +1,7 @@
 package org.github.spring.restful.view;
 
 import javax.annotation.Nonnull;
+import org.github.spring.enumerate.ContentType;
 import org.github.spring.footstone.IConstKt;
 import org.github.spring.restful.Returnable;
 
@@ -15,14 +16,14 @@ import org.github.spring.restful.Returnable;
 @FunctionalInterface
 public interface View extends Returnable {
   @Override
-  default boolean terminal() {
-    return false;
+  @Nonnull
+  default ContentType getContentType() {
+    return ContentType.HTML;
   }
 
-  /** Generator. */
-  @Nonnull
-  static View of(@Nonnull View view) {
-    return view;
+  @Override
+  default boolean isTerminated() {
+    return false;
   }
 
   /** Generator. */
@@ -35,5 +36,12 @@ public interface View extends Returnable {
   @Nonnull
   static View of() {
     return of(IConstKt.ROOT);
+  }
+
+  /** Generator. */
+  @Deprecated
+  @Nonnull
+  static View nil() {
+    return IConstKt.getViewNil();
   }
 }

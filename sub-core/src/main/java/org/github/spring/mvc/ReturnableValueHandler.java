@@ -30,11 +30,12 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
     val value = (Returnable) Objects.requireNonNull(returnValue);
     val req   = Objects.requireNonNull(webRequest.getNativeRequest(HttpServletRequest.class));
     val resp  = Objects.requireNonNull(webRequest.getNativeResponse(HttpServletResponse.class));
-    if(value.terminal()) {
+    if(value.isTerminated()) {
       value.collect(req, resp);
     } else {
       mavContainer.setViewName(value.get());
     }
-    mavContainer.setRequestHandled(value.terminal());
+    mavContainer.setRequestHandled(value.isTerminated());
+    //TODO log
   }
 }

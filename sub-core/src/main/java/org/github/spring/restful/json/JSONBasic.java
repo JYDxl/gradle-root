@@ -35,7 +35,7 @@ public class JSONBasic implements JSON {
   }
 
   @Override
-  public boolean functional() {
+  public boolean isFunctional() {
     return false;
   }
 

@@ -24,14 +24,8 @@ public interface JSON extends Returnable {
 
   @Override
   @Nonnull
-  default ContentType contentType() {
+  default ContentType getContentType() {
     return ContentType.JSON;
-  }
-
-  /** Generator. */
-  @Nonnull
-  static JSON of(@Nonnull JSON json) {
-    return json;
   }
 
   /** Generator. */
@@ -50,5 +44,11 @@ public interface JSON extends Returnable {
   @Nonnull
   static JSON of() {
     return of(IConstKt.EMPTY_JSON);
+  }
+
+  /** Generator. */
+  @Nonnull
+  static JSON nil() {
+    return IConstKt.getJsonNil();
   }
 }

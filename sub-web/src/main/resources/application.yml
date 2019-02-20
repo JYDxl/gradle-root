@@ -9,7 +9,7 @@ spring:
         max-idle: 16
       shutdown-timeout: 1s
   datasource:
-    url: jdbc:mysql://localhost:3357/security?useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3357/security?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: l
@@ -42,6 +42,6 @@ mybatis-plus:
 
 logging:
   level:
-    web: debug
-    org.github: debug
-    io.netty: debug
+    web: trace
+    org.github: trace
+    io.netty: trace

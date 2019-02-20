@@ -43,19 +43,19 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   @Override
   @Nonnull
-  public ContentType contentType() {
-    return ContentType.JSONP;
+  public String get() {
+    return callback + "(" + super.get() + ")";
+  }
+
+  @Override
+  public boolean isFunctional() {
+    return true;
   }
 
   @Override
   @Nonnull
-  public String get() {
-    return IConstKt.getJoiner().join(callback, "(", super.get(), ")");
-  }
-
-  @Override
-  public boolean functional() {
-    return true;
+  public ContentType getContentType() {
+    return ContentType.JSONP;
   }
 
   @Override
