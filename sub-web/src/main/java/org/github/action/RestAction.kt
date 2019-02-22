@@ -16,10 +16,10 @@ class RestAction {
   private lateinit var applicationContext: ApplicationContext
 
   @RequestMapping("returnable")
-  fun returnable() = Returnable { null }
+  fun returnable() = Returnable.nil()
 
   @RequestMapping("json")
-  fun json() = JSON { null }
+  fun json() = JSON.nil()
 
   @RequestMapping("json/basic")
   fun jsonBasic() = JSONBasic.of()

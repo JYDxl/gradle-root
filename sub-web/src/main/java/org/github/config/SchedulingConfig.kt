@@ -1,19 +1,26 @@
 package org.github.config
 
+import org.springframework.beans.factory.ObjectProvider
+import org.springframework.boot.autoconfigure.task.TaskSchedulingProperties
+import org.springframework.boot.task.TaskSchedulerBuilder
+import org.springframework.boot.task.TaskSchedulerCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.SchedulingConfigurer
 import org.springframework.scheduling.config.ScheduledTaskRegistrar
-import java.util.concurrent.Executors
 
 @EnableScheduling
 @Configuration
-class SchedulingConfig : SchedulingConfigurer {
-  override fun configureTasks(taskRegistrar: ScheduledTaskRegistrar) {
-    taskRegistrar.setScheduler(taskScheduler())
+class SchedulingConfig(private val props: TaskSchedulingProperties, private val customizers: ObjectProvider<TaskSchedulerCustomizer>): SchedulingConfigurer {
+  override fun configureTasks(registrar: ScheduledTaskRegistrar) {
+    registrar.setScheduler(taskScheduler())
   }
 
   @Bean
-  fun taskScheduler() = Executors.newScheduledThreadPool(100)!!
+  fun taskScheduler() = TaskSchedulerBuilder()
+    .poolSize(props.pool.size)
+    .threadNamePrefix(props.threadNamePrefix)
+    .customizers(customizers)
+    .build()!!
 }

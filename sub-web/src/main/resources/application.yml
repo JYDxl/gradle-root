@@ -2,12 +2,12 @@ spring:
   redis:
     port: 6380
     password: l
-    timeout: 1s
+    timeout: 10s
     lettuce:
       pool:
-        max-active: 16
+        max-active: 32
         max-idle: 16
-      shutdown-timeout: 1s
+      shutdown-timeout: 10s
   datasource:
     url: jdbc:mysql://localhost:3357/security?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
@@ -26,13 +26,24 @@ spring:
   http:
     encoding:
       force: true
-      force-request: true
       force-response: true
+      force-request: true
       enabled: true
       charset: utf-8
     log-request-details: true
     converters:
       preferred-json-mapper: jackson
+  task:
+    scheduling:
+      pool:
+        size: 8
+      thread-name-prefix: taskScheduler-
+    execution:
+      pool:
+        core-size: 16
+        max-size: 32
+        allow-core-thread-timeout: false
+      thread-name-prefix: taskExecutor-
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
@@ -43,5 +54,6 @@ mybatis-plus:
 logging:
   level:
     web: trace
+    sql: trace
     org.github: trace
     io.netty: trace

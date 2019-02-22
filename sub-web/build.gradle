@@ -12,7 +12,7 @@ dependencies {
   compile('org.springframework.boot:spring-boot-starter-aop')
   compile('org.springframework.boot:spring-boot-starter-cache')
   compile('org.springframework.boot:spring-boot-starter-data-redis') { exclude group: 'io.netty' }
-  compile('org.springframework.boot:spring-boot-starter-websocket')
+  compile('org.springframework.boot:spring-boot-starter-web')
   compile('org.springframework.session:spring-session-data-redis')
   compile('org.apache.commons:commons-pool2')
   runtimeOnly('org.springframework.boot:spring-boot-devtools')

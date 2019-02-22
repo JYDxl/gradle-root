@@ -20,7 +20,7 @@ class MyBatisPlusConfig {
 
   @Profile("dev")
   @Bean
-  fun performanceInterceptor() = PerformanceInterceptor().apply { isFormat = true }
+  fun performanceInterceptor() = PerformanceInterceptor()
 
   @Bean
   fun logicSqlInjector() = LogicSqlInjector()
