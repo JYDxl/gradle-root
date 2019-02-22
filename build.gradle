@@ -64,16 +64,15 @@ subprojects {
   }
 
   dependencies {
-    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
-    compile('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
-    compile('org.jetbrains.kotlin:kotlin-reflect')
-
-    compile("org.apache.commons:commons-lang3:$commons_lang3_version")
-    compile("commons-codec:commons-codec:$commons_codec_version")
-    compile("com.squareup.okhttp3:okhttp:$okhttp3_version")
-    compile("com.google.guava:guava:$guava_version")
-    compile("io.netty:netty-all:$netty_version")
-    compile("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinx_coroutines_version")
+    implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
+    implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
+    implementation('org.jetbrains.kotlin:kotlin-reflect')
+    implementation("org.apache.commons:commons-lang3:$commons_lang3_version")
+    implementation("commons-codec:commons-codec:$commons_codec_version")
+    implementation("com.squareup.okhttp3:okhttp:$okhttp3_version")
+    implementation("com.google.guava:guava:$guava_version")
+    implementation("io.netty:netty-all:$netty_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinx_coroutines_version")
 
     annotationProcessor('org.projectlombok:lombok')
     compileOnly('org.projectlombok:lombok')

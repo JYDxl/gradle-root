@@ -2,21 +2,24 @@ bootJar.enabled = true
 jar.enabled = false
 
 dependencies {
-  compile project(':sub-core')
-  compile project(':sub-model')
-  compile project(':sub-netty')
+  implementation project(':sub-core')
+  implementation project(':sub-model')
+  implementation project(':sub-netty')
+  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatis_plus_version")
+  implementation("com.google.protobuf:protobuf-java-util:$protobuf_version")
+  implementation("mysql:mysql-connector-java:$mysql_version")
+  implementation('org.springframework.boot:spring-boot-starter-actuator')
+  implementation('org.springframework.boot:spring-boot-starter-aop')
+  implementation('org.springframework.boot:spring-boot-starter-cache')
+  implementation('org.springframework.boot:spring-boot-starter-data-redis') { exclude group: 'io.netty' }
+  implementation('org.springframework.boot:spring-boot-starter-web')
+  implementation('org.springframework.session:spring-session-data-redis')
+  implementation('org.apache.commons:commons-pool2')
 
-  compile("mysql:mysql-connector-java:$mysql_version")
-
-  compile('org.springframework.boot:spring-boot-starter-actuator')
-  compile('org.springframework.boot:spring-boot-starter-aop')
-  compile('org.springframework.boot:spring-boot-starter-cache')
-  compile('org.springframework.boot:spring-boot-starter-data-redis') { exclude group: 'io.netty' }
-  compile('org.springframework.boot:spring-boot-starter-web')
-  compile('org.springframework.session:spring-session-data-redis')
-  compile('org.apache.commons:commons-pool2')
   runtimeOnly('org.springframework.boot:spring-boot-devtools')
+
   testCompile('org.springframework.boot:spring-boot-starter-test') { exclude module: 'android-json' }
   testCompile('org.springframework.security:spring-security-test')
+
   annotationProcessor('org.springframework.boot:spring-boot-configuration-processor')
 }
