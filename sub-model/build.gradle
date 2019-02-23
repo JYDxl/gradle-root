@@ -1,5 +1,5 @@
 dependencies {
-  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatis_plus_version")
+  compileOnly("com.baomidou:mybatis-plus-boot-starter:$mybatis_plus_version")
 
   testCompile("mysql:mysql-connector-java:$mysql_version")
   testCompile("com.baomidou:mybatis-plus-generator:$mybatis_plus_version")

@@ -1,6 +1,5 @@
 dependencies {
-  implementation project(':sub-core')
-  implementation("com.google.protobuf:protobuf-java-util:$protobuf_version")
-
+  compileOnly project(':sub-core')
+  compileOnly("com.google.protobuf:protobuf-java-util:$protobuf_version")
   compileOnly('org.springframework.boot:spring-boot-starter-web')
 }
