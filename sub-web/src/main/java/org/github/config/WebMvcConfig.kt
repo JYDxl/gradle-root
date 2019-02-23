@@ -20,6 +20,6 @@ class WebMvcConfig: WebMvcConfigurer {
 
   @Bean
   fun returnableValueHandler(adapter: RequestMappingHandlerAdapter) = ReturnableValueHandler().apply {
-    adapter.returnValueHandlers = builder<HandlerMethodReturnValueHandler>().add(ReturnableValueHandlerKotlin).addAll(adapter.returnValueHandlers!!).build()
+    adapter.returnValueHandlers = builder<HandlerMethodReturnValueHandler>().add(ReturnableValueHandlerKotlin).add(this).addAll(adapter.returnValueHandlers!!).build()
   }
 }

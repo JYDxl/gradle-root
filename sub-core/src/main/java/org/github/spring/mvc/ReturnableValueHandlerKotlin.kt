@@ -9,6 +9,7 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler
 import org.springframework.web.method.support.ModelAndViewContainer
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR
 
 /**
  * Returnable返回类型解析器，Kotlin版.
@@ -22,16 +23,21 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
 
   override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.parameterType)
 
-  override fun handleReturnValue(value: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
-    value as Returnable
+  override fun handleReturnValue(returnValue: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
+    val value = (returnValue ?: Returnable.nil()) as Returnable
     val req = webRequest.getNativeRequest(HttpServletRequest::class.java)!!
     val resp = webRequest.getNativeResponse(HttpServletResponse::class.java)!!
     if(value.isTerminated) {
-      value.collect(req, resp)
+      try {
+        value.collect(req, resp)
+      } catch(e: Exception) {
+        log.error(e.message, e)
+        resp.sendError(SC_INTERNAL_SERVER_ERROR)
+      }
     } else {
       mavContainer.viewName = value.get()
     }
     mavContainer.isRequestHandled = value.isTerminated
-    value.apply { log.trace { "Writing [$contentType] TO $this" } }
+    value.apply { log.trace { "Writing [$contentType] TO ${get()}" } }
   }
 }

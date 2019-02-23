@@ -1,5 +1,6 @@
 package org.github.spring.mvc;
 
+import java.io.IOException;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
@@ -26,16 +27,21 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
   }
 
   @Override
-  public void handleReturnValue(Object returnValue, @Nonnull MethodParameter returnType, @Nonnull ModelAndViewContainer mavContainer, @Nonnull NativeWebRequest webRequest) throws Exception {
-    val value = (Returnable) Objects.requireNonNull(returnValue);
+  public void handleReturnValue(Object returnValue, @Nonnull MethodParameter returnType, @Nonnull ModelAndViewContainer mavContainer, @Nonnull NativeWebRequest webRequest) throws IOException {
+    val value = returnValue == null ? Returnable.nil() : ((Returnable) returnValue);
     val req   = Objects.requireNonNull(webRequest.getNativeRequest(HttpServletRequest.class));
     val resp  = Objects.requireNonNull(webRequest.getNativeResponse(HttpServletResponse.class));
     if(value.isTerminated()) {
-      value.collect(req, resp);
+      try {
+        value.collect(req, resp);
+      } catch(Exception e) {
+        log.error(e.getMessage(), e);
+        resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+      }
     } else {
       mavContainer.setViewName(value.get());
     }
     mavContainer.setRequestHandled(value.isTerminated());
-    //TODO log
+    log.trace("Writing [{}] TO {}", value.getContentType(), value.get());
   }
 }
