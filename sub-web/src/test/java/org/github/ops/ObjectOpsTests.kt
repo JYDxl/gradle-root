@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
+import java.util.Random
+import java.util.stream.IntStream
 
 @RunWith(SpringRunner::class)
 @ActiveProfiles("dev", "test")
@@ -44,12 +46,33 @@ class ObjectOpsTests {
   }
 
   @Test
+  fun sort() {
+    val random = Random(System.currentTimeMillis())
+    val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()!!
+    bubbleSort(array) { left, right -> left > right }
+    log.info(array.json())
+  }
+
+  @Test
   fun recursive() {
     val list = sysMenuService.list().map { SysMenuTree(it.menuId, it.pid, it.menuName) }
     val multimap: ImmutableListMultimap<String, SysMenuTree> = ImmutableListMultimap.builder<String, SysMenuTree>().apply { list.forEach { put(it.pid.orEmpty(), it) } }.build()
     val result: ImmutableList<SysMenuTree> = multimap.get(EMPTY)
     recursive(multimap, result)
     log.info(result.json())
+  }
+
+  private fun bubbleSort(array: IntArray, predicate: (left: Int, right: Int) -> Boolean) {
+    val time = array.size - 1
+    for(i in 0 until time) {
+      for(j in 0 until time - i) {
+        if(predicate(array[j], array[j + 1])) {
+          val tmp = array[j]
+          array[j] = array[j + 1]
+          array[j + 1] = tmp
+        }
+      }
+    }
   }
 
   private tailrec fun recursive(multimap: ImmutableListMultimap<String, SysMenuTree>, list: ImmutableList<SysMenuTree>) {
