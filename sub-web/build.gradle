@@ -5,9 +5,7 @@ dependencies {
   implementation project(':sub-core')
   implementation project(':sub-model')
   implementation project(':sub-netty')
-  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatis_plus_version")
-  implementation("com.google.protobuf:protobuf-java-util:$protobuf_version")
-  implementation("mysql:mysql-connector-java:$mysql_version")
+
   implementation('org.springframework.boot:spring-boot-starter-actuator')
   implementation('org.springframework.boot:spring-boot-starter-aop')
   implementation('org.springframework.boot:spring-boot-starter-cache')

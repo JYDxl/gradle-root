@@ -1,5 +1,5 @@
 /.gradle
 /.idea
-/logs
+logs
 out
 build

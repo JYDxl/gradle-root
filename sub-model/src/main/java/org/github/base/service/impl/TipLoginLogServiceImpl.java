@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-02-15
+ * @since 2019-02-25
  */
 @Service
 public class TipLoginLogServiceImpl extends ServiceImpl<ITipLoginLogMapper, TipLoginLogEntity> implements ITipLoginLogService {}

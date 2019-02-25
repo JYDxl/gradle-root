@@ -5,8 +5,8 @@ spring:
     timeout: 10s
     lettuce:
       pool:
-        max-active: 32
-        max-idle: 16
+        max-active: 16
+        max-idle: 8
       shutdown-timeout: 10s
   datasource:
     url: jdbc:mysql://localhost:3357/security?useSSL=false

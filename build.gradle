@@ -21,12 +21,13 @@ allprojects {
 
   ext {
     kotlinx_coroutines_version = '1.1.1'
-    mybatis_plus_version = '3.0.7.1'
+    mybatis_plus_version = '3.1.0'
     protobuf_version = '3.6.1'
     okhttp3_version = '3.13.1'
     netty_version = '4.1.33.Final'
     mysql_version = '5.1.47'
     shiro_version = '1.4.0'
+    vertx_version = '3.6.3'
     guava_version = '27.0.1-jre'
     commons_lang3_version = '3.8.1'
     commons_codec_version = '1.12'
@@ -68,6 +69,11 @@ subprojects {
     implementation('com.fasterxml.jackson.module:jackson-module-kotlin')
     implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8')
     implementation('org.jetbrains.kotlin:kotlin-reflect')
+    implementation("io.vertx:vertx-web:$vertx_version") { exclude group: 'io.netty' }
+    implementation("io.vertx:vertx-lang-kotlin:$vertx_version") { exclude group: 'io.netty' }
+    implementation("mysql:mysql-connector-java:$mysql_version")
+    implementation("com.google.protobuf:protobuf-java-util:$protobuf_version")
+    implementation("com.baomidou:mybatis-plus-boot-starter:$mybatis_plus_version")
     implementation("org.apache.commons:commons-lang3:$commons_lang3_version")
     implementation("commons-codec:commons-codec:$commons_codec_version")
     implementation("com.squareup.okhttp3:okhttp:$okhttp3_version")

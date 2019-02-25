@@ -4,6 +4,7 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.buffer.Unpooled.copiedBuffer
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_BACKLOG
+import io.netty.channel.ChannelOption.SO_KEEPALIVE
 import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
@@ -36,10 +37,8 @@ import kotlin.text.Charsets.UTF_8
 class NettyConfig {
   @Bean
   fun serverChannelHolder(): ServerChannelHolder {
-    val boss = EpollEventLoopGroup()
-    val worker = EpollEventLoopGroup()
     return ServerBootstrap()
-      .group(boss, worker)
+      .group(boss(), worker())
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
@@ -56,13 +55,18 @@ class NettyConfig {
           }
         }
       })
+      .childOption(SO_KEEPALIVE, true)
       .bind(8081)
       .sync()
       .channel()
-      .closeFuture()
-      .addListener { worker.shutdownGracefully(); boss.shutdownGracefully() }
-      .let { ServerChannelHolder(it.channel()) }
+      .let { ServerChannelHolder(it) }
   }
+
+  @Bean(destroyMethod = "shutdownGracefully")
+  fun boss() = EpollEventLoopGroup(1)
+
+  @Bean(destroyMethod = "shutdownGracefully")
+  fun worker() = EpollEventLoopGroup()
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
