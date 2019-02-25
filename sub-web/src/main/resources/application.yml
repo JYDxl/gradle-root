@@ -57,3 +57,7 @@ logging:
     sql: trace
     org.github: trace
     io.netty: trace
+  file:
+    max-history: 30
+    max-size: 100MB
+  path: ${user.dir}/logs
