@@ -44,6 +44,9 @@ spring:
         max-size: 32
         allow-core-thread-timeout: false
       thread-name-prefix: taskExecutor-
+  rabbitmq:
+    username: admin
+    password: admin
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
