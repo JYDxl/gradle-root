@@ -7,7 +7,7 @@ import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
 import org.github.netty.protobuf.SubscribeRespProto.SubscribeResp
 import org.github.ops.log
 
-class ClientChannelHandler : ChannelInboundHandlerAdapter() {
+class ClientChannelHandler: ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
     val req = SubscribeReq.newBuilder()!!.apply {
       subReqId = 1

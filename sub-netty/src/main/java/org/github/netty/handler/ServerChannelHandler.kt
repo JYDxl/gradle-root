@@ -8,7 +8,7 @@ import org.github.netty.protobuf.SubscribeRespProto.SubscribeResp
 import org.github.ops.log
 
 @Sharable
-class ServerChannelHandler : ChannelInboundHandlerAdapter() {
+class ServerChannelHandler: ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
     log.info("ACTIVE")
   }

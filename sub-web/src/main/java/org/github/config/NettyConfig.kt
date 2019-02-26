@@ -6,6 +6,7 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_BACKLOG
 import io.netty.channel.ChannelOption.SO_KEEPALIVE
 import io.netty.channel.ChannelOption.SO_REUSEADDR
+import io.netty.channel.ChannelOption.TCP_NODELAY
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.epoll.EpollSocketChannel
@@ -21,13 +22,13 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
-import io.netty.handler.logging.LogLevel
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
-import org.github.netty.server.ServerChannelHolder
 import org.github.netty.handler.HttpFileServerChannelHandler
 import org.github.netty.handler.ServerChannelHandler
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
+import org.github.netty.server.ServerChannelHolder
+import org.github.netty.server.ServerSocketLoggingHandler
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -38,12 +39,14 @@ import kotlin.text.Charsets.UTF_8
 class NettyConfig {
   @Bean
   fun serverChannelHolder(): ServerChannelHolder {
+    val boss = EpollEventLoopGroup(1)
+    val worker = EpollEventLoopGroup()
     return ServerBootstrap()
-      .group(boss(), worker())
+      .group(boss, worker)
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
-      .handler(loggingHandler())
+      .handler(serverSocketLoggingHandler())
       .childHandler(object: ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
           channel.pipeline()!!.apply {
@@ -57,17 +60,14 @@ class NettyConfig {
         }
       })
       .childOption(SO_KEEPALIVE, true)
+      .childOption(TCP_NODELAY, true)
       .bind(8081)
       .sync()
       .channel()
-      .let { ServerChannelHolder(it) }
+      .closeFuture()
+      .addListener { boss.shutdownGracefully();worker.shutdownGracefully() }
+      .let { ServerChannelHolder(it.channel()) }
   }
-
-  @Bean(destroyMethod = "shutdownGracefully")
-  fun boss() = EpollEventLoopGroup(1)
-
-  @Bean(destroyMethod = "shutdownGracefully")
-  fun worker() = EpollEventLoopGroup()
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
@@ -91,7 +91,10 @@ class NettyConfig {
   fun serverChannelHandler() = ServerChannelHandler()
 
   @Bean
-  fun loggingHandler() = LoggingHandler(LogLevel.TRACE)
+  fun loggingHandler() = LoggingHandler()
+
+  @Bean
+  fun serverSocketLoggingHandler() = ServerSocketLoggingHandler("Netty-TCP")
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean

@@ -9,7 +9,7 @@ import org.github.ops.trace
 import org.springframework.stereotype.Component
 
 @Component
-class LoggerEventSubscriber : EventSubscriber {
+class LoggerEventSubscriber: EventSubscriber {
   @AllowConcurrentEvents
   @Subscribe
   fun log(event: Any) {

@@ -7,7 +7,6 @@ spring:
       pool:
         max-active: 16
         max-idle: 8
-      shutdown-timeout: 10s
   datasource:
     url: jdbc:mysql://localhost:3357/security?useSSL=false
     driver-class-name: com.mysql.jdbc.Driver

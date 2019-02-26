@@ -27,14 +27,14 @@ class ObjectOpsTests {
 
   @Test
   fun json() {
-    log.info(tipLoginLogService.list().json())
+    log.info { tipLoginLogService.list().json() }
   }
 
   @Test
   fun map() {
     val item = SysMenuTree("id", null, "name")
     val map = item.map()
-    log.info(map.json())
+    log.info { map.json() }
   }
 
   @Test
@@ -50,7 +50,7 @@ class ObjectOpsTests {
     val random = Random(System.currentTimeMillis())
     val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()!!
     bubbleSort(array) { left, right -> left > right }
-    log.info(array.json())
+    log.info { array.json() }
   }
 
   @Test
@@ -59,7 +59,7 @@ class ObjectOpsTests {
     val multimap: ImmutableListMultimap<String, SysMenuTree> = ImmutableListMultimap.builder<String, SysMenuTree>().apply { list.forEach { put(it.pid.orEmpty(), it) } }.build()
     val result: ImmutableList<SysMenuTree> = multimap.get(EMPTY)
     recursive(multimap, result)
-    log.info(result.json())
+    log.info { result.json() }
   }
 
   private fun bubbleSort(array: IntArray, predicate: (left: Int, right: Int) -> Boolean) {

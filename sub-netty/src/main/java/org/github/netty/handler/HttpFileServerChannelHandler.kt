@@ -11,7 +11,7 @@ import io.netty.handler.codec.http.HttpVersion.HTTP_1_1
 import org.github.ops.log
 
 @Sharable
-class HttpFileServerChannelHandler : SimpleChannelInboundHandler<FullHttpRequest>() {
+class HttpFileServerChannelHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelActive(ctx: ChannelHandlerContext) {
     log.info("ACTIVE")
   }
