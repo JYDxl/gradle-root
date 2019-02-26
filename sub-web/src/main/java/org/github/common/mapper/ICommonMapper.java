@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 @MyBatisMapper
-public interface CommonMapper {
+public interface ICommonMapper {
   @Select("select now()")
   @Nonnull
   LocalDateTime now();

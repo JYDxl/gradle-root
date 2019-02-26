@@ -6,7 +6,7 @@ import lombok.val;
 import org.github.base.entity.TipLoginLogEntity;
 import org.github.base.service.ISysCodeService;
 import org.github.base.service.ITipLoginLogService;
-import org.github.common.mapper.CommonMapper;
+import org.github.common.mapper.ICommonMapper;
 import org.github.ops.ObjectOpsKt;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 @Slf4j
 public class ApplicationTests {
   @Autowired
-  private CommonMapper commonMapper;
+  private ICommonMapper commonMapper;
 
   @Autowired
   private ITipLoginLogService tipLoginLogService;

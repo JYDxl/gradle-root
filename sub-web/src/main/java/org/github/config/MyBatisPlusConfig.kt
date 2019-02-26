@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 
 @EnableTransactionManagement
 @Configuration
-@MapperScan("org.github.**.mapper", annotationClass = MyBatisMapper::class)
+@MapperScan("org.github", annotationClass = MyBatisMapper::class)
 class MyBatisPlusConfig {
   @Bean
   fun paginationInterceptor() = PaginationInterceptor()
