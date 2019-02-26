@@ -21,9 +21,10 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
+import io.netty.handler.logging.LogLevel
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
-import org.github.netty.ServerChannelHolder
+import org.github.netty.server.ServerChannelHolder
 import org.github.netty.handler.HttpFileServerChannelHandler
 import org.github.netty.handler.ServerChannelHandler
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
@@ -90,7 +91,7 @@ class NettyConfig {
   fun serverChannelHandler() = ServerChannelHandler()
 
   @Bean
-  fun loggingHandler() = LoggingHandler()
+  fun loggingHandler() = LoggingHandler(LogLevel.TRACE)
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
