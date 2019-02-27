@@ -63,3 +63,8 @@ logging:
     max-history: 30
     max-size: 100MB
   path: ${user.dir}/logs
+
+netty:
+  port:
+    epoll: 9001
+    nio: 9002

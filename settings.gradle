@@ -1,2 +1,2 @@
 rootProject.name = 'gradle-root'
-include 'sub-core', 'sub-web', 'sub-model', 'sub-netty', 'sub-security', 'sub-shiro', 'sub-vertx'
+include 'sub-core', 'sub-web', 'sub-model', 'sub-netty', 'sub-security', 'sub-shiro', 'sub-vertx', 'sub-config'

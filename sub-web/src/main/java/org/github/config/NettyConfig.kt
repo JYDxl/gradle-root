@@ -38,7 +38,7 @@ import kotlin.text.Charsets.UTF_8
 @Configuration
 class NettyConfig {
   @Bean
-  fun serverChannelHolder(): ServerChannelHolder {
+  fun epollServerChannelHolder(): ServerChannelHolder {
     val boss = EpollEventLoopGroup(1)
     val worker = EpollEventLoopGroup()
     return ServerBootstrap()
@@ -46,8 +46,8 @@ class NettyConfig {
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
-      .handler(serverSocketLoggingHandler())
-      .childHandler(object: ChannelInitializer<EpollSocketChannel>() {
+      .handler(ServerSocketLoggingHandler("Netty-TCP"))
+      .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
@@ -92,9 +92,6 @@ class NettyConfig {
 
   @Bean
   fun loggingHandler() = LoggingHandler()
-
-  @Bean
-  fun serverSocketLoggingHandler() = ServerSocketLoggingHandler("Netty-TCP")
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
