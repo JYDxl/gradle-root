@@ -10,6 +10,8 @@ import io.netty.channel.ChannelOption.TCP_NODELAY
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.epoll.EpollSocketChannel
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.DelimiterBasedFrameDecoder
 import io.netty.handler.codec.FixedLengthFrameDecoder
 import io.netty.handler.codec.LineBasedFrameDecoder
@@ -24,11 +26,11 @@ import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
-import org.github.netty.handler.HttpFileServerChannelHandler
-import org.github.netty.handler.ServerChannelHandler
+import org.github.netty.handler.StringServerChannelHandler
 import org.github.netty.protobuf.SubscribeReqProto.SubscribeReq
 import org.github.netty.server.ServerChannelHolder
 import org.github.netty.server.ServerSocketLoggingHandler
+import org.github.netty.socket.NaiveNioSocketChannel
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -38,7 +40,7 @@ import kotlin.text.Charsets.UTF_8
 @Configuration
 class NettyConfig {
   @Bean
-  fun epollServerChannelHolder(): ServerChannelHolder {
+  fun epollServerChannelHolder(props: NettyPortProperties): ServerChannelHolder {
     val boss = EpollEventLoopGroup(1)
     val worker = EpollEventLoopGroup()
     return ServerBootstrap()
@@ -46,7 +48,7 @@ class NettyConfig {
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
-      .handler(ServerSocketLoggingHandler("Netty-TCP"))
+      .handler(ServerSocketLoggingHandler("Netty-epoll"))
       .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
           channel.pipeline()!!.apply {
@@ -55,13 +57,43 @@ class NettyConfig {
             addLast(httpObjectAggregator())
             addLast(httpResponseEncoder())
             addLast(chunkedWriteHandler())
-            addLast(httpFileServerChannelHandler())
           }
         }
       })
       .childOption(SO_KEEPALIVE, true)
       .childOption(TCP_NODELAY, true)
-      .bind(8081)
+      .bind(props.epoll)
+      .sync()
+      .channel()
+      .closeFuture()
+      .addListener { boss.shutdownGracefully();worker.shutdownGracefully() }
+      .let { ServerChannelHolder(it.channel()) }
+  }
+
+  @Bean
+  fun nioServerChannelHolder(props: NettyPortProperties): ServerChannelHolder {
+    val boss = NioEventLoopGroup(1)
+    val worker = NioEventLoopGroup()
+    return ServerBootstrap()
+      .group(boss, worker)
+      .channel(NioServerSocketChannel::class.java)
+      .option(SO_BACKLOG, 1024)
+      .option(SO_REUSEADDR, true)
+      .handler(ServerSocketLoggingHandler("Netty-nio"))
+      .childHandler(object : ChannelInitializer<NaiveNioSocketChannel>() {
+        override fun initChannel(channel: NaiveNioSocketChannel) {
+          channel.pipeline()!!.apply {
+            addLast(loggingHandler())
+            addLast(lineBasedFrameDecoder())
+            addLast(stringDecoder())
+            addLast(stringEncoder())
+            addLast(stringServerChannelHandler())
+          }
+        }
+      })
+      .childOption(SO_KEEPALIVE, true)
+      .childOption(TCP_NODELAY, true)
+      .bind(props.nio)
       .sync()
       .channel()
       .closeFuture()
@@ -88,10 +120,10 @@ class NettyConfig {
   fun stringEncoder() = StringEncoder()
 
   @Bean
-  fun serverChannelHandler() = ServerChannelHandler()
+  fun loggingHandler() = LoggingHandler()
 
   @Bean
-  fun loggingHandler() = LoggingHandler()
+  fun stringServerChannelHandler() = StringServerChannelHandler()
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
@@ -121,7 +153,4 @@ class NettyConfig {
   @Scope(SCOPE_PROTOTYPE)
   @Bean
   fun chunkedWriteHandler() = ChunkedWriteHandler()
-
-  @Bean
-  fun httpFileServerChannelHandler() = HttpFileServerChannelHandler()
 }
