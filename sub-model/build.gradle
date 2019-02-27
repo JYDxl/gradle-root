@@ -1,4 +1,4 @@
 dependencies {
-  testCompile("com.baomidou:mybatis-plus-generator:$mybatis_plus_version")
-  testCompile('org.freemarker:freemarker')
+  testImplementation("com.baomidou:mybatis-plus-generator:$mybatis_plus_version")
+  testImplementation('org.freemarker:freemarker')
 }
