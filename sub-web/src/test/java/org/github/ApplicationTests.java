@@ -22,13 +22,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 @Slf4j
 public class ApplicationTests {
   @Autowired
-  private ICommonMapper commonMapper;
-
+  private ICommonMapper       commonMapper;
   @Autowired
   private ITipLoginLogService tipLoginLogService;
-
   @Autowired
-  private ISysCodeService sysCodeService;
+  private ISysCodeService     sysCodeService;
 
   @Test
   public void contextLoads() {

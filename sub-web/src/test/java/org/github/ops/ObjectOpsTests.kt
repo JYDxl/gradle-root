@@ -21,7 +21,6 @@ import java.util.stream.IntStream
 class ObjectOpsTests {
   @Autowired
   private lateinit var tipLoginLogService: ITipLoginLogService
-
   @Autowired
   private lateinit var sysMenuService: ISysMenuService
 

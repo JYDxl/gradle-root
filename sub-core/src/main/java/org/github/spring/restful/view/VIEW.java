@@ -37,11 +37,4 @@ public interface VIEW extends Returnable {
   static VIEW of() {
     return of(IConstKt.ROOT);
   }
-
-  /** Generator. */
-  @Deprecated
-  @Nonnull
-  static VIEW nil() {
-    return IConstKt.getViewNil();
-  }
 }

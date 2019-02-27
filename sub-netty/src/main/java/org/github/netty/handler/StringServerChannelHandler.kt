@@ -7,7 +7,7 @@ import org.github.ops.log
 import org.github.ops.warn
 
 @Sharable
-class StringServerChannelHandler : ChannelInboundHandlerAdapter() {
+class StringServerChannelHandler: ChannelInboundHandlerAdapter() {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     log.warn { msg as String }
   }

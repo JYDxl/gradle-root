@@ -6,14 +6,14 @@ import java.nio.channels.SocketChannel
 import java.nio.channels.spi.SelectorProvider
 import java.util.UUID.randomUUID
 
-class NaiveNioSocketChannel : NioSocketChannel {
+class NaiveNioSocketChannel: NioSocketChannel {
   constructor()
 
-  constructor(provider: SelectorProvider) : super(provider)
+  constructor(provider: SelectorProvider): super(provider)
 
-  constructor(socket: SocketChannel) : super(socket)
+  constructor(socket: SocketChannel): super(socket)
 
-  constructor(parent: Channel, socket: SocketChannel) : super(parent, socket)
+  constructor(parent: Channel, socket: SocketChannel): super(parent, socket)
 
   override fun newId() = NaiveChannelId("naive-nio", randomUUID().toString())
 }

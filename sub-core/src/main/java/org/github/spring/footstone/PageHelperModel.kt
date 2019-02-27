@@ -11,7 +11,7 @@ import java.util.Optional
  * @author JYD_XL
  * @see org.github.spring.footstone.AbstractEntity
  */
-class PageHelperModel : AbstractEntity() {
+class PageHelperModel: AbstractEntity() {
   var sortName: String = ""
     set(sortName) = Optional.ofNullable(sortName).filter { v -> paramPattern.matches(v) }.ifPresent { v -> field = v }
 

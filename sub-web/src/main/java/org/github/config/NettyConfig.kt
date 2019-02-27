@@ -49,7 +49,7 @@ class NettyConfig {
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
       .handler(ServerSocketLoggingHandler("Netty-epoll"))
-      .childHandler(object : ChannelInitializer<EpollSocketChannel>() {
+      .childHandler(object: ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
@@ -80,7 +80,7 @@ class NettyConfig {
       .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
       .handler(ServerSocketLoggingHandler("Netty-nio"))
-      .childHandler(object : ChannelInitializer<NaiveNioSocketChannel>() {
+      .childHandler(object: ChannelInitializer<NaiveNioSocketChannel>() {
         override fun initChannel(channel: NaiveNioSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())

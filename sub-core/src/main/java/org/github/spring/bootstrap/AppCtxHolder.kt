@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
  * @author JYD_XL
  */
 @Component
-class AppCtxHolder : ApplicationContextAware {
+class AppCtxHolder: ApplicationContextAware {
   @Deprecated(DO_NOT_USE)
   override fun setApplicationContext(applicationContext: ApplicationContext) {
     context = applicationContext

@@ -22,11 +22,10 @@ import org.github.spring.footstone.IConstKt;
 @Data
 public class JSONBasic implements JSON {
   /** 返回的状态码. */
-  private int resCode = IConstKt.RES_OK_CODE;
-
+  private int    resCode = IConstKt.RES_OK_CODE;
   /** 返回的信息. */
   @NonNull
-  private String resMsg = IConstKt.RES_OK_MSG;
+  private String resMsg  = IConstKt.RES_OK_MSG;
 
   @Override
   @Nonnull

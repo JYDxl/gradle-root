@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
  *
  * @author JYD_XL
  */
-abstract class AbstractEntity : Serializable {
+abstract class AbstractEntity: Serializable {
   /** 参数断言.  */
   fun assertj(): AbstractEntity = this
 
