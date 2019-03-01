@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 @Data
 public class NettyPortProperties {
   /** port of netty epoll. */
-  private int epoll = 8081;
-  /** port of netty   nio. */
-  private int nio   = 8082;
+  private int epoll = 9001;
+  /** port of netty nio. */
+  private int nio   = 9002;
+  /** size of event loop group. */
+  private int size  = 16;
 }

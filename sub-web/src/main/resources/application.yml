@@ -66,5 +66,5 @@ logging:
 
 netty:
   port:
-    epoll: 9001
-    nio: 9002
+    epoll: 7001
+    nio: 7002

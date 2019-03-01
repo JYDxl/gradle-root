@@ -19,22 +19,23 @@ import io.netty.handler.logging.LoggingHandler
 import org.github.netty.handler.StringServerChannelHandler
 import org.github.netty.server.ServerChannelHolder
 import org.github.netty.server.ServerSocketLoggingHandler
+import org.github.thread.NaiveThreadFactory
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
 
 @Configuration
-class NettyConfig {
+class NettyConfig(private val props: NettyPortProperties) {
   @Bean
-  fun epollServerChannelHolder(props: NettyPortProperties): ServerChannelHolder {
-    val boss = EpollEventLoopGroup(1)
-    val worker = EpollEventLoopGroup()
+  fun epollServerChannelHolder(): ServerChannelHolder {
+    val worker = EpollEventLoopGroup(props.size, NaiveThreadFactory("epoll-worker"))
+    val boss = EpollEventLoopGroup(1, NaiveThreadFactory("epoll-boss"))
     return ServerBootstrap()
       .group(boss, worker)
       .channel(EpollServerSocketChannel::class.java)
-      .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
+      .option(SO_BACKLOG, 1024)
       .handler(ServerSocketLoggingHandler("Netty-epoll"))
       .childHandler(object: ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
@@ -58,14 +59,14 @@ class NettyConfig {
   }
 
   @Bean
-  fun nioServerChannelHolder(props: NettyPortProperties): ServerChannelHolder {
-    val boss = NioEventLoopGroup(1)
-    val worker = NioEventLoopGroup()
+  fun nioServerChannelHolder(): ServerChannelHolder {
+    val worker = NioEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
+    val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
     return ServerBootstrap()
       .group(boss, worker)
       .channel(NioServerSocketChannel::class.java)
-      .option(SO_BACKLOG, 1024)
       .option(SO_REUSEADDR, true)
+      .option(SO_BACKLOG, 1024)
       .handler(ServerSocketLoggingHandler("Netty-nio"))
       .childHandler(object: ChannelInitializer<NioSocketChannel>() {
         override fun initChannel(channel: NioSocketChannel) {
