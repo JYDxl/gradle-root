@@ -17,6 +17,10 @@ import org.github.spring.restful.Returnable;
 public interface VIEW extends Returnable {
   @Override
   @Nonnull
+  String get();
+
+  @Override
+  @Nonnull
   default ContentType getContentType() {
     return ContentType.HTML;
   }
