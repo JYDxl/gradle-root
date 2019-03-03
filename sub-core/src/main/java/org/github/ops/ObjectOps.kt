@@ -3,6 +3,7 @@ package org.github.ops
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.github.spring.bootstrap.AppCtxHolder
 import org.springframework.cglib.beans.BeanMap
+import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
@@ -20,4 +21,8 @@ fun Any.map() = BeanMap.create(this).toMutableMap() as MutableMap<String, Any?>
 
 fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>) = clazz.getDeclaredConstructor().newInstance()!!.also { BeanMap.create(it).putAll(this) }
 
-private val objectMapper = AppCtxHolder.getAppCtx().getBean(ObjectMapper::class.java)
+val objectMapper get() = AppCtxHolder.getAppCtx().getBean(ObjectMapper::class.java)
+
+val webAppCtx get() = AppCtxHolder.getAppCtx() as WebApplicationContext
+
+val appCtx get() = AppCtxHolder.getAppCtx()
