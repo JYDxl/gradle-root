@@ -64,6 +64,8 @@ logging:
     sql: trace
     org.github: trace
     io.netty: trace
+    org.springframework: trace
+
   file:
     max-history: 30
     max-size: 100MB
