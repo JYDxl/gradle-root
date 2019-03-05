@@ -26,7 +26,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
 
 @Configuration
-class NettyConfig(private val props: NettyPortProperties) {
+class NettyConfig(private val props: NettyProperties) {
   @Bean
   fun epollServerChannelHolder(): ServerChannelHolder {
     val worker = EpollEventLoopGroup(props.size, NaiveThreadFactory("epoll-worker"))
@@ -36,7 +36,7 @@ class NettyConfig(private val props: NettyPortProperties) {
       .channel(EpollServerSocketChannel::class.java)
       .option(SO_REUSEADDR, true)
       .option(SO_BACKLOG, 1024)
-      .handler(ServerSocketLoggingHandler("Netty-epoll"))
+      .handler(ServerSocketLoggingHandler(props.epollServer))
       .childHandler(object: ChannelInitializer<EpollSocketChannel>() {
         override fun initChannel(channel: EpollSocketChannel) {
           channel.pipeline()!!.apply {
@@ -50,7 +50,7 @@ class NettyConfig(private val props: NettyPortProperties) {
       })
       .childOption(SO_KEEPALIVE, true)
       .childOption(TCP_NODELAY, true)
-      .bind(props.epoll)
+      .bind(props.epollPort)
       .sync()
       .channel()
       .closeFuture()
@@ -67,7 +67,7 @@ class NettyConfig(private val props: NettyPortProperties) {
       .channel(NioServerSocketChannel::class.java)
       .option(SO_REUSEADDR, true)
       .option(SO_BACKLOG, 1024)
-      .handler(ServerSocketLoggingHandler("Netty-nio"))
+      .handler(ServerSocketLoggingHandler(props.nioServer))
       .childHandler(object: ChannelInitializer<NioSocketChannel>() {
         override fun initChannel(channel: NioSocketChannel) {
           channel.pipeline()!!.apply {
@@ -81,7 +81,7 @@ class NettyConfig(private val props: NettyPortProperties) {
       })
       .childOption(SO_KEEPALIVE, true)
       .childOption(TCP_NODELAY, true)
-      .bind(props.nio)
+      .bind(props.nioPort)
       .sync()
       .channel()
       .closeFuture()

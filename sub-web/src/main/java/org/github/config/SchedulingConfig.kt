@@ -14,11 +14,11 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar
 @Configuration
 class SchedulingConfig(private val props: TaskSchedulingProperties, private val customizers: ObjectProvider<TaskSchedulerCustomizer>): SchedulingConfigurer {
   override fun configureTasks(registrar: ScheduledTaskRegistrar) {
-    registrar.setScheduler(taskScheduler())
+    registrar.setScheduler(applicationScheduler())
   }
 
   @Bean
-  fun taskScheduler() = TaskSchedulerBuilder()
+  fun applicationScheduler() = TaskSchedulerBuilder()
     .poolSize(props.pool.size)
     .threadNamePrefix(props.threadNamePrefix)
     .customizers(customizers)

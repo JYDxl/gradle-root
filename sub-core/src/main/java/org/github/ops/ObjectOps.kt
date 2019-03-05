@@ -21,10 +21,10 @@ fun Any.map() = BeanMap.create(this).toMutableMap() as MutableMap<String, Any?>
 
 fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>) = clazz.getDeclaredConstructor().newInstance()!!.also { BeanMap.create(it).putAll(this) }
 
-fun <T: Any> T.proxy() = appCtx.getBean(this::class.java)
-
-val objectMapper get() = appCtx.getBean(ObjectMapper::class.java)
+val appCtx get() = AppCtxHolder.getAppCtx()
 
 val webAppCtx get() = appCtx as WebApplicationContext
 
-val appCtx get() = AppCtxHolder.getAppCtx()
+val objectMapper get() = appCtx.getBean(ObjectMapper::class.java)
+
+val <T: Any> T.proxy get() = appCtx.getBean(this::class.java)

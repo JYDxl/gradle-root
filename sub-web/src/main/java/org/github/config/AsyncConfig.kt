@@ -23,10 +23,10 @@ class AsyncConfig(private val props: TaskExecutionProperties, private val custom
     log.error("Exception thrown by async method $method with arguments ${params.joinToString(prefix = "[", postfix = "]")}", ex)
   }
 
-  override fun getAsyncExecutor() = taskExecutor()
+  override fun getAsyncExecutor() = applicationExecutor()
 
   @Bean
-  fun taskExecutor() = TaskExecutorBuilder()
+  fun applicationExecutor() = TaskExecutorBuilder()
     .queueCapacity(pool.queueCapacity)
     .corePoolSize(pool.coreSize)
     .maxPoolSize(pool.maxSize)

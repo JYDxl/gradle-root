@@ -64,14 +64,9 @@ logging:
     sql: trace
     org.github: trace
     io.netty: trace
-    org.springframework: trace
+    org.springframework.transaction: debug
 
   file:
     max-history: 30
     max-size: 100MB
   path: ${user.dir}/logs
-
-netty:
-  port:
-    epoll: 7001
-    nio: 7002
