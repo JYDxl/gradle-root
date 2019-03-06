@@ -6,11 +6,9 @@ import org.springframework.boot.task.TaskSchedulerBuilder
 import org.springframework.boot.task.TaskSchedulerCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.SchedulingConfigurer
 import org.springframework.scheduling.config.ScheduledTaskRegistrar
 
-@EnableScheduling
 @Configuration
 class SchedulingConfig(private val props: TaskSchedulingProperties, private val customizers: ObjectProvider<TaskSchedulerCustomizer>): SchedulingConfigurer {
   override fun configureTasks(registrar: ScheduledTaskRegistrar) {
