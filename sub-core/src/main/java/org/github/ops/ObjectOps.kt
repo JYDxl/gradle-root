@@ -12,14 +12,14 @@ fun Any?.json() = objectMapper.writeValueAsString(this)!!
 
 fun Any?.writeValue(output: OutputStream) = objectMapper.writeValue(output, this)
 
-fun getReq() = (RequestContextHolder.getRequestAttributes() as? ServletRequestAttributes)?.request
+fun <T : Any> Map<String, Any?>.bean(clazz: Class<T>) = clazz.getDeclaredConstructor().newInstance()!!.also { BeanMap.create(it).putAll(this) }
 
-fun getResp() = (RequestContextHolder.getRequestAttributes() as? ServletRequestAttributes)?.response
+val req get() = (RequestContextHolder.getRequestAttributes() as? ServletRequestAttributes)?.request
+
+val resp get() = (RequestContextHolder.getRequestAttributes() as? ServletRequestAttributes)?.response
 
 @Suppress("UNCHECKED_CAST")
-fun Any.map() = BeanMap.create(this).toMutableMap() as MutableMap<String, Any?>
-
-fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>) = clazz.getDeclaredConstructor().newInstance()!!.also { BeanMap.create(it).putAll(this) }
+val Any.map get() = BeanMap.create(this).toMutableMap() as MutableMap<String, Any?>
 
 val objectMapper get() = AppCtxHolder.getAppCtx().getBean(ObjectMapper::class.java)
 
