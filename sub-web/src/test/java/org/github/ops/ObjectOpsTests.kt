@@ -32,14 +32,14 @@ class ObjectOpsTests {
   @Test
   fun map() {
     val item = SysMenuTree("id", null, "name")
-    val map = item.map()
+    val map = item.map
     log.info { map.json() }
   }
 
   @Test
   fun bean() {
     val entity = sysMenuService.list()[0]!!
-    val map = entity.map()
+    val map = entity.map
     val bean = map.bean(SysMenuEntity::class.java)
     println(bean)
   }
