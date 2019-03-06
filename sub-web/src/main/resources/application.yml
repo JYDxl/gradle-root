@@ -64,7 +64,7 @@ logging:
     sql: trace
     org.github: trace
     io.netty: trace
-    org.springframework.transaction: debug
+    org.springframework.transaction: trace
 
   file:
     max-history: 30
