@@ -36,16 +36,16 @@ public class ApplicationTests {
       .eq(TipLoginLogEntity::getLogUser, "hanjian")
       .le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
     val page = query.page(new Page<>(2, 10));
-    log.info(ObjectOpsKt.json(now));
-    log.info(ObjectOpsKt.json(page));
+    log.info(ObjectOpsKt.getJson(now));
+    log.info(ObjectOpsKt.getJson(page));
     log.info(String.valueOf(page.getTotal()));
   }
 
   @Test
   public void page() {
     val page = commonMapper.page(new Page());
-    log.info(ObjectOpsKt.json(page));
+    log.info(ObjectOpsKt.getJson(page));
     val list = sysCodeService.list();
-    log.info(ObjectOpsKt.json(list));
+    log.info(ObjectOpsKt.getJson(list));
   }
 }

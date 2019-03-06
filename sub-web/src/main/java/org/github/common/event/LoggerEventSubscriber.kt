@@ -13,7 +13,7 @@ class LoggerEventSubscriber: EventSubscriber {
   @AllowConcurrentEvents
   @Subscribe
   fun log(event: Any) {
-    log.trace { event.json() }
+    log.trace { event.json }
   }
 
   companion object {

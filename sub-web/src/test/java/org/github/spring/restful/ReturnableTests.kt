@@ -22,45 +22,10 @@ class ReturnableTests {
   private lateinit var tipLoginLogService: ITipLoginLogService
 
   @Test
-  fun testReturnable() {
-    //TODO
-  }
-
-  @Test
-  fun testJSON() {
-    //TODO
-  }
-
-  @Test
-  fun testJSONArray() {
-    //TODO
-  }
-
-  @Test
-  fun testJSONBasic() {
-    //TODO
-  }
-
-  @Test
-  fun testJSONCount() {
-    //TODO
-  }
-
-  @Test
-  fun testJSONData() {
-    //TODO
-  }
-
-  @Test
-  fun testJSONP() {
-    //TODO
-  }
-
-  @Test
   fun testJSONPage() {
     val page: IPage<TipLoginLogEntity> = tipLoginLogService.page(Page())
     val result: JSONPage<TipLoginLogEntity> = JSONPage.of(page)
-    log.info(result.json())
+    log.info(result.json)
   }
 
   companion object {

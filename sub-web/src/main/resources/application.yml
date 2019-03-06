@@ -19,7 +19,9 @@ spring:
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
-    default-property-inclusion: non_null
+    default-property-inclusion: non_absent
+    serialization:
+      fail_on_empty_beans: false
   profiles:
     active: dev
   http:
@@ -36,13 +38,11 @@ spring:
     scheduling:
       pool:
         size: 8
-      thread-name-prefix: taskScheduler-
     execution:
       pool:
         core-size: 16
         max-size: 32
         allow-core-thread-timeout: false
-      thread-name-prefix: taskExecutor-
   rabbitmq:
     username: admin
     password: admin
@@ -56,7 +56,7 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
-  type-aliases-package: org.github.base.entity
+  type-aliases-package: org.github.**.entity
 
 logging:
   level:

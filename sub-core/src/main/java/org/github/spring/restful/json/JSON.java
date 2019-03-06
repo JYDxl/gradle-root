@@ -37,7 +37,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @Nonnull
   static JSON of(@Nonnull Object json) {
-    return of(ObjectOpsKt.json(json));
+    return of(ObjectOpsKt.getJson(json));
   }
 
   /** Generator. */

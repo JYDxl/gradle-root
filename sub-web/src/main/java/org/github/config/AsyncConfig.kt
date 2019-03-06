@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.task.TaskDecorator
 import org.springframework.core.task.TaskExecutor
 import org.springframework.scheduling.annotation.AsyncConfigurer
-import org.springframework.scheduling.annotation.EnableAsync
 
-@EnableAsync(proxyTargetClass = true)
 @Configuration
 class AsyncConfig(private val props: TaskExecutionProperties, private val customizers: ObjectProvider<TaskExecutorCustomizer>, private val decorator: ObjectProvider<TaskDecorator>): AsyncConfigurer {
   /** pool. */
