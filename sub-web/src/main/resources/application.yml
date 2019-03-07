@@ -8,14 +8,14 @@ spring:
         max-active: 16
         max-idle: 8
   datasource:
-    url: jdbc:mysql://localhost:3357/security?useSSL=false
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/security?useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: l
     type: com.zaxxer.hikari.HikariDataSource
     jmx-enabled: true
     hikari:
-      pool-name: hikari-mysql
+      pool-name: hikari-mariadb
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
@@ -68,5 +68,5 @@ logging:
 
   file:
     max-history: 30
-    max-size: 100MB
+    max-size: 1GB
   path: ${user.dir}/logs

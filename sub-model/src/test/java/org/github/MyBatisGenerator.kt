@@ -29,8 +29,8 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://localhost:3357/security?useSSL=false"
-    driverName = "com.mysql.jdbc.Driver"
+    url = "jdbc:mariadb://localhost:3306/security?useSSL=false"
+    driverName = "org.mariadb.jdbc.Driver"
     username = "root"
     password = "l"
     generator.dataSource = this

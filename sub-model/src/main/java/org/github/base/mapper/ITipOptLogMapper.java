@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-02-25
+ * @since 2019-03-07
  */
 @MyBatisMapper
 public interface ITipOptLogMapper extends BaseMapper<TipOptLogEntity> {}
