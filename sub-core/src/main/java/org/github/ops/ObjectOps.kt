@@ -14,6 +14,7 @@ import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
+import java.time.LocalDateTime
 
 fun Any?.writeValue(output: OutputStream) = objectMapper.writeValue(output, this)
 
@@ -35,6 +36,8 @@ val String.date get() = getInstance(FORMAT_DATE).parse(this)!!
 val String.time get() = getInstance(FORMAT_TIME).parse(this)!!
 
 val String.dateTime get() = getInstance(DATE_FORMAT).parse(this)!!
+
+val LocalDateTime.value get() = "${toLocalDate()} ${toLocalTime().withNano(0)}"
 
 val appCtx get() = getAppCtx()
 
