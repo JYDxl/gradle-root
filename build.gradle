@@ -23,10 +23,12 @@ allprojects {
     kotlinx_coroutines_version = '1.1.1'
     mybatis_plus_version = '3.1.0'
     protobuf_version = '3.6.1'
+    caffeine_version = '2.7.0'
     okhttp3_version = '3.13.1'
     mariadb_version = '2.4.0'
     netty_version = '4.1.33.Final'
     shiro_version = '1.4.0'
+    guice_version = '4.2.2'
     vertx_version = '3.6.3'
     guava_version = '27.0.1-jre'
     commons_lang3_version = '3.8.1'
@@ -78,6 +80,8 @@ subprojects {
     implementation("commons-codec:commons-codec:$commons_codec_version")
     implementation("com.squareup.okhttp3:okhttp:$okhttp3_version")
     implementation("com.google.guava:guava:$guava_version")
+    implementation("com.google.inject:guice:$guice_version")
+    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine_version")
     implementation("io.netty:netty-all:$netty_version")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinx_coroutines_version")
 

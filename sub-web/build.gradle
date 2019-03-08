@@ -1,6 +1,15 @@
 bootJar.enabled = true
 jar.enabled = false
 
+test {
+  jvmArgs '--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED'
+  jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED'
+  jvmArgs '--add-opens=java.base/java.lang.reflect=ALL-UNNAMED'
+  jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
+  jvmArgs '--illegal-access=deny'
+  jvmArgs '-Dio.netty.tryReflectionSetAccessible=true'
+}
+
 dependencies {
   implementation project(':sub-config')
   implementation project(':sub-core')
@@ -8,12 +17,12 @@ dependencies {
   implementation project(':sub-netty')
 
   implementation('org.springframework.boot:spring-boot-starter-actuator')
-  implementation('org.springframework.boot:spring-boot-starter-aop')
-  implementation('org.springframework.boot:spring-boot-starter-cache')
-  implementation('org.springframework.boot:spring-boot-starter-data-redis') { exclude group: 'io.netty' }
-  implementation('org.springframework.boot:spring-boot-starter-web')
-  implementation('org.springframework.session:spring-session-data-redis')
   implementation('org.springframework.boot:spring-boot-starter-amqp')
+  implementation('org.springframework.boot:spring-boot-starter-cache')
+  implementation('org.springframework.boot:spring-boot-starter-aop')
+  implementation('org.springframework.boot:spring-boot-starter-web')
+  implementation('org.springframework.boot:spring-boot-starter-data-redis') { exclude group: 'io.netty' }
+  implementation('org.springframework.session:spring-session-data-redis')
   implementation('org.apache.commons:commons-pool2')
 
   runtimeOnly('org.springframework.boot:spring-boot-devtools')
