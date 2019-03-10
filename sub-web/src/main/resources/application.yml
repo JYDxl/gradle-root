@@ -44,8 +44,8 @@ spring:
         max-size: 32
         allow-core-thread-timeout: false
   rabbitmq:
-    username: admin
-    password: admin
+    username: root
+    password: l
     publisher-confirms: true
     publisher-returns: true
     virtual-host: /
@@ -66,6 +66,7 @@ logging:
     sql: trace
     org.github: trace
     io.netty: trace
+    io.vertx: trace
     org.springframework.transaction: trace
 
   file:

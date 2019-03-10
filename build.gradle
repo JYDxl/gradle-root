@@ -24,15 +24,16 @@ allprojects {
   ext {
     kotlinx_coroutines_version = '1.1.1'
     mybatis_plus_version = '3.1.0'
-    protobuf_version = '3.6.1'
+    protobuf_version = '3.7.0'
     caffeine_version = '2.7.0'
     okhttp3_version = '3.13.1'
     mariadb_version = '2.4.0'
-    netty_version = '4.1.33.Final'
+    rxjava_version = '2.2.7'
+    netty_version = '4.1.34.Final'
     shiro_version = '1.4.0'
     guice_version = '4.2.2'
     vertx_version = '3.6.3'
-    guava_version = '27.0.1-jre'
+    guava_version = '27.1-jre'
     commons_lang3_version = '3.8.1'
     commons_codec_version = '1.12'
   }
@@ -86,12 +87,14 @@ subprojects {
     implementation("com.google.inject:guice:$guice_version")
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine_version")
     implementation("io.netty:netty-all:$netty_version")
+    implementation("io.reactivex.rxjava2:rxjava:$rxjava_version")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinx_coroutines_version")
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') { exclude module: 'android-json' }
 
-    annotationProcessor('org.projectlombok:lombok')
+    compileOnly("io.vertx:vertx-codegen:$vertx_version")
     compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
     testCompileOnly('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
   }

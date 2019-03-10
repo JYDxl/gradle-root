@@ -14,6 +14,7 @@ dependencies {
   implementation project(':sub-config')
   implementation project(':sub-core')
   implementation project(':sub-model')
+  implementation project(':sub-vertx')
   implementation project(':sub-netty')
 
   implementation('org.springframework.boot:spring-boot-starter-actuator')
