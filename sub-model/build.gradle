@@ -1,4 +1,6 @@
 dependencies {
+  compileOnly project(':sub-core')
+
   testImplementation("com.baomidou:mybatis-plus-generator:$mybatis_plus_version")
   testImplementation('org.freemarker:freemarker')
 }
