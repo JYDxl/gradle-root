@@ -5,11 +5,9 @@ import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSON
 
 /** 默认日期格式化.  */
-const val DATE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+const val FORMAT_TIME = "yyyy-MM-dd HH:mm:ss"
 /** 日期格式化，精确到日.  */
 const val FORMAT_DATE = "yyyy-MM-dd"
-/** 日期格式化，精确到时.  */
-const val FORMAT_TIME = "HH:mm:ss"
 /** 空字符串.  */
 const val EMPTY = ""
 /** null字符串. */

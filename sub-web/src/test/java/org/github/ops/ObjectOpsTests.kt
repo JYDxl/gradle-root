@@ -13,11 +13,12 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit4.SpringRunner
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.Random
 import java.util.stream.IntStream
 
 @RunWith(SpringRunner::class)
-@ActiveProfiles("dev", "test")
+@ActiveProfiles("dev")
 @SpringBootTest
 class ObjectOpsTests {
   @Autowired
@@ -38,8 +39,70 @@ class ObjectOpsTests {
   }
 
   @Test
+  fun localTimeValue() {
+    val value = LocalTime.now().value
+    log.info { value }
+  }
+
+  @Test
+  fun localDateTime() {
+    val long = LocalDateTime.now().long
+    log.info { long.toString() }
+  }
+
+  @Test
+  fun localDateTimeDate() {
+    val date = LocalDateTime.now().date
+    log.info { date.toString() }
+  }
+
+  @Test
+  fun localDateTimeSeconds() {
+    val seconds = LocalDateTime.now().seconds
+    log.info { seconds.toString() }
+  }
+
+  @Test
+  fun stringHexBytes() {
+    val hexBytes = "abcd".hexBytes
+    log.info { hexBytes.joinToString() }
+  }
+
+  @Test
+  fun stringPadStart() {
+    val str: String? = null
+    val result = str.padStart(10, '0')
+    log.info { result }
+  }
+
+  @Test
+  fun stringPadEnd() {
+    val str: String? = null
+    val result = str.padEnd(10, '1')
+    log.info { result }
+  }
+
+  @Test
+  fun byteArrayHexStr() {
+    val bytes = byteArrayOf(-85, -51)
+    log.info { bytes.hexStr }
+  }
+
+  @Test
   fun obj() {
     log.info { Any().json }
+  }
+
+  @Test
+  fun stringTime() {
+    val time = "2019-03-11 22:51:30".time
+    log.info { time.toString() }
+  }
+
+  @Test
+  fun stringDate() {
+    val date = "2019-03-11".date
+    log.info { date.toString() }
   }
 
   @Test

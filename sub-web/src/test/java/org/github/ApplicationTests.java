@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles({"dev", "test"})
+@ActiveProfiles({"dev"})
 @SpringBootTest
 @Slf4j
 public class ApplicationTests {
@@ -47,5 +47,11 @@ public class ApplicationTests {
     log.info(ObjectOpsKt.getJson(page));
     val list = sysCodeService.list();
     log.info(ObjectOpsKt.getJson(list));
+  }
+
+  @Test
+  public void webAppCtx() {
+    val ctx = ObjectOpsKt.getWebAppCtx();
+    log.info(ctx.getDisplayName());
   }
 }
