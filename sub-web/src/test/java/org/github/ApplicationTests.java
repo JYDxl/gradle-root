@@ -1,6 +1,8 @@
 package org.github;
 
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.github.base.entity.TipLoginLogEntity;
@@ -8,6 +10,7 @@ import org.github.base.service.ISysCodeService;
 import org.github.base.service.ITipLoginLogService;
 import org.github.common.mapper.ICommonMapper;
 import org.github.ops.ObjectOpsKt;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,12 @@ public class ApplicationTests {
     log.info(ObjectOpsKt.getJson(now));
     log.info(ObjectOpsKt.getJson(page));
     log.info(String.valueOf(page.getTotal()));
+  }
+
+  @Test
+  public void fibonacciSequence() {
+    val list = Stream.iterate(ImmutablePair.of(1, 1), (v) -> ImmutablePair.of(v.right, v.left + v.right)).limit(10).map((v) -> v.left).collect(Collectors.toList());
+    log.info(ObjectOpsKt.getJson(list));
   }
 
   @Test

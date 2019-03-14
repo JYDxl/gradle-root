@@ -26,7 +26,7 @@ allprojects {
     mybatis_plus_version = '3.1.0'
     protobuf_version = '3.7.0'
     caffeine_version = '2.7.0'
-    okhttp3_version = '3.13.1'
+    okhttp3_version = '3.14.0'
     mariadb_version = '2.4.0'
     rxjava_version = '2.2.7'
     netty_version = '4.1.34.Final'

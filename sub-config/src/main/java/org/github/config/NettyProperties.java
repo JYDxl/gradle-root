@@ -8,14 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class NettyProperties {
-  /** port of netty epoll. */
-  private int    epollPort   = 9001;
-  /** server name of netty epoll. */
-  private String epollServer = "Netty-epoll";
   /** port of netty nio. */
-  private int    nioPort     = 9002;
+  private int    nioPort   = 9002;
   /** server name of netty nio. */
-  private String nioServer   = "Netty-nio";
+  private String nioServer = "Netty-nio";
   /** size of event loop group. */
-  private int    size        = 16;
+  private int    size      = 16;
 }
