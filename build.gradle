@@ -30,7 +30,6 @@ allprojects {
     mariadb_version = '2.4.0'
     rxjava_version = '2.2.7'
     netty_version = '4.1.34.Final'
-    shiro_version = '1.4.0'
     guice_version = '4.2.2'
     vertx_version = '3.6.3'
     guava_version = '27.1-jre'

@@ -5,4 +5,5 @@
 --add-opens=java.base/java.nio=ALL-UNNAMED  
 --illegal-access=deny  
 &nbsp;-Dio.netty.tryReflectionSetAccessible=true  
+&nbsp;-Djava.library.path=/usr/local/opt/tomcat-native/lib  
 ![GitHub](kotlin.jpg "kotlin")

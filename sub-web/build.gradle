@@ -8,6 +8,7 @@ test {
   jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
   jvmArgs '--illegal-access=deny'
   jvmArgs '-Dio.netty.tryReflectionSetAccessible=true'
+  jvmArgs '-Djava.library.path=/usr/local/opt/tomcat-native/lib'
 }
 
 dependencies {
