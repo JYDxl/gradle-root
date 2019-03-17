@@ -3,7 +3,6 @@ package org.github.base.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDate;
-import com.baomidou.mybatisplus.annotation.Version;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
@@ -17,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-03-07
+ * @since 2019-03-17
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -97,9 +96,5 @@ public class SysUserEntity implements Serializable {
     /** delete flag */
     @TableLogic
     private Integer deleted;
-
-    /** update version */
-    @Version
-    private Integer version;
 
 }

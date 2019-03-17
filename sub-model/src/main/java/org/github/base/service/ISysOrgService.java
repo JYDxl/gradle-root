@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-03-07
+ * @since 2019-03-17
  */
 public interface ISysOrgService extends IService<SysOrgEntity> {}

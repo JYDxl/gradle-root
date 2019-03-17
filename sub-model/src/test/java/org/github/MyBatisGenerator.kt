@@ -45,7 +45,6 @@ fun main() {
   StrategyConfig().apply {
     naming = underline_to_camel
     isEntityLombokModel = true
-    versionFieldName = "version"
     logicDeleteFieldName = "deleted"
     setInclude(".+")
     generator.strategy = this
