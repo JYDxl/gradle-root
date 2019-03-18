@@ -46,7 +46,7 @@ public class ApplicationTests {
 
   @Test
   public void fibonacciSequence() {
-    val list = Stream.iterate(ImmutablePair.of(1, 1), (v) -> ImmutablePair.of(v.right, v.left + v.right)).limit(10).map((v) -> v.left).collect(Collectors.toList());
+    val list = Stream.iterate(ImmutablePair.of(1, 1), (v) -> ImmutablePair.of(v.right, v.left + v.right)).limit(10).map(ImmutablePair::getLeft).collect(Collectors.toList());
     log.info(ObjectOpsKt.getJson(list));
   }
 

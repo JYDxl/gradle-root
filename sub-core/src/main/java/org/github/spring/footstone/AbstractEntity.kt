@@ -1,7 +1,7 @@
 package org.github.spring.footstone
 
+import org.github.ops.log
 import org.github.ops.req
-import org.slf4j.LoggerFactory.getLogger
 import java.io.Serializable
 
 /**
@@ -30,10 +30,5 @@ abstract class AbstractEntity: Serializable {
       log.error(e.message, e)
     }
     return model
-  }
-
-  companion object {
-    /** log. */
-    val log = getLogger(AbstractEntity::class.java)!!
   }
 }
