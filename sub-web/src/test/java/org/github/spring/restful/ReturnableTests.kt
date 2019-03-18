@@ -27,8 +27,4 @@ class ReturnableTests {
     val result: JSONPage<TipLoginLogEntity> = JSONPage.of(page)
     log.info(result.json)
   }
-
-  companion object {
-    private val log = ReturnableTests::class.log
-  }
 }

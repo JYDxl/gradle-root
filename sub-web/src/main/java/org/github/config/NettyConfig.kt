@@ -6,9 +6,10 @@ import io.netty.channel.ChannelOption.SO_BACKLOG
 import io.netty.channel.ChannelOption.SO_KEEPALIVE
 import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.channel.ChannelOption.TCP_NODELAY
-import io.netty.channel.nio.NioEventLoopGroup
-import io.netty.channel.socket.nio.NioServerSocketChannel
-import io.netty.channel.socket.nio.NioSocketChannel
+import io.netty.channel.kqueue.KQueueEventLoopGroup
+import io.netty.channel.kqueue.KQueueServerSocketChannel
+import io.netty.channel.kqueue.KQueueSocketChannel
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.codec.LineBasedFrameDecoder
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
@@ -26,19 +27,19 @@ import org.springframework.context.annotation.Scope
 class NettyConfig(private val props: NettyProperties) {
   @Bean
   fun nioServerChannelHolder(): ServerChannelHolder {
-    val worker = NioEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
-    val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
+    val worker = KQueueEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
+    val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
     return ServerBootstrap()
       .group(boss, worker)
-      .channel(NioServerSocketChannel::class.java)
+      .channel(KQueueServerSocketChannel::class.java)
       .option(SO_REUSEADDR, true)
       .option(SO_BACKLOG, 1024)
       .handler(ServerSocketLoggingHandler(props.nioServer))
-      .childHandler(object: ChannelInitializer<NioSocketChannel>() {
-        override fun initChannel(channel: NioSocketChannel) {
+      .childHandler(object: ChannelInitializer<KQueueSocketChannel>() {
+        override fun initChannel(channel: KQueueSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
-            addLast(lineBasedFrameDecoder())
+            addLast(lengthFieldBasedFrameDecoder())
             addLast(stringDecoder())
             addLast(stringEncoder())
             addLast(stringServerChannelHandler())
@@ -58,6 +59,10 @@ class NettyConfig(private val props: NettyProperties) {
   @Scope(SCOPE_PROTOTYPE)
   @Bean
   fun lineBasedFrameDecoder() = LineBasedFrameDecoder(1024)
+
+  @Scope(SCOPE_PROTOTYPE)
+  @Bean
+  fun lengthFieldBasedFrameDecoder() = LengthFieldBasedFrameDecoder(1024, 4, 4)
 
   @Bean
   fun stringDecoder() = StringDecoder()

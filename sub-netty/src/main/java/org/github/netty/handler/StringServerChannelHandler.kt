@@ -11,8 +11,4 @@ class StringServerChannelHandler: ChannelInboundHandlerAdapter() {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     log.info { msg as String }
   }
-
-  companion object {
-    private val log = StringServerChannelHandler::class.log
-  }
 }

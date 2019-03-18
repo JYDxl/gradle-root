@@ -9,7 +9,6 @@ import org.springframework.boot.task.TaskExecutorCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.task.TaskDecorator
-import org.springframework.core.task.TaskExecutor
 import org.springframework.scheduling.annotation.AsyncConfigurer
 import org.springframework.scheduling.annotation.EnableAsync
 
@@ -36,9 +35,4 @@ class AsyncConfig(private val props: TaskExecutionProperties, private val custom
     .customizers(customizers)
     .taskDecorator(decorator.ifUnique)
     .build()!!
-
-  companion object {
-    /** log. */
-    private val log = TaskExecutor::class.log
-  }
 }

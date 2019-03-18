@@ -15,8 +15,4 @@ class LoggerEventSubscriber: EventSubscriber {
   fun log(event: Any) {
     log.trace { event.json }
   }
-
-  companion object {
-    private val log = LoggerEventSubscriber::class.log
-  }
 }

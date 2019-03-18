@@ -19,9 +19,6 @@ import javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR
  * @see HandlerMethodReturnValueHandler
  */
 object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
-  /** log. */
-  private val log = ReturnableValueHandlerKotlin::class.log
-
   override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.parameterType)
 
   override fun handleReturnValue(returnValue: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
