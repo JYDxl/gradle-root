@@ -6,9 +6,9 @@ import io.netty.channel.ChannelOption.SO_BACKLOG
 import io.netty.channel.ChannelOption.SO_KEEPALIVE
 import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.channel.ChannelOption.TCP_NODELAY
-import io.netty.channel.kqueue.KQueueEventLoopGroup
-import io.netty.channel.kqueue.KQueueServerSocketChannel
-import io.netty.channel.kqueue.KQueueSocketChannel
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.nio.NioServerSocketChannel
+import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.codec.LineBasedFrameDecoder
 import io.netty.handler.codec.string.StringDecoder
@@ -27,16 +27,16 @@ import org.springframework.context.annotation.Scope
 class NettyConfig(private val props: NettyProperties) {
   @Bean
   fun nioServerChannelHolder(): ServerChannelHolder {
-    val worker = KQueueEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
-    val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
+    val worker = NioEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
+    val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
     return ServerBootstrap()
       .group(boss, worker)
-      .channel(KQueueServerSocketChannel::class.java)
+      .channel(NioServerSocketChannel::class.java)
       .option(SO_REUSEADDR, true)
       .option(SO_BACKLOG, 1024)
       .handler(ServerSocketLoggingHandler(props.nioServer))
-      .childHandler(object: ChannelInitializer<KQueueSocketChannel>() {
-        override fun initChannel(channel: KQueueSocketChannel) {
+      .childHandler(object: ChannelInitializer<NioSocketChannel>() {
+        override fun initChannel(channel: NioSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
             addLast(lengthFieldBasedFrameDecoder())

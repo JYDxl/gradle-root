@@ -53,6 +53,9 @@ spring:
     port: 5672
   application:
     name: gradle-root
+  output:
+    ansi:
+      enabled: always
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml

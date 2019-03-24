@@ -11,7 +11,7 @@ public class NettyProperties {
   /** port of netty nio. */
   private int    nioPort   = 9002;
   /** server name of netty nio. */
-  private String nioServer = "Netty-nio";
+  private String nioServer = "netty-nio";
   /** size of event loop group. */
-  private int    size      = 16;
+  private int    size      = 24;
 }
