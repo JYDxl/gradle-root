@@ -17,6 +17,8 @@ import org.springframework.scheduling.annotation.EnableAsync
 class AsyncConfig(private val props: TaskExecutionProperties, private val customizers: ObjectProvider<TaskExecutorCustomizer>, private val decorator: ObjectProvider<TaskDecorator>): AsyncConfigurer {
   /** pool. */
   private val pool = props.pool!!
+  /** log. */
+  private val log = javaClass.log
 
   override fun getAsyncUncaughtExceptionHandler() = AsyncUncaughtExceptionHandler { ex, method, params ->
     log.error("Exception thrown by async method $method with arguments ${params.joinToString(prefix = "[", postfix = "]")}", ex)

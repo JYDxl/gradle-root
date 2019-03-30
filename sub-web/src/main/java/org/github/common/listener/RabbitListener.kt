@@ -1,0 +1,19 @@
+package org.github.common.listener
+
+import org.github.ops.info
+import org.github.ops.json
+import org.github.ops.log
+import org.github.spring.footstone.Entity
+import org.springframework.amqp.rabbit.annotation.RabbitListener
+import org.springframework.stereotype.Component
+
+@Component
+class RabbitListener {
+  /** log. */
+  private val log = javaClass.log
+
+  @RabbitListener(queues = ["app.queue"])
+  fun listen(msg: Entity) {
+    log.info { msg.json }
+  }
+}

@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner
 @ActiveProfiles("dev")
 @SpringBootTest
 class ReturnableTests {
+  /** log. */
+  private val log = javaClass.log
   @Autowired
   private lateinit var tipLoginLogService: ITipLoginLogService
 

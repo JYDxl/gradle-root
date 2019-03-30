@@ -9,9 +9,9 @@ import java.util.Optional
  * 分页查询数据模型,该类的作用是辅助分页及帮助分页时进行排序操作.
  *
  * @author JYD_XL
- * @see org.github.spring.footstone.AbstractEntity
+ * @see org.github.spring.footstone.Entity
  */
-class PageHelperModel: AbstractEntity() {
+class PageHelperModel: Entity {
   var sortName: String = ""
     set(sortName) = Optional.ofNullable(sortName).filter { v -> paramPattern.matches(v) }.ifPresent { v -> field = v }
 

@@ -13,6 +13,7 @@ import org.github.ops.ObjectOpsKt;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -30,6 +31,8 @@ public class ApplicationTests {
   private ITipLoginLogService tipLoginLogService;
   @Autowired
   private ISysCodeService     sysCodeService;
+  @Autowired
+  private AmqpTemplate        amqpTemplate;
 
   @Test
   public void contextLoads() {
@@ -56,6 +59,11 @@ public class ApplicationTests {
     log.info(ObjectOpsKt.getJson(page));
     val list = sysCodeService.list();
     log.info(ObjectOpsKt.getJson(list));
+  }
+
+  @Test
+  public void testAmqp() {
+    amqpTemplate.convertAndSend("app.queue", new User("admin", "admin"));
   }
 
   @Test

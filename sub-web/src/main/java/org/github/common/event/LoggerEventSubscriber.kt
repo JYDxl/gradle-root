@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component
 
 @Component
 class LoggerEventSubscriber: EventSubscriber {
+  /** log. */
+  private val log = javaClass.log
+
   @AllowConcurrentEvents
   @Subscribe
   fun log(event: Any) {

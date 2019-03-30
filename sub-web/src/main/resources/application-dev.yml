@@ -1,0 +1,30 @@
+spring:
+  redis:
+    port: 6380
+    password: l
+    timeout: 10s
+    lettuce:
+      pool:
+        max-active: 24
+        max-idle: 12
+  datasource:
+    url: jdbc:mariadb://localhost:3306/security?useSSL=false
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: l
+    type: com.zaxxer.hikari.HikariDataSource
+    jmx-enabled: true
+    hikari:
+      pool-name: hikari-mariadb
+  rabbitmq:
+    username: root
+    password: l
+    publisher-confirms: true
+    publisher-returns: true
+    virtual-host: /
+    host: localhost
+    port: 5672
+    listener:
+      simple:
+        acknowledge-mode: auto
+        prefetch: 0

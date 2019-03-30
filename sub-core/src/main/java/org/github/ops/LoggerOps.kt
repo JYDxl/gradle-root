@@ -13,5 +13,4 @@ fun Logger.info(ex: Throwable? = null, info: () -> String?) = if(isInfoEnabled) 
 
 fun Logger.warn(ex: Throwable? = null, warn: () -> String?) = if(isWarnEnabled) warn(warn(), ex) else Unit
 
-//TODO JYD_XL 可能存在性能问题
-val Any.log get() = getLogger(this::class.java)!!
+val Class<*>.log get() = getLogger(javaClass)!!

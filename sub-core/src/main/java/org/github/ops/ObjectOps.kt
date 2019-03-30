@@ -10,6 +10,7 @@ import org.github.spring.footstone.EMPTY
 import org.github.spring.footstone.FORMAT_DATE
 import org.github.spring.footstone.FORMAT_TIME
 import org.github.spring.restful.Returnable
+import org.springframework.beans.BeanWrapperImpl
 import org.springframework.cglib.beans.BeanMap.create
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
@@ -29,7 +30,14 @@ fun String?.padEnd(minLength: Int, padChar: Char) = padEnd(this ?: EMPTY, minLen
 fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>) = clazz.getDeclaredConstructor().newInstance()!!.also { create(it).putAll(this) }
 
 @Suppress("UNCHECKED_CAST")
-val Any.map get() = create(this).toMutableMap() as MutableMap<String, Any?>
+val Any.map
+  get() = create(this).toMutableMap() as MutableMap<String, Any?>
+
+val Any.nullProps: Array<String>
+  get() {
+    val wrapper = BeanWrapperImpl(this)
+    return wrapper.propertyDescriptors.asSequence().filter { wrapper.getPropertyValue(it.name) == null }.map { it.name!! }.toList().toTypedArray()
+  }
 
 val Any?.json get() = objectMapper.writeValueAsString(this)!!
 
@@ -57,12 +65,12 @@ val ByteArray.hexStr get() = base16().encode(this)!!
 
 val Returnable.value get() = get()
 
-val objectMapper get() = appCtx.getBean(ObjectMapper::class.java)
-
-val appCtx get() = getAppCtx()
-
-val webAppCtx get() = appCtx as WebApplicationContext
-
 val req get() = (getRequestAttributes() as? ServletRequestAttributes)?.request
 
 val resp get() = (getRequestAttributes() as? ServletRequestAttributes)?.response
+
+val appCtx = getAppCtx()
+
+val webAppCtx = appCtx as WebApplicationContext
+
+val objectMapper = appCtx.getBean(ObjectMapper::class.java)

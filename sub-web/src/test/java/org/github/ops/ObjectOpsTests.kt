@@ -21,6 +21,8 @@ import java.util.stream.IntStream
 @ActiveProfiles("dev")
 @SpringBootTest
 class ObjectOpsTests {
+  /** log. */
+  private val log = javaClass.log
   @Autowired
   private lateinit var tipLoginLogService: ITipLoginLogService
   @Autowired
