@@ -52,6 +52,11 @@ subprojects {
   test.enabled = false
   jar.enabled = true
 
+  configurations {
+    compileOnly { extendsFrom annotationProcessor }
+    testCompileOnly { extendsFrom testAnnotationProcessor }
+  }
+
   compileKotlin {
     kotlinOptions {
       freeCompilerArgs = ['-Xjsr305=strict']
@@ -88,15 +93,13 @@ subprojects {
     implementation("io.reactivex.rxjava2:rxjava:$rxjava_version")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinx_coroutines_version")
 
-    compileOnly("io.vertx:vertx-codegen:$vertx_version") { exclude group: 'io.netty' }
-    compileOnly('org.projectlombok:lombok')
-    annotationProcessor('org.projectlombok:lombok')
-
     testImplementation('org.springframework.boot:spring-boot-starter-test') { exclude module: 'android-json' }
     testImplementation("io.vertx:vertx-unit:$vertx_version") { exclude group: 'io.netty' }
 
+    compileOnly("io.vertx:vertx-codegen:$vertx_version") { exclude group: 'io.netty' }
     testCompileOnly("io.vertx:vertx-codegen:$vertx_version") { exclude group: 'io.netty' }
-    testCompileOnly('org.projectlombok:lombok')
+
+    annotationProcessor('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
   }
 }
