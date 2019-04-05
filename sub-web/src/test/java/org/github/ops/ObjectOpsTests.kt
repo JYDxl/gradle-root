@@ -22,7 +22,7 @@ import java.util.stream.IntStream
 @SpringBootTest
 class ObjectOpsTests {
   /** log. */
-  private val log = javaClass.log
+  private val log = ObjectOpsTests::class.log
   @Autowired
   private lateinit var tipLoginLogService: ITipLoginLogService
   @Autowired
