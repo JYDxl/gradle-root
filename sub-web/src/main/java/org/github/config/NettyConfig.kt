@@ -27,8 +27,8 @@ import org.springframework.context.annotation.Scope
 class NettyConfig(private val props: NettyProperties) {
   @Bean
   fun nioServerChannelHolder(): ServerChannelHolder {
-    val worker = NioEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
     val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
+    val worker = NioEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
     return ServerBootstrap()
       .group(boss, worker)
       .channel(NioServerSocketChannel::class.java)
@@ -39,7 +39,7 @@ class NettyConfig(private val props: NettyProperties) {
         override fun initChannel(channel: NioSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
-            addLast(lengthFieldBasedFrameDecoder())
+            addLast(lineBasedFrameDecoder())
             addLast(stringDecoder())
             addLast(stringEncoder())
             addLast(stringServerChannelHandler())

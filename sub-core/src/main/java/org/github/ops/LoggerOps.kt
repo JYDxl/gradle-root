@@ -2,6 +2,7 @@ package org.github.ops
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
+import kotlin.reflect.KClass
 
 fun Logger.trace(ex: Throwable? = null, msg: () -> String?) = if(isTraceEnabled) trace(msg(), ex) else Unit
 
@@ -13,4 +14,4 @@ fun Logger.info(ex: Throwable? = null, info: () -> String?) = if(isInfoEnabled) 
 
 fun Logger.warn(ex: Throwable? = null, warn: () -> String?) = if(isWarnEnabled) warn(warn(), ex) else Unit
 
-val Class<*>.log get() = getLogger(javaClass)!!
+val KClass<*>.log get() = getLogger(java)!!

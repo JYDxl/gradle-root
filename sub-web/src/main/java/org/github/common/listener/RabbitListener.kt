@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class RabbitListener {
   /** log. */
-  private val log = javaClass.log
+  private val log = RabbitListener::class.log
 
   @RabbitListener(queues = ["app.queue"])
   fun listen(msg: Entity) {

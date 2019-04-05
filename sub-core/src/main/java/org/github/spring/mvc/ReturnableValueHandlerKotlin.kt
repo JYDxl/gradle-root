@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR
  */
 object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
   /** log. */
-  private val log = javaClass.log
+  private val log = ReturnableValueHandlerKotlin::class.log
 
   override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.parameterType)
 

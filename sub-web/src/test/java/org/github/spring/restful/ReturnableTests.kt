@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest
 class ReturnableTests {
   /** log. */
-  private val log = javaClass.log
+  private val log = ReturnableTests::class.log
   @Autowired
   private lateinit var tipLoginLogService: ITipLoginLogService
 

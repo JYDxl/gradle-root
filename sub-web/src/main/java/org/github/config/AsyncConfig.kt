@@ -18,7 +18,7 @@ class AsyncConfig(private val props: TaskExecutionProperties, private val custom
   /** pool. */
   private val pool = props.pool!!
   /** log. */
-  private val log = javaClass.log
+  private val log = AsyncConfig::class.log
 
   override fun getAsyncUncaughtExceptionHandler() = AsyncUncaughtExceptionHandler { ex, method, params ->
     log.error("Exception thrown by async method $method with arguments ${params.joinToString(prefix = "[", postfix = "]")}", ex)
