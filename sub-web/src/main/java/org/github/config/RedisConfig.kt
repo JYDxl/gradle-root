@@ -3,7 +3,9 @@ package org.github.config
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.RedisConnectionFactory
+import org.springframework.data.redis.core.ClusterOperations
 import org.springframework.data.redis.core.GeoOperations
+import org.springframework.data.redis.core.HashOperations
 import org.springframework.data.redis.core.HyperLogLogOperations
 import org.springframework.data.redis.core.ListOperations
 import org.springframework.data.redis.core.SetOperations
@@ -31,11 +33,17 @@ class RedisConfig(private val factory: RedisConnectionFactory) {
   fun setOps(): SetOperations<String, String?> = redisTemplate().opsForSet()
 
   @Bean
-  fun valOps(): ValueOperations<String, String> = redisTemplate().opsForValue()
+  fun valueOps(): ValueOperations<String, String?> = redisTemplate().opsForValue()
 
   @Bean
-  fun geoOps(): GeoOperations<String, String> = redisTemplate().opsForGeo()
+  fun hashOps(): HashOperations<String, String, String?> = redisTemplate().opsForHash()
 
   @Bean
   fun hllOps(): HyperLogLogOperations<String, String?> = redisTemplate().opsForHyperLogLog()
+
+  @Bean
+  fun geoOps(): GeoOperations<String, String?> = redisTemplate().opsForGeo()
+
+  @Bean
+  fun clusterOps(): ClusterOperations<String, String?> = redisTemplate().opsForCluster()
 }

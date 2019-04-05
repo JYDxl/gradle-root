@@ -1,9 +1,11 @@
 package org.github.mybatis
 
 import org.springframework.stereotype.Component
+import kotlin.annotation.AnnotationRetention.*
+import kotlin.annotation.AnnotationTarget.*
 
-@Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.RUNTIME)
+@Target(CLASS)
+@Retention(RUNTIME)
 @MustBeDocumented
 @Component
 annotation class MyBatisMapper

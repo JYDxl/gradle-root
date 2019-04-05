@@ -1,12 +1,17 @@
 spring:
+  profiles:
+    active: dev
+  application:
+    name: spring
+  output:
+    ansi:
+      enabled: always
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
     default-property-inclusion: non_absent
     serialization:
       fail_on_empty_beans: false
-  profiles:
-    active: dev
   http:
     encoding:
       force: true
@@ -14,39 +19,11 @@ spring:
       force-response: true
       enabled: true
       charset: utf-8
-    log-request-details: true
     converters:
       preferred-json-mapper: jackson
-  task:
-    scheduling:
-      pool:
-        size: 12
-    execution:
-      pool:
-        core-size: 12
-        max-size: 24
-        allow-core-thread-timeout: false
-  application:
-    name: spring
-  output:
-    ansi:
-      enabled: always
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
   type-aliases-package: org.github.**.entity
-
-logging:
-  level:
-    web: trace
-    sql: trace
-    org.github: trace
-    io.netty: trace
-    io.vertx: trace
-    org.springframework.transaction: trace
-  file:
-    max-history: 30
-    max-size: 1GB
-  path: ${user.dir}/logs
