@@ -1,11 +1,10 @@
 package org.github.ops
 
-import com.google.common.collect.ImmutableListMultimap
 import com.google.common.collect.ListMultimap
+import com.google.common.collect.Multimaps.index
 import org.github.base.entity.SysMenuEntity
 import org.github.base.service.ISysMenuService
 import org.github.base.service.ITipLoginLogService
-import org.github.spring.footstone.EMPTY
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -137,8 +136,8 @@ class ObjectOpsTests {
   @Test
   fun recursive() {
     val list = sysMenuService.list().map { SysMenuTree(it.menuId, it.pid, it.menuName) }
-    val multimap: ListMultimap<String, SysMenuTree> = ImmutableListMultimap.builder<String, SysMenuTree>().apply { list.forEach { put(it.pid.orEmpty(), it) } }.build()
-    val result: List<SysMenuTree> = multimap.get(EMPTY)
+    val multimap: ListMultimap<String, SysMenuTree> = index(list) { it!!.pid.orEmpty() }
+    val result: List<SysMenuTree> = multimap.get("")
     recursive(multimap, result)
     log.info { result.json }
   }

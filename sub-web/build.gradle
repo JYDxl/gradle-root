@@ -2,12 +2,6 @@ bootJar.enabled = true
 jar.enabled = false
 
 test {
-  jvmArgs '--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED'
-  jvmArgs '--add-opens=java.base/java.lang=ALL-UNNAMED'
-  jvmArgs '--add-opens=java.base/java.lang.reflect=ALL-UNNAMED'
-  jvmArgs '--add-opens=java.base/java.nio=ALL-UNNAMED'
-  jvmArgs '--illegal-access=deny'
-  jvmArgs '-Dio.netty.tryReflectionSetAccessible=true'
   jvmArgs '-Djava.library.path=/usr/local/opt/tomcat-native/lib'
 }
 
