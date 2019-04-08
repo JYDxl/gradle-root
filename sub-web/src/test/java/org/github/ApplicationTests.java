@@ -16,12 +16,10 @@ import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles({"dev"})
 @SpringBootTest
 @Slf4j
 public class ApplicationTests {

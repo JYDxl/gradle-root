@@ -6,9 +6,9 @@ import io.netty.channel.ChannelOption.SO_BACKLOG
 import io.netty.channel.ChannelOption.SO_KEEPALIVE
 import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.channel.ChannelOption.TCP_NODELAY
-import io.netty.channel.nio.NioEventLoopGroup
-import io.netty.channel.socket.nio.NioServerSocketChannel
-import io.netty.channel.socket.nio.NioSocketChannel
+import io.netty.channel.kqueue.KQueueEventLoopGroup
+import io.netty.channel.kqueue.KQueueServerSocketChannel
+import io.netty.channel.kqueue.KQueueSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.codec.LineBasedFrameDecoder
 import io.netty.handler.codec.string.StringDecoder
@@ -26,17 +26,17 @@ import org.springframework.context.annotation.Scope
 @Configuration
 class NettyConfig(private val props: NettyProperties) {
   @Bean
-  fun nioServerChannelHolder(): ServerChannelHolder {
-    val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
-    val worker = NioEventLoopGroup(props.size, NaiveThreadFactory("nio-worker"))
+  fun serverChannelHolder(): ServerChannelHolder {
+    val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("kqueue-boss"))
+    val worker = KQueueEventLoopGroup(props.size, NaiveThreadFactory("kqueue-worker"))
     return ServerBootstrap()
       .group(boss, worker)
-      .channel(NioServerSocketChannel::class.java)
+      .channel(KQueueServerSocketChannel::class.java)
       .option(SO_REUSEADDR, true)
       .option(SO_BACKLOG, 1024)
-      .handler(ServerSocketLoggingHandler(props.nioServer))
-      .childHandler(object: ChannelInitializer<NioSocketChannel>() {
-        override fun initChannel(channel: NioSocketChannel) {
+      .handler(ServerSocketLoggingHandler(props.server))
+      .childHandler(object: ChannelInitializer<KQueueSocketChannel>() {
+        override fun initChannel(channel: KQueueSocketChannel) {
           channel.pipeline()!!.apply {
             addLast(loggingHandler())
             addLast(lineBasedFrameDecoder())
@@ -48,7 +48,7 @@ class NettyConfig(private val props: NettyProperties) {
       })
       .childOption(SO_KEEPALIVE, true)
       .childOption(TCP_NODELAY, true)
-      .bind(props.nioPort)
+      .bind(props.port)
       .sync()
       .channel()
       .closeFuture()

@@ -46,6 +46,10 @@ fun main() {
     naming = underline_to_camel
     isEntityLombokModel = true
     logicDeleteFieldName = "deleted"
+    superEntityClass = "org.github.base.AbstractEntity"
+    superMapperClass = "org.github.base.IMapper"
+    superServiceClass = "org.github.base.IService"
+    superServiceImplClass = "org.github.base.ServiceImpl"
     setInclude(".+")
     generator.strategy = this
   }

@@ -2,7 +2,7 @@ package org.github.base.mapper;
 
 import org.github.base.entity.SysOrgEntity;
 import org.github.mybatis.MyBatisMapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.github.base.IMapper;
 
 /**
  * <p>
@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-03-24
+ * @since 2019-04-08
  */
 @MyBatisMapper
-public interface ISysOrgMapper extends BaseMapper<SysOrgEntity> {}
+public interface ISysOrgMapper extends IMapper<SysOrgEntity> {}

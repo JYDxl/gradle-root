@@ -2,13 +2,14 @@ package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import org.github.base.AbstractEntity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -16,12 +17,13 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-03-24
+ * @since 2019-04-08
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
 @TableName("sys_user")
-public class SysUserEntity implements Serializable {
+public class SysUserEntity extends AbstractEntity {
 
     /** UID */
     private static final long serialVersionUID = 1L;

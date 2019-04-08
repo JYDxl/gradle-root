@@ -1,7 +1,7 @@
 package org.github.base.service;
 
 import org.github.base.entity.SysRoleEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.github.base.IService;
 
 /**
  * <p>
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-03-24
+ * @since 2019-04-08
  */
 public interface ISysRoleService extends IService<SysRoleEntity> {}
