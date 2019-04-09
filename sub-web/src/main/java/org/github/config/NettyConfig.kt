@@ -11,8 +11,8 @@ import io.netty.channel.kqueue.KQueueServerSocketChannel
 import io.netty.channel.kqueue.KQueueSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.codec.LineBasedFrameDecoder
+import io.netty.handler.codec.string.LineEncoder
 import io.netty.handler.codec.string.StringDecoder
-import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LoggingHandler
 import org.github.netty.handler.StringServerChannelHandler
 import org.github.netty.server.ServerChannelHolder
@@ -41,7 +41,7 @@ class NettyConfig(private val props: NettyProperties) {
             addLast(loggingHandler())
             addLast(lineBasedFrameDecoder())
             addLast(stringDecoder())
-            addLast(stringEncoder())
+            addLast(lineEncoder())
             addLast(stringServerChannelHandler())
           }
         }
@@ -58,7 +58,7 @@ class NettyConfig(private val props: NettyProperties) {
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
-  fun lineBasedFrameDecoder() = LineBasedFrameDecoder(1024)
+  fun lineBasedFrameDecoder() = LineBasedFrameDecoder(1024, true, true)
 
   @Scope(SCOPE_PROTOTYPE)
   @Bean
@@ -68,7 +68,7 @@ class NettyConfig(private val props: NettyProperties) {
   fun stringDecoder() = StringDecoder()
 
   @Bean
-  fun stringEncoder() = StringEncoder()
+  fun lineEncoder() = LineEncoder()
 
   @Bean
   fun loggingHandler() = LoggingHandler()

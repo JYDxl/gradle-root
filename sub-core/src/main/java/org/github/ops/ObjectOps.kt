@@ -61,6 +61,8 @@ val LocalDateTime.seconds get() = instant.epochSecond
 
 val LocalTime.value get() = withNano(0).toString()
 
+val LocalTime.minOfDay get() = this.toSecondOfDay() / 60
+
 val ByteArray.hexStr get() = base16().encode(this)!!
 
 val Returnable.value get() = get()

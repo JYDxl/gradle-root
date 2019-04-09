@@ -13,6 +13,10 @@ class StringServerChannelHandler: ChannelInboundHandlerAdapter() {
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     log.info { msg as String }
-    ctx.writeAndFlush("$msg\n")
+    ctx.write("$msg")
+  }
+
+  override fun channelReadComplete(ctx: ChannelHandlerContext) {
+    ctx.flush()
   }
 }
