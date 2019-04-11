@@ -1,7 +1,6 @@
 package org.github.extra
 
 import com.google.common.collect.Range
-import lombok.extern.slf4j.Slf4j
 import org.github.ops.minOfDay
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -13,7 +12,6 @@ import java.util.TreeMap
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-@Slf4j
 class TimeRangeTests {
   @Test
   fun test() {

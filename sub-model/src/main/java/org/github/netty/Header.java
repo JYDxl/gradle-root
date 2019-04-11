@@ -20,6 +20,6 @@ public class Header {
 
   @Override
   public String toString() {
-    return ObjectOpsKt.getJson(this);
+    return ObjectOpsKt.json(this, null);
   }
 }

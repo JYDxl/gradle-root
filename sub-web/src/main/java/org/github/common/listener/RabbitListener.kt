@@ -14,6 +14,6 @@ class RabbitListener {
 
   @RabbitListener(queues = ["app.queue"])
   fun listen(msg: Entity) {
-    log.info { msg.json }
+    log.info { msg.json() }
   }
 }

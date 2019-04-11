@@ -40,23 +40,23 @@ public class ApplicationTests {
       .eq(TipLoginLogEntity::getLogUser, "hanjian")
       .le(TipLoginLogEntity::getLogTime, LocalDateTime.now());
     val page = query.page(new Page<>(2, 10));
-    log.info(ObjectOpsKt.getJson(now));
-    log.info(ObjectOpsKt.getJson(page));
+    log.info(ObjectOpsKt.json(now, null));
+    log.info(ObjectOpsKt.json(page, null));
     log.info(String.valueOf(page.getTotal()));
   }
 
   @Test
   public void fibonacciSequence() {
     val list = Stream.iterate(ImmutablePair.of(1, 1), (v) -> ImmutablePair.of(v.right, v.left + v.right)).limit(10).map(ImmutablePair::getLeft).collect(Collectors.toList());
-    log.info(ObjectOpsKt.getJson(list));
+    log.info(ObjectOpsKt.json(list, null));
   }
 
   @Test
   public void page() {
     val page = commonMapper.page(new Page());
-    log.info(ObjectOpsKt.getJson(page));
+    log.info(ObjectOpsKt.json(page, null));
     val list = sysCodeService.list();
-    log.info(ObjectOpsKt.getJson(list));
+    log.info(ObjectOpsKt.json(list, null));
   }
 
   @Test

@@ -27,14 +27,14 @@ class ObjectOpsTests {
 
   @Test
   fun json() {
-    log.info { tipLoginLogService.list().json }
+    log.info { tipLoginLogService.list().json() }
   }
 
   @Test
   fun map() {
     val item = SysMenuTree("id", null, "name")
     val map = item.map
-    log.info { map.json }
+    log.info { map.json() }
   }
 
   @Test
@@ -70,7 +70,7 @@ class ObjectOpsTests {
   @Test
   fun fibonacciSequence() {
     val list = generateSequence(Triple(1, 1, 1)) { if(it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1) }.map { it.first }.toList()
-    log.info { list.json }
+    log.info { list.json() }
   }
 
   @Test
@@ -95,7 +95,7 @@ class ObjectOpsTests {
 
   @Test
   fun obj() {
-    log.info { Any().json }
+    log.info { Any().json() }
   }
 
   @Test
@@ -128,7 +128,7 @@ class ObjectOpsTests {
     val random = Random(System.currentTimeMillis())
     val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()!!
     bubbleSort(array) { left, right -> left > right }
-    log.info { array.json }
+    log.info { array.json() }
   }
 
   @Test
@@ -137,7 +137,7 @@ class ObjectOpsTests {
     val multimap: ListMultimap<String, SysMenuTree> = index(list) { it!!.pid.orEmpty() }
     val result: List<SysMenuTree> = multimap.get("")
     recursive(multimap, result)
-    log.info { result.json }
+    log.info { result.json() }
   }
 
   private fun bubbleSort(array: IntArray, predicate: (left: Int, right: Int) -> Boolean) {

@@ -19,7 +19,7 @@ import org.github.spring.restful.Returnable;
 public interface JSON extends Returnable {
   @Override
   default void accept(@Nonnull OutputStream output) {
-    ObjectOpsKt.writeValue(this, output);
+    ObjectOpsKt.writeValue(this, output, null);
   }
 
   @Override
@@ -37,7 +37,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @Nonnull
   static JSON of(@Nonnull Object json) {
-    return of(ObjectOpsKt.getJson(json));
+    return of(ObjectOpsKt.json(json, null));
   }
 
   /** Generator. */

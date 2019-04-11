@@ -30,7 +30,7 @@ public class JSONBasic implements JSON {
   @Override
   @Nonnull
   public String get() {
-    return ObjectOpsKt.getJson(this);
+    return ObjectOpsKt.json(this, null);
   }
 
   @Override

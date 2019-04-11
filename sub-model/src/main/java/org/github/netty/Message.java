@@ -12,6 +12,6 @@ public class Message {
 
   @Override
   public String toString() {
-    return ObjectOpsKt.getJson(this);
+    return ObjectOpsKt.json(this, null);
   }
 }

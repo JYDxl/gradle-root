@@ -25,6 +25,6 @@ class ReturnableTests {
   fun testJSONPage() {
     val page: IPage<TipLoginLogEntity> = tipLoginLogService.page(Page())
     val result: JSONPage<TipLoginLogEntity> = JSONPage.of(page)
-    log.info(result.json)
+    log.info(result.json())
   }
 }
