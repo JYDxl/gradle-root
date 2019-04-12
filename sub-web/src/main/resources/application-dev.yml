@@ -9,8 +9,8 @@ spring:
         max-idle: 12
     host: localhost
   datasource:
-    url: jdbc:mariadb://localhost:3306/security?useSSL=false
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:p6spy:mariadb://localhost:3306/security?useSSL=false
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: l
     type: com.zaxxer.hikari.HikariDataSource
@@ -58,4 +58,4 @@ logging:
   file:
     max-history: 30
     max-size: 1GB
-  path: ${user.dir}/logs
+  path: ${user.home}/logs/${spring.application.name}/${info.version}

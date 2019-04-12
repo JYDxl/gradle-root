@@ -1,7 +1,5 @@
-*.iml
-/.idea
-/.gradle
 .vertx
-logs
 out
 build
+/.idea
+/.gradle
