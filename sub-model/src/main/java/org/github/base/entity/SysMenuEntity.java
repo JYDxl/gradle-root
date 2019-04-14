@@ -5,18 +5,20 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import org.github.base.AbstractEntity;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * sys_menu_table
+ * 系统-菜单表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -27,38 +29,39 @@ public class SysMenuEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 菜单ID */
     @TableId(value = "menu_id", type = IdType.UUID)
     private String menuId;
 
-    /** menu_name */
+    /** 菜单名称 */
     private String menuName;
 
-    /** 资源类型，菜单或都按钮(menu,button) */
+    /** 资源类型，菜单或按钮(menu，button) */
     private String menuType;
 
-    /** menu_url */
+    /** 菜单地址 */
     private String menuUrl;
 
-    /** menu_code */
+    /** 菜单编码 */
     private String menuCode;
 
-    /** parent_id */
+    /** 父节点ID */
     private String pid;
 
-    /** child_num */
+    /** 子节点数目 */
     private Integer childNum;
 
-    /** list_order */
+    /** 显示顺序 */
     private Integer listOrder;
 
-    /** create_time */
+    /** 创建时间 */
     private LocalDateTime createdAt;
 
-    /** update_time */
+    /** 更新时间 */
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updatedAt;
 
-    /** delete flag */
+    /** 删除标志 */
     @TableLogic
     private Integer deleted;
 

@@ -46,31 +46,31 @@ class ObjectOpsTests {
   @Test
   fun localDateTime() {
     val long = LocalDateTime.now().long
-    log.info { long.toString() }
+    log.info { long }
   }
 
   @Test
   fun localDateTimeDate() {
     val date = LocalDateTime.now().date
-    log.info { date.toString() }
+    log.info { date }
   }
 
   @Test
   fun localDateTimeSeconds() {
     val seconds = LocalDateTime.now().seconds
-    log.info { seconds.toString() }
+    log.info { seconds }
   }
 
   @Test
   fun stringHexBytes() {
     val hexBytes = "abcd".hexBytes
-    log.info { hexBytes.joinToString() }
+    log.info { hexBytes }
   }
 
   @Test
   fun fibonacciSequence() {
     val list = generateSequence(Triple(1, 1, 1)) { if(it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1) }.map { it.first }.toList()
-    log.info { list.json() }
+    log.info { list }
   }
 
   @Test
@@ -101,13 +101,13 @@ class ObjectOpsTests {
   @Test
   fun stringTime() {
     val time = "2019-03-11 22:51:30".time
-    log.info { time.toString() }
+    log.info { time }
   }
 
   @Test
   fun stringDate() {
     val date = "2019-03-11".date
-    log.info { date.toString() }
+    log.info { date }
   }
 
   @Test

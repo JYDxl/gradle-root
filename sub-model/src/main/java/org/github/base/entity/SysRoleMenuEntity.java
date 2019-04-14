@@ -11,11 +11,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * sys_role_menu_table
+ * 系统-角色菜单关系表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,17 +26,17 @@ public class SysRoleMenuEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 角色菜单关系ID */
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
-    /** role_id */
+    /** 角色ID */
     private String roleId;
 
-    /** menu_id */
+    /** 菜单ID */
     private String menuId;
 
-    /** delete flag */
+    /** 删除标志 */
     @TableLogic
     private Integer deleted;
 

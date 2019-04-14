@@ -1,5 +1,6 @@
 package org.github
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType.UUID
 import com.baomidou.mybatisplus.generator.AutoGenerator
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig
@@ -7,6 +8,7 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig
 import com.baomidou.mybatisplus.generator.config.PackageConfig
 import com.baomidou.mybatisplus.generator.config.StrategyConfig
 import com.baomidou.mybatisplus.generator.config.TemplateConfig
+import com.baomidou.mybatisplus.generator.config.po.TableFill
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.getProperty
@@ -51,6 +53,7 @@ fun main() {
     superServiceClass = "org.github.base.IService"
     superServiceImplClass = "org.github.base.ServiceImpl"
     setInclude(".+")
+    tableFillList = listOf(TableFill("updated_at", FieldFill.UPDATE))
     generator.strategy = this
   }
 

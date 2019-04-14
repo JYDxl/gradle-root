@@ -11,11 +11,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * tip_login_log_table
+ * 其他-登陆日志表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,20 +26,20 @@ public class TipLoginLogEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 日志ID */
     @TableId(value = "log_id", type = IdType.UUID)
     private String logId;
 
-    /** log_user */
+    /** 所属用户 */
     private String logUser;
 
-    /** log_time */
+    /** 记录时间 */
     private LocalDateTime logTime;
 
-    /** log_ip */
+    /** 登录IP */
     private String logIp;
 
-    /** log_action */
+    /** 执行操作 */
     private String logAction;
 
 }

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * tip_opt_log_table 服务实现类
+ * 其他-操作日志表 服务实现类
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Service
 public class TipOptLogServiceImpl extends ServiceImpl<ITipOptLogMapper, TipOptLogEntity> implements ITipOptLogService {}

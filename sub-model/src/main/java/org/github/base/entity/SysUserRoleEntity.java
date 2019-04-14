@@ -11,11 +11,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * sys_user_role_table
+ * 系统-用户角色关系表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,17 +26,17 @@ public class SysUserRoleEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 用户角色关系ID */
     @TableId(value = "id", type = IdType.UUID)
     private String id;
 
-    /** user_id */
+    /** 用户ID */
     private String userId;
 
-    /** role_id */
+    /** 角色ID */
     private String roleId;
 
-    /** delete flag */
+    /** 删除标志 */
     @TableLogic
     private Integer deleted;
 

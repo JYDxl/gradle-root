@@ -6,18 +6,20 @@ import org.github.base.AbstractEntity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * sys_user_table
+ * 系统-用户表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -28,26 +30,26 @@ public class SysUserEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 用户ID */
     @TableId(value = "user_id", type = IdType.UUID)
     private String userId;
 
     /** 用户编号 */
     private String userCode;
 
-    /** username */
+    /** 用户名 */
     private String username;
 
-    /** password */
+    /** 密码 */
     private String password;
 
-    /** state */
+    /** 用户状态 1：启用 */
     private Boolean state;
 
     /** salt */
     private String salt;
 
-    /** is_system */
+    /** 是否为系统用户 */
     private Boolean isSystem;
 
     /** 姓名 */
@@ -86,16 +88,17 @@ public class SysUserEntity extends AbstractEntity {
     /** 失效日期 */
     private LocalDate expiryDate;
 
-    /** remark */
+    /** 备注 */
     private String remark;
 
-    /** create_time */
+    /** 创建时间 */
     private LocalDateTime createdAt;
 
-    /** update_time */
+    /** 更新时间 */
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updatedAt;
 
-    /** delete flag */
+    /** 删除标志 */
     @TableLogic
     private Integer deleted;
 

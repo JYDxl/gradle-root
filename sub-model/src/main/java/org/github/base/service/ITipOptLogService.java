@@ -5,10 +5,10 @@ import org.github.base.IService;
 
 /**
  * <p>
- * tip_opt_log_table 服务类
+ * 其他-操作日志表 服务类
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 public interface ITipOptLogService extends IService<TipOptLogEntity> {}

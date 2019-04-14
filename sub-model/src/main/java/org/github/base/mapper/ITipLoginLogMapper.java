@@ -6,11 +6,11 @@ import org.github.base.IMapper;
 
 /**
  * <p>
- * tip_login_log_table Mapper 接口
+ * 其他-登陆日志表 Mapper 接口
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @MyBatisMapper
 public interface ITipLoginLogMapper extends IMapper<TipLoginLogEntity> {}

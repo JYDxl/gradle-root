@@ -12,7 +12,7 @@ class StringServerChannelHandler: ChannelInboundHandlerAdapter() {
   private val log = StringServerChannelHandler::class.log
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    log.info { msg as String }
+    log.info { msg }
     ctx.write("$msg")
   }
 

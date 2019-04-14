@@ -5,10 +5,10 @@ import org.github.base.IService;
 
 /**
  * <p>
- * sys_role_table 服务类
+ * 系统-角色表 服务类
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 public interface ISysRoleService extends IService<SysRoleEntity> {}

@@ -11,11 +11,11 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * sys_code_table
+ * 系统-编码表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,11 +26,11 @@ public class SysCodeEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 编码ID */
     @TableId(value = "code_id", type = IdType.UUID)
     private String codeId;
 
-    /** 名称 */
+    /** 编码名称 */
     private String codeName;
 
     /** 码值 */
@@ -45,7 +45,7 @@ public class SysCodeEntity extends AbstractEntity {
     /** 1:可用，2：不可用 */
     private String useType;
 
-    /** delete flag */
+    /** 删除标志 */
     @TableLogic
     private Integer deleted;
 

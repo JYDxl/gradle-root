@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- * sys_code_table 服务实现类
+ * 系统-编码表 服务实现类
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Service
 public class SysCodeServiceImpl extends ServiceImpl<ISysCodeMapper, SysCodeEntity> implements ISysCodeService {}

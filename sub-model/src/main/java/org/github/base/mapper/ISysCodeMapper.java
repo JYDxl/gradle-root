@@ -6,11 +6,11 @@ import org.github.base.IMapper;
 
 /**
  * <p>
- * sys_code_table Mapper 接口
+ * 系统-编码表 Mapper 接口
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @MyBatisMapper
 public interface ISysCodeMapper extends IMapper<SysCodeEntity> {}

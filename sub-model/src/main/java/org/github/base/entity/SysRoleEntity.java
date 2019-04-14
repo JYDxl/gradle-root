@@ -5,18 +5,20 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import org.github.base.AbstractEntity;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * <p>
- * sys_role_table
+ * 系统-角色表
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-08
+ * @since 2019-04-14
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -27,26 +29,27 @@ public class SysRoleEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    /** ID */
+    /** 角色ID */
     @TableId(value = "role_id", type = IdType.UUID)
     private String roleId;
 
-    /** role_name */
+    /** 角色名称 */
     private String roleName;
 
-    /** role_desc */
+    /** 角色描述 */
     private String roleDesc;
 
-    /** enable */
+    /** 启用状态 1：启用 2：禁用 */
     private Boolean enable;
 
-    /** create_time */
+    /** 创建时间 */
     private LocalDateTime createdAt;
 
-    /** update_time */
+    /** 更新时间 */
+    @TableField(fill = FieldFill.UPDATE)
     private LocalDateTime updatedAt;
 
-    /** delete flag */
+    /** 删除标志 */
     @TableLogic
     private Integer deleted;
 

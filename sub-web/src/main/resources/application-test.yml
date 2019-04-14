@@ -58,4 +58,4 @@ logging:
   file:
     max-history: 30
     max-size: 1GB
-  path: ${user.home}/logs/${spring.application.name}/${info.version}/dev/
+  path: ${user.home}/logs/${spring.application.name}/${info.version}/test/
