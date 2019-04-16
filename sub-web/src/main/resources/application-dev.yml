@@ -59,3 +59,9 @@ logging:
     max-history: 30
     max-size: 1GB
   path: ${user.home}/logs/${spring.application.name}/${info.version}/dev/
+
+netty:
+  config:
+    port: 9002
+    server: netty-server
+    size: 24

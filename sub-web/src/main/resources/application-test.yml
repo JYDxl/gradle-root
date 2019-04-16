@@ -45,7 +45,7 @@ spring:
         enabled: false
 
 server:
-  port: 8080
+  port: 8081
 
 logging:
   level:
@@ -59,3 +59,9 @@ logging:
     max-history: 30
     max-size: 1GB
   path: ${user.home}/logs/${spring.application.name}/${info.version}/test/
+
+netty:
+  config:
+    port: 9003
+    server: netty-server-test
+    size: 24
