@@ -1,49 +1,32 @@
 package org.github.config
 
+import org.github.spring.redis.StringHashOps
+import org.github.spring.redis.StringListOps
+import org.github.spring.redis.StringRedisOps
+import org.github.spring.redis.StringSetOps
+import org.github.spring.redis.StringValueOps
+import org.github.spring.redis.StringZsetOps
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.redis.connection.RedisConnectionFactory
-import org.springframework.data.redis.core.ClusterOperations
-import org.springframework.data.redis.core.GeoOperations
-import org.springframework.data.redis.core.HashOperations
-import org.springframework.data.redis.core.HyperLogLogOperations
-import org.springframework.data.redis.core.ListOperations
-import org.springframework.data.redis.core.SetOperations
 import org.springframework.data.redis.core.StringRedisTemplate
-import org.springframework.data.redis.core.ValueOperations
-import org.springframework.data.redis.core.ZSetOperations
-import org.springframework.data.redis.serializer.RedisSerializer
 
 @Configuration
-class RedisConfig(private val factory: RedisConnectionFactory) {
+class RedisConfig {
   @Bean
-  fun redisTemplate() = StringRedisTemplate().apply {
-    setConnectionFactory(factory)
-    setDefaultSerializer(RedisSerializer.string())
-    setEnableTransactionSupport(true)
-  }
+  fun stringRedisOps(template: StringRedisTemplate) = StringRedisOps(template)
 
   @Bean
-  fun zsetOps(): ZSetOperations<String, String?> = redisTemplate().opsForZSet()
+  fun stringValueOps(template: StringRedisTemplate) = StringValueOps(template)
 
   @Bean
-  fun listOps(): ListOperations<String, String?> = redisTemplate().opsForList()
+  fun stringSetOps(template: StringRedisTemplate) = StringSetOps(template)
 
   @Bean
-  fun setOps(): SetOperations<String, String?> = redisTemplate().opsForSet()
+  fun stringZsetOps(template: StringRedisTemplate) = StringZsetOps(template)
 
   @Bean
-  fun valueOps(): ValueOperations<String, String?> = redisTemplate().opsForValue()
+  fun stringListOps(template: StringRedisTemplate) = StringListOps(template)
 
   @Bean
-  fun hashOps(): HashOperations<String, String, String?> = redisTemplate().opsForHash()
-
-  @Bean
-  fun hllOps(): HyperLogLogOperations<String, String?> = redisTemplate().opsForHyperLogLog()
-
-  @Bean
-  fun geoOps(): GeoOperations<String, String?> = redisTemplate().opsForGeo()
-
-  @Bean
-  fun clusterOps(): ClusterOperations<String, String?> = redisTemplate().opsForCluster()
+  fun stringHashOps(template: StringRedisTemplate) = StringHashOps(template)
 }
