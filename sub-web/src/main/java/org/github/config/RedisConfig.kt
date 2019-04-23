@@ -3,30 +3,37 @@ package org.github.config
 import org.github.spring.redis.StringHashOps
 import org.github.spring.redis.StringListOps
 import org.github.spring.redis.StringRedisOps
+import org.github.spring.redis.StringRedisSerializer
 import org.github.spring.redis.StringSetOps
 import org.github.spring.redis.StringValueOps
 import org.github.spring.redis.StringZsetOps
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.redis.core.StringRedisTemplate
+import org.springframework.data.redis.connection.RedisConnectionFactory
+import org.springframework.data.redis.core.RedisTemplate
 
 @Configuration
 class RedisConfig {
   @Bean
-  fun stringRedisOps(template: StringRedisTemplate) = StringRedisOps(template)
+  fun stringRedisOps(factory: RedisConnectionFactory) = RedisTemplate<String, String>().apply {
+    setDefaultSerializer(StringRedisSerializer())
+    setConnectionFactory(factory)
+    isEnableDefaultSerializer = true
+    afterPropertiesSet()
+  }.let { StringRedisOps(it) }
 
   @Bean
-  fun stringValueOps(template: StringRedisTemplate) = StringValueOps(template)
+  fun stringValueOps(redisOps: StringRedisOps) = StringValueOps(redisOps)
 
   @Bean
-  fun stringSetOps(template: StringRedisTemplate) = StringSetOps(template)
+  fun stringSetOps(redisOps: StringRedisOps) = StringSetOps(redisOps)
 
   @Bean
-  fun stringZsetOps(template: StringRedisTemplate) = StringZsetOps(template)
+  fun stringZsetOps(redisOps: StringRedisOps) = StringZsetOps(redisOps)
 
   @Bean
-  fun stringListOps(template: StringRedisTemplate) = StringListOps(template)
+  fun stringListOps(redisOps: StringRedisOps) = StringListOps(redisOps)
 
   @Bean
-  fun stringHashOps(template: StringRedisTemplate) = StringHashOps(template)
+  fun stringHashOps(redisOps: StringRedisOps) = StringHashOps(redisOps)
 }

@@ -10,12 +10,14 @@ import org.github.base.service.ISysCodeService;
 import org.github.base.service.ITipLoginLogService;
 import org.github.common.mapper.ICommonMapper;
 import org.github.ops.ObjectOpsKt;
+import org.github.spring.redis.StringHashOps;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
@@ -31,6 +33,10 @@ public class ApplicationTests {
   private ISysCodeService     sysCodeService;
   @Autowired
   private AmqpTemplate        amqpTemplate;
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
+  @Autowired
+  private StringHashOps       stringHashOps;
 
   @Test
   public void contextLoads() {
@@ -62,6 +68,16 @@ public class ApplicationTests {
   @Test
   public void testAmqp() {
     amqpTemplate.convertAndSend("app.queue", new User("admin", "admin"));
+  }
+
+  @Test
+  public void testRedis() {
+    // val opsForHash = stringRedisTemplate.<String, String>opsForHash();
+    // opsForHash.delete("hash", 1,2,3,4);
+    // opsForHash.get("hash",1);
+    stringHashOps.delete("hash", 1, 2, 3, 4);
+    val hvalue = stringHashOps.get("hash", 1);
+    log.info(hvalue);
   }
 
   @Test
