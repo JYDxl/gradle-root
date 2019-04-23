@@ -75,7 +75,7 @@ public class ApplicationTests {
     // val opsForHash = stringRedisTemplate.<String, String>opsForHash();
     // opsForHash.delete("hash", 1,2,3,4);
     // opsForHash.get("hash",1);
-    stringHashOps.delete("hash", 1, 2, 3, 4);
+    stringHashOps.put("hash", "1", "菜");
     val hvalue = stringHashOps.get("hash", 1);
     log.info(hvalue);
   }

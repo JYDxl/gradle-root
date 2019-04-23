@@ -18,7 +18,6 @@ class RedisConfig {
   fun stringRedisOps(factory: RedisConnectionFactory) = RedisTemplate<String, String>().apply {
     setDefaultSerializer(StringRedisSerializer())
     setConnectionFactory(factory)
-    isEnableDefaultSerializer = true
     afterPropertiesSet()
   }.let { StringRedisOps(it) }
 
