@@ -11,6 +11,10 @@ plugins {
 
 tasks.withType<BootJar> { enabled = false }
 
+repositories {
+  maven { url = uri("https://maven.aliyun.com/repository/public") }
+}
+
 allprojects {
   group = "org.github"
   version = "0.0.1-SNAPSHOT"
