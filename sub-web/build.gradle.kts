@@ -1,7 +1,7 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-tasks.withType<BootJar> { enabled = true }
 tasks.withType<Jar> { enabled = false }
+tasks.withType<BootJar> { enabled = true }
 tasks.withType<Test> {
   enabled = false
   jvmArgs = listOf("-Djava.library.path=/usr/local/opt/tomcat-native/lib")

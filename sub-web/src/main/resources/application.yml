@@ -1,32 +1,3 @@
 spring:
   profiles:
     active: dev
-  application:
-    name: gradle-root
-  output:
-    ansi:
-      enabled: always
-  jackson:
-    time-zone: Asia/Shanghai
-    date-format: yyyy-MM-dd HH:mm:ss
-    default-property-inclusion: non_absent
-    serialization:
-      fail_on_empty_beans: false
-  http:
-    encoding:
-      force: true
-      force-request: true
-      force-response: true
-      enabled: true
-      charset: utf-8
-    converters:
-      preferred-json-mapper: jackson
-
-mybatis-plus:
-  mapper-locations: classpath*:mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
-  type-aliases-package: org.github.**.entity
-
-info:
-  version: 0.0.1
