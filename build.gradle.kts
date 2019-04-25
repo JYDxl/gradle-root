@@ -3,16 +3,16 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
-  id("org.jetbrains.kotlin.plugin.spring") version "1.3.30"
-  id("org.jetbrains.kotlin.jvm") version "1.3.30"
-  id("com.github.ben-manes.versions") version "0.21.0"
-  id("org.springframework.boot") version "2.1.4.RELEASE"
-}
+  val springbootVersion = "2.1.4.RELEASE"
+  val kotlinVersion = "1.3.30"
+  val benmanesVersion = "0.21.0"
 
-tasks.withType<BootJar> { enabled = false }
+  java
 
-repositories {
-  maven { url = uri("https://maven.aliyun.com/repository/public") }
+  kotlin("plugin.spring") version kotlinVersion apply false
+  kotlin("jvm") version kotlinVersion apply false
+  id("com.github.ben-manes.versions") version benmanesVersion apply false
+  id("org.springframework.boot") version springbootVersion apply false
 }
 
 allprojects {
@@ -42,10 +42,11 @@ subprojects {
 
   tasks.withType<Jar> { enabled = true }
   tasks.withType<BootJar> { enabled = false }
-  tasks.withType<Test> { enabled = false }
 
   repositories {
     maven { url = uri("https://maven.aliyun.com/repository/public") }
+    maven { url = uri("https://maven.aliyun.com/repository/spring") }
+    maven { url = uri("https://maven.aliyun.com/repository/google") }
   }
 
   dependencies {
