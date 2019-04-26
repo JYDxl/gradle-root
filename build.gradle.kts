@@ -21,7 +21,7 @@ allprojects {
 }
 
 subprojects {
-  val mybatisPlusVersion = "3.1.0"
+  val mybatisPlusVersion = "3.1.1"
   val vertxVersion = "3.7.0"
 
   apply(plugin = "io.spring.dependency-management")
@@ -66,7 +66,7 @@ subprojects {
     implementation("com.github.ben-manes.caffeine:caffeine:2.7.0")
     implementation("io.netty:netty-all:4.1.35.Final")
     implementation("io.reactivex.rxjava2:rxjava:2.2.8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.2.1")
     implementation("com.squareup.retrofit2:retrofit:2.5.0")
     implementation("net.java.dev.jna:jna:5.3.0")
     implementation("org.javassist:javassist:3.25.0-GA")
