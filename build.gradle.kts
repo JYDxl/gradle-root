@@ -4,7 +4,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
   val springbootVersion = "2.1.4.RELEASE"
-  val kotlinVersion = "1.3.30"
+  val kotlinVersion = "1.3.31"
   val benmanesVersion = "0.21.0"
 
   java
@@ -47,6 +47,7 @@ subprojects {
     maven { url = uri("https://maven.aliyun.com/repository/public") }
     maven { url = uri("https://maven.aliyun.com/repository/spring") }
     maven { url = uri("https://maven.aliyun.com/repository/google") }
+    mavenCentral()
   }
 
   dependencies {
