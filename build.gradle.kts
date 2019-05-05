@@ -64,16 +64,17 @@ subprojects {
     implementation("com.google.guava:guava:27.1-jre")
     implementation("com.google.inject:guice:4.2.2")
     implementation("com.github.ben-manes.caffeine:caffeine:2.7.0")
-    implementation("io.netty:netty-all:4.1.35.Final")
+    implementation("io.netty:netty-all:4.1.36.Final")
     implementation("io.reactivex.rxjava2:rxjava:2.2.8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.2.1")
     implementation("com.squareup.retrofit2:retrofit:2.5.0")
-    implementation("net.java.dev.jna:jna:5.3.0")
+    implementation("net.java.dev.jna:jna:5.3.1")
     implementation("org.javassist:javassist:3.25.0-GA")
     implementation("org.jctools:jctools-core:2.1.2")
     implementation("org.jboss.byteman:byteman:4.0.6")
     implementation("p6spy:p6spy:3.8.2")
     implementation("org.apache.commons:commons-pool2:2.6.2")
+    implementation("redis.clients:jedis:2.9.3")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") { exclude(module = "android-json") }
     testImplementation("io.vertx:vertx-unit:$vertxVersion") { exclude(group = "io.netty") }

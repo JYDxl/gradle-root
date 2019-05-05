@@ -27,7 +27,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-aop")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-websocket")
-  implementation("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.netty") }
+  implementation("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.lettuce") }
   implementation("org.springframework.session:spring-session-data-redis")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")

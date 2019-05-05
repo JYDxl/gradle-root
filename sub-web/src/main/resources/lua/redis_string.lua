@@ -9,8 +9,7 @@
 local key = KEYS[1] --锁对应的key
 local seconds = ARGV[1] --超时时间 秒
 --尝试获取锁
-local flag = redis.call('setnx', key, '')
+local flag = redis.call('setnx', key, '') == 1
 --获取到锁了
-if flag == 1 then redis.call('expire', key, seconds) end
-return flag;
--- return 1:获取到锁了 0:没有获取到锁
+if flag then redis.call('expire', key, seconds) end
+return tostring(flag);
