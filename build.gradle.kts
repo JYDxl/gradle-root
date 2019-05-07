@@ -2,17 +2,40 @@ import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
+val kotlinxCoroutines: String by System.getProperties()
+val mybatisPlus: String by System.getProperties()
+val commonsLang3: String by System.getProperties()
+val commonsCodec: String by System.getProperties()
+val commonsPool2: String by System.getProperties()
+val protobuf: String by System.getProperties()
+val caffeine: String by System.getProperties()
+val retrofit: String by System.getProperties()
+val mariadb: String by System.getProperties()
+val okhttp3: String by System.getProperties()
+val rxjava2: String by System.getProperties()
+val jctools: String by System.getProperties()
+val byteman: String by System.getProperties()
+val lombok: String by System.getProperties()
+val vertx: String by System.getProperties()
+val guava: String by System.getProperties()
+val guice: String by System.getProperties()
+val netty: String by System.getProperties()
+val p6spy: String by System.getProperties()
+val jedis: String by System.getProperties()
+val jna: String by System.getProperties()
+val javassist: String by System.getProperties()
+
 plugins {
-  val springbootVersion = "2.1.4.RELEASE"
-  val kotlinVersion = "1.3.31"
-  val benmanesVersion = "0.21.0"
+  val springBoot: String by System.getProperties()
+  val kotlin: String by System.getProperties()
+  val benmanes: String by System.getProperties()
 
   java
 
-  kotlin("plugin.spring") version kotlinVersion apply false
-  kotlin("jvm") version kotlinVersion apply false
-  id("com.github.ben-manes.versions") version benmanesVersion apply false
-  id("org.springframework.boot") version springbootVersion apply false
+  kotlin("plugin.spring") version kotlin apply false
+  kotlin("jvm") version kotlin apply false
+  id("com.github.ben-manes.versions") version benmanes apply false
+  id("org.springframework.boot") version springBoot apply false
 }
 
 allprojects {
@@ -21,9 +44,6 @@ allprojects {
 }
 
 subprojects {
-  val mybatisPlusVersion = "3.1.1"
-  val vertxVersion = "3.7.0"
-
   apply(plugin = "io.spring.dependency-management")
   apply(plugin = "org.springframework.boot")
   apply(plugin = "kotlin")
@@ -54,39 +74,38 @@ subprojects {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("io.vertx:vertx-web:$vertxVersion") { exclude(group = "io.netty") }
-    implementation("org.mariadb.jdbc:mariadb-java-client:2.4.1")
-    implementation("com.google.protobuf:protobuf-java-util:3.7.1")
-    implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlusVersion")
-    implementation("org.apache.commons:commons-lang3:3.9")
-    implementation("commons-codec:commons-codec:1.12")
-    implementation("com.squareup.okhttp3:okhttp:3.14.1")
-    implementation("com.google.guava:guava:27.1-jre")
-    implementation("com.google.inject:guice:4.2.2")
-    implementation("com.github.ben-manes.caffeine:caffeine:2.7.0")
-    implementation("io.netty:netty-all:4.1.36.Final")
-    implementation("io.reactivex.rxjava2:rxjava:2.2.8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.2.1")
-    implementation("com.squareup.retrofit2:retrofit:2.5.0")
-    implementation("net.java.dev.jna:jna:5.3.1")
-    implementation("org.javassist:javassist:3.25.0-GA")
-    implementation("org.jctools:jctools-core:2.1.2")
-    implementation("org.jboss.byteman:byteman:4.0.6")
-    implementation("p6spy:p6spy:3.8.2")
-    implementation("org.apache.commons:commons-pool2:2.6.2")
-    implementation("redis.clients:jedis:2.9.3")
+    implementation("io.vertx:vertx-web:$vertx") { exclude(group = "io.netty") }
+    implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb")
+    implementation("com.google.protobuf:protobuf-java-util:$protobuf")
+    implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
+    implementation("org.apache.commons:commons-lang3:$commonsLang3")
+    implementation("commons-codec:commons-codec:$commonsCodec")
+    implementation("com.squareup.okhttp3:okhttp:$okhttp3")
+    implementation("com.google.guava:guava:$guava")
+    implementation("com.google.inject:guice:$guice")
+    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+    implementation("io.netty:netty-all:$netty")
+    implementation("io.reactivex.rxjava2:rxjava:$rxjava2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxCoroutines")
+    implementation("com.squareup.retrofit2:retrofit:$retrofit")
+    implementation("net.java.dev.jna:jna:$jna")
+    implementation("org.javassist:javassist:$javassist")
+    implementation("org.jctools:jctools-core:$jctools")
+    implementation("org.jboss.byteman:byteman:$byteman")
+    implementation("p6spy:p6spy:$p6spy")
+    implementation("org.apache.commons:commons-pool2:$commonsPool2")
+    implementation("redis.clients:jedis:$jedis")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") { exclude(module = "android-json") }
-    testImplementation("io.vertx:vertx-unit:$vertxVersion") { exclude(group = "io.netty") }
-    testImplementation("com.baomidou:mybatis-plus-generator:$mybatisPlusVersion")
+    testImplementation("io.vertx:vertx-unit:$vertx") { exclude(group = "io.netty") }
 
-    compileOnly("io.vertx:vertx-codegen:$vertxVersion") { exclude(group = "io.netty") }
-    testCompileOnly("io.vertx:vertx-codegen:$vertxVersion") { exclude(group = "io.netty") }
+    compileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }
+    testCompileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }
 
-    compileOnly("org.projectlombok:lombok")
-    testCompileOnly("org.projectlombok:lombok")
+    compileOnly("org.projectlombok:lombok:$lombok")
+    testCompileOnly("org.projectlombok:lombok:$lombok")
 
-    annotationProcessor("org.projectlombok:lombok")
-    testAnnotationProcessor("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok:$lombok")
+    testAnnotationProcessor("org.projectlombok:lombok:$lombok")
   }
 }

@@ -10,7 +10,7 @@ import org.github.base.IMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-04-14
+ * @since 2019-05-07
  */
 @MyBatisMapper
 public interface ISysCodeMapper extends IMapper<SysCodeEntity> {}
