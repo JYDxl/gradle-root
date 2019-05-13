@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gradle-root
+    name: gradle-web
   output:
     ansi:
       enabled: always
@@ -93,3 +93,19 @@ mybatis-plus:
 
 info:
   version: 0.0.1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    health-check-url-path: /actuator/health
+
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: "*"

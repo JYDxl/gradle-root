@@ -1,7 +1,10 @@
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
+val springBootAdmin: String by System.getProperties()
+val springCloud: String by System.getProperties()
 val commonsLang3: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val jctools: String by System.getProperties()
@@ -36,6 +39,13 @@ subprojects {
     targetCompatibility = VERSION_1_8
   }
 
+  configure<DependencyManagementExtension> {
+    imports {
+      mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloud")
+      mavenBom("de.codecentric:spring-boot-admin:$springBootAdmin")
+    }
+  }
+
   tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -59,6 +69,9 @@ subprojects {
     implementation("org.apache.commons:commons-lang3:$commonsLang3")
     implementation("org.jctools:jctools-core:$jctools")
     implementation("com.google.guava:guava:$guava")
+
+    testImplementation("junit:junit")
+    testImplementation("ch.qos.logback:logback-classic")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")
