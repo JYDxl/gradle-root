@@ -96,16 +96,18 @@ info:
 
 eureka:
   client:
+    registryFetchIntervalSeconds: 5
     service-url:
       defaultZone: http://localhost:8761/eureka/
   instance:
+    leaseRenewalIntervalInSeconds: 10
     health-check-url-path: /actuator/health
 
 management:
-  endpoint:
-    health:
-      show-details: ALWAYS
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
