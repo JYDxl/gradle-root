@@ -64,6 +64,7 @@ subprojects {
   dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("ch.qos.logback:logback-classic")
 
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
     implementation("org.apache.commons:commons-lang3:$commonsLang3")
@@ -71,7 +72,6 @@ subprojects {
     implementation("com.google.guava:guava:$guava")
 
     testImplementation("junit:junit")
-    testImplementation("ch.qos.logback:logback-classic")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")

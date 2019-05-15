@@ -35,7 +35,7 @@ dependencies {
   implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb")
   implementation("com.squareup.retrofit2:retrofit:$retrofit")
   implementation("com.squareup.okhttp3:okhttp:$okhttp3")
-  implementation("redis.clients:jedis:$jedis")
+  implementation("redis.clients:jedis")
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
 
@@ -47,7 +47,6 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.lettuce") }
-  implementation("org.springframework.session:spring-session-data-redis")
   implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
