@@ -14,7 +14,7 @@ class EchoServerHandler: ChannelInboundHandlerAdapter() {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
     log.info { msg }
-    ctx.write(msg)
+    ctx.write(msg, ctx.voidPromise())
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

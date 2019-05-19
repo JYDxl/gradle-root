@@ -16,11 +16,12 @@ fun main() {
   val echoHandler = EchoServerHandler()
   val loggingHandler = LoggingHandler()
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
+  val boss = NioEventLoopGroup(1, NaiveThreadFactory("  nio-boss"))
   val worker = NioEventLoopGroup(24, NaiveThreadFactory("nio-worker"))
   val serverBootstrap = ServerBootstrap()
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
+    .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<NioSocketChannel>() {
       override fun initChannel(channel: NioSocketChannel) {
         channel.pipeline()!!.apply {
@@ -34,12 +35,8 @@ fun main() {
     })!!
 
   try {
-    serverBootstrap
-      .bind(8000)
-      .sync()
-      .channel()
-      .closeFuture()
-      .sync()
+    serverBootstrap.bind(8000).sync()
+    serverBootstrap.bind(8001).sync().channel().closeFuture().sync()
   } catch(e: Exception) {
     e.printStackTrace()
   } finally {
