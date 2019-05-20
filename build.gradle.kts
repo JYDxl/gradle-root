@@ -3,9 +3,8 @@ import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-val springBootAdmin: String by System.getProperties()
-val springCloud: String by System.getProperties()
 val commonsLang3: String by System.getProperties()
+val springCloud: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val jctools: String by System.getProperties()
 val lombok: String by System.getProperties()
@@ -42,7 +41,6 @@ subprojects {
   configure<DependencyManagementExtension> {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloud")
-      mavenBom("de.codecentric:spring-boot-admin:$springBootAdmin")
     }
   }
 

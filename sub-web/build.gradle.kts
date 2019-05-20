@@ -20,7 +20,6 @@ val retrofit: String by System.getProperties()
 val mariadb: String by System.getProperties()
 val okhttp3: String by System.getProperties()
 val p6spy: String by System.getProperties()
-val jedis: String by System.getProperties()
 val netty: String by System.getProperties()
 
 dependencies {

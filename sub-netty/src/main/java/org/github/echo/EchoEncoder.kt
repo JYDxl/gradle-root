@@ -7,13 +7,15 @@ import io.netty.handler.codec.string.StringEncoder
 
 @Sharable
 class EchoEncoder: StringEncoder(Charsets.UTF_8) {
-  /** 换行分隔符. */
-  private val delimiter = wrappedBuffer("\n".toByteArray()).asReadOnly()!!
+  /** 分隔符. */
+  private val delimiter = "\n"
+  /** 分隔符-ByteBuf. */
+  private val buf = wrappedBuffer(delimiter.toByteArray()).asReadOnly()!!
 
   override fun encode(ctx: ChannelHandlerContext, msg: CharSequence, out: MutableList<Any>) {
     super.encode(ctx, msg, out)
-    if(msg.endsWith("\n")) return
-    delimiter.retain()
-    out += delimiter
+    if(msg.endsWith(delimiter)) return
+    buf.retain()
+    out += buf
   }
 }
