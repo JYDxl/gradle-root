@@ -30,7 +30,7 @@ class MyFirstVerticleTest {
   @Test
   fun testApp(ctx: TestContext) {
     val async = ctx.async()!!
-    vertx.createHttpClient().getNow(10001, "localhost", "/") { resp: HttpClientResponse ->
+    vertx.createHttpClient().getNow(10000, "localhost", "/") { resp: HttpClientResponse ->
       resp.handler { body: Buffer ->
         ctx.assertTrue(body.toString() == "Hello world!")
         async.complete()
