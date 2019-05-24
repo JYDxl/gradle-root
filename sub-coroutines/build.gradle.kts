@@ -1,5 +1,5 @@
-val kotlinxCoroutines: String by System.getProperties()
+val kotlinxcoroutines: String by System.getProperties()
 
 dependencies {
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxCoroutines")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
 }

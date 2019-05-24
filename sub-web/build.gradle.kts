@@ -14,8 +14,8 @@ tasks.withType<Test> {
   jvmArgs = listOf("-Djava.library.path=/usr/local/opt/tomcat-native/lib")
 }
 
-val commonsPool2: String by System.getProperties()
-val mybatisPlus: String by System.getProperties()
+val commonspool2: String by System.getProperties()
+val mybatisplus: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val mariadb: String by System.getProperties()
 val okhttp3: String by System.getProperties()
@@ -29,8 +29,8 @@ dependencies {
   implementation(project(":sub-vertx"))
   implementation(project(":sub-netty"))
 
-  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
-  implementation("org.apache.commons:commons-pool2:$commonsPool2")
+  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
+  implementation("org.apache.commons:commons-pool2:$commonspool2")
   implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb")
   implementation("com.squareup.retrofit2:retrofit:$retrofit")
   implementation("com.squareup.okhttp3:okhttp:$okhttp3")

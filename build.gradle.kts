@@ -3,15 +3,15 @@ import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-val commonsLang3: String by System.getProperties()
-val springCloud: String by System.getProperties()
+val commonslang3: String by System.getProperties()
+val springcloud: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val jctools: String by System.getProperties()
 val lombok: String by System.getProperties()
 val guava: String by System.getProperties()
 
 plugins {
-  val springBoot: String by System.getProperties()
+  val springboot: String by System.getProperties()
   val benmanes: String by System.getProperties()
   val kotlin: String by System.getProperties()
 
@@ -20,7 +20,7 @@ plugins {
   kotlin("plugin.spring") version kotlin apply false
   kotlin("jvm") version kotlin apply false
   id("com.github.ben-manes.versions") version benmanes apply false
-  id("org.springframework.boot") version springBoot apply false
+  id("org.springframework.boot") version springboot apply false
 }
 
 subprojects {
@@ -40,7 +40,7 @@ subprojects {
 
   configure<DependencyManagementExtension> {
     imports {
-      mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloud")
+      mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
     }
   }
 
@@ -65,7 +65,7 @@ subprojects {
     implementation("ch.qos.logback:logback-classic")
 
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
-    implementation("org.apache.commons:commons-lang3:$commonsLang3")
+    implementation("org.apache.commons:commons-lang3:$commonslang3")
     implementation("org.jctools:jctools-core:$jctools")
     implementation("com.google.guava:guava:$guava")
 
