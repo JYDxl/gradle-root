@@ -11,7 +11,7 @@ tasks.withType<BootJar> {
 
 tasks.withType<Test> {
   enabled = false
-  jvmArgs = listOf("-Djava.library.path=/usr/local/opt/tomcat-native/lib")
+  jvmArgs = listOf("-ea", "-Djava.library.path=/usr/local/opt/tomcat-native/lib")
 }
 
 val commonspool2: String by System.getProperties()
@@ -28,6 +28,7 @@ dependencies {
   implementation(project(":sub-model"))
   implementation(project(":sub-vertx"))
   implementation(project(":sub-netty"))
+  implementation(project(":sub-guice"))
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")

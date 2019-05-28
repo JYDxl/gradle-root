@@ -15,13 +15,13 @@ class MyFirstVerticleTest {
   private lateinit var vertx: Vertx
 
   @Before
-  fun setUp(ctx: TestContext) {
+  fun start(ctx: TestContext) {
     vertx = Vertx.vertx()
     vertx.deployVerticle(MyFirstVerticle(), ctx.asyncAssertSuccess())
   }
 
   @After
-  fun tearDown(ctx: TestContext) {
+  fun stop(ctx: TestContext) {
     vertx.close(ctx.asyncAssertSuccess())
   }
 
@@ -29,7 +29,7 @@ class MyFirstVerticleTest {
   fun testApp(ctx: TestContext) {
     val async = ctx.async()!!
     @Suppress("DEPRECATION")
-    vertx.createHttpClient().get(10000, "localhost", "/some/path") { resp: HttpClientResponse ->
+    vertx.createHttpClient().getNow(10000, "localhost", "/") { resp: HttpClientResponse ->
       ctx.assertTrue(resp.statusCode() == 200)
       async.complete()
     }

@@ -1,11 +1,15 @@
 package org.github.vertx.verticle
 
 import io.vertx.core.AbstractVerticle
+import io.vertx.core.AsyncResult
+import io.vertx.core.http.HttpServer
 import io.vertx.core.http.HttpServerOptions
-import io.vertx.core.http.HttpServerRequest
+import io.vertx.ext.web.Router
+import org.github.ops.error
+import org.github.ops.info
 import org.github.ops.log
 
-class MyFirstVerticle : AbstractVerticle() {
+class MyFirstVerticle: AbstractVerticle() {
   /** log. */
   private val log = MyFirstVerticle::class.log
 
@@ -13,32 +17,15 @@ class MyFirstVerticle : AbstractVerticle() {
     val httpServerOptions = HttpServerOptions().apply {
       logActivity = true
     }
-    vertx
-      .createHttpServer(httpServerOptions)
-      .requestHandler { req: HttpServerRequest ->
-        //        val fs = vertx.fileSystem()!!
-        //        Future.future<Void>().apply {
-        //          fs.createFile("foo", this)
-        //        }.compose {
-        //          return@compose Future.future<Void>().apply {
-        //            fs.writeFile("foo", Buffer.buffer("foo"), this)
-        //          }
-        //        }.compose {
-        //          return@compose Future.future<Void>().apply {
-        //            fs.move("foo", "bar", this)
-        //          }
-        //        }.setHandler {
-        //          val resp = req.response()!!
-        //          if(it.succeeded()) {
-        //            resp.end("OK!")
-        //          } else {
-        //            val throwable = it.cause()!!
-        //            log.error(throwable) { throwable.message }
-        //            resp.end("ERROR!")
-        //          }
-        //        }
-        req.response().end("Hello world!")
+    val httpServer = vertx.createHttpServer(httpServerOptions)!!
+    val router = Router.router(vertx)!!
+    router.route().handler { it.response().end("OK") }
+    httpServer.requestHandler(router).listen(10000) { result: AsyncResult<HttpServer> ->
+      if(result.succeeded()) {
+        log.info { "${result.result()}启动成功" }
+      } else {
+        log.error(result.cause()) { result.cause().message }
       }
-      .listen(10000)
+    }
   }
 }
