@@ -1,5 +1,6 @@
 .vertx
 out
 build
-/.idea
 /.gradle
+/.extra
+/.idea

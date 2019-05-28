@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 fun main() {
   val vertxOptions = VertxOptions().apply {
     maxEventLoopExecuteTime = 1
-    maxEventLoopExecuteTimeUnit = TimeUnit.SECONDS
+    maxEventLoopExecuteTimeUnit = TimeUnit.MILLISECONDS
   }
 
   val vertx = Vertx.vertx(vertxOptions)!!

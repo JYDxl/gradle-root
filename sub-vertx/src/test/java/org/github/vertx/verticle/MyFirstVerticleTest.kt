@@ -1,7 +1,6 @@
 package org.github.vertx.verticle
 
 import io.vertx.core.Vertx
-import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpClientResponse
 import io.vertx.ext.unit.TestContext
 import io.vertx.ext.unit.junit.VertxUnitRunner
@@ -26,15 +25,13 @@ class MyFirstVerticleTest {
     vertx.close(ctx.asyncAssertSuccess())
   }
 
-  @Suppress("DEPRECATION")
   @Test
   fun testApp(ctx: TestContext) {
     val async = ctx.async()!!
-    vertx.createHttpClient().getNow(10000, "localhost", "/") { resp: HttpClientResponse ->
-      resp.handler { body: Buffer ->
-        ctx.assertTrue(body.toString() == "Hello world!")
-        async.complete()
-      }
+    @Suppress("DEPRECATION")
+    vertx.createHttpClient().get(10000, "localhost", "/some/path") { resp: HttpClientResponse ->
+      ctx.assertTrue(resp.statusCode() == 200)
+      async.complete()
     }
   }
 }

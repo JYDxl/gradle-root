@@ -4,10 +4,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 val commonslang3: String by System.getProperties()
+val commonscodec: String by System.getProperties()
 val springcloud: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val jctools: String by System.getProperties()
 val lombok: String by System.getProperties()
+val groovy: String by System.getProperties()
 val guava: String by System.getProperties()
 
 plugins {
@@ -66,8 +68,11 @@ subprojects {
 
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
     implementation("org.apache.commons:commons-lang3:$commonslang3")
+    implementation("commons-codec:commons-codec:$commonscodec")
     implementation("org.jctools:jctools-core:$jctools")
     implementation("com.google.guava:guava:$guava")
+    implementation("org.codehaus.groovy:groovy:$groovy")
+    implementation("org.slf4j:jul-to-slf4j")
 
     testImplementation("junit:junit")
 
