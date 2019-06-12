@@ -1,6 +1,6 @@
 appender("CONSOLE", ConsoleAppender) {
   encoder(PatternLayoutEncoder) {
-    pattern = "%d %5level [%20.20thread] %37.37logger{5}:%-4L -- %msg%n"
+    pattern = "%d %5level [%20.20thread] %37.37logger:%-4L -- %msg%n"
   }
 }
 

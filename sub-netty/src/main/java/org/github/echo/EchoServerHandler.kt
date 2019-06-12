@@ -20,9 +20,4 @@ class EchoServerHandler: ChannelInboundHandlerAdapter() {
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
     ctx.flush()
   }
-
-  override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
-    cause.printStackTrace()
-    ctx.close()
-  }
 }

@@ -1,5 +1,3 @@
-package org.github.echo
-
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.nio.NioEventLoopGroup
@@ -7,6 +5,8 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LineBasedFrameDecoder
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LoggingHandler
+import org.github.echo.EchoClientHandler
+import org.github.echo.EchoEncoder
 import org.github.thread.NaiveThreadFactory
 
 fun main() {

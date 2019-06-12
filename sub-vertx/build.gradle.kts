@@ -1,11 +1,3 @@
-plugins {
-  application
-}
-
-configure<ApplicationPluginConvention> {
-  mainClassName = "org.github.StarterKt"
-}
-
 tasks.withType<Test> {
   jvmArgs = listOf("-ea", "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory")
 }
