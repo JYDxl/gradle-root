@@ -10,14 +10,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(VertxUnitRunner::class)
-class MyFirstVerticleTest {
+class TcpServerVerticleTest {
   /** vertx. */
   private lateinit var vertx: Vertx
 
   @Before
   fun start(ctx: TestContext) {
     vertx = Vertx.vertx()
-    vertx.deployVerticle(MyFirstVerticle(), ctx.asyncAssertSuccess())
+    vertx.deployVerticle(TcpServerVerticle(), ctx.asyncAssertSuccess())
   }
 
   @After
