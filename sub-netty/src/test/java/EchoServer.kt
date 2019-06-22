@@ -27,7 +27,7 @@ fun main() {
       override fun initChannel(channel: NioSocketChannel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(EchoDecoderWithPreChecker(16))
+          addLast(EchoDecoderWithPreChecker(4))
           addLast(stringDecoder)
           addLast(echoEncoder)
           addLast(echoHandler)
