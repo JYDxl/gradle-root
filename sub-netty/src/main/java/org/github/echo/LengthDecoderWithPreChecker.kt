@@ -2,7 +2,6 @@ package org.github.echo
 
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
-import io.netty.handler.codec.DecoderException
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import org.github.ops.log
 import org.github.ops.prettyHexDump
@@ -22,7 +21,7 @@ class LengthDecoderWithPreChecker(byteOrder: ByteOrder = ByteOrder.BIG_ENDIAN, m
     log.trace { "${ctx.channel()} >>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
     failIfNecessary(buf)
     return (super.decode(ctx, buf) as ByteBuf?).also {
-      if(it != null) log.trace { "${ctx.channel()} >>PACK>>: ${it.readableBytes()}B\n${it.prettyHexDump}" }
+      it?.apply { log.trace { "${ctx.channel()} >>PACK>>: ${readableBytes()}B\n$prettyHexDump" } }
       log.trace { "${ctx.channel()} REMAIN>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
     }
   }
@@ -44,6 +43,6 @@ class LengthDecoderWithPreChecker(byteOrder: ByteOrder = ByteOrder.BIG_ENDIAN, m
   private fun assert(buf: ByteBuf, @Suppress("SameParameterValue") offset: Int, length: Int, expected: String) {
     val frameHeadBuf = buf.retainedSlice(offset, length)!!
     val frameHead = frameHeadBuf.toString(Charsets.UTF_8).toUpperCase().also { frameHeadBuf.release() }
-    if(frameHead != expected) throw DecoderException("未知的协议帧头: $frameHead - (expected: $expected) (offset: $offset) (limit: $length)")
+    if(frameHead != expected) throw FrameHeadErrorException("未知的协议帧头: $frameHead - (expected: $expected) (offset: $offset) (limit: $length)")
   }
 }
