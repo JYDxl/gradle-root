@@ -6,9 +6,9 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import org.github.echo.EchoDecoderWithPreChecker
 import org.github.echo.EchoEncoder
 import org.github.echo.EchoServerHandler
+import org.github.echo.LengthDecoderWithPreChecker
 import org.github.thread.NaiveThreadFactory
 
 fun main() {
@@ -17,8 +17,8 @@ fun main() {
   val echoHandler = EchoServerHandler()
   val loggingHandler = LoggingHandler(TRACE)
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("kqueue-boss"))
-  val worker = NioEventLoopGroup(24, NaiveThreadFactory("kqueue-worker"))
+  val boss = NioEventLoopGroup(1, NaiveThreadFactory("nio-boss"))
+  val worker = NioEventLoopGroup(24, NaiveThreadFactory("nio-worker"))
   val serverBootstrap = ServerBootstrap()
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
@@ -27,7 +27,7 @@ fun main() {
       override fun initChannel(channel: NioSocketChannel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(EchoDecoderWithPreChecker(4))
+          addLast(LengthDecoderWithPreChecker(maxFrameLength = 4, lengthFieldOffset = 2, lengthFieldLength = 1))
           addLast(stringDecoder)
           addLast(echoEncoder)
           addLast(echoHandler)
