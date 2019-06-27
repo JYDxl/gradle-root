@@ -7,6 +7,7 @@ val vertx: String by System.getProperties()
 dependencies {
   api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-web:$vertx") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }
 
   implementation(project(":sub-netty"))
   implementation(project(":sub-model"))

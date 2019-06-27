@@ -12,5 +12,5 @@ class VertxConfig {
   fun vertx(verticleList: List<Verticle>) = Vertx.vertx()!!.apply { verticleList.forEach { deployVerticle(it) } }
 
   @Bean
-  fun myFirstVerticle() = MyFirstVerticle()
+  fun myFirstVerticle() = MyFirstVerticle(8000)
 }
