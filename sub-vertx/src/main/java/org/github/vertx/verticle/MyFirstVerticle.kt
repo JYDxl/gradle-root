@@ -8,7 +8,7 @@ import org.github.ops.debug
 import org.github.ops.error
 import org.github.ops.log
 
-class MyFirstVerticle(private val port: Int) : AbstractVerticle() {
+class MyFirstVerticle(private val port: Int): AbstractVerticle() {
   /** log. */
   private val log = MyFirstVerticle::class.log
 

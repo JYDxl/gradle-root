@@ -5,7 +5,6 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.logging.LoggingHandler
 import org.github.echo.EchoClientHandler
-import org.github.echo.EchoEncoder
 import org.github.thread.NaiveThreadFactory
 import java.nio.ByteOrder
 
@@ -14,7 +13,7 @@ fun main() {
   val bootstrap = Bootstrap()
     .group(group)
     .channel(NioSocketChannel::class.java)
-    .handler(object : ChannelInitializer<NioSocketChannel>() {
+    .handler(object: ChannelInitializer<NioSocketChannel>() {
       override fun initChannel(channel: NioSocketChannel) {
         channel.pipeline()!!.apply {
           addLast(LoggingHandler())

@@ -10,6 +10,7 @@ import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
+import java.io.IOException
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.Random
@@ -28,6 +29,14 @@ class ObjectOpsTests {
   @Test
   fun json() {
     log.info { tipLoginLogService.list().json() }
+  }
+
+  @Test
+  fun rootCause() {
+    val exception = Exception()
+    assert(exception === exception.rootCause)
+    val ioException = IOException(exception)
+    assert(ioException.rootCause === exception)
   }
 
   @Test

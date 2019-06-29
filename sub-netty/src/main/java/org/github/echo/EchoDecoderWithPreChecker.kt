@@ -8,7 +8,7 @@ import io.netty.handler.codec.LineBasedFrameDecoder
 import org.github.ops.log
 import org.github.ops.trace
 
-class EchoDecoderWithPreChecker(maxLength: Int, stripDelimiter: Boolean = true, failFast: Boolean = true) : LineBasedFrameDecoder(maxLength, stripDelimiter, failFast) {
+class EchoDecoderWithPreChecker(maxLength: Int, stripDelimiter: Boolean = true, failFast: Boolean = true): LineBasedFrameDecoder(maxLength, stripDelimiter, failFast) {
   /** log. */
   private val log = EchoDecoderWithPreChecker::class.log
 

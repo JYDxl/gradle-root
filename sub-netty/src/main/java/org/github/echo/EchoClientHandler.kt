@@ -5,11 +5,10 @@ import io.netty.buffer.ByteBufUtil
 import io.netty.buffer.Unpooled
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
-import io.netty.util.AttributeKey
 import org.github.ops.info
 import org.github.ops.log
 
-class EchoClientHandler : ChannelInboundHandlerAdapter() {
+class EchoClientHandler: ChannelInboundHandlerAdapter() {
   /** log. */
   private val log = EchoClientHandler::class.log
 
@@ -28,8 +27,6 @@ class EchoClientHandler : ChannelInboundHandlerAdapter() {
     buffer.writeShortLE(0x2222)
     buffer.writeShortLE(0)
     ctx.writeAndFlush(buffer)
-    val channel = ctx.channel()!!
-    val attr = channel.attr(AttributeKey.valueOf<String>("")).get()
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

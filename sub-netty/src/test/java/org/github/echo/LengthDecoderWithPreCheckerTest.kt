@@ -1,6 +1,6 @@
 package org.github.echo
 
-import io.netty.buffer.Unpooled
+import io.netty.buffer.PooledByteBufAllocator
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
@@ -13,7 +13,8 @@ import kotlin.text.Charsets.UTF_8
 class LengthDecoderWithPreCheckerTest {
   @Test
   fun testFrameHead() {
-    val buf = Unpooled.buffer()!!
+    val allocator = PooledByteBufAllocator()
+    val buf = allocator.buffer()!!
     val input1 = "as1a"
     val input2 = "as1b"
     val input3 = "as1c"

@@ -1,6 +1,7 @@
 package org.github.ops
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.common.base.Throwables
 import org.github.spring.bootstrap.AppCtxHolder.Companion.getAppCtx
 import org.github.spring.restful.Returnable
 import org.springframework.beans.BeanWrapperImpl
@@ -28,6 +29,8 @@ fun Any?.json(mapper: ObjectMapper? = null) = (mapper ?: objectMapper).writeValu
 val <T: Any> T.proxy get() = appCtx.getBean(this::class.java)
 
 val Returnable.value get() = get()
+
+val Exception.rootCause get() = Throwables.getRootCause(this)!!
 
 val <T: Any> Class<T>.bean get() = appCtx.getBean(this)
 

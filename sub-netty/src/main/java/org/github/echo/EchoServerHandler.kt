@@ -10,12 +10,12 @@ import org.github.ops.info
 import org.github.ops.log
 
 @Sharable
-class EchoServerHandler : ChannelInboundHandlerAdapter() {
+class EchoServerHandler: ChannelInboundHandlerAdapter() {
   /** log. */
   private val log = EchoServerHandler::class.log
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    //    msg as String
+    msg as String
     log.info { msg }
     ctx.write(msg, ctx.voidPromise())
   }

@@ -23,7 +23,7 @@ fun main() {
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
-    .childHandler(object : ChannelInitializer<NioSocketChannel>() {
+    .childHandler(object: ChannelInitializer<NioSocketChannel>() {
       override fun initChannel(channel: NioSocketChannel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)

@@ -6,7 +6,7 @@ import java.lang.Thread.currentThread
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.atomic.AtomicInteger
 
-class NaiveThreadFactory(private val prefix: String) : ThreadFactory {
+class NaiveThreadFactory(private val prefix: String): ThreadFactory {
   private val number = AtomicInteger(0)
   private val group: ThreadGroup
 

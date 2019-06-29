@@ -8,7 +8,7 @@ import io.vertx.core.net.NetSocket
 import org.github.ops.info
 import org.github.ops.log
 
-class TcpServerVerticle : AbstractVerticle() {
+class TcpServerVerticle: AbstractVerticle() {
 
   private val log = TcpServerVerticle::class.log
 
