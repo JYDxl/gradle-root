@@ -3,21 +3,29 @@ package org.github.echo
 import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
+import io.netty.channel.group.ChannelGroup
 import io.netty.handler.codec.DecoderException
 import io.netty.handler.codec.TooLongFrameException
 import org.github.ops.error
 import org.github.ops.info
 import org.github.ops.log
+import org.github.ops.setId
 
 @Sharable
-class EchoServerHandler: ChannelInboundHandlerAdapter() {
+class EchoServerHandler(private val group: ChannelGroup): ChannelInboundHandlerAdapter() {
   /** log. */
   private val log = EchoServerHandler::class.log
+
+  override fun channelActive(ctx: ChannelHandlerContext) {
+    val channel = ctx.channel()!!
+    channel.setId(channel.id().asShortText())
+    group.add(channel)
+  }
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
     log.info { msg }
-    ctx.write(msg, ctx.voidPromise())
+    group.writeAndFlush(msg)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
