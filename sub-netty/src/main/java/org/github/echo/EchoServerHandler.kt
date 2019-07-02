@@ -9,7 +9,7 @@ import io.netty.handler.codec.TooLongFrameException
 import org.github.ops.error
 import org.github.ops.info
 import org.github.ops.log
-import org.github.ops.setId
+import org.github.ops.mark
 
 @Sharable
 class EchoServerHandler(private val group: ChannelGroup): ChannelInboundHandlerAdapter() {
@@ -18,7 +18,7 @@ class EchoServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
 
   override fun channelActive(ctx: ChannelHandlerContext) {
     val channel = ctx.channel()!!
-    channel.setId(channel.id().asShortText())
+    channel.mark.set(channel.id().asShortText())
     group.add(channel)
   }
 

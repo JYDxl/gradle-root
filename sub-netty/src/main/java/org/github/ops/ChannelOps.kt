@@ -1,14 +1,11 @@
 package org.github.ops
 
 import io.netty.channel.Channel
+import io.netty.util.Attribute
 import io.netty.util.AttributeKey
 
-private val attrId: AttributeKey<String> = AttributeKey.valueOf("id")
+val KEY_MARK: AttributeKey<String> = AttributeKey.newInstance("mark")
 
-fun Channel.hasId() = hasAttr(attrId)
+fun Channel.hasMark() = mark.get() != null
 
-val Channel.ID get() = attr(attrId).get()!!
-
-val Channel.fixedID get() = ID.padStart(20)
-
-fun Channel.setId(id: String) = attr(attrId).set(id)
+val Channel.mark: Attribute<String> get() = attr(KEY_MARK)
