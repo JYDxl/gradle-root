@@ -6,6 +6,6 @@ import io.netty.util.AttributeKey
 
 val KEY_MARK: AttributeKey<String> = AttributeKey.newInstance("mark")
 
-fun Channel.hasMark() = mark.get() != null
+fun Channel.hasMark() = hasAttr(KEY_MARK) && mark.get() != null
 
 val Channel.mark: Attribute<String> get() = attr(KEY_MARK)

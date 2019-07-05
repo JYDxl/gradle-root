@@ -3,8 +3,10 @@ tasks.withType<Test> {
 }
 
 val vertx: String by System.getProperties()
+val netty: String by System.getProperties()
 
 dependencies {
+  api("io.netty:netty-all:$netty")
   api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-web:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }

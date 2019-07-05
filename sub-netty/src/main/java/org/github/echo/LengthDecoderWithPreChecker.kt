@@ -3,36 +3,25 @@ package org.github.echo
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
+import org.github.netty.DecoderInjector
 import org.github.ops.log
-import org.github.ops.prettyHexDump
-import org.github.ops.trace
 import java.nio.ByteOrder
 import java.nio.ByteOrder.BIG_ENDIAN
 import kotlin.text.Charsets.UTF_8
 
-class LengthDecoderWithPreChecker(maxFrameLength: Int, lengthFieldOffset: Int, lengthFieldLength: Int, byteOrder: ByteOrder = BIG_ENDIAN, lengthAdjustment: Int = 0, initialBytesToStrip: Int = 0, failFast: Boolean = true): LengthFieldBasedFrameDecoder(byteOrder, maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip, failFast) {
+class LengthDecoderWithPreChecker(maxFrameLength: Int, lengthFieldOffset: Int, lengthFieldLength: Int, byteOrder: ByteOrder = BIG_ENDIAN, lengthAdjustment: Int = 0, initialBytesToStrip: Int = 0, failFast: Boolean = true): LengthFieldBasedFrameDecoder(byteOrder, maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip, failFast), DecoderInjector {
   /** log. */
-  private val log = LengthDecoderWithPreChecker::class.log
+  override val log = LengthDecoderWithPreChecker::class.log
 
-  override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf): Any? {
-    val channel = ctx.channel()!!
-    if(!channel.isActive) return null
-    log.trace { "$channel >>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
-    failIfNecessary(buf)
-    return (super.decode(ctx, buf) as ByteBuf?).also {
-      it?.apply { log.trace { "$channel >>PACK>>: ${readableBytes()}B\n$prettyHexDump" } }
-      log.trace { "$channel REMAIN>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
-    }
+  override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf) = inject(ctx, buf) {
+    super.decode(ctx, buf) as ByteBuf?
   }
 
   override fun getUnadjustedFrameLength(buf: ByteBuf, offset: Int, length: Int, order: ByteOrder): Long {
-    val lengthBuf = buf.retainedSlice(offset, length)!!
-    val frameLength = lengthBuf.toString(UTF_8).toLong()
-    lengthBuf.release()
-    return frameLength
+    return ByteArray(length).apply { buf.getBytes(offset, this) }.toString(UTF_8).toLong()
   }
 
-  private fun failIfNecessary(buf: ByteBuf) {
+  override fun failIfNecessary(buf: ByteBuf) {
     when(buf.readableBytes()) {
       1 -> assert(buf, 0, 1, "A")
       2 -> assert(buf, 0, 2, "AS")
