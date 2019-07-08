@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 @Data
 public class NettyProperties {
   /** port of netty. */
-  private int    port   = 9002;
-  /** server name of netty. */
-  private String server = "netty-server";
+  private int port = 10000;
   /** size of event loop group. */
-  private int    size   = 24;
+  private int size = 0;
 }

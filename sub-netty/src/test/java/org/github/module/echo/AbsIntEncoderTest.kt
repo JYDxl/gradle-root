@@ -1,8 +1,9 @@
-package org.github.echo
+package org.github.module.echo
 
 import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.logging.LoggingHandler
+import org.github.module.echo.shaded.AbsIntEncoder
 import org.junit.Assert
 import org.junit.Test
 

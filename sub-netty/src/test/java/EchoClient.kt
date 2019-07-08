@@ -4,7 +4,7 @@ import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.logging.LoggingHandler
-import org.github.echo.EchoClientHandler
+import org.github.module.echo.shaded.EchoClientHandler
 import org.github.thread.NaiveThreadFactory
 import java.nio.ByteOrder
 

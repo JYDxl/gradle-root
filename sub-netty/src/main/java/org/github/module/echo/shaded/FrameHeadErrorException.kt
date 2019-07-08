@@ -1,4 +1,4 @@
-package org.github.echo
+package org.github.module.echo.shaded
 
 import io.netty.handler.codec.DecoderException
 

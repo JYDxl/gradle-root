@@ -1,35 +1,32 @@
-package org.github.line
+package org.github.runner
 
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.group.DefaultChannelGroup
 import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
-import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import io.netty.util.concurrent.ImmediateEventExecutor
-import org.github.module.echo.shaded.LineDecoderWithPreChecker
-import org.github.module.line.LineServerHandler
+import org.github.module.echo.EchoDecoder
+import org.github.module.echo.EchoServerHandler
 import org.github.thread.NaiveThreadFactory
 
 fun main() {
-  val lineGroup = DefaultChannelGroup("group-line", ImmediateEventExecutor.INSTANCE)
-  val lineServerHandler = LineServerHandler(lineGroup)
   val loggingHandler = LoggingHandler(TRACE)
+  val echoServerHandler = EchoServerHandler()
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("line-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("line-worker"))
+  val boss = NioEventLoopGroup(1, NaiveThreadFactory("echo-boss"))
+  val worker = NioEventLoopGroup(0, NaiveThreadFactory("echo-worker"))
   val serverBootstrap = ServerBootstrap()
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
-    .childHandler(object: ChannelInitializer<NioSocketChannel>() {
-      override fun initChannel(channel: NioSocketChannel) {
+    .childHandler(object: ChannelInitializer<SocketChannel>() {
+      override fun initChannel(channel: SocketChannel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(LineDecoderWithPreChecker(1024, false))
-          addLast(lineServerHandler)
+          addLast(EchoDecoder(1024, false))
+          addLast(echoServerHandler)
         }
       }
     })!!
