@@ -25,5 +25,5 @@ interface DecoderInjector {
 
   fun failIfNecessary(buf: ByteBuf) {}
 
-  private fun mark(channel: Channel) = "[MARK:${(channel.mark.get() ?: channel.id().asShortText())}]"
+  private fun mark(channel: Channel) = "[MARK:${(channel.mark.get() ?: channel.remoteAddress())}]"
 }
