@@ -1,22 +1,27 @@
-package org.github.line
+package org.github.runner
 
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.group.DefaultChannelGroup
 import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioServerSocketChannel
-import io.netty.channel.socket.nio.NioSocketChannel
+import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.ImmediateEventExecutor
-import org.github.module.echo.shaded.LineDecoderWithPreChecker
+import org.github.module.line.LineDecoder
+import org.github.module.line.LineEncoder
 import org.github.module.line.LineServerHandler
 import org.github.thread.NaiveThreadFactory
+import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val lineGroup = DefaultChannelGroup("group-line", ImmediateEventExecutor.INSTANCE)
+  val lineGroup = DefaultChannelGroup("line-group", ImmediateEventExecutor.INSTANCE)
   val lineServerHandler = LineServerHandler(lineGroup)
   val loggingHandler = LoggingHandler(TRACE)
+  val lineDecoder = StringDecoder(UTF_8)
+  val lineEncoder = LineEncoder()
 
   val boss = NioEventLoopGroup(1, NaiveThreadFactory("line-boss"))
   val worker = NioEventLoopGroup(0, NaiveThreadFactory("line-worker"))
@@ -24,11 +29,13 @@ fun main() {
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
-    .childHandler(object: ChannelInitializer<NioSocketChannel>() {
-      override fun initChannel(channel: NioSocketChannel) {
+    .childHandler(object: ChannelInitializer<SocketChannel>() {
+      override fun initChannel(channel: SocketChannel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(LineDecoderWithPreChecker(1024, false))
+          addLast(LineDecoder(1024))
+          addLast(lineDecoder)
+          addLast(lineEncoder)
           addLast(lineServerHandler)
         }
       }

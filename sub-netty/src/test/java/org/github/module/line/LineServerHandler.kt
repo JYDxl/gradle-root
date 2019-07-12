@@ -1,6 +1,6 @@
 package org.github.module.line
 
-import io.netty.buffer.ByteBuf
+import io.netty.buffer.UnpooledByteBufAllocator
 import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
@@ -13,8 +13,9 @@ class LineServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
   }
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    msg as ByteBuf
-    group.writeAndFlush(msg.touch()) { it != ctx.channel() }
+    msg as String
+    val buf = LineEncoder.toByteBuf(UnpooledByteBufAllocator.DEFAULT, msg)
+    group.writeAndFlush(buf)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
