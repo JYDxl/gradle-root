@@ -7,10 +7,14 @@ import org.github.netty.DecoderInjector
 import org.github.ops.log
 
 class LineDecoderWithPreChecker(maxLength: Int, stripDelimiter: Boolean = true, failFast: Boolean = true): LineBasedFrameDecoder(maxLength, stripDelimiter, failFast), DecoderInjector {
-  /** log. */
-  override val log = LineDecoderWithPreChecker::class.log
+  override val logger = log
 
   override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf) = inject(ctx, buf) {
     super.decode(ctx, buf) as ByteBuf?
+  }
+
+  companion object {
+    /** log. */
+    private val log = LineDecoderWithPreChecker::class.log
   }
 }

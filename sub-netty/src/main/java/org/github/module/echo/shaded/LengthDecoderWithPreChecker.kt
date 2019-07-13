@@ -10,8 +10,7 @@ import java.nio.ByteOrder.BIG_ENDIAN
 import kotlin.text.Charsets.UTF_8
 
 class LengthDecoderWithPreChecker(maxFrameLength: Int, lengthFieldOffset: Int, lengthFieldLength: Int, byteOrder: ByteOrder = BIG_ENDIAN, lengthAdjustment: Int = 0, initialBytesToStrip: Int = 0, failFast: Boolean = true): LengthFieldBasedFrameDecoder(byteOrder, maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip, failFast), DecoderInjector {
-  /** log. */
-  override val log = LengthDecoderWithPreChecker::class.log
+  override val logger = log
 
   override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf) = inject(ctx, buf) {
     super.decode(ctx, buf) as ByteBuf?
@@ -32,5 +31,10 @@ class LengthDecoderWithPreChecker(maxFrameLength: Int, lengthFieldOffset: Int, l
     val frameHeadBuf = buf.retainedSlice(offset, length)!!
     val frameHead = frameHeadBuf.toString(UTF_8).toUpperCase().also { frameHeadBuf.release() }
     if(frameHead != expected) throw FrameHeadErrorException("未知的协议帧头: $frameHead - (expected: $expected) (offset: $offset) (limit: $length)")
+  }
+
+  companion object {
+    /** log. */
+    private val log = LengthDecoderWithPreChecker::class.log
   }
 }

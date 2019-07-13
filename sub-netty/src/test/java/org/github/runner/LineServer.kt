@@ -3,9 +3,9 @@ package org.github.runner
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.group.DefaultChannelGroup
-import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.kqueue.KQueueEventLoopGroup
+import io.netty.channel.kqueue.KQueueServerSocketChannel
 import io.netty.channel.socket.SocketChannel
-import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
@@ -20,29 +20,29 @@ fun main() {
   val lineGroup = DefaultChannelGroup("line-group", ImmediateEventExecutor.INSTANCE)
   val lineServerHandler = LineServerHandler(lineGroup)
   val loggingHandler = LoggingHandler(TRACE)
-  val lineDecoder = StringDecoder(UTF_8)
-  val lineEncoder = LineEncoder()
+  val stringDecoder = StringDecoder(UTF_8)
+  val stringEncoder = LineEncoder()
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("line-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("line-worker"))
-  val serverBootstrap = ServerBootstrap()
+  val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("line-boss"))
+  val worker = KQueueEventLoopGroup(0, NaiveThreadFactory("line-worker"))
+  val bootstrap = ServerBootstrap()
     .group(boss, worker)
-    .channel(NioServerSocketChannel::class.java)
+    .channel(KQueueServerSocketChannel::class.java)
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<SocketChannel>() {
       override fun initChannel(channel: SocketChannel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
           addLast(LineDecoder(1024))
-          addLast(lineDecoder)
-          addLast(lineEncoder)
+          addLast(stringDecoder)
+          addLast(stringEncoder)
           addLast(lineServerHandler)
         }
       }
     })!!
 
   try {
-    serverBootstrap.bind(8000).sync().channel().closeFuture().sync()
+    bootstrap.bind(8000).sync().channel().closeFuture().sync()
   } catch(e: Exception) {
     e.printStackTrace()
   } finally {
