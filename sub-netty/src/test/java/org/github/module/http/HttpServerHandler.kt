@@ -1,6 +1,5 @@
 package org.github.module.http
 
-import io.netty.channel.ChannelFutureListener.*
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
@@ -14,7 +13,11 @@ import org.github.ops.log
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
     log.debug { req }
-    ctx.writeAndFlush(DefaultFullHttpResponse(req.protocolVersion(), OK)).addListeners(FIRE_EXCEPTION_ON_FAILURE, CLOSE)
+    ctx.writeAndFlush(DefaultFullHttpResponse(req.protocolVersion(), OK), ctx.voidPromise())
+  }
+
+  override fun channelReadComplete(ctx: ChannelHandlerContext) {
+    ctx.close()
   }
 
   companion object {

@@ -1,9 +1,10 @@
 package org.github.module.line
 
-import io.netty.channel.ChannelHandler.Sharable
+import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.group.ChannelGroup
+import org.github.module.line.LineEncoder.Companion.toByteBuf
 import org.github.ops.log
 
 @Sharable
@@ -14,7 +15,7 @@ class LineServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
-    group.writeAndFlush(msg, { it != ctx.channel() }, true)
+    group.writeAndFlush(msg.toByteBuf(), { it != ctx.channel() }, true)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

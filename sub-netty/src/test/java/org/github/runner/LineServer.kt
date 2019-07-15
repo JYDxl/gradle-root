@@ -4,8 +4,8 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.group.DefaultChannelGroup
-import io.netty.channel.kqueue.KQueueEventLoopGroup
-import io.netty.channel.kqueue.KQueueServerSocketChannel
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
@@ -23,11 +23,11 @@ fun main() {
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = LineEncoder()
 
-  val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("line-boss"))
-  val worker = KQueueEventLoopGroup(0, NaiveThreadFactory("line-worker"))
+  val boss = NioEventLoopGroup(1, NaiveThreadFactory("line-boss"))
+  val worker = NioEventLoopGroup(0, NaiveThreadFactory("line-worker"))
   val bootstrap = ServerBootstrap()
     .group(boss, worker)
-    .channel(KQueueServerSocketChannel::class.java)
+    .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<Channel>() {
       override fun initChannel(channel: Channel) {

@@ -3,8 +3,8 @@ package org.github.runner
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.kqueue.KQueueEventLoopGroup
-import io.netty.channel.kqueue.KQueueServerSocketChannel
+import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.logging.LogLevel
@@ -16,11 +16,11 @@ fun main() {
   val loggingHandler = LoggingHandler(LogLevel.TRACE)
   val httpServerHandler = HttpServerHandler()
 
-  val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("http-boss"))
-  val worker = KQueueEventLoopGroup(0, NaiveThreadFactory("http-worker"))
+  val boss = NioEventLoopGroup(1, NaiveThreadFactory("http-boss"))
+  val worker = NioEventLoopGroup(0, NaiveThreadFactory("http-worker"))
   val bootstrap = ServerBootstrap()
     .group(boss, worker)
-    .channel(KQueueServerSocketChannel::class.java)
+    .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<Channel>() {
       override fun initChannel(channel: Channel) {
