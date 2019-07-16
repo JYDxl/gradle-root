@@ -5,20 +5,18 @@ import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
-import io.netty.handler.codec.http.HttpContentCompressor
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
-import io.netty.handler.logging.LogLevel
+import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
+import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
-import org.github.module.http.HttpServerHandler
 import org.github.thread.NaiveThreadFactory
 
 fun main() {
-  val loggingHandler = LoggingHandler(LogLevel.TRACE)
-  val httpServerHandler = HttpServerHandler()
+  val loggingHandler = LoggingHandler(TRACE)
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("http-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("http-worker"))
+  val boss = NioEventLoopGroup(1, NaiveThreadFactory("ws-boss"))
+  val worker = NioEventLoopGroup(0, NaiveThreadFactory("ws-worker"))
   val bootstrap = ServerBootstrap()
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
@@ -28,9 +26,8 @@ fun main() {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
           addLast(HttpServerCodec())
-          addLast(HttpContentCompressor())
           addLast(HttpObjectAggregator(512 * 1024))
-          addLast(httpServerHandler)
+          addLast(WebSocketServerProtocolHandler("/ws"))
         }
       }
     })!!
