@@ -1,6 +1,7 @@
 package org.github
 
 import io.netty.bootstrap.Bootstrap
+import io.netty.channel.Channel
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.ChannelInitializer
@@ -13,12 +14,13 @@ import org.github.netty.Message
 
 fun main() {
   val worker = KQueueEventLoopGroup()
+
   Bootstrap()
     .group(worker)
     .channel(KQueueSocketChannel::class.java)
     .option(ChannelOption.TCP_NODELAY, true)
-    .handler(object: ChannelInitializer<KQueueSocketChannel>() {
-      override fun initChannel(ch: KQueueSocketChannel) {
+    .handler(object: ChannelInitializer<Channel>() {
+      override fun initChannel(ch: Channel) {
         ch.pipeline()!!.apply {
           addLast(LengthFieldBasedFrameDecoder(1024, 4, 4))
         }
@@ -29,7 +31,6 @@ fun main() {
     .channel()
     .closeFuture()
     .addListener { worker.shutdownGracefully() }
-    .sync()
 }
 
 class LoginAuthReqHandler: ChannelInboundHandlerAdapter() {

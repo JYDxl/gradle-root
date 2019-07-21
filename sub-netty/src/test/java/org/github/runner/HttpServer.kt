@@ -8,18 +8,19 @@ import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.http.HttpContentCompressor
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
-import io.netty.handler.logging.LogLevel
+import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.http.HttpServerHandler
 import org.github.thread.NaiveThreadFactory
 
 fun main() {
-  val loggingHandler = LoggingHandler(LogLevel.TRACE)
+  val loggingHandler = LoggingHandler(TRACE)
   val httpServerHandler = HttpServerHandler()
 
   val boss = NioEventLoopGroup(1, NaiveThreadFactory("http-boss"))
   val worker = NioEventLoopGroup(0, NaiveThreadFactory("http-worker"))
-  val bootstrap = ServerBootstrap()
+
+  ServerBootstrap()
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
@@ -33,14 +34,10 @@ fun main() {
           addLast(httpServerHandler)
         }
       }
-    })!!
-
-  try {
-    bootstrap.bind(8000).sync().channel().closeFuture().sync()
-  } catch(e: Exception) {
-    e.printStackTrace()
-  } finally {
-    worker.shutdownGracefully().syncUninterruptibly()
-    boss.shutdownGracefully().syncUninterruptibly()
-  }
+    })
+    .bind(8000)
+    .sync()
+    .channel()
+    .closeFuture()
+    .addListener { worker.shutdownGracefully();boss.shutdownGracefully() }
 }

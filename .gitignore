@@ -1,6 +1,7 @@
 .vertx
-out
 build
+out
+logs
 /.gradle
 /.extra
 /.idea

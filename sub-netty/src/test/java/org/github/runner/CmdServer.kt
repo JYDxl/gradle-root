@@ -19,7 +19,8 @@ fun main() {
 
   val boss = NioEventLoopGroup(1, NaiveThreadFactory("cmd-boss"))
   val worker = NioEventLoopGroup(0, NaiveThreadFactory("cmd-worker"))
-  val bootstrap = ServerBootstrap()
+
+  ServerBootstrap()
     .group(boss, worker)
     .channel(NioServerSocketChannel::class.java)
     .handler(loggingHandler)
@@ -32,14 +33,10 @@ fun main() {
           addLast(cmdServerHandler)
         }
       }
-    })!!
-
-  try {
-    bootstrap.bind(8000).sync().channel().closeFuture().sync()
-  } catch(e: Exception) {
-    e.printStackTrace()
-  } finally {
-    worker.shutdownGracefully().syncUninterruptibly()
-    boss.shutdownGracefully().syncUninterruptibly()
-  }
+    })
+    .bind(8000)
+    .sync()
+    .channel()
+    .closeFuture()
+    .addListener { worker.shutdownGracefully();boss.shutdownGracefully() }
 }
