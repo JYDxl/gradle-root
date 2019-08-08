@@ -1,12 +1,11 @@
-@file:Suppress("DEPRECATION")
-
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 tasks.withType<Jar> { enabled = false }
+tasks.withType<PublishToMavenRepository> { enabled = false }
 
 tasks.withType<BootJar> {
   enabled = true
-  archiveName = "web-boot.jar"
+  archiveFileName.set("web-boot.jar")
 }
 
 tasks.withType<Test> {
@@ -27,7 +26,6 @@ dependencies {
   implementation(project(":sub-core"))
   implementation(project(":sub-model"))
   implementation(project(":sub-vertx"))
-  implementation(project(":sub-netty"))
   implementation(project(":sub-guice"))
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")

@@ -25,7 +25,7 @@ class StringZsetOps(redisOps: StringRedisOps): ZSetOperations<String, String> by
 
 class StringListOps(redisOps: StringRedisOps): ListOperations<String, String> by redisOps.opsForList()
 
-class StringHashOps(redisOps: StringRedisOps): HashOperations<String, String, String> by redisOps.opsForHash<String, String>()
+class StringHashOps(redisOps: StringRedisOps): HashOperations<String, String, String> by redisOps.opsForHash()
 
 class StringGeoOps(redisOps: StringRedisOps): GeoOperations<String, String> by redisOps.opsForGeo()
 

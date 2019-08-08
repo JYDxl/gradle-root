@@ -5,9 +5,9 @@ import com.google.common.base.Throwables
 import org.github.spring.bootstrap.AppCtxHolder.Companion.getAppCtx
 import org.github.spring.restful.Returnable
 import org.springframework.beans.BeanWrapperImpl
-import org.springframework.cglib.beans.BeanMap.create
+import org.springframework.cglib.beans.BeanMap.*
 import org.springframework.web.context.WebApplicationContext
-import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
+import org.springframework.web.context.request.RequestContextHolder.*
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
 import kotlin.reflect.KClass
