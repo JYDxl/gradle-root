@@ -10,7 +10,7 @@ import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.log.LogEvent
 import org.github.module.log.LogEventEncoder
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 import java.net.InetSocketAddress
 import java.util.concurrent.Executors.*
 import java.util.concurrent.TimeUnit.*
@@ -20,8 +20,8 @@ fun main() {
   val addr = InetSocketAddress("255.255.255.255", 8000)
   val logEventEncoder = LogEventEncoder(addr)
 
-  val group = NioEventLoopGroup(0, NaiveThreadFactory("log-server"))
-  val service = newScheduledThreadPool(4, NaiveThreadFactory("udp-task"))
+  val group = NioEventLoopGroup(0, NativeThreadFactory("log-server"))
+  val service = newScheduledThreadPool(4, NativeThreadFactory("udp-task"))
 
   Bootstrap()
     .group(group)

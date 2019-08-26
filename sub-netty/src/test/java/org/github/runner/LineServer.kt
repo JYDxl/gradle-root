@@ -13,7 +13,7 @@ import io.netty.util.concurrent.ImmediateEventExecutor.*
 import org.github.module.line.LineDecoder
 import org.github.module.line.LineEncoder
 import org.github.module.line.LineServerHandler
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
@@ -23,8 +23,8 @@ fun main() {
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = LineEncoder()
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("line-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("line-worker"))
+  val boss = NioEventLoopGroup(1, NativeThreadFactory("line-boss"))
+  val worker = NioEventLoopGroup(0, NativeThreadFactory("line-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

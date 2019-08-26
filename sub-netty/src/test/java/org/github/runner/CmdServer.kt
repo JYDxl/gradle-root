@@ -10,15 +10,15 @@ import io.netty.handler.logging.LoggingHandler
 import org.github.module.cmd.CmdDecoder
 import org.github.module.cmd.CmdServerHandler
 import org.github.module.line.LineDecoder
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 
 fun main() {
   val cmdServerHandler = CmdServerHandler()
   val loggingHandler = LoggingHandler(TRACE)
   val cmdDecoder = CmdDecoder()
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("cmd-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("cmd-worker"))
+  val boss = NioEventLoopGroup(1, NativeThreadFactory("cmd-boss"))
+  val worker = NioEventLoopGroup(0, NativeThreadFactory("cmd-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

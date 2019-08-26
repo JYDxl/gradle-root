@@ -6,7 +6,7 @@ import org.github.ops.commonMapper
 import org.springframework.stereotype.Component
 
 @Component
-class NaiveMetaObjectHandler: MetaObjectHandler {
+class NativeMetaObjectHandler: MetaObjectHandler {
   override fun insertFill(meta: MetaObject) {
 
     // setFieldValByName("createdAt", commonMapper.now(), meta)

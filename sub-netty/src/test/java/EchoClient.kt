@@ -6,11 +6,11 @@ import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.echo.shaded.EchoClientHandler
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 import java.nio.ByteOrder.*
 
 fun main() {
-  val group = NioEventLoopGroup(24, NaiveThreadFactory("nio-client"))
+  val group = NioEventLoopGroup(24, NativeThreadFactory("nio-client"))
 
   Bootstrap()
     .group(group)

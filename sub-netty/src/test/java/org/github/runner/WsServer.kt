@@ -14,7 +14,7 @@ import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.ImmediateEventExecutor.*
 import org.github.module.ws.HttpReqHandler
 import org.github.module.ws.TextWsFrameHandler
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 
 fun main() {
   val group = DefaultChannelGroup("ws", INSTANCE)
@@ -22,8 +22,8 @@ fun main() {
   val httpReqHandler = HttpReqHandler("/ws")
   val textWsFrameHandler = TextWsFrameHandler(group)
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("ws-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("ws-worker"))
+  val boss = NioEventLoopGroup(1, NativeThreadFactory("ws-boss"))
+  val worker = NioEventLoopGroup(0, NativeThreadFactory("ws-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

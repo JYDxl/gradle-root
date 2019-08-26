@@ -2,7 +2,7 @@ package org.github.config
 
 import org.github.spring.redis.ListRedisScript
 import org.github.spring.redis.LongRedisScript
-import org.github.spring.redis.NaiveStringRedisSerializer
+import org.github.spring.redis.NativeStringRedisSerializer
 import org.github.spring.redis.StringClusterOps
 import org.github.spring.redis.StringGeoOps
 import org.github.spring.redis.StringHashOps
@@ -23,7 +23,7 @@ import org.springframework.data.redis.core.RedisTemplate
 class RedisConfig {
   @Bean
   fun stringRedisOps(factory: RedisConnectionFactory) = RedisTemplate<String, String>().apply {
-    setDefaultSerializer(NaiveStringRedisSerializer())
+    setDefaultSerializer(NativeStringRedisSerializer())
     setConnectionFactory(factory)
     afterPropertiesSet()
   }.let { StringRedisOps(it) }

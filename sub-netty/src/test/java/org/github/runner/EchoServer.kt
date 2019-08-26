@@ -9,14 +9,14 @@ import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.echo.EchoDecoder
 import org.github.module.echo.EchoServerHandler
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val echoServerHandler = EchoServerHandler()
 
-  val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("echo-boss"))
-  val worker = KQueueEventLoopGroup(0, NaiveThreadFactory("echo-worker"))
+  val boss = KQueueEventLoopGroup(1, NativeThreadFactory("echo-boss"))
+  val worker = KQueueEventLoopGroup(0, NativeThreadFactory("echo-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

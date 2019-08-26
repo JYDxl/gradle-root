@@ -1,5 +1,7 @@
+import ch.qos.logback.classic.filter.ThresholdFilter
+
 def out = "%d %5level --- [%20.20thread] %40.40logger : %msg%n"
-def dir = "logs/sub-netty"
+def dir = "${System.getProperty("user.dir")}/logs/sub-netty/"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) {
@@ -7,15 +9,29 @@ appender("console", ConsoleAppender) {
   }
 }
 
-appender("file", RollingFileAppender) {
+appender("rollback", RollingFileAppender) {
+  file = "${dir}/rollback.log"
+  rollingPolicy(SizeAndTimeBasedRollingPolicy) {
+    fileNamePattern = "${dir}/%d/rollback-%i.gz"
+    totalSizeCap = "20GB"
+    maxFileSize = "1GB"
+    maxHistory = 30
+  }
   encoder(PatternLayoutEncoder) {
     pattern = out
   }
-  rollingPolicy(TimeBasedRollingPolicy) {
-    fileNamePattern = "${dir}/%d/netty.log"
+}
+
+appender("issue", FileAppender) {
+  filter(ThresholdFilter) {
+    level = warn
+  }
+  file = "${dir}/issue.log"
+  encoder(PatternLayoutEncoder) {
+    pattern = out
   }
 }
 
-logger("org.github", TRACE)
-logger("io.netty", TRACE)
-root(DEBUG, ["console", "file"])
+logger("org.github", TRACE, ["issue"])
+logger("io.netty", TRACE, ["issue"])
+root(DEBUG, ["console", "rollback"])

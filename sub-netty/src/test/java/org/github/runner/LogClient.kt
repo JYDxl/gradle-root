@@ -9,14 +9,14 @@ import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.log.LogClientHandler
 import org.github.module.log.LogEventDecoder
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val logEventDecoder = LogEventDecoder()
   val logClientHandler = LogClientHandler()
 
-  val group = NioEventLoopGroup(0, NaiveThreadFactory("log-client"))
+  val group = NioEventLoopGroup(0, NativeThreadFactory("log-client"))
 
   Bootstrap()
     .group(group)

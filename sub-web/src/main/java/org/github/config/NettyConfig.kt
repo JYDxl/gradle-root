@@ -18,7 +18,7 @@ import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.ImmediateEventExecutor.INSTANCE
 import org.github.netty.StringServerChannelHandler
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE
@@ -29,8 +29,8 @@ import org.springframework.context.annotation.Scope
 @Configuration
 class NettyConfig(private val props: NettyProperties): InitializingBean, DisposableBean {
   override fun afterPropertiesSet() {
-    val boss = KQueueEventLoopGroup(1, NaiveThreadFactory("kqueue-boss"))
-    val worker = KQueueEventLoopGroup(props.size, NaiveThreadFactory("kqueue-worker"))
+    val boss = KQueueEventLoopGroup(1, NativeThreadFactory("kqueue-boss"))
+    val worker = KQueueEventLoopGroup(props.size, NativeThreadFactory("kqueue-worker"))
     ServerBootstrap()
       .group(boss, worker)
       .channel(KQueueServerSocketChannel::class.java)

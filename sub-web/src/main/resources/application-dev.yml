@@ -77,7 +77,7 @@ logging:
   file:
     max-history: 30
     max-size: 1GB
-  path: ${user.home}/logs/${spring.application.name}/${info.version}/dev/
+  path: ${user.dir}/logs/${spring.application.name}/${info.version}/dev/
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml

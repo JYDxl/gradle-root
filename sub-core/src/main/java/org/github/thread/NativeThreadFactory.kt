@@ -1,12 +1,11 @@
 package org.github.thread
 
-import java.lang.System.getSecurityManager
-import java.lang.Thread.NORM_PRIORITY
-import java.lang.Thread.currentThread
+import java.lang.System.*
+import java.lang.Thread.*
 import java.util.concurrent.ThreadFactory
 import java.util.concurrent.atomic.AtomicInteger
 
-class NaiveThreadFactory(private val prefix: String): ThreadFactory {
+class NativeThreadFactory(private val prefix: String): ThreadFactory {
   private val number = AtomicInteger(0)
   private val group: ThreadGroup
 

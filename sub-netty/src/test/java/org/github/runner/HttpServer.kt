@@ -11,14 +11,14 @@ import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.http.HttpServerHandler
-import org.github.thread.NaiveThreadFactory
+import org.github.thread.NativeThreadFactory
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val httpServerHandler = HttpServerHandler()
 
-  val boss = NioEventLoopGroup(1, NaiveThreadFactory("http-boss"))
-  val worker = NioEventLoopGroup(0, NaiveThreadFactory("http-worker"))
+  val boss = NioEventLoopGroup(1, NativeThreadFactory("http-boss"))
+  val worker = NioEventLoopGroup(0, NativeThreadFactory("http-worker"))
 
   ServerBootstrap()
     .group(boss, worker)
