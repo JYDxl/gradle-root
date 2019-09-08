@@ -2,6 +2,7 @@ package org.github.vertx.verticle
 
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.AsyncResult
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.NetServer
 import io.vertx.core.net.NetServerOptions
 import io.vertx.core.net.NetSocket
@@ -22,7 +23,7 @@ class TcpServerVerticle: AbstractVerticle() {
     }
     netServer = vertx.createNetServer(netServerOptions)
     netServer.connectHandler { socket: NetSocket ->
-      socket.handler {
+      socket.handler { _: Buffer ->
       }
     }
     netServer.listen { result: AsyncResult<NetServer> ->

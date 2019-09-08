@@ -1,5 +1,6 @@
 package org.github.ops
 
+import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ServerChannel
 import io.netty.channel.epoll.EpollEventLoopGroup
@@ -18,7 +19,7 @@ class NettyOps
 
 val log = NettyOps::class.log
 
-val channelFutureListener: GenericFutureListener<out Future<in Void>> = ChannelFutureListener {
+val channelFutureListener: GenericFutureListener<out Future<in Void>> = ChannelFutureListener { it: ChannelFuture ->
   if(!it.isSuccess) log.error(it.cause()) { it.channel().markInfo }
 }
 
