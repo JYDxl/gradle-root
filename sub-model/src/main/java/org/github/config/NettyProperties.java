@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties("netty.config")
 @Component
 @Data
-public class NettyProperties {
+public class NettyProperties implements ConfigProperties {
   /** port of netty. */
   private int port = 10000;
   /** size of event loop group. */

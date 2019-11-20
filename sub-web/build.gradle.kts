@@ -21,7 +21,6 @@ val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
 
 dependencies {
-  implementation(project(":sub-config"))
   implementation(project(":sub-core"))
   implementation(project(":sub-model"))
   implementation(project(":sub-vertx"))

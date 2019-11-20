@@ -9,7 +9,6 @@ pluginManagement {
 
 rootProject.name = "gradle-root"
 
-include("sub-config")
 include("sub-model")
 include("sub-netty")
 include("sub-vertx")

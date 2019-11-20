@@ -13,4 +13,6 @@ dependencies {
   testImplementation("com.baomidou:mybatis-plus-generator:$mybatisplus")
   testImplementation("mysql:mysql-connector-java:$mysql")
   testImplementation("org.freemarker:freemarker")
+
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
