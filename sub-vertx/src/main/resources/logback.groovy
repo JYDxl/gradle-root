@@ -1,7 +1,7 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
 def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
-def dir = "${System.getProperty("user.dir")}/logs/sub-vertx/"
+def dir = "${System.getProperty("user.dir")}/logs/sub-vertx"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
@@ -27,4 +27,4 @@ appender("problems", FileAppender) {
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
 logger("io.vertx", TRACE)
-root(INFO, ["console", "record", "problems"])
+root(INFO, ["console", "records", "problems"])

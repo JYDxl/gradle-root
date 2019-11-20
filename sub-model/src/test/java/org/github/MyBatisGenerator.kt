@@ -1,11 +1,7 @@
 package org.github
 
 import com.baomidou.mybatisplus.generator.AutoGenerator
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig
-import com.baomidou.mybatisplus.generator.config.GlobalConfig
-import com.baomidou.mybatisplus.generator.config.PackageConfig
-import com.baomidou.mybatisplus.generator.config.StrategyConfig
-import com.baomidou.mybatisplus.generator.config.TemplateConfig
+import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.*
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.*
@@ -21,7 +17,6 @@ fun main() {
     mapperName = "I%sMapper"
     entityName = "%sEntity"
     isFileOverride = true
-    isKotlin = true
     isOpen = false
     author = "JYD_XL"
     // idType = UUID
@@ -44,6 +39,8 @@ fun main() {
 
   StrategyConfig().apply {
     naming = underline_to_camel
+    isEntityLombokModel = true
+    isEntityTableFieldAnnotationEnable = true
     logicDeleteFieldName = "deleted"
     superEntityClass = "org.github.base.AbstractEntity"
     superMapperClass = "org.github.base.IMapper"
@@ -59,7 +56,7 @@ fun main() {
     service = "service.java"
     serviceImpl = "serviceImpl.java"
     mapper = "mapper.java"
-    entityKt="entity.kt"
+    setEntity("entity.java")
     generator.template = this
   }
 
