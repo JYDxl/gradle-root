@@ -1,38 +1,30 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
-def out = "%d %5level --- [%20.20thread] %40.40logger : %msg%n"
+def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
 def dir = "${System.getProperty("user.dir")}/logs/sub-vertx/"
 
 appender("console", ConsoleAppender) {
-  encoder(PatternLayoutEncoder) {
-    pattern = out
-  }
+  encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-appender("rollback", RollingFileAppender) {
-  file = "${dir}/rollback.log"
+appender("records", RollingFileAppender) {
+  file = "${dir}/records.txt"
   rollingPolicy(SizeAndTimeBasedRollingPolicy) {
-    fileNamePattern = "${dir}/%d/rollback-%i.gz"
+    fileNamePattern = "${dir}/%d/record-%i.gz"
     totalSizeCap = "20GB"
     maxFileSize = "1GB"
     maxHistory = 30
   }
-  encoder(PatternLayoutEncoder) {
-    pattern = out
-  }
+  encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-appender("issue", FileAppender) {
-  filter(ThresholdFilter) {
-    level = warn
-  }
-  file = "${dir}/issue.log"
-  encoder(PatternLayoutEncoder) {
-    pattern = out
-  }
+appender("problems", FileAppender) {
+  file = "${dir}/problems.txt"
+  filter(ThresholdFilter) { level = warn }
+  encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-logger("org.github", TRACE, ["issue"])
-logger("io.netty", TRACE, ["issue"])
-logger("io.vertx", TRACE, ["issue"])
-root(DEBUG, ["console", "rollback"])
+logger("org.github", TRACE)
+logger("io.netty", TRACE)
+logger("io.vertx", TRACE)
+root(INFO, ["console", "record", "problems"])

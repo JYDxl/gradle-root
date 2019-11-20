@@ -3,12 +3,8 @@ import org.gradle.api.JavaVersion.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-val kotlinxcoroutines: String by System.getProperties()
 val commonslang3: String by System.getProperties()
-val commonscodec: String by System.getProperties()
 val springcloud: String by System.getProperties()
-val caffeine: String by System.getProperties()
-val jctools: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
 val guava: String by System.getProperties()
@@ -19,10 +15,12 @@ plugins {
   val springboot: String by System.getProperties()
   val benmanes: String by System.getProperties()
   val kotlin: String by System.getProperties()
+  val shadow: String by System.getProperties()
 
   java
   `maven-publish`
 
+  id("com.github.johnrengelman.shadow") version shadow apply false
   id("org.springframework.boot") version springboot apply false
   id("io.spring.dependency-management") version dependencymanagement apply false
   kotlin("jvm") version kotlin apply false
@@ -35,6 +33,7 @@ subprojects {
   version = "0.0.1"
 
   apply(plugin = "io.spring.dependency-management")
+  apply(plugin = "com.github.johnrengelman.shadow")
   apply(plugin = "com.github.ben-manes.versions")
   apply(plugin = "org.springframework.boot")
   apply(plugin = "kotlin")
@@ -52,16 +51,6 @@ subprojects {
     targetCompatibility = VERSION_11
   }
 
-  tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-    kotlinOptions.verbose = true
-    kotlinOptions.javaParameters = true
-    kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
-  }
-
-  tasks.getByName<Jar>("jar") { enabled = true }
-  tasks.withType<BootJar> { enabled = false }
-
   repositories {
     maven { url = uri("https://maven.aliyun.com/repository/public") }
     maven { url = uri("https://maven.aliyun.com/repository/spring") }
@@ -73,15 +62,15 @@ subprojects {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("ch.qos.logback:logback-classic")
+    implementation("org.slf4j:jul-to-slf4j")
 
-    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+//    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
     implementation("org.apache.commons:commons-lang3:$commonslang3")
-    implementation("commons-codec:commons-codec:$commonscodec")
-    implementation("org.jctools:jctools-core:$jctools")
+//    implementation("commons-codec:commons-codec:$commonscodec")
+//    implementation("org.jctools:jctools-core:$jctools")
     implementation("com.google.guava:guava:$guava")
     implementation("org.codehaus.groovy:groovy:$groovy")
-    implementation("org.slf4j:jul-to-slf4j")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
@@ -91,6 +80,16 @@ subprojects {
 
     annotationProcessor("org.projectlombok:lombok:$lombok")
     testAnnotationProcessor("org.projectlombok:lombok:$lombok")
+  }
+
+  tasks.getByName<Jar>("jar") { enabled = true }
+  tasks.getByName<BootJar>("bootJar") { enabled = false }
+
+  tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.verbose = true
+    kotlinOptions.javaParameters = true
+    kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
   }
 
   tasks.register<Jar>("sourcesJar") {

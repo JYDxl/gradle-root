@@ -1,6 +1,5 @@
-package org.github.module.http
+package org.github.module.ws
 
-import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
@@ -9,8 +8,8 @@ import io.netty.handler.codec.http.FullHttpRequest
 import io.netty.handler.codec.http.HttpHeaderNames.*
 import io.netty.handler.codec.http.HttpHeaderValues.*
 import io.netty.handler.codec.http.HttpResponseStatus.*
-import io.netty.handler.codec.http.HttpUtil
-import io.netty.util.concurrent.Future
+import io.netty.handler.codec.http.HttpUtil.*
+import org.github.ops.channelFutureListener
 import org.github.ops.info
 import org.github.ops.log
 import org.github.ops.toByteBuf
@@ -18,19 +17,18 @@ import org.github.ops.toByteBuf
 @Sharable
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
-    log.info { "${req.method()} ${req.uri()}" }
-    val msg = "Hello world!".toByteBuf()
+    val uri = req.uri()!!
+    log.info { "${req.method()} $uri" }
+    if(uri.toLowerCase() == "/ws") {
+      ctx.fireChannelRead(req.retain())
+      return
+    }
+    val msg = uri.toByteBuf()
     val res = DefaultFullHttpResponse(req.protocolVersion(), OK, msg)
     res.headers()[CONTENT_LENGTH] = msg.readableBytes()
     res.headers()[CONTENT_TYPE] = TEXT_PLAIN
-    ctx
-      .writeAndFlush(res)
-      .addListener { it: Future<in Void> ->
-        it as ChannelFuture
-        if(!HttpUtil.isKeepAlive(req)) {
-          it.channel().close()
-        }
-      }
+    ctx.writeAndFlush(res, ctx.voidPromise())
+    if(!isKeepAlive(req)) ctx.close().addListener(channelFutureListener)
   }
 
   companion object {

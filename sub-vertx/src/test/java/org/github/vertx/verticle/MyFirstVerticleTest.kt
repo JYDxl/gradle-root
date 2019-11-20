@@ -14,7 +14,6 @@ import org.github.ops.log
 import org.github.ops.warn
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.TestInstance.Lifecycle.*
 import org.junit.jupiter.api.extension.ExtendWith
@@ -46,7 +45,7 @@ class MyFirstVerticleTest {
     ctx.completeNow()
   }
 
-  @Test
+//  @Test
   fun testApp(ctx: VertxTestContext) {
     val webClientOptions = WebClientOptions().apply {
       logActivity = true
