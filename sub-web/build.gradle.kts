@@ -1,6 +1,5 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
-tasks.withType<Jar> { enabled = false }
 tasks.withType<PublishToMavenRepository> { enabled = false }
 
 tasks.withType<BootJar> {
@@ -16,8 +15,8 @@ tasks.withType<Test> {
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
 val retrofit: String by System.getProperties()
-val mariadb: String by System.getProperties()
 val okhttp3: String by System.getProperties()
+val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
 
@@ -26,13 +25,12 @@ dependencies {
   implementation(project(":sub-core"))
   implementation(project(":sub-model"))
   implementation(project(":sub-vertx"))
-  implementation(project(":sub-guice"))
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")
-  implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb")
   implementation("com.squareup.retrofit2:retrofit:$retrofit")
   implementation("com.squareup.okhttp3:okhttp:$okhttp3")
+  implementation("mysql:mysql-connector-java:$mysql")
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
 
@@ -48,6 +46,6 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation("org.springframework.boot:spring-boot-starter-test") { exclude(module = "android-json") }
+  testImplementation("org.springframework.boot:spring-boot-starter-test") { exclude(module = "android-json");exclude(group = "junit") }
   testImplementation("org.springframework.security:spring-security-test")
 }

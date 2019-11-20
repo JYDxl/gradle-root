@@ -4,21 +4,24 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Vertx
 import io.vertx.core.VertxOptions
 import io.vertx.core.buffer.Buffer
-import io.vertx.ext.unit.TestContext
-import io.vertx.ext.unit.junit.VertxUnitRunner
 import io.vertx.ext.web.client.HttpResponse
 import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
+import io.vertx.junit5.VertxExtension
+import io.vertx.junit5.VertxTestContext
 import org.github.ops.error
 import org.github.ops.log
 import org.github.ops.warn
-import org.junit.After
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import java.util.concurrent.TimeUnit.MILLISECONDS
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.TestInstance.Lifecycle.*
+import org.junit.jupiter.api.extension.ExtendWith
+import java.util.concurrent.TimeUnit.*
 
-@RunWith(VertxUnitRunner::class)
+@ExtendWith(VertxExtension::class)
+@TestInstance(PER_CLASS)
 class MyFirstVerticleTest {
   /** log. */
   private val log = MyFirstVerticleTest::class.log
@@ -27,24 +30,24 @@ class MyFirstVerticleTest {
 
   private val port = 8000
 
-  @Before
-  fun start(ctx: TestContext) {
+  @BeforeAll
+  fun start(ctx: VertxTestContext) {
     val vertxOptions = VertxOptions().apply {
       maxEventLoopExecuteTimeUnit = MILLISECONDS
       maxEventLoopExecuteTime = 1
     }
     vertx = Vertx.vertx(vertxOptions)
-    vertx.deployVerticle(MyFirstVerticle(port), ctx.asyncAssertSuccess())
+    vertx.deployVerticle(MyFirstVerticle(port))
   }
 
-  @After
-  fun stop(ctx: TestContext) {
-    vertx.close(ctx.asyncAssertSuccess())
+  @AfterAll
+  fun stop(ctx: VertxTestContext) {
+    vertx.close()
+    ctx.completeNow()
   }
 
   @Test
-  fun testApp(ctx: TestContext) {
-    val async = ctx.async()!!
+  fun testApp(ctx: VertxTestContext) {
     val webClientOptions = WebClientOptions().apply {
       logActivity = true
       isUserAgentEnabled = false
@@ -63,7 +66,7 @@ class MyFirstVerticleTest {
           log.warn { result.statusMessage() }
           return@send
         }
-        async.complete()
+        ctx.completeNow()
       }
   }
 }

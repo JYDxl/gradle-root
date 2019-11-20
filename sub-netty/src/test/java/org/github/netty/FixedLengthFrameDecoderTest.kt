@@ -7,8 +7,8 @@ import io.netty.handler.codec.FixedLengthFrameDecoder
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import kotlin.text.Charsets.UTF_8
 
 class FixedLengthFrameDecoderTest {

@@ -1,8 +1,8 @@
-package ${package.Mapper};
+package ${package.Mapper}
 
-import ${package.Entity}.${entity};
-import org.github.mybatis.MyBatisMapper;
-import ${superMapperClassPackage};
+import ${superMapperClassPackage}
+import ${package.Entity}.${entity}
+import org.github.mybatis.MyBatisMapper
 
 /**
  * <p>
@@ -13,8 +13,6 @@ import ${superMapperClassPackage};
  * @since ${date}
  */
 <#if kotlin>
-interface ${table.mapperName} : ${superMapperClass}<${entity}>
-<#else>
 @MyBatisMapper
-public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {}
+interface ${table.mapperName}: ${superMapperClass}<${entity}>
 </#if>

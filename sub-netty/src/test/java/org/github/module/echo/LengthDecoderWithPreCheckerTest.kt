@@ -3,12 +3,12 @@ package org.github.module.echo
 import io.netty.buffer.PooledByteBufAllocator
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
-import io.netty.handler.logging.LogLevel.TRACE
+import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.echo.shaded.LengthDecoderWithPreChecker
 import org.github.ops.writeString
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import kotlin.text.Charsets.UTF_8
 
 class LengthDecoderWithPreCheckerTest {

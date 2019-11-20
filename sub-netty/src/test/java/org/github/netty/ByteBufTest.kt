@@ -1,8 +1,8 @@
 package org.github.netty
 
 import io.netty.buffer.Unpooled
-import org.junit.Assert.assertEquals
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 class ByteBufTest {
   @Test

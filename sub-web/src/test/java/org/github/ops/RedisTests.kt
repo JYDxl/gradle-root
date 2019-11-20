@@ -4,15 +4,15 @@ import org.github.spring.redis.ListRedisScript
 import org.github.spring.redis.LongRedisScript
 import org.github.spring.redis.StringRedisOps
 import org.github.spring.redis.StringRedisScript
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
-import java.util.Collections.singletonList
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.Collections.*
 import javax.annotation.Resource
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 class RedisTests {
   /** log. */

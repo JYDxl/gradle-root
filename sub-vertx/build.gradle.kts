@@ -10,7 +10,7 @@ dependencies {
   implementation(project(":sub-model"))
   implementation(project(":sub-core"))
 
-  testImplementation("io.vertx:vertx-unit:$vertx") { exclude(group = "io.netty") }
+  testImplementation("io.vertx:vertx-junit5:$vertx") { exclude(group = "io.netty");exclude(group = "org.junit.jupiter") }
 
   compileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }
   testCompileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }

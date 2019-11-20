@@ -2,8 +2,8 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.gradle.api.JavaVersion.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
-import java.lang.System.*
 
+val kotlinxcoroutines: String by System.getProperties()
 val commonslang3: String by System.getProperties()
 val commonscodec: String by System.getProperties()
 val springcloud: String by System.getProperties()
@@ -12,8 +12,10 @@ val jctools: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
 val guava: String by System.getProperties()
+val junit: String by System.getProperties()
 
 plugins {
+  val dependencymanagement: String by System.getProperties()
   val springboot: String by System.getProperties()
   val benmanes: String by System.getProperties()
   val kotlin: String by System.getProperties()
@@ -21,10 +23,11 @@ plugins {
   java
   `maven-publish`
 
-  kotlin("plugin.spring") version kotlin apply false
-  kotlin("jvm") version kotlin apply false
-  id("com.github.ben-manes.versions") version benmanes apply false
   id("org.springframework.boot") version springboot apply false
+  id("io.spring.dependency-management") version dependencymanagement apply false
+  kotlin("jvm") version kotlin apply false
+  kotlin("plugin.spring") version kotlin apply false
+  id("com.github.ben-manes.versions") version benmanes apply false
 }
 
 subprojects {
@@ -38,23 +41,25 @@ subprojects {
   apply(plugin = "kotlin-spring")
   apply(plugin = "maven-publish")
 
-  configure<JavaPluginConvention> {
-    sourceCompatibility = VERSION_1_8
-    targetCompatibility = VERSION_1_8
-  }
-
   configure<DependencyManagementExtension> {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
     }
   }
 
+  configure<JavaPluginConvention> {
+    sourceCompatibility = VERSION_11
+    targetCompatibility = VERSION_11
+  }
+
   tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.verbose = true
+    kotlinOptions.javaParameters = true
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
   }
 
-  tasks.withType<Jar> { enabled = true }
+  tasks.getByName<Jar>("jar") { enabled = true }
   tasks.withType<BootJar> { enabled = false }
 
   repositories {
@@ -65,19 +70,21 @@ subprojects {
   }
 
   dependencies {
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compile("org.jetbrains.kotlin:kotlin-reflect")
-    compile("ch.qos.logback:logback-classic")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("ch.qos.logback:logback-classic")
 
-    compile("com.github.ben-manes.caffeine:caffeine:$caffeine")
-    compile("org.apache.commons:commons-lang3:$commonslang3")
-    compile("commons-codec:commons-codec:$commonscodec")
-    compile("org.jctools:jctools-core:$jctools")
-    compile("com.google.guava:guava:$guava")
-    compile("org.codehaus.groovy:groovy:$groovy")
-    compile("org.slf4j:jul-to-slf4j")
+    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+    implementation("org.apache.commons:commons-lang3:$commonslang3")
+    implementation("commons-codec:commons-codec:$commonscodec")
+    implementation("org.jctools:jctools-core:$jctools")
+    implementation("com.google.guava:guava:$guava")
+    implementation("org.codehaus.groovy:groovy:$groovy")
+    implementation("org.slf4j:jul-to-slf4j")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
 
-    testImplementation("junit:junit")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")
@@ -118,7 +125,7 @@ subprojects {
 
     repositories {
       maven {
-        url = uri("${getProperty("user.home")}/.m2/repository")
+        url = uri("${System.getProperty("user.home")}/.m2/repository")
       }
     }
   }

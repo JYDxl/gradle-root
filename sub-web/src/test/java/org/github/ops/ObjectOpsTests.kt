@@ -1,35 +1,26 @@
 package org.github.ops
 
 import com.google.common.collect.ListMultimap
-import com.google.common.collect.Multimaps.index
 import org.github.base.entity.SysMenuEntity
 import org.github.base.service.ISysMenuService
-import org.github.base.service.ITipLoginLogService
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.io.IOException
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.Random
 import java.util.stream.IntStream
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 class ObjectOpsTests {
   /** log. */
   private val log = ObjectOpsTests::class.log
   @Autowired
-  private lateinit var tipLoginLogService: ITipLoginLogService
-  @Autowired
   private lateinit var sysMenuService: ISysMenuService
-
-  @Test
-  fun json() {
-    log.info { tipLoginLogService.list().json() }
-  }
 
   @Test
   fun rootCause() {
@@ -138,15 +129,6 @@ class ObjectOpsTests {
     val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()!!
     bubbleSort(array) { left, right -> left > right }
     log.info { array.json() }
-  }
-
-  @Test
-  fun recursive() {
-    val list = sysMenuService.list().map { SysMenuTree(it.menuId, it.pid, it.menuName) }
-    val multimap: ListMultimap<String, SysMenuTree> = index(list) { it!!.pid.orEmpty() }
-    val result: List<SysMenuTree> = multimap.get("")
-    recursive(multimap, result)
-    log.info { result.json() }
   }
 
   private fun bubbleSort(array: IntArray, predicate: (left: Int, right: Int) -> Boolean) {

@@ -2,15 +2,15 @@ package org.github.extra
 
 import com.google.common.collect.Range
 import org.github.ops.minOfDay
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.LocalTime
 import java.util.Comparator
 import java.util.TreeMap
 
-@RunWith(SpringRunner::class)
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 class TimeRangeTests {
   @Test

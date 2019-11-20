@@ -1,5 +1,5 @@
 val mybatisplus: String by System.getProperties()
-val mariadb: String by System.getProperties()
+val mysql: String by System.getProperties()
 
 dependencies {
   api(project(":sub-core"))
@@ -11,7 +11,6 @@ dependencies {
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
 
   testImplementation("com.baomidou:mybatis-plus-generator:$mybatisplus")
-  testImplementation("org.mariadb.jdbc:mariadb-java-client:$mariadb")
-
+  testImplementation("mysql:mysql-connector-java:$mysql")
   testImplementation("org.freemarker:freemarker")
 }
