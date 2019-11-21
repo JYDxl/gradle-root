@@ -1,4 +1,10 @@
+val commonscodec: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
+val javassist: String by System.getProperties()
+val caffeine: String by System.getProperties()
+val byteman: String by System.getProperties()
+val guice: String by System.getProperties()
+val jna: String by System.getProperties()
 
 dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-amqp")
@@ -7,4 +13,12 @@ dependencies {
   compileOnly("javax.servlet:javax.servlet-api")
 
   compileOnly("com.baomidou:mybatis-plus-core:$mybatisplus")
+
+  testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+  testImplementation("commons-codec:commons-codec:$commonscodec")
+  testImplementation("org.jboss.byteman:byteman:$byteman")
+  testImplementation("com.google.inject:guice:$guice")
+  testImplementation("com.google.inject.extensions:guice-multibindings:$guice")
+  testImplementation("net.java.dev.jna:jna:$jna")
+  testImplementation("org.javassist:javassist:$javassist")
 }

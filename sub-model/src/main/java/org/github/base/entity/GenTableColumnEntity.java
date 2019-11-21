@@ -17,147 +17,101 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-20
+ * @since 2019-11-21
  */
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @TableName("gen_table_column")
 public class GenTableColumnEntity extends AbstractEntity {
-  /**
-   * UID
-   */
-  private static final long serialVersionUID = 1L;
+    /** UID */
+    private static final long serialVersionUID = 1L;
 
-  /**
-   * 编号
-   */
-  @TableId(value = "column_id", type = IdType.AUTO)
-  private Long columnId;
+    /** 编号 */
+    @TableId(value = "column_id", type = IdType.AUTO)
+    private Long columnId;
 
-  /**
-   * 归属表编号
-   */
-  @TableField("table_id")
-  private String tableId;
+    /** 归属表编号 */
+    @TableField("table_id")
+    private String tableId;
 
-  /**
-   * 列名称
-   */
-  @TableField("column_name")
-  private String columnName;
+    /** 列名称 */
+    @TableField("column_name")
+    private String columnName;
 
-  /**
-   * 列描述
-   */
-  @TableField("column_comment")
-  private String columnComment;
+    /** 列描述 */
+    @TableField("column_comment")
+    private String columnComment;
 
-  /**
-   * 列类型
-   */
-  @TableField("column_type")
-  private String columnType;
+    /** 列类型 */
+    @TableField("column_type")
+    private String columnType;
 
-  /**
-   * JAVA类型
-   */
-  @TableField("java_type")
-  private String javaType;
+    /** JAVA类型 */
+    @TableField("java_type")
+    private String javaType;
 
-  /**
-   * JAVA字段名
-   */
-  @TableField("java_field")
-  private String javaField;
+    /** JAVA字段名 */
+    @TableField("java_field")
+    private String javaField;
 
-  /**
-   * 是否主键（1是）
-   */
-  @TableField("is_pk")
-  private String isPk;
+    /** 是否主键（1是） */
+    @TableField("is_pk")
+    private String isPk;
 
-  /**
-   * 是否自增（1是）
-   */
-  @TableField("is_increment")
-  private String isIncrement;
+    /** 是否自增（1是） */
+    @TableField("is_increment")
+    private String isIncrement;
 
-  /**
-   * 是否必填（1是）
-   */
-  @TableField("is_required")
-  private String isRequired;
+    /** 是否必填（1是） */
+    @TableField("is_required")
+    private String isRequired;
 
-  /**
-   * 是否为插入字段（1是）
-   */
-  @TableField("is_insert")
-  private String isInsert;
+    /** 是否为插入字段（1是） */
+    @TableField("is_insert")
+    private String isInsert;
 
-  /**
-   * 是否编辑字段（1是）
-   */
-  @TableField("is_edit")
-  private String isEdit;
+    /** 是否编辑字段（1是） */
+    @TableField("is_edit")
+    private String isEdit;
 
-  /**
-   * 是否列表字段（1是）
-   */
-  @TableField("is_list")
-  private String isList;
+    /** 是否列表字段（1是） */
+    @TableField("is_list")
+    private String isList;
 
-  /**
-   * 是否查询字段（1是）
-   */
-  @TableField("is_query")
-  private String isQuery;
+    /** 是否查询字段（1是） */
+    @TableField("is_query")
+    private String isQuery;
 
-  /**
-   * 查询方式（等于、不等于、大于、小于、范围）
-   */
-  @TableField("query_type")
-  private String queryType;
+    /** 查询方式（等于、不等于、大于、小于、范围） */
+    @TableField("query_type")
+    private String queryType;
 
-  /**
-   * 显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）
-   */
-  @TableField("html_type")
-  private String htmlType;
+    /** 显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件） */
+    @TableField("html_type")
+    private String htmlType;
 
-  /**
-   * 字典类型
-   */
-  @TableField("dict_type")
-  private String dictType;
+    /** 字典类型 */
+    @TableField("dict_type")
+    private String dictType;
 
-  /**
-   * 排序
-   */
-  @TableField("sort")
-  private Integer sort;
+    /** 排序 */
+    @TableField("sort")
+    private Integer sort;
 
-  /**
-   * 创建者
-   */
-  @TableField("create_by")
-  private String createBy;
+    /** 创建者 */
+    @TableField("create_by")
+    private String createBy;
 
-  /**
-   * 创建时间
-   */
-  @TableField("create_time")
-  private LocalDateTime createTime;
+    /** 创建时间 */
+    @TableField("create_time")
+    private LocalDateTime createTime;
 
-  /**
-   * 更新者
-   */
-  @TableField("update_by")
-  private String updateBy;
+    /** 更新者 */
+    @TableField("update_by")
+    private String updateBy;
 
-  /**
-   * 更新时间
-   */
-  @TableField("update_time")
-  private LocalDateTime updateTime;
+    /** 更新时间 */
+    @TableField("update_time")
+    private LocalDateTime updateTime;
 }

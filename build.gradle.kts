@@ -64,13 +64,9 @@ subprojects {
     implementation("ch.qos.logback:logback-classic")
     implementation("org.slf4j:jul-to-slf4j")
 
-//    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
     implementation("org.apache.commons:commons-lang3:$commonslang3")
-//    implementation("commons-codec:commons-codec:$commonscodec")
-//    implementation("org.jctools:jctools-core:$jctools")
     implementation("com.google.guava:guava:$guava")
     implementation("org.codehaus.groovy:groovy:$groovy")
-//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")

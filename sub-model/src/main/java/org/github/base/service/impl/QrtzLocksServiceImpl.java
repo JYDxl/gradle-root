@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-20
+ * @since 2019-11-21
  */
 @Service
 public class QrtzLocksServiceImpl extends ServiceImpl<IQrtzLocksMapper, QrtzLocksEntity> implements IQrtzLocksService {}

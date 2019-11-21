@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-20
+ * @since 2019-11-21
  */
 @MyBatisMapper
 public interface IQrtzSchedulerStateMapper extends IMapper<QrtzSchedulerStateEntity> {}

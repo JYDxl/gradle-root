@@ -1,3 +1,5 @@
 package org.github.base;
 
-public interface IEntity {}
+import java.io.Serializable;
+
+public interface IEntity extends Serializable {}
