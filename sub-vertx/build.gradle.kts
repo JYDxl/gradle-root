@@ -27,6 +27,7 @@ tasks.getByName<Jar>("jar") {
 }
 
 tasks.withType<ShadowJar> {
+  minimize()
   archiveFileName.set("vertx-boot.jar")
   manifest {
     attributes(mapOf("Main-Class" to "org.github.ApplicationKt"))
