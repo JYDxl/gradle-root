@@ -1,11 +1,14 @@
 package org.github.base.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import org.github.base.AbstractEntity;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.sql.Blob;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * <p>
@@ -23,7 +26,7 @@ public class QrtzBlobTriggersEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    @TableId("sched_name")
+    @TableId(value = "sched_name", type = IdType.UUID)
     private String schedName;
 
     @TableField("trigger_name")

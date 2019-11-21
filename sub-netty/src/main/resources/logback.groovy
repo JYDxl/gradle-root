@@ -1,7 +1,7 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
 def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
-def dir = "${System.getProperty("user.dir")}/logs/sub-netty"
+def dir = "logs/sub-netty"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }

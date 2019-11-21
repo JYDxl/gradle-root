@@ -1,13 +1,13 @@
 package org.github
 
+import kotlinx.coroutines.runBlocking
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient
 
 @SpringBootApplication
-@EnableEurekaClient
+// @EnableEurekaClient
 class Application
 
-fun main(args: Array<String>) {
-  runApplication<Application>(*args)
+fun main(args: Array<String>) = runBlocking<Unit> {
+  runApplication<Application>(*args).apply {}
 }

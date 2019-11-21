@@ -1,6 +1,7 @@
 package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import org.github.base.AbstractEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
@@ -24,7 +25,7 @@ public class SysUserOnlineEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 用户会话id */
-    @TableId("sessionId")
+    @TableId(value = "sessionId", type = IdType.UUID)
     private String sessionId;
 
     /** 登录账号 */

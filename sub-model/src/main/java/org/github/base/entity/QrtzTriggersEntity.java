@@ -1,6 +1,7 @@
 package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import org.github.base.AbstractEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.sql.Blob;
@@ -23,7 +24,7 @@ public class QrtzTriggersEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    @TableId("sched_name")
+    @TableId(value = "sched_name", type = IdType.UUID)
     private String schedName;
 
     @TableField("trigger_name")

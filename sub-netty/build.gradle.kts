@@ -7,7 +7,6 @@ dependencies {
   api("com.google.protobuf:protobuf-java-util:$protobuf")
   api("io.netty:netty-all:$netty")
 
-  api(project(":sub-model"))
   api(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
@@ -32,7 +31,7 @@ tasks.withType<Test> {
   }
   jvmArgs = listOf(
     "-ea",
-    "-Djava.library.path=native",
+    "-Djava.library.path=../native",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "--illegal-access=deny",
     "--add-opens=java.base/java.nio=ALL-UNNAMED",

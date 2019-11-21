@@ -12,6 +12,7 @@ tasks.withType<Test> {
   jvmArgs = listOf("-ea", "-Djava.library.path=/usr/local/opt/tomcat-native/lib")
 }
 
+val kotlinxcoroutines: String by System.getProperties()
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
 val retrofit: String by System.getProperties()
@@ -19,11 +20,19 @@ val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
+val vertx: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-core"))
   implementation(project(":sub-model"))
-  implementation(project(":sub-vertx"))
+
+  api("io.netty:netty-all:$netty")
+  api("io.vertx:vertx-web:$vertx") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-lang-kotlin-coroutines:$vertx") { exclude(group = "io.netty") }
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")
@@ -41,7 +50,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.netty") }
-  implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+  // implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 

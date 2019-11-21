@@ -1,6 +1,7 @@
 package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
 import org.github.base.AbstractEntity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -23,7 +24,7 @@ public class SysUserPostEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
-    @TableId("user_id")
+    @TableId(value = "user_id", type = IdType.UUID)
     private Long userId;
 
     /** 岗位ID */

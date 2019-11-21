@@ -13,8 +13,6 @@ dependencies {
   api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
   api("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
 
-  implementation(project(":sub-netty"))
-  implementation(project(":sub-model"))
   implementation(project(":sub-core"))
 
   testImplementation("io.vertx:vertx-junit5:$vertx") { exclude(group = "io.netty");exclude(group = "org.junit.jupiter") }
@@ -42,7 +40,7 @@ tasks.withType<Test> {
   }
   jvmArgs = listOf(
     "-ea",
-    "-Djava.library.path=native",
+    "-Djava.library.path=../native",
     "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "--illegal-access=deny",
