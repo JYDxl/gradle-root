@@ -1,7 +1,7 @@
 package org.github.module.echo.shaded
 
 import io.netty.buffer.ByteBuf
-import io.netty.channel.ChannelHandler.Sharable
+import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.channel.group.ChannelGroup

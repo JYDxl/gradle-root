@@ -7,9 +7,9 @@ import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.http.DefaultFullHttpResponse
 import io.netty.handler.codec.http.FullHttpRequest
 import io.netty.handler.codec.http.HttpResponseStatus.*
+import org.github.netty.ops.toByteBuf
 import org.github.ops.debug
 import org.github.ops.log
-import org.github.ops.toByteBuf
 
 @Sharable
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {

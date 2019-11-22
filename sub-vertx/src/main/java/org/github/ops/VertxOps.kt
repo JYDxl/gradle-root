@@ -25,7 +25,7 @@ import kotlin.reflect.KClass
 inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.consumer(consumers: Consumers, maxBufferSize: Int = DEFAULT_MAX_BUFFERED_MESSAGES): ReceiveChannel<Message<Buffer>> {
   val address = consumers.toString()
   val consumer: MessageConsumer<Buffer> = eventBus().consumer<Buffer>(address)
-  logger.info { "[CONSUMER注册成功] ${address.pad("ADDRESS:")} | ${T::class.pad("EXPECTED:")} | REPLY:${R::class.java.name}" }
+  log.info { "[CONSUMER注册成功] ${address.pad("ADDRESS:")} | ${T::class.pad("EXPECTED:")} | REPLY:${R::class.java.name}" }
   return consumer.setMaxBufferedMessages(maxBufferSize).toChannel(this)
 }
 
@@ -37,12 +37,12 @@ suspend inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.requestA
 
 suspend inline fun <reified T: Verticle> Vertx.deploySupplier(verticle: Supplier<T>, options: DeploymentOptions = defaultDeploymentOptions) {
   @Suppress("UNCHECKED_CAST") val id = deployVerticleAwait(verticle as Supplier<Verticle>, options)
-  logger.deploySuccess(id, T::class, options)
+  log.deploySuccess(id, T::class, options)
 }
 
 suspend fun Vertx.deploy(verticle: Verticle, options: DeploymentOptions = defaultDeploymentOptions) {
   val id = deployVerticleAwait(verticle, options)
-  logger.deploySuccess(id, verticle::class, options)
+  log.deploySuccess(id, verticle::class, options)
 }
 
 suspend fun <T> Vertx.executeAwait(ordered: Boolean = false, blockingCodeHandler: () -> T?) = executeBlockingAwait<T>(
@@ -73,4 +73,6 @@ val defaultDeploymentOptions = DeploymentOptions()
 
 val defaultDeliveryOptions = DeliveryOptions()
 
-val logger = "org.github.VertxOps".log
+val log = VertxOps::class.log
+
+class VertxOps

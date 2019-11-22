@@ -9,7 +9,7 @@ import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.cmd.CmdDecoder
 import org.github.module.cmd.CmdServerHandler
-import org.github.module.line.LineDecoder
+import org.github.netty.decoder.DefaultLineDecoder
 import org.github.thread.NativeThreadFactory
 
 fun main() {
@@ -28,7 +28,7 @@ fun main() {
       override fun initChannel(channel: Channel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(LineDecoder(1024))
+          addLast(DefaultLineDecoder(1024))
           addLast(cmdDecoder)
           addLast(cmdServerHandler)
         }

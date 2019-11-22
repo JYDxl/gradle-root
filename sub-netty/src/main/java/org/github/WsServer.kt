@@ -12,8 +12,8 @@ import io.netty.handler.stream.ChunkedWriteHandler
 import io.netty.util.concurrent.Future
 import org.github.module.ws.HttpServerHandler
 import org.github.module.ws.WsTextServerHandler
-import org.github.ops.eventLoopGroup
-import org.github.ops.serverSocketChannel
+import org.github.netty.ops.eventLoopGroup
+import org.github.netty.ops.serverSocketChannel
 import org.github.thread.NativeThreadFactory
 
 fun main() {

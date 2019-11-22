@@ -9,10 +9,10 @@ import io.netty.handler.codec.http.HttpHeaderNames.*
 import io.netty.handler.codec.http.HttpHeaderValues.*
 import io.netty.handler.codec.http.HttpResponseStatus.*
 import io.netty.handler.codec.http.HttpUtil.*
-import org.github.ops.channelFutureListener
+import org.github.netty.ops.channelFutureListener
+import org.github.netty.ops.toByteBuf
 import org.github.ops.info
 import org.github.ops.log
-import org.github.ops.toByteBuf
 
 @Sharable
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {

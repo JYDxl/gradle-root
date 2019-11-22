@@ -2,8 +2,10 @@ val commonscodec: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
 val javassist: String by System.getProperties()
 val caffeine: String by System.getProperties()
+val protobuf: String by System.getProperties()
 val byteman: String by System.getProperties()
 val guice: String by System.getProperties()
+val netty: String by System.getProperties()
 val jna: String by System.getProperties()
 
 dependencies {
@@ -11,6 +13,8 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.netty") }
   compileOnly("javax.servlet:javax.servlet-api")
+  compileOnly("io.netty:netty-all:$netty")
+  compileOnly("com.google.protobuf:protobuf-java-util:$protobuf")
 
   compileOnly("com.baomidou:mybatis-plus-core:$mybatisplus")
 

@@ -1,4 +1,4 @@
-package org.github.ops
+package org.github.netty.ops
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.PooledByteBufAllocator

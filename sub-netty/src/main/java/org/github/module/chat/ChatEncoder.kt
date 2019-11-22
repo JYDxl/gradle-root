@@ -5,9 +5,9 @@ import io.netty.buffer.Unpooled.*
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
-import org.github.ops.ALLOC_POOLED
-import org.github.ops.ALLOC_UNPOOLED
-import org.github.ops.toByteBuf
+import org.github.netty.ops.ALLOC_POOLED
+import org.github.netty.ops.ALLOC_UNPOOLED
+import org.github.netty.ops.toByteBuf
 
 @Sharable
 class ChatEncoder: MessageToMessageEncoder<CharSequence>() {

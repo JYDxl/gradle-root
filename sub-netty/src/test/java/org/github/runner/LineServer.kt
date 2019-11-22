@@ -10,9 +10,9 @@ import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.ImmediateEventExecutor.*
-import org.github.module.line.LineDecoder
 import org.github.module.line.LineEncoder
 import org.github.module.line.LineServerHandler
+import org.github.netty.decoder.DefaultLineDecoder
 import org.github.thread.NativeThreadFactory
 import kotlin.text.Charsets.UTF_8
 
@@ -34,7 +34,7 @@ fun main() {
       override fun initChannel(channel: Channel) {
         channel.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(LineDecoder(1024))
+          addLast(DefaultLineDecoder(1024))
           addLast(stringDecoder)
           addLast(stringEncoder)
           addLast(lineServerHandler)

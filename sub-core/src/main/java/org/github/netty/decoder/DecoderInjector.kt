@@ -1,9 +1,9 @@
-package org.github.netty
+package org.github.netty.decoder
 
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
-import org.github.ops.markInfo
-import org.github.ops.prettyHexDump
+import org.github.netty.ops.markInfo
+import org.github.netty.ops.prettyHexDump
 import org.github.ops.trace
 import org.slf4j.Logger
 
@@ -22,5 +22,5 @@ interface DecoderInjector {
     }
   }
 
-  fun failIfNecessary(buf: ByteBuf) {}
+  fun failIfNecessary(buf: ByteBuf)
 }

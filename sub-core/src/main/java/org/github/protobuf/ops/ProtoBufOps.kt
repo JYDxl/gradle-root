@@ -1,4 +1,4 @@
-package org.github.ops
+package org.github.protobuf.ops
 
 import com.google.protobuf.Message
 import com.google.protobuf.util.JsonFormat.*

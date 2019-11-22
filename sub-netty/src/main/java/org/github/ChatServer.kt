@@ -11,9 +11,9 @@ import io.netty.util.concurrent.Future
 import io.netty.util.concurrent.ImmediateEventExecutor.*
 import org.github.module.chat.ChatEncoder
 import org.github.module.chat.ChatServerHandler
-import org.github.netty.LineDecoder
-import org.github.ops.eventLoopGroup
-import org.github.ops.serverSocketChannel
+import org.github.netty.decoder.DefaultLineDecoder
+import org.github.netty.ops.eventLoopGroup
+import org.github.netty.ops.serverSocketChannel
 import org.github.thread.NativeThreadFactory
 
 fun main() {
@@ -33,7 +33,7 @@ fun main() {
       override fun initChannel(ch: Channel) {
         ch.pipeline()!!.apply {
           addLast("LoggingHandler", loggingHandler)
-          addLast("chatDecoder", LineDecoder(1024))
+          addLast("chatDecoder", DefaultLineDecoder(1024))
           addLast("StringDecoder", stringDecoder)
           addLast("ChatEncoder", chatEncoder)
           addLast("ChatServerHandler", chatServerHandler)

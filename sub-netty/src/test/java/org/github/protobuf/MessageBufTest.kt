@@ -1,7 +1,7 @@
 package org.github.protobuf
 
-import org.github.ops.json
 import org.github.protobuf.MessageBuf.*
+import org.github.protobuf.ops.json
 import org.junit.jupiter.api.Test
 
 class MessageBufTest {

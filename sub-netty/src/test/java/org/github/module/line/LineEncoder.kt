@@ -23,7 +23,7 @@ class LineEncoder: MessageToMessageEncoder<CharSequence>() {
 
     private fun CharSequence.toBuf(alloc: ByteBufAllocator) = encodeString(alloc, wrap(this), UTF_8)!!
 
-    fun CharSequence.toByteBuf(alloc: ByteBufAllocator = org.github.ops.ALLOC): ByteBuf {
+    fun CharSequence.toByteBuf(alloc: ByteBufAllocator = org.github.netty.ops.ALLOC): ByteBuf {
       val data = toBuf(alloc)
       if(endsWith(delimiter)) return data
       return alloc.compositeBuffer(2)!!.apply { addComponents(true, data, line) }

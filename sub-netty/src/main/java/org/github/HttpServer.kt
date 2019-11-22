@@ -9,8 +9,8 @@ import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.Future
 import org.github.module.http.HttpServerHandler
-import org.github.ops.eventLoopGroup
-import org.github.ops.serverSocketChannel
+import org.github.netty.ops.eventLoopGroup
+import org.github.netty.ops.serverSocketChannel
 import org.github.thread.NativeThreadFactory
 
 fun main() {

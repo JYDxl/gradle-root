@@ -1,4 +1,4 @@
-package org.github.ops
+package org.github.netty.ops
 
 import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelFutureListener
@@ -11,6 +11,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.util.concurrent.Future
 import io.netty.util.concurrent.GenericFutureListener
+import org.github.ops.error
+import org.github.ops.log
 import java.lang.System.*
 import java.util.Locale.*
 import java.util.concurrent.ThreadFactory

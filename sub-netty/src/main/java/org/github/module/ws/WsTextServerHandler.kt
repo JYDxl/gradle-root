@@ -5,8 +5,8 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler.*
+import org.github.netty.ops.markInfo
 import org.github.ops.log
-import org.github.ops.markInfo
 
 @Sharable
 class WsTextServerHandler: SimpleChannelInboundHandler<TextWebSocketFrame>() {
