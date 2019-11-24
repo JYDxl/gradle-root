@@ -12,7 +12,6 @@ tasks.withType<Test> {
   jvmArgs = listOf("-ea", "-Djava.library.path=/usr/local/opt/tomcat-native/lib")
 }
 
-val kotlinxcoroutines: String by System.getProperties()
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
 val retrofit: String by System.getProperties()
@@ -31,8 +30,6 @@ dependencies {
   api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-lang-kotlin-coroutines:$vertx") { exclude(group = "io.netty") }
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")
@@ -42,7 +39,6 @@ dependencies {
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
 
-  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
   implementation("org.springframework.boot:spring-boot-starter-cache")

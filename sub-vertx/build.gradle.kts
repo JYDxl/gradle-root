@@ -1,6 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-val kotlinxcoroutines: String by System.getProperties()
 val vertx: String by System.getProperties()
 val netty: String by System.getProperties()
 
@@ -10,8 +9,6 @@ dependencies {
   api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
   api("io.vertx:vertx-lang-kotlin-coroutines:$vertx") { exclude(group = "io.netty") }
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
 
   implementation(project(":sub-core"))
 

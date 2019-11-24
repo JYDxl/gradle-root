@@ -3,6 +3,7 @@ import org.gradle.api.JavaVersion.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
+val kotlinxcoroutines: String by System.getProperties()
 val commonslang3: String by System.getProperties()
 val springcloud: String by System.getProperties()
 val jackson: String by System.getProperties()
@@ -68,6 +69,9 @@ subprojects {
     implementation("org.apache.commons:commons-lang3:$commonslang3")
     implementation("com.google.guava:guava:$guava")
     implementation("org.codehaus.groovy:groovy:$groovy")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
 
     implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-core:$jackson")
