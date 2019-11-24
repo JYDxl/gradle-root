@@ -1,7 +1,6 @@
-.vertx
+.gradle
+.idea
 build
 out
 logs
-/.gradle
-/.extra
-/.idea
+rebel.xml

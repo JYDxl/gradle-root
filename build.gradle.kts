@@ -5,6 +5,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 val commonslang3: String by System.getProperties()
 val springcloud: String by System.getProperties()
+val jackson: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
 val guava: String by System.getProperties()
@@ -67,6 +68,16 @@ subprojects {
     implementation("org.apache.commons:commons-lang3:$commonslang3")
     implementation("com.google.guava:guava:$guava")
     implementation("org.codehaus.groovy:groovy:$groovy")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")
+    implementation("com.fasterxml.jackson.core:jackson-core:$jackson")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353:$jackson")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jackson")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")

@@ -1,11 +1,15 @@
 package org.github.netty.ops
 
+import io.netty.channel.Channel
 import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ServerChannel
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.epoll.EpollSocketChannel
+import io.netty.channel.kqueue.KQueueEventLoopGroup
+import io.netty.channel.kqueue.KQueueServerSocketChannel
+import io.netty.channel.kqueue.KQueueSocketChannel
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
@@ -26,25 +30,27 @@ val channelFutureListener: GenericFutureListener<out Future<in Void>> = ChannelF
 }
 
 val serverSocketChannel: Class<out ServerChannel>
-  get() = if(linux) {
-    EpollServerSocketChannel::class.java
-  } else {
-    NioServerSocketChannel::class.java
+  get() = when {
+    mac   -> KQueueServerSocketChannel::class.java
+    linux -> EpollServerSocketChannel::class.java
+    else  -> NioServerSocketChannel::class.java
   }
 
-val socketChannel
-  get() = if(linux) {
-    EpollSocketChannel::class.java
-  } else {
-    NioSocketChannel::class.java
+val socketChannel: Class<out Channel>
+  get() = when {
+    mac   -> KQueueSocketChannel::class.java
+    linux -> EpollSocketChannel::class.java
+    else  -> NioSocketChannel::class.java
   }
 
-fun eventLoopGroup(threads: Int, threadFactory: ThreadFactory) = if(linux) {
-  EpollEventLoopGroup(threads, threadFactory)
-} else {
-  NioEventLoopGroup(threads, threadFactory)
+fun eventLoopGroup(threads: Int, threadFactory: ThreadFactory) = when {
+  mac   -> KQueueEventLoopGroup(threads, threadFactory)
+  linux -> EpollEventLoopGroup(threads, threadFactory)
+  else  -> NioEventLoopGroup(threads, threadFactory)
 }
 
 internal val os = getProperty("os.name", "").toLowerCase(US)
 
 internal val linux get() = os.contains("linux")
+
+internal val mac get() = os.contains("mac")
