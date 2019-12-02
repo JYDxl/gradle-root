@@ -54,9 +54,9 @@ subprojects {
   }
 
   repositories {
-    maven { url = uri("https://maven.aliyun.com/repository/public") }
-    maven { url = uri("https://maven.aliyun.com/repository/spring") }
-    maven { url = uri("https://maven.aliyun.com/repository/google") }
+    maven { url = uri("http://maven.aliyun.com/repository/public");isAllowInsecureProtocol = true }
+    maven { url = uri("http://maven.aliyun.com/repository/spring");isAllowInsecureProtocol = true }
+    maven { url = uri("http://maven.aliyun.com/repository/google");isAllowInsecureProtocol = true }
     mavenCentral()
   }
 
