@@ -27,7 +27,7 @@ tasks.withType<ShadowJar> {
   minimize()
   archiveFileName.set("vertx-boot.jar")
   manifest {
-    attributes(mapOf("Main-Class" to "org.github.ApplicationKt"))
+    attributes(mapOf("Main-Class" to "org.github.VertxAppKt"))
   }
 }
 
@@ -38,11 +38,13 @@ tasks.withType<Test> {
   }
   jvmArgs = listOf(
     "-ea",
-    "-Djava.library.path=../native",
     "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
     "-Dio.netty.tryReflectionSetAccessible=true",
-    "--illegal-access=deny",
+    "-Djava.net.preferIPv4Stack=true",
+    "-Djava.library.path=../native",
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
+    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
     "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED"
+    "--illegal-access=deny"
   )
 }

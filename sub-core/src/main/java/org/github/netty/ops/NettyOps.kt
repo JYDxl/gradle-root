@@ -1,7 +1,5 @@
 package org.github.netty.ops
 
-import io.netty.channel.Channel
-import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ServerChannel
 import io.netty.channel.epoll.EpollEventLoopGroup
@@ -25,7 +23,7 @@ class NettyOps
 
 val log = NettyOps::class.log
 
-val channelFutureListener: GenericFutureListener<out Future<in Void>> = ChannelFutureListener { it: ChannelFuture ->
+val channelFutureListener: GenericFutureListener<out Future<in Void>> = ChannelFutureListener {
   if(!it.isSuccess) log.error(it.cause()) { it.channel().markInfo }
 }
 
@@ -36,7 +34,7 @@ val serverSocketChannel: Class<out ServerChannel>
     else  -> NioServerSocketChannel::class.java
   }
 
-val socketChannel: Class<out Channel>
+val socketChannel
   get() = when {
     mac   -> KQueueSocketChannel::class.java
     linux -> EpollSocketChannel::class.java
@@ -51,6 +49,6 @@ fun eventLoopGroup(threads: Int, threadFactory: ThreadFactory) = when {
 
 internal val os = getProperty("os.name", "").toLowerCase(US)
 
-internal val linux get() = os.contains("linux")
+internal val linux = os.contains("linux")
 
-internal val mac get() = os.contains("mac")
+internal val mac = os.contains("mac")

@@ -1,4 +1,4 @@
-#FROM azul/zulu-openjdk-alpine:11-jre as gradle-vertx
+#FROM azul/zulu-openjdk-alpine:11.0.5-jre-headless as alpine-jre
 #
 #RUN \
 ##设置镜像地址
@@ -13,8 +13,8 @@
 ##配置netty-native文件
 #    && mkdir -p /opt/tmp/netty/ \
 #    && cd /opt/tmp/netty/ \
-#    && wget https://maven.aliyun.com/repository/public/io/netty/netty-all/4.1.43.Final/netty-all-4.1.43.Final.jar \
-#    && unzip netty-all-4.1.43.Final.jar \
+#    && wget http://maven.aliyun.com/repository/public/io/netty/netty-transport-native-epoll/4.1.43.Final/netty-transport-native-epoll-4.1.43.Final-linux-x86_64.jar \
+#    && unzip netty-transport-native-epoll-4.1.43.Final-linux-x86_64.jar \
 #    && mkdir /opt/native/ \
 #    && cp META-INF/native/libnetty_transport_native_epoll_x86_64.so /opt/native/ \
 ##文件清理
@@ -24,18 +24,20 @@
 #ENV LANGUAGE en_US.UTF-8
 #ENV TZ Asia/Shanghai
 
-FROM gradle-vertx
+FROM alpine-jre
 COPY build/libs/vertx-boot.jar /opt/vertx-boot.jar
 WORKDIR /opt
 EXPOSE 3000/tcp 8800/tcp 5005/tcp
 CMD java \
     -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 \
-    -ea \
     -jar \
-    -Djava.library.path=/opt/native \
+    -ea \
+    -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory
     -Dio.netty.tryReflectionSetAccessible=true \
+    -Djava.net.preferIPv4Stack=true \
+    -Djava.library.path=/opt/native \
+    --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED \
     --add-exports=java.base/sun.nio.ch=ALL-UNNAMED \
     --add-opens=java.base/java.nio=ALL-UNNAMED \
-    --add-exports=java.base/jdk.internal.misc=ALL-UNNAMED \
     --illegal-access=deny \
     vertx-boot.jar
