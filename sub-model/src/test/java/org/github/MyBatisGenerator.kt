@@ -24,7 +24,7 @@ fun main() {
     isFileOverride = true
     isOpen = false
     author = "JYD_XL"
-    idType = UUID
+    idType = ASSIGN_UUID
     generator.globalConfig = this
   }
 
