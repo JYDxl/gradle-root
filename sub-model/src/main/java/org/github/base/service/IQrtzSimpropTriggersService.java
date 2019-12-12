@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-21
+ * @since 2019-12-12
  */
 public interface IQrtzSimpropTriggersService extends IService<QrtzSimpropTriggersEntity> {}

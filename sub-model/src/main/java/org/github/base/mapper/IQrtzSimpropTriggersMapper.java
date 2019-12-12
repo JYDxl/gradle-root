@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-21
+ * @since 2019-12-12
  */
 @MyBatisMapper
 public interface IQrtzSimpropTriggersMapper extends IMapper<QrtzSimpropTriggersEntity> {}

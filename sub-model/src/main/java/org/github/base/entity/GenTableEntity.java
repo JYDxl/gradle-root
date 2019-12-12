@@ -1,14 +1,12 @@
 package org.github.base.entity;
 
-import java.time.LocalDateTime;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import org.github.base.AbstractEntity;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.*;
 
 /**
  * <p>
@@ -16,7 +14,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-21
+ * @since 2019-12-12
  */
 @Setter
 @Getter

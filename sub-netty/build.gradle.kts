@@ -6,7 +6,8 @@ val netty: String by System.getProperties()
 dependencies {
   api("com.google.protobuf:protobuf-java-util:$protobuf")
   api("io.netty:netty-all:$netty")
-
+  api("io.projectreactor.netty:reactor-netty") { exclude(group = "io.netty") }
+  api("io.projectreactor.kotlin:reactor-kotlin-extensions")
   api(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")

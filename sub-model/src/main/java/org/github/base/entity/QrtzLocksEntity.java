@@ -13,7 +13,7 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-21
+ * @since 2019-12-12
  */
 @Setter
 @Getter
@@ -23,7 +23,7 @@ public class QrtzLocksEntity extends AbstractEntity {
     /** UID */
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "sched_name", type = IdType.UUID)
+    @TableId(value = "sched_name", type = IdType.ASSIGN_UUID)
     private String schedName;
 
     @TableField("lock_name")

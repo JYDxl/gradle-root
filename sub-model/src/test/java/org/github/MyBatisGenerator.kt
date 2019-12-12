@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig
 import com.baomidou.mybatisplus.generator.config.PackageConfig
 import com.baomidou.mybatisplus.generator.config.StrategyConfig
 import com.baomidou.mybatisplus.generator.config.TemplateConfig
+import com.baomidou.mybatisplus.generator.config.po.LikeTable
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.*
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.*
@@ -29,7 +30,7 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://localhost:3380/sample?useSSL=false"
+    url = "jdbc:mysql://localhost:3380/sample"
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
     password = "l"
@@ -51,7 +52,7 @@ fun main() {
     superMapperClass = "org.github.base.IMapper"
     superServiceClass = "org.github.base.IService"
     superServiceImplClass = "org.github.base.ServiceImpl"
-    setInclude(".+")
+    likeTable = LikeTable("_")
     generator.strategy = this
   }
 

@@ -14,7 +14,7 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-21
+ * @since 2019-12-12
  */
 @Setter
 @Getter
@@ -25,7 +25,7 @@ public class SysUserOnlineEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 用户会话id */
-    @TableId(value = "sessionId", type = IdType.UUID)
+    @TableId(value = "sessionId", type = IdType.ASSIGN_UUID)
     private String sessionId;
 
     /** 登录账号 */

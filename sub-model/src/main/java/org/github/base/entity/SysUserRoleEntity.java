@@ -13,7 +13,7 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2019-11-21
+ * @since 2019-12-12
  */
 @Setter
 @Getter
@@ -24,7 +24,7 @@ public class SysUserRoleEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 用户ID */
-    @TableId(value = "user_id", type = IdType.UUID)
+    @TableId(value = "user_id", type = IdType.ASSIGN_UUID)
     private Long userId;
 
     /** 角色ID */
