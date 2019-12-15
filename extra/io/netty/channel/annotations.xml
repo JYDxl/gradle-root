@@ -1,0 +1,26 @@
+<root>
+  <item name='io.netty.channel.Channel io.netty.channel.ChannelPipeline pipeline()'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelFuture io.netty.channel.ChannelFuture sync()'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelHandlerContext io.netty.channel.Channel channel()'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelInboundHandlerAdapter void channelActive(io.netty.channel.ChannelHandlerContext) 0'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelInboundHandlerAdapter void channelRead(io.netty.channel.ChannelHandlerContext, java.lang.Object) 0'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelInboundHandlerAdapter void channelRead(io.netty.channel.ChannelHandlerContext, java.lang.Object) 1'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelInboundHandlerAdapter void channelReadComplete(io.netty.channel.ChannelHandlerContext) 0'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelInitializer void initChannel(C) 0'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>

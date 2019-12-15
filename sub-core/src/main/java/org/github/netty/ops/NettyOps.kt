@@ -24,7 +24,7 @@ class NettyOps
 val log = NettyOps::class.log
 
 val channelFutureListener: GenericFutureListener<out Future<in Void>> = ChannelFutureListener {
-  if(!it.isSuccess) log.error(it.cause()) { it.channel().markInfo }
+  if(!it.isSuccess) log.error(it.cause()) { it.channel().info }
 }
 
 val serverSocketChannel: Class<out ServerChannel>

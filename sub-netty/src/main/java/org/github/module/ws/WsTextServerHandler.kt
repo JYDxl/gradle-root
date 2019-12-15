@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler.*
-import org.github.netty.ops.markInfo
+import org.github.netty.ops.info
 import org.github.ops.log
 
 @Sharable
@@ -17,7 +17,7 @@ class WsTextServerHandler: SimpleChannelInboundHandler<TextWebSocketFrame>() {
   override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
     if(evt is HandshakeComplete) {
       ctx.pipeline().remove(HttpServerHandler::class.java)
-      log.warn("${ctx.channel().markInfo}成功升级到websocket协议")
+      log.warn("${ctx.channel().info}成功升级到websocket协议")
     }
   }
 

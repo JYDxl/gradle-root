@@ -15,8 +15,8 @@ val ALLOC_POOLED get() = PooledByteBufAllocator.DEFAULT!!
 
 val ALLOC_UNPOOLED get() = UnpooledByteBufAllocator.DEFAULT!!
 
-fun Channel.hasMark() = hasAttr(KEY_MARK) && mark.get() != null
+val Channel.hasMark get() = hasAttr(KEY_MARK)
 
 val Channel.mark: Attribute<String> get() = attr(KEY_MARK)
 
-val Channel.markInfo: String get() = "[MARK:${(mark.get() ?: remoteAddress())}]"
+val Channel.info get() = "[MARK:${if(hasMark) mark.get() else null}]"
