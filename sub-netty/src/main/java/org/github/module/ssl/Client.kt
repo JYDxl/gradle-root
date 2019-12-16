@@ -1,11 +1,7 @@
 package org.github.module.ssl
 
 import io.netty.bootstrap.Bootstrap
-import io.netty.channel.Channel
-import io.netty.channel.ChannelFutureListener
-import io.netty.channel.ChannelHandlerContext
-import io.netty.channel.ChannelInboundHandlerAdapter
-import io.netty.channel.ChannelInitializer
+import io.netty.channel.*
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.*
@@ -15,10 +11,10 @@ import org.github.netty.decoder.DefaultLineDecoder
 import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
-import org.github.ops.log
 import org.github.thread.NativeThreadFactory
 import java.io.File
 import java.util.concurrent.TimeUnit.*
+import java.util.function.Function
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
@@ -28,7 +24,7 @@ fun main() {
   val sslCtx = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
 
   val loggingHandler = LoggingHandler(TRACE)
-  val readWriteInfoHandler = ReadWriteInfoHandler()
+  val readWriteInfoHandler = ReadWriteInfoHandler(Function { it.toString().trim() })
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = StringEncoder(UTF_8)
   val clientHandler = ClientHandler()
@@ -70,5 +66,3 @@ class ClientHandler: ChannelInboundHandlerAdapter() {
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {}
 }
-
-private val log = ClientHandler::class.log
