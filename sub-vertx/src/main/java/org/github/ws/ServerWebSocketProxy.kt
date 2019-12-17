@@ -14,11 +14,11 @@ class ServerWebSocketProxy(ws: ServerWebSocket, vertx: Vertx): CoroutineScope, S
 
   fun coroutineExceptionHandler(handle: CoroutineVertxServerWebSocketHandler<Throwable>): ServerWebSocket {
     val fn = handle.name
-    exceptionHandler { throwable: Throwable ->
+    exceptionHandler {
       launch(CoroutineName(fn)) {
         log.trace { "Touch exceptionHandler $fn" }
         try {
-          handle(this@ServerWebSocketProxy, throwable)
+          handle(this@ServerWebSocketProxy, it)
         } catch(e: Exception) {
           log.error(e) {}
         } finally {
@@ -31,11 +31,11 @@ class ServerWebSocketProxy(ws: ServerWebSocket, vertx: Vertx): CoroutineScope, S
 
   fun coroutineTextMessageHandler(handle: CoroutineVertxServerWebSocketHandler<String>): ServerWebSocket {
     val fn = handle.name
-    textMessageHandler { text: String ->
+    textMessageHandler {
       launch(CoroutineName(fn)) {
         log.trace { "Touch textMessageHandler $fn" }
         try {
-          handle(this@ServerWebSocketProxy, text)
+          handle(this@ServerWebSocketProxy, it)
         } catch(e: Exception) {
           log.error(e) {}
         } finally {
@@ -48,11 +48,11 @@ class ServerWebSocketProxy(ws: ServerWebSocket, vertx: Vertx): CoroutineScope, S
 
   fun coroutineBinaryMessageHandler(handle: CoroutineVertxServerWebSocketHandler<Buffer>): ServerWebSocket {
     val fn = handle.name
-    binaryMessageHandler { buffer: Buffer ->
+    binaryMessageHandler {
       launch(CoroutineName(fn)) {
         log.trace { "Touch binaryMessageHandler $fn" }
         try {
-          handle(this@ServerWebSocketProxy, buffer)
+          handle(this@ServerWebSocketProxy, it)
         } catch(e: Exception) {
           log.error(e) {}
         } finally {
@@ -65,7 +65,7 @@ class ServerWebSocketProxy(ws: ServerWebSocket, vertx: Vertx): CoroutineScope, S
 
   fun coroutineCloseHandler(handle: CoroutineVertxServerWebSocketHandler<Unit>): ServerWebSocket {
     val fn = handle.name
-    closeHandler { _: Void? ->
+    closeHandler {
       launch(CoroutineName(fn)) {
         log.trace { "Touch closeHandler $fn" }
         try {

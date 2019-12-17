@@ -5,6 +5,8 @@ import io.netty.channel.Channel
 import io.netty.channel.ChannelDuplexHandler
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.ChannelInboundHandlerAdapter
+import io.netty.channel.ChannelOutboundHandlerAdapter
 import io.netty.channel.ChannelPromise
 import org.github.netty.ops.info
 import org.github.ops.info
@@ -23,16 +25,42 @@ class ReadWriteInfoHandler(private val func: Function<Any, String?> = turn): Cha
     writeLog(log, msg, ctx.channel(), func)
     super.write(ctx, msg, promise)
   }
+
+  companion object {
+    private val log = ReadWriteInfoHandler::class.log
+  }
 }
 
-private val log = ReadWriteInfoHandler::class.log
+@Sharable
+class ReadInfoHandler(private val func: Function<Any, String?> = turn): ChannelInboundHandlerAdapter() {
+  override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
+    readLog(log, msg, ctx.channel(), func)
+    super.channelRead(ctx, msg)
+  }
 
-internal val turn = Function<Any, String?> { it.toString() }
+  companion object {
+    private val log = ReadInfoHandler::class.log
+  }
+}
 
-internal fun readLog(logger: Logger, msg: Any, channel: Channel, func: Function<Any, String?>) {
+@Sharable
+class WriteInfoHandler(private val func: Function<Any, String?> = turn): ChannelOutboundHandlerAdapter() {
+  override fun write(ctx: ChannelHandlerContext, msg: Any, promise: ChannelPromise) {
+    writeLog(log, msg, ctx.channel(), func)
+    super.write(ctx, msg, promise)
+  }
+
+  companion object {
+    private val log = WriteInfoHandler::class.log
+  }
+}
+
+private val turn = Function<Any, String?> { it.toString() }
+
+private fun readLog(logger: Logger, msg: Any, channel: Channel, func: Function<Any, String?>) {
   if(msg !is ByteBuf) channel.apply { logger.info { "$this $info >>>>READ: ${func.apply(msg)}" } }
 }
 
-internal fun writeLog(logger: Logger, msg: Any, channel: Channel, func: Function<Any, String?>) {
+private fun writeLog(logger: Logger, msg: Any, channel: Channel, func: Function<Any, String?>) {
   if(msg !is ByteBuf) channel.apply { logger.info { "$this $info WRITE>>>: ${func.apply(msg)}" } }
 }

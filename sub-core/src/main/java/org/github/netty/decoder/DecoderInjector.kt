@@ -22,5 +22,7 @@ interface DecoderInjector {
     }
   }
 
-  fun failIfNecessary(buf: ByteBuf)
+  @Throws(Exception::class)
+  fun failIfNecessary(buf: ByteBuf) {
+  }
 }

@@ -13,6 +13,8 @@ fun ByteBuf.beforeRelease(block: ByteBuf.() -> Unit) {
   apply(block).release()
 }
 
-val ByteBuf.prettyHexDump get() = prettyHexDump(this)!!
+val ByteBuf.prettyHexDump: String get() = prettyHexDump(this)
+
+val ByteBuf.hexDump: String get() = hexDump(this)
 
 fun CharSequence.toByteBuf(alloc: ByteBufAllocator = ALLOC_POOLED) = encodeString(alloc, wrap(this), UTF_8)!!

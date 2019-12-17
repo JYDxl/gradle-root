@@ -31,7 +31,7 @@ fun main() {
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<Channel>() {
       override fun initChannel(ch: Channel) {
-        ch.pipeline()!!.apply {
+        ch.pipeline().apply {
           addLast("LoggingHandler", loggingHandler)
           addLast("chatDecoder", DefaultLineDecoder(1024))
           addLast("StringDecoder", stringDecoder)

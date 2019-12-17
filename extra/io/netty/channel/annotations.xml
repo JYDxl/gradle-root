@@ -2,6 +2,15 @@
   <item name='io.netty.channel.Channel io.netty.channel.ChannelPipeline pipeline()'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>
+  <item name='io.netty.channel.ChannelDuplexHandler void write(io.netty.channel.ChannelHandlerContext, java.lang.Object, io.netty.channel.ChannelPromise) 0'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelDuplexHandler void write(io.netty.channel.ChannelHandlerContext, java.lang.Object, io.netty.channel.ChannelPromise) 1'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.channel.ChannelDuplexHandler void write(io.netty.channel.ChannelHandlerContext, java.lang.Object, io.netty.channel.ChannelPromise) 2'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
   <item name='io.netty.channel.ChannelFuture io.netty.channel.ChannelFuture sync()'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>

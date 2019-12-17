@@ -9,6 +9,7 @@ import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.ssl.SslContextBuilder.*
 import org.github.netty.decoder.DefaultLineDecoder
+import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.hasMark
@@ -33,6 +34,7 @@ fun main() {
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = StringEncoder(UTF_8)
   val serverHandler = ServerHandler()
+  val readWriteHexHandler = ReadWriteHexHandler()
 
   val boss = eventLoopGroup(1, NativeThreadFactory("ssl-server-boss"))
   val worker = eventLoopGroup(0, NativeThreadFactory("ssl-server-worker"))
@@ -48,6 +50,7 @@ fun main() {
           addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
           addLast(DefaultLineDecoder(1024, false))
+          addLast(readWriteHexHandler)
           addLast(stringDecoder)
           addLast(stringEncoder)
           addLast(readWriteInfoHandler)
@@ -88,7 +91,7 @@ class LinkHandler: ChannelInboundHandlerAdapter() {
     val array = link.toTypedArray()
     link.clear()
     for(item in array) {
-      super.channelRead(ctx, msg)
+      super.channelRead(ctx, item)
     }
   }
 }

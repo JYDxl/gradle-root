@@ -1,0 +1,5 @@
+<root>
+  <item name='io.vertx.core.Handler void handle(E) 0'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>
