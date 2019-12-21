@@ -26,4 +26,5 @@ appender("problems", FileAppender) {
 
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
+logger("io.netty.util.internal.NativeLibraryLoader", INFO)
 root(INFO, ["console", "records", "problems"])

@@ -28,7 +28,7 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
     val result = (returnValue ?: Returnable.nil()) as Returnable
     val req = webRequest.getNativeRequest(HttpServletRequest::class.java)!!
     val resp = webRequest.getNativeResponse(HttpServletResponse::class.java)!!
-    if(result.isTerminated) {
+    if(result.terminated()) {
       try {
         result.collect(req, resp)
       } catch(e: Exception) {
@@ -38,7 +38,7 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
     } else {
       mavContainer.viewName = result.value
     }
-    mavContainer.isRequestHandled = result.isTerminated
-    result.apply { log.trace { "Writing [$contentType] TO $value" } }
+    mavContainer.isRequestHandled = result.terminated()
+    result.apply { log.trace { "Writing [${mediaType()}] TO $value" } }
   }
 }

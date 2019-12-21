@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.github.spring.footstone.IConstKt;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of array.
@@ -29,11 +29,11 @@ import org.github.spring.footstone.IConstKt;
 public class JSONArray<E> extends JSONBasic implements JSON {
   /** data. */
   @NonNull
-  private Object[] data = IConstKt.getArray();
+  private Object[] data = getArray();
 
   @Override
   public void release() {
-    data = IConstKt.getArray();
+    data = getArray();
     super.release();
   }
 
@@ -73,8 +73,8 @@ public class JSONArray<E> extends JSONBasic implements JSON {
 
   /** Generator. */
   @Nonnull
-  public static JSONArray of() {
-    return new JSONArray();
+  public static JSONArray<?> of() {
+    return new JSONArray<>();
   }
 
   /** Generator. */

@@ -31,7 +31,7 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
     val value = returnValue == null ? Returnable.nil() : ((Returnable) returnValue);
     val req   = Objects.requireNonNull(webRequest.getNativeRequest(HttpServletRequest.class));
     val resp  = Objects.requireNonNull(webRequest.getNativeResponse(HttpServletResponse.class));
-    if(value.isTerminated()) {
+    if(value.terminated()) {
       try {
         value.collect(req, resp);
       } catch(Exception e) {
@@ -41,7 +41,7 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
     } else {
       mavContainer.setViewName(value.get());
     }
-    mavContainer.setRequestHandled(value.isTerminated());
-    log.trace("Writing [{}] TO {}", value.getContentType(), value.get());
+    mavContainer.setRequestHandled(value.terminated());
+    log.trace("Writing [{}] TO {}", value.mediaType(), value.get());
   }
 }

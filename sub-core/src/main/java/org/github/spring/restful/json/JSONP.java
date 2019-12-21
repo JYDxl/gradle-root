@@ -8,10 +8,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.github.spring.enumerate.ContentType;
-import org.github.spring.footstone.IConstKt;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.MoreObjects;
+import com.google.common.net.MediaType;
+import static com.google.common.base.MoreObjects.*;
+import static com.google.common.net.MediaType.*;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of jsonp.
@@ -33,12 +34,12 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   /** callback. */
   @JsonIgnore
   @NonNull
-  private String callback = IConstKt.CALL_BACK;
+  private String callback = CALL_BACK;
 
   @Override
-  public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse resp) throws Exception {
-    if(IConstKt.CALL_BACK.equals(callback)) setCallback(MoreObjects.firstNonNull(req.getParameter(IConstKt.CALL_BACK), IConstKt.CALL_BACK));
-    super.collect(req, resp);
+  public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
+    if(CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
+    super.collect(req, res);
   }
 
   @Override
@@ -48,25 +49,25 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   @Override
-  public boolean isFunctional() {
+  public boolean functional() {
     return true;
   }
 
   @Override
   @Nonnull
-  public ContentType getContentType() {
-    return ContentType.JSONP;
-  }
-
-  @Override
-  public void release() {
-    callback = IConstKt.CALL_BACK;
-    super.release();
+  public MediaType mediaType() {
+    return JAVASCRIPT_UTF_8;
   }
 
   @Override
   public String toString() {
     return super.get();
+  }
+
+  @Override
+  public void release() {
+    callback = CALL_BACK;
+    super.release();
   }
 
   /** WITH callback. */
@@ -77,12 +78,12 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   /** Generator. */
   @Nonnull
-  public static JSONP of() {
-    return new JSONP();
+  public static JSONP<?> of() {
+    return new JSONP<>();
   }
 
   /** Generator. */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @Nonnull
   public static <V> JSONP<V> of(V data) {
     return (JSONP) new JSONP<>().withData(data);

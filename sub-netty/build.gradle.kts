@@ -37,7 +37,6 @@ tasks.withType<Test> {
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Djava.net.preferIPv4Stack=true",
-    "-Djava.library.path=../native",
     "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
     "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
     "--add-opens=java.base/java.nio=ALL-UNNAMED",

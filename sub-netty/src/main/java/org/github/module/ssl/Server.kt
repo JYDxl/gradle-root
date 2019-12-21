@@ -1,13 +1,18 @@
 package org.github.module.ssl
 
 import io.netty.bootstrap.ServerBootstrap
-import io.netty.channel.*
+import io.netty.channel.Channel
+import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.ChannelInboundHandlerAdapter
+import io.netty.channel.ChannelInitializer
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.ssl.SslContextBuilder.*
+import io.netty.handler.ssl.SslProvider.*
 import org.github.netty.decoder.DefaultLineDecoder
 import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
@@ -15,19 +20,19 @@ import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.hasMark
 import org.github.netty.ops.mark
 import org.github.netty.ops.serverSocketChannel
+import org.github.ops.classpathFile
 import org.github.ops.info
 import org.github.ops.log
 import org.github.thread.NativeThreadFactory
-import java.io.File
-import java.util.*
+import java.util.LinkedList
 import java.util.function.Function
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val ca = File("ssl/ca.crt")
-  val serverCrt = File("ssl/server/server.crt")
-  val serverKey = File("ssl/server/pkcs8_server.key")
-  val sslCtx = forServer(serverCrt, serverKey).trustManager(ca).build()
+  val ca = "ssl/ca.crt".classpathFile
+  val serverCrt = "ssl/server/server.crt".classpathFile
+  val serverKey = "ssl/server/pkcs8_server.key".classpathFile
+  val sslCtx = forServer(serverCrt, serverKey).trustManager(ca).sslProvider(OPENSSL).build()
 
   val loggingHandler = LoggingHandler(TRACE)
   val readWriteInfoHandler = ReadWriteInfoHandler(Function { it.toString().trim() })

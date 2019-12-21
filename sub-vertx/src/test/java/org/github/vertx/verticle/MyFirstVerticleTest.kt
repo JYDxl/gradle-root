@@ -30,7 +30,7 @@ class MyFirstVerticleTest {
   private val port = 8000
 
   @BeforeAll
-  fun start(ctx: VertxTestContext) {
+  fun start() {
     val vertxOptions = VertxOptions().apply {
       maxEventLoopExecuteTimeUnit = MILLISECONDS
       maxEventLoopExecuteTime = 1
@@ -45,7 +45,7 @@ class MyFirstVerticleTest {
     ctx.completeNow()
   }
 
-//  @Test
+  //  @Test
   fun testApp(ctx: VertxTestContext) {
     val webClientOptions = WebClientOptions().apply {
       logActivity = true

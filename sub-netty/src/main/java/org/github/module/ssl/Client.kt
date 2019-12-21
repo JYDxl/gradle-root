@@ -1,7 +1,11 @@
 package org.github.module.ssl
 
 import io.netty.bootstrap.Bootstrap
-import io.netty.channel.*
+import io.netty.channel.Channel
+import io.netty.channel.ChannelFutureListener
+import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.ChannelInboundHandlerAdapter
+import io.netty.channel.ChannelInitializer
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.*
@@ -12,16 +16,16 @@ import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
+import org.github.ops.classpathFile
 import org.github.thread.NativeThreadFactory
-import java.io.File
 import java.util.concurrent.TimeUnit.*
 import java.util.function.Function
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val ca = File("ssl/ca.crt")
-  val clientCrt = File("ssl/client/client.crt")
-  val clientKey = File("ssl/client/pkcs8_client.key")
+  val ca = "ssl/ca.crt".classpathFile
+  val clientCrt = "ssl/client/client.crt".classpathFile
+  val clientKey = "ssl/client/pkcs8_client.key".classpathFile
   val sslCtx = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
 
   val loggingHandler = LoggingHandler(TRACE)

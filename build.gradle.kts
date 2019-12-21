@@ -105,6 +105,10 @@ subprojects {
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
   }
 
+  tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Xlint:unchecked")
+  }
+
   tasks.register<Jar>("sourcesJar") {
     from(sourceSets.main.get().allSource)
     archiveClassifier.set("sources")

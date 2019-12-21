@@ -1,0 +1,5 @@
+<root>
+  <item name='com.fasterxml.jackson.databind.ObjectMapper T readValue(java.lang.String, java.lang.Class&lt;T&gt;)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>

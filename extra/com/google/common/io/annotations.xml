@@ -1,0 +1,5 @@
+<root>
+  <item name='com.google.common.io.BaseEncoding byte[] decode(java.lang.CharSequence)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>

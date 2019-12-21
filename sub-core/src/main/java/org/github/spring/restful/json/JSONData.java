@@ -31,11 +31,6 @@ public class JSONData<T> extends JSONBasic implements JSON {
     super.release();
   }
 
-  @Override
-  public String toString() {
-    return get();
-  }
-
   /** WITH data. */
   public JSONData<T> withData(T data) {
     setData(data);
@@ -44,8 +39,8 @@ public class JSONData<T> extends JSONBasic implements JSON {
 
   /** Generator. */
   @Nonnull
-  public static JSONData of() {
-    return new JSONData();
+  public static JSONData<?> of() {
+    return new JSONData<>();
   }
 
   /** Generator. */

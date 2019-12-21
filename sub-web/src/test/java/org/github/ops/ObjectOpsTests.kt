@@ -144,6 +144,7 @@ class ObjectOpsTests {
     }
   }
 
+  @Suppress("TAILREC_ON_VIRTUAL_MEMBER")
   private tailrec fun recursive(multimap: ListMultimap<String, SysMenuTree>, list: List<SysMenuTree>) {
     for(node: SysMenuTree in list) {
       val sub: List<SysMenuTree> = multimap.get(node.id)

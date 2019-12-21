@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.github.spring.footstone.IConstKt;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of count.
@@ -23,11 +23,11 @@ import org.github.spring.footstone.IConstKt;
 @Data
 public class JSONCount extends JSONBasic implements JSON {
   /** data. */
-  private long data = IConstKt.COUNT;
+  private long data = COUNT;
 
   @Override
   public void release() {
-    data = IConstKt.COUNT;
+    data = COUNT;
     super.release();
   }
 

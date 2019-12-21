@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import org.github.ops.ObjectOpsKt;
-import org.github.spring.footstone.IConstKt;
+import static org.github.ops.ObjectOpsKt.*;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of basic.
@@ -22,25 +22,25 @@ import org.github.spring.footstone.IConstKt;
 @Data
 public class JSONBasic implements JSON {
   /** 返回的状态码. */
-  private int    resCode = IConstKt.RES_OK_CODE;
+  private int    resCode = RES_OK_CODE;
   /** 返回的信息. */
   @NonNull
-  private String resMsg  = IConstKt.RES_OK_MSG;
+  private String resMsg  = RES_OK_MSG;
 
   @Override
   @Nonnull
   public String get() {
-    return ObjectOpsKt.json(this, null);
+    return json(this, null);
   }
 
   @Override
-  public boolean isFunctional() {
+  public boolean functional() {
     return false;
   }
 
   @Override
   public void release() {
-    withResCode(IConstKt.RES_OK_CODE).withResMsg(IConstKt.RES_OK_MSG);
+    withResCode(RES_OK_CODE).withResMsg(RES_OK_MSG);
   }
 
   @Override
@@ -77,6 +77,6 @@ public class JSONBasic implements JSON {
   /** Generator. */
   @Nonnull
   public static JSONBasic error() {
-    return of(IConstKt.RET_ERROR_CODE, IConstKt.RET_ERROR_MSG);
+    return of(RET_ERROR_CODE, RET_ERROR_MSG);
   }
 }

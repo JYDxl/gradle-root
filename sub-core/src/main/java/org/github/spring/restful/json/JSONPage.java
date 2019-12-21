@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.github.spring.footstone.IConstKt;
-import org.github.util.BeansUtilKt;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import static org.github.spring.footstone.IConstKt.*;
+import static org.github.util.BeansUtilKt.*;
 
 /**
  * JSON of page.
@@ -27,11 +27,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 @Data
 public class JSONPage<E> extends JSONArray<E> implements JSON {
   /** total. */
-  private long total = IConstKt.COUNT;
+  private long total = COUNT;
 
   @Override
   public void release() {
-    total = IConstKt.COUNT;
+    total = COUNT;
     super.release();
   }
 
@@ -49,21 +49,20 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
 
   /** Generator. */
   @Nonnull
-  public static JSONPage of() {
-    return new JSONPage();
+  public static JSONPage<?> of() {
+    return new JSONPage<>();
   }
 
   /** Generator. */
-  @SuppressWarnings("unchecked")
   @Nonnull
   public static <V> JSONPage<V> of(@Nonnull IPage<? extends V> page) {
-    return (JSONPage) new JSONPage<V>(page.getTotal()).withData(page.getRecords());
+    return (JSONPage<V>) new JSONPage<V>(page.getTotal()).withData(page.getRecords());
   }
 
   /** Generator. */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "rawtypes"})
   @Nonnull
   public static <V> JSONPage<V> of(@Nonnull IPage<? super V> page, @Nonnull Class<? extends V> data) {
-    return (JSONPage) new JSONPage<>(page.getTotal()).withData(BeansUtilKt.copy(data, page.getRecords()));
+    return (JSONPage) new JSONPage<>(page.getTotal()).withData(copy(data, page.getRecords()));
   }
 }

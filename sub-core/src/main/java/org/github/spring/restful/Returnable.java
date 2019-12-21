@@ -8,10 +8,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.github.spring.enumerate.ContentType;
-import org.github.spring.footstone.IConstKt;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.MoreObjects;
+import com.google.common.net.MediaType;
+import static com.google.common.base.MoreObjects.*;
+import static com.google.common.net.MediaType.*;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * Top interface of all.
@@ -29,45 +29,42 @@ public interface Returnable extends Serializable, Supplier<String> {
 
   /** 通过字符流{@link Writer}处理数据. */
   default void accept(@Nonnull Writer writer) throws Exception {
-    writer.write(MoreObjects.firstNonNull(get(), IConstKt.NULL));
+    writer.write(firstNonNull(get(), NULL));
   }
 
   /** 通过字节流{@link OutputStream}处理数据. */
   default void accept(@Nonnull OutputStream output) throws Exception {
-    throw new Exception("unsupported");
+    throw new UnsupportedOperationException();
   }
 
   /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
-  default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse resp) throws Exception {
-    resp.setContentType(getContentType().toString());
-    if(isFunctional()) {
-      accept(resp.getWriter());
+  default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
+    res.setContentType(mediaType().toString());
+    if(functional()) {
+      accept(res.getWriter());
     } else {
-      accept(resp.getOutputStream());
+      accept(res.getOutputStream());
     }
   }
 
-  /** 获取返回类型. */
-  @JsonIgnore
-  @Nonnull
-  default ContentType getContentType() {
-    return ContentType.TEXT;
-  }
-
   /** 直接通过函数接口传递数据? */
-  @JsonIgnore
-  default boolean isFunctional() {
+  default boolean functional() {
     return true;
   }
 
-  /** 数据已被完全处理? 未处理完毕的数据将交由Spring继续处理(现阶段只对视图有效). */
-  @JsonIgnore
-  default boolean isTerminated() {
-    return true;
+  /** 获取返回类型. */
+  @Nonnull
+  default MediaType mediaType() {
+    return PLAIN_TEXT_UTF_8;
   }
 
   /** 清空数据. */
   default void release() {}
+
+  /** 数据已被完全处理? 未处理完毕的数据将交由Spring继续处理(现阶段只对视图有效). */
+  default boolean terminated() {
+    return true;
+  }
 
   /** Generator. */
   @Nonnull
@@ -78,12 +75,12 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** Generator. */
   @Nonnull
   static Returnable of() {
-    return of(IConstKt.EMPTY);
+    return getRestEmpty();
   }
 
   /** Generator. */
   @Nonnull
   static Returnable nil() {
-    return IConstKt.getRestNil();
+    return getRestNil();
   }
 }

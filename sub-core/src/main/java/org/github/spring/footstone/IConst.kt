@@ -3,6 +3,7 @@ package org.github.spring.footstone
 import com.google.common.base.Joiner.on
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSON
+import org.github.spring.restful.view.VIEW
 
 /** 默认日期格式化.  */
 const val FORMAT_TIME = "yyyy-MM-dd HH:mm:ss"
@@ -75,7 +76,8 @@ val spaceJoiner = on(SPACE).skipNulls()!!
 val joiner = emptyJoiner
 /** default result list. */
 val array = arrayOf<Any>()
-
 val jsonNil = JSON { null }
-
+val jsonEmpty = JSON { EMPTY_JSON }
 val restNil = Returnable { null }
+val restEmpty = Returnable { EMPTY }
+val viewRoot = VIEW { ROOT }

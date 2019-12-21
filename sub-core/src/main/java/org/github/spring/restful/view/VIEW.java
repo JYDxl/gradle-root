@@ -1,9 +1,10 @@
 package org.github.spring.restful.view;
 
 import javax.annotation.Nonnull;
-import org.github.spring.enumerate.ContentType;
-import org.github.spring.footstone.IConstKt;
 import org.github.spring.restful.Returnable;
+import com.google.common.net.MediaType;
+import static com.google.common.net.MediaType.*;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * Top interface of view.
@@ -21,12 +22,12 @@ public interface VIEW extends Returnable {
 
   @Override
   @Nonnull
-  default ContentType getContentType() {
-    return ContentType.HTML;
+  default MediaType mediaType() {
+    return HTML_UTF_8;
   }
 
   @Override
-  default boolean isTerminated() {
+  default boolean terminated() {
     return false;
   }
 
@@ -39,6 +40,6 @@ public interface VIEW extends Returnable {
   /** Generator. */
   @Nonnull
   static VIEW of() {
-    return of(IConstKt.ROOT);
+    return getViewRoot();
   }
 }

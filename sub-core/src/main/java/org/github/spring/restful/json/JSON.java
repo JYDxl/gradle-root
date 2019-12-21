@@ -2,10 +2,11 @@ package org.github.spring.restful.json;
 
 import java.io.OutputStream;
 import javax.annotation.Nonnull;
-import org.github.ops.ObjectOpsKt;
-import org.github.spring.enumerate.ContentType;
-import org.github.spring.footstone.IConstKt;
 import org.github.spring.restful.Returnable;
+import com.google.common.net.MediaType;
+import static com.google.common.net.MediaType.*;
+import static org.github.ops.ObjectOpsKt.*;
+import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * Top interface of json.
@@ -19,13 +20,13 @@ import org.github.spring.restful.Returnable;
 public interface JSON extends Returnable {
   @Override
   default void accept(@Nonnull OutputStream output) {
-    ObjectOpsKt.writeValue(this, output, null);
+    writeValue(this, output, null);
   }
 
   @Override
   @Nonnull
-  default ContentType getContentType() {
-    return ContentType.JSON;
+  default MediaType mediaType() {
+    return JSON_UTF_8;
   }
 
   /** Generator. */
@@ -37,18 +38,18 @@ public interface JSON extends Returnable {
   /** Generator. */
   @Nonnull
   static JSON of(@Nonnull Object json) {
-    return of(ObjectOpsKt.json(json, null));
+    return of(json(json, null));
   }
 
   /** Generator. */
   @Nonnull
   static JSON of() {
-    return of(IConstKt.EMPTY_JSON);
+    return getJsonEmpty();
   }
 
   /** Generator. */
   @Nonnull
   static JSON nil() {
-    return IConstKt.getJsonNil();
+    return getJsonNil();
   }
 }

@@ -8,8 +8,6 @@ import io.netty.handler.codec.http.FullHttpRequest
 import io.netty.handler.codec.http.HttpHeaderNames.*
 import io.netty.handler.codec.http.HttpHeaderValues.*
 import io.netty.handler.codec.http.HttpResponseStatus.*
-import io.netty.handler.codec.http.HttpUtil.*
-import org.github.netty.ops.channelFutureListener
 import org.github.netty.ops.toByteBuf
 import org.github.ops.info
 import org.github.ops.log
@@ -28,7 +26,6 @@ class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
     res.headers()[CONTENT_LENGTH] = msg.readableBytes()
     res.headers()[CONTENT_TYPE] = TEXT_PLAIN
     ctx.writeAndFlush(res, ctx.voidPromise())
-    if(!isKeepAlive(req)) ctx.close().addListener(channelFutureListener)
   }
 
   companion object {
