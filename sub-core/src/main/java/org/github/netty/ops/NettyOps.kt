@@ -6,6 +6,9 @@ import io.netty.channel.epoll.Epoll
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.epoll.EpollSocketChannel
+import io.netty.channel.group.ChannelGroup
+import io.netty.channel.group.ChannelMatcher
+import io.netty.channel.group.ChannelMatchers.*
 import io.netty.channel.kqueue.KQueue
 import io.netty.channel.kqueue.KQueueEventLoopGroup
 import io.netty.channel.kqueue.KQueueServerSocketChannel
@@ -34,3 +37,12 @@ fun eventLoopGroup(threads: Int, threadFactory: ThreadFactory) = when {
   KQueue.isAvailable() -> KQueueEventLoopGroup(threads, threadFactory)
   else                 -> NioEventLoopGroup(threads, threadFactory)
 }
+
+fun ChannelGroup.findChannel(matcher: ChannelMatcher): Boolean {
+  forEach { if(matcher.matches(it)) return true }
+  return false
+}
+
+val isWriteable get() = ChannelMatcher { it.isWritable }
+
+val ChannelMatcher.withWriteable: ChannelMatcher get() = compose(this, isWriteable)

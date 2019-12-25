@@ -2,13 +2,11 @@ package org.github.module.ssl
 
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
-import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.group.ChannelGroupFutureListener
 import io.netty.channel.group.ChannelMatchers.*
 import io.netty.channel.group.DefaultChannelGroup
 import io.netty.handler.codec.string.StringDecoder
@@ -23,7 +21,6 @@ import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 import org.github.ops.info
 import org.github.ops.log
-import org.github.ops.warn
 import org.github.thread.NativeThreadFactory
 import java.util.LinkedList
 import java.util.function.Function
@@ -82,16 +79,7 @@ class ServerHandler: ChannelInboundHandlerAdapter() {
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
-    val listener = ChannelGroupFutureListener {
-      for(future: ChannelFuture in it) {
-        if(future.isSuccess) {
-          log.info { "${future.channel()} success" }
-        } else {
-          log.warn(future.cause()) { "${future.channel()} failure" }
-        }
-      }
-    }
-    group.writeAndFlush(msg, isNot(ctx.channel()),true)
+    group.writeAndFlush(msg, isNot(ctx.channel()), true)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

@@ -75,12 +75,12 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** Generator. */
   @Nonnull
   static Returnable of() {
-    return getRestEmpty();
+    return () -> EMPTY;
   }
 
   /** Generator. */
   @Nonnull
   static Returnable nil() {
-    return getRestNil();
+    return () -> null;
   }
 }

@@ -40,6 +40,6 @@ public interface VIEW extends Returnable {
   /** Generator. */
   @Nonnull
   static VIEW of() {
-    return getViewRoot();
+    return () -> ROOT;
   }
 }
