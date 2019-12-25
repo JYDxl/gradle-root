@@ -9,8 +9,10 @@ import kotlin.text.Charsets.UTF_8
 
 fun ByteBuf.writeString(str: String, charset: Charset = UTF_8) = writeCharSequence(str, charset)
 
-fun ByteBuf.beforeRelease(block: ByteBuf.() -> Unit) {
-  apply(block).release()
+fun ByteBuf.beforeRelease(block: ByteBuf.() -> Unit) = try {
+  apply(block)
+} finally {
+  release()
 }
 
 val ByteBuf.prettyHexDump: String get() = prettyHexDump(this)

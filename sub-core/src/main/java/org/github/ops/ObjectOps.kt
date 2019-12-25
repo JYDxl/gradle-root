@@ -9,6 +9,8 @@ import org.springframework.cglib.beans.BeanMap.*
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.*
 import org.springframework.web.context.request.ServletRequestAttributes
+import java.io.Closeable
+import java.io.IOException
 import java.io.OutputStream
 import kotlin.reflect.KClass
 
@@ -25,6 +27,13 @@ val Any.nullProps: Array<String>
   }
 
 fun Any?.json(mapper: ObjectMapper? = null) = (mapper ?: objectMapper).writeValueAsString(this)!!
+
+fun Closeable?.closeQuietly() = this?.let {
+  try {
+    it.close()
+  } catch(ignore: IOException) {
+  }
+}
 
 val <T: Any> T.proxy get() = appCtx.getBean(this::class.java)
 
