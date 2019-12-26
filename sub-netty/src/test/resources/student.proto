@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-package protobuf;
-
 option java_package = "org.github.protobuf";
 option java_outer_classname = "MessageBuf";
 

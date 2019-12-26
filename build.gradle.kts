@@ -26,8 +26,8 @@ plugins {
   id("com.github.johnrengelman.shadow") version shadow apply false
   id("org.springframework.boot") version springboot apply false
   id("io.spring.dependency-management") version dependencymanagement apply false
-  kotlin("jvm") version kotlin apply false
-  kotlin("plugin.spring") version kotlin apply false
+  id("org.jetbrains.kotlin.jvm") version kotlin apply false
+  id("org.jetbrains.kotlin.plugin.spring") version kotlin apply false
   id("com.github.ben-manes.versions") version benmanes apply false
 }
 
