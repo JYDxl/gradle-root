@@ -13,7 +13,7 @@ import org.github.ops.warn
 @Sharable
 class ChatServerHandler(private val group: ChannelGroup): ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
-    ctx.channel()!!.apply {
+    ctx.channel().apply {
       group.add(this)
       log.info { "用户【${remoteAddress()}】已上线" }
       closeFuture().addListener { it: Future<in Void> ->
@@ -25,9 +25,9 @@ class ChatServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
-    val channel = ctx.channel()!!
+    val channel = ctx.channel()
     log.info { "用户【${channel.remoteAddress()}】发送信息: $msg" }
-    group.writeAndFlush(msg.encode(), { it !== channel }, true)
+    group.writeAndFlush(msg.encode(ctx.alloc()), { it !== channel }, true)
   }
 
   private companion object {

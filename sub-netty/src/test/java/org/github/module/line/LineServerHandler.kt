@@ -15,7 +15,7 @@ class LineServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
-    group.writeAndFlush(msg.toByteBuf(), { it != ctx.channel() }, true)
+    group.writeAndFlush(msg.toByteBuf(ctx.alloc()), { it != ctx.channel() }, true)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

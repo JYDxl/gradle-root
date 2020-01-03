@@ -36,12 +36,12 @@ subprojects {
   version = "0.0.1"
 
   apply(plugin = "io.spring.dependency-management")
+  apply(plugin = "org.springframework.boot")
   apply(plugin = "com.github.johnrengelman.shadow")
   apply(plugin = "com.github.ben-manes.versions")
-  apply(plugin = "org.springframework.boot")
+  apply(plugin = "maven-publish")
   apply(plugin = "kotlin")
   apply(plugin = "kotlin-spring")
-  apply(plugin = "maven-publish")
 
   configure<DependencyManagementExtension> {
     imports {
@@ -74,6 +74,7 @@ subprojects {
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines")
 
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")

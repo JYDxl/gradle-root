@@ -19,7 +19,7 @@ import org.github.ops.log
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
     log.info { "${req.method()} ${req.uri()}" }
-    val msg = "Hello world!".toByteBuf()
+    val msg = "Hello world!".toByteBuf(ctx.alloc())
     val res = DefaultFullHttpResponse(req.protocolVersion(), OK, msg)
     res.headers()[CONTENT_LENGTH] = msg.readableBytes()
     res.headers()[CONTENT_TYPE] = TEXT_PLAIN

@@ -10,7 +10,7 @@ appender("console", ConsoleAppender) {
 appender("records", RollingFileAppender) {
   file = "${dir}/records.txt"
   rollingPolicy(SizeAndTimeBasedRollingPolicy) {
-    fileNamePattern = "${dir}/%d/record-%i.gz"
+    fileNamePattern = "${dir}/%d/records-%i.gz"
     totalSizeCap = "20GB"
     maxFileSize = "1GB"
     maxHistory = 30
@@ -18,8 +18,14 @@ appender("records", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-appender("problems", FileAppender) {
-  file = "${dir}/problems.txt"
+appender("problem", RollingFileAppender) {
+  file = "${dir}/problem.txt"
+  rollingPolicy(SizeAndTimeBasedRollingPolicy) {
+    fileNamePattern = "${dir}/%d/problem-%i.gz"
+    totalSizeCap = "20GB"
+    maxFileSize = "1GB"
+    maxHistory = 30
+  }
   filter(ThresholdFilter) { level = warn }
   encoder(PatternLayoutEncoder) { pattern = out }
 }
@@ -28,4 +34,4 @@ logger("org.github", TRACE)
 logger("io.netty", TRACE)
 logger("io.vertx", TRACE)
 logger("io.netty.util.internal.NativeLibraryLoader", INFO)
-root(INFO, ["console", "records", "problems"])
+root(INFO, ["console", "records", "problem"])

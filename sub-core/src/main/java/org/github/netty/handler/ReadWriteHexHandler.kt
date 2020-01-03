@@ -7,18 +7,18 @@ import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelPromise
 import org.github.netty.ops.hexDump
 import org.github.netty.ops.info
-import org.github.ops.info
 import org.github.ops.log
+import org.github.ops.trace
 
 @Sharable
 class ReadWriteHexHandler: ChannelDuplexHandler() {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    if(msg is ByteBuf) ctx.channel().apply { log.info { "$this $info >>>>READ: ${msg.hexDump}" } }
+    if(msg is ByteBuf) ctx.channel().apply { log.trace { "$this $info >>>>READ: ${msg.hexDump}" } }
     super.channelRead(ctx, msg)
   }
 
   override fun write(ctx: ChannelHandlerContext, msg: Any, promise: ChannelPromise) {
-    if(msg is ByteBuf) ctx.channel().apply { log.info { "$this $info WRITE>>>: ${msg.hexDump}" } }
+    if(msg is ByteBuf) ctx.channel().apply { log.trace { "$this $info WRITE>>>: ${msg.hexDump}" } }
     super.write(ctx, msg, promise)
   }
 
@@ -30,7 +30,7 @@ class ReadWriteHexHandler: ChannelDuplexHandler() {
 @Sharable
 class ReadHexHandler: ChannelDuplexHandler() {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    if(msg is ByteBuf) ctx.channel().apply { log.info { "$this $info >>>>READ: ${msg.hexDump}" } }
+    if(msg is ByteBuf) ctx.channel().apply { log.trace { "$this $info >>>>READ: ${msg.hexDump}" } }
     super.channelRead(ctx, msg)
   }
 
@@ -42,7 +42,7 @@ class ReadHexHandler: ChannelDuplexHandler() {
 @Sharable
 class WriteHexHandler: ChannelDuplexHandler() {
   override fun write(ctx: ChannelHandlerContext, msg: Any, promise: ChannelPromise) {
-    if(msg is ByteBuf) ctx.channel().apply { log.info { "$this $info WRITE>>>: ${msg.hexDump}" } }
+    if(msg is ByteBuf) ctx.channel().apply { log.trace { "$this $info WRITE>>>: ${msg.hexDump}" } }
     super.write(ctx, msg, promise)
   }
 

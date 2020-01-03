@@ -1,5 +1,9 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
+plugins {
+  application
+}
+
 val protobuf: String by System.getProperties()
 val tcnative: String by System.getProperties()
 val netty: String by System.getProperties()
@@ -15,17 +19,23 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-web")
 }
 
-tasks.getByName<Jar>("jar") {
-  enabled = true
-  excludes += "logback.groovy"
+tasks.withType<ShadowJar> {
+  archiveFileName.set("netty-boot.jar")
 }
 
-tasks.withType<ShadowJar> {
-  minimize()
-  archiveFileName.set("netty-boot.jar")
-  manifest {
-    attributes(mapOf("Main-Class" to "org.github.NettyAppKt"))
-  }
+application {
+  mainClassName = "org.github.module.ssl.ServerKt"
+  applicationDefaultJvmArgs = listOf(
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+    "-ea",
+    "-Dio.netty.tryReflectionSetAccessible=true",
+    "-Dio.netty.leakDetection.level=advanced",
+    "-Djava.net.preferIPv4Stack=true",
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
+    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
+    "--add-opens=java.base/java.nio=ALL-UNNAMED",
+    "--illegal-access=deny"
+  )
 }
 
 tasks.withType<Test> {

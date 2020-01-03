@@ -19,4 +19,4 @@ val ByteBuf.prettyHexDump: String get() = prettyHexDump(this)
 
 val ByteBuf.hexDump: String get() = hexDump(this)
 
-fun CharSequence.toByteBuf(alloc: ByteBufAllocator = ALLOC_POOLED) = encodeString(alloc, wrap(this), UTF_8)!!
+fun CharSequence.toByteBuf(alloc: ByteBufAllocator) = encodeString(alloc, wrap(this), UTF_8)!!

@@ -18,11 +18,6 @@ dependencies {
   testCompileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }
 }
 
-tasks.getByName<Jar>("jar") {
-  enabled = true
-  excludes += "logback.groovy"
-}
-
 tasks.withType<ShadowJar> {
   minimize()
   archiveFileName.set("vertx-boot.jar")

@@ -21,7 +21,7 @@ class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
       ctx.fireChannelRead(req.retain())
       return
     }
-    val msg = uri.toByteBuf()
+    val msg = uri.toByteBuf(ctx.alloc())
     val res = DefaultFullHttpResponse(req.protocolVersion(), OK, msg)
     res.headers()[CONTENT_LENGTH] = msg.readableBytes()
     res.headers()[CONTENT_TYPE] = TEXT_PLAIN
