@@ -21,7 +21,6 @@ plugins {
   val shadow: String by System.getProperties()
 
   java
-  `maven-publish`
 
   id("com.github.johnrengelman.shadow") version shadow apply false
   id("org.springframework.boot") version springboot apply false
@@ -37,9 +36,7 @@ subprojects {
 
   apply(plugin = "io.spring.dependency-management")
   apply(plugin = "org.springframework.boot")
-  apply(plugin = "com.github.johnrengelman.shadow")
   apply(plugin = "com.github.ben-manes.versions")
-  apply(plugin = "maven-publish")
   apply(plugin = "kotlin")
   apply(plugin = "kotlin-spring")
 
@@ -50,7 +47,7 @@ subprojects {
     }
   }
 
-  configure<JavaPluginConvention> {
+  java {
     sourceCompatibility = VERSION_11
     targetCompatibility = VERSION_11
   }
@@ -108,42 +105,5 @@ subprojects {
 
   tasks.withType<JavaCompile> {
     options.compilerArgs.add("-Xlint:unchecked")
-  }
-
-  tasks.register<Jar>("sourcesJar") {
-    from(sourceSets.main.get().allSource)
-    archiveClassifier.set("sources")
-  }
-
-  tasks.register<Jar>("javadocJar") {
-    from(tasks.javadoc)
-    archiveClassifier.set("javadoc")
-  }
-
-  publishing {
-    publications {
-      create<MavenPublication>("mavenJava") {
-        from(components["java"])
-
-        artifact(tasks["sourcesJar"])
-        artifact(tasks["javadocJar"])
-
-        versionMapping {
-          usage("java-api") {
-            fromResolutionOf("runtimeClasspath")
-          }
-
-          usage("java-runtime") {
-            fromResolutionResult()
-          }
-        }
-      }
-    }
-
-    repositories {
-      maven {
-        url = uri("${System.getProperty("user.home")}/.m2/repository")
-      }
-    }
   }
 }

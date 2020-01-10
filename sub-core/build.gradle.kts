@@ -8,6 +8,22 @@ val guice: String by System.getProperties()
 val netty: String by System.getProperties()
 val jna: String by System.getProperties()
 
+plugins {
+  `maven-publish`
+}
+
+java {
+  withSourcesJar()
+}
+
+publishing {
+  publications {
+    create<MavenPublication>("maven") {
+      from(components["java"])
+    }
+  }
+}
+
 dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-amqp")
   compileOnly("org.springframework.boot:spring-boot-starter-web")

@@ -2,6 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
   application
+  id("com.github.johnrengelman.shadow")
 }
 
 val protobuf: String by System.getProperties()
@@ -25,6 +26,7 @@ tasks.withType<ShadowJar> {
 
 application {
   mainClassName = "org.github.module.ssl.ServerKt"
+  applicationName = "runner"
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
     "-ea",

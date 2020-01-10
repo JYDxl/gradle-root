@@ -1,31 +1,26 @@
 package org.github.module.ssl
 
 import io.netty.bootstrap.ServerBootstrap
-import io.netty.buffer.ByteBuf
-import io.netty.buffer.ByteBufAllocator
-import io.netty.buffer.Unpooled.*
 import io.netty.channel.Channel
-import io.netty.channel.ChannelFutureListener
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.ChannelInitializer
+import io.netty.channel.group.ChannelMatcher
 import io.netty.channel.group.ChannelMatchers.*
-import io.netty.channel.group.DefaultChannelGroup
-import io.netty.handler.codec.MessageToMessageEncoder
-import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
-import io.netty.util.concurrent.ImmediateEventExecutor.*
+import io.netty.util.concurrent.DefaultThreadFactory
+import org.github.module.ssl.codec.ServerDecoder
+import org.github.module.ssl.codec.ServerEncoder
+import org.github.module.ssl.codec.toByteBuf
 import org.github.netty.decoder.DefaultLineDecoder
+import org.github.netty.group.NativeChannelGroup
+import org.github.netty.group.NativeChannelGroupImpl
 import org.github.netty.handler.ReadWriteHexHandler
-import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
-import org.github.netty.ops.toByteBuf
-import org.github.thread.NativeThreadFactory
-import java.util.function.Function
-import kotlin.text.Charsets.UTF_8
+import java.util.function.Supplier
 
 fun main() {
   // val ca = "ssl/ca.crt".classpathFile
@@ -34,17 +29,17 @@ fun main() {
   // val sslCtx = forServer(serverCrt, serverKey).trustManager(ca).sslProvider(OPENSSL).build()
 
   val loggingHandler = LoggingHandler(TRACE)
-  val readWriteInfoHandler = ReadWriteInfoHandler(Function { it.toString().trim() })
-  val stringDecoder = StringDecoder(UTF_8)
-  val stringEncoder = StringEncoder()
-  val serverHandler = ServerHandler()
+  // val readWriteInfoHandler = ReadWriteInfoHandler(Function { it.toString().trim() })
+  val decoder = ServerDecoder()
+  val encoder = ServerEncoder()
   val readWriteHexHandler = ReadWriteHexHandler()
 
-  val boss = eventLoopGroup(1, NativeThreadFactory("ssl-server-boss"))
-  val worker = eventLoopGroup(0, NativeThreadFactory("ssl-server-worker"))
-  val listener = ChannelFutureListener { boss.shutdownGracefully();worker.shutdownGracefully() }
+  val boss = eventLoopGroup(2, DefaultThreadFactory("ssl-server-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("ssl-server-worker"))
+  val group = NativeChannelGroupImpl(boss.next())
+  val serverHandler = ServerHandler(group)
 
-  ServerBootstrap()
+  val bootstrap = ServerBootstrap()
     .group(boss, worker)
     .channel(serverSocketChannel)
     .handler(loggingHandler)
@@ -53,34 +48,28 @@ fun main() {
         ch.pipeline().apply {
           // addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
-          addLast(DefaultLineDecoder(1024, false))
+          addLast(DefaultLineDecoder(1024))
           addLast(readWriteHexHandler)
-          addLast(stringDecoder)
-          addLast(stringEncoder)
-          addLast(readWriteInfoHandler)
+          addLast(decoder)
+          addLast(encoder)
+          // addLast(readWriteInfoHandler)
           // addLast(LinkHandler())
           addLast(serverHandler)
         }
       }
     })
-    .bind(10000)
-    .sync()
-    .channel()
-    .closeFuture()
-    .addListener(listener)
+  group.add(bootstrap.bind(10000).sync().channel())
 }
 
 @Sharable
-class ServerHandler: ChannelInboundHandlerAdapter() {
-  private val group = DefaultChannelGroup(INSTANCE)
-
+class ServerHandler(private val group: NativeChannelGroup): ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
     group.add(ctx.channel())
   }
 
-  override fun channelRead(ctx: ChannelHandlerContext, input: Any) {
-    val msg = (input as String).trim()
-    group.writeAndFlush(msg, isNot(ctx.channel()), true)
+  override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
+    msg as String
+    group.writeAndFlush(isNot(ctx.channel()), msg)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
@@ -88,24 +77,8 @@ class ServerHandler: ChannelInboundHandlerAdapter() {
   }
 }
 
-@Sharable
-class StringEncoder: MessageToMessageEncoder<String>() {
-  override fun encode(ctx: ChannelHandlerContext, msg: String, out: MutableList<Any>) {
-    msg.encodeToByteBuf(ctx.alloc())?.let { out.add(it) }
-  }
-}
-
-const val end = '\n'
-
-val tail: ByteBuf = unreleasableBuffer(directBuffer(1).writeByte(end.toInt()))
-
-fun String.encodeToByteBuf(alloc: ByteBufAllocator): ByteBuf? {
-  if(isBlank()) return null
-  val body = toByteBuf(alloc)
-  if(endsWith(end)) return body
-  return alloc.compositeDirectBuffer(2).apply {
-    addComponents(true, body, tail)
-  }
+fun NativeChannelGroup.writeAndFlush(matcher: ChannelMatcher, message: CharSequence) {
+  writeAndFlush(matcher, Supplier { message.toByteBuf() })
 }
 
 // class LinkHandler: ChannelInboundHandlerAdapter() {

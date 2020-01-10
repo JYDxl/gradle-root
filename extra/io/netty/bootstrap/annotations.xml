@@ -1,0 +1,5 @@
+<root>
+  <item name='io.netty.bootstrap.ServerBootstrap io.netty.bootstrap.ServerBootstrap childHandler(io.netty.channel.ChannelHandler)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>
