@@ -106,4 +106,11 @@ subprojects {
   tasks.withType<JavaCompile> {
     options.compilerArgs.add("-Xlint:unchecked")
   }
+
+  tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+      events("PASSED", "FAILED", "SKIPPED")
+    }
+  }
 }
