@@ -1,11 +1,10 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import static org.github.spring.footstone.IConstKt.*;
 import static org.github.util.BeansUtilKt.*;
 
@@ -24,21 +23,11 @@ import static org.github.util.BeansUtilKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class JSONPage<E> extends JSONArray<E> implements JSON {
   /** total. */
   private long total = COUNT;
-
-  @Override
-  public void release() {
-    total = COUNT;
-    super.release();
-  }
-
-  @Override
-  public String toString() {
-    return get();
-  }
 
   /** WITH total. */
   @Nonnull

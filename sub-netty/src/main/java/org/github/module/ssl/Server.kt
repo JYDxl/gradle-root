@@ -6,11 +6,13 @@ import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.ChannelInitializer
+import io.netty.channel.ChannelOption.*
 import io.netty.channel.group.ChannelMatcher
 import io.netty.channel.group.ChannelMatchers.*
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
+import io.netty.util.concurrent.GlobalEventExecutor.*
 import org.github.module.ssl.codec.ServerDecoder
 import org.github.module.ssl.codec.ServerEncoder
 import org.github.module.ssl.codec.toByteBuf
@@ -20,7 +22,6 @@ import org.github.netty.group.NativeChannelGroupImpl
 import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
-import java.util.function.Supplier
 
 fun main() {
   // val ca = "ssl/ca.crt".classpathFile
@@ -36,13 +37,14 @@ fun main() {
 
   val boss = eventLoopGroup(2, DefaultThreadFactory("ssl-server-boss"))
   val worker = eventLoopGroup(0, DefaultThreadFactory("ssl-server-worker"))
-  val group = NativeChannelGroupImpl(boss.next())
+  val group = NativeChannelGroupImpl(INSTANCE)
   val serverHandler = ServerHandler(group)
 
   val bootstrap = ServerBootstrap()
     .group(boss, worker)
     .channel(serverSocketChannel)
     .handler(loggingHandler)
+    .option(SO_REUSEADDR, true)
     .childHandler(object: ChannelInitializer<Channel>() {
       override fun initChannel(ch: Channel) {
         ch.pipeline().apply {
@@ -59,6 +61,7 @@ fun main() {
       }
     })
   group.add(bootstrap.bind(10000).sync().channel())
+  group.add(bootstrap.bind(20000).sync().channel())
 }
 
 @Sharable
@@ -78,7 +81,7 @@ class ServerHandler(private val group: NativeChannelGroup): ChannelInboundHandle
 }
 
 fun NativeChannelGroup.writeAndFlush(matcher: ChannelMatcher, message: CharSequence) {
-  writeAndFlush(matcher, Supplier { message.toByteBuf() })
+  writeAndFlush(message.toByteBuf(), matcher, true)
 }
 
 // class LinkHandler: ChannelInboundHandlerAdapter() {

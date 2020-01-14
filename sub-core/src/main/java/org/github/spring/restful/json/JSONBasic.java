@@ -1,10 +1,9 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
+import lombok.*;
+
 import static org.github.ops.ObjectOpsKt.*;
 import static org.github.spring.footstone.IConstKt.*;
 
@@ -19,13 +18,14 @@ import static org.github.spring.footstone.IConstKt.*;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class JSONBasic implements JSON {
   /** 返回的状态码. */
-  private int    resCode = RES_OK_CODE;
+  private int resCode = RES_OK_CODE;
   /** 返回的信息. */
   @NonNull
-  private String resMsg  = RES_OK_MSG;
+  private String resMsg = RES_OK_MSG;
 
   @Override
   @Nonnull
@@ -36,11 +36,6 @@ public class JSONBasic implements JSON {
   @Override
   public boolean functional() {
     return false;
-  }
-
-  @Override
-  public void release() {
-    withResCode(RES_OK_CODE).withResMsg(RES_OK_MSG);
   }
 
   @Override

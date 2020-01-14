@@ -8,7 +8,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import com.google.common.net.MediaType;
+
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
 import static org.github.spring.footstone.IConstKt.*;
@@ -23,8 +25,8 @@ import static org.github.spring.footstone.IConstKt.*;
 @FunctionalInterface
 public interface Returnable extends Serializable, Supplier<String> {
   /** 获取数据. */
-  @Override
   @Nullable
+  @Override
   String get();
 
   /** 通过字符流{@link Writer}处理数据. */
@@ -40,7 +42,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
   default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
-    if(functional()) {
+    if (functional()) {
       accept(res.getWriter());
     } else {
       accept(res.getOutputStream());
@@ -57,9 +59,6 @@ public interface Returnable extends Serializable, Supplier<String> {
   default MediaType mediaType() {
     return PLAIN_TEXT_UTF_8;
   }
-
-  /** 清空数据. */
-  default void release() {}
 
   /** 数据已被完全处理? 未处理完毕的数据将交由Spring继续处理(现阶段只对视图有效). */
   default boolean terminated() {

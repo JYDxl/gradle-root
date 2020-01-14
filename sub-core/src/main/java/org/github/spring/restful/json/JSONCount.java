@@ -1,10 +1,9 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
+
 import static org.github.spring.footstone.IConstKt.*;
 
 /**
@@ -20,21 +19,11 @@ import static org.github.spring.footstone.IConstKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class JSONCount extends JSONBasic implements JSON {
   /** data. */
   private long data = COUNT;
-
-  @Override
-  public void release() {
-    data = COUNT;
-    super.release();
-  }
-
-  @Override
-  public String toString() {
-    return get();
-  }
 
   /** WITH data. */
   @Nonnull

@@ -40,6 +40,11 @@ subprojects {
   apply(plugin = "kotlin")
   apply(plugin = "kotlin-spring")
 
+  java {
+    sourceCompatibility = VERSION_11
+    targetCompatibility = VERSION_11
+  }
+
   configure<DependencyManagementExtension> {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
@@ -47,16 +52,32 @@ subprojects {
     }
   }
 
-  java {
-    sourceCompatibility = VERSION_11
-    targetCompatibility = VERSION_11
-  }
-
   repositories {
     maven { url = uri("http://maven.aliyun.com/repository/public");isAllowInsecureProtocol = true }
     maven { url = uri("http://maven.aliyun.com/repository/spring");isAllowInsecureProtocol = true }
     maven { url = uri("http://maven.aliyun.com/repository/google");isAllowInsecureProtocol = true }
     mavenCentral()
+  }
+
+  tasks.getByName<Jar>("jar") { enabled = true }
+  tasks.getByName<BootJar>("bootJar") { enabled = false }
+
+  tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.verbose = true
+    kotlinOptions.javaParameters = true
+    kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
+  }
+
+  tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-Xlint:unchecked")
+  }
+
+  tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+      events("PASSED", "FAILED", "SKIPPED")
+    }
   }
 
   dependencies {
@@ -91,26 +112,5 @@ subprojects {
 
     annotationProcessor("org.projectlombok:lombok:$lombok")
     testAnnotationProcessor("org.projectlombok:lombok:$lombok")
-  }
-
-  tasks.getByName<Jar>("jar") { enabled = true }
-  tasks.getByName<BootJar>("bootJar") { enabled = false }
-
-  tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-    kotlinOptions.verbose = true
-    kotlinOptions.javaParameters = true
-    kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")
-  }
-
-  tasks.withType<JavaCompile> {
-    options.compilerArgs.add("-Xlint:unchecked")
-  }
-
-  tasks.withType<Test> {
-    useJUnitPlatform()
-    testLogging {
-      events("PASSED", "FAILED", "SKIPPED")
-    }
   }
 }

@@ -4,11 +4,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nonnull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
+import lombok.*;
+
 import static org.github.spring.footstone.IConstKt.*;
 
 /**
@@ -25,22 +23,12 @@ import static org.github.spring.footstone.IConstKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class JSONArray<E> extends JSONBasic implements JSON {
   /** data. */
   @NonNull
   private Object[] data = getArray();
-
-  @Override
-  public void release() {
-    data = getArray();
-    super.release();
-  }
-
-  @Override
-  public String toString() {
-    return get();
-  }
 
   /** GET data. */
   @SuppressWarnings("unchecked")

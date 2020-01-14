@@ -16,6 +16,6 @@
 
 FROM alpine-jre
 COPY build/libs/netty-boot.jar /lib/netty-boot.jar
-COPY build/scriptsShadow/runner runner
+COPY build/scriptsShadow/sub-netty /runner
 EXPOSE 3000/tcp 8800/tcp 10000/tcp 5005/tcp
 CMD ./runner

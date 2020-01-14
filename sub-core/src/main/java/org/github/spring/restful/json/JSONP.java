@@ -3,13 +3,11 @@ package org.github.spring.restful.json;
 import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
+import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.net.MediaType;
+
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
 import static org.github.spring.footstone.IConstKt.*;
@@ -29,7 +27,8 @@ import static org.github.spring.footstone.IConstKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class JSONP<T> extends JSONData<T> implements JSON {
   /** callback. */
   @JsonIgnore
@@ -38,7 +37,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   @Override
   public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
-    if(CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
+    if (CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
     super.collect(req, res);
   }
 
@@ -62,12 +61,6 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   @Override
   public String toString() {
     return super.get();
-  }
-
-  @Override
-  public void release() {
-    callback = CALL_BACK;
-    super.release();
   }
 
   /** WITH callback. */

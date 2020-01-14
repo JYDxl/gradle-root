@@ -1,18 +1,12 @@
 package org.github.spring.restful.file;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Writer;
-import javax.annotation.Nonnull;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
-import static com.google.common.io.ByteStreams.*;
-import static com.google.common.net.MediaType.*;
+import org.github.spring.restful.Returnable;
+
+import javax.annotation.Nonnull;
+import java.io.*;
+
+import static com.google.common.net.MediaType.OCTET_STREAM;
 
 /**
  * Top interface of file.
@@ -22,13 +16,10 @@ import static com.google.common.net.MediaType.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  */
-@FunctionalInterface
 public interface FILE extends Returnable {
-  @Deprecated
+  @Nonnull
   @Override
-  default String get() {
-    throw new UnsupportedOperationException();
-  }
+  String get();
 
   @Deprecated
   @Override
@@ -37,17 +28,7 @@ public interface FILE extends Returnable {
   }
 
   @Override
-  default void accept(@Nonnull OutputStream output) throws Exception {
-    try(InputStream input = info().input) {
-      copy(input, output);
-    }
-  }
-
-  @Override
-  default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
-    res.addHeader("Content-Disposition", "attachment;filename=" + info().name);
-    Returnable.super.collect(req, res);
-  }
+  void accept(@Nonnull OutputStream output) throws Exception;
 
   @Override
   default boolean functional() {
@@ -60,39 +41,23 @@ public interface FILE extends Returnable {
     return OCTET_STREAM;
   }
 
-  @Nonnull
-  Info info();
-
-  /** Generator. */
+  /**
+   * Generator.
+   */
   @Nonnull
   static FILE of(@Nonnull File file) {
     try {
-      return of(new Info(file.getName(), new FileInputStream(file)));
-    } catch(FileNotFoundException e) {
+      return new FILEImpl(file.getName(), new FileInputStream(file));
+    } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
     }
   }
 
-  /** Generator. */
-  @Nonnull
-  static FILE of(@Nonnull Info info) {
-    return () -> info;
-  }
-
-  /** Generator. */
+  /**
+   * Generator.
+   */
   @Nonnull
   static FILE of(@Nonnull String name, @Nonnull InputStream input) {
-    return of(new Info(name, input));
-  }
-
-  final class Info {
-    private final String name;
-
-    private final InputStream input;
-
-    public Info(String name, InputStream input) {
-      this.name = name;
-      this.input = input;
-    }
+    return new FILEImpl(name, input);
   }
 }

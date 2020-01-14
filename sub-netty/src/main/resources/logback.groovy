@@ -47,5 +47,5 @@ appender("packets", RollingFileAppender) {
 
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
-logger("io.netty.util.internal.NativeLibraryLoader", INFO)
+//logger("io.netty.util.internal.NativeLibraryLoader", INFO)
 root(INFO, ["console", "records", "problem", "packets"])

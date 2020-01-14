@@ -1,10 +1,8 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  * JSON of data.
@@ -20,16 +18,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class JSONData<T> extends JSONBasic implements JSON {
   /** data. */
   private T data;
-
-  @Override
-  public void release() {
-    data = null;
-    super.release();
-  }
 
   /** WITH data. */
   public JSONData<T> withData(T data) {

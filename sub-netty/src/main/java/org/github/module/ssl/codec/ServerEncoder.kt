@@ -2,11 +2,11 @@ package org.github.module.ssl.codec
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
-import io.netty.buffer.ByteBufAllocator.*
 import io.netty.buffer.ByteBufUtil.*
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
+import org.github.netty.ops.ALLOC_UNPOOLED
 import java.nio.CharBuffer.*
 import java.nio.charset.Charset
 import kotlin.text.Charsets.UTF_8
@@ -20,7 +20,7 @@ class ServerEncoder(private val charset: Charset = UTF_8): MessageToMessageEncod
 
 private val tail = "\n".toByteArray()
 
-fun CharSequence.toByteBuf(alloc: ByteBufAllocator = DEFAULT, charset: Charset = UTF_8): ByteBuf {
+fun CharSequence.toByteBuf(alloc: ByteBufAllocator = ALLOC_UNPOOLED, charset: Charset = UTF_8): ByteBuf {
   if(endsWith('\n')) return encodeString(alloc, wrap(this), charset)
   return encodeString(alloc, wrap(this), charset, tail.size).writeBytes(tail)
 }
