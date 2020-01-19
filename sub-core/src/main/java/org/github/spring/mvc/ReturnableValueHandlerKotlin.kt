@@ -3,7 +3,6 @@ package org.github.spring.mvc
 import org.github.ops.error
 import org.github.ops.log
 import org.github.ops.trace
-import org.github.ops.value
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.Returnable.*
 import org.springframework.core.MethodParameter
@@ -12,7 +11,7 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler
 import org.springframework.web.method.support.ModelAndViewContainer
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
-import javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR
+import javax.servlet.http.HttpServletResponse.*
 
 /**
  * Returnable返回类型解析器，Kotlin版.
@@ -37,9 +36,9 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
         res.sendError(SC_INTERNAL_SERVER_ERROR)
       }
     } else {
-      mavContainer.viewName = value.value
+      mavContainer.viewName = value.get()
     }
     mavContainer.isRequestHandled = value.terminated()
-    value.apply { log.trace { "Writing [${mediaType()}] of [${this.value}]" } }
+    value.apply { log.trace { "Writing [${mediaType()}] of [${this.get()}]" } }
   }
 }

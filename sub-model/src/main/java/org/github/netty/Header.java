@@ -1,7 +1,7 @@
 package org.github.netty;
 
+import org.github.ops.spring.SpringOpsKt;
 import lombok.Data;
-import org.github.ops.ObjectOpsKt;
 
 @Data
 public class Header {
@@ -20,6 +20,6 @@ public class Header {
 
   @Override
   public String toString() {
-    return ObjectOpsKt.json(this, null);
+    return SpringOpsKt.json(this, null);
   }
 }

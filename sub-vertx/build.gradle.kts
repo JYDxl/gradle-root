@@ -1,10 +1,52 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.springframework.boot.gradle.tasks.application.CreateBootStartScripts
+import org.springframework.boot.gradle.tasks.run.BootRun
+
+val netty: String by System.getProperties()
 
 plugins {
+  application
   id("com.github.johnrengelman.shadow")
 }
 
-val netty: String by System.getProperties()
+application {
+  mainClassName = "org.github.VertxAppKt"
+  applicationDefaultJvmArgs = listOf(
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+    "-ea",
+    "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
+    "-Dio.netty.tryReflectionSetAccessible=true",
+    "-Dio.netty.leakDetection.level=advanced",
+    "-Djava.net.preferIPv4Stack=true",
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
+    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
+    "--add-opens=java.base/java.nio=ALL-UNNAMED",
+    "--illegal-access=deny"
+  )
+}
+
+tasks.getByName<CreateBootStartScripts>("bootStartScripts") { enabled = false }
+tasks.getByName<BootRun>("bootRun") { enabled = false }
+tasks.getByName<Tar>("bootDistTar") { enabled = false }
+tasks.getByName<Zip>("bootDistZip") { enabled = false }
+
+tasks.withType<ShadowJar> {
+  archiveFileName.set("vertx-boot.jar")
+}
+
+tasks.withType<Test> {
+  jvmArgs = listOf(
+    "-ea",
+    "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
+    "-Dio.netty.tryReflectionSetAccessible=true",
+    "-Dio.netty.leakDetection.level=paranoid",
+    "-Djava.net.preferIPv4Stack=true",
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
+    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
+    "--add-opens=java.base/java.nio=ALL-UNNAMED",
+    "--illegal-access=deny"
+  )
+}
 
 dependencies {
   api("io.netty:netty-all:$netty")
@@ -19,30 +61,4 @@ dependencies {
 
   compileOnly("io.vertx:vertx-codegen") { exclude(group = "io.netty") }
   testCompileOnly("io.vertx:vertx-codegen") { exclude(group = "io.netty") }
-}
-
-tasks.withType<ShadowJar> {
-  minimize()
-  archiveFileName.set("vertx-boot.jar")
-  manifest {
-    attributes(mapOf("Main-Class" to "org.github.VertxAppKt"))
-  }
-}
-
-tasks.withType<Test> {
-  useJUnitPlatform()
-  testLogging {
-    events("PASSED", "FAILED", "SKIPPED")
-  }
-  jvmArgs = listOf(
-    "-ea",
-    "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
-    "-Dio.netty.tryReflectionSetAccessible=true",
-    "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true",
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
-    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    "--illegal-access=deny"
-  )
 }

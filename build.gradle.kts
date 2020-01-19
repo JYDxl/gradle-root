@@ -39,6 +39,7 @@ subprojects {
   apply(plugin = "org.springframework.boot")
   apply(plugin = "com.github.ben-manes.versions")
   apply(plugin = "kotlin")
+  apply(plugin = "jacoco")
   apply(plugin = "kotlin-spring")
 
   java {

@@ -1,15 +1,13 @@
 package org.github.spring.rabbit
 
 import com.google.common.annotations.Beta
-import org.github.ops.objectMapper
+import org.github.ops.spring.objectMapper
 import org.github.spring.footstone.Entity
 import org.springframework.amqp.core.Message
 import org.springframework.amqp.core.MessageProperties
-import org.springframework.amqp.core.MessageProperties.CONTENT_TYPE_BYTES
-import org.springframework.amqp.core.MessageProperties.CONTENT_TYPE_JSON
-import org.springframework.amqp.core.MessageProperties.CONTENT_TYPE_TEXT_PLAIN
+import org.springframework.amqp.core.MessageProperties.*
 import org.springframework.amqp.support.converter.SimpleMessageConverter
-import org.springframework.util.ClassUtils.getDefaultClassLoader
+import org.springframework.util.ClassUtils.*
 import java.util.concurrent.ConcurrentHashMap
 
 @Beta

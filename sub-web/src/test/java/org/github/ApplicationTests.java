@@ -2,9 +2,7 @@ package org.github;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import org.github.ops.ObjectOpsKt;
+import org.github.ops.spring.SpringOpsKt;
 import org.github.spring.redis.StringHashOps;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.junit.jupiter.api.Test;
@@ -14,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -29,7 +29,7 @@ public class ApplicationTests {
   @Test
   public void fibonacciSequence() {
     val list = Stream.iterate(ImmutablePair.of(1, 1), (v) -> ImmutablePair.of(v.right, v.left + v.right)).limit(10).map(ImmutablePair::getLeft).collect(Collectors.toList());
-    log.info(ObjectOpsKt.json(list, null));
+    log.info(SpringOpsKt.json(list, null));
   }
 
   @Test
@@ -49,7 +49,7 @@ public class ApplicationTests {
 
   @Test
   public void webAppCtx() {
-    val ctx = ObjectOpsKt.getWebAppCtx();
+    val ctx = SpringOpsKt.getWebAppCtx();
     log.info(ctx.getDisplayName());
   }
 }

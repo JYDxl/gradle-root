@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import lombok.*;
 
-import static org.github.ops.ObjectOpsKt.*;
+import static org.github.ops.spring.SpringOpsKt.*;
 import static org.github.spring.footstone.IConstKt.*;
 
 /**

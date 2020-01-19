@@ -3,15 +3,17 @@ package org.github.ops
 import com.google.common.collect.ListMultimap
 import org.github.base.entity.SysMenuEntity
 import org.github.base.service.ISysMenuService
+import org.github.ops.spring.bean
+import org.github.ops.spring.json
+import org.github.ops.spring.map
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.io.IOException
 import java.time.LocalDateTime
 import java.time.LocalTime
-import java.util.*
+import java.util.Random
 import java.util.stream.IntStream
 
 @ExtendWith(SpringExtension::class)
@@ -21,14 +23,6 @@ class ObjectOpsTests {
   private val log = ObjectOpsTests::class.log
   @Autowired
   private lateinit var sysMenuService: ISysMenuService
-
-  @Test
-  fun rootCause() {
-    val exception = Exception()
-    assert(exception === exception.rootCause)
-    val ioException = IOException(exception)
-    assert(ioException.rootCause === exception)
-  }
 
   @Test
   fun map() {
@@ -71,20 +65,6 @@ class ObjectOpsTests {
   fun fibonacciSequence() {
     val list = generateSequence(Triple(1, 1, 1)) { if(it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1) }.map { it.first }.toList()
     log.info { list }
-  }
-
-  @Test
-  fun stringPadStart() {
-    val str: String? = null
-    val result = str.padStart(10, '0')
-    log.info { result }
-  }
-
-  @Test
-  fun stringPadEnd() {
-    val str: String? = null
-    val result = str.padEnd(10, '1')
-    log.info { result }
   }
 
   @Test

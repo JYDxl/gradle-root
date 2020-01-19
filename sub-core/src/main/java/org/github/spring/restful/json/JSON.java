@@ -2,12 +2,10 @@ package org.github.spring.restful.json;
 
 import java.io.OutputStream;
 import javax.annotation.Nonnull;
-
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
-
 import static com.google.common.net.MediaType.*;
-import static org.github.ops.ObjectOpsKt.*;
+import static org.github.ops.spring.SpringOpsKt.*;
 import static org.github.spring.footstone.IConstKt.*;
 
 /**

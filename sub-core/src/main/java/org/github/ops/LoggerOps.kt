@@ -89,4 +89,4 @@ fun Logger.warn(ex: Throwable? = null, msg: () -> Any?) {
   }
 }
 
-val KClass<*>.log get() = getLogger(java)!!
+val KClass<*>.log: Logger get() = getLogger(java)
