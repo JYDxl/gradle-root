@@ -12,6 +12,7 @@ val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
 val guava: String by System.getProperties()
 val junit: String by System.getProperties()
+val vertx: String by System.getProperties()
 
 plugins {
   val dependencymanagement: String by System.getProperties()
@@ -49,6 +50,7 @@ subprojects {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
       mavenBom("io.projectreactor:reactor-bom:$reactor")
+      mavenBom("io.vertx:vertx-dependencies:$vertx")
     }
   }
 

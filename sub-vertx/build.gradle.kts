@@ -4,22 +4,21 @@ plugins {
   id("com.github.johnrengelman.shadow")
 }
 
-val vertx: String by System.getProperties()
 val netty: String by System.getProperties()
 
 dependencies {
   api("io.netty:netty-all:$netty")
-  api("io.vertx:vertx-web:$vertx") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-lang-kotlin-coroutines:$vertx") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web-client") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-lang-kotlin") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-lang-kotlin-coroutines") { exclude(group = "io.netty") }
 
   implementation(project(":sub-core"))
 
-  testImplementation("io.vertx:vertx-junit5:$vertx") { exclude(group = "io.netty");exclude(group = "org.junit.jupiter") }
+  testImplementation("io.vertx:vertx-junit5") { exclude(group = "io.netty");exclude(group = "org.junit.jupiter") }
 
-  compileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }
-  testCompileOnly("io.vertx:vertx-codegen:$vertx") { exclude(group = "io.netty") }
+  compileOnly("io.vertx:vertx-codegen") { exclude(group = "io.netty") }
+  testCompileOnly("io.vertx:vertx-codegen") { exclude(group = "io.netty") }
 }
 
 tasks.withType<ShadowJar> {

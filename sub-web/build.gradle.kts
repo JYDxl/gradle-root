@@ -19,17 +19,16 @@ val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
-val vertx: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-core"))
   implementation(project(":sub-model"))
 
   api("io.netty:netty-all:$netty")
-  api("io.vertx:vertx-web:$vertx") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-web-client:$vertx") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-lang-kotlin:$vertx") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-lang-kotlin-coroutines:$vertx") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web-client") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-lang-kotlin") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-lang-kotlin-coroutines") { exclude(group = "io.netty") }
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")
