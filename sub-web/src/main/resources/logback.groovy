@@ -1,10 +1,7 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
-import org.github.logger.NameFilter
-import org.github.netty.handler.ReadWriteHexHandler
-import org.github.netty.handler.ReadWriteInfoHandler
 
 def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
-def dir = "logs/sub-netty"
+def dir = "logs/sub-web"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
@@ -33,18 +30,8 @@ appender("problem", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-appender("packets", RollingFileAppender) {
-  file = "${dir}/packets.txt"
-  rollingPolicy(SizeAndTimeBasedRollingPolicy) {
-    fileNamePattern = "${dir}/%d/packets-%i.gz"
-    totalSizeCap = "20GB"
-    maxFileSize = "1GB"
-    maxHistory = 30
-  }
-  filter(NameFilter) { classes = [ReadWriteHexHandler, ReadWriteInfoHandler] }
-  encoder(PatternLayoutEncoder) { pattern = out }
-}
-
+logger("org.springframework.transaction", TRACE)
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
-root(INFO, ["console", "records", "problem", "packets"])
+logger("io.vertx", TRACE)
+root(INFO, ["console", "records", "problem"])

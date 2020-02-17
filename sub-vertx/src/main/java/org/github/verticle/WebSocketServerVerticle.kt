@@ -38,7 +38,7 @@ class WebSocketServerVerticle(private val port: Int = 8800): CoroutineVerticle()
   }
 
   private suspend fun initWebSocketServer() {
-    val channel: ReceiveChannel<ServerWebSocket> = httpServer.websocketStream().toChannel(vertx)
+    val channel: ReceiveChannel<ServerWebSocket> = httpServer.webSocketStream().toChannel(vertx)
     launch {
       for(ws in channel) {
         //握手

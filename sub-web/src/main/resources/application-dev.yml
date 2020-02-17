@@ -21,8 +21,7 @@ spring:
     converters:
       preferred-json-mapper: jackson
   redis:
-    port: 6380
-    password: l
+    port: 6379
     timeout: 10s
     lettuce:
       pool:
@@ -30,7 +29,7 @@ spring:
         max-idle: 12
     host: localhost
   datasource:
-    url: jdbc:p6spy:mysql://localhost:3380/sample?useSSL=false
+    url: jdbc:p6spy:mysql://localhost:3380/sample
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: l
@@ -65,19 +64,6 @@ spring:
 server:
   port: 8080
 
-logging:
-  level:
-    web: trace
-    sql: trace
-    org.github: trace
-    io.netty: trace
-    io.vertx: trace
-    org.springframework.transaction: trace
-  file:
-    max-history: 30
-    max-size: 1GB
-    path: ${user.dir}/logs/${spring.application.name}/${info.version}/dev/
-
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   configuration:
@@ -104,3 +90,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+
+logging:
+  config: classpath:logback.groovy

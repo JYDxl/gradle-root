@@ -49,6 +49,10 @@ dependencies {
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation("org.springframework.boot:spring-boot-starter-test") { exclude(module = "android-json");exclude(group = "junit") }
+  testImplementation("org.springframework.boot:spring-boot-starter-test") {
+    exclude(group = "org.junit.vintage")
+    exclude(module = "android-json")
+    exclude(group = "junit")
+  }
   testImplementation("org.springframework.security:spring-security-test")
 }

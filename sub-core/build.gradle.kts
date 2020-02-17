@@ -4,7 +4,6 @@ val javassist: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val protobuf: String by System.getProperties()
 val byteman: String by System.getProperties()
-val guice: String by System.getProperties()
 val netty: String by System.getProperties()
 val jna: String by System.getProperties()
 
@@ -34,11 +33,9 @@ dependencies {
 
   compileOnly("com.baomidou:mybatis-plus-core:$mybatisplus")
 
-  testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+  testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine") { exclude(group = "org.checkerframework") }
   testImplementation("commons-codec:commons-codec:$commonscodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")
-  testImplementation("com.google.inject:guice:$guice")
-  testImplementation("com.google.inject.extensions:guice-multibindings:$guice")
   testImplementation("net.java.dev.jna:jna:$jna")
   testImplementation("org.javassist:javassist:$javassist")
 }
