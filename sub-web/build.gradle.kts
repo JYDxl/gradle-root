@@ -19,6 +19,7 @@ val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
+val shiro: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-core"))
@@ -37,6 +38,7 @@ dependencies {
   implementation("mysql:mysql-connector-java:$mysql")
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
+  implementation("org.apache.shiro:shiro-spring-boot:$shiro")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
