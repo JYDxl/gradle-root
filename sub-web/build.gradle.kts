@@ -38,7 +38,7 @@ dependencies {
   implementation("mysql:mysql-connector-java:$mysql")
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
-  implementation("org.apache.shiro:shiro-spring-boot:$shiro")
+  implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
