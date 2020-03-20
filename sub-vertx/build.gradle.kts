@@ -3,6 +3,7 @@ import org.springframework.boot.gradle.tasks.application.CreateBootStartScripts
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 val netty: String by System.getProperties()
+val guice: String by System.getProperties()
 
 plugins {
   application
@@ -56,6 +57,8 @@ dependencies {
   api("io.vertx:vertx-lang-kotlin-coroutines") { exclude(group = "io.netty") }
 
   implementation(project(":sub-core"))
+  implementation("com.google.inject:guice:$guice")
+  implementation("com.google.inject.extensions:guice-multibindings:$guice")
 
   testImplementation("io.vertx:vertx-junit5") { exclude(group = "io.netty");exclude(group = "org.junit.jupiter") }
 
