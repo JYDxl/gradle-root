@@ -50,8 +50,10 @@ subprojects {
   configure<DependencyManagementExtension> {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
+      mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
       mavenBom("io.projectreactor:reactor-bom:$reactor")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
+      mavenBom("org.junit:junit-bom:$junit")
     }
   }
 
@@ -100,15 +102,18 @@ subprojects {
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-core:$jackson")
-    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jackson")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353:$jackson")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava:$jackson")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.platform:junit-platform-engine")
+//    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")
