@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test
 class FixedLengthFrameDecoderTest {
   @Test
   fun test1() {
-    val buf = Unpooled.wrappedBuffer(byteArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8))!!
+    val buf = Unpooled.wrappedBuffer(byteArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8))
     val input = buf.copy()!!
     val channel = EmbeddedChannel(LoggingHandler(), FixedLengthFrameDecoder(3))
     Assertions.assertTrue(channel.writeInbound(input))
@@ -36,7 +36,7 @@ class FixedLengthFrameDecoderTest {
 
   @Test
   fun test2() {
-    val buf = Unpooled.wrappedBuffer(byteArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8))!!
+    val buf = Unpooled.wrappedBuffer(byteArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8))
     val input = buf.copy()!!
     val channel = EmbeddedChannel(LoggingHandler(), FixedLengthFrameDecoder(3))
     Assertions.assertFalse(channel.writeInbound(input.readBytes(2)))

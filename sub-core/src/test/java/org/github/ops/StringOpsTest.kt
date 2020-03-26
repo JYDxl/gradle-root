@@ -1,7 +1,7 @@
 package org.github.ops
 
 import org.github.spring.footstone.FORMAT_DATE
-import org.github.spring.footstone.FORMAT_TIME
+import org.github.spring.footstone.FORMAT_DATE_TIME
 import org.junit.jupiter.api.Test
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -33,7 +33,7 @@ internal class StringOpsTest {
 
   @Test
   fun getTime() {
-    assert(LocalDateTime.now().value == SimpleDateFormat(FORMAT_TIME).format(LocalDateTime.now().value.time))
+    assert(LocalDateTime.now().value == SimpleDateFormat(FORMAT_DATE_TIME).format(LocalDateTime.now().value.time))
   }
 
   @Test

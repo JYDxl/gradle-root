@@ -10,9 +10,9 @@ import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
 import kotlin.reflect.KClass
 
-fun <T: Any> ByteArray.toBean(clazz: Class<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue<T>(this, clazz)
+fun <T: Any> ByteArray.toBean(clazz: Class<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue(this, clazz)
 
-fun <T: Any> ByteArray.toBean(clazz: KClass<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue<T>(this, clazz.java)
+fun <T: Any> ByteArray.toBean(clazz: KClass<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue(this, clazz.java)
 
 fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>): T = clazz.getDeclaredConstructor().newInstance().also { create(it).putAll(this) }
 
@@ -50,6 +50,6 @@ val webAppCtx = appCtx as WebApplicationContext
 
 val objectMapper = appCtx.getBean(ObjectMapper::class.java)
 
-fun <T: Any> String.toBean(clazz: Class<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue<T>(this, clazz)
+fun <T: Any> String.toBean(clazz: Class<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue(this, clazz)
 
-fun <T: Any> String.toBean(clazz: KClass<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue<T>(this, clazz.java)
+fun <T: Any> String.toBean(clazz: KClass<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue(this, clazz.java)

@@ -16,7 +16,7 @@ fun main() {
   val generator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
 
   GlobalConfig().apply {
-    val path = getProperty("user.dir")!!
+    val path = checkNotNull(getProperty("user.dir"))
     outputDir = "$path/sub-model/src/main/java"
     serviceImplName = "%sServiceImpl"
     serviceName = "I%sService"
