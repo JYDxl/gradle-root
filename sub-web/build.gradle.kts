@@ -14,12 +14,14 @@ tasks.withType<Test> {
 
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
+val crazycake: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
 val shiro: String by System.getProperties()
+val jedis: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-core"))
@@ -39,6 +41,8 @@ dependencies {
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
+  implementation("redis.clients:jedis:$jedis")
+  implementation("org.crazycake:shiro-redis:$crazycake")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
@@ -46,7 +50,10 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-aop")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-websocket")
-  implementation("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.netty") }
+  implementation("org.springframework.boot:spring-boot-starter-data-redis") {
+    exclude(group = "io.netty")
+    exclude(group = "io.lettuce")
+  }
   // implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
   runtimeOnly("org.springframework.boot:spring-boot-devtools")

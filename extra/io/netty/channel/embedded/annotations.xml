@@ -1,0 +1,8 @@
+<root>
+    <item name='io.netty.channel.embedded.EmbeddedChannel T readInbound()'>
+        <annotation name='org.jetbrains.annotations.Nullable'/>
+    </item>
+    <item name='io.netty.channel.embedded.EmbeddedChannel T readOutbound()'>
+        <annotation name='org.jetbrains.annotations.Nullable'/>
+    </item>
+</root>

@@ -26,7 +26,10 @@ publishing {
 dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-amqp")
   compileOnly("org.springframework.boot:spring-boot-starter-web")
-  compileOnly("org.springframework.boot:spring-boot-starter-data-redis") { exclude(group = "io.netty") }
+  compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {
+    exclude(group = "io.netty")
+    exclude(group = "io.lettuce")
+  }
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("io.netty:netty-all:$netty")
   compileOnly("com.google.protobuf:protobuf-java-util:$protobuf")
