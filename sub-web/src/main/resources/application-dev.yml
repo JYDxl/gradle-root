@@ -10,13 +10,7 @@ spring:
     default-property-inclusion: non_absent
     serialization:
       fail_on_empty_beans: false
-  http:
-    encoding:
-      force: true
-      force-request: true
-      force-response: true
-      enabled: true
-      charset: utf-8
+  mvc:
     log-request-details: true
     converters:
       preferred-json-mapper: jackson
@@ -63,6 +57,13 @@ spring:
 
 server:
   port: 8080
+  servlet:
+    encoding:
+      force: true
+      force-request: true
+      force-response: true
+      enabled: true
+      charset: utf-8
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml

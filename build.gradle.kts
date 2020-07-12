@@ -113,7 +113,7 @@ subprojects {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testRuntimeOnly("org.junit.platform:junit-platform-engine")
-//    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+    //    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")

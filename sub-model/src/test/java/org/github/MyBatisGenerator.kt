@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.generator.config.TemplateConfig
 import com.baomidou.mybatisplus.generator.config.po.LikeTable
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.*
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
+import org.github.base.AbstractEntity
 import java.lang.System.*
 
 fun main() {
@@ -48,7 +49,7 @@ fun main() {
     isEntityLombokModel = true
     isEntityTableFieldAnnotationEnable = true
     logicDeleteFieldName = "deleted"
-    superEntityClass = "org.github.base.AbstractEntity"
+    setSuperEntityClass(AbstractEntity::class.java)
     superMapperClass = "org.github.base.IMapper"
     superServiceClass = "org.github.base.IService"
     superServiceImplClass = "org.github.base.ServiceImpl"

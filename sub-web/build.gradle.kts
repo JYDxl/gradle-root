@@ -14,7 +14,6 @@ tasks.withType<Test> {
 
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
-val crazycake: String by System.getProperties()
 val retrofit: String by System.getProperties()
 // val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
@@ -42,7 +41,6 @@ dependencies {
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("redis.clients:jedis:$jedis")
-  implementation("org.crazycake:shiro-redis:$crazycake")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")

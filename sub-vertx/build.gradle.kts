@@ -1,5 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.springframework.boot.gradle.tasks.application.CreateBootStartScripts
 import org.springframework.boot.gradle.tasks.run.BootRun
 
 val netty: String by System.getProperties()
@@ -21,12 +20,11 @@ application {
     "-Djava.net.preferIPv4Stack=true",
     "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
     "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    "--illegal-access=deny"
+    "--add-opens=java.base/java.nio=ALL-UNNAMED"
   )
 }
 
-tasks.getByName<CreateBootStartScripts>("bootStartScripts") { enabled = false }
+tasks.getByName<Task>("bootStartScripts") { enabled = false }
 tasks.getByName<BootRun>("bootRun") { enabled = false }
 tasks.getByName<Tar>("bootDistTar") { enabled = false }
 tasks.getByName<Zip>("bootDistZip") { enabled = false }
@@ -44,8 +42,7 @@ tasks.withType<Test> {
     "-Djava.net.preferIPv4Stack=true",
     "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
     "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    "--illegal-access=deny"
+    "--add-opens=java.base/java.nio=ALL-UNNAMED"
   )
 }
 

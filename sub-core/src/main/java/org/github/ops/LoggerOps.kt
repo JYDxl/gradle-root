@@ -15,7 +15,7 @@ fun Logger.trace(ex: Throwable? = null, msg: () -> Any?) {
         }
       }
     } catch(e: Exception) {
-      error("Exception in log: ${e.message}", e)
+      error("Exception in msg func: ${e.message}", e)
       ex?.apply { trace(message, this) }
     }
   }
@@ -32,7 +32,7 @@ fun Logger.debug(ex: Throwable? = null, msg: () -> Any?) {
         }
       }
     } catch(e: Exception) {
-      error("Exception in log: ${e.message}", e)
+      error("Exception in msg func: ${e.message}", e)
       ex?.apply { debug(message, this) }
     }
   }
@@ -49,7 +49,7 @@ fun Logger.error(ex: Throwable? = null, msg: () -> Any?) {
         }
       }
     } catch(e: Exception) {
-      error("Exception in log: ${e.message}", e)
+      error("Exception in msg func: ${e.message}", e)
       ex?.apply { error(message, this) }
     }
   }
@@ -66,7 +66,7 @@ fun Logger.info(ex: Throwable? = null, msg: () -> Any?) {
         }
       }
     } catch(e: Exception) {
-      error("Exception in log: ${e.message}", e)
+      error("Exception in msg func: ${e.message}", e)
       ex?.apply { info(message, this) }
     }
   }
@@ -83,7 +83,7 @@ fun Logger.warn(ex: Throwable? = null, msg: () -> Any?) {
         }
       }
     } catch(e: Exception) {
-      error("Exception in log: ${e.message}", e)
+      error("Exception in msg func: ${e.message}", e)
       ex?.apply { warn(message, this) }
     }
   }
