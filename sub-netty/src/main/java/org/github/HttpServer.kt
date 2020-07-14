@@ -7,7 +7,6 @@ import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
-import io.netty.util.concurrent.Future
 import org.github.module.http.HttpServerHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
@@ -26,7 +25,7 @@ fun main() {
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<SocketChannel>() {
       override fun initChannel(ch: SocketChannel) {
-        ch.pipeline()!!.apply {
+        ch.pipeline().apply {
           addLast("LoggingHandler", loggingHandler)
           addLast("httpServerCodec", HttpServerCodec())
           addLast("httpObjectAggregator", HttpObjectAggregator(512 * 1024))
@@ -38,8 +37,7 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { _: Future<in Void> ->
-      boss.shutdownGracefully()
-      worker.shutdownGracefully()
+    .addListener {
+      boss.shutdownGracefully(); worker.shutdownGracefully()
     }
 }

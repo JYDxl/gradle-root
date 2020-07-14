@@ -17,7 +17,7 @@ fun main() {
     .channel(NioSocketChannel::class.java)
     .handler(object: ChannelInitializer<Channel>() {
       override fun initChannel(channel: Channel) {
-        channel.pipeline()!!.apply {
+        channel.pipeline().apply {
           addLast(LoggingHandler())
           addLast(LengthFieldBasedFrameDecoder(LITTLE_ENDIAN, 65535, 0, 2, -2, 0, false))
           addLast(EchoClientHandler())

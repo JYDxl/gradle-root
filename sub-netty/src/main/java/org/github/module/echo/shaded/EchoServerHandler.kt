@@ -17,7 +17,7 @@ class EchoServerHandler(private val group: ChannelGroup): SimpleChannelInboundHa
   }
 
   override fun channelActive(ctx: ChannelHandlerContext) {
-    group.add(ctx.channel()!!)
+    group.add(ctx.channel())
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

@@ -32,4 +32,7 @@
   <item name='io.netty.channel.ChannelInitializer void initChannel(C) 0'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>
+  <item name='io.netty.channel.ChannelOutboundInvoker io.netty.channel.ChannelPromise newPromise()'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
 </root>

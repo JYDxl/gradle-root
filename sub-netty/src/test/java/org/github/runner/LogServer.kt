@@ -29,7 +29,7 @@ fun main() {
     .option(SO_BROADCAST, true)
     .handler(object: ChannelInitializer<Channel>() {
       override fun initChannel(channel: Channel) {
-        channel.pipeline()!!.apply {
+        channel.pipeline().apply {
           addLast("LoggingHandler", loggingHandler)
           addLast("LogEventEncoder", logEventEncoder)
         }

@@ -97,7 +97,7 @@ class ObjectOpsTests {
 
   @Test
   fun bean() {
-    val entity = sysMenuService.list()[0]!!
+    val entity = sysMenuService.list()[0]
     val map = entity.map
     val bean = map.bean(SysMenuEntity::class.java)
     println(bean)
@@ -106,7 +106,7 @@ class ObjectOpsTests {
   @Test
   fun sort() {
     val random = Random(System.currentTimeMillis())
-    val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()!!
+    val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()
     bubbleSort(array) { left, right -> left > right }
     log.info { array.json() }
   }

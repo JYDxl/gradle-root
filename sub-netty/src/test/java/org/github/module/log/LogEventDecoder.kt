@@ -9,7 +9,7 @@ import io.netty.util.CharsetUtil.*
 @Sharable
 class LogEventDecoder: MessageToMessageDecoder<DatagramPacket>() {
   override fun decode(ctx: ChannelHandlerContext, dp: DatagramPacket, out: MutableList<Any>) {
-    val line = dp.content().toString(UTF_8)!!
+    val line = dp.content().toString(UTF_8)
     val (file, msg) = line.split(":", limit = 2)
     out.add(LogEvent(dp.sender(), file, msg))
   }

@@ -39,7 +39,7 @@ class NettyConfig(private val props: NettyProperties): InitializingBean, Disposa
       .handler(loggingHandler())
       .childHandler(object: ChannelInitializer<KQueueSocketChannel>() {
         override fun initChannel(channel: KQueueSocketChannel) {
-          channel.pipeline()!!.apply {
+          channel.pipeline().apply {
             addLast(loggingHandler())
             addLast(lineBasedFrameDecoder())
             addLast(stringDecoder())

@@ -21,12 +21,12 @@ class LineEncoder: MessageToMessageEncoder<CharSequence>() {
 
     private val line = unreleasableBuffer(directBuffer(1).writeByte(delimiter.toInt()))
 
-    private fun CharSequence.toBuf(alloc: ByteBufAllocator) = encodeString(alloc, wrap(this), UTF_8)!!
+    private fun CharSequence.toBuf(alloc: ByteBufAllocator) = encodeString(alloc, wrap(this), UTF_8)
 
     fun CharSequence.toByteBuf(alloc: ByteBufAllocator): ByteBuf {
       val data = toBuf(alloc)
       if(endsWith(delimiter)) return data
-      return alloc.compositeBuffer(2)!!.apply { addComponents(true, data, line) }
+      return alloc.compositeBuffer(2).apply { addComponents(true, data, line) }
     }
   }
 }

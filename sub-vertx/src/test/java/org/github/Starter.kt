@@ -12,7 +12,7 @@ fun main() {
     maxEventLoopExecuteTimeUnit = TimeUnit.MILLISECONDS
   }
 
-  val vertx = Vertx.vertx(vertxOptions)!!
+  val vertx = Vertx.vertx(vertxOptions)
 
   val deploymentOptions = DeploymentOptions().apply {
     instances = 8

@@ -11,10 +11,10 @@ class MessageBufTest {
       name = "张三"
       age = 20
       address = "北京"
-    }.build()!!
+    }.build()
     println(param.json)
-    val bytes = param.toByteArray()!!
-    val result = Student.parseFrom(bytes)!!
+    val bytes = param.toByteArray()
+    val result = Student.parseFrom(bytes)
     println(result.json)
   }
 }

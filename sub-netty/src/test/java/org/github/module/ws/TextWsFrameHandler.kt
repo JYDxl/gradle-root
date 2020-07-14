@@ -20,7 +20,7 @@ class TextWsFrameHandler(private val group: ChannelGroup): SimpleChannelInboundH
   override fun userEventTriggered(ctx: ChannelHandlerContext, evt: Any) {
     if(evt !is HandshakeComplete) return
     ctx.pipeline().remove(HttpReqHandler::class.java)
-    val channel = ctx.channel()!!
+    val channel = ctx.channel()
     group.writeAndFlush(TextWebSocketFrame("client ${channel.remoteAddress()} joined"), all(), true)
     group.add(channel)
   }

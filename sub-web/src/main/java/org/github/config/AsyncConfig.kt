@@ -21,5 +21,5 @@ class AsyncConfig(private val builder: TaskExecutorBuilder): AsyncConfigurer {
   override fun getAsyncExecutor() = taskExecutor()
 
   @Bean
-  fun taskExecutor() = builder.build()!!
+  fun taskExecutor() = builder.build()
 }

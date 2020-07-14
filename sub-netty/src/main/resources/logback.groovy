@@ -4,7 +4,7 @@ import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
 
 def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
-def dir = "logs/sub-netty"
+def dir = "build/logs/sub-netty"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }

@@ -11,12 +11,12 @@ import java.nio.charset.StandardCharsets.*
 
 class FileServerVerticle: AbstractVerticle() {
   override fun start() {
-    val fs = vertx.fileSystem()!!
+    val fs = vertx.fileSystem()
     fs.readFile(".gitignore") { it: AsyncResult<Buffer> ->
       if(it.succeeded()) {
         log.trace { "文件[.gitignore]中的信息:\n${it.result().toString(UTF_8)}" }
       } else {
-        it.cause()!!.apply {
+        it.cause().apply {
           log.error(this) { "文件读取失败" }
         }
       }
@@ -25,7 +25,7 @@ class FileServerVerticle: AbstractVerticle() {
       if(it.succeeded()) {
         log.trace { "文件拷贝成功" }
       } else {
-        it.cause()!!.apply {
+        it.cause().apply {
           log.error(this) { "文件拷贝失败" }
         }
       }

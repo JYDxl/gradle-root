@@ -40,4 +40,4 @@ class LongRedisScript(resource: Resource): RedisScript<Long> by newRedisScript(L
 @Suppress("UNCHECKED_CAST")
 class ListRedisScript(resource: Resource): RedisScript<List<String?>> by newRedisScript(List::class, resource) as RedisScript<List<String?>>
 
-fun <T: Any> newRedisScript(clazz: KClass<T>? = null, resource: Resource) = DefaultRedisScript<T>().apply { clazz?.java?.let { setResultType(it) }; setLocation(resource) }
+fun <T: Any> newRedisScript(clazz: KClass<T>? = null, resource: Resource) = DefaultRedisScript<T>().apply { clazz?.java?.let { resultType = it }; setLocation(resource) }

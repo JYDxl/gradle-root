@@ -9,7 +9,6 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
-import io.netty.util.concurrent.Future
 import org.github.module.ws.HttpServerHandler
 import org.github.module.ws.WsTextServerHandler
 import org.github.netty.ops.eventLoopGroup
@@ -30,7 +29,7 @@ fun main() {
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<SocketChannel>() {
       override fun initChannel(ch: SocketChannel) {
-        ch.pipeline()!!.apply {
+        ch.pipeline().apply {
           addLast("LoggingHandler", loggingHandler)
           addLast("httpServerCodec", HttpServerCodec())
           addLast("chunkedWriteHandler", ChunkedWriteHandler())
@@ -45,8 +44,5 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { _: Future<in Void> ->
-      boss.shutdownGracefully()
-      worker.shutdownGracefully()
-    }
+    .addListener { boss.shutdownGracefully(); worker.shutdownGracefully() }
 }

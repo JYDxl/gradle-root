@@ -18,9 +18,9 @@ class WebClientVerticle: CoroutineVerticle() {
     // val channel = vertx.consumer<String, String>(CONSUME)
     // launch {
     //   for(msg in channel) {
-    //     val value = Json.decodeValue(msg.body(), String::class.java)!!
+    //     val value = Json.decodeValue(msg.body(), String::class.java)
     //     try {
-    //       val res = webClient.get(value).`as`(string()).sendAwait().body()!!
+    //       val res = webClient.get(value).`as`(string()).sendAwait().body()
     //       msg.reply(Json.encodeToBuffer(res))
     //     } catch(e: Exception) {
     //       log.error(e) { }

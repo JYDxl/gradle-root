@@ -21,10 +21,10 @@ suspend fun main() = coroutineScope {
     maxEventLoopExecuteTime = maxWorkerExecuteTime
     preferNativeTransport = true
   }
-  val vertx = Vertx.vertx(vertxOptions)!!
+  val vertx = Vertx.vertx(vertxOptions)
 
   //注册自定义编解码器
-  // vertx.eventBus()!!.apply {
+  // vertx.eventBus().apply {
   //   registerDefaultCodec(EduScore::class.java, EduScoreCodec())
   // }
 

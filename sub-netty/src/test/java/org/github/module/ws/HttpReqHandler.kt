@@ -17,12 +17,12 @@ import org.github.ops.log
 @Sharable
 class HttpReqHandler(private val wsUri: String): SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
-    val uri = req.uri()!!
+    val uri = req.uri()
     if(uri.equals(wsUri, true)) {
       ctx.fireChannelRead(req.retain())
       return
     }
-    val httpVersion = req.protocolVersion()!!
+    val httpVersion = req.protocolVersion()
     val res = DefaultFullHttpResponse(httpVersion, HttpResponseStatus.OK)
     val msg = req.method().name() + " " + uri
     res.headers().set(HttpHeaderNames.CONTENT_TYPE, HttpHeaderValues.TEXT_PLAIN)
@@ -30,7 +30,7 @@ class HttpReqHandler(private val wsUri: String): SimpleChannelInboundHandler<Ful
     res.content().writeCharSequence(msg, UTF_8)
     val keepAlive = isKeepAlive(req)
     if(keepAlive) res.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE)
-    val future = ctx.writeAndFlush(res)!!
+    val future = ctx.writeAndFlush(res)
     if(!keepAlive) future.addListener(CLOSE)
   }
 

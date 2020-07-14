@@ -15,7 +15,7 @@ import org.github.ops.log
 @Sharable
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
-    val uri = req.uri()!!
+    val uri = req.uri()
     log.info { "${req.method()} $uri" }
     if(uri.toLowerCase() == "/ws") {
       ctx.fireChannelRead(req.retain())

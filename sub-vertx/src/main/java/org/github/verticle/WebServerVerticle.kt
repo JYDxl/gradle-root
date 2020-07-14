@@ -14,13 +14,13 @@ import org.github.ops.log
 
 class WebServerVerticle: AbstractVerticle() {
   override fun start() {
-    val router = Router.router(vertx)!!
+    val router = Router.router(vertx)
     router.route().handler(LoggerHandler.create())
     router.route().handler(BodyHandler.create().setDeleteUploadedFilesOnEnd(true))
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
     router.route().produces(TEXT_PLAIN.toString()).handler { ctx: RoutingContext ->
-      val req = ctx.request()!!
-      val res = ctx.response()!!
+      val req = ctx.request()
+      val res = ctx.response()
       ctx.user()
       log.info { "${req.path()} ${req.method()}" }
       res.end("Hello world!")

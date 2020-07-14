@@ -12,7 +12,7 @@ class ByteBufProcessorTest {
 
   @Test
   fun test() {
-    val byteBuf = Unpooled.wrappedBuffer(byteArrayOf(0, 1, 2, 3))!!
+    val byteBuf = Unpooled.wrappedBuffer(byteArrayOf(0, 1, 2, 3))
     val index1 = byteBuf.forEachByte { true.apply { log.debug { it } } }
     assertEquals(-1, index1)
     val index2 = byteBuf.forEachByte { it.toInt() != 0 }

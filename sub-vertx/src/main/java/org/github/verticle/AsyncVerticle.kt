@@ -14,7 +14,7 @@ import java.time.Duration
 
 class AsyncVerticle: CoroutineVerticle() {
   override suspend fun start() {
-    val eventBus = vertx.eventBus()!!
+    val eventBus = vertx.eventBus()
     val channel: ReceiveChannel<Message<String>> = eventBus
       .localConsumer<String>("a.b.c")
       .setMaxBufferedMessages(Int.MAX_VALUE)
@@ -22,7 +22,7 @@ class AsyncVerticle: CoroutineVerticle() {
     launch {
       for(msg in channel) {
         launch {
-          val body = msg.body()!!
+          val body = msg.body()
           log.info { body }
           delay(500)
           msg.reply(body)

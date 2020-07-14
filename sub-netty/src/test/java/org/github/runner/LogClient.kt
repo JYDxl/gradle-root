@@ -23,7 +23,7 @@ fun main() {
     .channel(NioDatagramChannel::class.java)
     .handler(object: ChannelInitializer<Channel>() {
       override fun initChannel(channel: Channel) {
-        channel.pipeline()!!.apply {
+        channel.pipeline().apply {
           addLast(loggingHandler)
           addLast(logEventDecoder)
           addLast(logClientHandler)

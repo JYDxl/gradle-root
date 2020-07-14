@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 @Beta
 class RabbitMessageConverter: SimpleMessageConverter() {
 
-  private val classLoader = getDefaultClassLoader()!!
+  private val classLoader = requireNotNull(getDefaultClassLoader())
 
   private val classCache = ConcurrentHashMap<String, Class<*>>()
 
@@ -24,16 +24,16 @@ class RabbitMessageConverter: SimpleMessageConverter() {
         bytes = msg
         props.contentType = CONTENT_TYPE_BYTES
       }
-      is String    -> {
+      is String -> {
         bytes = msg.toByteArray()
         props.contentType = CONTENT_TYPE_TEXT_PLAIN
       }
-      is Entity    -> {
+      is Entity -> {
         bytes = objectMapper.writeValueAsBytes(msg)
         props.contentType = CONTENT_TYPE_JSON
         props.setHeader("class", msg.javaClass.name)
       }
-      else         -> {
+      else -> {
         bytes = msg.toString().toByteArray()
         props.contentType = CONTENT_TYPE_TEXT_PLAIN
       }
@@ -47,16 +47,16 @@ class RabbitMessageConverter: SimpleMessageConverter() {
     val contentType = props.contentType ?: return msg.body
     return when(contentType) {
       CONTENT_TYPE_TEXT_PLAIN -> String(msg.body)
-      CONTENT_TYPE_JSON       -> objectMapper.readValue(msg.body, getClass(props.headers["class"] as String)) //TODO 缓存一下name到class的映射, 否则效率有问题
-      CONTENT_TYPE_BYTES      -> msg.body
-      else                    -> throw UnsupportedOperationException()
+      CONTENT_TYPE_JSON -> objectMapper.readValue(msg.body, getClass(props.headers["class"] as String)) //TODO 缓存一下name到class的映射, 否则效率有问题
+      CONTENT_TYPE_BYTES -> msg.body
+      else -> throw UnsupportedOperationException()
     }
   }
 
   private fun getClass(clazz: String): Class<*> {
     val target = classCache[clazz]
     if(target != null) return target
-    val result = classLoader.loadClass(clazz)!!
+    val result: Class<*> = classLoader.loadClass(clazz)
     classCache[clazz] = result
     return result
   }

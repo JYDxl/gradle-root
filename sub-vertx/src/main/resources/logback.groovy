@@ -1,7 +1,7 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
 def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
-def dir = "logs/sub-vertx"
+def dir = "build/logs/sub-vertx"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }

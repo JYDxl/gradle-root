@@ -13,7 +13,7 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
   private val log = EchoClientHandler::class.log
 
   override fun channelActive(ctx: ChannelHandlerContext) {
-    val buffer = Unpooled.buffer()!!
+    val buffer = Unpooled.buffer()
     buffer.writeShortLE(8)
     buffer.writeShortLE(0x2001)
     buffer.writeIntLE(0x1000005)
@@ -22,7 +22,7 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     log.info { ByteBufUtil.hexDump(msg as ByteBuf) }
-    val buffer = Unpooled.buffer(6)!!
+    val buffer = Unpooled.buffer(6)
     buffer.writeShortLE(6)
     buffer.writeShortLE(0x2222)
     buffer.writeShortLE(0)

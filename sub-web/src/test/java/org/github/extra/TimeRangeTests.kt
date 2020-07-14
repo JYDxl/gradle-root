@@ -7,8 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.LocalTime
-import java.util.Comparator
-import java.util.TreeMap
+import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
@@ -26,17 +25,22 @@ class TimeRangeTests {
     }.associateByTo(TreeMap(Comparator.comparing<Range<Int>, Int> { it.lowerEndpoint() })) { it.range }
     assert(treeMap.size >= 4)
     var current: Range<Int> = treeMap.firstKey()
-    assert(treeMap[current]!!.tag.startsWith("00:00-")) { "无效的起始时间: ${treeMap[current]!!.tag}" }
+    val first = requireNotNull(treeMap[current])
+    assert(first.tag.startsWith("00:00-")) { "无效的起始时间: ${first.tag}" }
     var next: Range<Int>? = treeMap.higherKey(current)
     while(next != null) {
       try {
         if(!current.intersection(next).isEmpty) throw RuntimeException()
       } catch(ignore: Exception) {
-        throw AssertionError("无法完全连接的时间段: ${treeMap[current]!!.tag} | ${treeMap[next]!!.tag}")
+        val head = requireNotNull(treeMap[current])
+        val tail = requireNotNull(treeMap[next])
+        throw AssertionError("无法完全连接的时间段: ${head.tag} | ${tail.tag}")
       }
       current = next
       next = treeMap.higherKey(next)
-      if(next == null) assert(treeMap[current]!!.tag.endsWith("-24:00")) { "无效的结束时间: ${treeMap[current]!!.tag}" }
+      val head = requireNotNull(treeMap[current])
+      val tail = requireNotNull(treeMap[next])
+      if(next == null) assert(head.tag.endsWith("-24:00")) { "无效的结束时间: ${tail.tag}" }
     }
     println(treeMap.values.map { it.tag })
   }

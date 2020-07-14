@@ -41,10 +41,10 @@ class NetClientVerticle(private val host: String, private val port: Int): Corout
       launch {
         buffer = buffer.appendBuffer(buf)
         while(true) {
-          val byteBuf = buffer.byteBuf!!
+          val byteBuf = buffer.byteBuf
           val index = byteBuf.forEachByte(FIND_LF)
           if(index == -1) return@launch
-          val data = byteBuf.readSlice(index + 1)!!
+          val data = byteBuf.readSlice(index + 1)
           buffer = buffer(getBytes(byteBuf))
           handle(data)
         }

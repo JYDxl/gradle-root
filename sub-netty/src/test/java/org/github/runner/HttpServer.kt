@@ -26,7 +26,7 @@ fun main() {
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<Channel>() {
       override fun initChannel(channel: Channel) {
-        channel.pipeline()!!.apply {
+        channel.pipeline().apply {
           addLast(loggingHandler)
           addLast(HttpServerCodec())
           addLast(HttpContentCompressor())

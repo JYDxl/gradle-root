@@ -32,14 +32,14 @@ class RedisTests {
   @Test
   fun testBool() {
     val key = "redis:bool"
-    val flag = redisOps.execute(boolScript, singletonList(key), 60)!!.toBoolean()
+    val flag = requireNotNull(redisOps.execute(boolScript, singletonList(key), 60)).toBoolean()
     log.info { "testBool: $flag" }
   }
 
   @Test
   fun testLong() {
     val key = "redis:long"
-    val long = redisOps.execute(longScript, singletonList(key), 60)!!
+    val long = requireNotNull(redisOps.execute(longScript, singletonList(key), 60))
     log.info { "testLong: $long" }
   }
 
@@ -53,7 +53,7 @@ class RedisTests {
   @Test
   fun testList() {
     val key = "redis:list"
-    val list = redisOps.execute(listScript, singletonList(key), 60)!!
+    val list: List<String?> = requireNotNull(redisOps.execute(listScript, singletonList(key), 60))
     log.info { "testList: $list" }
   }
 }

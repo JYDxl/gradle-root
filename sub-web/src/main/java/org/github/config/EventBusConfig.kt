@@ -16,8 +16,8 @@ class EventBusConfig {
   fun eventBus(@Qualifier("taskExecutor") taskExecutor: TaskExecutor, subscribers: List<EventSubscriber>) = AsyncEventBus(taskExecutor).apply { subscribers.forEach { register(it) } }
 
   @Bean
-  fun listeningExecutor(@Qualifier("taskExecutor") executor: ThreadPoolTaskExecutor) = listeningDecorator(executor.threadPoolExecutor)!!
+  fun listeningExecutor(@Qualifier("taskExecutor") executor: ThreadPoolTaskExecutor) = listeningDecorator(executor.threadPoolExecutor)
 
   @Bean
-  fun listeningScheduler(@Qualifier("taskScheduler") scheduler: ThreadPoolTaskScheduler) = listeningDecorator(scheduler.scheduledExecutor)!!
+  fun listeningScheduler(@Qualifier("taskScheduler") scheduler: ThreadPoolTaskScheduler) = listeningDecorator(scheduler.scheduledExecutor)
 }

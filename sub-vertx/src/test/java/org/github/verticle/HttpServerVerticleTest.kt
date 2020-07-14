@@ -40,7 +40,7 @@ class HttpServerVerticleTest {
       maxEventLoopExecuteTime = 500
       maxEventLoopExecuteTimeUnit = MILLISECONDS
       preferNativeTransport = true
-    })!!
+    })
     vertx.deploy(HttpServerVerticle(port))
     ctx.completeNow()
   }
@@ -54,12 +54,13 @@ class HttpServerVerticleTest {
   @Test
   fun test(ctx: VertxTestContext) = runBlocking {
     val webClientOptions = WebClientOptions().apply { logActivity = true }
-    val webClient = WebClient.create(vertx, webClientOptions)!!
+    val webClient = WebClient.create(vertx, webClientOptions)
     val res = webClient
       .getAbs("http://www.baidu.com")
       .expect(SC_OK)
       .`as`(string())
-      .sendAwait().body()!!
+      .sendAwait()
+      .body()
     log.info { res }
     ctx.completeNow()
   }

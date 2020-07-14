@@ -22,7 +22,7 @@ class HttpServerVerticle(private val port: Int = 3000) : CoroutineVerticle() {
     // val channel = vertx.consumer<Buffer, String>(HTTP_SAY_HELLO)
     // launch {
     //   for(msg in channel) {
-    //     val req = msg.body().toString(UTF_8)!!
+    //     val req = msg.body().toString(UTF_8)
     //     log.warn { req }
     //     val res = req.toUpperCase().toBuffer()
     //     msg.reply(res)
@@ -47,9 +47,9 @@ class HttpServerVerticle(private val port: Int = 3000) : CoroutineVerticle() {
       //        password = "example"
       //      }
     }
-    val router = Router.router(vertx)!!
-    val bodyHandler = BodyHandler.create().setDeleteUploadedFilesOnEnd(true)!!
-    val logHandler = LoggerHandler.create(SHORT)!!
+    val router = Router.router(vertx)
+    val bodyHandler = BodyHandler.create().setDeleteUploadedFilesOnEnd(true)
+    val logHandler = LoggerHandler.create(SHORT)
     router.route().handler(logHandler).handler(bodyHandler)
 
     // router.post("/score").coroutineHandler(Handler::handler2Score)

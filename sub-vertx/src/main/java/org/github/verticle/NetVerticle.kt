@@ -32,7 +32,7 @@ class NetVerticle: CoroutineVerticle() {
 //        path = "truststore.jks"
 //        password = "654321"
 //      }
-    })!!
+    })
     val netSocket = netClient.connectAwait(10000, "localhost")
     netSocket.writeAwait(Buffer.buffer("2333"))
     netSocket.closeHandler {

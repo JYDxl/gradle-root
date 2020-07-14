@@ -15,5 +15,5 @@ class SchedulingConfig(private val builder: TaskSchedulerBuilder): SchedulingCon
   }
 
   @Bean
-  fun taskScheduler() = builder.build()!!
+  fun taskScheduler() = builder.build()
 }

@@ -21,7 +21,7 @@ fun main() {
     .option(ChannelOption.TCP_NODELAY, true)
     .handler(object: ChannelInitializer<Channel>() {
       override fun initChannel(ch: Channel) {
-        ch.pipeline()!!.apply {
+        ch.pipeline().apply {
           addLast(LengthFieldBasedFrameDecoder(1024, 4, 4))
         }
       }

@@ -52,7 +52,7 @@ class MyFirstVerticleTest {
       isUserAgentEnabled = false
       isKeepAlive = true
     }
-    val webClient = WebClient.create(vertx, webClientOptions)!!
+    val webClient = WebClient.create(vertx, webClientOptions)
     webClient
       .postAbs("http://localhost:$port")
       .send { ar: AsyncResult<HttpResponse<Buffer>> ->
