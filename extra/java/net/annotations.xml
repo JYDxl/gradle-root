@@ -1,0 +1,5 @@
+<root>
+  <item name='java.net.ServerSocket java.net.Socket accept()'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>
