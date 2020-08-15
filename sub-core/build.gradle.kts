@@ -23,6 +23,18 @@ publishing {
   }
 }
 
+tasks.withType<Test> {
+  jvmArgs = listOf(
+    "-ea",
+    "-Dio.netty.tryReflectionSetAccessible=true",
+    "-Dio.netty.leakDetection.level=paranoid",
+    "-Djava.net.preferIPv4Stack=true",
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
+    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
+    "--add-opens=java.base/java.nio=ALL-UNNAMED"
+  )
+}
+
 dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-amqp")
   compileOnly("org.springframework.boot:spring-boot-starter-web")
@@ -37,6 +49,7 @@ dependencies {
   compileOnly("com.baomidou:mybatis-plus-core:$mybatisplus")
 
   testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine") { exclude(group = "org.checkerframework") }
+  testImplementation("io.netty:netty-all:$netty")
   testImplementation("commons-codec:commons-codec:$commonscodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")
   testImplementation("net.java.dev.jna:jna:$jna")

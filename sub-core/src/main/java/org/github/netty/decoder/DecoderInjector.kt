@@ -6,19 +6,20 @@ import org.github.netty.ops.info
 import org.github.netty.ops.prettyHexDump
 import org.github.ops.trace
 import org.slf4j.Logger
+import kotlin.jvm.Throws
 
 interface DecoderInjector {
   /** log. */
-  val logger: Logger
+  val log: Logger
 
   fun inject(ctx: ChannelHandlerContext, buf: ByteBuf, func: () -> ByteBuf?): ByteBuf? {
     val channel = ctx.channel()
-    if(!channel.isActive) return null
-    logger.trace { "$channel ${channel.info} >>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
+    if(!channel.isActive) return func() //TODO 待测试
+    log.trace { "$channel ${channel.info} >>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
     failIfNecessary(buf)
     return func().also {
-      it?.apply { logger.trace { "$channel ${channel.info} >>PACK>>: ${readableBytes()}B\n$prettyHexDump" } }
-      logger.trace { "$channel ${channel.info} FINAL>>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
+      it?.apply { log.trace { "$channel ${channel.info} >>PACK>>: ${readableBytes()}B\n$prettyHexDump" } }
+      log.trace { "$channel ${channel.info} FINAL>>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
     }
   }
 

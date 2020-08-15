@@ -21,6 +21,6 @@
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>
     <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf wrappedBuffer(byte[])'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
+      <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
 </root>

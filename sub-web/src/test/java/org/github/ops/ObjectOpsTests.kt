@@ -1,6 +1,5 @@
 package org.github.ops
 
-import com.google.common.collect.ListMultimap
 import org.github.base.entity.SysMenuEntity
 import org.github.base.service.ISysMenuService
 import org.github.ops.spring.bean
@@ -21,6 +20,7 @@ import java.util.stream.IntStream
 class ObjectOpsTests {
   /** log. */
   private val log = ObjectOpsTests::class.log
+
   @Autowired
   private lateinit var sysMenuService: ISysMenuService
 
@@ -124,14 +124,14 @@ class ObjectOpsTests {
     }
   }
 
-  @Suppress("TAILREC_ON_VIRTUAL_MEMBER")
-  private tailrec fun recursive(multimap: ListMultimap<String, SysMenuTree>, list: List<SysMenuTree>) {
-    for(node: SysMenuTree in list) {
-      val sub: List<SysMenuTree> = multimap.get(node.id)
-      if(sub.isNotEmpty()) {
-        node.children = sub
-        return recursive(multimap, sub)
-      }
-    }
-  }
+  // @Suppress("TAILREC_ON_VIRTUAL_MEMBER")
+  // private tailrec fun recursive(multimap: ListMultimap<String, SysMenuTree>, list: List<SysMenuTree>) {
+  //   for(node: SysMenuTree in list) {
+  //     val sub: List<SysMenuTree> = multimap.get(node.id)
+  //     if(sub.isNotEmpty()) {
+  //       node.children = sub
+  //       return recursive(multimap, sub)
+  //     }
+  //   }
+  // }
 }
