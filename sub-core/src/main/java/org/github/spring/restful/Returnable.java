@@ -42,7 +42,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
   default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
-    if (functional()) {
+    if(functional()) {
       accept(res.getWriter());
     } else {
       accept(res.getOutputStream());

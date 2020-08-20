@@ -20,13 +20,12 @@ import org.github.netty.ops.socketChannel
 import org.github.ops.info
 import org.github.ops.log
 import org.github.ops.warn
-import org.github.thread.NativeThreadFactory
 import java.net.InetSocketAddress.*
 import java.util.concurrent.TimeUnit.*
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val group = eventLoopGroup(1, NativeThreadFactory("tcp-client"))
+  val group = eventLoopGroup(1, "tcp-client")
   val bootstrap = Bootstrap()
   val address = createUnresolved("localhost", 10000)
 

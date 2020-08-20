@@ -1,9 +1,13 @@
 package org.github.module.file
 
 import io.netty.bootstrap.ServerBootstrap
-import io.netty.channel.*
+import io.netty.channel.Channel
 import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.ChannelInboundHandlerAdapter
+import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.*
+import io.netty.channel.DefaultFileRegion
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.*
@@ -13,13 +17,10 @@ import io.netty.handler.ssl.SslHandler
 import io.netty.handler.ssl.SslProvider.*
 import io.netty.handler.stream.ChunkedFile
 import io.netty.handler.stream.ChunkedWriteHandler
-import io.netty.util.concurrent.DefaultThreadFactory
-import org.github.module.ssl.ServerHandler
 import org.github.netty.decoder.DefaultLineDecoder
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 import org.github.ops.classpathFile
-import org.github.ops.log
 import java.io.RandomAccessFile
 import kotlin.text.Charsets.UTF_8
 
@@ -34,8 +35,8 @@ fun main() {
   val stringEncoder = StringEncoder(UTF_8)
   val serverHandler = ServerHandler()
 
-  val boss = eventLoopGroup(1, DefaultThreadFactory("file-server-boss"))
-  val worker = eventLoopGroup(0, DefaultThreadFactory("file-server-worker"))
+  val boss = eventLoopGroup(1, "file-server-boss")
+  val worker = eventLoopGroup(0, "file-server-worker")
 
   ServerBootstrap()
     .group(boss, worker)
@@ -78,6 +79,4 @@ class ServerHandler: ChannelInboundHandlerAdapter() {
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
     ctx.flush()
   }
-
-  private val log = ServerHandler::class.log
 }

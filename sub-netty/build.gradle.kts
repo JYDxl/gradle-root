@@ -49,8 +49,6 @@ dependencies {
   api("com.google.protobuf:protobuf-java-util:$protobuf")
   api("io.netty:netty-tcnative-boringssl-static:$tcnative")
   api("io.netty:netty-all:$netty")
-  api("io.projectreactor.kotlin:reactor-kotlin-extensions")
-  api("io.projectreactor.netty:reactor-netty") { exclude(group = "io.netty") }
   api(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")

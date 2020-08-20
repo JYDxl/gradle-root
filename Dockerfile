@@ -1,11 +1,11 @@
-FROM azul/zulu-openjdk-alpine:11.0.8-jre as alpine-jre
+FROM azul/zulu-openjdk-alpine:11.0.8-jre-headless as alpine-jre
 
 RUN \
 #设置镜像地址
     sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
     && apk update \
 #安装常用工具包
-    && apk add curl tree bash iproute2 \
+#    && apk add curl tree bash iproute2 \
 #设置时区
     && apk add -U tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \

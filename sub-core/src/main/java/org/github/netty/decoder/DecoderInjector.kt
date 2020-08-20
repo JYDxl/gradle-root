@@ -14,12 +14,13 @@ interface DecoderInjector {
 
   fun inject(ctx: ChannelHandlerContext, buf: ByteBuf, func: () -> ByteBuf?): ByteBuf? {
     val channel = ctx.channel()
-    if(!channel.isActive) return func() //TODO 待测试
-    log.trace { "$channel ${channel.info} >>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
+    //TODO 待测试
+    // if(!channel.isActive) return func()
+    log.trace { "$channel ${channel.info} PROCESS>>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
     failIfNecessary(buf)
     return func().also {
-      it?.apply { log.trace { "$channel ${channel.info} >>PACK>>: ${readableBytes()}B\n$prettyHexDump" } }
-      log.trace { "$channel ${channel.info} FINAL>>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
+      it?.apply { log.trace { "$channel ${channel.info} PROCESS>>PACK>>: ${readableBytes()}B\n$prettyHexDump" } }
+      log.trace { "$channel ${channel.info} PROCESS>FINAL>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
     }
   }
 

@@ -28,11 +28,8 @@ abstract class LineDecoder(maxFrameLength: Int, stripDelimiter: Boolean = true, 
   }
 }
 
-//TODO:添加测试类
 class DefaultDelimiterDecoder(maxFrameLength: Int, delimiters: Array<ByteBuf>, stripDelimiter: Boolean = true, failFast: Boolean = true, override val log: Logger = DefaultDelimiterDecoder::class.log): DelimiterDecoder(maxFrameLength, delimiters, stripDelimiter, failFast)
 
-//TODO:添加测试类
 class DefaultLengthDecoder(maxFrameLength: Int, lengthFieldOffset: Int, lengthFieldLength: Int, lengthAdjustment: Int = 0, initialBytesToStrip: Int = 0, failFast: Boolean = true, byteOrder: ByteOrder = BIG_ENDIAN, override val log: Logger = DefaultLengthDecoder::class.log): LengthDecoder(maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip, failFast, byteOrder), DecoderInjector
 
-//TODO:添加测试类
 class DefaultLineDecoder(maxFrameLength: Int, stripDelimiter: Boolean = true, failFast: Boolean = true, override val log: Logger = DefaultLineDecoder::class.log): LineDecoder(maxFrameLength, stripDelimiter, failFast), DecoderInjector

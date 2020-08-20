@@ -14,11 +14,10 @@ import org.github.module.chat.ChatServerHandler
 import org.github.netty.decoder.DefaultLineDecoder
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
-import org.github.thread.NativeThreadFactory
 
 fun main() {
-  val boss = eventLoopGroup(1, NativeThreadFactory("chat-boss"))
-  val worker = eventLoopGroup(0, NativeThreadFactory("chat-worker"))
+  val boss = eventLoopGroup(1, "chat-boss")
+  val worker = eventLoopGroup(0, "chat-worker")
 
   val loggingHandler = LoggingHandler(TRACE)
   val stringDecoder = StringDecoder()

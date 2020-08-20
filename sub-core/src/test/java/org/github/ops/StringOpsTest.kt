@@ -6,8 +6,11 @@ import org.junit.jupiter.api.Test
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.stream.Stream.*
 
 internal class StringOpsTest {
+  private val log = StringOpsTest::class.log
+
   @Test
   fun padStart() {
     assert("2333".padStart(10, ' ') == "      2333")
@@ -40,4 +43,12 @@ internal class StringOpsTest {
   fun getClasspathFile() {
     assert("META-INF/sub-core.kotlin_module".classpathFile.exists())
   }
+
+  @Test
+  fun fibonacciSequence() {
+    val array = iterate(Node(1, 1), { Node(it.right, it.left + it.right) }).limit(10).mapToInt { it.left }.toArray().requireNotNull
+    log.info { array.contentToString() }
+  }
 }
+
+internal data class Node(val left: Int, val right: Int)

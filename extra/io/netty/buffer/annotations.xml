@@ -15,7 +15,7 @@
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>
     <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf buffer(int)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
+      <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
     <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf unreleasableBuffer(io.netty.buffer.ByteBuf)'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
@@ -23,4 +23,7 @@
     <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf wrappedBuffer(byte[])'>
       <annotation name='org.jetbrains.annotations.NotNull'/>
     </item>
+  <item name='io.netty.buffer.Unpooled io.netty.buffer.CompositeByteBuf compositeBuffer(int)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
 </root>

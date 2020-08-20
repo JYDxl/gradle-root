@@ -6,7 +6,6 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 val kotlinxcoroutines: String by System.getProperties()
 val commonslang3: String by System.getProperties()
 val springcloud: String by System.getProperties()
-val reactor: String by System.getProperties()
 val jackson: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
@@ -51,7 +50,6 @@ subprojects {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
       mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
-      mavenBom("io.projectreactor:reactor-bom:$reactor")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
       mavenBom("org.junit:junit-bom:$junit")
     }

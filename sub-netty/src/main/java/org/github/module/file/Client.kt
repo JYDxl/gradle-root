@@ -20,7 +20,6 @@ import org.github.netty.ops.socketChannel
 import org.github.ops.classpathFile
 import org.github.ops.info
 import org.github.ops.log
-import org.github.thread.NativeThreadFactory
 import java.io.File
 import kotlin.Int.Companion.MAX_VALUE
 import kotlin.text.Charsets.UTF_8
@@ -34,7 +33,7 @@ fun main() {
   val clientDecoder = ClientDecoder()
   val loggingHandler = LoggingHandler(TRACE)
   val clientHandler = ClientHandler()
-  val group = eventLoopGroup(1, NativeThreadFactory("file-client"))
+  val group = eventLoopGroup(1, "file-client")
 
   Bootstrap()
     .group(group)

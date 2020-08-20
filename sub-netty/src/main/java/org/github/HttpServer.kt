@@ -10,11 +10,10 @@ import io.netty.handler.logging.LoggingHandler
 import org.github.module.http.HttpServerHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
-import org.github.thread.NativeThreadFactory
 
 fun main() {
-  val boss = eventLoopGroup(1, NativeThreadFactory("http-boss"))
-  val worker = eventLoopGroup(0, NativeThreadFactory("http-worker"))
+  val boss = eventLoopGroup(1, "http-boss")
+  val worker = eventLoopGroup(0, "http-worker")
 
   val loggingHandler = LoggingHandler(TRACE)
   val httpServerHandler = HttpServerHandler()

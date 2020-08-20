@@ -11,7 +11,7 @@ fun Logger.trace(ex: Throwable? = null, msg: () -> Any?) {
         if(it != Unit) {
           trace(it.toString(), ex)
         } else {
-          trace(ex?.message, ex)
+          ex?.apply { trace(message, this) }
         }
       }
     } catch(e: Exception) {
@@ -28,7 +28,7 @@ fun Logger.debug(ex: Throwable? = null, msg: () -> Any?) {
         if(it != Unit) {
           debug(it.toString(), ex)
         } else {
-          debug(ex?.message, ex)
+          ex?.apply { debug(message, this) }
         }
       }
     } catch(e: Exception) {
@@ -45,7 +45,7 @@ fun Logger.error(ex: Throwable? = null, msg: () -> Any?) {
         if(it != Unit) {
           error(it.toString(), ex)
         } else {
-          error(ex?.message, ex)
+          ex?.apply { error(message, this) }
         }
       }
     } catch(e: Exception) {
@@ -62,7 +62,7 @@ fun Logger.info(ex: Throwable? = null, msg: () -> Any?) {
         if(it != Unit) {
           info(it.toString(), ex)
         } else {
-          info(ex?.message, ex)
+          ex?.apply { info(message, this) }
         }
       }
     } catch(e: Exception) {
@@ -79,7 +79,7 @@ fun Logger.warn(ex: Throwable? = null, msg: () -> Any?) {
         if(it != Unit) {
           warn(it.toString(), ex)
         } else {
-          warn(ex?.message, ex)
+          ex?.apply { warn(message, this) }
         }
       }
     } catch(e: Exception) {

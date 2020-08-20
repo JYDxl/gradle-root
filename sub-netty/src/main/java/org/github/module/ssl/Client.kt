@@ -17,9 +17,7 @@ import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import org.github.ops.classpathFile
-import org.github.thread.NativeThreadFactory
 import java.util.concurrent.TimeUnit.*
-import java.util.function.Function
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
@@ -29,13 +27,13 @@ fun main() {
   val sslCtx = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
 
   val loggingHandler = LoggingHandler(TRACE)
-  val readWriteInfoHandler = ReadWriteInfoHandler(Function { it.toString().trim() })
+  val readWriteInfoHandler = ReadWriteInfoHandler { it.toString().trim() }
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = StringEncoder(UTF_8)
   val clientHandler = ClientHandler()
   val readWriteHexHandler = ReadWriteHexHandler()
 
-  val group = eventLoopGroup(1, NativeThreadFactory("ssl-client"))
+  val group = eventLoopGroup(1, "ssl-client")
   val listener = ChannelFutureListener { group.shutdownGracefully() }
 
   Bootstrap()

@@ -23,7 +23,7 @@ public interface FILE extends Returnable {
 
   @Deprecated
   @Override
-  default void accept(@Nonnull Writer writer) throws Exception {
+  default void accept(@Nonnull Writer writer) {
     throw new UnsupportedOperationException();
   }
 
@@ -48,8 +48,8 @@ public interface FILE extends Returnable {
   static FILE of(@Nonnull File file) {
     try {
       return new FILEImpl(file.getName(), new FileInputStream(file));
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
+    } catch(FileNotFoundException e) {
+      throw new IllegalArgumentException(e);
     }
   }
 

@@ -13,11 +13,10 @@ import org.github.module.ws.HttpServerHandler
 import org.github.module.ws.WsTextServerHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
-import org.github.thread.NativeThreadFactory
 
 fun main() {
-  val boss = eventLoopGroup(1, NativeThreadFactory("ws-boss"))
-  val worker = eventLoopGroup(0, NativeThreadFactory("ws-worker"))
+  val boss = eventLoopGroup(1, "ws-boss")
+  val worker = eventLoopGroup(0, "ws-worker")
 
   val loggingHandler = LoggingHandler(TRACE)
   val wsTextServerHandler = WsTextServerHandler()
