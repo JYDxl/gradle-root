@@ -5,7 +5,9 @@ import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.group.ChannelGroup
+import io.netty.channel.group.ChannelMatchers.*
 import io.netty.util.concurrent.Future
+import org.github.netty.ops.andWriteable
 import org.github.ops.info
 import org.github.ops.log
 import org.github.ops.warn
@@ -27,7 +29,7 @@ class ChatServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
     msg as String
     val channel = ctx.channel()
     log.info { "用户【${channel.remoteAddress()}】发送信息: $msg" }
-    group.writeAndFlush(msg.encode(ctx.alloc()), { it !== channel }, true)
+    group.writeAndFlush(msg, all().andWriteable, true)
   }
 
   private companion object {

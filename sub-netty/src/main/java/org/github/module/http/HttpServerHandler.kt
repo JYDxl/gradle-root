@@ -1,5 +1,6 @@
 package org.github.module.http
 
+import io.netty.buffer.ByteBufUtil.*
 import io.netty.channel.ChannelFuture
 import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
@@ -11,15 +12,16 @@ import io.netty.handler.codec.http.HttpHeaderValues.*
 import io.netty.handler.codec.http.HttpResponseStatus.*
 import io.netty.handler.codec.http.HttpUtil
 import io.netty.util.concurrent.Future
-import org.github.netty.ops.toByteBuf
 import org.github.ops.info
 import org.github.ops.log
+import java.nio.CharBuffer.*
+import kotlin.text.Charsets.UTF_8
 
 @Sharable
 class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
     log.info { "${req.method()} ${req.uri()}" }
-    val msg = "Hello world!".toByteBuf(ctx.alloc())
+    val msg = encodeString(ctx.alloc(), wrap("Hello world!"), UTF_8)
     val res = DefaultFullHttpResponse(req.protocolVersion(), OK, msg)
     res.headers()[CONTENT_LENGTH] = msg.readableBytes()
     res.headers()[CONTENT_TYPE] = TEXT_PLAIN

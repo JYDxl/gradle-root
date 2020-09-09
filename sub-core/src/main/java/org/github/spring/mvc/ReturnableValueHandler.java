@@ -1,7 +1,6 @@
 package org.github.spring.mvc;
 
 import java.io.IOException;
-import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +12,7 @@ import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
-import static java.util.Objects.requireNonNull;
+import static java.util.Objects.*;
 
 /**
  * Returnable返回类型解析器，Java版.

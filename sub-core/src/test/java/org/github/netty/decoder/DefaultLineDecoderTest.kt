@@ -1,10 +1,10 @@
 package org.github.netty.decoder
 
+import io.netty.buffer.Unpooled.*
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
-import org.github.netty.ops.toByteBuf
 import org.github.ops.requireNotNull
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -16,7 +16,7 @@ internal class DefaultLineDecoderTest {
   fun decode() {
     val decoder = DefaultLineDecoder(MAX_VALUE)
     val channel = EmbeddedChannel(LoggingHandler(TRACE), decoder, StringDecoder(UTF_8))
-    assertTrue(channel.writeInbound("2333\n1234\r\nawsl\r\nnico\n".toByteBuf()))
+    assertTrue(channel.writeInbound(wrappedBuffer("2333\n1234\r\nawsl\r\nnico\n".toByteArray())))
     assertTrue(channel.finish())
     val msg1 = channel.readInbound<String>().requireNotNull
     assertEquals(msg1, "2333")

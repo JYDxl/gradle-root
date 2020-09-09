@@ -2,6 +2,7 @@ package org.github.spring.mvc
 
 import org.github.ops.error
 import org.github.ops.log
+import org.github.ops.requireNotNull
 import org.github.ops.trace
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.Returnable.*
@@ -26,8 +27,8 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
 
   override fun handleReturnValue(returnValue: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
     val value = (returnValue ?: nil()) as Returnable
-    val req = checkNotNull(webRequest.getNativeRequest(HttpServletRequest::class.java))
-    val res = checkNotNull(webRequest.getNativeResponse(HttpServletResponse::class.java))
+    val req = webRequest.getNativeRequest(HttpServletRequest::class.java).requireNotNull
+    val res = webRequest.getNativeResponse(HttpServletResponse::class.java).requireNotNull
     if(value.terminated()) {
       try {
         value.collect(req, res)

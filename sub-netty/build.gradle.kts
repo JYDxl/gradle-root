@@ -11,7 +11,7 @@ plugins {
 }
 
 application {
-  mainClassName = "org.github.module.ssl.ServerKt"
+  mainClassName = "org.github.ChatServerKt"
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
     "-ea",

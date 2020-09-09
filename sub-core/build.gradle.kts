@@ -48,7 +48,10 @@ dependencies {
 
   compileOnly("com.baomidou:mybatis-plus-core:$mybatisplus")
 
-  testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine") { exclude(group = "org.checkerframework") }
+  testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine") {
+    exclude(group = "org.checkerframework")
+    exclude(group = "com.google.errorprone")
+  }
   testImplementation("io.netty:netty-all:$netty")
   testImplementation("commons-codec:commons-codec:$commonscodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")

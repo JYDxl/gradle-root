@@ -1,6 +1,7 @@
 package org.github.config
 
 import org.github.spring.rabbit.RabbitMessageConverter
+import org.springframework.amqp.core.Binding
 import org.springframework.amqp.core.BindingBuilder
 import org.springframework.amqp.core.Queue
 import org.springframework.amqp.core.TopicExchange
@@ -16,7 +17,7 @@ class RabbitConfig {
   fun queue() = Queue("app.queue")
 
   @Bean
-  fun binding() = BindingBuilder.bind(queue()).to(topicExchange()).with("#")
+  fun binding(): Binding = BindingBuilder.bind(queue()).to(topicExchange()).with("#")
 
   @Bean
   fun rabbitMessageConverter() = RabbitMessageConverter()
