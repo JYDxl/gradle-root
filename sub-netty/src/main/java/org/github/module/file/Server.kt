@@ -17,7 +17,7 @@ import io.netty.handler.ssl.SslHandler
 import io.netty.handler.ssl.SslProvider.*
 import io.netty.handler.stream.ChunkedFile
 import io.netty.handler.stream.ChunkedWriteHandler
-import org.github.netty.decoder.DefaultLineDecoder
+import org.github.netty.decoder.LineDecoder
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 import org.github.ops.classpathFile
@@ -48,7 +48,7 @@ fun main() {
         ch.pipeline().apply {
           addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
-          addLast(DefaultLineDecoder(1024))
+          addLast(LineDecoder(1024))
           addLast(stringDecoder)
           addLast(stringEncoder)
           addLast(ChunkedWriteHandler())

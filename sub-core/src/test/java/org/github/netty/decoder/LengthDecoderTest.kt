@@ -13,17 +13,17 @@ import kotlin.Int.Companion.MAX_VALUE
 import kotlin.reflect.jvm.jvmName
 import kotlin.text.Charsets.UTF_8
 
-internal class DefaultLengthDecoderTest {
+internal class LengthDecoderTest {
   @Test
   fun decode() {
-    val decoder = DefaultLengthDecoder(MAX_VALUE, 0, 4, 0, 4)
+    val decoder = LengthDecoder(0, 4, MAX_VALUE, 0, 4)
     val channel = EmbeddedChannel(LoggingHandler(TRACE), decoder, StringDecoder(UTF_8))
     // val part1 = DefaultLengthDecoder::class.jvmName.toByteBuf()
     // val part2 = EmbeddedChannel::class.jvmName.toByteBuf()
     // val head1 = wrappedBuffer(toByteArray(part1.readableBytes()))
     // val head2 = wrappedBuffer(toByteArray(part2.readableBytes()))
     // val buf = compositeBuffer(4).apply { addComponents(true, head1, part1, head2, part2) }
-    val part1 = DefaultLengthDecoder::class.jvmName.toByteArray()
+    val part1 = LengthDecoder::class.jvmName.toByteArray()
     val part2 = EmbeddedChannel::class.jvmName.toByteArray()
     val buf = buffer(4 + part1.size + 4 + part2.size).apply {
       writeInt(part1.size)
@@ -34,7 +34,7 @@ internal class DefaultLengthDecoderTest {
     assertTrue(channel.writeInbound(buf))
     assertTrue(channel.finish())
     val msg1 = channel.readInbound<String>().requireNotNull
-    assertEquals(msg1, DefaultLengthDecoder::class.jvmName)
+    assertEquals(msg1, LengthDecoder::class.jvmName)
     val msg2 = channel.readInbound<String>().requireNotNull
     assertEquals(msg2, EmbeddedChannel::class.jvmName)
     val msg3 = channel.readInbound<String>()

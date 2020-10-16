@@ -10,6 +10,7 @@ plugins {
 }
 
 application {
+  @Suppress("DEPRECATION")
   mainClassName = "org.github.VertxAppKt"
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",

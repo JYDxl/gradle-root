@@ -14,7 +14,7 @@ import io.netty.handler.logging.LoggingHandler
 import io.netty.util.AttributeKey
 import io.netty.util.concurrent.EventExecutor
 import io.netty.util.concurrent.Future
-import org.github.netty.decoder.DefaultLineDecoder
+import org.github.netty.decoder.LineDecoder
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import org.github.ops.info
@@ -41,7 +41,7 @@ fun main() {
       override fun initChannel(ch: Channel) {
         ch.pipeline().apply {
           addLast(loggingHandler)
-          addLast(DefaultLineDecoder(1024, false))
+          addLast(LineDecoder(1024, false))
           addLast(stringDecoder)
           addLast(stringEncoder)
           addLast(clientHandler)

@@ -1,7 +1,9 @@
-package org.github.module.echo
+package org.github.module.echo.server.handler
 
 import io.netty.buffer.ByteBuf
-import io.netty.channel.ChannelHandler.Sharable
+import io.netty.buffer.Unpooled.*
+import io.netty.channel.ChannelFutureListener.*
+import io.netty.channel.ChannelHandler.*
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import org.github.ops.debug
@@ -16,17 +18,16 @@ class EchoServerHandler: ChannelInboundHandlerAdapter() {
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as ByteBuf
-    log.debug { msg.toString(UTF_8) }
+    log.debug { "Server received: ${msg.toString(UTF_8)}" }
     ctx.write(msg, ctx.voidPromise())
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
-    ctx.flush()
+    ctx.writeAndFlush(EMPTY_BUFFER).addListener(CLOSE)
   }
 
   override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
     log.error(cause) {}
-    ctx.flush()
     ctx.close()
   }
 }

@@ -1,4 +1,7 @@
 <root>
+  <item name='io.netty.util.concurrent.Future java.lang.Throwable cause()'>
+    <annotation name='org.jetbrains.annotations.Nullable'/>
+  </item>
   <item name='io.netty.util.concurrent.GenericFutureListener void operationComplete(F) 0'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>

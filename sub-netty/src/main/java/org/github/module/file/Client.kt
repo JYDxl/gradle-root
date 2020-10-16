@@ -13,7 +13,7 @@ import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.ssl.SslContextBuilder.*
-import org.github.netty.decoder.DefaultLengthDecoder
+import org.github.netty.decoder.LengthDecoder
 import org.github.netty.ops.beforeRelease
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
@@ -43,7 +43,7 @@ fun main() {
         ch.pipeline().apply {
           addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
-          addLast(DefaultLengthDecoder(MAX_VALUE, 2, 8, 2))
+          addLast(LengthDecoder(MAX_VALUE, 2, 8, 2))
           addLast(clientDecoder)
           addLast(stringEncoder)
           addLast(clientHandler)

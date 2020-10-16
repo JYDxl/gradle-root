@@ -7,8 +7,8 @@ import io.netty.channel.kqueue.KQueueEventLoopGroup
 import io.netty.channel.kqueue.KQueueServerSocketChannel
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
-import org.github.module.echo.EchoServerHandler
-import org.github.netty.decoder.DefaultLineDecoder
+import org.github.module.echo.server.handler.EchoServerHandler
+import org.github.netty.decoder.LineDecoder
 import org.github.thread.NativeThreadFactory
 
 fun main() {
@@ -26,7 +26,7 @@ fun main() {
       override fun initChannel(channel: Channel) {
         channel.pipeline().apply {
           addLast(loggingHandler)
-          addLast(DefaultLineDecoder(1024, stripDelimiter = false))
+          addLast(LineDecoder(1024, stripDelimiter = false))
           addLast(echoServerHandler)
         }
       }

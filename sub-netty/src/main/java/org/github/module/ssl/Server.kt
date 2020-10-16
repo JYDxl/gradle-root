@@ -15,7 +15,7 @@ import io.netty.util.concurrent.GlobalEventExecutor.*
 import org.github.module.ssl.codec.ServerDecoder
 import org.github.module.ssl.codec.ServerEncoder
 import org.github.module.ssl.codec.toByteBuf
-import org.github.netty.decoder.DefaultLineDecoder
+import org.github.netty.decoder.LineDecoder
 import org.github.netty.group.NativeChannelGroup
 import org.github.netty.group.NativeChannelGroupImpl
 import org.github.netty.handler.ReadWriteHexHandler
@@ -49,7 +49,7 @@ fun main() {
         ch.pipeline().apply {
           // addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
-          addLast(DefaultLineDecoder(1024))
+          addLast(LineDecoder(1024))
           addLast(readWriteHexHandler)
           addLast(decoder)
           addLast(encoder)

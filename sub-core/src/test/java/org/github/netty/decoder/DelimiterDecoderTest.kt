@@ -8,15 +8,14 @@ import io.netty.handler.logging.LoggingHandler
 import org.github.ops.requireNotNull
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import kotlin.Int.Companion.MAX_VALUE
 import kotlin.text.Charsets.UTF_8
 
-internal class DefaultLineDecoderTest {
+internal class DelimiterDecoderTest {
   @Test
   fun decode() {
-    val decoder = DefaultLineDecoder(MAX_VALUE)
+    val decoder = DelimiterDecoder(arrayOf(wrappedBuffer("\n".toByteArray()), wrappedBuffer("\r\n".toByteArray()), wrappedBuffer("\r".toByteArray())))
     val channel = EmbeddedChannel(LoggingHandler(TRACE), decoder, StringDecoder(UTF_8))
-    assertTrue(channel.writeInbound(wrappedBuffer("2333\n1234\r\nawsl\r\nnico\n".toByteArray())))
+    assertTrue(channel.writeInbound(wrappedBuffer("2333\n1234\r\nawsl\nnico\r".toByteArray())))
     assertTrue(channel.finish())
     val msg1 = channel.readInbound<String>().requireNotNull
     assertEquals(msg1, "2333")

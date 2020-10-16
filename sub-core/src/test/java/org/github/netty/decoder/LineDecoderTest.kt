@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test
 import kotlin.Int.Companion.MAX_VALUE
 import kotlin.text.Charsets.UTF_8
 
-internal class DefaultDelimiterDecoderTest {
+internal class LineDecoderTest {
   @Test
   fun decode() {
-    val decoder = DefaultDelimiterDecoder(MAX_VALUE, arrayOf(wrappedBuffer("\n".toByteArray()), wrappedBuffer("\r\n".toByteArray()), wrappedBuffer("\r".toByteArray())))
+    val decoder = LineDecoder(MAX_VALUE)
     val channel = EmbeddedChannel(LoggingHandler(TRACE), decoder, StringDecoder(UTF_8))
-    assertTrue(channel.writeInbound(wrappedBuffer("2333\n1234\r\nawsl\nnico\r".toByteArray())))
+    assertTrue(channel.writeInbound(wrappedBuffer("2333\n1234\r\nawsl\r\nnico\n".toByteArray())))
     assertTrue(channel.finish())
     val msg1 = channel.readInbound<String>().requireNotNull
     assertEquals(msg1, "2333")
