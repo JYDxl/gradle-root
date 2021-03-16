@@ -1,8 +1,5 @@
 package org.github.ops
 
-import org.github.base.entity.SysMenuEntity
-import org.github.base.service.ISysMenuService
-import org.github.ops.spring.bean
 import org.github.ops.spring.json
 import org.github.ops.spring.map
 import org.junit.jupiter.api.Test
@@ -12,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.time.LocalDateTime
 import java.time.LocalTime
-import java.util.Random
+import java.util.*
 import java.util.stream.IntStream
 
 @ExtendWith(SpringExtension::class)
@@ -22,7 +19,6 @@ class ObjectOpsTests {
   private val log = ObjectOpsTests::class.log
 
   @Autowired
-  private lateinit var sysMenuService: ISysMenuService
 
   @Test
   fun map() {
@@ -93,14 +89,6 @@ class ObjectOpsTests {
   @Test
   fun format() {
     log.info { LocalDateTime.now().value }
-  }
-
-  @Test
-  fun bean() {
-    val entity = sysMenuService.list()[0]
-    val map = entity.map
-    val bean = map.bean(SysMenuEntity::class.java)
-    println(bean)
   }
 
   @Test

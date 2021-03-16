@@ -5,11 +5,8 @@ import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpServer
 import io.vertx.core.http.HttpServerOptions
 import io.vertx.core.http.ServerWebSocket
-import io.vertx.kotlin.core.http.closeAwait
-import io.vertx.kotlin.core.http.listenAwait
-import io.vertx.kotlin.core.http.writeBinaryMessageAwait
-import io.vertx.kotlin.core.http.writeTextMessageAwait
 import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.coroutines.await
 import io.vertx.kotlin.coroutines.toChannel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
@@ -26,7 +23,7 @@ class WebSocketServerVerticle(private val port: Int = 8800): CoroutineVerticle()
   override suspend fun start() {
     initHttpServer()
     initWebSocketServer()
-    httpServer.listenAwait(port)
+    httpServer.listen(port).await()
     log.info { "websocket服务端[:$port]启动成功" }
   }
 
@@ -61,12 +58,12 @@ class WebSocketServerVerticle(private val port: Int = 8800): CoroutineVerticle()
 
   private suspend fun wsTextMessageHandler(ws: ServerWebSocket, msg: String) {
     log.info { "从websocket客户端[${ws.remoteAddress()}]接收到文本数据: $msg" }
-    ws.writeTextMessageAwait(msg.toUpperCase())
+    ws.writeTextMessage(msg.toUpperCase()).await()
   }
 
   private suspend fun wsBinaryMessageHandler(ws: ServerWebSocket, buf: Buffer) {
     log.info { "从websocket客户端[${ws.remoteAddress()}]接收到二进制数据: " }
-    ws.writeBinaryMessageAwait(buf)
+    ws.writeBinaryMessage(buf).await()
   }
 
   private suspend fun wsHandShake(ws: ServerWebSocket): Boolean {
@@ -85,7 +82,7 @@ class WebSocketServerVerticle(private val port: Int = 8800): CoroutineVerticle()
 
   private suspend fun wsExceptionHandler(ws: ServerWebSocket, e: Throwable) {
     log.error(e) {}
-    ws.closeAwait(INTERNAL_SERVER_ERROR.code().toShort(), INTERNAL_SERVER_ERROR.reasonText())
+    ws.close(INTERNAL_SERVER_ERROR.code().toShort(), INTERNAL_SERVER_ERROR.reasonText()).await()
   }
 }
 

@@ -20,6 +20,12 @@ class FILEImpl implements FILE {
     this.input = input;
   }
 
+  @Override
+  public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
+    res.addHeader("Content-Disposition", "attachment;filename=" + name);
+    FILE.super.collect(req, res);
+  }
+
   @Nonnull
   @Override
   public String get() {
@@ -28,7 +34,7 @@ class FILEImpl implements FILE {
 
   @Override
   public void accept(@Nonnull OutputStream output) throws Exception {
-    try (input) {
+    try(input) {
       copy(input, output);
     }
   }
@@ -36,11 +42,5 @@ class FILEImpl implements FILE {
   @Override
   public String toString() {
     return name;
-  }
-
-  @Override
-  public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
-    res.addHeader("Content-Disposition", "attachment;filename=" + name);
-    FILE.super.collect(req, res);
   }
 }

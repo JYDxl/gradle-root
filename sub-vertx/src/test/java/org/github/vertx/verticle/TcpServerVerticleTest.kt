@@ -3,8 +3,7 @@ package org.github.vertx.verticle
 import io.vertx.core.Vertx
 import io.vertx.junit5.VertxExtension
 import io.vertx.junit5.VertxTestContext
-import io.vertx.kotlin.core.closeAwait
-import io.vertx.kotlin.core.deployVerticleAwait
+import io.vertx.kotlin.coroutines.await
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
@@ -21,17 +20,17 @@ class TcpServerVerticleTest {
   @BeforeAll
   fun start(ctx: VertxTestContext) = runBlocking {
     vertx = Vertx.vertx()
-    vertx.deployVerticleAwait(TcpServerVerticle())
+    vertx.deployVerticle(TcpServerVerticle()).await()
     ctx.completeNow()
   }
 
   @AfterAll
   fun stop(ctx: VertxTestContext) = runBlocking {
-    vertx.closeAwait()
+    vertx.close().await()
     ctx.completeNow()
   }
 
-//  @Test
+  //  @Test
   fun testApp(ctx: VertxTestContext) {
     ctx.completeNow()
   }

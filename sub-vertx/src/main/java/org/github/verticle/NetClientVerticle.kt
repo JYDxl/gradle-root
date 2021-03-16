@@ -7,8 +7,8 @@ import io.vertx.core.buffer.Buffer
 import io.vertx.core.buffer.Buffer.*
 import io.vertx.core.net.NetClient
 import io.vertx.core.net.NetClientOptions
-import io.vertx.kotlin.core.net.connectAwait
 import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.coroutines.await
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.github.ops.info
@@ -35,7 +35,7 @@ class NetClientVerticle(private val host: String, private val port: Int): Corout
   }
 
   private suspend fun initNetClientBusiness() {
-    val socket = netClient.connectAwait(port, host)
+    val socket = netClient.connect(port, host).await()
     log.info { "handlerID: ${socket.writeHandlerID()}" }
     socket.handler { buf: Buffer ->
       launch {
@@ -69,5 +69,3 @@ class NetClientVerticle(private val host: String, private val port: Int): Corout
     println(buf.toString(UTF_8))
   }
 }
-
-private val log = NetClientVerticle::class.log

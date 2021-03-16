@@ -21,20 +21,20 @@ spring:
       pool:
         max-active: 24
         max-idle: 12
-    host: localhost
+    host: ubuntu
   datasource:
-    url: jdbc:p6spy:mysql://localhost:3380/sample
+    url: jdbc:p6spy:mysql://ubuntu:3380/blog
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
-    password: l
+    password: root
     type: com.zaxxer.hikari.HikariDataSource
     name: hikari-mysql
   rabbitmq:
     username: root
-    password: l
+    password: root
     publisher-returns: true
     virtual-host: /
-    host: localhost
+    host: ubuntu
     port: 5672
     listener:
       simple:
@@ -54,6 +54,8 @@ spring:
     redis:
       repositories:
         enabled: false
+  thymeleaf:
+    mode: HTML
 
 server:
   port: 8080
@@ -78,7 +80,7 @@ info:
 #  client:
 #    registryFetchIntervalSeconds: 5
 #    service-url:
-#      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: http://ubuntu:8761/eureka/
 #  instance:
 #    leaseRenewalIntervalInSeconds: 10
 #    health-check-url-path: /actuator/health

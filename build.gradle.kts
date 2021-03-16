@@ -93,7 +93,7 @@ subprojects {
     implementation("com.google.guava:guava:$guava")
     implementation("org.codehaus.groovy:groovy:$groovy")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines")
 

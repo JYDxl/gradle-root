@@ -5,6 +5,7 @@ val caffeine: String by System.getProperties()
 val protobuf: String by System.getProperties()
 val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
+val p6spy: String by System.getProperties()
 val jna: String by System.getProperties()
 
 plugins {
@@ -45,6 +46,9 @@ dependencies {
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("io.netty:netty-all:$netty")
   compileOnly("com.google.protobuf:protobuf-java-util:$protobuf")
+  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisplus")
+  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  compileOnly("p6spy:p6spy:$p6spy")
 
   compileOnly("com.baomidou:mybatis-plus-core:$mybatisplus")
 

@@ -1,8 +1,8 @@
 package org.github.verticle
 
 import io.vertx.core.eventbus.Message
-import io.vertx.kotlin.core.eventbus.requestAwait
 import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.coroutines.await
 import io.vertx.kotlin.coroutines.toChannel
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.channels.ReceiveChannel
@@ -35,15 +35,13 @@ class AsyncVerticle: CoroutineVerticle() {
       for(ignore in timeChannel) {
         repeat(100_000) {
           launch(Default) {
-            eventBus.requestAwait<String>(
+            eventBus.request<String>(
               "a.b.c",
               "2333+${System.currentTimeMillis()}"
-            )
+            ).await()
           }
         }
       }
     }
   }
 }
-
-private val log = AsyncVerticle::class.log

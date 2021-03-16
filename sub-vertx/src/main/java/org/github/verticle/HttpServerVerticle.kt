@@ -1,15 +1,21 @@
 package org.github.verticle
 
-import io.vertx.core.http.*
-import io.vertx.ext.web.*
-import io.vertx.ext.web.handler.*
+import io.vertx.core.http.HttpServer
+import io.vertx.core.http.HttpServerOptions
+import io.vertx.ext.web.Route
+import io.vertx.ext.web.Router
+import io.vertx.ext.web.RoutingContext
+import io.vertx.ext.web.handler.BodyHandler
 import io.vertx.ext.web.handler.LoggerFormat.*
-import io.vertx.kotlin.core.http.*
-import io.vertx.kotlin.coroutines.*
-import kotlinx.coroutines.*
+import io.vertx.ext.web.handler.LoggerHandler
+import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.coroutines.await
+import io.vertx.kotlin.coroutines.dispatcher
+import kotlinx.coroutines.CoroutineName
+import kotlinx.coroutines.launch
 import org.github.ops.*
 
-class HttpServerVerticle(private val port: Int = 3000) : CoroutineVerticle() {
+class HttpServerVerticle(private val port: Int = 3000): CoroutineVerticle() {
   /** HTTP服务器. */
   private lateinit var httpServer: HttpServer
 
@@ -55,7 +61,7 @@ class HttpServerVerticle(private val port: Int = 3000) : CoroutineVerticle() {
     // router.post("/score").coroutineHandler(Handler::handler2Score)
     // router.route("/sleep").coroutineHandler(Handler::handler2Sleep)
 
-    httpServer = vertx.createHttpServer(httpServerOptions).requestHandler(router).listenAwait(port)
+    httpServer = vertx.createHttpServer(httpServerOptions).requestHandler(router).listen(port).await()
     log.info { "HTTP服务启动成功,监听在[$port]端口" }
   }
 

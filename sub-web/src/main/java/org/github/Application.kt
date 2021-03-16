@@ -1,6 +1,5 @@
 package org.github
 
-import kotlinx.coroutines.runBlocking
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -8,6 +7,6 @@ import org.springframework.boot.runApplication
 // @EnableEurekaClient
 class Application
 
-fun main(args: Array<String>) = runBlocking<Unit> {
-  runApplication<Application>(*args).apply {}
+fun main(args: Array<String>) {
+  runApplication<Application>(*args)
 }

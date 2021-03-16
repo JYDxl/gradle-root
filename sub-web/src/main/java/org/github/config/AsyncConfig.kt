@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.scheduling.annotation.AsyncConfigurer
 import org.springframework.scheduling.annotation.EnableAsync
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 
 @Configuration
 @EnableAsync
@@ -18,8 +19,8 @@ class AsyncConfig(private val builder: TaskExecutorBuilder): AsyncConfigurer {
     log.error("Exception thrown by async method $method with arguments ${params.joinToString(prefix = "[", postfix = "]")}", ex)
   }
 
-  override fun getAsyncExecutor() = taskExecutor()
+  override fun getAsyncExecutor(): ThreadPoolTaskExecutor = taskExecutor()
 
   @Bean
-  fun taskExecutor() = builder.build()
+  fun taskExecutor(): ThreadPoolTaskExecutor = builder.build()
 }

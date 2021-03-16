@@ -37,7 +37,7 @@ public class JSONP<T> extends JSONData<T> implements JSON {
 
   @Override
   public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
-    if (CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
+    if(CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
     super.collect(req, res);
   }
 
@@ -53,14 +53,14 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   @Override
-  @Nonnull
-  public MediaType mediaType() {
-    return JAVASCRIPT_UTF_8;
+  public String toString() {
+    return super.get();
   }
 
   @Override
-  public String toString() {
-    return super.get();
+  @Nonnull
+  public MediaType mediaType() {
+    return JAVASCRIPT_UTF_8;
   }
 
   /** WITH callback. */

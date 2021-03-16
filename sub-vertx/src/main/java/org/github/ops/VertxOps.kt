@@ -8,11 +8,8 @@ import io.vertx.core.buffer.Buffer
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.core.eventbus.Message
 import io.vertx.core.eventbus.MessageConsumer
-import io.vertx.core.eventbus.impl.HandlerRegistration.*
 import io.vertx.core.json.Json.*
-import io.vertx.kotlin.core.deployVerticleAwait
-import io.vertx.kotlin.core.eventbus.requestAwait
-import io.vertx.kotlin.core.executeBlockingAwait
+import io.vertx.kotlin.coroutines.await
 import io.vertx.kotlin.coroutines.toChannel
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.github.const.Consumers
@@ -22,7 +19,7 @@ import org.slf4j.Logger
 import java.util.function.Supplier
 import kotlin.reflect.KClass
 
-inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.consumer(consumers: Consumers, maxBufferSize: Int = DEFAULT_MAX_BUFFERED_MESSAGES): ReceiveChannel<Message<Buffer>> {
+inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.consumer(consumers: Consumers, maxBufferSize: Int = 100): ReceiveChannel<Message<Buffer>> {
   val address = consumers.toString()
   val consumer: MessageConsumer<Buffer> = eventBus().consumer<Buffer>(address)
   log.info { "[CONSUMER注册成功] ${address.pad("ADDRESS:")} | ${T::class.pad("EXPECTED:")} | REPLY:${R::class.java.name}" }
@@ -30,29 +27,30 @@ inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.consumer(consume
 }
 
 suspend inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.requestAwait(consumers: Consumers, message: T, options: DeliveryOptions = defaultDeliveryOptions): Pair<Message<Buffer>, R> {
-  val res = eventBus().requestAwait<Buffer>(consumers.toString(), message.toBuffer(), options)
+  val res = eventBus().request<Buffer>(consumers.toString(), message.toBuffer(), options).await()
   val body = fromBuffer<R>(res.body())
   return Pair(res, body)
 }
 
 suspend inline fun <reified T: Verticle> Vertx.deploySupplier(verticle: Supplier<T>, options: DeploymentOptions = defaultDeploymentOptions) {
-  @Suppress("UNCHECKED_CAST") val id = deployVerticleAwait(verticle as Supplier<Verticle>, options)
+  @Suppress("UNCHECKED_CAST") val id = deployVerticle(verticle as Supplier<Verticle>, options).await()
   log.deploySuccess(id, T::class, options)
 }
 
 suspend fun Vertx.deploy(verticle: Verticle, options: DeploymentOptions = defaultDeploymentOptions) {
-  val id = deployVerticleAwait(verticle, options)
+  val id = deployVerticle(verticle, options).await()
   log.deploySuccess(id, verticle::class, options)
 }
 
-suspend fun <T> Vertx.executeAwait(ordered: Boolean = false, blockingCodeHandler: () -> T?) = executeBlockingAwait<T>(
+suspend fun <T> Vertx.executeAwait(ordered: Boolean = false, blockingCodeHandler: () -> T?) = executeBlocking<T>(
   {
     try {
       it.complete(blockingCodeHandler())
     } catch(e: Exception) {
       it.fail(e)
     }
-  }, ordered)
+  }, ordered
+).await()
 
 fun String.pad(prefix: String): String {
   val body = padEnd(this, minLen, ' ').takeLast(minLen)

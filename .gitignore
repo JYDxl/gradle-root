@@ -1,7 +1,5 @@
 .gradle
 .idea
 build
-logs
 out
-rebel.xml
 .DS_Store

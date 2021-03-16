@@ -39,10 +39,11 @@ dependencies {
   implementation("mysql:mysql-connector-java:$mysql")
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
-  implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
+//  implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("redis.clients:jedis:$jedis")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
+  implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
   implementation("org.springframework.boot:spring-boot-starter-cache")
   implementation("org.springframework.boot:spring-boot-starter-aop")
@@ -54,7 +55,7 @@ dependencies {
   }
   // implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
-  runtimeOnly("org.springframework.boot:spring-boot-devtools")
+  developmentOnly("org.springframework.boot:spring-boot-devtools")
 
   testImplementation("org.springframework.boot:spring-boot-starter-test") {
     exclude(group = "org.junit.vintage")

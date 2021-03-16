@@ -5,11 +5,8 @@ import io.vertx.core.net.NetClientOptions
 import io.vertx.core.net.NetServer
 import io.vertx.core.net.NetServerOptions
 import io.vertx.core.net.NetSocket
-import io.vertx.kotlin.core.net.connectAwait
-import io.vertx.kotlin.core.net.listenAwait
-import io.vertx.kotlin.core.net.writeAwait
-import io.vertx.kotlin.core.streams.toAwait
 import io.vertx.kotlin.coroutines.CoroutineVerticle
+import io.vertx.kotlin.coroutines.await
 import io.vertx.kotlin.coroutines.toChannel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
@@ -23,18 +20,18 @@ class NetVerticle: CoroutineVerticle() {
   override suspend fun start() {
     initNetServer()
     initBusiness()
-    netServer.listenAwait(10000)
+    netServer.listen(10000).await()
 
     val netClient = vertx.createNetClient(NetClientOptions().apply {
       logActivity = true
-//      isSsl = true
-//      trustStoreOptions = JksOptions().apply {
-//        path = "truststore.jks"
-//        password = "654321"
-//      }
+      //      isSsl = true
+      //      trustStoreOptions = JksOptions().apply {
+      //        path = "truststore.jks"
+      //        password = "654321"
+      //      }
     })
-    val netSocket = netClient.connectAwait(10000, "localhost")
-    netSocket.writeAwait(Buffer.buffer("2333"))
+    val netSocket = netClient.connect(10000, "localhost").await()
+    netSocket.write(Buffer.buffer("2333")).await()
     netSocket.closeHandler {
       println("closed")
     }
@@ -43,11 +40,11 @@ class NetVerticle: CoroutineVerticle() {
   private fun initNetServer() {
     netServer = vertx.createNetServer(NetServerOptions().apply {
       logActivity = true
-//      isSsl = true
-//      keyStoreOptions = JksOptions().apply {
-//        path = "keystore.jks"
-//        password = "123456"
-//      }
+      //      isSsl = true
+      //      keyStoreOptions = JksOptions().apply {
+      //        path = "keystore.jks"
+      //        password = "123456"
+      //      }
     })
   }
 
@@ -65,8 +62,6 @@ class NetVerticle: CoroutineVerticle() {
   }
 
   private suspend fun initSocket(socket: NetSocket) {
-    launch { socket.pipe().endOnSuccess(false).toAwait(socket) }
+    launch { socket.pipe().endOnSuccess(false).to(socket).await() }
   }
 }
-
-private val log = NetVerticle::class.log

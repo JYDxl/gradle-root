@@ -93,9 +93,6 @@ const val ATTACHMENT_FILENAME = "attachment;fileName="
 /** 默认批量下载文件名.  */
 const val DEFAULT_ZIP = "package.zip"
 
-/** do not use. */
-const val DO_NOT_USE = "DO NOT USE"
-
 /** 变量及方法名正则校验.  */
 val paramPattern = "^[A-Za-z_$]+[A-Za-z0-9_$]*$".toRegex()
 

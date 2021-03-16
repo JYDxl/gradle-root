@@ -31,10 +31,10 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://localhost:3380/sample"
+    url = "jdbc:mysql://ubuntu:3380/shop"
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
-    password = "l"
+    password = "root"
     generator.dataSource = this
   }
 

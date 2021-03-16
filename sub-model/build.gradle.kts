@@ -9,7 +9,7 @@ dependencies {
   compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisplus")
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
 
-  testImplementation("com.baomidou:mybatis-plus-generator:$mybatisplus")
+  testImplementation("com.baomidou:mybatis-plus-generator:3.4.1")
   testImplementation("mysql:mysql-connector-java:$mysql")
   testImplementation("org.freemarker:freemarker")
 
