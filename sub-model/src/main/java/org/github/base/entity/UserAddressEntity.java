@@ -25,7 +25,7 @@ public class UserAddressEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 地址主键id */
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     /** 关联用户id */

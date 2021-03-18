@@ -13,4 +13,8 @@ include("sub-model")
 include("sub-netty")
 include("sub-vertx")
 include("sub-core")
+
 include("sub-web")
+include("sub-web-api")
+include("sub-web-service")
+include("sub-web-eureka")

@@ -2,12 +2,12 @@ val mybatisplus: String by System.getProperties()
 val mysql: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-core"))
+  implementation(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot")
 
-  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisplus")
-  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
+  api("com.baomidou:mybatis-plus-extension:$mybatisplus")
 
   testImplementation("com.baomidou:mybatis-plus-generator:3.4.1")
   testImplementation("mysql:mysql-connector-java:$mysql")

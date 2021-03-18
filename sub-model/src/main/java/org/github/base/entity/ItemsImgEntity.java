@@ -25,7 +25,7 @@ public class ItemsImgEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 图片主键 */
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     /** 商品外键id 商品外键id */

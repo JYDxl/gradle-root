@@ -25,7 +25,7 @@ public class ItemsCommentsEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** id主键 */
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     /** 用户id 用户名须脱敏 */

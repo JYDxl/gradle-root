@@ -1,0 +1,11 @@
+FROM jre-alpine
+
+COPY build/libs/eureka.jar /eureka.jar
+
+ENTRYPOINT [ \
+"java","-jar", "eureka.jar", \
+    "-ea", \
+    "--spring.application.name=eureka-server-2", \
+    "--server.port=8762", \
+    "--eureka.client.service-url.defaultZone=http://ubuntu1:8761/eureka/,http://ubuntu3:8763/eureka/" \
+]

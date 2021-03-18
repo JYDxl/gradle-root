@@ -26,7 +26,7 @@ public class ItemsSpecEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 商品规格id */
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     /** 商品外键id */

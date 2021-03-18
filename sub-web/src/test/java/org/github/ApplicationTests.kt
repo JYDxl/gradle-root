@@ -1,6 +1,5 @@
 package org.github
 
-import lombok.extern.slf4j.Slf4j
 import org.github.ops.info
 import org.github.ops.log
 import org.github.ops.spring.webAppCtx
@@ -14,7 +13,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
-@Slf4j
 class ApplicationTests {
   private val log = ApplicationTests::class.log
 

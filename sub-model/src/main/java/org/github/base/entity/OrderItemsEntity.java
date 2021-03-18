@@ -24,7 +24,7 @@ public class OrderItemsEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 主键id */
-    @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
 
     /** 归属订单id */

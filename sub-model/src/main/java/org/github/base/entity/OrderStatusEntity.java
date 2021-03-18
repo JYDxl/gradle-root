@@ -27,7 +27,7 @@ public class OrderStatusEntity extends AbstractEntity {
     private static final long serialVersionUID = 1L;
 
     /** 订单ID;对应订单表的主键id */
-    @TableId(value = "order_id", type = IdType.ASSIGN_UUID)
+    @TableId(value = "order_id", type = IdType.ASSIGN_ID)
     private String orderId;
 
     /** 订单状态 */

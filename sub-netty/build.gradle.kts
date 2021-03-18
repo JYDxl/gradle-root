@@ -50,7 +50,7 @@ dependencies {
   api("com.google.protobuf:protobuf-java-util:$protobuf")
   api("io.netty:netty-tcnative-boringssl-static:$tcnative")
   api("io.netty:netty-all:$netty")
-  api(project(":sub-core"))
+  implementation(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
 }
