@@ -17,41 +17,41 @@ import static org.github.util.BeansUtilKt.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.restful.json.JSONBasic
- * @see org.github.spring.restful.json.JSONArray
+ * @see JSONReturn
+ * @see JSONArrayReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class JSONPage<E> extends JSONArray<E> implements JSON {
+public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   /** total. */
   private long total = COUNT;
 
   /** WITH total. */
   @Nonnull
-  public JSONPage<E> withTotal(long total) {
+  public JSONPageReturn<E> withTotal(long total) {
     setTotal(total);
     return this;
   }
 
   /** Generator. */
   @Nonnull
-  public static JSONPage<?> of() {
-    return new JSONPage<>();
+  public static JSONPageReturn<?> of() {
+    return new JSONPageReturn<>();
   }
 
   /** Generator. */
   @Nonnull
-  public static <V> JSONPage<V> of(@Nonnull IPage<? extends V> page) {
-    return (JSONPage<V>) new JSONPage<V>(page.getTotal()).withData(page.getRecords());
+  public static <V> JSONPageReturn<V> of(@Nonnull IPage<? extends V> page) {
+    return (JSONPageReturn<V>) new JSONPageReturn<V>(page.getTotal()).withData(page.getRecords());
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
   @Nonnull
-  public static <V> JSONPage<V> of(@Nonnull IPage<? super V> page, @Nonnull Class<? extends V> data) {
-    return (JSONPage) new JSONPage<>(page.getTotal()).withData(copy(data, page.getRecords()));
+  public static <V> JSONPageReturn<V> of(@Nonnull IPage<? super V> page, @Nonnull Class<? extends V> data) {
+    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(copy(data, page.getRecords()));
   }
 }

@@ -3,7 +3,7 @@ package org.github.web.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.github.base.service.IUsersService;
 import org.github.spring.restful.Returnable;
-import org.github.spring.restful.json.JSONData;
+import org.github.spring.restful.json.JSONDataReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +17,6 @@ public class StuController {
 
   @GetMapping("/stu/{id}")
   public Returnable getStu(@PathVariable String id) {
-    return JSONData.of(usersService.getById(id));
+    return JSONDataReturn.of(usersService.getById(id));
   }
 }

@@ -2,8 +2,8 @@ package org.github.action
 
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSON
-import org.github.spring.restful.json.JSONBasic
-import org.github.spring.restful.json.JSONP
+import org.github.spring.restful.json.JSONReturn
+import org.github.spring.restful.json.JSONPReturn
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,8 +20,8 @@ class RestAction {
   fun json() = JSON.nil()
 
   @RequestMapping("json/basic")
-  fun jsonBasic() = JSONBasic.of()
+  fun jsonBasic() = JSONReturn.of()
 
   @RequestMapping("json/callback")
-  fun jsonCallback(): Returnable = JSONP.of()
+  fun jsonCallback(): Returnable = JSONPReturn.of()
 }

@@ -1,16 +1,14 @@
 package org.github.web.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.github.base.common.CookieUtils;
 import org.github.base.entity.UsersEntity;
 import org.github.base.model.UserLoginReqModel;
-import org.github.base.model.UserLoginResModel;
-import org.github.base.model.UserRegisterModel;
+import org.github.base.model.UserRegisterReqModel;
 import org.github.base.service.IUsersService;
-import org.github.ops.spring.SpringOpsKt;
 import org.github.spring.restful.Returnable;
-import org.github.spring.restful.json.JSONBasic;
-import org.github.spring.restful.json.JSONData;
-import org.github.web.common.CookieUtils;
+import org.github.spring.restful.json.JSONReturn;
+import org.github.spring.restful.json.JSONDataReturn;
 import org.github.web.service.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import static com.google.common.hash.Hashing.*;
 import static java.nio.charset.StandardCharsets.*;
 import static java.time.LocalDateTime.*;
+import static org.github.ops.spring.SpringOpsKt.*;
 
 @Service
 @Slf4j
@@ -31,7 +30,7 @@ public class UserServiceImpl implements IUserService {
 
   @Transactional
   @Override
-  public Returnable createUser(UserRegisterModel user) {
+  public Returnable createUser(UserRegisterReqModel user) {
     user.setNickname(user.getUsername());
     user.setPassword(sha256().hashString(user.getPassword(), UTF_8).toString());
     user.setFace("");
@@ -40,7 +39,7 @@ public class UserServiceImpl implements IUserService {
     usersService.save(user);
     UsersEntity entity = new UsersEntity();
     BeanUtils.copyProperties(user, entity);
-    return new JSONData<>(entity);
+    return new JSONDataReturn<>(entity);
   }
 
   @Override
@@ -49,15 +48,20 @@ public class UserServiceImpl implements IUserService {
     LambdaQueryWrapper<UsersEntity> query = Wrappers.lambdaQuery();
     query
       .eq(UsersEntity::getUsername, model.getUsername())
-      .eq(UsersEntity::getPassword, model.getPassword());
+      .eq(UsersEntity::getPassword, model.getPassword())
+      .select(UsersEntity::getId, UsersEntity::getUsername, UsersEntity::getNickname, UsersEntity::getRealname, UsersEntity::getFace, UsersEntity::getSex);
     UsersEntity one = usersService.getOne(query, true);
     if(one == null) {
-      return JSONBasic.error().withResMsg("用户名或密码错误");
+      return JSONReturn.error().withRetMsg("用户名或密码错误");
     }
-    UserLoginResModel res = new UserLoginResModel();
-    BeanUtils.copyProperties(one, res);
-    CookieUtils.setCookie(SpringOpsKt.getReq(), SpringOpsKt.getResp(), "user", SpringOpsKt.json(res, null), true);
-    return new JSONData<>(res);
+    CookieUtils.setCookie(getReq(), getResp(), "user", json(one, null), true);
+    return new JSONDataReturn<>(one);
+  }
+
+  @Override
+  public Returnable logout(String userId) {
+    CookieUtils.deleteCookie(getReq(), getResp(), "user");
+    return new JSONReturn();
   }
 
   @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -65,6 +69,6 @@ public class UserServiceImpl implements IUserService {
   public Returnable queryUserNameIsExist(String userName) {
     LambdaQueryWrapper<UsersEntity> query = Wrappers.lambdaQuery();
     int                             count = usersService.count(query.eq(UsersEntity::getUsername, userName));
-    return new JSONData<>(count > 0);
+    return new JSONDataReturn<>(count > 0);
   }
 }

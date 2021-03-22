@@ -5,6 +5,7 @@ dependencies {
   implementation(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot")
+  compileOnly("javax.servlet:javax.servlet-api")
 
   api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
   api("com.baomidou:mybatis-plus-extension:$mybatisplus")

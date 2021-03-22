@@ -1,6 +1,6 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
-def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
+def out = "%d %5level --- [%25.25thread] %-30.30logger{30} : %msg%n"
 def dir = "build/logs/sub-web"
 
 appender("console", ConsoleAppender) {
@@ -31,6 +31,7 @@ appender("problem", RollingFileAppender) {
 }
 
 logger("org.springframework.transaction", TRACE)
+logger("com.baomidou", TRACE)
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
 logger("io.vertx", TRACE)

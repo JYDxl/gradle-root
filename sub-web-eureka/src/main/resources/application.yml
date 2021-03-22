@@ -6,12 +6,22 @@ eureka:
     enable-self-preservation: true
     renewal-percent-threshold: 0.49
   instance:
+    health-check-url-path: /actuator/health
     hostname: ${spring.application.name}
     lease-renewal-interval-in-seconds: 30
+    status-page-url-path: /
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://ubuntu:8761/eureka/
 server:
   port: 8761
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

@@ -1,5 +1,9 @@
 package org.github.base;
 
-public interface IModel {
-  Object valid();
+import java.io.Serializable;
+
+public interface IModel extends Serializable {
+  default Object valid() {
+    return this;
+  }
 }

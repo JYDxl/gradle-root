@@ -73,10 +73,10 @@ const val FLAG = true
 const val CALL_BACK = "callback"
 
 /** success#code.  */
-const val RES_OK_CODE = 0
+const val RET_OK_CODE = 0
 
 /** success#message.  */
-const val RES_OK_MSG = "OK"
+const val RET_OK_MSG = "OK"
 
 /** failure#code.  */
 const val RET_ERROR_CODE = -1

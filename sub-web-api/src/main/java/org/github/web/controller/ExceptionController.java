@@ -3,7 +3,7 @@ package org.github.web.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.github.ops.LoggerOpsKt;
 import org.github.spring.restful.Returnable;
-import org.github.spring.restful.json.JSONBasic;
+import org.github.spring.restful.json.JSONReturn;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +15,6 @@ public class ExceptionController {
   @ResponseBody
   public Returnable illegalArgumentExceptionHandler(Exception ex) {
     LoggerOpsKt.error(log, ex, ex::getMessage);
-    return JSONBasic.error().withResMsg(ex.getMessage());
+    return JSONReturn.error().withRetMsg(ex.getMessage());
   }
 }

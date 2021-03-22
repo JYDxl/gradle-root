@@ -14,5 +14,6 @@ ENTRYPOINT [ \
     "-Djava.net.preferIPv4Stack=true", \
     "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED", \
     "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED", \
-    "--add-opens=java.base/java.nio=ALL-UNNAMED"\
+    "--add-opens=java.base/java.nio=ALL-UNNAMED", \
+    "--eureka.instance.hostname=ubuntu" \
 ]

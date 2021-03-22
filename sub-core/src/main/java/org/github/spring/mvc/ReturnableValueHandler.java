@@ -43,6 +43,6 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
       mavContainer.setViewName(requireNonNull(value.get()));
     }
     mavContainer.setRequestHandled(value.terminated());
-    log.trace("Writing [{}] TO {}", value.mediaType(), value.get());
+    log.trace("Writing [{}] ====> {}", value.mediaType(), value.get());
   }
 }

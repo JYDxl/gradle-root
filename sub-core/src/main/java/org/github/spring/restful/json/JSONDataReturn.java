@@ -13,32 +13,32 @@ import lombok.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.restful.json.JSONBasic
+ * @see JSONReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class JSONData<T> extends JSONBasic implements JSON {
+public class JSONDataReturn<T> extends JSONReturn implements JSON {
   /** data. */
   private T data;
 
   /** WITH data. */
-  public JSONData<T> withData(T data) {
+  public JSONDataReturn<T> withData(T data) {
     setData(data);
     return this;
   }
 
   /** Generator. */
   @Nonnull
-  public static JSONData<?> of() {
-    return new JSONData<>();
+  public static JSONDataReturn<?> of() {
+    return new JSONDataReturn<>();
   }
 
   /** Generator. */
   @Nonnull
-  public static <V> JSONData<V> of(V data) {
-    return new JSONData<>(data);
+  public static <V> JSONDataReturn<V> of(V data) {
+    return new JSONDataReturn<>(data);
   }
 }

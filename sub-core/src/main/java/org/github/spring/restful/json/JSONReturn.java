@@ -1,9 +1,11 @@
 package org.github.spring.restful.json;
 
 import javax.annotation.Nonnull;
-
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 import static org.github.ops.spring.SpringOpsKt.*;
 import static org.github.spring.footstone.IConstKt.*;
 
@@ -20,12 +22,12 @@ import static org.github.spring.footstone.IConstKt.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class JSONBasic implements JSON {
+public class JSONReturn implements JSON {
   /** 返回的状态码. */
-  private int    resCode = RES_OK_CODE;
+  private int    retCode = RET_OK_CODE;
   /** 返回的信息. */
   @NonNull
-  private String resMsg  = RES_OK_MSG;
+  private String retMsg  = RET_OK_MSG;
 
   @Override
   @Nonnull
@@ -43,35 +45,35 @@ public class JSONBasic implements JSON {
     return get();
   }
 
-  /** WITH resCode. */
+  /** WITH retCode. */
   @Nonnull
-  public JSONBasic withResCode(int resCode) {
-    setResCode(resCode);
+  public JSONReturn withRetCode(int retCode) {
+    setRetCode(retCode);
     return this;
   }
 
-  /** WITH resMsg. */
+  /** WITH retMsg. */
   @Nonnull
-  public JSONBasic withResMsg(@Nonnull String resMsg) {
-    setResMsg(resMsg);
+  public JSONReturn withRetMsg(@Nonnull String retMsg) {
+    setRetMsg(retMsg);
     return this;
   }
 
   /** Generator. */
   @Nonnull
-  public static JSONBasic of() {
-    return new JSONBasic();
+  public static JSONReturn of() {
+    return new JSONReturn();
   }
 
   /** Generator. */
   @Nonnull
-  public static JSONBasic of(int code, @Nonnull String msg) {
-    return new JSONBasic(code, msg);
+  public static JSONReturn of(int code, @Nonnull String msg) {
+    return new JSONReturn(code, msg);
   }
 
   /** Generator. */
   @Nonnull
-  public static JSONBasic error() {
+  public static JSONReturn error() {
     return of(RET_ERROR_CODE, RET_ERROR_MSG);
   }
 }

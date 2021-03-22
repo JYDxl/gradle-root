@@ -2,7 +2,7 @@ package org.github.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.github.base.model.UserLoginReqModel;
-import org.github.base.model.UserRegisterModel;
+import org.github.base.model.UserRegisterReqModel;
 import org.github.spring.restful.Returnable;
 import org.github.web.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,18 @@ public class PassportController {
     return usersService.login(model.valid());
   }
 
+  @PostMapping("logout")
+  public Returnable logout(@RequestParam String userId) {
+    return usersService.logout(userId);
+  }
+
   @PostMapping("regist")
-  public Returnable register(@RequestBody UserRegisterModel model) {
+  public Returnable register(@RequestBody UserRegisterReqModel model) {
     return usersService.createUser(model.valid());
   }
 
   @GetMapping("usernameIsExist")
-  public Returnable userNameIsExist(@RequestParam("username") String username) {
+  public Returnable userNameIsExist(@RequestParam String username) {
     return usersService.queryUserNameIsExist(username);
   }
 }

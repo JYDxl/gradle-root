@@ -21,15 +21,15 @@ import static org.github.spring.footstone.IConstKt.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see org.github.spring.restful.json.JSONBasic
- * @see org.github.spring.restful.json.JSONData
+ * @see JSONReturn
+ * @see JSONDataReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class JSONP<T> extends JSONData<T> implements JSON {
+public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** callback. */
   @JsonIgnore
   @NonNull
@@ -64,21 +64,21 @@ public class JSONP<T> extends JSONData<T> implements JSON {
   }
 
   /** WITH callback. */
-  public JSONP<T> withCallback(@Nonnull String callback) {
+  public JSONPReturn<T> withCallback(@Nonnull String callback) {
     setCallback(callback);
     return this;
   }
 
   /** Generator. */
   @Nonnull
-  public static JSONP<?> of() {
-    return new JSONP<>();
+  public static JSONPReturn<?> of() {
+    return new JSONPReturn<>();
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
   @Nonnull
-  public static <V> JSONP<V> of(V data) {
-    return (JSONP) new JSONP<>().withData(data);
+  public static <V> JSONPReturn<V> of(V data) {
+    return (JSONPReturn) new JSONPReturn<>().withData(data);
   }
 }

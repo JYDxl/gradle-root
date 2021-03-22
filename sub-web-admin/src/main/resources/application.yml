@@ -1,0 +1,25 @@
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: http://ubuntu:8761/eureka/
+  instance:
+    health-check-url-path: /actuator/health
+    leaseRenewalIntervalInSeconds: 10
+    status-page-url-path: /
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  application:
+    name: admin-server
+
+server:
+  port: 8000
