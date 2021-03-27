@@ -2,6 +2,7 @@ package org.github.web.controller;
 
 import org.github.base.model.bo.ItemCommentBO;
 import org.github.base.model.bo.ItemSearchBO;
+import org.github.base.model.bo.ItemSearchByCatBO;
 import org.github.spring.restful.Returnable;
 import org.github.spring.restful.json.JSONDataReturn;
 import org.github.spring.restful.json.JSONPageReturn;
@@ -18,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ItemController {
   @Autowired
   private IItemService itemService;
+
+  @GetMapping("catItems")
+  public Returnable catItems(ItemSearchByCatBO bo) {
+    return JSONPageReturn.of(itemService.catItems(bo.valid()));
+  }
 
   @GetMapping("commentLevel")
   public Returnable commentLevel(@RequestParam String itemId) {

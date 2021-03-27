@@ -1,7 +1,7 @@
 package org.github.spring.footstone
 
 import com.google.common.base.Joiner
-import com.google.common.base.Joiner.*
+import com.google.common.base.Joiner.on
 
 /** 默认日期格式化.  */
 const val FORMAT_DATE_TIME = "yyyy-MM-dd HH:mm:ss"
@@ -78,11 +78,17 @@ const val RET_OK_CODE = 0
 /** success#message.  */
 const val RET_OK_MSG = "OK"
 
-/** failure#code.  */
+/** fail#code.  */
 const val RET_ERROR_CODE = -1
 
-/** failure#message.  */
-const val RET_ERROR_MSG = "ERROR"
+/** fail#message.  */
+const val RET_ERROR_MSG = "SYSTEM ERROR"
+
+/** warn#code.  */
+const val RET_WARN_CODE = -2
+
+/** warn#message.  */
+const val RET_WARN_MSG = "PARAMS ERROR"
 
 /** Content-Disposition.  */
 const val CONTENT_DISPOSITION = "Content-Disposition"

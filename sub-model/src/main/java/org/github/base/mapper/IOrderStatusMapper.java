@@ -1,7 +1,7 @@
 package org.github.base.mapper;
 
 import org.github.base.entity.OrderStatusEntity;
-import org.github.base.IMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.github.mybatis.MyBatisMapper;
 
 /**
@@ -12,7 +12,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
 @MyBatisMapper
-public interface IOrderStatusMapper extends IMapper<OrderStatusEntity> {}
+public interface IOrderStatusMapper extends BaseMapper<OrderStatusEntity> {}

@@ -1,13 +1,13 @@
 package org.github.netty
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.Unpooled.*
+import io.netty.buffer.Unpooled.copiedBuffer
+import io.netty.buffer.Unpooled.wrappedBuffer
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.FixedLengthFrameDecoder
 import io.netty.handler.codec.string.StringDecoder
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import org.github.ops.requireNotNull
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.text.Charsets.UTF_8
@@ -37,9 +37,9 @@ class FixedLengthFrameDecoderTest {
     assertTrue(channel.writeInbound(input.retain()))
     input.release()
     assertTrue(channel.finish())
-    val out1 = channel.readInbound<ByteBuf>().requireNotNull
-    val out2 = channel.readInbound<ByteBuf>().requireNotNull
-    val out3 = channel.readInbound<ByteBuf>().requireNotNull
+    val out1 = requireNotNull(channel.readInbound<ByteBuf>())
+    val out2 = requireNotNull(channel.readInbound<ByteBuf>())
+    val out3 = requireNotNull(channel.readInbound<ByteBuf>())
     assertNull(channel.readInbound())
     assertEquals(buf.readSlice(3), out1)
     out1.release()

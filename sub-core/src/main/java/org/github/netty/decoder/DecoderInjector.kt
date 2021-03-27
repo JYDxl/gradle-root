@@ -1,7 +1,7 @@
 package org.github.netty.decoder
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.Unpooled.*
+import io.netty.buffer.Unpooled.EMPTY_BUFFER
 import io.netty.channel.ChannelHandlerContext
 import org.github.netty.ops.info
 import org.github.netty.ops.prettyHexDump

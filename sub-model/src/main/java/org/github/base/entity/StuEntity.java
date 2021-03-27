@@ -2,10 +2,13 @@ package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -13,22 +16,29 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
-@Setter
-@Getter
-@EqualsAndHashCode(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("stu")
-public class StuEntity extends AbstractEntity {
-    /** UID */
-    private static final long serialVersionUID = 1L;
+public class StuEntity extends Model<StuEntity> {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+  /** UID */
+  private static final long serialVersionUID = 1L;
 
-    @TableField("name")
-    private String name;
+  @TableId(value = "id", type = IdType.AUTO)
+  private Integer id;
 
-    @TableField("age")
-    private Integer age;
+  @TableField("name")
+  private String name;
+
+  @TableField("age")
+  private Integer age;
+
+  @Override
+  protected Serializable pkVal() {
+    return this.id;
+  }
+
 }

@@ -1,7 +1,7 @@
 package org.github.base.service;
 
 import org.github.base.entity.ItemsCommentsEntity;
-import org.github.base.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
 public interface IItemsCommentsService extends IService<ItemsCommentsEntity> {}

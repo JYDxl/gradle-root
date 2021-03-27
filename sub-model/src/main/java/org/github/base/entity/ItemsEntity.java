@@ -2,11 +2,14 @@ package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -14,49 +17,56 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
-@Setter
-@Getter
-@EqualsAndHashCode(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("items")
-public class ItemsEntity extends AbstractEntity {
-    /** UID */
-    private static final long serialVersionUID = 1L;
+public class ItemsEntity extends Model<ItemsEntity> {
 
-    /** 商品主键id */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+  /** UID */
+  private static final long serialVersionUID = 1L;
 
-    /** 商品名称 商品名称 */
-    @TableField("item_name")
-    private String itemName;
+  /** 商品主键id */
+  @TableId(value = "id", type = IdType.ASSIGN_ID)
+  private String id;
 
-    /** 分类外键id 分类id */
-    @TableField("cat_id")
-    private Integer catId;
+  /** 商品名称 商品名称 */
+  @TableField("item_name")
+  private String itemName;
 
-    /** 一级分类外键id */
-    @TableField("root_cat_id")
-    private Integer rootCatId;
+  /** 分类外键id 分类id */
+  @TableField("cat_id")
+  private Integer catId;
 
-    /** 累计销售 累计销售 */
-    @TableField("sell_counts")
-    private Integer sellCounts;
+  /** 一级分类外键id */
+  @TableField("root_cat_id")
+  private Integer rootCatId;
 
-    /** 上下架状态 上下架状态,1:上架 2:下架 */
-    @TableField("on_off_status")
-    private Integer onOffStatus;
+  /** 累计销售 累计销售 */
+  @TableField("sell_counts")
+  private Integer sellCounts;
 
-    /** 商品内容 商品内容 */
-    @TableField("content")
-    private String content;
+  /** 上下架状态 上下架状态,1:上架 2:下架 */
+  @TableField("on_off_status")
+  private Integer onOffStatus;
 
-    /** 创建时间 */
-    @TableField("created_time")
-    private LocalDateTime createdTime;
+  /** 商品内容 商品内容 */
+  @TableField("content")
+  private String content;
 
-    /** 更新时间 */
-    @TableField("updated_time")
-    private LocalDateTime updatedTime;
+  /** 创建时间 */
+  @TableField("created_time")
+  private LocalDateTime createdTime;
+
+  /** 更新时间 */
+  @TableField("updated_time")
+  private LocalDateTime updatedTime;
+
+  @Override
+  protected Serializable pkVal() {
+    return this.id;
+  }
+
 }

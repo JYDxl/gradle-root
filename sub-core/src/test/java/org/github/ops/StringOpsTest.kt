@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.util.stream.Stream.*
+import java.util.stream.Stream.iterate
 
 internal class StringOpsTest {
   private val log = StringOpsTest::class.log
@@ -46,7 +46,7 @@ internal class StringOpsTest {
 
   @Test
   fun fibonacciSequence() {
-    val array = iterate(Node(1, 1), { Node(it.right, it.left + it.right) }).limit(10).mapToInt { it.left }.toArray().requireNotNull
+    val array = iterate(Node(1, 1), { Node(it.right, it.left + it.right) }).limit(10).mapToInt { it.left }.toArray()
     log.info { array.contentToString() }
   }
 }

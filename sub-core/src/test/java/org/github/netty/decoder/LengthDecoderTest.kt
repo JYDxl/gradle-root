@@ -1,12 +1,11 @@
 package org.github.netty.decoder
 
-import io.netty.buffer.Unpooled.*
+import io.netty.buffer.Unpooled.buffer
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import org.github.netty.ops.mark
-import org.github.ops.requireNotNull
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.Int.Companion.MAX_VALUE
@@ -33,9 +32,9 @@ internal class LengthDecoderTest {
     }
     assertTrue(channel.writeInbound(buf))
     assertTrue(channel.finish())
-    val msg1 = channel.readInbound<String>().requireNotNull
+    val msg1 = channel.readInbound<String>()
     assertEquals(msg1, LengthDecoder::class.jvmName)
-    val msg2 = channel.readInbound<String>().requireNotNull
+    val msg2 = channel.readInbound<String>()
     assertEquals(msg2, EmbeddedChannel::class.jvmName)
     val msg3 = channel.readInbound<String>()
     assertNull(msg3)

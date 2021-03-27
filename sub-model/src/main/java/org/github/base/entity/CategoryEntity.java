@@ -2,10 +2,13 @@ package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -13,45 +16,52 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
-@Setter
-@Getter
-@EqualsAndHashCode(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("category")
-public class CategoryEntity extends AbstractEntity {
-    /** UID */
-    private static final long serialVersionUID = 1L;
+public class CategoryEntity extends Model<CategoryEntity> {
 
-    /** 主键 */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+  /** UID */
+  private static final long serialVersionUID = 1L;
 
-    /** 分类名称 */
-    @TableField("name")
-    private String name;
+  /** 主键 */
+  @TableId(value = "id", type = IdType.AUTO)
+  private Integer id;
 
-    /** 分类类型 */
-    @TableField("type")
-    private Integer type;
+  /** 分类名称 */
+  @TableField("name")
+  private String name;
 
-    /** 父id */
-    @TableField("father_id")
-    private Integer fatherId;
+  /** 分类类型 */
+  @TableField("type")
+  private Integer type;
 
-    /** 图标 */
-    @TableField("logo")
-    private String logo;
+  /** 父id */
+  @TableField("father_id")
+  private Integer fatherId;
 
-    /** 口号 */
-    @TableField("slogan")
-    private String slogan;
+  /** 图标 */
+  @TableField("logo")
+  private String logo;
 
-    /** 分类图 */
-    @TableField("cat_image")
-    private String catImage;
+  /** 口号 */
+  @TableField("slogan")
+  private String slogan;
 
-    /** 背景颜色 */
-    @TableField("bg_color")
-    private String bgColor;
+  /** 分类图 */
+  @TableField("cat_image")
+  private String catImage;
+
+  /** 背景颜色 */
+  @TableField("bg_color")
+  private String bgColor;
+
+  @Override
+  protected Serializable pkVal() {
+    return this.id;
+  }
+
 }

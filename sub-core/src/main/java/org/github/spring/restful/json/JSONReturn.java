@@ -76,4 +76,10 @@ public class JSONReturn implements JSON {
   public static JSONReturn error() {
     return of(RET_ERROR_CODE, RET_ERROR_MSG);
   }
+
+  /** Generator. */
+  @Nonnull
+  public static JSONReturn warn() {
+    return of(RET_WARN_CODE, RET_WARN_MSG);
+  }
 }

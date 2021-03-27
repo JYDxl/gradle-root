@@ -2,11 +2,14 @@ package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -14,61 +17,68 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
-@Setter
-@Getter
-@EqualsAndHashCode(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("user_address")
-public class UserAddressEntity extends AbstractEntity {
-    /** UID */
-    private static final long serialVersionUID = 1L;
+public class UserAddressEntity extends Model<UserAddressEntity> {
 
-    /** 地址主键id */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+  /** UID */
+  private static final long serialVersionUID = 1L;
 
-    /** 关联用户id */
-    @TableField("user_id")
-    private String userId;
+  /** 地址主键id */
+  @TableId(value = "id", type = IdType.ASSIGN_ID)
+  private String id;
 
-    /** 收件人姓名 */
-    @TableField("receiver")
-    private String receiver;
+  /** 关联用户id */
+  @TableField("user_id")
+  private String userId;
 
-    /** 收件人手机号 */
-    @TableField("mobile")
-    private String mobile;
+  /** 收件人姓名 */
+  @TableField("receiver")
+  private String receiver;
 
-    /** 省份 */
-    @TableField("province")
-    private String province;
+  /** 收件人手机号 */
+  @TableField("mobile")
+  private String mobile;
 
-    /** 城市 */
-    @TableField("city")
-    private String city;
+  /** 省份 */
+  @TableField("province")
+  private String province;
 
-    /** 区县 */
-    @TableField("district")
-    private String district;
+  /** 城市 */
+  @TableField("city")
+  private String city;
 
-    /** 详细地址 */
-    @TableField("detail")
-    private String detail;
+  /** 区县 */
+  @TableField("district")
+  private String district;
 
-    /** 扩展字段 */
-    @TableField("extand")
-    private String extand;
+  /** 详细地址 */
+  @TableField("detail")
+  private String detail;
 
-    /** 是否默认地址 */
-    @TableField("is_default")
-    private Integer isDefault;
+  /** 扩展字段 */
+  @TableField("extand")
+  private String extand;
 
-    /** 创建时间 */
-    @TableField("created_time")
-    private LocalDateTime createdTime;
+  /** 是否默认地址 */
+  @TableField("is_default")
+  private Integer isDefault;
 
-    /** 更新时间 */
-    @TableField("updated_time")
-    private LocalDateTime updatedTime;
+  /** 创建时间 */
+  @TableField("created_time")
+  private LocalDateTime createdTime;
+
+  /** 更新时间 */
+  @TableField("updated_time")
+  private LocalDateTime updatedTime;
+
+  @Override
+  protected Serializable pkVal() {
+    return this.id;
+  }
+
 }

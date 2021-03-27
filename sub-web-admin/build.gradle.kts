@@ -11,7 +11,7 @@ val caffeine: String by System.getProperties()
 
 dependencies {
   implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
-  implementation("de.codecentric:spring-boot-admin-starter-server")
+  implementation("de.codecentric:spring-boot-admin-starter-server") { exclude(group = "io.netty") }
   implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-security")

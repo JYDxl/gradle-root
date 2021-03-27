@@ -1,5 +1,5 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
-import org.gradle.api.JavaVersion.*
+import org.gradle.api.JavaVersion.VERSION_11
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
@@ -10,6 +10,7 @@ val springadmin: String by System.getProperties()
 val jackson: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
+val hutool: String by System.getProperties()
 val guava: String by System.getProperties()
 val junit: String by System.getProperties()
 val vertx: String by System.getProperties()
@@ -93,9 +94,10 @@ subprojects {
 
     implementation("org.apache.commons:commons-lang3:$commonslang3")
     implementation("com.google.guava:guava:$guava")
+    implementation("cn.hutool:hutool-all:$hutool")
     implementation("org.codehaus.groovy:groovy:$groovy")
 
-//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines")
 
@@ -108,6 +110,10 @@ subprojects {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+
+    implementation("com.fasterxml.woodstox:woodstox-core:6.2.4")
+    implementation("com.google.inject:guice:5.0.1")
+    implementation("org.checkerframework:checker-qual:3.11.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")

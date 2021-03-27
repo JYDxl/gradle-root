@@ -5,7 +5,6 @@ import io.netty.buffer.Unpooled
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.echo.shaded.FixedLengthFrameDecoder
-import org.github.ops.requireNotNull
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -18,15 +17,15 @@ class FixedLengthFrameDecoderTest {
     Assertions.assertTrue(channel.writeInbound(input))
     assert(channel.finish())
 
-    val output1 = channel.readInbound<ByteBuf>().requireNotNull
+    val output1 = requireNotNull(channel.readInbound<ByteBuf>())
     Assertions.assertEquals(buf.readSlice(3), output1)
     output1.release()
 
-    val output2 = channel.readInbound<ByteBuf>().requireNotNull
+    val output2 = requireNotNull(channel.readInbound<ByteBuf>())
     Assertions.assertEquals(buf.readSlice(3), output2)
     output2.release()
 
-    val output3 = channel.readInbound<ByteBuf>().requireNotNull
+    val output3 = requireNotNull(channel.readInbound<ByteBuf>())
     Assertions.assertEquals(buf.readSlice(3), output3)
     output3.release()
 
@@ -45,15 +44,15 @@ class FixedLengthFrameDecoderTest {
     input.release()
     assert(channel.finish())
 
-    val output1 = channel.readInbound<ByteBuf>().requireNotNull
+    val output1 = channel.readInbound<ByteBuf>()
     Assertions.assertEquals(buf.readSlice(3), output1)
     output1.release()
 
-    val output2 = channel.readInbound<ByteBuf>().requireNotNull
+    val output2 = channel.readInbound<ByteBuf>()
     Assertions.assertEquals(buf.readSlice(3), output2)
     output2.release()
 
-    val output3 = channel.readInbound<ByteBuf>().requireNotNull
+    val output3 = channel.readInbound<ByteBuf>()
     Assertions.assertEquals(buf.readSlice(3), output3)
     output3.release()
 

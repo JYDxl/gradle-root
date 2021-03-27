@@ -48,4 +48,34 @@
         </otherwise>
       </choose>
   </select>
+
+  <select id="catItems" resultType="org.github.base.model.vo.ItemSearchVO">
+    SELECT
+    i.id                    as item_id,
+    i.item_name             as item_name,
+    i.sell_counts           as sell_counts,
+    ii.url                  as img_url,
+    tmp_spec.price_discount as price
+    from items i
+    left join items_img ii on i.id = ii.item_id
+    left join (select
+    item_id,
+    min(price_discount) as price_discount
+    from items_spec
+    group by item_id) tmp_spec on i.id = tmp_spec.item_id
+    where ii.is_main = 1
+    and i.cat_id = #{bo.catId}
+    order by
+    <choose>
+      <when test='bo.sort == "c"'>
+        i.sell_counts desc
+      </when>
+      <when test='bo.sort == "p"'>
+        tmp_spec.price_discount asc
+      </when>
+      <otherwise>
+        i.item_name asc
+      </otherwise>
+    </choose>
+  </select>
 </mapper>

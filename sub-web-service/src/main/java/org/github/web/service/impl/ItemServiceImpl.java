@@ -10,6 +10,7 @@ import org.github.base.entity.ItemsParamEntity;
 import org.github.base.entity.ItemsSpecEntity;
 import org.github.base.model.bo.ItemCommentBO;
 import org.github.base.model.bo.ItemSearchBO;
+import org.github.base.model.bo.ItemSearchByCatBO;
 import org.github.base.model.vo.ItemCommentCountsVO;
 import org.github.base.model.vo.ItemCommentVO;
 import org.github.base.model.vo.ItemInfoVO;
@@ -46,6 +47,13 @@ public class ItemServiceImpl implements IItemService {
   private IItemsCommentsService itemsCommentsService;
   @Autowired
   private IItemMapper           itemMapper;
+
+  @Override
+  public IPage<ItemSearchVO> catItems(ItemSearchByCatBO bo) {
+    val page = new Page<ItemSearchVO>(bo.getPageNum(), bo.getPageSize());
+    itemMapper.catItems(bo, page);
+    return page;
+  }
 
   @Override
   public ItemCommentCountsVO queryCommentCounts(String itemId) {

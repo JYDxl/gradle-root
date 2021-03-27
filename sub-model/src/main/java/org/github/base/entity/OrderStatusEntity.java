@@ -2,11 +2,14 @@ package org.github.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import org.github.base.AbstractEntity;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
-import lombok.*;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -16,45 +19,52 @@ import lombok.*;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-16
+ * @since 2021-03-27
  */
-@Setter
-@Getter
-@EqualsAndHashCode(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @TableName("order_status")
-public class OrderStatusEntity extends AbstractEntity {
-    /** UID */
-    private static final long serialVersionUID = 1L;
+public class OrderStatusEntity extends Model<OrderStatusEntity> {
 
-    /** 订单ID;对应订单表的主键id */
-    @TableId(value = "order_id", type = IdType.ASSIGN_ID)
-    private String orderId;
+  /** UID */
+  private static final long serialVersionUID = 1L;
 
-    /** 订单状态 */
-    @TableField("order_status")
-    private Integer orderStatus;
+  /** 订单ID;对应订单表的主键id */
+  @TableId(value = "order_id", type = IdType.ASSIGN_ID)
+  private String orderId;
 
-    /** 订单创建时间;对应[10:待付款]状态 */
-    @TableField("created_time")
-    private LocalDateTime createdTime;
+  /** 订单状态 */
+  @TableField("order_status")
+  private Integer orderStatus;
 
-    /** 支付成功时间;对应[20:已付款，待发货]状态 */
-    @TableField("pay_time")
-    private LocalDateTime payTime;
+  /** 订单创建时间;对应[10:待付款]状态 */
+  @TableField("created_time")
+  private LocalDateTime createdTime;
 
-    /** 发货时间;对应[30：已发货，待收货]状态 */
-    @TableField("deliver_time")
-    private LocalDateTime deliverTime;
+  /** 支付成功时间;对应[20:已付款，待发货]状态 */
+  @TableField("pay_time")
+  private LocalDateTime payTime;
 
-    /** 交易成功时间;对应[40：交易成功]状态 */
-    @TableField("success_time")
-    private LocalDateTime successTime;
+  /** 发货时间;对应[30：已发货，待收货]状态 */
+  @TableField("deliver_time")
+  private LocalDateTime deliverTime;
 
-    /** 交易关闭时间;对应[50：交易关闭]状态 */
-    @TableField("close_time")
-    private LocalDateTime closeTime;
+  /** 交易成功时间;对应[40：交易成功]状态 */
+  @TableField("success_time")
+  private LocalDateTime successTime;
 
-    /** 留言时间;用户在交易成功后的留言时间 */
-    @TableField("comment_time")
-    private LocalDateTime commentTime;
+  /** 交易关闭时间;对应[50：交易关闭]状态 */
+  @TableField("close_time")
+  private LocalDateTime closeTime;
+
+  /** 留言时间;用户在交易成功后的留言时间 */
+  @TableField("comment_time")
+  private LocalDateTime commentTime;
+
+  @Override
+  protected Serializable pkVal() {
+    return this.orderId;
+  }
+
 }
