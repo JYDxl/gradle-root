@@ -1,12 +1,12 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.gradle.api.JavaVersion.VERSION_11
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 val kotlinxcoroutines: String by System.getProperties()
 val commonslang3: String by System.getProperties()
 val springcloud: String by System.getProperties()
 val springadmin: String by System.getProperties()
+val springboot: String by System.getProperties()
 val jackson: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
@@ -37,7 +37,6 @@ subprojects {
   version = "0.0.1"
 
   apply(plugin = "io.spring.dependency-management")
-  apply(plugin = "org.springframework.boot")
   apply(plugin = "com.github.ben-manes.versions")
   apply(plugin = "kotlin")
   apply(plugin = "jacoco")
@@ -51,6 +50,7 @@ subprojects {
   configure<DependencyManagementExtension> {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
+      mavenBom("org.springframework.boot:spring-boot-starter-parent:$springboot")
       mavenBom("de.codecentric:spring-boot-admin-dependencies:$springadmin")
       mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
@@ -59,14 +59,12 @@ subprojects {
   }
 
   repositories {
-    maven { url = uri("http://maven.aliyun.com/repository/public");isAllowInsecureProtocol = true }
-    maven { url = uri("http://maven.aliyun.com/repository/spring");isAllowInsecureProtocol = true }
-    maven { url = uri("http://maven.aliyun.com/repository/google");isAllowInsecureProtocol = true }
+    maven {url = uri("http://maven.aliyun.com/repository/public");isAllowInsecureProtocol = true}
+    maven {url = uri("http://maven.aliyun.com/repository/spring");isAllowInsecureProtocol = true}
+    maven {url = uri("http://maven.aliyun.com/repository/google");isAllowInsecureProtocol = true}
+    maven {url = uri("https://raw.github.com/venusdrogon/feilong-platform/repository")}
     mavenCentral()
   }
-
-  tasks.getByName<Jar>("jar") { enabled = true }
-  tasks.getByName<BootJar>("bootJar") { enabled = false }
 
   tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
@@ -93,9 +91,9 @@ subprojects {
     implementation("org.slf4j:jul-to-slf4j")
 
     implementation("org.apache.commons:commons-lang3:$commonslang3")
+    implementation("org.codehaus.groovy:groovy:$groovy")
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
-    implementation("org.codehaus.groovy:groovy:$groovy")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
@@ -111,15 +109,18 @@ subprojects {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
 
-    implementation("com.fasterxml.woodstox:woodstox-core:6.2.4")
-    implementation("com.google.inject:guice:5.0.1")
-    implementation("org.checkerframework:checker-qual:3.11.0")
-
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testRuntimeOnly("org.junit.platform:junit-platform-engine")
     //    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+
+    implementation("org.checkerframework:checker-qual:3.11.0")
+    implementation("com.fasterxml.woodstox:woodstox-core:6.2.4")
+    implementation("com.alibaba:fastjson:1.2.75")
+    implementation("org.javassist:javassist:3.27.0-GA")
+    implementation("com.google.inject:guice:5.0.1")
+    implementation("org.codehaus.woodstox:stax2-api:4.2.1")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")

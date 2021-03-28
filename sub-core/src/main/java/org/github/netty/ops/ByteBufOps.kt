@@ -1,7 +1,8 @@
 package org.github.netty.ops
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.ByteBufUtil.*
+import io.netty.buffer.ByteBufUtil.hexDump
+import io.netty.buffer.ByteBufUtil.prettyHexDump
 import io.netty.buffer.PooledByteBufAllocator
 import io.netty.buffer.UnpooledByteBufAllocator
 import java.nio.charset.Charset

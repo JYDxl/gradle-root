@@ -1,5 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.springframework.boot.gradle.tasks.run.BootRun
 
 val protobuf: String by System.getProperties()
 val tcnative: String by System.getProperties()
@@ -25,10 +24,10 @@ application {
   )
 }
 
-tasks.getByName<Task>("bootStartScripts") { enabled = false }
-tasks.getByName<BootRun>("bootRun") { enabled = false }
-tasks.getByName<Tar>("bootDistTar") { enabled = false }
-tasks.getByName<Zip>("bootDistZip") { enabled = false }
+tasks.getByName<Task>("startScripts") {enabled = false}
+tasks.getByName<Task>("distTar") {enabled = false}
+tasks.getByName<Task>("distZip") {enabled = false}
+tasks.getByName<Task>("jar") {enabled = false}
 
 tasks.withType<ShadowJar> {
   archiveFileName.set("netty-boot.jar")

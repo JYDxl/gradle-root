@@ -1,9 +1,10 @@
 package org.github.netty.ops
 
-import io.netty.buffer.Unpooled.*
+import io.netty.buffer.Unpooled.buffer
+import io.netty.buffer.Unpooled.wrappedBuffer
 import org.github.ops.info
 import org.github.ops.log
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.text.Charsets.UTF_8
 
@@ -25,14 +26,14 @@ internal class ByteBufOpsKtTest {
     buf.beforeRelease {
       assertEquals(str, buf.toString(UTF_8))
     }
-    log.info { buf }
+    log.info {buf}
   }
 
   @Test
   fun getPrettyHexDump() {
     val buf = wrappedBuffer("2333".toByteArray())
     buf.beforeRelease {
-      log.info { buf.prettyHexDump }
+      log.info {buf.prettyHexDump}
     }
   }
 
@@ -40,7 +41,7 @@ internal class ByteBufOpsKtTest {
   fun getHexDump() {
     val buf = wrappedBuffer("2333".toByteArray())
     buf.beforeRelease {
-      log.info { buf.hexDump }
+      log.info {buf.hexDump}
     }
   }
 
@@ -48,14 +49,14 @@ internal class ByteBufOpsKtTest {
   fun getALLOC_POOLED() {
     val buf = wrappedBuffer("2333".toByteArray())
     buf.release()
-    log.info { buf }
+    log.info {buf}
   }
 
   @Test
   fun getALLOC_UNPOOLED() {
     val buf = wrappedBuffer("2333".toByteArray())
     buf.release()
-    log.info { buf }
+    log.info {buf}
   }
 
   @Test

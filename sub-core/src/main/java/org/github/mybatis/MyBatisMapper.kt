@@ -1,8 +1,8 @@
 package org.github.mybatis
 
 import org.springframework.stereotype.Component
-import kotlin.annotation.AnnotationRetention.*
-import kotlin.annotation.AnnotationTarget.*
+import kotlin.annotation.AnnotationRetention.RUNTIME
+import kotlin.annotation.AnnotationTarget.CLASS
 
 @Target(CLASS)
 @Retention(RUNTIME)

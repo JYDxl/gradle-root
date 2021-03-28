@@ -1,7 +1,7 @@
 package org.github.ops
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
 
 internal class BitOpsKtTest {
   @Test

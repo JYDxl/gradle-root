@@ -16,11 +16,11 @@ interface DecoderInjector {
   fun inject(ctx: ChannelHandlerContext, buf: ByteBuf, func: () -> ByteBuf?): ByteBuf? {
     val channel = ctx.channel()
     // if(!channel.isActive) return func()
-    log.trace { "$channel ${channel.info} >>>>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
+    log.trace {"$channel ${channel.info} >>>>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}"}
     failIfNecessary?.invoke(buf)
     return func().also {
-      (it ?: EMPTY_BUFFER).apply { log.trace { "$channel ${channel.info} >>PACKET>>: ${readableBytes()}B\n$prettyHexDump" } }
-      log.trace { "$channel ${channel.info} REMAIN>>>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}" }
+      (it ?: EMPTY_BUFFER).apply {log.trace {"$channel ${channel.info} >>PACKET>>: ${readableBytes()}B\n$prettyHexDump"}}
+      log.trace {"$channel ${channel.info} REMAIN>>>>: ${buf.readableBytes()}B\n${buf.prettyHexDump}"}
     }
   }
 }

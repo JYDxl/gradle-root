@@ -12,14 +12,14 @@ public class NameFilter extends Filter<ILoggingEvent> {
 
   @Override
   public void start() {
-    if(classes != null && !classes.isEmpty()) super.start();
+    if (classes != null && !classes.isEmpty()) super.start();
   }
 
   @Override
   public FilterReply decide(ILoggingEvent event) {
-    if(!isStarted()) return NEUTRAL;
-    for(Class<?> name : classes) {
-      if(event.getLoggerName().equals(name.getName())) return NEUTRAL;
+    if (!isStarted()) return NEUTRAL;
+    for (Class<?> name : classes) {
+      if (event.getLoggerName().equals(name.getName())) return NEUTRAL;
     }
     return DENY;
   }

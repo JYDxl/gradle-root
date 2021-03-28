@@ -1,5 +1,4 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import org.springframework.boot.gradle.tasks.run.BootRun
 
 val netty: String by System.getProperties()
 val guice: String by System.getProperties()
@@ -25,10 +24,10 @@ application {
   )
 }
 
-tasks.getByName<Task>("bootStartScripts") { enabled = false }
-tasks.getByName<BootRun>("bootRun") { enabled = false }
-tasks.getByName<Tar>("bootDistTar") { enabled = false }
-tasks.getByName<Zip>("bootDistZip") { enabled = false }
+tasks.getByName<Task>("startScripts") {enabled = false}
+tasks.getByName<Task>("distTar") {enabled = false}
+tasks.getByName<Task>("distZip") {enabled = false}
+tasks.getByName<Task>("jar") {enabled = false}
 
 tasks.withType<ShadowJar> {
   archiveFileName.set("vertx-boot.jar")
@@ -49,16 +48,16 @@ tasks.withType<Test> {
 
 dependencies {
   api("io.netty:netty-all:$netty")
-  api("io.vertx:vertx-web") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-web-client") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-lang-kotlin") { exclude(group = "io.netty") }
-  api("io.vertx:vertx-lang-kotlin-coroutines") { exclude(group = "io.netty") }
+  api("io.vertx:vertx-web") {exclude(group = "io.netty")}
+  api("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
+  api("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
+  api("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
 
   implementation(project(":sub-core"))
   implementation("com.google.inject:guice:$guice")
 
-  testImplementation("io.vertx:vertx-junit5") { exclude(group = "io.netty");exclude(group = "org.junit.jupiter") }
+  testImplementation("io.vertx:vertx-junit5") {exclude(group = "io.netty")}
 
-  compileOnly("io.vertx:vertx-codegen") { exclude(group = "io.netty") }
-  testCompileOnly("io.vertx:vertx-codegen") { exclude(group = "io.netty") }
+  compileOnly("io.vertx:vertx-codegen") {exclude(group = "io.netty")}
+  testCompileOnly("io.vertx:vertx-codegen") {exclude(group = "io.netty")}
 }

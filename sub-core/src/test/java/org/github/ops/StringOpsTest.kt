@@ -46,8 +46,8 @@ internal class StringOpsTest {
 
   @Test
   fun fibonacciSequence() {
-    val array = iterate(Node(1, 1), { Node(it.right, it.left + it.right) }).limit(10).mapToInt { it.left }.toArray()
-    log.info { array.contentToString() }
+    val array = iterate(Node(1, 1), {Node(it.right, it.left + it.right)}).limit(10).mapToInt {it.left}.toArray()
+    log.info {array.contentToString()}
   }
 }
 

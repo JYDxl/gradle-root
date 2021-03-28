@@ -7,7 +7,7 @@ import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
 import io.netty.channel.epoll.EpollSocketChannel
 import io.netty.channel.group.ChannelMatcher
-import io.netty.channel.group.ChannelMatchers.*
+import io.netty.channel.group.ChannelMatchers.compose
 import io.netty.channel.kqueue.KQueueEventLoopGroup
 import io.netty.channel.kqueue.KQueueServerSocketChannel
 import io.netty.channel.kqueue.KQueueSocketChannel
@@ -41,6 +41,6 @@ fun eventLoopGroup(threads: Int, poolName: String): MultithreadEventLoopGroup {
   }
 }
 
-val isWriteable get() = ChannelMatcher { it.isWritable }
+val isWriteable get() = ChannelMatcher {it.isWritable}
 
 val ChannelMatcher.andWriteable: ChannelMatcher get() = compose(this, isWriteable)

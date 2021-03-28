@@ -1,13 +1,8 @@
 package org.github.netty.handler
 
 import io.netty.buffer.ByteBuf
-import io.netty.channel.Channel
-import io.netty.channel.ChannelDuplexHandler
-import io.netty.channel.ChannelHandler.*
-import io.netty.channel.ChannelHandlerContext
-import io.netty.channel.ChannelInboundHandlerAdapter
-import io.netty.channel.ChannelOutboundHandlerAdapter
-import io.netty.channel.ChannelPromise
+import io.netty.channel.*
+import io.netty.channel.ChannelHandler.Sharable
 import org.github.netty.ops.info
 import org.github.ops.info
 import org.github.ops.log
@@ -55,12 +50,12 @@ class WriteInfoHandler(private val func: Function<Any, String?> = turn): Channel
   }
 }
 
-private val turn = Function<Any, String?> { it.toString() }
+private val turn = Function<Any, String?> {it.toString()}
 
 private fun readLog(logger: Logger, msg: Any, channel: Channel, func: Function<Any, String?>) {
-  if(msg !is ByteBuf) channel.apply { logger.info { "$this $info >>>>READ: ${func.apply(msg)}" } }
+  if (msg !is ByteBuf) channel.apply {logger.info {"$this $info >>>>READ: ${func.apply(msg)}"}}
 }
 
 private fun writeLog(logger: Logger, msg: Any, channel: Channel, func: Function<Any, String?>) {
-  if(msg !is ByteBuf) channel.apply { logger.info { "$this $info WRITE>>>: ${func.apply(msg)}" } }
+  if (msg !is ByteBuf) channel.apply {logger.info {"$this $info WRITE>>>: ${func.apply(msg)}"}}
 }

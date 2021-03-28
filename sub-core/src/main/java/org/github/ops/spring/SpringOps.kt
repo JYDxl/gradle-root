@@ -3,9 +3,9 @@ package org.github.ops.spring
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.github.spring.bootstrap.AppCtxHolder.Companion.getAppCtx
 import org.springframework.beans.BeanWrapperImpl
-import org.springframework.cglib.beans.BeanMap.*
+import org.springframework.cglib.beans.BeanMap.create
 import org.springframework.web.context.WebApplicationContext
-import org.springframework.web.context.request.RequestContextHolder.*
+import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
 import kotlin.reflect.KClass
@@ -14,7 +14,7 @@ fun <T: Any> ByteArray.toBean(clazz: Class<T>, mapper: ObjectMapper? = null): T 
 
 fun <T: Any> ByteArray.toBean(clazz: KClass<T>, mapper: ObjectMapper? = null): T = (mapper ?: objectMapper).readValue(this, clazz.java)
 
-fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>): T = clazz.getDeclaredConstructor().newInstance().also { create(it).putAll(this) }
+fun <T: Any> Map<String, Any?>.bean(clazz: Class<T>): T = clazz.getDeclaredConstructor().newInstance().also {create(it).putAll(this)}
 
 @Suppress("UNCHECKED_CAST")
 val Any.map
@@ -25,7 +25,7 @@ fun Any?.writeValue(output: OutputStream, mapper: ObjectMapper? = null) = (mappe
 val Any.nullProps: Array<String>
   get() {
     val wrapper = BeanWrapperImpl(this)
-    return wrapper.propertyDescriptors.asSequence().filter { wrapper.getPropertyValue(it.name) == null }.map { it.name }.toList().toTypedArray()
+    return wrapper.propertyDescriptors.asSequence().filter {wrapper.getPropertyValue(it.name) == null}.map {it.name}.toList().toTypedArray()
   }
 
 fun Any?.json(mapper: ObjectMapper? = null): String = (mapper ?: objectMapper).writeValueAsString(this)

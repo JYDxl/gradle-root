@@ -1,8 +1,11 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
+plugins {
+  id("org.springframework.boot")
+}
+
 tasks.withType<BootJar> {
-  enabled = true
-  archiveFileName.set("eureka.jar")
+  archiveFileName.set("eureka-boot.jar")
   mainClass.set("org.github.web.EurekaKt")
 }
 
