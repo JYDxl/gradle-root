@@ -14,15 +14,18 @@
   <item name='io.netty.buffer.ByteBufUtil java.lang.String prettyHexDump(io.netty.buffer.ByteBuf)'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>
-    <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf buffer(int)'>
-      <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-    <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf unreleasableBuffer(io.netty.buffer.ByteBuf)'>
+  <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf buffer(int)'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>
-    <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf wrappedBuffer(byte[])'>
-      <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
+  <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf copiedBuffer(java.lang.CharSequence, java.nio.charset.Charset)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf unreleasableBuffer(io.netty.buffer.ByteBuf)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+  <item name='io.netty.buffer.Unpooled io.netty.buffer.ByteBuf wrappedBuffer(byte[])'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
   <item name='io.netty.buffer.Unpooled io.netty.buffer.CompositeByteBuf compositeBuffer(int)'>
     <annotation name='org.jetbrains.annotations.NotNull'/>
   </item>

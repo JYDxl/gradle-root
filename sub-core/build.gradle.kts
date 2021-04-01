@@ -3,12 +3,10 @@ val mybatisplus: String by System.getProperties()
 val javassist: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val protobuf: String by System.getProperties()
-val feilong: String by System.getProperties()
 val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val jna: String by System.getProperties()
-val tio: String by System.getProperties()
 
 plugins {
   `maven-publish`
@@ -52,11 +50,9 @@ dependencies {
   compileOnly("p6spy:p6spy:$p6spy")
 
   testImplementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
-  testImplementation("com.feilong.platform:feilong-core:$feilong")
   testImplementation("commons-codec:commons-codec:$commonscodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")
   testImplementation("org.javassist:javassist:$javassist")
   testImplementation("net.java.dev.jna:jna:$jna")
   testImplementation("io.netty:netty-all:$netty")
-  testImplementation("org.t-io:tio-utils:$tio")
 }

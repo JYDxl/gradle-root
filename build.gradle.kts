@@ -12,6 +12,7 @@ val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
 val hutool: String by System.getProperties()
 val guava: String by System.getProperties()
+val guice: String by System.getProperties()
 val junit: String by System.getProperties()
 val vertx: String by System.getProperties()
 
@@ -62,7 +63,6 @@ subprojects {
     maven {url = uri("http://maven.aliyun.com/repository/public");isAllowInsecureProtocol = true}
     maven {url = uri("http://maven.aliyun.com/repository/spring");isAllowInsecureProtocol = true}
     maven {url = uri("http://maven.aliyun.com/repository/google");isAllowInsecureProtocol = true}
-    maven {url = uri("https://raw.github.com/venusdrogon/feilong-platform/repository")}
     mavenCentral()
   }
 
@@ -86,12 +86,16 @@ subprojects {
 
   dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("ch.qos.logback:logback-classic")
     implementation("org.slf4j:jul-to-slf4j")
 
     implementation("org.apache.commons:commons-lang3:$commonslang3")
     implementation("org.codehaus.groovy:groovy:$groovy")
+    implementation("com.google.inject:guice:$guice")
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
 
@@ -102,12 +106,15 @@ subprojects {
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-core:$jackson")
-    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-jaxb-annotations:$jackson")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jackson")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava:$jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
@@ -116,11 +123,6 @@ subprojects {
     //    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
 
     implementation("org.checkerframework:checker-qual:3.11.0")
-    implementation("com.fasterxml.woodstox:woodstox-core:6.2.4")
-    implementation("com.alibaba:fastjson:1.2.75")
-    implementation("org.javassist:javassist:3.27.0-GA")
-    implementation("com.google.inject:guice:5.0.1")
-    implementation("org.codehaus.woodstox:stax2-api:4.2.1")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")
