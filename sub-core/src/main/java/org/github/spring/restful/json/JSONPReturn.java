@@ -1,13 +1,10 @@
 package org.github.spring.restful.json;
 
-import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.net.MediaType;
-
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
 import static org.github.spring.footstone.IConstKt.*;
@@ -27,8 +24,7 @@ import static org.github.spring.footstone.IConstKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** callback. */
   @JsonIgnore
@@ -36,13 +32,13 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   private String callback = CALL_BACK;
 
   @Override
-  public void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
-    if(CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
+  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    if (CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
     super.collect(req, res);
   }
 
+  @NonNull
   @Override
-  @Nonnull
   public String get() {
     return callback + "(" + super.get() + ")";
   }
@@ -52,32 +48,32 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
     return true;
   }
 
+  @NonNull
+  @Override
+  public MediaType mediaType() {
+    return JAVASCRIPT_UTF_8;
+  }
+
   @Override
   public String toString() {
     return super.get();
   }
 
-  @Override
-  @Nonnull
-  public MediaType mediaType() {
-    return JAVASCRIPT_UTF_8;
-  }
-
   /** WITH callback. */
-  public JSONPReturn<T> withCallback(@Nonnull String callback) {
+  public JSONPReturn<T> withCallback(@NonNull String callback) {
     setCallback(callback);
     return this;
   }
 
   /** Generator. */
-  @Nonnull
+  @NonNull
   public static JSONPReturn<?> of() {
     return new JSONPReturn<>();
   }
 
   /** Generator. */
+  @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  @Nonnull
   public static <V> JSONPReturn<V> of(V data) {
     return (JSONPReturn) new JSONPReturn<>().withData(data);
   }

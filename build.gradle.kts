@@ -13,7 +13,6 @@ val groovy: String by System.getProperties()
 val hutool: String by System.getProperties()
 val guava: String by System.getProperties()
 val guice: String by System.getProperties()
-val junit: String by System.getProperties()
 val vertx: String by System.getProperties()
 
 plugins {
@@ -55,7 +54,6 @@ subprojects {
       mavenBom("de.codecentric:spring-boot-admin-dependencies:$springadmin")
       mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
-      mavenBom("org.junit:junit-bom:$junit")
     }
   }
 
@@ -116,13 +114,9 @@ subprojects {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testRuntimeOnly("org.junit.platform:junit-platform-engine")
-    //    testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
-
     implementation("org.checkerframework:checker-qual:3.11.0")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     compileOnly("org.projectlombok:lombok:$lombok")
     testCompileOnly("org.projectlombok:lombok:$lombok")

@@ -79,13 +79,13 @@ const val RET_OK_CODE = 0
 const val RET_OK_MSG = "OK"
 
 /** fail#code.  */
-const val RET_ERROR_CODE = -1
+const val RET_ERROR_CODE = -2
 
 /** fail#message.  */
 const val RET_ERROR_MSG = "SYSTEM ERROR"
 
 /** warn#code.  */
-const val RET_WARN_CODE = -2
+const val RET_WARN_CODE = -1
 
 /** warn#message.  */
 const val RET_WARN_MSG = "PARAMS ERROR"

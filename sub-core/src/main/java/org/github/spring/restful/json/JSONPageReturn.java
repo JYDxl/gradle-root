@@ -1,12 +1,9 @@
 package org.github.spring.restful.json;
 
-import javax.annotation.Nonnull;
-
+import java.util.List;
 import lombok.*;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-
 import static org.github.spring.footstone.IConstKt.*;
-import static org.github.util.BeansUtilKt.*;
 
 /**
  * JSON of page.
@@ -23,35 +20,39 @@ import static org.github.util.BeansUtilKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   /** total. */
   private long total = COUNT;
 
+  @Override
+  public String toString() {
+    return get();
+  }
+
   /** WITH total. */
-  @Nonnull
+  @NonNull
   public JSONPageReturn<E> withTotal(long total) {
     setTotal(total);
     return this;
   }
 
   /** Generator. */
-  @Nonnull
+  @NonNull
   public static JSONPageReturn<?> of() {
     return new JSONPageReturn<>();
   }
 
   /** Generator. */
-  @Nonnull
-  public static <V> JSONPageReturn<V> of(@Nonnull IPage<? extends V> page) {
+  @NonNull
+  public static <V> JSONPageReturn<V> of(@NonNull IPage<? extends V> page) {
     return (JSONPageReturn<V>) new JSONPageReturn<V>(page.getTotal()).withData(page.getRecords());
   }
 
   /** Generator. */
+  @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  @Nonnull
-  public static <V> JSONPageReturn<V> of(@Nonnull IPage<? super V> page, @Nonnull Class<? extends V> data) {
-    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(copy(data, page.getRecords()));
+  public static <V> JSONPageReturn<V> of(long total, @NonNull List<? extends V> data) {
+    return (JSONPageReturn) new JSONPageReturn<>(total).withData(data);
   }
 }

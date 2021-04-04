@@ -3,10 +3,7 @@ package org.github.spring.restful.json;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.Nonnull;
-
 import lombok.*;
-
 import static org.github.spring.footstone.IConstKt.*;
 
 /**
@@ -23,58 +20,62 @@ import static org.github.spring.footstone.IConstKt.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** data. */
   @NonNull
   private Object[] data = getArray();
 
+  @Override
+  public String toString() {
+    return get();
+  }
+
   /** GET data. */
   @SuppressWarnings("unchecked")
-  @Nonnull
+  @NonNull
   public E[] toArray() {
     return (E[]) data;
   }
 
   /** GET data. */
   @SuppressWarnings("unchecked")
-  @Nonnull
+  @NonNull
   public List<E> toList() {
     return (List<E>) Arrays.asList(data);
   }
 
   /** WITH data. */
   @SafeVarargs
-  @Nonnull
+  @NonNull
   public final JSONArrayReturn<E> withData(E... data) {
     setData(data);
     return this;
   }
 
   /** WITH data. */
-  @Nonnull
-  public JSONArrayReturn<E> withData(@Nonnull Collection<? extends E> data) {
+  @NonNull
+  public JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
     setData(data.toArray());
     return this;
   }
 
   /** Generator. */
-  @Nonnull
+  @NonNull
   public static JSONArrayReturn<?> of() {
     return new JSONArrayReturn<>();
   }
 
   /** Generator. */
   @SafeVarargs
-  @Nonnull
+  @NonNull
   public static <V> JSONArrayReturn<V> of(V... data) {
     return new JSONArrayReturn<>(data);
   }
 
   /** Generator. */
-  @Nonnull
-  public static <V> JSONArrayReturn<V> of(@Nonnull Collection<? extends V> data) {
+  @NonNull
+  public static <V> JSONArrayReturn<V> of(@NonNull Collection<? extends V> data) {
     return new JSONArrayReturn<>(data.toArray());
   }
 }

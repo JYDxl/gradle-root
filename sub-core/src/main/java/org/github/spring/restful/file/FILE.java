@@ -1,12 +1,15 @@
 package org.github.spring.restful.file;
 
-import com.google.common.net.MediaType;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.Writer;
+import lombok.*;
+import org.github.exception.ParamsErrorException;
 import org.github.spring.restful.Returnable;
-
-import javax.annotation.Nonnull;
-import java.io.*;
-
-import static com.google.common.net.MediaType.OCTET_STREAM;
+import com.google.common.net.MediaType;
+import static com.google.common.net.MediaType.*;
 
 /**
  * Top interface of file.
@@ -17,25 +20,21 @@ import static com.google.common.net.MediaType.OCTET_STREAM;
  * @see org.github.spring.restful.Returnable
  */
 public interface FILE extends Returnable {
-  @Nonnull
+  @NonNull
   @Override
   String get();
 
-  @Deprecated
   @Override
-  default void accept(@Nonnull Writer writer) {
+  default void accept(@NonNull Writer writer) {
     throw new UnsupportedOperationException();
   }
-
-  @Override
-  void accept(@Nonnull OutputStream output) throws Exception;
 
   @Override
   default boolean functional() {
     return false;
   }
 
-  @Nonnull
+  @NonNull
   @Override
   default MediaType mediaType() {
     return OCTET_STREAM;
@@ -44,20 +43,20 @@ public interface FILE extends Returnable {
   /**
    * Generator.
    */
-  @Nonnull
-  static FILE of(@Nonnull File file) {
+  @NonNull
+  static FILE of(@NonNull File file) {
     try {
       return new FILEImpl(file.getName(), new FileInputStream(file));
-    } catch(FileNotFoundException e) {
-      throw new IllegalArgumentException(e);
+    } catch (FileNotFoundException e) {
+      throw new ParamsErrorException(e);
     }
   }
 
   /**
    * Generator.
    */
-  @Nonnull
-  static FILE of(@Nonnull String name, @Nonnull InputStream input) {
+  @NonNull
+  static FILE of(@NonNull String name, @NonNull InputStream input) {
     return new FILEImpl(name, input);
   }
 }

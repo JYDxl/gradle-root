@@ -1,6 +1,5 @@
 <root>
-    <item
-        name='com.google.protobuf.util.JsonFormat.Printer java.lang.String print(com.google.protobuf.MessageOrBuilder)'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
+  <item name='com.google.protobuf.util.JsonFormat.Printer java.lang.String print(com.google.protobuf.MessageOrBuilder)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
 </root>

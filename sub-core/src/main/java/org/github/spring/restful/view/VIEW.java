@@ -1,15 +1,11 @@
 package org.github.spring.restful.view;
 
-import javax.annotation.Nonnull;
+import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
-
-import java.io.OutputStream;
-import java.io.Writer;
-
 import static com.google.common.net.MediaType.*;
 import static org.github.spring.footstone.IConstKt.*;
 
@@ -23,35 +19,26 @@ import static org.github.spring.footstone.IConstKt.*;
  */
 @FunctionalInterface
 public interface VIEW extends Returnable {
-  @Nonnull
+  @NonNull
   @Override
   String get();
 
-  @Deprecated
   @Override
-  default void accept(@Nonnull Writer writer) throws Exception {
+  default void accept(@NonNull Writer writer) throws Exception {
     throw new UnsupportedOperationException();
   }
 
-  @Deprecated
   @Override
-  default void accept(@Nonnull OutputStream output) throws Exception {
+  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     throw new UnsupportedOperationException();
   }
 
-  @Deprecated
-  @Override
-  default void collect(@Nonnull HttpServletRequest req, @Nonnull HttpServletResponse res) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Deprecated
   @Override
   default boolean functional() {
     throw new UnsupportedOperationException();
   }
 
-  @Nonnull
+  @NonNull
   @Override
   default MediaType mediaType() {
     return HTML_UTF_8;
@@ -63,13 +50,13 @@ public interface VIEW extends Returnable {
   }
 
   /** Generator. */
-  @Nonnull
-  static VIEW of(@Nonnull String view) {
+  @NonNull
+  static VIEW of(@NonNull String view) {
     return view::toString;
   }
 
   /** Generator. */
-  @Nonnull
+  @NonNull
   static VIEW of() {
     return () -> ROOT;
   }

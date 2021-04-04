@@ -1,7 +1,5 @@
 package org.github.spring.restful.json;
 
-import javax.annotation.Nonnull;
-
 import lombok.*;
 
 /**
@@ -18,11 +16,15 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class JSONDataReturn<T> extends JSONReturn implements JSON {
   /** data. */
   private T data;
+
+  @Override
+  public String toString() {
+    return get();
+  }
 
   /** WITH data. */
   public JSONDataReturn<T> withData(T data) {
@@ -31,13 +33,13 @@ public class JSONDataReturn<T> extends JSONReturn implements JSON {
   }
 
   /** Generator. */
-  @Nonnull
+  @NonNull
   public static JSONDataReturn<?> of() {
     return new JSONDataReturn<>();
   }
 
   /** Generator. */
-  @Nonnull
+  @NonNull
   public static <V> JSONDataReturn<V> of(V data) {
     return new JSONDataReturn<>(data);
   }
