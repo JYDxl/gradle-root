@@ -1,6 +1,6 @@
 package org.github.web.service;
 
-import org.github.base.model.po.NoticePO;
+import org.github.base.model.dto.NoticePO;
 import org.github.spring.restful.Returnable;
 
 public interface ICategoryShowService {

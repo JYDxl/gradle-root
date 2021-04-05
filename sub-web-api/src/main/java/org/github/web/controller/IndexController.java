@@ -1,6 +1,6 @@
 package org.github.web.controller;
 
-import org.github.base.model.po.NoticePO;
+import org.github.base.model.dto.NoticePO;
 import org.github.spring.restful.Returnable;
 import org.github.web.service.ICarouselShowService;
 import org.github.web.service.ICategoryShowService;

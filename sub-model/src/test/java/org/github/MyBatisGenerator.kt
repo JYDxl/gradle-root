@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import java.lang.System.getProperty
 
 fun main() {
-  val generator = AutoGenerator().apply { templateEngine = FreemarkerTemplateEngine() }
+  val generator = AutoGenerator().apply {templateEngine = FreemarkerTemplateEngine()}
 
   GlobalConfig().apply {
     val path = requireNotNull(getProperty("user.dir"))

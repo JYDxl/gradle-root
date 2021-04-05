@@ -3,7 +3,7 @@ package org.github.web.service.impl;
 import java.util.List;
 import lombok.extern.slf4j.*;
 import org.github.base.entity.CategoryEntity;
-import org.github.base.model.po.NoticePO;
+import org.github.base.model.dto.NoticePO;
 import org.github.base.model.vo.CategoryVO;
 import org.github.base.model.vo.NewItemsVO;
 import org.github.base.service.ICategoryService;

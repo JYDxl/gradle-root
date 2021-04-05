@@ -7,4 +7,5 @@ dependencies {
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
+  compileOnly("org.hibernate.validator:hibernate-validator")
 }

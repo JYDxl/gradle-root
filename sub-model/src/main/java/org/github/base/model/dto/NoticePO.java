@@ -1,4 +1,4 @@
-package org.github.base.model.po;
+package org.github.base.model.dto;
 
 import java.util.List;
 import lombok.*;
