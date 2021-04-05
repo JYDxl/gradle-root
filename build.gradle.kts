@@ -114,7 +114,7 @@ subprojects {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
 
-    implementation("org.checkerframework:checker-qual:3.11.0")
+    implementation("org.checkerframework:checker-qual:3.12.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

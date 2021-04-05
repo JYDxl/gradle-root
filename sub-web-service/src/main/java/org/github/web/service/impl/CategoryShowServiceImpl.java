@@ -1,8 +1,9 @@
 package org.github.web.service.impl;
 
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.*;
 import org.github.base.entity.CategoryEntity;
+import org.github.base.model.po.NoticePO;
 import org.github.base.model.vo.CategoryVO;
 import org.github.base.model.vo.NewItemsVO;
 import org.github.base.service.ICategoryService;
@@ -29,6 +30,11 @@ public class CategoryShowServiceImpl implements ICategoryShowService {
   public Returnable getSixNewItemsLazy(int rootCatId) {
     List<NewItemsVO> list = categoryShowMapper.getSixNewItemsLazy(rootCatId);
     return JSONArrayReturn.of(list);
+  }
+
+  @Override
+  public Returnable notice(NoticePO po) {
+    return Returnable.nil();
   }
 
   @Transactional(propagation = SUPPORTS, readOnly = true)
