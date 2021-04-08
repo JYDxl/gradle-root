@@ -52,12 +52,13 @@ public interface VIEW extends Returnable {
   /** Generator. */
   @NonNull
   static VIEW of(@NonNull String view) {
+    //noinspection NullableProblems
     return view::toString;
   }
 
   /** Generator. */
   @NonNull
   static VIEW of() {
-    return () -> ROOT;
+    return of(ROOT);
   }
 }

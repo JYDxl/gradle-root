@@ -37,12 +37,12 @@ class ApplicationTests {
     // opsForHash.get("hash",1);
     stringHashOps.put("hash", "1", "菜")
     val hvalue = stringHashOps["hash", 1]
-    log.info { hvalue }
+    log.info {hvalue}
   }
 
   @Test
   fun webAppCtx() {
     val ctx = webAppCtx
-    log.info { ctx.displayName }
+    log.info {ctx.displayName}
   }
 }

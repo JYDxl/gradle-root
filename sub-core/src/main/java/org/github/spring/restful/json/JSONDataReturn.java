@@ -1,6 +1,8 @@
 package org.github.spring.restful.json;
 
+import java.util.function.Function;
 import lombok.*;
+import static java.util.Optional.*;
 
 /**
  * JSON of data.
@@ -11,7 +13,7 @@ import lombok.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see JSONReturn
+ * @see org.github.spring.restful.json.JSONReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -42,5 +44,11 @@ public class JSONDataReturn<T> extends JSONReturn implements JSON {
   @NonNull
   public static <V> JSONDataReturn<V> of(V data) {
     return new JSONDataReturn<>(data);
+  }
+
+  /** Generator. */
+  @NonNull
+  public static <T, R> JSONDataReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+    return of(ofNullable(data).map(mapper).orElse(null));
   }
 }

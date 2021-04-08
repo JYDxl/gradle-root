@@ -3,6 +3,7 @@ package org.github.spring.restful.json;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import lombok.*;
 import static org.github.spring.footstone.IConstKt.*;
 
@@ -15,7 +16,7 @@ import static org.github.spring.footstone.IConstKt.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see JSONReturn
+ * @see org.github.spring.restful.json.JSONReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -75,7 +76,13 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONArrayReturn<V> of(@NonNull Collection<? extends V> data) {
+  public static <V> JSONArrayReturn<V> of(@NonNull Collection<V> data) {
     return new JSONArrayReturn<>(data.toArray());
+  }
+
+  /** Generator. */
+  @NonNull
+  public static <T, R> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
+    return new JSONArrayReturn<>(data.stream().map(mapper).toArray());
   }
 }

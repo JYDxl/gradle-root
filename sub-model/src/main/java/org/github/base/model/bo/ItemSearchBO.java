@@ -2,12 +2,12 @@ package org.github.base.model.bo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.github.base.PageModel;
+import org.github.base.PageParam;
 import static org.apache.commons.lang3.StringUtils.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ItemSearchBO extends PageModel {
+public class ItemSearchBO extends PageParam {
   private String keywords;
 
   private String sort;

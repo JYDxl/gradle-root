@@ -71,9 +71,9 @@ class RestController {
     return jsonp
   }
 
-  @RequestMapping("json/basic")
+  @GetMapping("json/basic")
   fun jsonBasic() = JSONReturn.of()
 
-  @RequestMapping("json/callback")
+  @GetMapping("json/callback")
   fun jsonCallback(): Returnable = JSONPReturn.of()
 }

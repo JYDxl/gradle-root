@@ -1,7 +1,7 @@
 package org.github.base.service;
 
 import org.github.base.entity.CategoryEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.github.base.IService;
 
 /**
  * <p>
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-03-27
+ * @since 2021-04-07
  */
 public interface ICategoryService extends IService<CategoryEntity> {}

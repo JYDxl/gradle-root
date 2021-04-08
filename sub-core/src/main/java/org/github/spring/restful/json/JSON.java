@@ -44,7 +44,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @NonNull
   static JSON of() {
-    return () -> EMPTY_JSON;
+    return of(EMPTY_JSON);
   }
 
   /** Generator. */

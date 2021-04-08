@@ -72,7 +72,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** Generator. */
   @NonNull
   static Returnable of() {
-    return () -> EMPTY;
+    return of(EMPTY);
   }
 
   /** Generator. */

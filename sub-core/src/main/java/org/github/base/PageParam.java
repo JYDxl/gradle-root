@@ -1,9 +1,9 @@
 package org.github.base;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
-public class PageModel implements IModel {
+public class PageParam implements IParam {
   private int pageNum = 1;
 
   private int pageSize = 10;

@@ -10,7 +10,6 @@ tasks.withType<BootJar> {
 
 tasks.withType<Test> {
   enabled = false
-  jvmArgs = listOf("-ea", "-Djava.library.path=/usr/local/opt/tomcat-native/lib")
 }
 
 val commonspool2: String by System.getProperties()
@@ -18,6 +17,7 @@ val mybatisplus: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val redisson: String by System.getProperties()
+val swagger: String by System.getProperties()
 val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
@@ -45,6 +45,7 @@ dependencies {
   implementation("p6spy:p6spy:$p6spy")
   //  implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+  implementation("io.springfox:springfox-boot-starter:$swagger")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-thymeleaf")

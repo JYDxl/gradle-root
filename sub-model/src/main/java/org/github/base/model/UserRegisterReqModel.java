@@ -3,7 +3,7 @@ package org.github.base.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.github.base.IModel;
+import org.github.base.IParam;
 import org.github.base.entity.UsersEntity;
 import static com.google.common.base.Preconditions.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -11,7 +11,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = true)
-public class UserRegisterReqModel extends UsersEntity implements IModel {
+public class UserRegisterReqModel extends UsersEntity implements IParam {
   private String confirmPassword;
 
   @Override

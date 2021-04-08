@@ -1,15 +1,19 @@
 package org.github
 
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
-import com.baomidou.mybatisplus.generator.AutoGenerator
 import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.po.LikeTable
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
+import org.github.base.IMapper
+import org.github.base.IService
+import org.github.base.Model
+import org.github.base.ServiceImpl
 import java.lang.System.getProperty
+import kotlin.reflect.jvm.jvmName
 
 fun main() {
-  val generator = AutoGenerator().apply {templateEngine = FreemarkerTemplateEngine()}
+  val generator = CustomAutoGenerator().apply {templateEngine = FreemarkerTemplateEngine()}
 
   GlobalConfig().apply {
     val path = requireNotNull(getProperty("user.dir"))
@@ -22,12 +26,13 @@ fun main() {
     idType = ASSIGN_ID
     isFileOverride = true
     isActiveRecord = true
+    isSwagger2 = true
     isOpen = false
     generator.globalConfig = this
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://ubuntu:3380/shop"
+    url = "jdbc:mysql://ubuntu:3380/mp"
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
     password = "root"
@@ -44,7 +49,10 @@ fun main() {
     naming = underline_to_camel
     isEntityTableFieldAnnotationEnable = true
     isEntityLombokModel = true
-    isChainModel = true
+    superEntityClass = Model::class.jvmName
+    superMapperClass = IMapper::class.jvmName
+    superServiceClass = IService::class.jvmName
+    superServiceImplClass = ServiceImpl::class.jvmName
     logicDeleteFieldName = "deleted"
     likeTable = LikeTable("_")
     generator.strategy = this

@@ -1,6 +1,8 @@
 package org.github.spring.restful.json;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lombok.*;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import static org.github.spring.footstone.IConstKt.*;
@@ -14,8 +16,8 @@ import static org.github.spring.footstone.IConstKt.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see JSONReturn
- * @see JSONArrayReturn
+ * @see org.github.spring.restful.json.JSONReturn
+ * @see org.github.spring.restful.json.JSONArrayReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -45,14 +47,20 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONPageReturn<V> of(@NonNull IPage<? extends V> page) {
-    return (JSONPageReturn<V>) new JSONPageReturn<V>(page.getTotal()).withData(page.getRecords());
+  public static <V> JSONPageReturn<V> of(@NonNull IPage<V> page) {
+    return of(page.getTotal(), page.getRecords());
   }
 
   /** Generator. */
   @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <V> JSONPageReturn<V> of(long total, @NonNull List<? extends V> data) {
+  public static <V> JSONPageReturn<V> of(long total, @NonNull List<V> data) {
     return (JSONPageReturn) new JSONPageReturn<>(total).withData(data);
+  }
+
+  /** Generator. */
+  @NonNull
+  public static <T, R> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
+    return of(page.getTotal(), page.getRecords().stream().map(mapper).collect(Collectors.toList()));
   }
 }

@@ -4,12 +4,12 @@ import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.github.base.IModel;
+import org.github.base.IParam;
 
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class NewItemsVO implements IModel {
+public class NewItemsVO implements IParam {
   private Integer rootCatId;
 
   private String rootCatName;

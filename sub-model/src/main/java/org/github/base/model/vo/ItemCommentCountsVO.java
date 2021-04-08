@@ -2,11 +2,11 @@ package org.github.base.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.github.base.IModel;
+import org.github.base.IParam;
 
 @AllArgsConstructor
 @Data
-public class ItemCommentCountsVO implements IModel {
+public class ItemCommentCountsVO implements IParam {
   private Integer totalCounts;
 
   private Integer goodCounts;

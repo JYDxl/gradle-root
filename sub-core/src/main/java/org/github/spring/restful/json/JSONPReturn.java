@@ -1,5 +1,6 @@
 package org.github.spring.restful.json;
 
+import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.net.MediaType;
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
+import static java.util.Optional.*;
 import static org.github.spring.footstone.IConstKt.*;
 
 /**
@@ -18,8 +20,8 @@ import static org.github.spring.footstone.IConstKt.*;
  * @see java.util.function.Supplier
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
- * @see JSONReturn
- * @see JSONDataReturn
+ * @see org.github.spring.restful.json.JSONReturn
+ * @see org.github.spring.restful.json.JSONDataReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -76,5 +78,11 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public static <V> JSONPReturn<V> of(V data) {
     return (JSONPReturn) new JSONPReturn<>().withData(data);
+  }
+
+  /** Generator. */
+  @NonNull
+  public static <T, R> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+    return of(ofNullable(data).map(mapper).orElse(null));
   }
 }

@@ -1,4 +1,5 @@
 val mybatisplus: String by System.getProperties()
+val swagger: String by System.getProperties()
 val mysql: String by System.getProperties()
 
 dependencies {
@@ -7,6 +8,7 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot")
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
   compileOnly("javax.servlet:javax.servlet-api")
+  compileOnly("io.springfox:springfox-boot-starter:$swagger")
 
   api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
   api("com.baomidou:mybatis-plus-extension:$mybatisplus")
