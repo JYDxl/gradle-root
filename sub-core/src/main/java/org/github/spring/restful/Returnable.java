@@ -11,7 +11,6 @@ import lombok.*;
 import com.google.common.net.MediaType;
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * Top interface of all.
@@ -29,7 +28,7 @@ public interface Returnable extends Serializable, Supplier<String> {
 
   /** 通过字符流{@link Writer}处理数据. */
   default void accept(@NonNull Writer writer) throws Exception {
-    writer.write(firstNonNull(get(), NULL));
+    writer.write(firstNonNull(get(), "null"));
   }
 
   /** 通过字节流{@link OutputStream}处理数据. */
@@ -72,7 +71,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   /** Generator. */
   @NonNull
   static Returnable of() {
-    return of(EMPTY);
+    return of("");
   }
 
   /** Generator. */

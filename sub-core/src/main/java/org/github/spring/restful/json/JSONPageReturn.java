@@ -5,7 +5,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.*;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of page.
@@ -25,7 +24,7 @@ import static org.github.spring.footstone.IConstKt.*;
 @Data
 public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   /** total. */
-  private long total = COUNT;
+  private long total = 0L;
 
   @Override
   public String toString() {

@@ -6,7 +6,6 @@ import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import static com.google.common.net.MediaType.*;
 import static org.github.ops.spring.SpringOpsKt.*;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * Top interface of json.
@@ -44,7 +43,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @NonNull
   static JSON of() {
-    return of(EMPTY_JSON);
+    return of("{}");
   }
 
   /** Generator. */

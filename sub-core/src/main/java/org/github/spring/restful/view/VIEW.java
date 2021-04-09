@@ -7,7 +7,6 @@ import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import static com.google.common.net.MediaType.*;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * Top interface of view.
@@ -59,6 +58,6 @@ public interface VIEW extends Returnable {
   /** Generator. */
   @NonNull
   static VIEW of() {
-    return of(ROOT);
+    return of("/");
   }
 }

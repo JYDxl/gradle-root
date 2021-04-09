@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import lombok.*;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of array.
@@ -25,7 +24,7 @@ import static org.github.spring.footstone.IConstKt.*;
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** data. */
   @NonNull
-  private Object[] data = getArray();
+  private Object[] data = {};
 
   @Override
   public String toString() {

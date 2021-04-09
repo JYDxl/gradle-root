@@ -7,7 +7,7 @@ fun check(preCondition: () -> Boolean, lazyMessage: () -> Any) {
   val value = try {
     preCondition()
   } catch (e: Exception) {
-    log.error(e) { "precondition方法中发生异常: ${e.message}" }
+    log.error(e) {"precondition方法中发生异常: ${e.message}"}
     false
   }
   try {
@@ -15,7 +15,7 @@ fun check(preCondition: () -> Boolean, lazyMessage: () -> Any) {
   } catch (e: IllegalArgumentException) {
     throw ParamsErrorException(e)
   } catch (e: Exception) {
-    log.error(e) { "lazyMessage方法中发生异常: ${e.message}" }
+    log.error(e) {"lazyMessage方法中发生异常: ${e.message}"}
     throw ParamsErrorException(e)
   }
 }

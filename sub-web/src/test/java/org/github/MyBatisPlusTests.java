@@ -3,20 +3,31 @@ package org.github;
 import lombok.extern.slf4j.*;
 import lombok.*;
 import org.github.base.entity.TbUserEntity;
-import org.github.base.mapper.ITbUserMapper;
+import org.github.base.service.ITbUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import static java.util.Arrays.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
 public class MyBatisPlusTests {
   @Autowired
-  private ITbUserMapper userMapper;
+  private ITbUserService userService;
+
+  @Test
+  public void testDelete() {
+    val user = new TbUserEntity();
+    user.setUserName("coco");
+    user.setPassword("123456");
+    val query = Wrappers.lambdaQuery(user);
+    user.delete(query);
+    log.info(user.json());
+  }
 
   @Test
   public void testInsert() {
@@ -31,8 +42,14 @@ public class MyBatisPlusTests {
   }
 
   @Test
+  public void testSelectBatchByIds() {
+    val userList = userService.listByIds(asList(1, 2, 3, 4, 5, 6, 100));
+    userList.forEach((user) -> log.info(user.json()));
+  }
+
+  @Test
   public void testSelectList() {
-    val entityList = userMapper.selectList(null);
+    val entityList = userService.list(null);
     entityList.forEach((entity) -> log.info(entity.json()));
   }
 

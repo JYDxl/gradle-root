@@ -9,7 +9,6 @@ import com.google.common.net.MediaType;
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
 import static java.util.Optional.*;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of jsonp.
@@ -31,11 +30,11 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** callback. */
   @JsonIgnore
   @NonNull
-  private String callback = CALL_BACK;
+  private String callback = "callback";
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    if (CALL_BACK.equals(callback)) setCallback(firstNonNull(req.getParameter(CALL_BACK), CALL_BACK));
+    if ("callback".equals(callback)) setCallback(firstNonNull(req.getParameter("callback"), "callback"));
     super.collect(req, res);
   }
 

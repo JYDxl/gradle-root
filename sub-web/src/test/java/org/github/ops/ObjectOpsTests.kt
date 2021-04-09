@@ -24,86 +24,68 @@ class ObjectOpsTests {
   fun map() {
     val item = SysMenuTree("id", null, "name")
     val map = item.map
-    log.info { map.json() }
+    log.info {map.json()}
   }
 
   @Test
   fun localTimeValue() {
     val value = LocalTime.now().value
-    log.info { value }
+    log.info {value}
   }
 
   @Test
   fun localDateTime() {
     val long = LocalDateTime.now().long
-    log.info { long }
+    log.info {long}
   }
 
   @Test
   fun localDateTimeDate() {
     val date = LocalDateTime.now().date
-    log.info { date }
+    log.info {date}
   }
 
   @Test
   fun localDateTimeSeconds() {
     val seconds = LocalDateTime.now().seconds
-    log.info { seconds }
+    log.info {seconds}
   }
 
   @Test
   fun stringHexBytes() {
-    val hexBytes = "abcd".hexBytes
-    log.info { hexBytes }
+    val hexBytes = "bcd".hexBytes
+    log.info {hexBytes}
   }
 
   @Test
   fun fibonacciSequence() {
-    val list = generateSequence(Triple(1, 1, 1)) { if(it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1) }.map { it.first }.toList()
-    log.info { list }
-  }
-
-  @Test
-  fun byteArrayHexStr() {
-    val bytes = byteArrayOf(-85, -51)
-    log.info { bytes.hexStr }
+    val list = generateSequence(Triple(1, 1, 1)) {if (it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1)}.map {it.first}.toList()
+    log.info {list}
   }
 
   @Test
   fun obj() {
-    log.info { Any().json() }
-  }
-
-  @Test
-  fun stringTime() {
-    val time = "2019-03-11 22:51:30".time
-    log.info { time }
-  }
-
-  @Test
-  fun stringDate() {
-    val date = "2019-03-11".date
-    log.info { date }
+    log.info {Any().json()}
   }
 
   @Test
   fun format() {
-    log.info { LocalDateTime.now().value }
+    log.info {LocalDateTime.now().value}
   }
 
   @Test
   fun sort() {
     val random = Random(System.currentTimeMillis())
-    val array = IntStream.generate { random.nextInt(100) }.limit(100).toArray()
-    bubbleSort(array) { left, right -> left > right }
-    log.info { array.json() }
+    val array = IntStream.generate {random.nextInt(100)}.limit(100).toArray()
+    bubbleSort(array) {left, right -> left > right}
+    log.info {array.json()}
   }
 
   private fun bubbleSort(array: IntArray, predicate: (left: Int, right: Int) -> Boolean) {
     val time = array.size - 1
-    for(i in 0 until time) {
-      for(j in 0 until time - i) {
-        if(predicate(array[j], array[j + 1])) {
+    for (i in 0 until time) {
+      for (j in 0 until time - i) {
+        if (predicate(array[j], array[j + 1])) {
           val tmp = array[j]
           array[j] = array[j + 1]
           array[j + 1] = tmp

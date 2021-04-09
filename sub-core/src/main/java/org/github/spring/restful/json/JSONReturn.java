@@ -2,7 +2,6 @@ package org.github.spring.restful.json;
 
 import lombok.*;
 import static org.github.ops.spring.SpringOpsKt.*;
-import static org.github.spring.footstone.IConstKt.*;
 
 /**
  * JSON of basic.
@@ -18,10 +17,10 @@ import static org.github.spring.footstone.IConstKt.*;
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态码. */
-  private int    retCode = RET_OK_CODE;
+  private int    retCode = 0;
   /** 返回的信息. */
   @NonNull
-  private String retMsg  = RET_OK_MSG;
+  private String retMsg  = "OK";
 
   @NonNull
   @Override
@@ -68,12 +67,12 @@ public class JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static JSONReturn error() {
-    return of(RET_ERROR_CODE, RET_ERROR_MSG);
+    return of(-2, "SYSTEM ERROR");
   }
 
   /** Generator. */
   @NonNull
   public static JSONReturn warn() {
-    return of(RET_WARN_CODE, RET_WARN_MSG);
+    return of(-1, "PARAMS ERROR");
   }
 }

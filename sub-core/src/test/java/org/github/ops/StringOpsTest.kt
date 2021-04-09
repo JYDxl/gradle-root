@@ -1,11 +1,8 @@
 package org.github.ops
 
-import org.github.spring.footstone.FORMAT_DATE
-import org.github.spring.footstone.FORMAT_DATE_TIME
+import com.google.common.base.Strings.padEnd
+import com.google.common.base.Strings.padStart
 import org.junit.jupiter.api.Test
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.stream.Stream.iterate
 
 internal class StringOpsTest {
@@ -13,12 +10,12 @@ internal class StringOpsTest {
 
   @Test
   fun padStart() {
-    assert("2333".padStart(10, ' ') == "      2333")
+    assert(padStart("2333", 10, ' ') == "      2333")
   }
 
   @Test
   fun padEnd() {
-    assert("2333".padEnd(10, ' ') == "2333      ")
+    assert(padEnd("2333", 10, ' ') == "2333      ")
   }
 
   @Test
@@ -30,23 +27,13 @@ internal class StringOpsTest {
   }
 
   @Test
-  fun getDate() {
-    assert(LocalDate.now().toString() == SimpleDateFormat(FORMAT_DATE).format(LocalDate.now().toString().date))
-  }
-
-  @Test
-  fun getTime() {
-    assert(LocalDateTime.now().value == SimpleDateFormat(FORMAT_DATE_TIME).format(LocalDateTime.now().value.time))
-  }
-
-  @Test
   fun getClasspathFile() {
     assert("META-INF/sub-core.kotlin_module".classpathFile.exists())
   }
 
   @Test
   fun fibonacciSequence() {
-    val array = iterate(Node(1, 1), {Node(it.right, it.left + it.right)}).limit(10).mapToInt {it.left}.toArray()
+    val array = iterate(Node(1, 1)) {Node(it.right, it.left + it.right)}.limit(10).mapToInt {it.left}.toArray()
     log.info {array.contentToString()}
   }
 }
