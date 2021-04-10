@@ -4,16 +4,15 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.group.DefaultChannelGroup
-import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.string.StringDecoder
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import io.netty.util.concurrent.ImmediateEventExecutor.*
+import io.netty.util.concurrent.ImmediateEventExecutor.INSTANCE
 import org.github.module.line.LineEncoder
 import org.github.module.line.LineServerHandler
 import org.github.netty.decoder.LineDecoder
-import org.github.thread.NativeThreadFactory
+import org.github.netty.ops.eventLoopGroup
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
@@ -23,8 +22,8 @@ fun main() {
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = LineEncoder()
 
-  val boss = NioEventLoopGroup(1, NativeThreadFactory("line-boss"))
-  val worker = NioEventLoopGroup(0, NativeThreadFactory("line-worker"))
+  val boss = eventLoopGroup(1, "line-boss")
+  val worker = eventLoopGroup(0, "line-worker")
 
   ServerBootstrap()
     .group(boss, worker)
@@ -45,5 +44,5 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { worker.shutdownGracefully();boss.shutdownGracefully() }
+    .addListener {worker.shutdownGracefully();boss.shutdownGracefully()}
 }

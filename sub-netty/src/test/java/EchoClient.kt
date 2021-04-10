@@ -1,16 +1,15 @@
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.echo.shaded.EchoClientHandler
-import org.github.thread.NativeThreadFactory
-import java.nio.ByteOrder.*
+import org.github.netty.ops.eventLoopGroup
+import java.nio.ByteOrder.LITTLE_ENDIAN
 
 fun main() {
-  val group = NioEventLoopGroup(24, NativeThreadFactory("nio-client"))
+  val group = eventLoopGroup(24, "nio-client")
 
   Bootstrap()
     .group(group)
@@ -28,5 +27,5 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { group.shutdownGracefully() }
+    .addListener {group.shutdownGracefully()}
 }

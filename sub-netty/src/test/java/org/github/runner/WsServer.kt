@@ -4,17 +4,16 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.group.DefaultChannelGroup
-import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import io.netty.util.concurrent.ImmediateEventExecutor.*
+import io.netty.util.concurrent.ImmediateEventExecutor.INSTANCE
 import org.github.module.ws.HttpReqHandler
 import org.github.module.ws.TextWsFrameHandler
-import org.github.thread.NativeThreadFactory
+import org.github.netty.ops.eventLoopGroup
 
 fun main() {
   val group = DefaultChannelGroup("ws", INSTANCE)
@@ -22,8 +21,8 @@ fun main() {
   val httpReqHandler = HttpReqHandler("/ws")
   val textWsFrameHandler = TextWsFrameHandler(group)
 
-  val boss = NioEventLoopGroup(1, NativeThreadFactory("ws-boss"))
-  val worker = NioEventLoopGroup(0, NativeThreadFactory("ws-worker"))
+  val boss = eventLoopGroup(1, "ws-boss")
+  val worker = eventLoopGroup(0, "ws-worker")
 
   ServerBootstrap()
     .group(boss, worker)
@@ -45,5 +44,5 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { worker.shutdownGracefully();boss.shutdownGracefully() }
+    .addListener {worker.shutdownGracefully();boss.shutdownGracefully()}
 }

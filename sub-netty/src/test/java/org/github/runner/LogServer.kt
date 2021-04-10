@@ -3,25 +3,20 @@ package org.github.runner
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.ChannelOption.*
-import io.netty.channel.nio.NioEventLoopGroup
+import io.netty.channel.ChannelOption.SO_BROADCAST
 import io.netty.channel.socket.nio.NioDatagramChannel
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import org.github.module.log.LogEvent
 import org.github.module.log.LogEventEncoder
-import org.github.thread.NativeThreadFactory
+import org.github.netty.ops.eventLoopGroup
 import java.net.InetSocketAddress
-import java.util.concurrent.Executors.*
-import java.util.concurrent.TimeUnit.*
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val addr = InetSocketAddress("255.255.255.255", 8000)
   val logEventEncoder = LogEventEncoder(addr)
 
-  val group = NioEventLoopGroup(0, NativeThreadFactory("log-server"))
-  val service = newScheduledThreadPool(4, NativeThreadFactory("udp-task"))
+  val group = eventLoopGroup(0, "log-server")
 
   Bootstrap()
     .group(group)
@@ -38,7 +33,6 @@ fun main() {
     .bind(0)
     .sync()
     .channel()
-    .apply { service.scheduleWithFixedDelay({ writeAndFlush(LogEvent(addr, "mac", "Hello world!")) }, 3, 1, SECONDS) }
     .closeFuture()
-    .addListener { group.shutdownGracefully() }
+    .addListener {group.shutdownGracefully()}
 }

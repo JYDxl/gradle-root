@@ -108,10 +108,8 @@ subprojects {
     implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jackson")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr353:$jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava:$jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
 
     implementation("org.checkerframework:checker-qual:3.12.0")

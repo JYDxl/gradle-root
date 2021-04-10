@@ -1,10 +1,10 @@
 package org.github.spring.restful.json;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import lombok.*;
+import static java.util.Arrays.*;
 
 /**
  * JSON of array.
@@ -42,7 +42,7 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   @SuppressWarnings("unchecked")
   @NonNull
   public List<E> toList() {
-    return (List<E>) Arrays.asList(data);
+    return (List<E>) asList(data);
   }
 
   /** WITH data. */

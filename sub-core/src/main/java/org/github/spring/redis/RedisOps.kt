@@ -1,16 +1,7 @@
 package org.github.spring.redis
 
 import org.springframework.core.io.Resource
-import org.springframework.data.redis.core.ClusterOperations
-import org.springframework.data.redis.core.GeoOperations
-import org.springframework.data.redis.core.HashOperations
-import org.springframework.data.redis.core.HyperLogLogOperations
-import org.springframework.data.redis.core.ListOperations
-import org.springframework.data.redis.core.RedisOperations
-import org.springframework.data.redis.core.RedisTemplate
-import org.springframework.data.redis.core.SetOperations
-import org.springframework.data.redis.core.ValueOperations
-import org.springframework.data.redis.core.ZSetOperations
+import org.springframework.data.redis.core.*
 import org.springframework.data.redis.core.script.DefaultRedisScript
 import org.springframework.data.redis.core.script.RedisScript
 import kotlin.reflect.KClass
@@ -40,4 +31,4 @@ class LongRedisScript(resource: Resource): RedisScript<Long> by newRedisScript(L
 @Suppress("UNCHECKED_CAST")
 class ListRedisScript(resource: Resource): RedisScript<List<String?>> by newRedisScript(List::class, resource) as RedisScript<List<String?>>
 
-fun <T: Any> newRedisScript(clazz: KClass<T>? = null, resource: Resource) = DefaultRedisScript<T>().apply { clazz?.java?.let { resultType = it }; setLocation(resource) }
+fun <T: Any> newRedisScript(clazz: KClass<T>? = null, resource: Resource) = DefaultRedisScript<T>().apply {clazz?.java?.let {resultType = it}; setLocation(resource)}

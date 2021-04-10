@@ -3,18 +3,17 @@ package org.github.runner
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.http.HttpServerHandler
-import org.github.thread.NativeThreadFactory
+import org.github.netty.ops.eventLoopGroup
 
 fun main() {
-  val boss = NioEventLoopGroup(1, NativeThreadFactory("http-boss"))
-  val worker = NioEventLoopGroup(0, NativeThreadFactory("http-worker"))
+  val boss = eventLoopGroup(1, "http-boss")
+  val worker = eventLoopGroup(0, "http-worker")
 
   val loggingHandler = LoggingHandler(TRACE)
   val httpServerHandler = HttpServerHandler()
@@ -37,5 +36,5 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { boss.shutdownGracefully();worker.shutdownGracefully() }
+    .addListener {boss.shutdownGracefully();worker.shutdownGracefully()}
 }
