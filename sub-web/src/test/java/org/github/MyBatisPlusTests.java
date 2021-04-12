@@ -3,6 +3,7 @@ package org.github;
 import lombok.extern.slf4j.*;
 import lombok.*;
 import org.github.base.entity.TbUserEntity;
+import org.github.base.mapper.ITbUserMapper;
 import org.github.base.service.ITbUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,17 @@ import static java.util.Arrays.*;
 public class MyBatisPlusTests {
   @Autowired
   private ITbUserService userService;
+  @Autowired
+  private ITbUserMapper  userMapper;
+
+  @Test
+  public void testBatch() {
+    val list = userService.list();
+    // userService.updateBatchById(list);
+    // list.forEach(it -> it.setId(null));
+    userMapper.insertBatchSomeColumn(list);
+    log.info(list.toString());
+  }
 
   @Test
   public void testDelete() {
@@ -39,6 +51,15 @@ public class MyBatisPlusTests {
     user.setEmail("1@itcast.cn");
     user.insert();
     log.info(user.json());
+  }
+
+  @Test
+  public void testQuery() {
+    val user = new TbUserEntity();
+    user.setName("2333");
+    val query = Wrappers.lambdaQuery(user);
+    val list  = user.selectList(query);
+    log.info(list.toString());
   }
 
   @Test

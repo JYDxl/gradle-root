@@ -1,6 +1,9 @@
 package org.github.config
 
 import com.baomidou.mybatisplus.annotation.DbType.MYSQL
+import com.baomidou.mybatisplus.core.injector.AbstractMethod
+import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector
+import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor
@@ -19,4 +22,11 @@ class MyBatisConfig {
     addInnerInterceptor(PaginationInnerInterceptor(MYSQL))
     addInnerInterceptor(BlockAttackInnerInterceptor())
   }
+
+  @Bean
+  fun easySqlInjector() = EasySqlInjector()
+}
+
+class EasySqlInjector: DefaultSqlInjector() {
+  override fun getMethodList(mapperClass: Class<*>): MutableList<AbstractMethod> = super.getMethodList(mapperClass).apply {add(InsertBatchSomeColumn())}
 }
