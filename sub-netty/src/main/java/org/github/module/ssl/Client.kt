@@ -1,40 +1,38 @@
 package org.github.module.ssl
 
+import cn.hutool.core.io.FileUtil.file
 import io.netty.bootstrap.Bootstrap
-import io.netty.channel.Channel
-import io.netty.channel.ChannelFutureListener
-import io.netty.channel.ChannelHandlerContext
-import io.netty.channel.ChannelInboundHandlerAdapter
-import io.netty.channel.ChannelInitializer
+import io.netty.channel.*
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import io.netty.handler.ssl.SslContextBuilder.*
+import io.netty.handler.ssl.SslContext
+import io.netty.handler.ssl.SslContextBuilder.forClient
 import org.github.netty.decoder.LineDecoder
 import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
-import org.github.ops.classpathFile
-import java.util.concurrent.TimeUnit.*
+import java.io.File
+import java.util.concurrent.TimeUnit.SECONDS
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val ca = "ssl/ca.crt".classpathFile
-  val clientCrt = "ssl/client/client.crt".classpathFile
-  val clientKey = "ssl/client/pkcs8_client.key".classpathFile
-  val sslCtx = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
+  val ca: File = file("ssl/ca.crt")
+  val clientCrt: File = file("ssl/client/client.crt")
+  val clientKey: File = file("ssl/client/pkcs8_client.key")
+  val sslCtx: SslContext = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
 
   val loggingHandler = LoggingHandler(TRACE)
-  val readWriteInfoHandler = ReadWriteInfoHandler { it.toString().trim() }
+  val readWriteInfoHandler = ReadWriteInfoHandler {it.toString().trim()}
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = StringEncoder(UTF_8)
   val clientHandler = ClientHandler()
   val readWriteHexHandler = ReadWriteHexHandler()
 
   val group = eventLoopGroup(1, "ssl-client")
-  val listener = ChannelFutureListener { group.shutdownGracefully() }
+  val listener = ChannelFutureListener {group.shutdownGracefully()}
 
   Bootstrap()
     .group(group)
@@ -62,7 +60,7 @@ fun main() {
 
 class ClientHandler: ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
-    ctx.executor().scheduleWithFixedDelay({ ctx.writeAndFlush("2333\n2333\n2333", ctx.voidPromise()) }, 0, 10, SECONDS)
+    ctx.executor().scheduleWithFixedDelay({ctx.writeAndFlush("2333\n2333\n2333", ctx.voidPromise())}, 0, 10, SECONDS)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

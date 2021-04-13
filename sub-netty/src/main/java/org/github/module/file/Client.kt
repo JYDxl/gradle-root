@@ -1,23 +1,24 @@
 package org.github.module.file
 
+import cn.hutool.core.io.FileUtil.file
 import com.google.common.io.Files
 import io.netty.bootstrap.Bootstrap
 import io.netty.buffer.ByteBuf
 import io.netty.channel.Channel
-import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.ChannelInitializer
 import io.netty.handler.codec.MessageToMessageDecoder
 import io.netty.handler.codec.string.StringEncoder
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import io.netty.handler.ssl.SslContextBuilder.*
+import io.netty.handler.ssl.SslContext
+import io.netty.handler.ssl.SslContextBuilder.forClient
 import org.github.netty.decoder.LengthDecoder
 import org.github.netty.ops.beforeRelease
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
-import org.github.ops.classpathFile
 import org.github.ops.info
 import org.github.ops.log
 import java.io.File
@@ -25,10 +26,10 @@ import kotlin.Int.Companion.MAX_VALUE
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val ca = "ssl/ca.crt".classpathFile
-  val clientCrt = "ssl/client/client.crt".classpathFile
-  val clientKey = "ssl/client/pkcs8_client.key".classpathFile
-  val sslCtx = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
+  val ca: File = file("ssl/ca.crt")
+  val clientCrt: File = file("ssl/client/client.crt")
+  val clientKey: File = file("ssl/client/pkcs8_client.key")
+  val sslCtx: SslContext = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
   val stringEncoder = StringEncoder(UTF_8)
   val clientDecoder = ClientDecoder()
   val loggingHandler = LoggingHandler(TRACE)
@@ -54,19 +55,19 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { group.shutdownGracefully() }
+    .addListener {group.shutdownGracefully()}
 }
 
 data class Data(var prefix: String = "", var suffix: String = "", var data: ByteArray = byteArrayOf()) {
   override fun equals(other: Any?): Boolean {
-    if(this === other) return true
-    if(javaClass != other?.javaClass) return false
+    if (this === other) return true
+    if (javaClass != other?.javaClass) return false
 
     other as Data
 
-    if(prefix != other.prefix) return false
-    if(suffix != other.suffix) return false
-    if(!data.contentEquals(other.data)) return false
+    if (prefix != other.prefix) return false
+    if (suffix != other.suffix) return false
+    if (!data.contentEquals(other.data)) return false
 
     return true
   }
@@ -87,11 +88,11 @@ data class Data(var prefix: String = "", var suffix: String = "", var data: Byte
 class ClientDecoder: MessageToMessageDecoder<ByteBuf>() {
   override fun decode(ctx: ChannelHandlerContext, msg: ByteBuf, out: MutableList<Any>) {
     val data = Data()
-    msg.readRetainedSlice(2).beforeRelease { data.prefix = toString(UTF_8) }
+    msg.readRetainedSlice(2).beforeRelease {data.prefix = toString(UTF_8)}
     val len = msg.readLong()
-    val ary = ByteArray(len.toInt()).apply { msg.readBytes(this) }
+    val ary = ByteArray(len.toInt()).apply {msg.readBytes(this)}
     data.data = ary
-    msg.readRetainedSlice(2).beforeRelease { data.suffix = toString(UTF_8) }
+    msg.readRetainedSlice(2).beforeRelease {data.suffix = toString(UTF_8)}
     out.add(data)
   }
 }
@@ -108,9 +109,9 @@ class ClientHandler: ChannelInboundHandlerAdapter() {
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as Data
-    log.info { msg }
+    log.info {msg}
     Files.write(msg.data, File("D:\\GitHub\\gradle-root\\kotlin-bak.jpg"))
-    log.info { "文件下载成功" }
+    log.info {"文件下载成功"}
   }
 
   private val log = ClientHandler::class.log

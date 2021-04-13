@@ -17,19 +17,6 @@ class ObjectOpsTests {
   @Autowired
 
   @Test
-  fun map() {
-    val item = SysMenuTree("id", null, "name")
-    val map = item.map
-    log.info {map.json()}
-  }
-
-  @Test
-  fun stringHexBytes() {
-    val hexBytes = "bcd".hexBytes
-    log.info {hexBytes}
-  }
-
-  @Test
   fun fibonacciSequence() {
     val list = generateSequence(Triple(1, 1, 1)) {if (it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1)}.map {it.first}.toList()
     log.info {list}

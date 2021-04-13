@@ -20,6 +20,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import static com.google.common.hash.Hashing.*;
 import static java.nio.charset.StandardCharsets.*;
 import static java.time.LocalDateTime.*;
+import static org.github.ops.SpringsKt.*;
 
 @Service
 @Slf4j
@@ -53,13 +54,13 @@ public class UserServiceImpl implements IUserService {
     if (one == null) {
       return JSONReturn.error().withRetMsg("用户名或密码错误");
     }
-    CookieUtils.setCookie(org.github.ops.SpringsKt.getReq(), org.github.ops.SpringsKt.getResp(), "user", org.github.ops.SpringsKt.json(one, null), true);
+    CookieUtils.setCookie(getReq(), getResp(), "user", json(one, null), true);
     return new JSONDataReturn<>(one);
   }
 
   @Override
   public Returnable logout(String userId) {
-    CookieUtils.deleteCookie(org.github.ops.SpringsKt.getReq(), org.github.ops.SpringsKt.getResp(), "user");
+    CookieUtils.deleteCookie(getReq(), getResp(), "user");
     return new JSONReturn();
   }
 
