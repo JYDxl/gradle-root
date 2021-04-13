@@ -1,4 +1,4 @@
-package org.github.ops.spring
+package org.github.ops
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.github.spring.bootstrap.AppCtxHolder.Companion.getAppCtx

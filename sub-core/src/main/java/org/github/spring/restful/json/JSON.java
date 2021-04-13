@@ -5,7 +5,6 @@ import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import static com.google.common.net.MediaType.*;
-import static org.github.ops.spring.SpringOpsKt.*;
 
 /**
  * Top interface of json.
@@ -19,7 +18,7 @@ import static org.github.ops.spring.SpringOpsKt.*;
 public interface JSON extends Returnable {
   @Override
   default void accept(@NonNull OutputStream output) {
-    writeValue(this, output, null);
+    org.github.ops.SpringsKt.writeValue(this, output, null);
   }
 
   @NonNull
@@ -37,7 +36,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @NonNull
   static JSON of(@NonNull Object json) {
-    return of(json(json, null));
+    return of(org.github.ops.SpringsKt.json(json, null));
   }
 
   /** Generator. */

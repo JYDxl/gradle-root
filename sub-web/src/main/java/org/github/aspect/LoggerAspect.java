@@ -1,13 +1,13 @@
 package org.github.aspect;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.*;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import static com.google.common.base.Strings.*;
 import static java.lang.System.*;
-import static org.github.ops.LoggerOpsKt.*;
+import static org.github.ops.LoggersKt.*;
 
 @Component
 @Aspect

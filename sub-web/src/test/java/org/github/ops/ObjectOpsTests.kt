@@ -1,14 +1,10 @@
 package org.github.ops
 
-import org.github.ops.spring.json
-import org.github.ops.spring.map
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.time.LocalDateTime
-import java.time.LocalTime
 import java.util.*
 import java.util.stream.IntStream
 
@@ -28,30 +24,6 @@ class ObjectOpsTests {
   }
 
   @Test
-  fun localTimeValue() {
-    val value = LocalTime.now().value
-    log.info {value}
-  }
-
-  @Test
-  fun localDateTime() {
-    val long = LocalDateTime.now().long
-    log.info {long}
-  }
-
-  @Test
-  fun localDateTimeDate() {
-    val date = LocalDateTime.now().date
-    log.info {date}
-  }
-
-  @Test
-  fun localDateTimeSeconds() {
-    val seconds = LocalDateTime.now().seconds
-    log.info {seconds}
-  }
-
-  @Test
   fun stringHexBytes() {
     val hexBytes = "bcd".hexBytes
     log.info {hexBytes}
@@ -66,11 +38,6 @@ class ObjectOpsTests {
   @Test
   fun obj() {
     log.info {Any().json()}
-  }
-
-  @Test
-  fun format() {
-    log.info {LocalDateTime.now().value}
   }
 
   @Test

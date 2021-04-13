@@ -1,7 +1,6 @@
 package org.github.spring.restful.json;
 
 import lombok.*;
-import static org.github.ops.spring.SpringOpsKt.*;
 
 /**
  * JSON of basic.
@@ -25,7 +24,7 @@ public class JSONReturn implements JSON {
   @NonNull
   @Override
   public String get() {
-    return json(this, null);
+    return org.github.ops.SpringsKt.json(this, null);
   }
 
   @Override
