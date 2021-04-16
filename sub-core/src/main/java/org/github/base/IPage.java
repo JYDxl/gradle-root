@@ -1,9 +1,8 @@
 package org.github.base;
 
-import java.io.Serializable;
 import java.util.List;
 
-public interface IPage<T> extends Serializable {
+public interface IPage<T> extends IJson {
     List<T> getRecords();
 
     long getTotal();

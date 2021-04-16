@@ -38,7 +38,7 @@ public class MyBatisPlusTests {
     user.setPassword("123456");
     val query = Wrappers.lambdaQuery(user);
     user.delete(query);
-    log.info(user.json());
+    log.info(user.get());
   }
 
   @Test
@@ -50,7 +50,7 @@ public class MyBatisPlusTests {
     user.setAge(30);
     user.setEmail("1@itcast.cn");
     user.insert();
-    log.info(user.json());
+    log.info(user.get());
   }
 
   @Test
@@ -65,13 +65,13 @@ public class MyBatisPlusTests {
   @Test
   public void testSelectBatchByIds() {
     val userList = userService.listByIds(asList(1, 2, 3, 4, 5, 6, 100));
-    userList.forEach((user) -> log.info(user.json()));
+    userList.forEach((user) -> log.info(user.get()));
   }
 
   @Test
   public void testSelectList() {
     val entityList = userService.list(null);
-    entityList.forEach((entity) -> log.info(entity.json()));
+    entityList.forEach((entity) -> log.info(entity.get()));
   }
 
   @Test
@@ -82,7 +82,7 @@ public class MyBatisPlusTests {
     val updateWrapper = Wrappers.<TbUserEntity>lambdaUpdate();
     updateWrapper.eq(TbUserEntity::getUserName, "zhangsan");
     user.update(updateWrapper);
-    log.info(user.json());
+    log.info(user.get());
   }
 
   @Test
@@ -91,6 +91,6 @@ public class MyBatisPlusTests {
     user.setId(1L);
     user.setAge(19);
     user.updateById();
-    log.info(user.json());
+    log.info(user.get());
   }
 }
