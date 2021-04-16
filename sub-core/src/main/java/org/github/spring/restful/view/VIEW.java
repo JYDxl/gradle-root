@@ -1,5 +1,6 @@
 package org.github.spring.restful.view;
 
+import java.io.OutputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,16 +23,25 @@ public interface VIEW extends Returnable {
   @Override
   String get();
 
+  @Deprecated
   @Override
   default void accept(@NonNull Writer writer) throws Exception {
     throw new UnsupportedOperationException();
   }
 
+  @Deprecated
+  @Override
+  default void accept(@NonNull OutputStream output) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+
+  @Deprecated
   @Override
   default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     throw new UnsupportedOperationException();
   }
 
+  @Deprecated
   @Override
   default boolean functional() {
     throw new UnsupportedOperationException();

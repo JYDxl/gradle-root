@@ -1,10 +1,7 @@
 package org.github.spring.restful.file;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.Writer;
+import java.io.*;
+
 import lombok.*;
 import org.github.exception.ParamsErrorException;
 import org.github.spring.restful.Returnable;
@@ -24,11 +21,13 @@ public interface FILE extends Returnable {
   @Override
   String get();
 
+  @Deprecated
   @Override
   default void accept(@NonNull Writer writer) {
     throw new UnsupportedOperationException();
   }
 
+  @Deprecated
   @Override
   default boolean functional() {
     return false;

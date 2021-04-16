@@ -1,5 +1,6 @@
 package org.github.spring.restful.json;
 
+import java.io.OutputStream;
 import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +37,12 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     if ("callback".equals(callback)) setCallback(firstNonNull(req.getParameter("callback"), "callback"));
     super.collect(req, res);
+  }
+
+  @Deprecated
+  @Override
+  public void accept(@NonNull OutputStream output) {
+    throw new UnsupportedOperationException();
   }
 
   @NonNull
