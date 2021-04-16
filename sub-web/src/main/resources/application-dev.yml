@@ -65,6 +65,11 @@ spring:
   thymeleaf:
     mode: HTML
 
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ubuntu:8848
+
 server:
   port: 8088
   servlet:

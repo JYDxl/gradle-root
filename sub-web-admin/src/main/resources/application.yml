@@ -1,12 +1,12 @@
-eureka:
-  client:
-    registryFetchIntervalSeconds: 5
-    service-url:
-      defaultZone: http://ubuntu:8761/eureka/
-  instance:
-    health-check-url-path: /actuator/health
-    leaseRenewalIntervalInSeconds: 10
-    status-page-url-path: /
+#eureka:
+#  client:
+#    registryFetchIntervalSeconds: 5
+#    service-url:
+#      defaultZone: http://ubuntu:8761/eureka/
+#  instance:
+#    health-check-url-path: /actuator/health
+#    leaseRenewalIntervalInSeconds: 10
+#    status-page-url-path: /
 
 management:
   endpoints:
@@ -20,6 +20,12 @@ management:
 spring:
   application:
     name: admin-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ubuntu:8848
+  thymeleaf:
+    check-template-location: false
 
 server:
   port: 8000

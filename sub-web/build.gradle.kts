@@ -57,6 +57,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-websocket")
 //  implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
 //  implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 

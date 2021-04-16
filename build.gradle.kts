@@ -8,6 +8,7 @@ val springcloud: String by System.getProperties()
 val springadmin: String by System.getProperties()
 val springboot: String by System.getProperties()
 val jackson: String by System.getProperties()
+val alibaba: String by System.getProperties()
 val lombok: String by System.getProperties()
 val groovy: String by System.getProperties()
 val hutool: String by System.getProperties()
@@ -51,6 +52,7 @@ subprojects {
     imports {
       mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
       mavenBom("org.springframework.boot:spring-boot-starter-parent:$springboot")
+      mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:$alibaba")
       mavenBom("de.codecentric:spring-boot-admin-dependencies:$springadmin")
       mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
@@ -110,6 +112,7 @@ subprojects {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-guava:$jackson")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
 
     implementation("org.checkerframework:checker-qual:3.12.0")
