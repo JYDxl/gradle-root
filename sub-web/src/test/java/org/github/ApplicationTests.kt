@@ -2,7 +2,7 @@
 //
 //import org.github.ops.info
 //import org.github.ops.log
-//import org.github.ops.spring.webAppCtx
+//import org.github.ops.getWebAppCtx
 //import org.github.spring.redis.StringHashOps
 //import org.junit.jupiter.api.Test
 //import org.junit.jupiter.api.extension.ExtendWith

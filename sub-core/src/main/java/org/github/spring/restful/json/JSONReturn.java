@@ -1,7 +1,7 @@
 package org.github.spring.restful.json;
 
 import lombok.*;
-import static org.github.ops.spring.SpringOpsKt.*;
+import static org.github.ops.SpringsKt.*;
 
 /**
  * JSON of basic.

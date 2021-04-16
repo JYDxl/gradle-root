@@ -1,5 +1,6 @@
 package org.github.system;
 
+import java.util.Arrays;
 import lombok.extern.slf4j.*;
 import lombok.*;
 import org.aspectj.lang.JoinPoint;
@@ -9,12 +10,11 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import static java.util.Arrays.*;
 
 @Component
 @Aspect
 @Slf4j
-public class ServiceLogger {
+public class MethodInvokeLogger {
   @AfterReturning(value = "pointcut()", returning = "value")
   public void afterReturning(JoinPoint point, Object value) {
     val name = point.getSignature().toShortString();
@@ -31,10 +31,9 @@ public class ServiceLogger {
   public void before(JoinPoint point) {
     val name = point.getSignature().toShortString();
     val args = point.getArgs();
-    log.info("执行方法: {}", name);
-    log.info("接收参数: {} ====> {}", name, asList(args));
+    log.info("执行方法: {} ====> {}", name, Arrays.toString(args));
   }
 
-  @Pointcut("execution(* org.github..*ServiceImpl.*(..))")
+  @Pointcut("execution(* org.github..*Controller.*(..)) || execution(* org.github..*Service.*(..)) || execution(* org.github..*Mapper.*(..))")
   public void pointcut() {}
 }

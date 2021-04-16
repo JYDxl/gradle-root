@@ -1,14 +1,10 @@
 package org.github.ops
 
-import org.github.ops.spring.json
-import org.github.ops.spring.map
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.time.LocalDateTime
-import java.time.LocalTime
 import java.util.*
 import java.util.stream.IntStream
 
@@ -21,43 +17,6 @@ class ObjectOpsTests {
   @Autowired
 
   @Test
-  fun map() {
-    val item = SysMenuTree("id", null, "name")
-    val map = item.map
-    log.info {map.json()}
-  }
-
-  @Test
-  fun localTimeValue() {
-    val value = LocalTime.now().value
-    log.info {value}
-  }
-
-  @Test
-  fun localDateTime() {
-    val long = LocalDateTime.now().long
-    log.info {long}
-  }
-
-  @Test
-  fun localDateTimeDate() {
-    val date = LocalDateTime.now().date
-    log.info {date}
-  }
-
-  @Test
-  fun localDateTimeSeconds() {
-    val seconds = LocalDateTime.now().seconds
-    log.info {seconds}
-  }
-
-  @Test
-  fun stringHexBytes() {
-    val hexBytes = "bcd".hexBytes
-    log.info {hexBytes}
-  }
-
-  @Test
   fun fibonacciSequence() {
     val list = generateSequence(Triple(1, 1, 1)) {if (it.third == 10) null else Triple(it.second, it.first + it.second, it.third + 1)}.map {it.first}.toList()
     log.info {list}
@@ -66,11 +25,6 @@ class ObjectOpsTests {
   @Test
   fun obj() {
     log.info {Any().json()}
-  }
-
-  @Test
-  fun format() {
-    log.info {LocalDateTime.now().value}
   }
 
   @Test

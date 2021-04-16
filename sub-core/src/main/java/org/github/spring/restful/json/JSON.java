@@ -5,7 +5,7 @@ import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import static com.google.common.net.MediaType.*;
-import static org.github.ops.spring.SpringOpsKt.*;
+import static org.github.ops.SpringsKt.*;
 
 /**
  * Top interface of json.
