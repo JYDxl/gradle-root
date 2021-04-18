@@ -1,7 +1,10 @@
 package org.github.spring.restful.file;
 
-import java.io.*;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.Writer;
 import lombok.*;
 import org.github.exception.ParamsErrorException;
 import org.github.spring.restful.Returnable;

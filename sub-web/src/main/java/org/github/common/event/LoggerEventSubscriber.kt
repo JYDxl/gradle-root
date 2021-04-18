@@ -6,9 +6,7 @@ import org.github.event.EventSubscriber
 import org.github.ops.json
 import org.github.ops.log
 import org.github.ops.trace
-import org.springframework.stereotype.Component
 
-@Component
 class LoggerEventSubscriber: EventSubscriber {
   /** log. */
   private val log = LoggerEventSubscriber::class.log

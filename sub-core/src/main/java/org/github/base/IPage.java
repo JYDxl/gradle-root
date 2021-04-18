@@ -3,7 +3,7 @@ package org.github.base;
 import java.util.List;
 
 public interface IPage<T> extends IJson {
-    List<T> getRecords();
+  List<T> getRecords();
 
-    long getTotal();
+  long getTotal();
 }

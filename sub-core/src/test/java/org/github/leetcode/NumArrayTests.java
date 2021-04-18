@@ -1,11 +1,8 @@
 package org.github.leetcode;
 
 import lombok.extern.slf4j.*;
-import lombok.val;
 import org.junit.jupiter.api.Test;
-
-import static java.lang.Integer.toBinaryString;
-import static java.lang.String.valueOf;
+import static java.lang.String.*;
 
 @Slf4j
 public class NumArrayTests {

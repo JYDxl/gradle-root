@@ -31,6 +31,7 @@ appender("problem", RollingFileAppender) {
 }
 
 logger("org.springframework.transaction", TRACE)
+logger("org.apache.shiro", TRACE)
 logger("com.baomidou", TRACE)
 logger("org.github", TRACE)
 logger("io.netty", TRACE)

@@ -15,7 +15,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
 @Configuration
 class EventBusConfig {
   @Bean
-  fun guavaEventBus(@Qualifier("taskExecutor") taskExecutor: TaskExecutor, subscribers: List<EventSubscriber>) = AsyncEventBus(taskExecutor).apply { subscribers.forEach { register(it) } }
+  fun guavaEventBus(@Qualifier("taskExecutor") taskExecutor: TaskExecutor, subscribers: List<EventSubscriber>) = AsyncEventBus(taskExecutor).apply {subscribers.forEach {register(it)}}
 
   @Bean
   fun listeningExecutor(@Qualifier("taskExecutor") executor: ThreadPoolTaskExecutor): ListeningExecutorService = listeningDecorator(executor.threadPoolExecutor)

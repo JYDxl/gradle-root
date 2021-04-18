@@ -1,8 +1,8 @@
 package org.github.web.service.impl;
 
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
+import lombok.extern.slf4j.*;
+import lombok.*;
 import org.github.base.IPage;
 import org.github.base.Page;
 import org.github.base.entity.ItemsCommentsEntity;
@@ -125,7 +125,7 @@ public class ItemServiceImpl implements IItemService {
   private int queryItemsComments(String itemId, Integer commentLevel) {
     val query = itemsCommentsService.lambdaQuery();
     query.eq(ItemsCommentsEntity::getItemId, itemId);
-    if(commentLevel != null) query.eq(ItemsCommentsEntity::getCommentLevel, commentLevel);
+    if (commentLevel != null) query.eq(ItemsCommentsEntity::getCommentLevel, commentLevel);
     return query.count();
   }
 }
