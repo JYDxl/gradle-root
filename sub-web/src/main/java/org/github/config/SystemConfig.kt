@@ -7,5 +7,5 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class SystemConfig {
   @Bean
-  fun methodInvokeLogger() = MethodInvokeLogger(true)
+  fun methodInvokeLogger() = MethodInvokeLogger()
 }

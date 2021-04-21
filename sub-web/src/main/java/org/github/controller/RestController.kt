@@ -1,5 +1,6 @@
 package org.github.controller
 
+import org.apache.shiro.authz.annotation.RequiresRoles
 import org.github.ops.info
 import org.github.ops.log
 import org.github.spring.restful.Returnable
@@ -71,6 +72,7 @@ class RestController {
     return jsonp
   }
 
+  @RequiresRoles("admin")
   @GetMapping("json/basic")
   fun jsonBasic() = JSONReturn.of()
 
