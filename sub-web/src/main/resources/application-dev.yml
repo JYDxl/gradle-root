@@ -106,3 +106,7 @@ management:
 
 logging:
   config: classpath:logback.groovy
+
+shiro:
+  userNativeSessionManager: true
+  loginUrl: /

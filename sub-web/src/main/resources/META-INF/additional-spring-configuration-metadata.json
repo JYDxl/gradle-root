@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "shiro.userNativeSessionManager",
+      "type": "java.lang.Boolean",
+      "default": true,
+      "description": "Description for shiro.userNativeSessionManager."
+    }
+  ]
+}
