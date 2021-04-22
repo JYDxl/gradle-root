@@ -1,0 +1,5 @@
+<root>
+  <item name='org.apache.shiro.SecurityUtils org.apache.shiro.subject.Subject getSubject()'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>

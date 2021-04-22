@@ -1,5 +1,7 @@
 package org.github.controller
 
+import org.apache.shiro.authc.AuthenticationException
+import org.apache.shiro.authz.AuthorizationException
 import org.github.exception.ParamsErrorException
 import org.github.ops.error
 import org.github.ops.log
@@ -16,5 +18,11 @@ class ErrorController {
   fun throwableHandler(e: Throwable) = error().withRetMsg(e.localizedMessage).also {log.error(e) {}}
 
   @ExceptionHandler(ParamsErrorException::class)
-  fun paramsErrorHandler(e: ParamsErrorException) = warn().withRetMsg(e.localizedMessage).also {log.error(e) {}}
+  fun paramsErrorExceptionHandler(e: ParamsErrorException) = warn().withRetMsg(e.localizedMessage).also {log.error(e) {}}
+
+  @ExceptionHandler(AuthorizationException::class)
+  fun authorizationExceptionHandler(e: AuthorizationException) = warn().withRetMsg("权限不足").also {log.error(e) {}}
+
+  @ExceptionHandler(AuthenticationException::class)
+  fun authenticationExceptionHandler(e: AuthenticationException) = warn().withRetMsg("用户名或密码错误").also {log.error(e) {}}
 }

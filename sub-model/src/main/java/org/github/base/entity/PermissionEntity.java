@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户信息表
+ * 
  * </p>
  *
  * @author JYD_XL
@@ -21,42 +21,25 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("tb_user")
-@ApiModel(value="TbUserEntity对象", description="用户信息表")
-public class TbUserEntity extends Model<TbUserEntity> {
+@TableName("permission")
+@ApiModel(value="PermissionEntity对象", description="")
+public class PermissionEntity extends Model<PermissionEntity> {
 
   /** UID */
   private static final long serialVersionUID = 1L;
 
-  /** 主键ID */
-  @ApiModelProperty(value = "主键ID")
   @TableId(value = "id", type = IdType.AUTO)
-  private Long id;
+  private Integer id;
 
-  /** 用户名 */
-  @ApiModelProperty(value = "用户名")
-  @TableField("user_name")
-  private String userName;
-
-  /** 密码 */
-  @ApiModelProperty(value = "密码")
-  @TableField("password")
-  private String password;
-
-  /** 姓名 */
-  @ApiModelProperty(value = "姓名")
+  /** 名称 */
+  @ApiModelProperty(value = "名称")
   @TableField("name")
   private String name;
 
-  /** 年龄 */
-  @ApiModelProperty(value = "年龄")
-  @TableField("age")
-  private Integer age;
-
-  /** 邮箱 */
-  @ApiModelProperty(value = "邮箱")
-  @TableField("email")
-  private String email;
+  /** 接口路径 */
+  @ApiModelProperty(value = "接口路径")
+  @TableField("url")
+  private String url;
 
   @Override
   protected Serializable pkVal() {

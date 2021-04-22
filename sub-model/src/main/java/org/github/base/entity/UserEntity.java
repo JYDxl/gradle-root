@@ -4,6 +4,7 @@ import org.github.base.Model;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 用户信息表
+ * 
  * </p>
  *
  * @author JYD_XL
@@ -21,42 +22,31 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("tb_user")
-@ApiModel(value="TbUserEntity对象", description="用户信息表")
-public class TbUserEntity extends Model<TbUserEntity> {
+@TableName("user")
+@ApiModel(value="UserEntity对象", description="")
+public class UserEntity extends Model<UserEntity> {
 
   /** UID */
   private static final long serialVersionUID = 1L;
 
-  /** 主键ID */
-  @ApiModelProperty(value = "主键ID")
   @TableId(value = "id", type = IdType.AUTO)
-  private Long id;
+  private Integer id;
 
   /** 用户名 */
   @ApiModelProperty(value = "用户名")
-  @TableField("user_name")
-  private String userName;
+  @TableField("username")
+  private String username;
 
   /** 密码 */
   @ApiModelProperty(value = "密码")
   @TableField("password")
   private String password;
 
-  /** 姓名 */
-  @ApiModelProperty(value = "姓名")
-  @TableField("name")
-  private String name;
+  @TableField("create_time")
+  private LocalDateTime createTime;
 
-  /** 年龄 */
-  @ApiModelProperty(value = "年龄")
-  @TableField("age")
-  private Integer age;
-
-  /** 邮箱 */
-  @ApiModelProperty(value = "邮箱")
-  @TableField("email")
-  private String email;
+  @TableField("salt")
+  private String salt;
 
   @Override
   protected Serializable pkVal() {
