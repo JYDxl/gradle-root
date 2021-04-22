@@ -47,6 +47,11 @@ dependencies {
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 //  implementation("org.crazycake:shiro-redis-spring-boot-starter:3.3.1")
 //  implementation("redis.clients:jedis:3.5.2")
+  implementation("net.oschina.j2cache:j2cache-core:$j2cache"){
+    exclude(group="com.alibaba")
+    exclude(group="redis.clients")
+    exclude(group="org.slf4j")
+  }
   implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 
@@ -58,7 +63,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-websocket")
-//  implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
+  implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
 //  implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
 

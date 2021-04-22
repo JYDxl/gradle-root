@@ -24,7 +24,7 @@ import static org.github.ops.SpringsKt.*;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements IUserService {
+public class UserServiceImplCustom implements IUserService {
   @Autowired
   private IUsersService usersService;
 

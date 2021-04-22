@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
+import static java.util.Collections.emptyMap;
 import static java.util.Optional.ofNullable;
-import static java.util.stream.Collectors.toMap;
 
 @Component
 public class UsernameCache extends AbstractCacheSupplier<String> {
@@ -36,9 +36,10 @@ public class UsernameCache extends AbstractCacheSupplier<String> {
     @Deprecated
     @Override
     public @NonNull Map<String, String> get() {
-        val query = usersService.lambdaQuery();
-        query.select(UsersEntity::getId, UsersEntity::getUsername);
-        val list = query.list();
-        return list.stream().collect(toMap(UsersEntity::getId, UsersEntity::getUsername));
+//        val query = usersService.lambdaQuery();
+//        query.select(UsersEntity::getId, UsersEntity::getUsername);
+//        val list = query.list();
+//        return list.stream().collect(toMap(UsersEntity::getId, UsersEntity::getUsername));
+        return emptyMap();
     }
 }
