@@ -7,6 +7,9 @@ val commonslang3: String by System.getProperties()
 val springcloud: String by System.getProperties()
 val springadmin: String by System.getProperties()
 val springboot: String by System.getProperties()
+val caffeine: String by System.getProperties()
+val fastjson: String by System.getProperties()
+val j2cache: String by System.getProperties()
 val jackson: String by System.getProperties()
 val alibaba: String by System.getProperties()
 val lombok: String by System.getProperties()
@@ -115,7 +118,17 @@ subprojects {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
 
+    implementation("net.oschina.j2cache:j2cache-core:$j2cache") {
+      exclude(group = "com.alibaba")
+      exclude(group = "redis.clients")
+      exclude(group = "org.slf4j")
+    }
+    implementation("com.alibaba:fastjson:$fastjson")
+    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+
     implementation("org.checkerframework:checker-qual:3.12.0")
+    implementation("org.objenesis:objenesis:3.2")
+    implementation("org.javassist:javassist:3.27.0-GA")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

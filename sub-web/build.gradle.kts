@@ -15,11 +15,9 @@ tasks.withType<Test> {
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()
 val retrofit: String by System.getProperties()
-val caffeine: String by System.getProperties()
 val redisson: String by System.getProperties()
 val swagger: String by System.getProperties()
 val okhttp3: String by System.getProperties()
-val j2cache: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
@@ -47,12 +45,6 @@ dependencies {
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 //  implementation("org.crazycake:shiro-redis-spring-boot-starter:3.3.1")
 //  implementation("redis.clients:jedis:3.5.2")
-  implementation("net.oschina.j2cache:j2cache-core:$j2cache"){
-    exclude(group="com.alibaba")
-    exclude(group="redis.clients")
-    exclude(group="org.slf4j")
-  }
-  implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")

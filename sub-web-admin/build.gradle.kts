@@ -9,11 +9,9 @@ tasks.withType<BootJar> {
   mainClass.set("org.github.web.AdminKt")
 }
 
-val caffeine: String by System.getProperties()
 val netty: String by System.getProperties()
 
 dependencies {
-  implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
   implementation("de.codecentric:spring-boot-admin-starter-server") {exclude(group = "io.netty")}
 //  implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")

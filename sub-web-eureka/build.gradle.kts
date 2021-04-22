@@ -9,9 +9,6 @@ tasks.withType<BootJar> {
   mainClass.set("org.github.web.EurekaKt")
 }
 
-val caffeine: String by System.getProperties()
-
 dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
-  implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
 }
