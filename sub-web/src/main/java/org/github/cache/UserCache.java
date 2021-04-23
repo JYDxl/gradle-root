@@ -1,13 +1,12 @@
 package org.github.cache;
 
 import java.util.Map;
-import java.util.function.Function;
 import lombok.*;
 import org.github.base.entity.UserEntity;
 import org.github.base.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import static java.util.Optional.*;
+import static com.baomidou.mybatisplus.core.toolkit.Wrappers.lambdaQuery;
+import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.*;
 
 public class UserCache extends AbstractCacheSupplier<UserEntity> {
@@ -18,17 +17,16 @@ public class UserCache extends AbstractCacheSupplier<UserEntity> {
   @Override
   public @NonNull Map<String,UserEntity> get() {
     val query = userService.lambdaQuery();
-    val list  = query.list();
-    return list.stream().collect(toMap(Function.<UserEntity>identity().andThen(UserEntity::getId).andThen(String::valueOf), Function.identity()));
+    val list = query.list();
+    return list.stream().collect(toMap(v -> v.getId().toString(), identity()));
   }
 
   @Deprecated
   @Override
   public UserEntity apply(@NonNull String key) {
-    val query = Wrappers.<UserEntity>lambdaQuery();
+    val query = lambdaQuery(UserEntity.class);
     query.eq(UserEntity::getId, key);
-    val entity = userService.getOne(query, true);
-    return ofNullable(entity).orElse(null);
+    return userService.getOne(query, true);
   }
 
   @NonNull

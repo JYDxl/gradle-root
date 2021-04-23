@@ -54,6 +54,7 @@ fun main() {
     superServiceClass = IService::class.jvmName
     superServiceImplClass = ServiceImpl::class.jvmName
     logicDeleteFieldName = "deleted"
+    versionFieldName = "version"
     likeTable = LikeTable("_")
     generator.strategy = this
   }
