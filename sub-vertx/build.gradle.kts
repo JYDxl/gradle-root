@@ -17,10 +17,7 @@ application {
     "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
-    "-Djava.net.preferIPv4Stack=true",
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
-    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED"
+    "-Djava.net.preferIPv4Stack=true"
   )
 }
 
@@ -39,10 +36,7 @@ tasks.withType<Test> {
     "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true",
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
-    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED"
+    "-Djava.net.preferIPv4Stack=true"
   )
 }
 

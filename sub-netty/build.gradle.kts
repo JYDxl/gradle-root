@@ -17,10 +17,7 @@ application {
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
-    "-Djava.net.preferIPv4Stack=true",
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
-    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED"
+    "-Djava.net.preferIPv4Stack=true"
   )
 }
 
@@ -38,10 +35,7 @@ tasks.withType<Test> {
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true",
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
-    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED"
+    "-Djava.net.preferIPv4Stack=true"
   )
 }
 

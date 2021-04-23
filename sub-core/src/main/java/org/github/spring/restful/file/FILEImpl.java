@@ -17,8 +17,8 @@ class FILEImpl implements FILE {
 
   @Override
   public void accept(@NonNull OutputStream output) throws Exception {
-    try (input) {
-      copy(input, output);
+    try (val in = input) {
+      copy(in, output);
     }
   }
 

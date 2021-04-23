@@ -5,9 +5,9 @@ import lombok.*;
 import org.github.base.entity.UserEntity;
 import org.github.base.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import static com.baomidou.mybatisplus.core.toolkit.Wrappers.lambdaQuery;
-import static java.util.function.Function.identity;
-import static java.util.stream.Collectors.*;
+import static com.baomidou.mybatisplus.core.toolkit.Wrappers.*;
+import static com.google.common.collect.ImmutableMap.*;
+import static java.util.function.Function.*;
 
 public class UserCache extends AbstractCacheSupplier<UserEntity> {
   @Autowired
@@ -17,8 +17,8 @@ public class UserCache extends AbstractCacheSupplier<UserEntity> {
   @Override
   public @NonNull Map<String,UserEntity> get() {
     val query = userService.lambdaQuery();
-    val list = query.list();
-    return list.stream().collect(toMap(v -> v.getId().toString(), identity()));
+    val list  = query.list();
+    return list.stream().collect(toImmutableMap(v -> v.getId().toString(), identity()));
   }
 
   @Deprecated

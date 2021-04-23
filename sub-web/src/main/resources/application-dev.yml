@@ -15,7 +15,7 @@ spring:
     converters:
       preferred-json-mapper: jackson
   redis:
-    port: 6379
+    port: 6381
     timeout: 10s
     lettuce:
       pool:

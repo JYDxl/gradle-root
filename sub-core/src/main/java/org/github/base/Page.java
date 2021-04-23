@@ -1,6 +1,6 @@
 package org.github.base;
 
-import java.util.StringJoiner;
+import static com.google.common.base.MoreObjects.*;
 
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T> {
   public Page() {}
@@ -13,13 +13,17 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
     super(current, size, isSearchCount);
   }
 
+  public Page(PageParam param) {
+    this(param.getPageNum(), param.getPageSize(), param.isSearchCount());
+  }
+
   @Override
   public String toString() {
-    return new StringJoiner(", ", Page.class.getSimpleName() + "(", ")")
-      .add("current=" + current)
-      .add("size=" + size)
-      .add("total=" + total)
-      .add("records=" + records)
+    return toStringHelper(this)
+      .add("current", current)
+      .add("size", size)
+      .add("records", records)
+      .add("total", total)
       .toString();
   }
 }

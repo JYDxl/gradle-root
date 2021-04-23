@@ -15,7 +15,7 @@ interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>>, Ini
   fun get(key: Any?): V? = if (key == null) null else channel.get(region, key.toString(), {apply(key.toString())}).value as V?
 
   @Suppress("UNCHECKED_CAST")
-  fun getSome(keys: Collection<String>): Map<String, V?> = channel.get(region, keys, this::apply).mapValues { it.value.value as V? }
+  fun getSome(keys: Collection<String>): Map<String, V?> = channel.get(region, keys, this::apply).mapValues {it.value.value as V?}
 
   @Suppress("UNCHECKED_CAST")
   fun getAll(): Map<String, V?> = channel.get(region, channel.keys(region)).mapValues {it.value.value as V?}
