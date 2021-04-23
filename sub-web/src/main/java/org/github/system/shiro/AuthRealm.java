@@ -9,18 +9,19 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import com.google.common.collect.ImmutableListMultimap;
+import static com.google.common.collect.ImmutableMap.*;
+import static org.apache.shiro.crypto.hash.Sha256Hash.*;
 import static org.apache.shiro.util.ByteSource.Util.*;
 
 public class AuthRealm extends AuthorizingRealm {
-  private final Map<String,String>                   userMap = Map.of(
-    "admin", new SimpleHash(Sha256Hash.ALGORITHM_NAME, "admin", "admin", 1024).toHex(),
-    "jack", new SimpleHash(Sha256Hash.ALGORITHM_NAME, "jack", "jack", 1024).toHex(),
-    "xd", new SimpleHash(Sha256Hash.ALGORITHM_NAME, "xd", "xd", 1024).toHex()
+  private final Map<String,String>                   userMap = of(
+    "admin", new SimpleHash(ALGORITHM_NAME, "admin", "admin", 1024).toHex(),
+    "jack", new SimpleHash(ALGORITHM_NAME, "jack", "jack", 1024).toHex(),
+    "xd", new SimpleHash(ALGORITHM_NAME, "xd", "xd", 1024).toHex()
   );
   private final ImmutableListMultimap<String,String> roleMap = ImmutableListMultimap.of("admin", "*", "jack", "jack:*", "jack", "testJack:*");
 

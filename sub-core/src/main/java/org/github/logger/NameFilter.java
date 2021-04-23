@@ -5,7 +5,7 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
 import static ch.qos.logback.core.spi.FilterReply.*;
-import static java.util.List.*;
+import static com.google.common.collect.ImmutableList.*;
 
 public class NameFilter extends Filter<ILoggingEvent> {
   private List<Class<?>> classes = of();

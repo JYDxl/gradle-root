@@ -3,13 +3,13 @@ package org.github.module.echo.server
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import org.github.module.echo.server.handler.EchoServerHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 import org.github.ops.info
-import org.github.ops.log
+import org.slf4j.LoggerFactory.getLogger
 
 fun main() {
   val boss = eventLoopGroup(1, "echo-boss")
@@ -32,8 +32,8 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { boss.shutdownGracefully();worker.shutdownGracefully() }
-  log.info { "这里为什么不会终止程序？之前好像知道现在又忘了..." } //TODO
+    .addListener {boss.shutdownGracefully();worker.shutdownGracefully()}
+  log.info {"这里为什么不会终止程序？之前好像知道现在又忘了..."}
 }
 
-private val log = "main".log
+private val log = getLogger("main")

@@ -68,7 +68,6 @@ class WebSocketServerVerticle(private val port: Int = 8800): CoroutineVerticle()
 
   private suspend fun wsHandShake(ws: ServerWebSocket): Boolean {
     return try {
-      //TODO: implement
       ws.accept()
       log.info { "websocket客户端[${ws.remoteAddress()}]握手成功" }
       log.info { "websocket客户端[${ws.remoteAddress()}]已注册 textHandler:${ws.textHandlerID()} | binaryHandler:${ws.binaryHandlerID()}" }
