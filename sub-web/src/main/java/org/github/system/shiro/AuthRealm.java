@@ -1,7 +1,8 @@
 package org.github.system.shiro;
 
-import java.util.Map;
 import lombok.*;
+import org.github.base.entity.UserEntity;
+import org.github.web.service.ICustomUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,21 +10,15 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import com.google.common.collect.ImmutableListMultimap;
-import static com.google.common.collect.ImmutableMap.*;
-import static org.apache.shiro.crypto.hash.Sha256Hash.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.shiro.util.ByteSource.Util.*;
 
 public class AuthRealm extends AuthorizingRealm {
-  private final Map<String,String>                   userMap = of(
-    "admin", new SimpleHash(ALGORITHM_NAME, "admin", "admin", 1024).toHex(),
-    "jack", new SimpleHash(ALGORITHM_NAME, "jack", "jack", 1024).toHex(),
-    "xd", new SimpleHash(ALGORITHM_NAME, "xd", "xd", 1024).toHex()
-  );
-  private final ImmutableListMultimap<String,String> roleMap = ImmutableListMultimap.of("admin", "*", "jack", "jack:*", "jack", "testJack:*");
+  @Autowired
+  private ICustomUserService userService;
 
   public AuthRealm(CredentialsMatcher matcher) {
     super(matcher);
@@ -33,19 +28,23 @@ public class AuthRealm extends AuthorizingRealm {
   @Override
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
     val username = ((String) token.getPrincipal());
-    val password = userMap.get(username);
-    if (password == null) return null;
-    return new SimpleAuthenticationInfo(username, password, bytes(username), getName());
+    if (isBlank(username)) return null;
+
+    val user = userService.queryUser(username);
+    if (user == null) return null;
+
+    return new SimpleAuthenticationInfo(user, user.getPassword(), bytes(user.getSalt()), getName());
   }
 
   @Override
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    val username    = ((String) principals.getPrimaryPrincipal());
-    val permissions = roleMap.get(username);
-    if (permissions.isEmpty()) return null;
-    val info = new SimpleAuthorizationInfo();
-    info.addRole(username);
-    info.addStringPermissions(permissions);
+    val user        = ((UserEntity) principals.getPrimaryPrincipal());
+    val userId      = user.getId();
+    val roles       = userService.queryRoles(userId);
+    val permissions = userService.queryPermissions(userId);
+    val info        = new SimpleAuthorizationInfo();
+    info.setRoles(roles);
+    info.setStringPermissions(permissions);
     return info;
   }
 }

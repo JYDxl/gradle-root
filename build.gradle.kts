@@ -103,6 +103,7 @@ subprojects {
     implementation("cn.hutool:hutool-all:$hutool")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines")
 

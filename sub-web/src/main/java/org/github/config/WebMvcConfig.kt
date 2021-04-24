@@ -1,6 +1,7 @@
 package org.github.config
 
 import com.google.common.collect.ImmutableList.builder
+import com.google.common.collect.ImmutableList.of
 import org.github.spring.mvc.ReturnableValueHandlerKotlin
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,6 +18,6 @@ class WebMvcConfig: WebMvcConfigurer {
 
   @Bean
   fun returnableValueHandler(adapter: RequestMappingHandlerAdapter) = ReturnableValueHandlerKotlin.apply {
-    adapter.returnValueHandlers = builder<HandlerMethodReturnValueHandler>().add(this).addAll(adapter.returnValueHandlers ?: emptyList()).build()
+    adapter.returnValueHandlers = builder<HandlerMethodReturnValueHandler>().add(this).addAll(adapter.returnValueHandlers ?: of()).build()
   }
 }

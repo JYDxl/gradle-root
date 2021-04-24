@@ -1,11 +1,11 @@
 <root>
   <item name='io.netty.handler.codec.MessageToMessageEncoder void encode(io.netty.channel.ChannelHandlerContext, I, java.util.List&lt;java.lang.Object&gt;) 0'>
-    <annotation name='org.jetbrains.annotations.NotNull'/>
+    <annotation name='lombok.NonNull'/>
   </item>
   <item name='io.netty.handler.codec.MessageToMessageEncoder void encode(io.netty.channel.ChannelHandlerContext, I, java.util.List&lt;java.lang.Object&gt;) 1'>
-    <annotation name='org.jetbrains.annotations.NotNull'/>
+    <annotation name='lombok.NonNull'/>
   </item>
   <item name='io.netty.handler.codec.MessageToMessageEncoder void encode(io.netty.channel.ChannelHandlerContext, I, java.util.List&lt;java.lang.Object&gt;) 2'>
-    <annotation name='org.jetbrains.annotations.NotNull'/>
+    <annotation name='lombok.NonNull'/>
   </item>
 </root>

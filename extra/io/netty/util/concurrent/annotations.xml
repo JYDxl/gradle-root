@@ -3,6 +3,6 @@
     <annotation name='org.jetbrains.annotations.Nullable'/>
   </item>
   <item name='io.netty.util.concurrent.GenericFutureListener void operationComplete(F) 0'>
-    <annotation name='org.jetbrains.annotations.NotNull'/>
+    <annotation name='lombok.NonNull'/>
   </item>
 </root>

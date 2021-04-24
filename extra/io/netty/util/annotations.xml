@@ -1,5 +1,5 @@
 <root>
   <item name='io.netty.util.AttributeKey io.netty.util.AttributeKey&lt;T&gt; newInstance(java.lang.String)'>
-    <annotation name='org.jetbrains.annotations.NotNull'/>
+    <annotation name='lombok.NonNull'/>
   </item>
 </root>

@@ -1,0 +1,5 @@
+<root>
+  <item name='org.apache.shiro.subject.Subject org.apache.shiro.session.Session getSession(boolean)'>
+    <annotation name='org.jetbrains.annotations.Nullable'/>
+  </item>
+</root>
