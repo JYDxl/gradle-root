@@ -16,11 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-import java.util.Optional;
 
 import static com.google.common.base.MoreObjects.firstNonNull;
-import static com.google.common.base.Objects.equal;
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.copyOf;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.Lists.newArrayList;
@@ -145,8 +143,8 @@ class TreeUtilTest {
                 new CollectVO(0, 0, 0, 1, "2021-04-22"),
                 new CollectVO(0, 0, 0, 1, "2021-04-15")
         );
-        val map = list.stream().collect(groupingBy(CollectVO::getDate, reducing(CollectVO::reduce)));
-        val result = map.values().stream().map(Optional::get).collect(toImmutableList());
+        val map = list.stream().collect(groupingBy(CollectVO::getDate, reducing(new CollectVO(), CollectVO::reduce)));
+        val result = copyOf(map.values());
         log.info(result.toString());
     }
 }
@@ -162,7 +160,6 @@ class CollectVO {
     private String date;
 
     public CollectVO reduce(CollectVO vo) {
-        checkArgument(equal(date, vo.date));
-        return new CollectVO(normal + vo.normal, major + vo.major, risk + vo.risk, check + vo.check, date);
+        return new CollectVO(normal + vo.normal, major + vo.major, risk + vo.risk, check + vo.check, vo.date);
     }
 }

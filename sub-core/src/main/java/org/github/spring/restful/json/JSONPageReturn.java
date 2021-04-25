@@ -1,10 +1,10 @@
 package org.github.spring.restful.json;
 
-import java.util.List;
-import java.util.function.Function;
 import lombok.*;
 import org.github.base.IPage;
-import static com.google.common.collect.ImmutableList.*;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * JSON of page.
@@ -59,7 +59,8 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
 
   /** Generator. */
   @NonNull
+  @SuppressWarnings({"unchecked", "rawtypes"})
   public static <T, R> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
-    return of(page.getTotal(), page.getRecords().stream().map(mapper).collect(toImmutableList()));
+    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).toArray());
   }
 }
