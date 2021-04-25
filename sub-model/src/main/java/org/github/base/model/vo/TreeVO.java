@@ -1,24 +1,18 @@
 package org.github.base.model.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
+import org.github.util.tree.TreeNode;
 
-import java.util.List;
-
-@AllArgsConstructor
-@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Data
-public class TreeVO<T> {
-    private String pid;
-
-    private String id;
-
-    private String name;
-
+public class TreeVO extends TreeNode<String, Object> {
     private boolean leaf;
 
-    private T extra;
-
-    private List<TreeVO<T>> child;
+    public TreeVO(@NonNull String pid, @NonNull String id, @NonNull String name) {
+        super(pid, id, name);
+    }
 }

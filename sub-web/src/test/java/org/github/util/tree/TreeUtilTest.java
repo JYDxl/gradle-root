@@ -1,13 +1,12 @@
-package org.github.base.model.vo;
+package org.github.util.tree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableListMultimap;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.github.base.entity.TabSafeQuestionDataEntity;
 import org.github.base.entity.TabSafeQuestionTypeEntity;
+import org.github.base.model.vo.TreeVO;
 import org.github.base.service.ITabSafeQuestionDataService;
 import org.github.base.service.ITabSafeQuestionTypeService;
 import org.junit.jupiter.api.Test;
@@ -23,17 +22,17 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Objects.equal;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.collect.Lists.newArrayList;
-import static java.util.function.Function.identity;
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 import static java.util.stream.Stream.concat;
+import static org.github.util.tree.TreeUtil.buildTree;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
-class TreeVOTest {
+class TreeUtilTest {
     @Autowired
     private ITabSafeQuestionTypeService safeQuestionTypeService;
     @Autowired
@@ -41,27 +40,15 @@ class TreeVOTest {
     @Autowired
     private ObjectMapper mapper;
 
-    private static @NonNull TreeVO<Object> applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
-        val vo = new TreeVO<>();
-
-        vo.setPid(firstNonNull(type.getParentId(), ""));
-        vo.setId(type.getId());
-        vo.setName(type.getTypeName());
+    private @NonNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
+        val vo = new TreeVO(firstNonNull(type.getParentId(), ""), type.getId(), type.getTypeName());
         vo.setLeaf(false);
-        vo.setExtra(null);
-
         return vo;
     }
 
-    private static @NonNull TreeVO<Object> applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
-        val vo = new TreeVO<>();
-
-        vo.setPid(firstNonNull(data.getQuestionTypeId(), ""));
-        vo.setId(data.getId());
-        vo.setName(data.getCheckContent());
+    private @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
+        val vo = new TreeVO(firstNonNull(data.getQuestionTypeId(), ""), data.getId(), data.getCheckContent());
         vo.setLeaf(true);
-        vo.setExtra(null);
-
         return vo;
     }
 
@@ -70,40 +57,28 @@ class TreeVOTest {
         val typeQuery = safeQuestionTypeService.lambdaQuery();
         typeQuery.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
         val typeList = typeQuery.list();
-        val typeStream = typeList.stream().map(TreeVOTest::applyTabSafeQuestionTypeEntity2TreeVO);
+        val typeStream = typeList.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO);
 
         val dataQuery = safeQuestionDataService.lambdaQuery();
         dataQuery.eq(TabSafeQuestionDataEntity::getProjectId, "-1");
         dataQuery.eq(TabSafeQuestionDataEntity::getIsUse, 0);
         val dataList = dataQuery.list();
-        val dataStream = dataList.stream().map(TreeVOTest::applyTabSafeQuestionDataEntity2TreeVO);
+        val dataStream = dataList.stream().map(this::applyTabSafeQuestionDataEntity2TreeVO);
 
         val list = concat(typeStream, dataStream).collect(toList());
-        val resultList = reduceList(list);
+        reduceList(list);
 
-        val index = resultList.stream().collect(toImmutableListMultimap(TreeVO::getPid, identity()));
-        val root = index.get("");
-        recursion(root, index);
-        val json = mapper.writeValueAsString(root);
+        val tree = buildTree(list, "", comparing(TreeVO::getName));
+        val json = mapper.writeValueAsString(tree);
         log.info(json);
     }
 
-    private void recursion(ImmutableList<TreeVO<Object>> root, ImmutableListMultimap<String, TreeVO<Object>> index) {
-        for (TreeVO<Object> vo : root) {
-            val id = vo.getId();
-            val subList = index.get(id);
-            if (subList.isEmpty()) continue;
-            vo.setChild(subList);
-            recursion(subList, index);
-        }
-    }
-
-    private List<TreeVO<Object>> reduceList(List<TreeVO<Object>> list) {
+    private void reduceList(List<TreeVO> list) {
         val pidList = list.stream().map(TreeVO::getPid).collect(toImmutableSet());
         val subList = list.stream().filter(v -> !pidList.contains(v.getId())).filter(v -> !v.isLeaf()).collect(toImmutableList());
-        if (subList.isEmpty()) return list;
+        if (subList.isEmpty()) return;
         list.removeAll(subList);
-        return reduceList(list);
+        reduceList(list);
     }
 
     @Test
