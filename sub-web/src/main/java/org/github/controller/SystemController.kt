@@ -5,6 +5,7 @@ import org.apache.shiro.session.Session
 import org.apache.shiro.subject.Subject
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn.of
+import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.json.JSONReturn.warn
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -27,5 +28,10 @@ class SystemController {
   @RequestMapping("unauthorized")
   fun unauthorized(): Returnable {
     return warn().withRetMsg("权限不足")
+  }
+
+  @RequestMapping("logout")
+  fun logout(): Returnable {
+    return JSONReturn().withRetMsg("退出成功")
   }
 }

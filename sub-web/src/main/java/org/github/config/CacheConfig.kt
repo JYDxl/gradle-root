@@ -12,5 +12,5 @@ class CacheConfig {
   fun cacheChannel(): CacheChannel = getChannel()
 
   @Bean
-  fun usernameCache() = UserCache()
+  fun userCache() = UserCache()
 }

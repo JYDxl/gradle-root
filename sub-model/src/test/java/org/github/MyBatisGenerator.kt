@@ -32,10 +32,10 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://rm-bp1x3u83zg9626s21co.mysql.rds.aliyuncs.com:3306/wisdom-site_test"
+    url = "jdbc:mysql://ubuntu:3380/mp"
     driverName = "com.mysql.cj.jdbc.Driver"
-    username = "imp_nems"
-    password = "nems%2017"
+    username = "root"
+    password = "root"
     generator.dataSource = this
   }
 
@@ -55,7 +55,7 @@ fun main() {
     superServiceImplClass = ServiceImpl::class.jvmName
     logicDeleteFieldName = "deleted"
     versionFieldName = "version"
-    likeTable = LikeTable("tab_safe_question")
+    likeTable = LikeTable("_")
     generator.strategy = this
   }
 
