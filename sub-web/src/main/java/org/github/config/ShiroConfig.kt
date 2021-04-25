@@ -35,6 +35,8 @@ class ShiroConfig {
 
   @Bean
   fun shiroFilterChainDefinition() = DefaultShiroFilterChainDefinition().apply {
+    addPathDefinition("/static/**", "anon")
+    addPathDefinition("/public/**", "anon")
     addPathDefinition("/login", "authc")
     addPathDefinition("/rest/**", "authc")
     addPathDefinition("/**", "anon")

@@ -19,10 +19,10 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
   @Value("#{ @environment['shiro.sessionManager.cookie.name'] ?: T(org.apache.shiro.web.servlet.ShiroHttpSession).DEFAULT_SESSION_ID_NAME }")
   protected String sessionIdCookieName;
 
-  @Value("#{ @environment['shiro.failureUrl'] ?: '/failure' }")
+  @Value("#{ @environment['shiro.failureUrl'] ?: '/public/failure' }")
   protected String failureUrl;
 
-  @Value("#{ @environment['shiro.unauthorizedUrl'] ?: '/unauthorized' }")
+  @Value("#{ @environment['shiro.unauthorizedUrl'] ?: '/public/unauthorized' }")
   protected String unauthorizedUrl;
 
   @Override

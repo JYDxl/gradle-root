@@ -9,21 +9,22 @@ import org.github.spring.restful.json.JSONReturn.warn
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 
+@RequestMapping("/public/")
 @Controller
 class SystemController {
-  @RequestMapping("/token")
+  @RequestMapping("token")
   fun token(): Returnable {
     val subject: Subject = SecurityUtils.getSubject()
     val session: Session? = subject.getSession(false)
     return of(session?.id)
   }
 
-  @RequestMapping("/failure")
+  @RequestMapping("failure")
   fun failure(): Returnable {
     return warn().withRetMsg("用户名或密码错误")
   }
 
-  @RequestMapping("/unauthorized")
+  @RequestMapping("unauthorized")
   fun unauthorized(): Returnable {
     return warn().withRetMsg("权限不足")
   }

@@ -109,12 +109,12 @@ logging:
 
 shiro:
   userNativeSessionManager: true
-  loginUrl: /login
-  successUrl: /token
-  failureUrl: /failure
-  unauthorizedUrl: /unauthorized
+  loginUrl: /public/login
+  successUrl: /public/token
+  failureUrl: /public/failure
+  unauthorizedUrl: /public/unauthorized
   sessionManager:
     cookie:
       name: token
-    sessionIdCookieEnabled: false
+    sessionIdCookieEnabled: true
     sessionIdUrlRewritingEnabled: false
