@@ -29,7 +29,7 @@ public class AuthRealm extends AuthorizingRealm {
     if (isBlank(username)) return null;
 
     val userService = Companion.getAppCtx().getBean(ICustomUserService.class);
-    val user = userService.queryUser(username);
+    val user        = userService.queryUser(username);
     if (user == null) return null;
 
     return new SimpleAuthenticationInfo(user, user.getPassword(), bytes(user.getSalt()), getName());

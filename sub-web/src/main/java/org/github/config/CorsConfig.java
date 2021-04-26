@@ -12,13 +12,13 @@ import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
 @Configuration
 public class CorsConfig {
-    @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter() {
-        val config = new CorsConfiguration();
-        val configSource = new UrlBasedCorsConfigurationSource();
-        configSource.registerCorsConfiguration("/**", config);
-        val bean = new FilterRegistrationBean<>(new CorsFilter(configSource));
-        bean.setOrder(HIGHEST_PRECEDENCE);
-        return bean;
-    }
+  @Bean
+  public FilterRegistrationBean<CorsFilter> corsFilter() {
+    val config       = new CorsConfiguration();
+    val configSource = new UrlBasedCorsConfigurationSource();
+    configSource.registerCorsConfiguration("/**", config);
+    val bean = new FilterRegistrationBean<>(new CorsFilter(configSource));
+    bean.setOrder(HIGHEST_PRECEDENCE);
+    return bean;
+  }
 }

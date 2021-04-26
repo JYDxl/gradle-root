@@ -73,7 +73,7 @@ class ShiroConfig {
   }
 
   @Bean
-  fun shiroFilterFactoryBean(manager: SecurityManager, definition: ShiroFilterChainDefinition)= ShiroFilterFactoryBean().apply {
+  fun shiroFilterFactoryBean(manager: SecurityManager, definition: ShiroFilterChainDefinition) = ShiroFilterFactoryBean().apply {
     loginUrl = this@ShiroConfig.loginUrl
     successUrl = this@ShiroConfig.successUrl
     unauthorizedUrl = this@ShiroConfig.unauthorizedUrl
@@ -86,7 +86,8 @@ class ShiroConfig {
         "user", CustomUserFilter(this@ShiroConfig.unauthorizedUrl),
         "logout", CustomLogoutFilter(this@ShiroConfig.logoutUrl)
       )
-      override fun put(key: String, value: Filter): Filter? = log.debug {"忽略Spring中注册的的Filter[$key : $value]"}.let { null }
+
+      override fun put(key: String, value: Filter): Filter? = log.debug {"忽略Spring中注册的的Filter[$key : $value]"}.let {null}
     }
   }
 

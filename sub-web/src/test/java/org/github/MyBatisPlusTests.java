@@ -3,14 +3,13 @@ package org.github;
 import lombok.extern.slf4j.*;
 import lombok.*;
 import org.github.base.entity.TbUserEntity;
-import org.github.base.mapper.ITbUserMapper;
 import org.github.base.service.ITbUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import static com.baomidou.mybatisplus.core.toolkit.Wrappers.*;
 import static java.util.Arrays.*;
 
 @ExtendWith(SpringExtension.class)
@@ -19,15 +18,14 @@ import static java.util.Arrays.*;
 public class MyBatisPlusTests {
   @Autowired
   private ITbUserService userService;
-  @Autowired
-  private ITbUserMapper  userMapper;
 
   @Test
   public void testBatch() {
     val list = userService.list();
     // userService.updateBatchById(list);
     // list.forEach(it -> it.setId(null));
-    userMapper.insertBatchSomeColumn(list);
+    list.forEach(v -> v.setEmail(null));
+    userService.insertBatch(list);
     log.info(list.toString());
   }
 
@@ -36,7 +34,7 @@ public class MyBatisPlusTests {
     val user = new TbUserEntity();
     user.setUserName("coco");
     user.setPassword("123456");
-    val query = Wrappers.lambdaQuery(user);
+    val query = lambdaQuery(user);
     user.delete(query);
     log.info(user.get());
   }
@@ -57,7 +55,7 @@ public class MyBatisPlusTests {
   public void testQuery() {
     val user = new TbUserEntity();
     user.setName("2333");
-    val query = Wrappers.lambdaQuery(user);
+    val query = lambdaQuery(user);
     val list  = user.selectList(query);
     log.info(list.toString());
   }
@@ -79,7 +77,7 @@ public class MyBatisPlusTests {
     val user = new TbUserEntity();
     user.setAge(20);
     user.setPassword("66666666");
-    val updateWrapper = Wrappers.<TbUserEntity>lambdaUpdate();
+    val updateWrapper = lambdaUpdate(TbUserEntity.class);
     updateWrapper.eq(TbUserEntity::getUserName, "zhangsan");
     user.update(updateWrapper);
     log.info(user.get());
