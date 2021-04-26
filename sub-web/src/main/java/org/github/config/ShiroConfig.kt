@@ -73,28 +73,21 @@ class ShiroConfig {
   }
 
   @Bean
-  fun shiroFilterFactoryBean(securityManager: SecurityManager, shiroFilterChainDefinition: ShiroFilterChainDefinition): ShiroFilterFactoryBean {
-    val shiroFilterFactoryBean = ShiroFilterFactoryBean()
-    shiroFilterFactoryBean.loginUrl = loginUrl
-    shiroFilterFactoryBean.successUrl = successUrl
-    shiroFilterFactoryBean.unauthorizedUrl = unauthorizedUrl
-    shiroFilterFactoryBean.securityManager = securityManager
-    shiroFilterFactoryBean.setGlobalFilters(of(invalidRequest.name))
-    shiroFilterFactoryBean.filterChainDefinitionMap = shiroFilterChainDefinition.filterChainMap
-
-    shiroFilterFactoryBean.filters = object: ForwardingMap<String, Filter>() {
+  fun shiroFilterFactoryBean(manager: SecurityManager, definition: ShiroFilterChainDefinition)= ShiroFilterFactoryBean().apply {
+    loginUrl = this@ShiroConfig.loginUrl
+    successUrl = this@ShiroConfig.successUrl
+    unauthorizedUrl = this@ShiroConfig.unauthorizedUrl
+    securityManager = manager
+    setGlobalFilters(of(invalidRequest.name))
+    filterChainDefinitionMap = definition.filterChainMap
+    filters = object: ForwardingMap<String, Filter>() {
       override fun delegate(): Map<String, Filter> = ImmutableMap.of(
-        "authc", CustomFormAuthenticationFilter(sessionIdCookieName, failureUrl, unauthorizedUrl),
-        "user", CustomUserFilter(unauthorizedUrl),
-        "logout", CustomLogoutFilter(logoutUrl)
+        "authc", CustomFormAuthenticationFilter(this@ShiroConfig.sessionIdCookieName, this@ShiroConfig.failureUrl, this@ShiroConfig.unauthorizedUrl),
+        "user", CustomUserFilter(this@ShiroConfig.unauthorizedUrl),
+        "logout", CustomLogoutFilter(this@ShiroConfig.logoutUrl)
       )
-
-      override fun put(key: String, value: Filter): Filter? {
-        log.debug {"忽略Spring中注册的的Filter[$key : $value]"}
-        return null
-      }
+      override fun put(key: String, value: Filter): Filter? = log.debug {"忽略Spring中注册的的Filter[$key : $value]"}.let { null }
     }
-    return shiroFilterFactoryBean
   }
 
   @Bean
