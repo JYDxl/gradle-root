@@ -1,8 +1,6 @@
 package org.github.system.shiro;
 
-import lombok.*;
-import org.github.base.entity.UserEntity;
-import org.github.web.service.ICustomUserService;
+import lombok.val;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -12,14 +10,14 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.springframework.beans.factory.annotation.Autowired;
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.apache.shiro.util.ByteSource.Util.*;
+import org.github.base.entity.UserEntity;
+import org.github.web.service.ICustomUserService;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.shiro.util.ByteSource.Util.bytes;
+import static org.github.spring.bootstrap.AppCtxHolder.Companion;
 
 public class AuthRealm extends AuthorizingRealm {
-  @Autowired
-  private ICustomUserService userService;
-
   public AuthRealm(CredentialsMatcher matcher) {
     super(matcher);
     setAuthenticationCachingEnabled(true);
@@ -30,6 +28,7 @@ public class AuthRealm extends AuthorizingRealm {
     val username = ((String) token.getPrincipal());
     if (isBlank(username)) return null;
 
+    val userService = Companion.getAppCtx().getBean(ICustomUserService.class);
     val user = userService.queryUser(username);
     if (user == null) return null;
 
@@ -40,6 +39,7 @@ public class AuthRealm extends AuthorizingRealm {
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     val user        = ((UserEntity) principals.getPrimaryPrincipal());
     val userId      = user.getId();
+    val userService = Companion.getAppCtx().getBean(ICustomUserService.class);
     val roles       = userService.queryRoles(userId);
     val permissions = userService.queryPermissions(userId);
     val info        = new SimpleAuthorizationInfo();
