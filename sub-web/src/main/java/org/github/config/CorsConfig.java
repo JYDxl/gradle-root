@@ -15,7 +15,7 @@ import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 public class CorsConfig {
   @Bean
   public FilterRegistrationBean<CorsFilter> corsFilter() {
-    val config       = new CorsConfiguration();
+    val config = new CorsConfiguration();
     config.setAllowCredentials(true);
     config.setAllowedOrigins(of("*"));
     config.setAllowedMethods(of("*"));

@@ -13,20 +13,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest
 @Slf4j
 class EnumCacheTest {
-    @Autowired
-    EnumCache enumCache;
+  @Autowired
+  EnumCache enumCache;
 
-    @Test
-    void getTest() {
-        val value1 = enumCache.get(SexEnum.class, 0);
-        log.info(value1);
-        val value2 = enumCache.get(SexEnum.class, null);
-        log.info(value2);
-    }
+  @Test
+  void getAllTest() {
+    val map = enumCache.getAll(SexEnum.class);
+    log.info(map.toString());
+  }
 
-    @Test
-    void getAllTest() {
-        val map = enumCache.getAll(SexEnum.class);
-        log.info(map.toString());
-    }
+  @Test
+  void getTest() {
+    val value1 = enumCache.get(SexEnum.class, 0);
+    log.info(value1);
+    val value2 = enumCache.get(SexEnum.class, null);
+    log.info(value2);
+  }
 }

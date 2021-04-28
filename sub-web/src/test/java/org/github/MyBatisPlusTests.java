@@ -15,12 +15,12 @@ import static java.util.Arrays.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
- class MyBatisPlusTests {
+class MyBatisPlusTests {
   @Autowired
   private ITbUserService userService;
 
   @Test
-   void testBatch() {
+  void testBatch() {
     val list = userService.list();
     // userService.updateBatchById(list);
     // list.forEach(it -> it.setId(null));
@@ -30,7 +30,7 @@ import static java.util.Arrays.*;
   }
 
   @Test
-   void testDelete() {
+  void testDelete() {
     val user = new TbUserEntity();
     user.setUserName("coco");
     user.setPassword("123456");
@@ -40,7 +40,7 @@ import static java.util.Arrays.*;
   }
 
   @Test
-   void testInsert() {
+  void testInsert() {
     val user = new TbUserEntity();
     user.setUserName("coco");
     user.setPassword("123456");
@@ -52,7 +52,7 @@ import static java.util.Arrays.*;
   }
 
   @Test
-   void testQuery() {
+  void testQuery() {
     val user = new TbUserEntity();
     user.setName("2333");
     val query = lambdaQuery(user);
@@ -61,19 +61,19 @@ import static java.util.Arrays.*;
   }
 
   @Test
-   void testSelectBatchByIds() {
+  void testSelectBatchByIds() {
     val userList = userService.listByIds(asList(1, 2, 3, 4, 5, 6, 100));
     userList.forEach((user) -> log.info(user.get()));
   }
 
   @Test
-   void testSelectList() {
+  void testSelectList() {
     val entityList = userService.list(null);
     entityList.forEach((entity) -> log.info(entity.get()));
   }
 
   @Test
-   void testUpdate() {
+  void testUpdate() {
     val user = new TbUserEntity();
     user.setAge(20);
     user.setPassword("66666666");
@@ -84,7 +84,7 @@ import static java.util.Arrays.*;
   }
 
   @Test
-   void testUpdateById() {
+  void testUpdateById() {
     val user = new TbUserEntity();
     user.setId(1L);
     user.setAge(19);
