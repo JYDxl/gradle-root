@@ -1,4 +1,4 @@
-package org.github
+package org.github.check
 
 import org.github.ops.info
 import org.github.ops.log

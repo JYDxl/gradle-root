@@ -1,4 +1,4 @@
-package org.github
+package org.github.mbp
 
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
 import com.baomidou.mybatisplus.generator.config.*
@@ -17,7 +17,7 @@ fun main() {
 
   GlobalConfig().apply {
     val path = requireNotNull(getProperty("user.dir"))
-    outputDir = "$path/sub-model/src/main/java"
+    outputDir = "$path/sub-web-model/src/main/java"
     serviceImplName = "%sServiceImpl"
     serviceName = "I%sService"
     mapperName = "I%sMapper"

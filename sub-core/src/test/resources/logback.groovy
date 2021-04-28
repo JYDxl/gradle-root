@@ -4,6 +4,4 @@ appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-logger("org.github", TRACE)
-logger("io.netty", TRACE)
-root(INFO, ["console"])
+root(TRACE, ["console"])

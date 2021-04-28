@@ -1,4 +1,4 @@
-package org.github
+package org.github.mbp
 
 import com.baomidou.mybatisplus.extension.activerecord.Model
 import com.baomidou.mybatisplus.generator.AutoGenerator

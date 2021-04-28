@@ -5,6 +5,7 @@ val protobuf: String by System.getProperties()
 val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
 val p6spy: String by System.getProperties()
+val mysql: String by System.getProperties()
 val jna: String by System.getProperties()
 
 plugins {
@@ -50,4 +51,8 @@ dependencies {
   testImplementation("org.javassist:javassist:$javassist")
   testImplementation("net.java.dev.jna:jna:$jna")
   testImplementation("io.netty:netty-all:$netty")
+
+  testImplementation("com.baomidou:mybatis-plus-generator:3.4.1")
+  testImplementation("mysql:mysql-connector-java:$mysql")
+  testImplementation("org.freemarker:freemarker")
 }
