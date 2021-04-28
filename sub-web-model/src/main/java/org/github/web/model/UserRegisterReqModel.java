@@ -1,4 +1,4 @@
-package org.github.base.model;
+package org.github.web.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

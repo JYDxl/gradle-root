@@ -1,8 +1,7 @@
-package org.github.base.model.vo;
+package org.github.web.model.vo;
 
 import java.time.LocalDateTime;
 import lombok.Data;
-import org.github.base.common.DesensitizationUtil;
 
 @Data
 public class ItemCommentVO {
@@ -14,6 +13,6 @@ public class ItemCommentVO {
   private String        nickname;
 
   public String getNickname() {
-    return DesensitizationUtil.commonDisplay(nickname);
+    return "";
   }
 }

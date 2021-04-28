@@ -1,8 +1,8 @@
 package org.github.web.mapper;
 
 import java.util.List;
-import org.github.base.model.vo.CategoryVO;
-import org.github.base.model.vo.NewItemsVO;
+import org.github.web.model.vo.CategoryVO;
+import org.github.web.model.vo.NewItemsVO;
 import org.github.mybatis.MyBatisMapper;
 import org.apache.ibatis.annotations.Param;
 

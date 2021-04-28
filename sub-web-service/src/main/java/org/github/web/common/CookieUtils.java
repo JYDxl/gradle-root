@@ -1,4 +1,4 @@
-package org.github.base.common;
+package org.github.web.common;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

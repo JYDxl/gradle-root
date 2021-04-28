@@ -1,12 +1,12 @@
 package org.github.web.service;
 
 import org.github.base.IPage;
-import org.github.base.model.bo.ItemCommentBO;
-import org.github.base.model.bo.ItemSearchBO;
-import org.github.base.model.bo.ItemSearchByCatBO;
-import org.github.base.model.vo.ItemCommentCountsVO;
-import org.github.base.model.vo.ItemCommentVO;
-import org.github.base.model.vo.ItemSearchVO;
+import org.github.web.model.bo.ItemCommentBO;
+import org.github.web.model.bo.ItemSearchBO;
+import org.github.web.model.bo.ItemSearchByCatBO;
+import org.github.web.model.vo.ItemCommentCountsVO;
+import org.github.web.model.vo.ItemCommentVO;
+import org.github.web.model.vo.ItemSearchVO;
 import org.github.spring.restful.Returnable;
 
 public interface IItemService {

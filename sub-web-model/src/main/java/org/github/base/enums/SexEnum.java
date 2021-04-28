@@ -2,7 +2,7 @@ package org.github.base.enums;
 
 import org.github.base.IEnum;
 
-public enum SexEnum implements IEnum<Integer,String> {
+public enum SexEnum implements IEnum<Integer, String> {
   man(0, "男"),
   woman(1, "女");
 

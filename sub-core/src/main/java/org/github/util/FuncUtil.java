@@ -1,4 +1,4 @@
-package org.github.ops;
+package org.github.util;
 
 import java.util.Map;
 import java.util.Optional;
@@ -7,7 +7,7 @@ import java.util.function.Function;
 import lombok.*;
 import static java.util.Optional.*;
 
-public abstract class Functions {
+public abstract class FuncUtil {
   public static <T> BinaryOperator<T> throwing() {
     return (t1, t2) -> {throw new UnsupportedOperationException();};
   }

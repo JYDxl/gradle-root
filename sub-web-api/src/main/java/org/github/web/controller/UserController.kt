@@ -3,7 +3,7 @@ package org.github.web.controller
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.authc.UsernamePasswordToken
 import org.github.base.entity.TbUserEntity
-import org.github.base.model.bo.UserBO
+import org.github.web.model.bo.UserBO
 import org.github.ops.error
 import org.github.ops.info
 import org.github.ops.log

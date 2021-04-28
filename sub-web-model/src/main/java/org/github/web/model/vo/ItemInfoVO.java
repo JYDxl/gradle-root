@@ -1,4 +1,4 @@
-package org.github.base.model.vo;
+package org.github.web.model.vo;
 
 import java.util.List;
 import lombok.AllArgsConstructor;

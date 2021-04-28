@@ -1,4 +1,4 @@
-package org.github.base.common;
+package org.github.web.common;
 
 /**
  * 通用脱敏工具类

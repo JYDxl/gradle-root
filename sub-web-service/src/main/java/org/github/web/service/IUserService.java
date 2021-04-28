@@ -1,7 +1,7 @@
 package org.github.web.service;
 
-import org.github.base.model.UserLoginReqModel;
-import org.github.base.model.UserRegisterReqModel;
+import org.github.web.model.UserLoginReqModel;
+import org.github.web.model.UserRegisterReqModel;
 import org.github.spring.restful.Returnable;
 
 public interface IUserService {

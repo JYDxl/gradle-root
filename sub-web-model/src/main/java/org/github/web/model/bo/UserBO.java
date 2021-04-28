@@ -1,4 +1,4 @@
-package org.github.base.model.bo;
+package org.github.web.model.bo;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

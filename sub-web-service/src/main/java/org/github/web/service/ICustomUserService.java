@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import lombok.*;
 import org.github.base.entity.UserEntity;
-import org.github.base.model.dto.UserInfoDTO;
+import org.github.web.model.dto.UserInfoDTO;
 
 public interface ICustomUserService {
   @NonNull Set<String> queryPermissions(@NonNull Integer userId);

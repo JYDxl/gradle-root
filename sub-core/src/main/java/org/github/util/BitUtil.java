@@ -1,6 +1,6 @@
-package org.github.ops;
+package org.github.util;
 
-public abstract class Bits {
+public abstract class BitUtil {
   public static int lastN(int num, int n) {
     return num & ((1 << n) - 1);
   }
