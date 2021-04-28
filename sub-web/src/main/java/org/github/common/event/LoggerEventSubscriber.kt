@@ -8,7 +8,6 @@ import org.github.ops.log
 import org.github.ops.trace
 
 class LoggerEventSubscriber: EventSubscriber {
-  /** log. */
   private val log = LoggerEventSubscriber::class.log
 
   @AllowConcurrentEvents

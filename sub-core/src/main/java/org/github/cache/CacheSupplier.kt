@@ -9,10 +9,16 @@ interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>> {
 
   val channel: CacheChannel
 
-  @Suppress("UNCHECKED_CAST")
+  @Deprecated("")
+  override fun get(): Map<String, V?>
+
+  @Deprecated("")
+  override fun apply(key: String): V?
+
+  @Suppress("UNCHECKED_CAST", "DEPRECATION")
   fun get(key: Any?): V? = if (key == null) null else channel.get(region.get(), key.toString(), {apply(key.toString())}).value as V?
 
-  @Suppress("UNCHECKED_CAST")
+  @Suppress("UNCHECKED_CAST", "DEPRECATION")
   fun getSome(keys: Collection<String>): Map<String, V?> = channel.get(region.get(), keys, this::apply).mapValues {it.value.value as V?}
 
   @Suppress("UNCHECKED_CAST")

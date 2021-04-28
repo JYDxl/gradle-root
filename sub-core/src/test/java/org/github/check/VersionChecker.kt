@@ -1,4 +1,4 @@
-package org.github.mbp
+package org.github.check
 
 import com.google.common.collect.HashMultiset
 

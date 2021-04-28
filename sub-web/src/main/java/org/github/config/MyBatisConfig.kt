@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector
 import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor
-import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor
 import org.github.mybatis.MyBatisMapper
@@ -21,13 +20,13 @@ class MyBatisConfig {
   fun mybatisPlusInterceptor() = MybatisPlusInterceptor().apply {
     addInnerInterceptor(PaginationInnerInterceptor())
     addInnerInterceptor(OptimisticLockerInnerInterceptor())
-    addInnerInterceptor(IllegalSQLInnerInterceptor())
+//    addInnerInterceptor(IllegalSQLInnerInterceptor())
     addInnerInterceptor(BlockAttackInnerInterceptor())
   }
 
   @Bean
   @Suppress("DEPRECATION")
-  fun configurationCustomizer() = ConfigurationCustomizer { it.isUseDeprecatedExecutor = false }
+  fun configurationCustomizer() = ConfigurationCustomizer {it.isUseDeprecatedExecutor = false}
 
   @Bean
   fun easySqlInjector() = EasySqlInjector()

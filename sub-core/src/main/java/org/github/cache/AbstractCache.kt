@@ -11,15 +11,10 @@ abstract class AbstractCache<V>: CacheSupplier<V>, InitializingBean, DisposableB
 
   override val channel: CacheChannel get() = cacheChannel
 
-  @Suppress("DEPRECATION")
-  abstract override fun get(): Map<String, V?>
-
-  @Suppress("DEPRECATION")
-  abstract override fun apply(key: String): V?
-
+  @Deprecated("")
   @Suppress("DEPRECATION")
   override fun afterPropertiesSet() = setSome(get())
 
-  @Suppress("DEPRECATION")
+  @Deprecated("")
   override fun destroy() = delAll()
 }

@@ -16,6 +16,12 @@ public class UserCache extends AbstractCache<UserEntity> {
   @Autowired
   private IUserService userService;
 
+  @NonNull
+  @Override
+  public Supplier<String> getRegion() {
+    return user;
+  }
+
   @Deprecated
   @Override
   public @NonNull Map<String,UserEntity> get() {
@@ -30,11 +36,5 @@ public class UserCache extends AbstractCache<UserEntity> {
     val query = lambdaQuery(UserEntity.class);
     query.eq(UserEntity::getId, key);
     return userService.getOne(query, true);
-  }
-
-  @NonNull
-  @Override
-  public Supplier<String> getRegion() {
-    return user;
   }
 }
