@@ -1,7 +1,5 @@
 pluginManagement {
   repositories {
-    maven {url = uri("http://maven.aliyun.com/repository/gradle-plugin");isAllowInsecureProtocol = true}
-    maven {url = uri("http://maven.aliyun.com/repository/spring-plugin");isAllowInsecureProtocol = true}
     gradlePluginPortal()
   }
 }
