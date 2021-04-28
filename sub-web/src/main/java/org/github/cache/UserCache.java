@@ -1,6 +1,8 @@
 package org.github.cache;
 
 import java.util.Map;
+import java.util.function.Supplier;
+
 import lombok.*;
 import org.github.base.entity.UserEntity;
 import org.github.base.service.IUserService;
@@ -8,8 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static com.baomidou.mybatisplus.core.toolkit.Wrappers.*;
 import static com.google.common.collect.ImmutableMap.*;
 import static java.util.function.Function.*;
+import static org.github.cache.CacheEnum.user;
 
-public class UserCache extends AbstractCacheSupplier<UserEntity> {
+public class UserCache extends AbstractCache<UserEntity> {
   @Autowired
   private IUserService userService;
 
@@ -31,7 +34,7 @@ public class UserCache extends AbstractCacheSupplier<UserEntity> {
 
   @NonNull
   @Override
-  public String getRegion() {
-    return "user";
+  public Supplier<String> getRegion() {
+    return user;
   }
 }

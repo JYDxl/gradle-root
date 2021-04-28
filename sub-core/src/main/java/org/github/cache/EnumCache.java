@@ -5,13 +5,21 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.commons.lang3.tuple.Triple;
 import org.github.base.IEnum;
 import org.springframework.beans.factory.InitializingBean;
 
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.stream.Stream;
 
-import static org.github.util.enums.IEnumUtil.load;
+import static cn.hutool.core.util.ClassUtil.getPublicMethod;
+import static cn.hutool.core.util.ClassUtil.scanPackageBySuper;
+import static cn.hutool.core.util.ReflectUtil.invoke;
+import static com.google.common.collect.ImmutableTable.toImmutableTable;
+import static java.util.Arrays.stream;
+import static java.util.stream.Stream.empty;
+import static org.apache.commons.lang3.tuple.Triple.of;
 
 @Slf4j
 @Data
@@ -47,5 +55,19 @@ public class EnumCache implements InitializingBean {
     @Deprecated
     public void setTable(Table<Class<?>, ?, ?> table) {
         throw new UnsupportedOperationException();
+    }
+
+    public Table<Class<? extends IEnum<?, ?>>, ?, ?> load(String packageName) {
+        val classes = scanPackageBySuper(packageName, IEnum.class);
+        return classes.stream().flatMap(this::apply).collect(toImmutableTable(Triple::getLeft, Triple::getMiddle, Triple::getRight));
+    }
+
+    @SuppressWarnings("unchecked")
+    private Stream<Triple<Class<? extends IEnum<?, ?>>, ?, ?>> apply(Class<?> clazz) {
+        if (!clazz.isEnum()) return empty();
+        val method = getPublicMethod(clazz, "values");
+        val values = ((IEnum<?, ?>[]) invoke(null, method));
+        val token = ((Class<? extends IEnum<?, ?>>) clazz);
+        return stream(values).map(v -> of(token, v.getCode(), v.getValue()));
     }
 }
