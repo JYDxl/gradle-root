@@ -1,4 +1,4 @@
-package org.github.system;
+package org.github.cache;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -20,7 +20,7 @@ class EnumCacheTest {
     void getTest() {
         val value1 = enumCache.get(SexEnum.class, 0);
         log.info(value1);
-        val value2 = enumCache.get(SexEnum.class, null);
+        val value2 = enumCache.get(SexEnum.class, 2);
         log.info(value2);
     }
 

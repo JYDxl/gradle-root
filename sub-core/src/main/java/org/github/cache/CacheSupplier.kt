@@ -1,13 +1,10 @@
 package org.github.cache
 
 import net.oschina.j2cache.CacheChannel
-import org.springframework.beans.factory.DisposableBean
-import org.springframework.beans.factory.InitializingBean
-import org.springframework.beans.factory.NamedBean
 import java.util.function.Function
 import java.util.function.Supplier
 
-interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>>, InitializingBean, DisposableBean, NamedBean {
+interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>> {
   val region: String
 
   val channel: CacheChannel
@@ -28,13 +25,4 @@ interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>>, Ini
   fun del(vararg keys: String) = channel.evict(region, *keys)
 
   fun delAll() = channel.clear(region)
-
-  @Deprecated("")
-  override fun afterPropertiesSet() = setSome(get())
-
-  @Deprecated("")
-  override fun destroy() = delAll()
-
-  @Deprecated("")
-  override fun getBeanName() = region
 }

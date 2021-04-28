@@ -16,5 +16,5 @@ class CacheConfig {
   fun userCache() = UserCache()
 
   @Bean
-  fun enumCache() = EnumCache("org.github.base.enums")
+  fun enumCache() = EnumCache("org.github")
 }
