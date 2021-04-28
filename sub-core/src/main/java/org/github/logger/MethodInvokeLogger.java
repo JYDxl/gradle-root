@@ -1,4 +1,4 @@
-package org.github.system;
+package org.github.logger;
 
 import java.util.Arrays;
 import lombok.extern.slf4j.*;
