@@ -1,7 +1,7 @@
 package org.github.web.service
 
 import org.github.base.entity.UserEntity
-import org.github.base.model.dto.UserInfoDTO
+import org.github.web.model.dto.UserInfoDTO
 import org.github.ops.info
 import org.github.ops.log
 import org.junit.jupiter.api.Test

@@ -6,7 +6,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.github.base.entity.TabSafeQuestionDataEntity;
 import org.github.base.entity.TabSafeQuestionTypeEntity;
-import org.github.base.model.vo.TreeVO;
+import org.github.web.model.vo.TreeVO;
 import org.github.base.service.ITabSafeQuestionDataService;
 import org.github.base.service.ITabSafeQuestionTypeService;
 import org.junit.jupiter.api.Test;

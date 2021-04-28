@@ -25,9 +25,10 @@ val shiro: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-core"))
-  implementation(project(":sub-model"))
-  implementation(project(":sub-web-api"))
+
   implementation(project(":sub-web-service"))
+  implementation(project(":sub-web-model"))
+  implementation(project(":sub-web-api"))
 
   api("io.netty:netty-all:$netty")
   api("io.vertx:vertx-web") {exclude(group = "io.netty")}

@@ -9,7 +9,7 @@ import org.github.base.entity.RoleEntity;
 import org.github.base.entity.RolePermissionEntity;
 import org.github.base.entity.UserEntity;
 import org.github.base.entity.UserRoleEntity;
-import org.github.base.model.dto.UserInfoDTO;
+import org.github.web.model.dto.UserInfoDTO;
 import org.github.base.service.IPermissionService;
 import org.github.base.service.IRolePermissionService;
 import org.github.base.service.IRoleService;

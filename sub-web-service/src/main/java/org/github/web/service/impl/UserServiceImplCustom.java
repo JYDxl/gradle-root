@@ -1,10 +1,10 @@
 package org.github.web.service.impl;
 
 import lombok.extern.slf4j.*;
-import org.github.base.common.CookieUtils;
+import org.github.web.common.CookieUtils;
 import org.github.base.entity.UsersEntity;
-import org.github.base.model.UserLoginReqModel;
-import org.github.base.model.UserRegisterReqModel;
+import org.github.web.model.UserLoginReqModel;
+import org.github.web.model.UserRegisterReqModel;
 import org.github.base.service.IUsersService;
 import org.github.spring.restful.Returnable;
 import org.github.spring.restful.json.JSONDataReturn;

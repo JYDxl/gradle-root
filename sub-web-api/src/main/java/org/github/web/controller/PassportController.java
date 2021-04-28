@@ -1,8 +1,8 @@
 package org.github.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.github.base.model.UserLoginReqModel;
-import org.github.base.model.UserRegisterReqModel;
+import org.github.web.model.UserLoginReqModel;
+import org.github.web.model.UserRegisterReqModel;
 import org.github.spring.restful.Returnable;
 import org.github.web.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

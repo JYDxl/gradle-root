@@ -1,8 +1,8 @@
 package org.github.web.controller;
 
-import org.github.base.model.bo.ItemCommentBO;
-import org.github.base.model.bo.ItemSearchBO;
-import org.github.base.model.bo.ItemSearchByCatBO;
+import org.github.web.model.bo.ItemCommentBO;
+import org.github.web.model.bo.ItemSearchBO;
+import org.github.web.model.bo.ItemSearchByCatBO;
 import org.github.spring.restful.Returnable;
 import org.github.spring.restful.json.JSONDataReturn;
 import org.github.spring.restful.json.JSONPageReturn;
