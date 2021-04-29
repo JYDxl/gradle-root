@@ -1,7 +1,7 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
 def out = "%d %5level --- [%25.25thread] %-30.30logger{30} : %msg%n"
-def dir = "build/logs/sub-web"
+def dir = "logs/sub-web"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }

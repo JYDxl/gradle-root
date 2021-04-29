@@ -1,4 +1,4 @@
-def out = "%d %5level --- [%50.50thread] %40.40logger : %msg%n"
+def out = "%d %5level --- [%25.25thread] %-30.30logger{30} : %msg%n"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }

@@ -7,7 +7,7 @@ spring:
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
-    default-property-inclusion: non_absent
+    default-property-inclusion: always
     serialization:
       fail_on_empty_beans: false
   mvc:
@@ -84,16 +84,6 @@ mybatis-plus:
 
 info:
   version: 0.0.1
-
-#eureka:
-#  client:
-#    registryFetchIntervalSeconds: 5
-#    service-url:
-#      defaultZone: http://ubuntu:8761/eureka/
-#  instance:
-#    health-check-url-path: /actuator/health
-#    leaseRenewalIntervalInSeconds: 10
-#    status-page-url-path: /
 
 management:
   endpoints:

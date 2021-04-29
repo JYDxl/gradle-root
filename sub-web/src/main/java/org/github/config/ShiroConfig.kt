@@ -1,8 +1,7 @@
 package org.github.config
 
 import com.google.common.collect.ForwardingMap
-import com.google.common.collect.ImmutableList.of
-import com.google.common.collect.ImmutableMap
+import com.google.common.collect.ImmutableMap.of
 import org.apache.shiro.authc.credential.CredentialsMatcher
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher
 import org.apache.shiro.authz.ModularRealmAuthorizer
@@ -20,6 +19,8 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.util.*
+import java.util.Collections.singletonList
 import javax.servlet.Filter
 
 @Configuration
@@ -53,11 +54,11 @@ class ShiroConfig {
   @Bean
   fun credentialsMatcher() = HashedCredentialsMatcher().apply {
     hashAlgorithmName = ALGORITHM_NAME
-    hashIterations = 1024
+    hashIterations = 2
   }
 
   @Bean
-  fun passwordGenerator(shiroFilterFactoryBean: ShiroFilterFactoryBean) = PasswordGenerator(ALGORITHM_NAME, 1024)
+  fun passwordGenerator() = PasswordGenerator(ALGORITHM_NAME, 2)
 
   @Bean
   fun cacheManager() = MemoryConstrainedCacheManager()
@@ -78,10 +79,10 @@ class ShiroConfig {
     successUrl = this@ShiroConfig.successUrl
     unauthorizedUrl = this@ShiroConfig.unauthorizedUrl
     securityManager = manager
-    setGlobalFilters(of(invalidRequest.name))
+    setGlobalFilters(singletonList(invalidRequest.name))
     filterChainDefinitionMap = definition.filterChainMap
     filters = object: ForwardingMap<String, Filter>() {
-      override fun delegate(): Map<String, Filter> = ImmutableMap.of(
+      override fun delegate(): Map<String, Filter> = of(
         "authc", CustomFormAuthenticationFilter(this@ShiroConfig.sessionIdCookieName, this@ShiroConfig.failureUrl, this@ShiroConfig.unauthorizedUrl),
         "user", CustomUserFilter(this@ShiroConfig.unauthorizedUrl),
         "logout", CustomLogoutFilter(this@ShiroConfig.logoutUrl)

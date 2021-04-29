@@ -36,6 +36,12 @@ plugins {
   id("com.github.ben-manes.versions") version benmanes apply false
 }
 
+allprojects {
+  tasks.register("cleanAll", Delete::class) {
+    delete = setOf("build", "out", "log")
+  }
+}
+
 subprojects {
   group = "org.github"
   version = "0.0.1"

@@ -12,8 +12,6 @@ include("sub-netty")
 
 include("sub-vertx")
 
-include("sub-eureka")
-
 include("sub-admin")
 
 include("sub-web-model")

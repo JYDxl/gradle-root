@@ -1,10 +1,4 @@
 FROM jre-alpine
-
-COPY build/libs/admin.jar /admin.jar
-
-ENTRYPOINT [ \
-"java","-jar", "admin.jar", \
-    "-ea", \
-    "--spring.application.name=admin-server", \
-    "--eureka.instance.hostname=ubuntu" \
-]
+COPY build/libs/admin-boot.jar /lib/admin-boot.jar
+COPY build/bootScripts/sub-admin /script/runner
+CMD ./script/runner

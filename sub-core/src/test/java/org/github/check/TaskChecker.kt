@@ -2,14 +2,15 @@ package org.github.check
 
 import org.github.ops.info
 import org.github.ops.log
+import org.github.ops.trace
 
 fun main() {
   val tasks = ""
-  val map = tasks.splitToSequence('\n').map {Task(it.substringBeforeLast(':'), it.substringAfterLast(':'), it)}.groupBy {it.name}
+  val map = tasks.splitToSequence('\n').filter { it.startsWith("> Task :") }.map { Task(it.substringBeforeLast(':'), it.substringAfterLast(':'), it) }.groupBy { it.name }
   map.forEach {(task, list) ->
     log.info {task}
     list.forEach {log.info {it.detail}}
-    log.info {""}
+    log.trace {""}
   }
 }
 

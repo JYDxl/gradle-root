@@ -15,7 +15,7 @@ import org.github.web.service.ICustomUserService;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.shiro.util.ByteSource.Util.bytes;
-import static org.github.spring.bootstrap.AppCtxHolder.Companion;
+import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
 
 public class AuthRealm extends AuthorizingRealm {
   public AuthRealm(CredentialsMatcher matcher) {
@@ -28,7 +28,7 @@ public class AuthRealm extends AuthorizingRealm {
     val username = ((String) token.getPrincipal());
     if (isBlank(username)) return null;
 
-    val userService = Companion.getAppCtx().getBean(ICustomUserService.class);
+    val userService = getAppCtx().getBean(ICustomUserService.class);
     val user        = userService.queryUser(username);
     if (user == null) return null;
 
@@ -39,7 +39,7 @@ public class AuthRealm extends AuthorizingRealm {
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     val user        = ((UserEntity) principals.getPrimaryPrincipal());
     val userId      = user.getId();
-    val userService = Companion.getAppCtx().getBean(ICustomUserService.class);
+    val userService = getAppCtx().getBean(ICustomUserService.class);
     val roles       = userService.queryRoles(userId);
     val permissions = userService.queryPermissions(userId);
     val info        = new SimpleAuthorizationInfo();

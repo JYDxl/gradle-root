@@ -1,7 +1,7 @@
 package org.github.ops
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.github.spring.bootstrap.AppCtxHolder.Companion.getAppCtx
+import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
 import org.springframework.web.context.request.ServletRequestAttributes

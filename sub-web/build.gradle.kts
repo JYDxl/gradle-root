@@ -2,6 +2,19 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
   id("org.springframework.boot")
+  application
+}
+
+application {
+  mainClass.set("org.github.web.WebKt")
+  applicationDefaultJvmArgs = listOf(
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+    "-ea",
+    "-Djava.library.path=/usr/lib",
+    "-Dio.netty.tryReflectionSetAccessible=true",
+    "-Dio.netty.leakDetection.level=advanced",
+    "-Djava.net.preferIPv4Stack=true"
+  )
 }
 
 tasks.withType<BootJar> {
@@ -11,6 +24,12 @@ tasks.withType<BootJar> {
 tasks.withType<Test> {
   enabled = false
 }
+
+tasks.getByName<Task>("startScripts") {enabled = false}
+tasks.getByName<Task>("distTar") {enabled = false}
+tasks.getByName<Task>("distZip") {enabled = false}
+tasks.getByName<Task>("bootDistTar") {enabled = false}
+tasks.getByName<Task>("bootDistZip") {enabled = false}
 
 val commonspool2: String by System.getProperties()
 val mybatisplus: String by System.getProperties()

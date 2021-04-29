@@ -11,7 +11,8 @@ RUN \
     && apk add -U tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
-    && apk cache \
+    && apk del tzdata \
+    && apk cache clean \
 #配置环境
-ENV LANGUAGE en_US.UTF-8
+ENV LANG zh_CN.UTF-8
 ENV TZ Asia/Shanghai
