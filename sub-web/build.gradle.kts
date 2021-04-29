@@ -6,14 +6,15 @@ plugins {
 }
 
 application {
-  mainClass.set("org.github.web.WebKt")
+  mainClass.set("org.github.WebKt")
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
     "-ea",
     "-Djava.library.path=/usr/lib",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
-    "-Djava.net.preferIPv4Stack=true"
+    "-Djava.net.preferIPv4Stack=true",
+    "--illegal-access=deny"
   )
 }
 

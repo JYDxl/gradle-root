@@ -6,8 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 
 @SpringBootApplication
 @EnableDiscoveryClient
-class Application
+class Web
 
 fun main(args: Array<String>) {
-  runApplication<Application>(*args)
+  runApplication<Web>(*args)
 }

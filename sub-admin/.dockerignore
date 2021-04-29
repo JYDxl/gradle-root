@@ -1,3 +1,3 @@
 *
-!Dockerfile
 !build/libs/admin-boot.jar
+!build/bootScripts/sub-admin

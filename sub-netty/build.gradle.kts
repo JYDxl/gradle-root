@@ -16,7 +16,8 @@ application {
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
-    "-Djava.net.preferIPv4Stack=true"
+    "-Djava.net.preferIPv4Stack=true",
+    "--illegal-access=deny"
   )
 }
 
@@ -36,7 +37,8 @@ tasks.withType<Test> {
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true"
+    "-Djava.net.preferIPv4Stack=true",
+    "--illegal-access=deny"
   )
 }
 

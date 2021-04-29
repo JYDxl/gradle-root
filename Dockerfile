@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:11.0.10-11.45.27-jre-headless as jre-alpine
+FROM azul/zulu-openjdk-alpine:11.0.11-11.48.21-jre-headless as jre-alpine
 
 RUN \
 #设置镜像地址
@@ -12,7 +12,7 @@ RUN \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone \
     && apk del tzdata \
-    && apk cache clean \
+    && rm -rf /var/cache/apk/*
 #配置环境
 ENV LANG zh_CN.UTF-8
 ENV TZ Asia/Shanghai

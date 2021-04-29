@@ -8,7 +8,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import static com.google.common.collect.ImmutableTable.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -32,16 +31,11 @@ class EnumCacheTest {
   }
 
   @Test
-  @SuppressWarnings("deprecation")
   void test() {
     log.info(enumCache.toString());
     val packageName = enumCache.getPackageName();
     log.info(packageName);
     val table = enumCache.getTable();
     log.info(table.toString());
-    try {
-      enumCache.setTable(of());
-    } catch (Exception ignored) {
-    }
   }
 }
