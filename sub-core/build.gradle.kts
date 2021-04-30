@@ -36,6 +36,7 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.boot:spring-boot-starter-aop")
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
+  compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
 

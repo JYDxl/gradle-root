@@ -1,4 +1,4 @@
-package org.github.config
+package org.github.system.config
 
 import cn.hutool.core.date.DatePattern.*
 import com.fasterxml.jackson.datatype.guava.GuavaModule

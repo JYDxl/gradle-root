@@ -1,4 +1,4 @@
-package org.github.config
+package org.github.system.config
 
 import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: client-web
+    name: sub-web
   output:
     ansi:
       enabled: always

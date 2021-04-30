@@ -38,7 +38,7 @@ plugins {
 
 allprojects {
   tasks.register("cleanAll", Delete::class) {
-    delete = setOf("build", "out", "log")
+    delete = setOf("build", "out", "logs")
   }
 }
 
@@ -49,7 +49,6 @@ subprojects {
   apply(plugin = "io.spring.dependency-management")
   apply(plugin = "com.github.ben-manes.versions")
   apply(plugin = "kotlin")
-  apply(plugin = "jacoco")
   apply(plugin = "kotlin-spring")
 
   java {

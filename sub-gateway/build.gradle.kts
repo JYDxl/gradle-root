@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-  mainClass.set("org.github.AdminKt")
+  mainClass.set("org.github.GatewayKt")
   applicationDefaultJvmArgs = listOf(
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
@@ -17,7 +17,7 @@ application {
 }
 
 tasks.withType<BootJar> {
-  archiveFileName.set("admin-boot.jar")
+  archiveFileName.set("gateway-boot.jar")
 }
 
 tasks.getByName<Task>("startScripts") {enabled = false}
@@ -26,16 +26,12 @@ tasks.getByName<Task>("distZip") {enabled = false}
 tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
-val netty: String by System.getProperties()
-
 dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
   implementation(project(":sub-api"))
 
-  implementation("de.codecentric:spring-boot-admin-starter-server") {exclude(group = "io.netty")}
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
-  implementation("io.netty:netty-all:$netty")
-  implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-  implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
+  implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+  implementation("org.springframework.boot:spring-boot-starter-actuator")
 }

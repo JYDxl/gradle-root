@@ -9,13 +9,18 @@ management:
 
 spring:
   application:
-    name: admin-server
+    name: sub-gateway
   cloud:
     nacos:
       discovery:
-        server-addr: ubuntu:8848
-  thymeleaf:
-    check-template-location: false
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: nacos-route
+          uri: lb://service-gateway-provider
+          predicates:
+            - name: Path
+
   jackson:
     time-zone: Asia/Shanghai
     date-format: yyyy-MM-dd HH:mm:ss
@@ -24,4 +29,4 @@ spring:
       fail_on_empty_beans: false
 
 server:
-  port: 8000
+  port: 13650
