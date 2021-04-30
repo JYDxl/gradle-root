@@ -33,5 +33,4 @@ appender("problem", RollingFileAppender) {
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
 logger("io.vertx", TRACE)
-logger("io.netty.util.internal.NativeLibraryLoader", INFO)
-root(INFO, ["console", "records", "problem"])
+root(DEBUG, ["console", "records", "problem"])

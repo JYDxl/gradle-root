@@ -61,7 +61,7 @@ public class EnumCache implements InitializingBean {
     return (Map<C,V>) table.row(clazz);
   }
 
-  public Table<Class<? extends IEnum<?,?>>,?,?> load(String packageName) {
+  private Table<Class<? extends IEnum<?,?>>,?,?> load(String packageName) {
     val classes = scanPackageBySuper(packageName, IEnum.class);
     return classes.stream().flatMap(this::apply).collect(toImmutableTable(Triple::getLeft, Triple::getMiddle, Triple::getRight));
   }

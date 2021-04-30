@@ -47,4 +47,4 @@ appender("packets", RollingFileAppender) {
 
 logger("org.github", TRACE)
 logger("io.netty", TRACE)
-root(INFO, ["console", "records", "problem", "packets"])
+root(DEBUG, ["console", "records", "problem", "packets"])

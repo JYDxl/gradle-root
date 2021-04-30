@@ -4,4 +4,4 @@ appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-root(TRACE, ["console"])
+root(DEBUG, ["console"])
