@@ -1,7 +1,6 @@
 package org.github.web.model.bo;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.github.base.PageParam;
 import static org.apache.commons.lang3.StringUtils.*;
 
@@ -13,7 +12,7 @@ public class ItemSearchBO extends PageParam {
   private String sort;
 
   @Override
-  public ItemSearchBO valid() {
+  public @NonNull ItemSearchBO valid() {
     if(isBlank(keywords)) {
       keywords = null;
     } else {

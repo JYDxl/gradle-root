@@ -1,6 +1,13 @@
 package org.github.system.shiro;
 
-import lombok.val;
+import java.util.Objects;
+import java.util.function.Function;
+import lombok.*;
+import org.github.base.entity.PermissionEntity;
+import org.github.util.FuncUtil;
+import org.github.web.model.dto.RoleInfoDTO;
+import org.github.web.model.dto.UserInfoDTO;
+import org.github.web.service.ICustomUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -10,12 +17,11 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.github.base.entity.UserEntity;
-import org.github.web.service.ICustomUserService;
-
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.apache.shiro.util.ByteSource.Util.bytes;
-import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
+import static com.google.common.collect.ImmutableSet.*;
+import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.shiro.util.ByteSource.Util.*;
+import static org.github.spring.bootstrap.AppCtxHolder.*;
+import static org.github.util.FuncUtil.*;
 
 public class AuthRealm extends AuthorizingRealm {
   public AuthRealm(CredentialsMatcher matcher) {
@@ -29,19 +35,17 @@ public class AuthRealm extends AuthorizingRealm {
     if (isBlank(username)) return null;
 
     val userService = getAppCtx().getBean(ICustomUserService.class);
-    val user        = userService.queryUser(username);
+    val user        = userService.queryUserInfo(username);
     if (user == null) return null;
 
-    return new SimpleAuthenticationInfo(user, user.getPassword(), bytes(user.getSalt()), getName());
+    return new SimpleAuthenticationInfo(user, user.getPassword(), bytes((Object) user.getSalt()), getName());
   }
 
   @Override
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    val user        = ((UserEntity) principals.getPrimaryPrincipal());
-    val userId      = user.getId();
-    val userService = getAppCtx().getBean(ICustomUserService.class);
-    val roles       = userService.queryRoles(userId);
-    val permissions = userService.queryPermissions(userId);
+    val user        = ((UserInfoDTO) principals.getPrimaryPrincipal());
+    val roles       = stream(user.getRoleList()).map(RoleInfoDTO::getName).filter(Objects::nonNull).collect(toImmutableSet());
+    val permissions = stream(user.getRoleList()).flatMap(Function.<RoleInfoDTO>identity().andThen(RoleInfoDTO::getPermissionList).andThen(FuncUtil::stream)).map(PermissionEntity::getName).filter(Objects::nonNull).collect(toImmutableSet());
     val info        = new SimpleAuthorizationInfo();
     info.setRoles(roles);
     info.setStringPermissions(permissions);

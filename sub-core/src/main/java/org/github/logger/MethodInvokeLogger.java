@@ -1,6 +1,7 @@
 package org.github.logger;
 
 import java.util.Arrays;
+import javax.annotation.Nullable;
 import lombok.extern.slf4j.*;
 import lombok.*;
 import org.aspectj.lang.JoinPoint;
@@ -14,7 +15,7 @@ import org.aspectj.lang.annotation.Pointcut;
 @Slf4j
 public class MethodInvokeLogger {
   @AfterReturning(value = "pointcut()", returning = "value")
-  public void afterReturning(JoinPoint point, Object value) {
+  public void afterReturning(JoinPoint point, @Nullable Object value) {
     val name = point.getSignature().toShortString();
     log.info("返回结果: {} ====> {}", name, value);
   }

@@ -1,9 +1,12 @@
 package org.github.util;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.stream.Stream;
+import javax.annotation.Nullable;
 import lombok.*;
 import static java.util.Optional.*;
 
@@ -16,15 +19,19 @@ public abstract class FuncUtil {
     return (t) -> ofNullable(t).map(function);
   }
 
-  public static <T, R> Function<T,R> optional(@NonNull Function<T,R> function, R defaultValue) {
+  public static <T, R> Function<T,R> optional(@NonNull Function<T,R> function, @Nullable R defaultValue) {
     return (t) -> ofNullable(t).map(function).orElse(defaultValue);
   }
 
-  public static <T, R> R map(T t, @NonNull Map<T,R> map) {
+  public static <T, R> R map(@Nullable T t, @NonNull Map<T,R> map) {
     return map(t, map, null);
   }
 
-  public static <T, R> R map(T t, @NonNull Map<T,R> map, R defaultValue) {
+  public static <T, R> R map(@Nullable T t, @NonNull Map<T,R> map, @Nullable R defaultValue) {
     return ofNullable(t).map(map::get).orElse(defaultValue);
+  }
+
+  public static <T> Stream<T> stream(@Nullable Collection<T> collection) {
+    return collection == null || collection.isEmpty() ? Stream.empty() : collection.stream();
   }
 }

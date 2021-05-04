@@ -1,6 +1,6 @@
 package org.github.controller
 
-import org.apache.shiro.SecurityUtils
+import org.apache.shiro.SecurityUtils.getSubject
 import org.apache.shiro.session.Session
 import org.apache.shiro.subject.Subject
 import org.github.spring.restful.Returnable
@@ -10,27 +10,32 @@ import org.github.spring.restful.json.JSONReturn.warn
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 
-@RequestMapping("/public/")
+@RequestMapping("/")
 @Controller
 class SystemController {
-  @RequestMapping("token")
+  @RequestMapping("public/login", "login")
+  fun login(): Returnable {
+    return of(getSubject()?.principal)
+  }
+
+  @RequestMapping("public/token")
   fun token(): Returnable {
-    val subject: Subject = SecurityUtils.getSubject()
+    val subject: Subject = getSubject()
     val session: Session? = subject.getSession(false)
     return of(session?.id)
   }
 
-  @RequestMapping("failure")
+  @RequestMapping("public/failure")
   fun failure(): Returnable {
     return warn().withRetMsg("用户名或密码错误")
   }
 
-  @RequestMapping("unauthorized")
+  @RequestMapping("public/unauthorized")
   fun unauthorized(): Returnable {
     return warn().withRetMsg("权限不足")
   }
 
-  @RequestMapping("logout")
+  @RequestMapping("public/logout")
   fun logout(): Returnable {
     return JSONReturn().withRetMsg("退出成功")
   }

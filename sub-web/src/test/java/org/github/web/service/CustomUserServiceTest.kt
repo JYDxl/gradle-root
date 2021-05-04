@@ -38,7 +38,7 @@ internal class CustomUserServiceTest {
 
   @Test
   fun queryUserInfo() {
-    val userInfoList: List<UserInfoDTO> = customUserService.queryUserInfo("jack")
-    log.info {userInfoList}
+    val userInfo: UserInfoDTO? = customUserService.queryUserInfo("jack")
+    log.info {userInfo}
   }
 }

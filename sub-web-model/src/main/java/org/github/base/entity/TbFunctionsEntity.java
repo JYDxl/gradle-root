@@ -3,10 +3,12 @@ package org.github.base.entity;
 import org.github.base.Model;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import javax.annotation.Nullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -18,7 +20,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-04-21
+ * @since 2021-05-04
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -30,34 +32,34 @@ public class TbFunctionsEntity extends Model<TbFunctionsEntity> {
   private static final long serialVersionUID = 1L;
 
   @TableId(value = "func_id", type = IdType.AUTO)
-  private Integer funcId;
+  private @Nullable Integer funcId;
 
   @TableField("func_name")
-  private String funcName;
+  private @Nullable String funcName;
 
   @TableField("func_url")
-  private String funcUrl;
+  private @Nullable String funcUrl;
 
   @TableField("func_code")
-  private String funcCode;
+  private @Nullable String funcCode;
 
   @TableField("parent_id")
-  private Integer parentId;
+  private @Nullable Integer parentId;
 
   @TableField("func_type")
-  private Integer funcType;
+  private @Nullable Integer funcType;
 
   @TableField("status")
-  private Integer status;
+  private @Nullable Integer status;
 
   @TableField("sort_num")
-  private Integer sortNum;
+  private @Nullable Integer sortNum;
 
   @TableField("create_time")
-  private LocalDateTime createTime;
+  private @Nullable LocalDateTime createTime;
 
   @TableField("update_time")
-  private LocalDateTime updateTime;
+  private @Nullable LocalDateTime updateTime;
 
   @Override
   protected Serializable pkVal() {

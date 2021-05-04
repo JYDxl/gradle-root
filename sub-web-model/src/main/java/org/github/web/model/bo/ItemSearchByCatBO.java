@@ -1,7 +1,6 @@
 package org.github.web.model.bo;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.github.base.PageParam;
 import static com.google.common.base.Preconditions.*;
 
@@ -13,7 +12,7 @@ public class ItemSearchByCatBO extends PageParam {
   private String sort;
 
   @Override
-  public ItemSearchByCatBO valid() {
+  public @NonNull ItemSearchByCatBO valid() {
     checkArgument(catId != null, "catId不能为空");
     return this;
   }

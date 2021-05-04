@@ -101,7 +101,7 @@ shiro:
   userNativeSessionManager: true
   loginUrl: /login
   logoutUrl: /public/logout
-  successUrl: /public/token
+  successUrl: /public/login
   failureUrl: /public/failure
   unauthorizedUrl: /public/unauthorized
   sessionManager:

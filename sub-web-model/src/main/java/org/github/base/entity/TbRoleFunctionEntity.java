@@ -3,9 +3,11 @@ package org.github.base.entity;
 import org.github.base.Model;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import javax.annotation.Nullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,7 +19,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-04-21
+ * @since 2021-05-04
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -29,10 +31,10 @@ public class TbRoleFunctionEntity extends Model<TbRoleFunctionEntity> {
   private static final long serialVersionUID = 1L;
 
   @TableId(value = "role_id", type = IdType.ASSIGN_ID)
-  private Integer roleId;
+  private @Nullable Integer roleId;
 
   @TableField("func_id")
-  private Integer funcId;
+  private @Nullable Integer funcId;
 
   @Override
   protected Serializable pkVal() {

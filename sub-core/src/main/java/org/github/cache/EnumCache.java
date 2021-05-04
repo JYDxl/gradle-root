@@ -1,42 +1,38 @@
 package org.github.cache;
 
-import com.google.common.collect.Table;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import org.apache.commons.lang3.tuple.Triple;
-import org.github.base.IEnum;
-import org.springframework.beans.factory.InitializingBean;
-
-import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.stream.Stream;
-
+import javax.annotation.Nullable;
+import lombok.*;
+import lombok.extern.slf4j.*;
+import org.github.base.IEnum;
+import org.apache.commons.lang3.tuple.Triple;
+import com.google.common.collect.Table;
 import static cn.hutool.core.util.ClassUtil.getPublicMethod;
-import static cn.hutool.core.util.ClassUtil.scanPackageBySuper;
+import static cn.hutool.core.util.ClassUtil.*;
 import static cn.hutool.core.util.ReflectUtil.invoke;
-import static com.google.common.collect.ImmutableTable.toImmutableTable;
-import static java.util.Arrays.stream;
-import static java.util.stream.Stream.empty;
+import static com.google.common.collect.ImmutableTable.*;
+import static java.util.Arrays.*;
+import static java.util.stream.Stream.*;
 import static org.apache.commons.lang3.tuple.Triple.of;
 
 @Slf4j
 @Data
-public class EnumCache implements InitializingBean {
+public class EnumCache {
   @NonNull
   private final String packageName;
 
-  private Table<Class<? extends IEnum<?,?>>,?,?> table;
+  @NonNull
+  private final Table<Class<? extends IEnum<?,?>>,?,?> table;
 
   public EnumCache(@NonNull String packageName) {
     this.packageName = packageName;
+    this.table = load(packageName);
   }
 
-  @Deprecated
-  @Override
-  public void afterPropertiesSet() throws Exception {
-    table = load(packageName);
+  private Table<Class<? extends IEnum<?,?>>,?,?> load(String packageName) {
+    val classes = scanPackageBySuper(packageName, IEnum.class);
+    return classes.stream().flatMap(this::apply).collect(toImmutableTable(Triple::getLeft, Triple::getMiddle, Triple::getRight));
   }
 
   @SuppressWarnings("unchecked")
@@ -59,15 +55,5 @@ public class EnumCache implements InitializingBean {
   @SuppressWarnings("unchecked")
   public @NonNull <C, V, E extends Class<? extends IEnum<C,V>>> Map<C,V> getAll(@NonNull E clazz) {
     return (Map<C,V>) table.row(clazz);
-  }
-
-  private Table<Class<? extends IEnum<?,?>>,?,?> load(String packageName) {
-    val classes = scanPackageBySuper(packageName, IEnum.class);
-    return classes.stream().flatMap(this::apply).collect(toImmutableTable(Triple::getLeft, Triple::getMiddle, Triple::getRight));
-  }
-
-  @Deprecated
-  public void setTable(Table<Class<?>,?,?> table) {
-    throw new UnsupportedOperationException();
   }
 }

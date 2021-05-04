@@ -1,5 +1,6 @@
 package org.github.base.enums;
 
+import lombok.*;
 import org.github.base.IEnum;
 
 public enum SexEnum implements IEnum<Integer,String> {
@@ -16,12 +17,12 @@ public enum SexEnum implements IEnum<Integer,String> {
   }
 
   @Override
-  public Integer getCode() {
+  public @NonNull Integer getCode() {
     return code;
   }
 
   @Override
-  public String getValue() {
+  public @NonNull String getValue() {
     return value;
   }
 }

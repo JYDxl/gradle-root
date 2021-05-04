@@ -80,7 +80,7 @@ public class CustomUserServiceImpl implements ICustomUserService {
   }
 
   @Override
-  public @NonNull List<UserInfoDTO> queryUserInfo(@NonNull String username) {
+  public UserInfoDTO queryUserInfo(@NonNull String username) {
     return userMapper.queryUserInfo(username);
   }
 

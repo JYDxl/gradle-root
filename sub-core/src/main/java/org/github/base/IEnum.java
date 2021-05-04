@@ -1,7 +1,9 @@
 package org.github.base;
 
-public interface IEnum<C, V> {
-  C getCode();
+import lombok.*;
 
-  V getValue();
+public interface IEnum<C, V> {
+  @NonNull C getCode();
+
+  @NonNull V getValue();
 }
