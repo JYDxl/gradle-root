@@ -21,5 +21,5 @@ fun main() {
 }
 
 fun process(req: String): String {
-  return req.toUpperCase()
+  return req.uppercase()
 }

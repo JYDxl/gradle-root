@@ -1,5 +1,6 @@
 package org.github.controller
 
+import org.apache.shiro.authz.annotation.Logical.OR
 import org.apache.shiro.authz.annotation.RequiresRoles
 import org.github.ops.info
 import org.github.ops.log
@@ -72,7 +73,7 @@ class RestController {
     return jsonp
   }
 
-  @RequiresRoles("admin")
+  @RequiresRoles("test", "admin", logical = OR)
   @GetMapping("json/basic")
   fun jsonBasic() = JSONReturn.of()
 

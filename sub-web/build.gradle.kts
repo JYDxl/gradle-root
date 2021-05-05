@@ -67,8 +67,8 @@ dependencies {
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:3.15.0")
-//  implementation("org.crazycake:shiro-redis-spring-boot-starter:3.3.1")
-//  implementation("redis.clients:jedis:3.5.2")
+  implementation("org.crazycake:shiro-redis-spring-boot-starter:3.3.1")
+  implementation("redis.clients:jedis:3.6.0")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")

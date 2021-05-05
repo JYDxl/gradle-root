@@ -33,7 +33,7 @@ class BufferVerticle: CoroutineVerticle() {
         val req = fromBuffer<BufferedReq>(message.body())
         val res = BufferedRes().apply {
           cmd = req.cmd
-          result = req.params.toUpperCase()
+          result = req.params.uppercase()
         }
           .toBuffer()
         message.reply(res)

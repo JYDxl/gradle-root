@@ -38,7 +38,12 @@ public class AuthRealm extends AuthorizingRealm {
     val user        = userService.queryUserInfo(username);
     if (user == null) return null;
 
-    return new SimpleAuthenticationInfo(user, user.getPassword(), bytes((Object) user.getSalt()), getName());
+    return new SimpleAuthenticationInfo(user, user.getPassword(), new CustomByteSource(bytes((Object) user.getSalt())), getName());
+  }
+
+  @Override
+  public String getName() {
+    return getClass().getName();
   }
 
   @Override

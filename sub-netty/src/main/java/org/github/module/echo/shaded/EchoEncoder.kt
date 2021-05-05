@@ -12,6 +12,6 @@ class EchoEncoder: StringEncoder(Charsets.UTF_8) {
   override fun encode(ctx: ChannelHandlerContext, msg: CharSequence, out: MutableList<Any>) {
     super.encode(ctx, msg, out)
     if(msg.endsWith(delimiter)) return
-    out += ctx.alloc().buffer(1).writeByte(delimiter.toInt())
+    out += ctx.alloc().buffer(1).writeByte(delimiter.code)
   }
 }

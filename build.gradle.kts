@@ -132,6 +132,8 @@ subprojects {
     implementation("com.alibaba:fastjson:$fastjson")
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
 
+    implementation("commons-io:commons-io:2.8.0")
+    implementation("org.ow2.asm:asm:9.1")
     implementation("org.checkerframework:checker-qual:3.13.0")
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.27.0-GA")

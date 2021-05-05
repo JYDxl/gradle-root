@@ -17,4 +17,4 @@ class ChatEncoder: MessageToMessageEncoder<CharSequence>() {
 
 internal const val delimiter = '\n'
 
-internal val delimiterBuf = unreleasableBuffer(directBuffer(1).writeByte(delimiter.toInt()))
+internal val delimiterBuf = unreleasableBuffer(directBuffer(1).writeByte(delimiter.code))

@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap.of
 import org.apache.shiro.authc.credential.CredentialsMatcher
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher
 import org.apache.shiro.authz.ModularRealmAuthorizer
-import org.apache.shiro.cache.MemoryConstrainedCacheManager
 import org.apache.shiro.crypto.hash.Sha256Hash.ALGORITHM_NAME
 import org.apache.shiro.mgt.SecurityManager
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean
@@ -60,9 +59,6 @@ class ShiroConfig {
   fun passwordGenerator() = PasswordGenerator(ALGORITHM_NAME, 2)
 
   @Bean
-  fun cacheManager() = MemoryConstrainedCacheManager()
-
-  @Bean
   fun shiroFilterChainDefinition() = DefaultShiroFilterChainDefinition().apply {
     addPathDefinition("/static/**", "anon")
     addPathDefinition("/public/**", "anon")
@@ -70,6 +66,11 @@ class ShiroConfig {
     addPathDefinition("/logout", "logout")
     addPathDefinition("/rest/**", "user")
     addPathDefinition("/**", "user")
+  }
+
+  @Bean
+  fun sessionStorageEvaluator() = CustomWebSessionStorageEvaluator().apply {
+    isSessionStorageEnabled = false
   }
 
   @Bean

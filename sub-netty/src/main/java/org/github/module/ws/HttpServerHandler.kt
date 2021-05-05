@@ -19,7 +19,7 @@ class HttpServerHandler: SimpleChannelInboundHandler<FullHttpRequest>() {
   override fun channelRead0(ctx: ChannelHandlerContext, req: FullHttpRequest) {
     val uri = req.uri()
     log.info { "${req.method()} $uri" }
-    if(uri.toLowerCase() == "/ws") {
+    if(uri.lowercase() == "/ws") {
       ctx.fireChannelRead(req.retain())
       return
     }

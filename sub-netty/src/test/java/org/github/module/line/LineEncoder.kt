@@ -19,7 +19,7 @@ class LineEncoder: MessageToMessageEncoder<CharSequence>() {
   companion object {
     private const val delimiter = '\n'
 
-    private val line = unreleasableBuffer(directBuffer(1).writeByte(delimiter.toInt()))
+    private val line = unreleasableBuffer(directBuffer(1).writeByte(delimiter.code))
 
     private fun CharSequence.toBuf(alloc: ByteBufAllocator) = encodeString(alloc, wrap(this), UTF_8)
 

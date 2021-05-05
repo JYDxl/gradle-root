@@ -58,7 +58,7 @@ class WebSocketServerVerticle(private val port: Int = 8800): CoroutineVerticle()
 
   private suspend fun wsTextMessageHandler(ws: ServerWebSocket, msg: String) {
     log.info { "从websocket客户端[${ws.remoteAddress()}]接收到文本数据: $msg" }
-    ws.writeTextMessage(msg.toUpperCase()).await()
+    ws.writeTextMessage(msg.uppercase()).await()
   }
 
   private suspend fun wsBinaryMessageHandler(ws: ServerWebSocket, buf: Buffer) {

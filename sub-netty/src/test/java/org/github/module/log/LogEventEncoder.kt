@@ -18,6 +18,6 @@ class LogEventEncoder(private val addr: InetSocketAddress): MessageToMessageEnco
   }
 }
 
-private val sep = unreleasableBuffer(directBuffer(1).writeByte(':'.toInt()))
+private val sep = unreleasableBuffer(directBuffer(1).writeByte(':'.code))
 
 fun LogEvent.toBuf(alloc: ByteBufAllocator, addr: InetSocketAddress) = DatagramPacket(alloc.compositeBuffer(3).apply { addComponents(true, encodeString(alloc, wrap(this@toBuf.file), UTF_8), sep, encodeString(alloc, wrap(this@toBuf.msg), UTF_8)) }, addr)
