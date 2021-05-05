@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-04
+ * @since 2021-05-05
  */
 public interface ITbRolesService extends IService<TbRolesEntity> {}
