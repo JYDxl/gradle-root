@@ -12,8 +12,6 @@ spring:
       fail_on_empty_beans: false
   mvc:
     log-request-details: true
-    converters:
-      preferred-json-mapper: jackson
   redis:
     port: 6381
     timeout: 10s
@@ -71,16 +69,9 @@ spring:
 
 server:
   port: 8088
-  servlet:
-    encoding:
-      force: true
-      force-request: true
-      force-response: true
-      enabled: true
-      charset: utf-8
 
 mybatis-plus:
-  mapper-locations: classpath*:mapper/*.xml, classpath*:/mapper/**/*.xml
+  mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/**/*.xml
 
 info:
   version: 0.0.1

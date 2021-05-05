@@ -1,8 +1,9 @@
 package org.github.cache;
 
-import java.util.Map;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
+
+import com.google.common.collect.BiMap;
 import lombok.*;
 import lombok.extern.slf4j.*;
 import org.github.base.IEnum;
@@ -11,9 +12,9 @@ import com.google.common.collect.Table;
 import static cn.hutool.core.util.ClassUtil.getPublicMethod;
 import static cn.hutool.core.util.ClassUtil.*;
 import static cn.hutool.core.util.ReflectUtil.invoke;
+import static com.google.common.collect.ImmutableBiMap.copyOf;
 import static com.google.common.collect.ImmutableTable.*;
 import static java.util.Arrays.*;
-import static java.util.stream.Stream.*;
 import static org.apache.commons.lang3.tuple.Triple.of;
 
 @Slf4j
@@ -37,7 +38,7 @@ public class EnumCache {
 
   @SuppressWarnings("unchecked")
   private Stream<Triple<Class<? extends IEnum<?,?>>,?,?>> apply(Class<?> clazz) {
-    if (!clazz.isEnum()) return empty();
+    if (!clazz.isEnum()) throw new IllegalStateException();
     val method = getPublicMethod(clazz, "values");
     val values = ((IEnum<?,?>[]) invoke(null, method));
     val token  = ((Class<? extends IEnum<?,?>>) clazz);
@@ -53,7 +54,7 @@ public class EnumCache {
   }
 
   @SuppressWarnings("unchecked")
-  public @NonNull <C, V, E extends Class<? extends IEnum<C,V>>> Map<C,V> getAll(@NonNull E clazz) {
-    return (Map<C,V>) table.row(clazz);
+  public @NonNull <C, V, E extends Class<? extends IEnum<C,V>>> BiMap<C,V> getAll(@NonNull E clazz) {
+    return (BiMap<C,V>) copyOf(table.row(clazz));
   }
 }

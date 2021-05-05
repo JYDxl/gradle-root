@@ -70,11 +70,4 @@ internal class UserCacheTest {
   fun testDelAll() {
     userCache.delAll()
   }
-
-  @Suppress("DEPRECATION")
-  @Order(8)
-  @Test
-  fun testDestroy() {
-    userCache.destroy()
-  }
 }

@@ -26,22 +26,22 @@ import javax.servlet.Filter
 class ShiroConfig {
   private val log = ShiroConfig::class.log
 
-  @Value("#{ @environment['shiro.sessionManager.cookie.name'] ?: T(org.apache.shiro.web.servlet.ShiroHttpSession).DEFAULT_SESSION_ID_NAME }")
+  @Value("#{@environment['shiro.sessionManager.cookie.name']}")
   protected lateinit var sessionIdCookieName: String
 
-  @Value("#{ @environment['shiro.failureUrl'] ?: '/public/failure' }")
+  @Value("#{@environment['shiro.failureUrl']}")
   protected lateinit var failureUrl: String
 
-  @Value("#{ @environment['shiro.unauthorizedUrl'] ?: '/public/unauthorized' }")
+  @Value("#{@environment['shiro.unauthorizedUrl']}")
   protected lateinit var unauthorizedUrl: String
 
-  @Value("#{ @environment['shiro.logoutUrl'] ?: '/public/logout' }")
+  @Value("#{@environment['shiro.logoutUrl']}")
   protected lateinit var logoutUrl: String
 
-  @Value("#{ @environment['shiro.loginUrl'] ?: '/login.jsp' }")
+  @Value("#{@environment['shiro.loginUrl']}")
   protected lateinit var loginUrl: String
 
-  @Value("#{ @environment['shiro.successUrl'] ?: '/' }")
+  @Value("#{@environment['shiro.successUrl']}")
   protected lateinit var successUrl: String
 
   @Bean

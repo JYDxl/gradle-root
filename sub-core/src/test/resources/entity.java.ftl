@@ -24,6 +24,7 @@ import lombok.experimental.Accessors;
  * @author ${author}
  * @since ${date}
  */
+@SuppressWarnings("all")
 <#if entityLombokModel>
 @Data
   <#if superEntityClass??>
