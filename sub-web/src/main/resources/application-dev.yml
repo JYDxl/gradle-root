@@ -104,3 +104,5 @@ shiro:
 shiro-redis:
   redis-manager:
     host: ubuntu:6381
+  cache-manager:
+    principalIdFieldName: username
