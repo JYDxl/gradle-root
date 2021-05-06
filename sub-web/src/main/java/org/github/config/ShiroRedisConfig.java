@@ -10,7 +10,6 @@ import org.crazycake.shiro.RedisManagerProperties;
 import org.crazycake.shiro.RedisSentinelManager;
 import org.crazycake.shiro.RedisSessionDAO;
 import org.crazycake.shiro.RedisSessionDAOProperties;
-import org.github.system.shiro.JSONRedisSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -50,7 +49,6 @@ public class ShiroRedisConfig {
     if (!StringUtils.isEmpty(cacheManagerProperties.getKeyPrefix())) {
       cacheManager.setKeyPrefix(cacheManagerProperties.getKeyPrefix());
     }
-    cacheManager.setValueSerializer(jsonRedisSerializer());
     return cacheManager;
   }
 
@@ -153,11 +151,6 @@ public class ShiroRedisConfig {
   }
 
   @Bean
-  public JSONRedisSerializer jsonRedisSerializer() {
-    return new JSONRedisSerializer();
-  }
-
-  @Bean
   public RedisSessionDAO sessionDAO(IRedisManager redisManager) {
     RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
     redisSessionDAO.setRedisManager(redisManager);
@@ -170,7 +163,6 @@ public class ShiroRedisConfig {
     if (redisSessionDAOProperties.getSessionInMemoryTimeout() != null) {
       redisSessionDAO.setSessionInMemoryTimeout(redisSessionDAOProperties.getSessionInMemoryTimeout());
     }
-    redisSessionDAO.setValueSerializer(jsonRedisSerializer());
     return redisSessionDAO;
   }
 }
