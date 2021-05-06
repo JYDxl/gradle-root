@@ -44,7 +44,10 @@ class ShiroConfig {
   protected lateinit var successUrl: String
 
   @Bean
-  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher)
+  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher).apply {
+    authenticationCacheName="authen"
+    authorizationCacheName="author"
+  }
 
   @Bean
   fun authorizer() = ModularRealmAuthorizer()
