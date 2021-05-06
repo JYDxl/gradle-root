@@ -1,6 +1,5 @@
 package org.github.cache
 
-import lombok.extern.slf4j.Slf4j
 import org.github.base.entity.UserEntity
 import org.github.ops.info
 import org.github.ops.log
@@ -16,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @TestMethodOrder(OrderAnnotation::class)
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
-@Slf4j
 internal class UserCacheTest {
   private val log = UserCache::class.log
 

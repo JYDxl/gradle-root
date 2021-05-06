@@ -1,13 +1,6 @@
 package org.github.cache;
 
-import java.util.function.Supplier;
-
-public enum CacheEnum implements Supplier<String> {
+public enum CacheEnum implements CacheNameSupplier {
   user,
-  username;
-
-  @Override
-  public String get() {
-    return toString();
-  }
+  username
 }

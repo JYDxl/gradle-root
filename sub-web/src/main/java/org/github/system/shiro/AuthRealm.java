@@ -27,6 +27,8 @@ public class AuthRealm extends AuthorizingRealm {
   public AuthRealm(CredentialsMatcher matcher) {
     super(matcher);
     setAuthenticationCachingEnabled(true);
+    setAuthenticationCacheName("authen");
+    setAuthorizationCacheName("author");
   }
 
   @Override
