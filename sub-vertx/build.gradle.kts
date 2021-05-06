@@ -38,8 +38,7 @@ tasks.withType<Test> {
     "-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true",
-    "--illegal-access=deny"
+    "-Djava.net.preferIPv4Stack=true"
   )
 }
 
