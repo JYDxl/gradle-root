@@ -3,15 +3,12 @@ package org.github.system.shiro;
 import java.util.Objects;
 import java.util.function.Function;
 import lombok.*;
+import org.apache.shiro.authc.*;
 import org.github.base.entity.PermissionEntity;
 import org.github.util.FuncUtil;
 import org.github.web.model.dto.RoleInfoDTO;
 import org.github.web.model.dto.UserInfoDTO;
 import org.github.web.service.ICustomUserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -31,7 +28,8 @@ public class AuthRealm extends AuthorizingRealm {
 
   @Override
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-    val username = ((String) token.getPrincipal());
+    UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
+    val username = usernamePasswordToken.getUsername();
     if (isBlank(username)) return null;
 
     val userService = getAppCtx().getBean(ICustomUserService.class);
