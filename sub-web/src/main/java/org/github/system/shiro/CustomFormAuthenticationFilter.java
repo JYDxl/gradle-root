@@ -27,7 +27,6 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter imp
         val userInfo = new UserInfoDTO();
         copyProperties(subject.getPrincipal(), userInfo);
         val session = subject.getSession(false);
-        if (session != null) session.setAttribute("user", subject.getPrincipal());
         userInfo.setSessionId(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
         resp(request, response, new JSONDataReturn<>(userInfo));
         return false;
