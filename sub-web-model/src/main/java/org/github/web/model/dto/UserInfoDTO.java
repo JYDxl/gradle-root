@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserInfoDTO extends UserEntity {
   private @Nullable List<RoleInfoDTO> roleList;
 
+  private @Nullable String sessionId;
+
   @JsonIgnore
   @Override
   public String getPassword() {

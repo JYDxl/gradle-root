@@ -25,17 +25,8 @@ import javax.servlet.Filter
 class ShiroConfig {
   private val log = ShiroConfig::class.log
 
-  @Value("#{@environment['shiro.sessionManager.cookie.name']}")
-  protected lateinit var sessionIdCookieName: String
-
-  @Value("#{@environment['shiro.failureUrl']}")
-  protected lateinit var failureUrl: String
-
   @Value("#{@environment['shiro.unauthorizedUrl']}")
   protected lateinit var unauthorizedUrl: String
-
-  @Value("#{@environment['shiro.logoutUrl']}")
-  protected lateinit var logoutUrl: String
 
   @Value("#{@environment['shiro.loginUrl']}")
   protected lateinit var loginUrl: String
@@ -68,7 +59,7 @@ class ShiroConfig {
     addPathDefinition("/login", "authc")
     addPathDefinition("/logout", "logout")
     addPathDefinition("/rest/**", "user")
-    addPathDefinition("/**", "user")
+    addPathDefinition("/**", "authc")
   }
 
   @Bean
@@ -85,11 +76,7 @@ class ShiroConfig {
     setGlobalFilters(singletonList(invalidRequest.name))
     filterChainDefinitionMap = definition.filterChainMap
     filters = object: ForwardingMap<String, Filter>() {
-      override fun delegate(): Map<String, Filter> = of(
-        "authc", CustomFormAuthenticationFilter(this@ShiroConfig.sessionIdCookieName, this@ShiroConfig.failureUrl, this@ShiroConfig.unauthorizedUrl),
-        "user", CustomUserFilter(this@ShiroConfig.unauthorizedUrl),
-        "logout", CustomLogoutFilter(this@ShiroConfig.logoutUrl)
-      )
+      override fun delegate(): Map<String, Filter> = of("authc", CustomAuthenticationFilter(), "user", CustomUserFilter(), "logout", CustomLogoutFilter())
 
       override fun put(key: String, value: Filter): Filter? = log.debug {"忽略Spring中注册的的Filter[$key : $value]"}.let {null}
     }

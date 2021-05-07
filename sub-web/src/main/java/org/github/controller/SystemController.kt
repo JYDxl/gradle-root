@@ -5,17 +5,24 @@ import org.apache.shiro.session.Session
 import org.apache.shiro.subject.Subject
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn.of
-import org.github.spring.restful.json.JSONReturn
-import org.github.spring.restful.json.JSONReturn.warn
-import org.springframework.stereotype.Controller
+import org.github.web.model.dto.UserInfoDTO
+import org.springframework.beans.BeanUtils.copyProperties
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/")
-@Controller
+@RestController
 class SystemController {
-  @RequestMapping("public/login", "login")
+  @PostMapping( "login")
   fun login(): Returnable {
-    return of(getSubject()?.principal)
+    val subject: Subject = getSubject()
+    if (subject.principal==null)return of()
+    val userInfo = UserInfoDTO()
+    copyProperties(subject.principal, userInfo)
+    val session: Session? = subject.getSession(false)
+    userInfo.sessionId = session?.id.toString()
+    return of(userInfo)
   }
 
   @RequestMapping("public/token")
@@ -23,20 +30,5 @@ class SystemController {
     val subject: Subject = getSubject()
     val session: Session? = subject.getSession(false)
     return of(session?.id)
-  }
-
-  @RequestMapping("public/failure")
-  fun failure(): Returnable {
-    return warn().withRetMsg("用户名或密码错误")
-  }
-
-  @RequestMapping("public/unauthorized")
-  fun unauthorized(): Returnable {
-    return warn().withRetMsg("权限不足")
-  }
-
-  @RequestMapping("public/logout")
-  fun logout(): Returnable {
-    return JSONReturn().withRetMsg("退出成功")
   }
 }

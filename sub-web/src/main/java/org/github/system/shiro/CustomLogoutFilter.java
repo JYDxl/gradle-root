@@ -1,19 +1,15 @@
 package org.github.system.shiro;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 
-public class CustomLogoutFilter extends LogoutFilter {
-  private final String logoutUrl;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
-  public CustomLogoutFilter(String logoutUrl) {
-    this.logoutUrl = logoutUrl;
-  }
+import static org.github.spring.restful.json.JSONReturn.of;
 
-  @Override
-  protected String getRedirectUrl(ServletRequest request, ServletResponse response, Subject subject) {
-    return logoutUrl;
-  }
+public class CustomLogoutFilter extends LogoutFilter implements CustomFilterInvoker {
+    @Override
+    protected void issueRedirect(ServletRequest request, ServletResponse response, String redirectUrl) throws Exception {
+        resp(request, response, of().withRetMsg("登出成功"));
+    }
 }

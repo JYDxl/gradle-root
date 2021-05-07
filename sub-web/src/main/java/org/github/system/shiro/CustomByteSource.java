@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Arrays;
+
+import lombok.NonNull;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.codec.CodecSupport;
 import org.apache.shiro.codec.Hex;
@@ -20,23 +22,19 @@ public class CustomByteSource implements ByteSource, Serializable {
     this.bytes = bytes;
   }
 
-  public CustomByteSource(char[] chars) {
-    this.bytes = CodecSupport.toBytes(chars);
-  }
-
-  public CustomByteSource(String string) {
+  public CustomByteSource(@NonNull String string) {
     this.bytes = CodecSupport.toBytes(string);
   }
 
-  public CustomByteSource(ByteSource source) {
+  public CustomByteSource(@NonNull ByteSource source) {
     this.bytes = source.getBytes();
   }
 
-  public CustomByteSource(File file) {
+  public CustomByteSource(@NonNull File file) {
     this.bytes = (new BytesHelper()).getBytes(file);
   }
 
-  public CustomByteSource(InputStream stream) {
+  public CustomByteSource(@NonNull InputStream stream) {
     this.bytes = (new BytesHelper()).getBytes(stream);
   }
 

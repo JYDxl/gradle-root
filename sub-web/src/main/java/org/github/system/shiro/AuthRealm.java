@@ -58,8 +58,8 @@ public class AuthRealm extends AuthorizingRealm {
     val userService = getAppCtx().getBean(ICustomUserService.class);
     val user        = userService.queryUserInfo(username);
     if (user == null) return null;
-
-    return new SimpleAuthenticationInfo(user, user.getPassword(), new CustomByteSource(user.getSalt()), getName());
+    val source = user.getSalt() != null ? new CustomByteSource(user.getSalt()) : new CustomByteSource();
+    return new SimpleAuthenticationInfo(user, user.getPassword(), source, getName());
   }
 
   @Override
