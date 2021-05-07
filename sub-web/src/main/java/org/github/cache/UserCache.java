@@ -1,14 +1,13 @@
 package org.github.cache;
 
 import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Function;
 import lombok.*;
 import org.github.base.entity.UserEntity;
 import org.github.base.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import static com.baomidou.mybatisplus.core.toolkit.Wrappers.*;
 import static com.google.common.collect.ImmutableMap.*;
-import static java.util.function.Function.*;
 import static org.github.base.enums.EnableEnum.*;
 import static org.github.cache.CacheEnum.*;
 
@@ -18,7 +17,7 @@ public class UserCache extends AbstractCache<UserEntity> {
 
   @NonNull
   @Override
-  public Supplier<String> getRegion() {
+  public CacheNameSupplier getRegion() {
     return user;
   }
 
@@ -28,7 +27,7 @@ public class UserCache extends AbstractCache<UserEntity> {
     val query = userService.lambdaQuery();
     query.eq(UserEntity::getEnabled, enabled.getCode());
     val list = query.list();
-    return list.stream().collect(toImmutableMap(v -> String.valueOf(v.getId()), identity()));
+    return list.stream().collect(toImmutableMap(v -> String.valueOf(v.getId()), Function.identity()));
   }
 
   @Deprecated

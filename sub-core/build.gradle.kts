@@ -27,8 +27,7 @@ tasks.withType<Test> {
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true",
-    "--illegal-access=deny"
+    "-Djava.net.preferIPv4Stack=true"
   )
 }
 
