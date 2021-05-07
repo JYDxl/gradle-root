@@ -17,7 +17,7 @@ class PasswordGeneratorTest {
 
   @Test
   void generator() {
-    val result = generator.generator("123", "jack");
+    val result = generator.generate("123", "jack");
     log.info(result);
   }
 }

@@ -49,7 +49,7 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter imp
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         if (isLoginRequest(request, response)) {
             if (isLoginSubmission(request, response)) {
-                if (log.isDebugEnabled()) log.debug("Login submission detected. Attempting to execute login.");
+                if (log.isDebugEnabled()) log.debug("WEB Login submission detected. Attempting to execute login.");
                 executeLogin(request, response);
             } else {
                 //访问方法错误

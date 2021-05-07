@@ -15,7 +15,8 @@ public class PasswordGenerator {
     this.hashIterations = hashIterations;
   }
 
-  public String generator(@NonNull String password, String salt) {
+  @NonNull
+  public String generate(@NonNull String password, String salt) {
     return new SimpleHash(hashAlgorithm, password, salt, hashIterations).toHex();
   }
 }
