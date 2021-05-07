@@ -7,6 +7,8 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 public class AuthRealm extends AbstractRealm {
   public AuthRealm(CredentialsMatcher matcher) {
     super(matcher);
+    setAuthenticationCacheName("authen:web");
+    setAuthorizationCacheName("author");
   }
 
   @Override

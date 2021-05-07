@@ -25,8 +25,6 @@ public abstract class AbstractRealm extends AuthorizingRealm {
   public AbstractRealm(CredentialsMatcher matcher) {
     super(matcher);
     setAuthenticationCachingEnabled(true);
-    setAuthenticationCacheName("authen");
-    setAuthorizationCacheName("author");
   }
 
   @Override

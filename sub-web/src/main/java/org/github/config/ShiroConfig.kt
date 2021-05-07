@@ -25,17 +25,14 @@ import javax.servlet.Filter
 class ShiroConfig {
   private val log = ShiroConfig::class.log
 
-  @Value("#{@environment['shiro.unauthorizedUrl']}")
-  protected lateinit var unauthorizedUrl: String
-
   @Value("#{@environment['shiro.loginUrl']}")
   protected lateinit var loginUrl: String
 
-  @Value("#{@environment['shiro.successUrl']}")
-  protected lateinit var successUrl: String
-
   @Bean
   fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher)
+
+  @Bean
+  fun jwtRealm() = JWTRealm()
 
   @Bean
   fun authorizer() = ModularRealmAuthorizer()
@@ -55,7 +52,7 @@ class ShiroConfig {
     addPathDefinition("/public/**", "anon")
     addPathDefinition("/login", "authc")
     addPathDefinition("/logout", "logout")
-    addPathDefinition("/rest/**", "user")
+    addPathDefinition("/rest/**", "authc")
     addPathDefinition("/**", "authc")
   }
 
@@ -67,8 +64,8 @@ class ShiroConfig {
   @Bean
   fun shiroFilterFactoryBean(manager: SecurityManager, definition: ShiroFilterChainDefinition) = ShiroFilterFactoryBean().apply {
     loginUrl = this@ShiroConfig.loginUrl
-    successUrl = this@ShiroConfig.successUrl
-    unauthorizedUrl = this@ShiroConfig.unauthorizedUrl
+//    successUrl = this@ShiroConfig.successUrl
+//    unauthorizedUrl = this@ShiroConfig.unauthorizedUrl
     securityManager = manager
     setGlobalFilters(singletonList(invalidRequest.name))
     filterChainDefinitionMap = definition.filterChainMap
@@ -76,7 +73,7 @@ class ShiroConfig {
       override fun delegate(): Map<String, Filter> = of(
         "logout", CustomLogoutFilter(),
         "perms", CustomPermissionsAuthorizationFilter(),
-        "authc", CustomFormAuthenticationFilter(),
+        "authc", CustomJWTFormAuthenticationFilter(),
         "roles", CustomRolesAuthorizationFilter(),
         "user", CustomUserFilter()
       )

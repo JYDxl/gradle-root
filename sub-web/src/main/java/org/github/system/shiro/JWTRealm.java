@@ -12,6 +12,8 @@ import static org.github.system.shiro.JWTUtil.verify;
 public class JWTRealm extends AbstractRealm {
   public JWTRealm() {
     super(null);
+    setAuthenticationCacheName("authen:jwt");
+    setAuthorizationCacheName("author");
   }
 
   @Override
