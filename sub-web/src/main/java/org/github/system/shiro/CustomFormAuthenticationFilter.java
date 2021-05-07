@@ -17,11 +17,11 @@ import java.util.Objects;
 import static java.util.Optional.ofNullable;
 import static javax.servlet.http.HttpServletResponse.SC_METHOD_NOT_ALLOWED;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
-import static org.github.spring.restful.json.JSONReturn.warn;
+import static org.github.system.shiro.CustomFilterInvoker.resp;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Slf4j
-public class CustomAuthenticationFilter extends FormAuthenticationFilter implements CustomFilterInvoker {
+public class CustomFormAuthenticationFilter extends FormAuthenticationFilter implements CustomFilterInvoker {
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
         val userInfo = new UserInfoDTO();
@@ -36,7 +36,8 @@ public class CustomAuthenticationFilter extends FormAuthenticationFilter impleme
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
         log.warn(e.getMessage(), e);
         try {
-            resp(request, response, warn().withRetMsg("登录失败"));
+            //TODO 根据异常分类
+            loginFailed(request, response);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
@@ -47,14 +48,14 @@ public class CustomAuthenticationFilter extends FormAuthenticationFilter impleme
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         if (isLoginRequest(request, response)) {
             if (isLoginSubmission(request, response)) {
-                if (log.isDebugEnabled()) log.debug("Login submission detected. Attempting to execute login.");
+                if (log.isDebugEnabled()) log.debug("WEB Login submission detected. Attempting to execute login.");
                 executeLogin(request, response);
             } else {
                 //访问方法错误
                 onLoginRequestNotAPost(request, response);
             }
         } else {
-            resp(request, response, warn().withRetMsg("用户未登录"));
+            notLogin(request, response);
         }
         return false;
     }

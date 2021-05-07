@@ -81,6 +81,7 @@ public class CustomUserServiceImpl implements ICustomUserService {
 
   @Override
   public UserInfoDTO queryUserInfo(@NonNull String username) {
+    //TODO 检查账户状态并抛出对应异常
     return userMapper.queryUserInfo(username);
   }
 
