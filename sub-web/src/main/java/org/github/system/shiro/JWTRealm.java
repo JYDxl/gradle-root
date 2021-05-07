@@ -29,6 +29,7 @@ public class JWTRealm extends AbstractRealm {
   @Override
   protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
     try {
+      //TODO 异常分类
       verify(token.getCredentials().toString(), token.getPrincipal().toString(), info.getCredentials().toString());
     } catch (Exception e) {
       log.error(e.getMessage(), e);
