@@ -76,7 +76,13 @@ class ShiroConfig {
     setGlobalFilters(singletonList(invalidRequest.name))
     filterChainDefinitionMap = definition.filterChainMap
     filters = object: ForwardingMap<String, Filter>() {
-      override fun delegate(): Map<String, Filter> = of("authc", CustomAuthenticationFilter(), "user", CustomUserFilter(), "logout", CustomLogoutFilter())
+      override fun delegate(): Map<String, Filter> = of(
+        "logout", CustomLogoutFilter(),
+        "perms", CustomPermissionsAuthorizationFilter(),
+        "authc", CustomFormAuthenticationFilter(),
+        "roles", CustomRolesAuthorizationFilter(),
+        "user", CustomUserFilter()
+      )
 
       override fun put(key: String, value: Filter): Filter? = log.debug {"忽略Spring中注册的的Filter[$key : $value]"}.let {null}
     }

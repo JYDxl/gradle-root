@@ -17,16 +17,17 @@ import java.util.Objects;
 import static java.util.Optional.ofNullable;
 import static javax.servlet.http.HttpServletResponse.SC_METHOD_NOT_ALLOWED;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
-import static org.github.spring.restful.json.JSONReturn.warn;
+import static org.github.system.shiro.CustomFilterInvoker.resp;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Slf4j
-public class CustomAuthenticationFilter extends FormAuthenticationFilter implements CustomFilterInvoker {
+public class CustomFormAuthenticationFilter extends FormAuthenticationFilter implements CustomFilterInvoker {
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
         val userInfo = new UserInfoDTO();
         copyProperties(subject.getPrincipal(), userInfo);
         val session = subject.getSession(false);
+        if (session != null) session.setAttribute("user", subject.getPrincipal());
         userInfo.setSessionId(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
         resp(request, response, new JSONDataReturn<>(userInfo));
         return false;
@@ -36,7 +37,8 @@ public class CustomAuthenticationFilter extends FormAuthenticationFilter impleme
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
         log.warn(e.getMessage(), e);
         try {
-            resp(request, response, warn().withRetMsg("登录失败"));
+            //TODO 根据异常分类
+            loginFailed(request, response);
         } catch (Exception ex) {
             log.error(ex.getMessage(), ex);
         }
@@ -54,7 +56,7 @@ public class CustomAuthenticationFilter extends FormAuthenticationFilter impleme
                 onLoginRequestNotAPost(request, response);
             }
         } else {
-            resp(request, response, warn().withRetMsg("用户未登录"));
+            notLogin(request, response);
         }
         return false;
     }
