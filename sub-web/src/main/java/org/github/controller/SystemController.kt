@@ -25,7 +25,7 @@ class SystemController {
   @Autowired
   private lateinit var generator: PasswordGenerator
 
-  @PostMapping( "login")
+  @PostMapping("login")
   fun login(): Returnable {
     val userInfo = UserInfoDTO()
     val subject: Subject = getSubject()

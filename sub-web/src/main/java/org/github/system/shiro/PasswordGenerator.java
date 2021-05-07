@@ -7,11 +7,16 @@ import javax.annotation.Nullable;
 
 @Data
 public class PasswordGenerator {
-    private final @NonNull String hashAlgorithm;
+  private final @NonNull String hashAlgorithm;
 
-    private final int hashIterations;
+  private final int hashIterations;
 
-    public @NonNull String generate(@NonNull String password, @Nullable Object salt) {
-        return new SimpleHash(hashAlgorithm, password, salt, hashIterations).toHex();
-    }
+  public PasswordGenerator(@NonNull String hashAlgorithm, int hashIterations) {
+    this.hashAlgorithm = hashAlgorithm;
+    this.hashIterations = hashIterations;
+  }
+
+  public @NonNull String generate(@NonNull String password, @Nullable Object salt) {
+    return new SimpleHash(hashAlgorithm, password, salt, hashIterations).toHex();
+  }
 }

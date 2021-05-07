@@ -5,13 +5,12 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 
 public class AuthRealm extends AbstractRealm {
-    public AuthRealm(CredentialsMatcher matcher) {
-        super(matcher);
-    }
+  public AuthRealm(CredentialsMatcher matcher) {
+    super(matcher);
+  }
 
-    @Override
-    protected String getUsername(AuthenticationToken authenticationToken) {
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        return token.getUsername();
-    }
+  @Override
+  protected String getUsername(AuthenticationToken token) {
+    return ((UsernamePasswordToken) token).getUsername();
+  }
 }

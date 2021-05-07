@@ -14,38 +14,38 @@ import static org.github.system.shiro.JWTUtil.username;
 
 @Slf4j
 public class CustomJWTFormAuthenticationFilter extends CustomFormAuthenticationFilter {
-    @Override
-    protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
-        if (isNotJWT(request)) return super.onLoginSuccess(token, subject, request, response);
-        return true;
-    }
+  @Override
+  protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
+    if (isNotJWT(request)) return super.createToken(request, response);
+    val token    = toHttp(request).getHeader("token");
+    val username = username(token);
+    return new JWTToken(username, token);
+  }
 
-    @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        if (isNotJWT(request)) return super.onAccessDenied(request, response);
-        if (log.isDebugEnabled()) log.debug("JWT Login submission detected. Attempting to execute login.");
-        return executeLogin(request, response);
-    }
+  protected boolean isNotJWT(ServletRequest request) {
+    return !hasJWTToken(request);
+  }
 
-    protected boolean hasJWTToken(ServletRequest request) {
-        return isNotBlank(toHttp(request).getHeader("token"));
-    }
+  protected boolean hasJWTToken(ServletRequest request) {
+    return isNotBlank(toHttp(request).getHeader("token"));
+  }
 
-    protected boolean isNotJWT(ServletRequest request) {
-        return !hasJWTToken(request);
-    }
+  @Override
+  protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+    if (isNotJWT(request)) return super.onAccessDenied(request, response);
+    if (log.isDebugEnabled()) log.debug("JWT Login submission detected. Attempting to execute login.");
+    return executeLogin(request, response);
+  }
 
-    @Override
-    protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-        if (isNotJWT(request)) return super.createToken(request, response);
-        val token = toHttp(request).getHeader("token");
-        val username = username(token);
-        return new JWTToken(username, token);
-    }
+  @Override
+  protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
+    if (isNotJWT(request)) return super.onLoginSuccess(token, subject, request, response);
+    return true;
+  }
 
-    @Override
-    protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
-        //if (isNotJWT(request)) return;
-        //TODO 刷新token的过期时间.
-    }
+  @Override
+  protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
+    //if (isNotJWT(request)) return;
+    //TODO 刷新token的过期时间.
+  }
 }
