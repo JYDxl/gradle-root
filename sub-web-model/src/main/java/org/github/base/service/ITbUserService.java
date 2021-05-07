@@ -5,10 +5,10 @@ import org.github.base.IService;
 
 /**
  * <p>
- * 用户信息表 服务类
+ * 用户 服务类
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-05
+ * @since 2021-05-07
  */
 public interface ITbUserService extends IService<TbUserEntity> {}

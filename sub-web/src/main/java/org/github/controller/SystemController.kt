@@ -7,18 +7,20 @@ import org.github.exception.ParamsErrorException
 import org.github.ops.log
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn.of
+import org.github.spring.restful.view.VIEW
 import org.github.system.shiro.JWTUtil.sign
 import org.github.system.shiro.PasswordGenerator
 import org.github.web.model.dto.UserInfoDTO
 import org.github.web.model.system.JWTLogin
 import org.springframework.beans.BeanUtils.copyProperties
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/")
-@RestController
+@Controller
 class SystemController {
   private val log = SystemController::class.log
 
@@ -34,6 +36,9 @@ class SystemController {
     userInfo.sessionId = session?.id.toString()
     return of(userInfo)
   }
+
+  @GetMapping("login")
+  fun loginPage() = VIEW {"login"}
 
   @RequestMapping("public/token")
   fun token(): Returnable {

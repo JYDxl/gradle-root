@@ -6,11 +6,11 @@ import org.github.mybatis.MyBatisMapper;
 
 /**
  * <p>
- * 用户信息表 Mapper 接口
+ * 用户 Mapper 接口
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-05
+ * @since 2021-05-07
  */
 @MyBatisMapper
 public interface ITbUserMapper extends IMapper<TbUserEntity> {}

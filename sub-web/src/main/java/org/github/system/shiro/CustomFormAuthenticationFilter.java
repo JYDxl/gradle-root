@@ -15,8 +15,8 @@ import javax.servlet.ServletResponse;
 import java.util.Objects;
 
 import static java.util.Optional.ofNullable;
-import static javax.servlet.http.HttpServletResponse.SC_METHOD_NOT_ALLOWED;
-import static org.apache.shiro.web.util.WebUtils.toHttp;
+// import static javax.servlet.http.HttpServletResponse.SC_METHOD_NOT_ALLOWED;
+// import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.system.shiro.CustomFilterInvoker.resp;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
@@ -30,7 +30,8 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter imp
         executeLogin(request, response);
       } else {
         //访问方法错误
-        onLoginRequestNotAPost(request, response);
+        // onLoginRequestNotAPost(request, response);
+        return true;
       }
     } else {
       notLogin(request, response);
@@ -60,9 +61,9 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter imp
     return false;
   }
 
-  protected void onLoginRequestNotAPost(@SuppressWarnings("unused") ServletRequest request, ServletResponse response) {
-    val httpServletResponse = toHttp(response);
-    httpServletResponse.setStatus(SC_METHOD_NOT_ALLOWED);
-    httpServletResponse.setHeader("Allow", "POST");
-  }
+  // protected void onLoginRequestNotAPost(@SuppressWarnings("unused") ServletRequest request, ServletResponse response) {
+  //   val httpServletResponse = toHttp(response);
+  //   httpServletResponse.setStatus(SC_METHOD_NOT_ALLOWED);
+  //   httpServletResponse.setHeader("Allow", "POST");
+  // }
 }

@@ -32,7 +32,7 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://ubuntu:3380/mp"
+    url = "jdbc:mysql://ubuntu:3380/web"
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
     password = "root"

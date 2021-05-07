@@ -32,7 +32,7 @@ class UserController {
 
   @PostMapping("login")
   fun login(@RequestBody user: TbUserEntity): Returnable {
-    val token = UsernamePasswordToken(user.userName, user.password)
+    val token = UsernamePasswordToken(user.username, user.password)
     val subject = SecurityUtils.getSubject()
     subject.login(token)
     subject.isAuthenticated
