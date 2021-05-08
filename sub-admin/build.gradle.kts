@@ -29,7 +29,6 @@ tasks.getByName<Task>("bootDistZip") {enabled = false}
 val netty: String by System.getProperties()
 
 dependencies {
-  implementation(project(":sub-system"))
   implementation(project(":sub-core"))
   implementation(project(":sub-api"))
 

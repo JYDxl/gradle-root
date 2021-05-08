@@ -1,0 +1,3 @@
+*
+!build/libs/gateway-boot.jar
+!build/bootScripts/sub-gateway

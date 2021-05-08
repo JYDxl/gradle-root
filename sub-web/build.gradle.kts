@@ -44,7 +44,6 @@ val netty: String by System.getProperties()
 val shiro: String by System.getProperties()
 
 dependencies {
-  implementation(project(":sub-system"))
   implementation(project(":sub-core"))
   implementation(project(":sub-api"))
 

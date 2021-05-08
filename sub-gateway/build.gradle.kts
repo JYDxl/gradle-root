@@ -27,7 +27,6 @@ tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
 dependencies {
-  implementation(project(":sub-system"))
   implementation(project(":sub-core"))
   implementation(project(":sub-api"))
 
