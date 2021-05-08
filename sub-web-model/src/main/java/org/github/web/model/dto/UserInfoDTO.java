@@ -2,6 +2,8 @@ package org.github.web.model.dto;
 
 import java.util.List;
 import javax.annotation.Nullable;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.github.base.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UserInfoDTO extends UserEntity {
   private @Nullable List<RoleInfoDTO> roleList;
 
+  @JsonProperty("token")
   private @Nullable String sessionId;
 
   @JsonIgnore

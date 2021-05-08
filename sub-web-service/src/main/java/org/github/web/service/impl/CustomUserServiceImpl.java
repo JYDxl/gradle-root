@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import lombok.*;
+import org.apache.shiro.authc.AuthenticationException;
 import org.github.base.entity.PermissionEntity;
 import org.github.base.entity.RoleEntity;
 import org.github.base.entity.RolePermissionEntity;
@@ -80,9 +81,11 @@ public class CustomUserServiceImpl implements ICustomUserService {
   }
 
   @Override
-  public UserInfoDTO queryUserInfo(@NonNull String username) {
-    //TODO 检查账户状态并抛出对应异常
-    return userMapper.queryUserInfo(username);
+  public @NonNull UserInfoDTO queryUserInfo(@NonNull String username) throws AuthenticationException {
+    val userInfo = userMapper.queryUserInfo(username);
+    if (userInfo == null) throw new AuthenticationException("用户未注册");
+    //TODO 禁用、锁定等等
+    return userInfo;
   }
 
   private @NonNull List<Integer> queryRoleIds(@NonNull Integer userId) {

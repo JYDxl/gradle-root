@@ -53,8 +53,7 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter imp
   protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
     log.warn(e.getMessage(), e);
     try {
-      //TODO 根据异常分类
-      loginFailed(request, response);
+      loginFailed(request, response, e.getMessage());
     } catch (Exception ex) {
       log.error(ex.getMessage(), ex);
     }

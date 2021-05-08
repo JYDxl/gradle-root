@@ -3,6 +3,7 @@ package org.github.web.service;
 import java.util.Set;
 import javax.annotation.Nullable;
 import lombok.*;
+import org.apache.shiro.authc.AuthenticationException;
 import org.github.base.entity.UserEntity;
 import org.github.web.model.dto.UserInfoDTO;
 
@@ -13,5 +14,5 @@ public interface ICustomUserService {
 
   @Nullable UserEntity queryUser(@NonNull String username);
 
-  @Nullable UserInfoDTO queryUserInfo(@NonNull String username);
+  @NonNull UserInfoDTO queryUserInfo(@NonNull String username) throws AuthenticationException;
 }

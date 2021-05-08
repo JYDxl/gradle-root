@@ -12,8 +12,8 @@ import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.spring.restful.json.JSONReturn.warn;
 
 public interface CustomFilterInvoker {
-  default void loginFailed(ServletRequest request, ServletResponse response) throws IOException {
-    resp(request, response, warn().withRetMsg("登陆失败"));
+  default void loginFailed(ServletRequest request, ServletResponse response, String msg) throws IOException {
+    resp(request, response, warn().withRetMsg(msg));
   }
 
   static void resp(ServletRequest request, ServletResponse response, JSON json) throws IOException {

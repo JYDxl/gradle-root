@@ -2,14 +2,18 @@ package org.github.system.shiro;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
+import org.github.web.model.dto.UserInfoDTO;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
+import static org.github.system.shiro.JWTUtil.sign;
 import static org.github.system.shiro.JWTUtil.username;
 
 @Slf4j
@@ -45,7 +49,12 @@ public class CustomJWTFormAuthenticationFilter extends CustomFormAuthenticationF
 
   @Override
   protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
-    //if (isNotJWT(request)) return;
-    //TODO 刷新token的过期时间.
+    if (isNotJWT(request)) return;
+    val subject = SecurityUtils.getSubject();
+    val principal = (UserInfoDTO) subject.getPrincipal();
+    val username = requireNonNull(principal.getUsername());
+    val password = requireNonNull(principal.getPassword());
+    val token = sign(username, password);
+    toHttp(response).addHeader("token", token);
   }
 }

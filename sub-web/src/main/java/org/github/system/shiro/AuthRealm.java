@@ -1,9 +1,6 @@
 package org.github.system.shiro;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 
 public class AuthRealm extends AbstractRealm {
@@ -14,8 +11,7 @@ public class AuthRealm extends AbstractRealm {
   }
 
   @Override protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
-    //TODO 异常分类处理
-    super.assertCredentialsMatch(token, info);
+    if (!getCredentialsMatcher().doCredentialsMatch(token, info)) throw new IncorrectCredentialsException("用户名或密码错误");
   }
 
   @Override
