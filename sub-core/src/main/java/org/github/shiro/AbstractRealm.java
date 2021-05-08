@@ -12,38 +12,38 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 public abstract class AbstractRealm extends AuthorizingRealm {
 
-    private final AuthorFunc author;
+  private final AuthorFunc author;
 
-    private final AuthenFunc authen;
+  private final AuthenFunc authen;
 
-    public AbstractRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen) {
-        super(matcher);
-        this.author = author;
-        this.authen = authen;
-        setAuthenticationCachingEnabled(true);
-    }
+  public AbstractRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen) {
+    super(matcher);
+    this.author = author;
+    this.authen = authen;
+    setAuthenticationCachingEnabled(true);
+  }
 
-    @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        return author.apply(principals);
-    }
+  @Override
+  protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+    return author.apply(principals);
+  }
 
-    @Override
-    protected Object getAuthenticationCacheKey(PrincipalCollection principals) {
-        return ((User) principals.getPrimaryPrincipal()).getUsername();
-    }
+  @Override
+  protected Object getAuthenticationCacheKey(PrincipalCollection principals) {
+    return ((User) principals.getPrimaryPrincipal()).getUsername();
+  }
 
-    @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        if (token.getPrincipal() == null) throw new AuthenticationException("用户名不能为空");
-        if (token.getCredentials() == null) throw new AuthenticationException("密码不能为空");
-        val info = authen.apply(token);
-        val source = info.getSalt() != null ? new CustomByteSource(info.getSalt()) : new CustomByteSource();
-        return new SimpleAuthenticationInfo(info.getPrincipal(), info.getHashedCredentials(), source, getName());
-    }
+  @Override
+  protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+    if (token.getPrincipal() == null) throw new AuthenticationException("用户名不能为空");
+    if (token.getCredentials() == null) throw new AuthenticationException("密码不能为空");
+    val info   = authen.apply(token);
+    val source = info.getSalt() != null ? new CustomByteSource(info.getSalt()) : new CustomByteSource();
+    return new SimpleAuthenticationInfo(info.getPrincipal(), info.getHashedCredentials(), source, getName());
+  }
 
-    @Override
-    public String getName() {
-        return getClass().getName();
-    }
+  @Override
+  public String getName() {
+    return getClass().getName();
+  }
 }

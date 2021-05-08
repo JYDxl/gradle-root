@@ -5,4 +5,4 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import java.util.function.Function;
 
-public interface AuthorFunc extends Function<PrincipalCollection, AuthorizationInfo> {}
+public interface AuthorFunc extends Function<PrincipalCollection,AuthorizationInfo> {}

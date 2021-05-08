@@ -1,31 +1,26 @@
 package org.github.shiro;
 
-import com.auth0.jwt.JWTVerifier;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import lombok.NonNull;
-import lombok.val;
-
-import static cn.hutool.core.date.DateUtil.date;
+import lombok.*;
+import static cn.hutool.core.date.DateUtil.*;
 import static com.auth0.jwt.JWT.*;
-import static com.auth0.jwt.algorithms.Algorithm.HMAC256;
+import static com.auth0.jwt.algorithms.Algorithm.*;
 import static java.time.LocalDateTime.now;
 
 public class JWTUtil {
   public static void verify(@NonNull String token, @NonNull String username, @NonNull String secret) {
-    Algorithm   algorithm = HMAC256(secret);
-    JWTVerifier verifier  = require(algorithm).withClaim("username", username).build();
+    val algorithm = HMAC256(secret);
+    val verifier  = require(algorithm).withClaim("username", username).build();
     verifier.verify(token);
   }
 
   public static @NonNull String getUsername(@NonNull String token) {
-    DecodedJWT jwt = decode(token);
+    val jwt = decode(token);
     return jwt.getClaim("username").asString();
   }
 
   public static @NonNull String sign(@NonNull String username, @NonNull String secret) {
-    val       date      = date(now().plusMinutes(EXPIRE_MIN)).toJdkDate();
-    Algorithm algorithm = HMAC256(secret);
+    val date      = date(now().plusMinutes(EXPIRE_MIN)).toJdkDate();
+    val algorithm = HMAC256(secret);
     return create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
   }
 

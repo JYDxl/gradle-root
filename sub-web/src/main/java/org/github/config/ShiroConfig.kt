@@ -30,13 +30,13 @@ class ShiroConfig {
 
   fun authorFunc() = WebAuthorFunc()
 
-  fun authenFunc()= WebAuthenFunc()
+  fun authenFunc() = WebAuthenFunc()
 
   @Bean
-  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher,authorFunc(),authenFunc())
+  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher, authorFunc(), authenFunc())
 
   @Bean
-  fun jwtRealm() = JWTRealm(authorFunc(),authenFunc())
+  fun jwtRealm() = JWTRealm(authorFunc(), authenFunc())
 
   @Bean
   fun authorizer() = ModularRealmAuthorizer()

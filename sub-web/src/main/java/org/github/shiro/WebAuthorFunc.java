@@ -16,14 +16,14 @@ import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static org.github.util.FuncUtil.stream;
 
 public class WebAuthorFunc implements AuthorFunc {
-    @Override
-    public AuthorizationInfo apply(PrincipalCollection principals) {
-        val user = ((UserInfoDTO) principals.getPrimaryPrincipal());
-        val roles = stream(user.getRoleList()).map(RoleInfoDTO::getName).filter(Objects::nonNull).collect(toImmutableSet());
-        val permissions = stream(user.getRoleList()).flatMap(Function.<RoleInfoDTO>identity().andThen(RoleInfoDTO::getPermissionList).andThen(FuncUtil::stream)).map(PermissionEntity::getName).filter(Objects::nonNull).collect(toImmutableSet());
-        val info = new SimpleAuthorizationInfo();
-        info.setRoles(roles);
-        info.setStringPermissions(permissions);
-        return info;
-    }
+  @Override
+  public AuthorizationInfo apply(PrincipalCollection principals) {
+    val user        = ((UserInfoDTO) principals.getPrimaryPrincipal());
+    val roles       = stream(user.getRoleList()).map(RoleInfoDTO::getName).filter(Objects::nonNull).collect(toImmutableSet());
+    val permissions = stream(user.getRoleList()).flatMap(Function.<RoleInfoDTO>identity().andThen(RoleInfoDTO::getPermissionList).andThen(FuncUtil::stream)).map(PermissionEntity::getName).filter(Objects::nonNull).collect(toImmutableSet());
+    val info        = new SimpleAuthorizationInfo();
+    info.setRoles(roles);
+    info.setStringPermissions(permissions);
+    return info;
+  }
 }

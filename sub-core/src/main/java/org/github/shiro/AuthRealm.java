@@ -10,7 +10,8 @@ public class AuthRealm extends AbstractRealm {
     setAuthorizationCacheName("author");
   }
 
-  @Override protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
+  @Override
+  protected void assertCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) throws AuthenticationException {
     if (!getCredentialsMatcher().doCredentialsMatch(token, info)) throw new IncorrectCredentialsException("用户名或密码错误");
   }
 }

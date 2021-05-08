@@ -1,11 +1,11 @@
 package org.github.shiro
 
 interface User {
-    val username: String
+  val username: String
 
-    val password: String
+  val password: String
 
-    val salt: String?
+  val salt: String?
 
-    var token: String?
+  var token: String?
 }
