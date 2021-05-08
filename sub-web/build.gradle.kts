@@ -42,6 +42,7 @@ val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
 val shiro: String by System.getProperties()
+val jwt: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-core"))
@@ -65,7 +66,7 @@ dependencies {
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
-  implementation("com.auth0:java-jwt:3.15.0")
+  implementation("com.auth0:java-jwt:$jwt")
   implementation("org.crazycake:shiro-redis-spring-boot-starter:3.3.1")
   implementation("redis.clients:jedis:3.6.0")
   implementation("io.springfox:springfox-boot-starter:$swagger")

@@ -1,4 +1,4 @@
-package org.github.system.shiro;
+package org.github.shiro;
 
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -18,7 +18,7 @@ public class JWTUtil {
     verifier.verify(token);
   }
 
-  public static @NonNull String username(@NonNull String token) {
+  public static @NonNull String getUsername(@NonNull String token) {
     DecodedJWT jwt = decode(token);
     return jwt.getClaim("username").asString();
   }

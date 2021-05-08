@@ -1,4 +1,4 @@
-package org.github.system.shiro;
+package org.github.shiro;
 
 import lombok.val;
 import org.github.spring.restful.json.JSON;
@@ -7,16 +7,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import java.io.IOException;
 
+import static cn.hutool.core.lang.Validator.hasChinese;
 import static com.google.common.base.MoreObjects.firstNonNull;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.spring.restful.json.JSONReturn.warn;
 
 public interface CustomFilterInvoker {
   default void loginFailed(ServletRequest request, ServletResponse response, String msg) throws IOException {
-    resp(request, response, warn().withRetMsg(msg));
+    resp(request, response, warn().withRetMsg(hasChinese(msg) ? msg : "登陆失败"));
   }
 
-  static void resp(ServletRequest request, ServletResponse response, JSON json) throws IOException {
+  default void resp(ServletRequest request, ServletResponse response, JSON json) throws IOException {
     val httpServletResponse = toHttp(response);
     httpServletResponse.setContentType(json.mediaType().toString());
     httpServletResponse.getWriter().write(firstNonNull(json.get(), "null"));

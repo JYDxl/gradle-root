@@ -2,6 +2,7 @@ package org.github.system.shiro;
 
 import lombok.extern.slf4j.*;
 import lombok.*;
+import org.github.shiro.PasswordGenerator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

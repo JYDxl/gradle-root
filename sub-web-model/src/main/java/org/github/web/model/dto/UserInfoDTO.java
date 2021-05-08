@@ -1,31 +1,42 @@
 package org.github.web.model.dto;
 
-import java.util.List;
-import javax.annotation.Nullable;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-import org.github.base.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
+import org.github.base.entity.UserEntity;
+import org.github.shiro.User;
+
+import javax.annotation.Nullable;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
-public class UserInfoDTO extends UserEntity {
-  private @Nullable List<RoleInfoDTO> roleList;
+public class UserInfoDTO extends UserEntity implements User {
+    private @Nullable
+    List<RoleInfoDTO> roleList;
 
-  @JsonProperty("token")
-  private @Nullable String sessionId;
+    private @Nullable
+    String token;
 
-  @JsonIgnore
-  @Override
-  public String getPassword() {
-    return super.getPassword();
-  }
+    @Override
+    public @NonNull String getUsername() {
+        return requireNonNull(super.getUsername());
+    }
 
-  @JsonIgnore
-  @Override
-  public String getSalt() {
-    return super.getSalt();
-  }
+    @JsonIgnore
+    @Override
+    public @NonNull String getPassword() {
+        return requireNonNull(super.getPassword());
+    }
+
+    @JsonIgnore
+    @Override
+    public String getSalt() {
+        return super.getSalt();
+    }
 }

@@ -1,4 +1,4 @@
-package org.github.system.shiro;
+package org.github.shiro;
 
 import com.auth0.jwt.exceptions.AlgorithmMismatchException;
 import com.auth0.jwt.exceptions.InvalidClaimException;
@@ -9,19 +9,14 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 
-import static org.github.system.shiro.JWTUtil.verify;
+import static org.github.shiro.JWTUtil.verify;
 
 @Slf4j
 public class JWTRealm extends AbstractRealm {
-  public JWTRealm() {
-    super(null);
+  public JWTRealm(AuthorFunc author, AuthenFunc authen) {
+    super(null, author, authen);
     setAuthenticationCacheName("authen:jwt");
     setAuthorizationCacheName("author");
-  }
-
-  @Override
-  protected String getUsername(AuthenticationToken token) {
-    return ((JWTToken) token).getUsername();
   }
 
   @Override

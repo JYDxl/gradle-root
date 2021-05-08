@@ -5,6 +5,7 @@ pluginManagement {
 }
 
 rootProject.name = "gradle-root"
+
 include("sub-core")
 include("sub-api")
 

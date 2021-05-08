@@ -1,6 +1,7 @@
-package org.github.system.shiro;
+package org.github.shiro;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
 import javax.annotation.Nullable;

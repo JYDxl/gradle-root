@@ -1,4 +1,4 @@
-package org.github.system.shiro;
+package org.github.shiro;
 
 import lombok.Data;
 import lombok.NonNull;

@@ -1,4 +1,4 @@
-package org.github.system.shiro;
+package org.github.shiro;
 
 import org.apache.shiro.web.filter.authc.UserFilter;
 

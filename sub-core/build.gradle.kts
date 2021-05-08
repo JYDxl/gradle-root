@@ -4,7 +4,9 @@ val javassist: String by System.getProperties()
 val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
+val shiro: String by System.getProperties()
 val jna: String by System.getProperties()
+val jwt: String by System.getProperties()
 
 plugins {
   `maven-publish`
@@ -37,9 +39,10 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
+  compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
-
   compileOnly("io.netty:netty-all:$netty")
+  compileOnly("com.auth0:java-jwt:$jwt")
 
   testImplementation("commons-codec:commons-codec:$commonscodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")

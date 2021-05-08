@@ -13,7 +13,7 @@ import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition
 import org.apache.shiro.web.filter.mgt.DefaultFilter.invalidRequest
 import org.github.ops.debug
 import org.github.ops.log
-import org.github.system.shiro.*
+import org.github.shiro.*
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -28,11 +28,15 @@ class ShiroConfig {
   @Value("#{@environment['shiro.loginUrl']}")
   protected lateinit var loginUrl: String
 
-  @Bean
-  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher)
+  fun authorFunc() = WebAuthorFunc()
+
+  fun authenFunc()= WebAuthenFunc()
 
   @Bean
-  fun jwtRealm() = JWTRealm()
+  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher,authorFunc(),authenFunc())
+
+  @Bean
+  fun jwtRealm() = JWTRealm(authorFunc(),authenFunc())
 
   @Bean
   fun authorizer() = ModularRealmAuthorizer()
@@ -73,7 +77,7 @@ class ShiroConfig {
       override fun delegate(): Map<String, Filter> = of(
         "logout", CustomLogoutFilter(),
         "perms", CustomPermissionsAuthorizationFilter(),
-        "authc", CustomJWTFormAuthenticationFilter(),
+        "authc", CustomJWTFormAuthenticationFilter(true),
         "roles", CustomRolesAuthorizationFilter(),
         "user", CustomUserFilter()
       )
