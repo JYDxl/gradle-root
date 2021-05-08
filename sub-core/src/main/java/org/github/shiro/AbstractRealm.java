@@ -1,6 +1,6 @@
 package org.github.shiro;
 
-import lombok.val;
+import lombok.*;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -9,6 +9,7 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public abstract class AbstractRealm extends AuthorizingRealm {
 
@@ -35,8 +36,8 @@ public abstract class AbstractRealm extends AuthorizingRealm {
 
   @Override
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-    if (token.getPrincipal() == null) throw new AuthenticationException("用户名不能为空");
-    if (token.getCredentials() == null) throw new AuthenticationException("密码不能为空");
+    if (isBlank((CharSequence) token.getPrincipal())) throw new AuthenticationException("用户名不能为空");
+    if (token.getCredentials() == null || (token.getCredentials() instanceof CharSequence && isBlank((CharSequence) token.getCredentials()))) throw new AuthenticationException("密码不能为空");
     val info   = authen.apply(token);
     val source = info.getSalt() != null ? new CustomByteSource(info.getSalt()) : new CustomByteSource();
     return new SimpleAuthenticationInfo(info.getPrincipal(), info.getHashedCredentials(), source, getName());

@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-07
+ * @since 2021-05-08
  */
 @MyBatisMapper
 public interface IActivityCategoryMapper extends IMapper<ActivityCategoryEntity> {}

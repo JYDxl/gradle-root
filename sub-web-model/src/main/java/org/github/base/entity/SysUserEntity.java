@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-07
+ * @since 2021-05-08
  */
 @SuppressWarnings("all")
 @Data
@@ -41,6 +41,16 @@ public class SysUserEntity extends Model<SysUserEntity> {
   @TableField("password")
   private @Nullable String password;
 
+  /** salt */
+  @ApiModelProperty(value = "salt")
+  @TableField("salt")
+  private @Nullable String salt;
+
+  /** 状态  0：禁用   1：正常 */
+  @ApiModelProperty(value = "状态  0：禁用   1：正常")
+  @TableField("status")
+  private @Nullable Integer status;
+
   /** 邮箱 */
   @ApiModelProperty(value = "邮箱")
   @TableField("email")
@@ -50,11 +60,6 @@ public class SysUserEntity extends Model<SysUserEntity> {
   @ApiModelProperty(value = "手机号")
   @TableField("mobile")
   private @Nullable String mobile;
-
-  /** 状态  0：禁用   1：正常 */
-  @ApiModelProperty(value = "状态  0：禁用   1：正常")
-  @TableField("status")
-  private @Nullable Integer status;
 
   /** 创建者ID */
   @ApiModelProperty(value = "创建者ID")

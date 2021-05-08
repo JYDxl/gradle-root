@@ -2,7 +2,7 @@ package org.github.cache;
 
 import lombok.extern.slf4j.*;
 import lombok.*;
-import org.github.base.enums.SexEnum;
+import org.github.web.enums.SexEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

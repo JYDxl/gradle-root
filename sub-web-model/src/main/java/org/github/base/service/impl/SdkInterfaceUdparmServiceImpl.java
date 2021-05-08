@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-07
+ * @since 2021-05-08
  */
 @Service
 public class SdkInterfaceUdparmServiceImpl extends ServiceImpl<ISdkInterfaceUdparmMapper, SdkInterfaceUdparmEntity> implements ISdkInterfaceUdparmService {}

@@ -1,4 +1,4 @@
-package org.github.base.enums;
+package org.github.web.enums;
 
 import lombok.*;
 import org.github.base.IEnum;

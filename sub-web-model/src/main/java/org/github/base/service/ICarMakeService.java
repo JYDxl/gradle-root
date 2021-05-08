@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-07
+ * @since 2021-05-08
  */
 public interface ICarMakeService extends IService<CarMakeEntity> {}

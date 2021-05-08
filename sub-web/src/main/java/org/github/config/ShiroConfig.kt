@@ -48,6 +48,9 @@ class ShiroConfig {
   }
 
   @Bean
+  fun authenticationStrategy() = CustomFirstSuccessfulStrategy()
+
+  @Bean
   fun passwordGenerator() = PasswordGenerator(ALGORITHM_NAME, 2)
 
   @Bean
