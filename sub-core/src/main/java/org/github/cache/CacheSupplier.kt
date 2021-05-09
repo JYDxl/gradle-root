@@ -11,10 +11,8 @@ interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>> {
 
   val prefix: String get() = "j2cache:"
 
-  @Deprecated("")
   override fun get(): Map<String, V?>
 
-  @Deprecated("")
   override fun apply(key: String): V?
 
   @Suppress("UNCHECKED_CAST", "DEPRECATION")

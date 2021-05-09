@@ -12,7 +12,7 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
   }
 
   public Page(PageParam param) {
-    this(param.getPageNum(), param.getPageSize(), param.isSearchCount());
+    this(param.getPageNumber(), param.getPageSize(), param.isSearchCount());
   }
 
   public Page(long current, long size, boolean isSearchCount) {
@@ -32,5 +32,17 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
       .add("records", records)
       .add("total", total)
       .toString();
+  }
+
+  public Page<T> sort(PageParam param) {
+    val sort = param.sort();
+    if (sort != null) super.addOrder(sort);
+    return this;
+  }
+
+  public Page<T> sortList(PageParam param) {
+    val list = param.sortList();
+    super.addOrder(list);
+    return this;
   }
 }

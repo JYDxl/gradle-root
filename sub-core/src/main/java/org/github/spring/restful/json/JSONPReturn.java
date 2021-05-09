@@ -75,8 +75,14 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static JSONPReturn<?> of() {
+  public static <V> JSONPReturn<V> empty() {
     return new JSONPReturn<>();
+  }
+
+  /** Generator. */
+  @NonNull
+  public static <T, R> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+    return of(ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */
@@ -84,11 +90,5 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   @SuppressWarnings({"unchecked", "rawtypes"})
   public static <V> JSONPReturn<V> of(V data) {
     return (JSONPReturn) new JSONPReturn<>().withData(data);
-  }
-
-  /** Generator. */
-  @NonNull
-  public static <T, R> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
-    return of(ofNullable(data).map(mapper).orElse(null));
   }
 }

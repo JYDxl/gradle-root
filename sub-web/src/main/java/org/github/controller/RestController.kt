@@ -67,7 +67,7 @@ class RestController {
 
   @GetMapping("jsonp")
   fun jsonpReturn(): JSONPReturn<*> {
-    val jsonp = JSONPReturn.of()
+    val jsonp: JSONPReturn<Any?> = JSONPReturn.empty<Any?>()
     log.info {jsonp.toString()}
     log.info {jsonp.get()}
     return jsonp

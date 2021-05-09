@@ -8,8 +8,8 @@ import org.github.base.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import static com.baomidou.mybatisplus.core.toolkit.Wrappers.*;
 import static com.google.common.collect.ImmutableMap.*;
+import static org.github.web.common.CacheNameEnum.*;
 import static org.github.web.enums.EnableEnum.*;
-import static org.github.cache.CacheNameEnum.*;
 
 public class UserCache extends AbstractCache<UserEntity> {
   @Autowired
