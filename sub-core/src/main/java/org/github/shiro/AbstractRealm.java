@@ -35,6 +35,11 @@ public abstract class AbstractRealm extends AuthorizingRealm {
   }
 
   @Override
+  protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
+    return ((User) principals.getPrimaryPrincipal()).getUsername();
+  }
+
+  @Override
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
     if (isBlank((CharSequence) token.getPrincipal())) throw new AuthenticationException("用户名不能为空");
     if (token.getCredentials() == null || (token.getCredentials() instanceof CharSequence && isBlank((CharSequence) token.getCredentials()))) throw new AuthenticationException("密码不能为空");

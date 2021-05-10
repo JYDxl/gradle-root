@@ -5,9 +5,9 @@ import org.github.web.system.IShiroService;
 import org.apache.shiro.authc.AuthenticationToken;
 import static org.github.spring.bootstrap.AppCtxHolder.*;
 
-public class WebAuthenFunc implements AuthenFunc {
+public class DefaultAuthenFunc implements AuthenFunc {
   @Override
-  public PartAuthenticationInfo apply(AuthenticationToken token) {
+  public @NonNull PartAuthenticationInfo apply(@NonNull AuthenticationToken token) {
     val username    = token.getPrincipal().toString();
     val userService = getAppCtx().getBean(IShiroService.class);
     val user        = userService.queryUser(username);

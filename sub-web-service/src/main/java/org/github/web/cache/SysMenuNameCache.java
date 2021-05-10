@@ -1,16 +1,21 @@
-package org.github.cache;
+package org.github.web.cache;
 
-import java.util.Map;
-import java.util.function.Function;
-import javax.annotation.Nullable;
-import lombok.*;
+import lombok.NonNull;
+import lombok.val;
 import org.github.base.entity.SysMenuEntity;
 import org.github.base.service.ISysMenuService;
+import org.github.cache.AbstractCache;
+import org.github.cache.CacheNameSupplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import static com.google.common.collect.ImmutableMap.*;
-import static java.lang.Long.*;
-import static org.github.web.common.CacheNameEnum.*;
+
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.function.Function;
+
+import static com.google.common.collect.ImmutableMap.toImmutableMap;
+import static java.lang.Long.parseLong;
+import static org.github.web.common.CacheNameEnum.sysMenuName;
 
 @Component
 public class SysMenuNameCache extends AbstractCache<String> {

@@ -24,7 +24,7 @@ public class CustomByteSource implements ByteSource, Serializable {
         this.bytes = toBytes((String) salt);
       } else if (salt instanceof ByteSource) {
         this.bytes = ((ByteSource) salt).getBytes();
-      }
+      } else throw new UnsupportedOperationException(salt.getClass().getName() + " to byte[]");
     }
   }
 

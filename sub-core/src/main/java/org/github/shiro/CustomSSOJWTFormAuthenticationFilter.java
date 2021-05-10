@@ -1,6 +1,5 @@
 package org.github.shiro;
 
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
@@ -8,9 +7,8 @@ import org.apache.shiro.subject.Subject;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-@Slf4j
-public class CustomSSOFormAuthenticationFilter extends CustomFormAuthenticationFilter {
-    public CustomSSOFormAuthenticationFilter(boolean simple) {
+public class CustomSSOJWTFormAuthenticationFilter extends CustomJWTFormAuthenticationFilter {
+    public CustomSSOJWTFormAuthenticationFilter(boolean simple) {
         super(simple);
     }
 

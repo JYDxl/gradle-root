@@ -136,7 +136,7 @@ subprojects {
     implementation("org.ow2.asm:asm:9.1")
     implementation("org.checkerframework:checker-qual:3.13.0")
     implementation("org.objenesis:objenesis:3.2")
-    implementation("org.javassist:javassist:3.27.0-GA")
+    implementation("org.javassist:javassist:3.28.0-GA")
     implementation("com.github.ifeilong:feilong:3.0.10")
     implementation("org.t-io:tio-core:3.7.2.v20210316-RELEASE")
 

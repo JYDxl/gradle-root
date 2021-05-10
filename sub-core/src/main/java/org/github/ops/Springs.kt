@@ -1,17 +1,17 @@
 package org.github.ops
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
+import org.github.spring.restful.json.JSONMapper
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
 
-fun Any?.writeValue(output: OutputStream, mapper: ObjectMapper? = null) = (mapper ?: objectMapper).writeValue(output, this)
+fun Any.writeValue(output: OutputStream, mapper: JSONMapper? = null) = (mapper ?: jsonMapper).writeValue(output, this)
 
-fun Any?.json(mapper: ObjectMapper? = null): String = (mapper ?: objectMapper).writeValueAsString(this)
+fun Any.json(mapper: JSONMapper? = null): String = (mapper ?: jsonMapper).writeValueAsString(this)
 
-val <T: Any> T.proxy get() = appCtx.getBean(this::class.java)
+val <T : Any> T.proxy get() = appCtx.getBean(this::class.java)
 
 val req get() = (getRequestAttributes() as? ServletRequestAttributes)?.request
 
@@ -21,4 +21,4 @@ val appCtx = getAppCtx()
 
 val webAppCtx = appCtx as WebApplicationContext
 
-val objectMapper = appCtx.getBean(ObjectMapper::class.java)
+val jsonMapper = appCtx.getBean(JSONMapper::class.java)

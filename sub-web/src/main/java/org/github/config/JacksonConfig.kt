@@ -1,6 +1,7 @@
 package org.github.config
 
 import cn.hutool.core.date.DatePattern.*
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.guava.GuavaModule
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer
+import org.github.spring.restful.json.JSONMapperImpl
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -33,4 +35,7 @@ class JacksonConfig {
 
   @Bean
   fun guavaModule() = GuavaModule()
+
+  @Bean
+  fun jsonMapper(mapper: ObjectMapper) = JSONMapperImpl(mapper)
 }

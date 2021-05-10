@@ -28,9 +28,9 @@ class ShiroConfig {
   @Value("#{@environment['shiro.loginUrl']}")
   protected lateinit var loginUrl: String
 
-  fun authorFunc() = WebAuthorFunc()
+  fun authorFunc() = DefaultAuthorFunc()
 
-  fun authenFunc() = WebAuthenFunc()
+  fun authenFunc() = DefaultAuthenFunc()
 
   @Bean
   fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher, authorFunc(), authenFunc())

@@ -20,11 +20,11 @@ public class ShiroServiceImpl implements IShiroService {
   public @NonNull UserDTO queryUser(@NonNull String username) {
     val query = sysUserService.lambdaQuery();
     query.eq(SysUserEntity::getUsername, username);
-    val sysUserEntity = query.one();
-    if (sysUserEntity == null) throw new AuthenticationException("用户未注册");
-    if (disabled.getCode().equals(sysUserEntity.getStatus())) throw new AuthenticationException("该用户已禁用");
+    val entity = query.one();
+    if (entity == null) throw new AuthenticationException("用户未注册");
+    if (disabled.getCode().equals(entity.getStatus())) throw new AuthenticationException("该用户已禁用");
     val user = new UserDTO();
-    copyProperties(sysUserEntity, user);
+    copyProperties(entity, user);
     return user;
   }
 }

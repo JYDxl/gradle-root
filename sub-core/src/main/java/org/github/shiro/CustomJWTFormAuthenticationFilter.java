@@ -1,17 +1,11 @@
 package org.github.shiro;
 
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.shiro.web.util.WebUtils.toHttp;
-import static org.github.shiro.JWTUtil.sign;
 
 @Slf4j
 public class CustomJWTFormAuthenticationFilter extends CustomFormAuthenticationFilter {
@@ -27,35 +21,20 @@ public class CustomJWTFormAuthenticationFilter extends CustomFormAuthenticationF
   }
 
   @Override
-  protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
-    if (isNotJWT(request)) return super.createToken(request, response);
-    val token    = toHttp(request).getHeader("token");
-    val username = JWTUtil.getUsername(token);
-    return new JWTToken(username, token);
-  }
-
-  protected boolean isNotJWT(ServletRequest request) {
-    return !hasJWTToken(request);
-  }
-
-  protected boolean hasJWTToken(ServletRequest request) {
-    return isNotBlank(toHttp(request).getHeader("token"));
+  protected AuthenticationToken generateToken(ServletRequest request, ServletResponse response) throws Exception {
+    if (isNotJWT(request)) return super.generateToken(request, response);
+    return generateJwtToken(request);
   }
 
   @Override
-  protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
-    if (isNotJWT(request)) return super.onLoginSuccess(token, subject, request, response);
+  protected boolean loginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
+    if (isNotJWT(request)) return super.loginSuccess(token, subject, request, response);
     return true;
   }
 
   @Override
   protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
     if (isNotJWT(request)) return;
-    val subject   = SecurityUtils.getSubject();
-    val principal = (User) subject.getPrincipal();
-    val username  = principal.getUsername();
-    val password  = principal.getPassword();
-    val token     = sign(username, password);
-    toHttp(response).addHeader("token", token);
+    refreshToken(request, response);
   }
 }

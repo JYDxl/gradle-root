@@ -1,11 +1,10 @@
 package org.github.util.tree;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.github.base.entity.TabSafeQuestionDataEntity;
 import org.github.base.entity.TabSafeQuestionTypeEntity;
+import org.github.spring.restful.json.JSONMapper;
 import org.github.web.model.vo.TreeVO;
 import org.github.base.service.ITabSafeQuestionDataService;
 import org.github.base.service.ITabSafeQuestionTypeService;
@@ -36,7 +35,7 @@ class TreeUtilTest {
   @Autowired
   private ITabSafeQuestionDataService safeQuestionDataService;
   @Autowired
-  private ObjectMapper                mapper;
+  private JSONMapper mapper;
 
   private @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
     val vo = new TreeVO(firstNonNull(data.getQuestionTypeId(), ""), data.getId(), data.getCheckContent());
@@ -59,7 +58,7 @@ class TreeUtilTest {
   }
 
   @Test
-  void testGenerateTree() throws JsonProcessingException {
+  void testGenerateTree() {
     val typeQuery = safeQuestionTypeService.lambdaQuery();
     typeQuery.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
     val typeList   = typeQuery.list();
