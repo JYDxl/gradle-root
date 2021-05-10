@@ -31,4 +31,6 @@ interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>> {
   fun del(vararg keys: String) = channel.evict(region.apply(prefix), *keys)
 
   fun delAll() = channel.clear(region.apply(prefix))
+
+  fun loadAll() = setSome(get())
 }

@@ -5,6 +5,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.github.spring.restful.json.JSON;
@@ -24,6 +25,7 @@ import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.shiro.SecurityUtils.getSecurityManager;
 import static org.apache.shiro.SecurityUtils.getSubject;
+import static org.apache.shiro.subject.support.DefaultSubjectContext.PRINCIPALS_SESSION_KEY;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.shiro.JWTUtil.getUsername;
 import static org.github.shiro.JWTUtil.sign;
@@ -130,18 +132,17 @@ public interface CustomFilterInvoker {
     default void sessionKickOut(Subject subject) {
         val current = subject.getSession(false);
         if (current != null) {
-            current.setAttribute("user", subject.getPrincipal());
             val securityManager = (DefaultWebSessionManager) getSecurityManager();
             val sessionDAO = securityManager.getSessionDAO();
             val activeSessions = sessionDAO.getActiveSessions();
-            val removeList = activeSessions.stream().filter(session -> sameUser(current, session)).collect(toImmutableList());
+            val removeList = activeSessions.stream().filter(other -> sameUser(current, other)).collect(toImmutableList());
             removeList.forEach(sessionDAO::delete);
         }
     }
 
-    default boolean sameUser(Session current, Session session) {
-        val currentUser = (User) current.getAttribute("user");
-        val user = (User) session.getAttribute("user");
-        return !Objects.equals(current.getId(), session.getId()) && Objects.equals(currentUser.getUsername(), user.getUsername());
+    default boolean sameUser(Session current, Session other) {
+        val currentUser = (User) ((PrincipalCollection) current.getAttribute(PRINCIPALS_SESSION_KEY)).getPrimaryPrincipal();
+        val otherUser = (User) ((PrincipalCollection) other.getAttribute(PRINCIPALS_SESSION_KEY)).getPrimaryPrincipal();
+        return !Objects.equals(current.getId(), other.getId()) && Objects.equals(currentUser.getUsername(), otherUser.getUsername());
     }
 }
