@@ -80,7 +80,7 @@ class ShiroConfig {
       override fun delegate(): Map<String, Filter> = of(
         "logout", CustomLogoutFilter(),
         "perms", CustomPermissionsAuthorizationFilter(),
-        "authc", CustomJWTFormAuthenticationFilter(true),
+        "authc", CustomCommonAuthenticationFilter(true),
         "roles", CustomRolesAuthorizationFilter(),
         "user", CustomUserFilter()
       )

@@ -10,11 +10,9 @@ import javax.servlet.ServletResponse;
 public class CustomUserFilter extends UserFilter implements CustomFilterInvoker {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        if (isNotJWT(request)) {
-            notLogin(request, response);
-            return false;
-        }
-        return jwtLogin(request, response, log);
+        if (isJWT(request)) return executeJWTLogin(request, response, log);
+        notLogin(request, response);
+        return false;
     }
 
     @Override
