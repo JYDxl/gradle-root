@@ -8,21 +8,24 @@ import javax.servlet.ServletResponse;
 
 @Slf4j
 public class CustomUserFilter extends UserFilter implements CustomFilterInvoker {
-    @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        if (isJWT(request)) return executeJWTLogin(request, response, log);
-        notLogin(request, response);
-        return false;
-    }
+  @Override
+  protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+    return getSubject(request, response).getPrincipal() != null;
+  }
 
-    @Override
-    protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        return getSubject(request, response).getPrincipal() != null;
-    }
+  @Override
+  protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+    notLogin(request, response);
+    return false;
+  }
 
-    @Override
-    protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
-        if (isNotJWT(request)) return;
-        refreshToken(request, response);
-    }
+  @Override public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+    return isJWT(request) ? executeJWTLogin(request, response, log) : super.onPreHandle(request, response, mappedValue);
+  }
+
+  @Override
+  protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
+    if (isNotJWT(request)) return;
+    refreshToken(request, response);
+  }
 }

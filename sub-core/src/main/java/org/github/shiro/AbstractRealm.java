@@ -25,17 +25,7 @@ public abstract class AbstractRealm extends AuthorizingRealm {
   }
 
   @Override
-  protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-    return author.apply(principals);
-  }
-
-  @Override
   protected Object getAuthenticationCacheKey(PrincipalCollection principals) {
-    return ((User) principals.getPrimaryPrincipal()).getUsername();
-  }
-
-  @Override
-  protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
     return ((User) principals.getPrimaryPrincipal()).getUsername();
   }
 
@@ -51,5 +41,15 @@ public abstract class AbstractRealm extends AuthorizingRealm {
   @Override
   public String getName() {
     return getClass().getName();
+  }
+
+  @Override
+  protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
+    return ((User) principals.getPrimaryPrincipal()).getUsername();
+  }
+
+  @Override
+  protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+    return author.apply(principals);
   }
 }

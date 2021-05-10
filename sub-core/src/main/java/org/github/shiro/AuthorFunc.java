@@ -6,7 +6,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 
 import java.util.function.Function;
 
-public interface AuthorFunc extends Function<PrincipalCollection, AuthorizationInfo> {
-    @Override
-    @NonNull AuthorizationInfo apply(@NonNull PrincipalCollection principalCollection);
+public interface AuthorFunc extends Function<PrincipalCollection,AuthorizationInfo> {
+  @Override
+  @NonNull AuthorizationInfo apply(@NonNull PrincipalCollection principalCollection);
 }
