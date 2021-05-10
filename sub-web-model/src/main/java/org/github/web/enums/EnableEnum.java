@@ -4,8 +4,8 @@ import lombok.*;
 import org.github.base.IEnum;
 
 public enum EnableEnum implements IEnum<Integer,String> {
-  disabled(0, "未启用"),
-  enabled(1, "已启用");
+  disabled(0, "禁用"),
+  enabled(1, "启用");
 
   private final Integer code;
 

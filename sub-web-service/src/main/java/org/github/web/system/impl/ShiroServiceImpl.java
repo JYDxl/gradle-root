@@ -8,7 +8,7 @@ import org.github.web.system.IShiroService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import static org.github.web.enums.UserStatusEnum.*;
+import static org.github.web.enums.EnableEnum.*;
 import static org.springframework.beans.BeanUtils.*;
 
 @Service

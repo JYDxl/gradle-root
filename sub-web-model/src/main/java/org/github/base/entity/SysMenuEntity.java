@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-08
+ * @since 2021-05-11
  */
 @SuppressWarnings("all")
 @Data
@@ -64,6 +64,11 @@ public class SysMenuEntity extends Model<SysMenuEntity> {
   @ApiModelProperty(value = "排序")
   @TableField("order_num")
   private @Nullable Integer orderNum;
+
+  /** 是否启用（0：启用 1：禁用） */
+  @ApiModelProperty(value = "是否启用（0：启用 1：禁用）")
+  @TableField("enabled")
+  private @Nullable Integer enabled;
 
   @Override
   protected Serializable pkVal() {
