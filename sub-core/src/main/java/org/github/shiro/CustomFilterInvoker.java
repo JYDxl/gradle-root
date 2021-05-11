@@ -50,7 +50,7 @@ public interface CustomFilterInvoker {
   }
 
   default JWTToken generateJwtToken(ServletRequest request) {
-    val token    = toHttp(request).getHeader("token");
+    val token    = toHttp(request).getHeader("Token");
     val username = getUsername(token);
     return new JWTToken(username, token);
   }
@@ -91,7 +91,7 @@ public interface CustomFilterInvoker {
     copyProperties(principal, user);
     val session = subject.getSession(false);
     ((User) user).setToken(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
-    resp(request, response, new JSONDataReturn<>("2333"));
+    resp(request, response, new JSONDataReturn<>(user));
   }
 
   default void onWEBLoginFailure(@SuppressWarnings("unused") AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response, Logger log) throws Exception {
@@ -104,7 +104,7 @@ public interface CustomFilterInvoker {
   }
 
   default boolean hasJWTToken(ServletRequest request) {
-    return isNotBlank(toHttp(request).getHeader("token"));
+    return isNotBlank(toHttp(request).getHeader("Token"));
   }
 
   default boolean isNotJWT(ServletRequest request) {
@@ -125,7 +125,7 @@ public interface CustomFilterInvoker {
     val username  = principal.getUsername();
     val password  = principal.getPassword();
     val token     = sign(username, password);
-    toHttp(response).addHeader("token", token);
+    toHttp(response).addHeader("Token", token);
   }
 
   default void sessionKickOut(Subject subject) {

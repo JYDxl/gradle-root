@@ -55,10 +55,16 @@ class ShiroConfig {
 
   @Bean
   fun shiroFilterChainDefinition() = DefaultShiroFilterChainDefinition().apply {
+    addPathDefinition("/swagger-resources/**", "anon")
+    addPathDefinition("/swagger-ui/**", "anon")
+    addPathDefinition("/v3/api-docs", "anon")
+
     addPathDefinition("/static/**", "anon")
     addPathDefinition("/public/**", "anon")
+
     addPathDefinition("/login", "authc")
     addPathDefinition("/logout", "logout")
+
     addPathDefinition("/rest/**", "authc")
     addPathDefinition("/**", "authc")
   }
