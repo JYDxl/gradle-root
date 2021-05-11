@@ -3,7 +3,7 @@ import org.github.logger.NameFilter
 import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
 
-def out = "%d %5level --- [%25.25thread] %-30.30logger{30} : %msg%n"
+def out = "%d [%5level] --- [%25.25thread] %-30.30logger{30} : %msg%n"
 def dir = "logs/sub-netty"
 
 appender("console", ConsoleAppender) {
