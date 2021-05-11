@@ -29,7 +29,6 @@ import static org.apache.shiro.SecurityUtils.getSubject;
 import static org.apache.shiro.subject.support.DefaultSubjectContext.PRINCIPALS_SESSION_KEY;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.shiro.JWTUtil.getUsername;
-import static org.github.shiro.JWTUtil.sign;
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
 import static org.github.spring.restful.json.JSONReturn.warn;
 import static org.springframework.beans.BeanUtils.copyProperties;
@@ -91,7 +90,7 @@ public interface CustomFilterInvoker {
     copyProperties(principal, user);
     val session = subject.getSession(false);
     ((User) user).setToken(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
-    resp(request, response, new JSONDataReturn<>("2333"));
+    resp(request, response, new JSONDataReturn<>(user));
   }
 
   default void onWEBLoginFailure(@SuppressWarnings("unused") AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response, Logger log) throws Exception {
@@ -119,14 +118,15 @@ public interface CustomFilterInvoker {
     resp(request, response, warn().withRetMsg("用户未登录"));
   }
 
-  default void refreshToken(ServletRequest request, ServletResponse response) {
-    val subject   = getSubject();
-    val principal = (User) subject.getPrincipal();
-    val username  = principal.getUsername();
-    val password  = principal.getPassword();
-    val token     = sign(username, password);
-    toHttp(response).addHeader("token", token);
-  }
+//  default void refreshToken(ServletRequest request, ServletResponse response) {
+//    val subject   = getSubject();
+//    val principal = (User) subject.getPrincipal();
+//    if (principal == null) return;
+//    val username  = principal.getUsername();
+//    val password  = principal.getPassword();
+//    val token     = sign(username, password);
+//    toHttp(response).addHeader("token", token);
+//  }
 
   default void sessionKickOut(Subject subject) {
     val current = subject.getSession(false);

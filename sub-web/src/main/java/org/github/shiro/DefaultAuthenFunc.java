@@ -1,7 +1,7 @@
 package org.github.shiro;
 
 import lombok.*;
-import org.github.web.system.IShiroService;
+import org.github.web.system.service.IShiroService;
 import org.apache.shiro.authc.AuthenticationToken;
 import static org.github.spring.bootstrap.AppCtxHolder.*;
 

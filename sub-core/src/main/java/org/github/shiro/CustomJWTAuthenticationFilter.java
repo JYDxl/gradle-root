@@ -15,9 +15,9 @@ public class CustomJWTAuthenticationFilter extends CustomAuthenticationFilter {
     return isJWT(request) ? executeJWTLogin(request, response, log) : super.onPreHandle(request, response, mappedValue);
   }
 
-  @Override
-  protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
-    if (isNotJWT(request)) return;
-    refreshToken(request, response);
-  }
+//  @Override
+//  protected void postHandle(ServletRequest request, ServletResponse response) throws Exception {
+//    if (isNotJWT(request)) return;
+//    refreshToken(request, response);
+//  }
 }

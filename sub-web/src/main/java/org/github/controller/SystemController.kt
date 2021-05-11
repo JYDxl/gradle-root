@@ -8,10 +8,10 @@ import org.github.ops.log
 import org.github.shiro.JWTLogin
 import org.github.shiro.JWTUtil.sign
 import org.github.shiro.PasswordGenerator
+import org.github.shiro.User
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn.of
 import org.github.spring.restful.view.VIEW
-import org.github.web.model.dto.UserInfoDTO
 import org.springframework.beans.BeanUtils.copyProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -29,17 +29,18 @@ class SystemController {
   private lateinit var generator: PasswordGenerator
 
   @PostMapping("login")
-  fun userInfo(): Returnable {
-    val userInfo = UserInfoDTO()
+  fun login(): Returnable {
     val subject: Subject = getSubject()
-    copyProperties(subject.principal, userInfo)
+    val user = subject.principal as User
+    val info = user.javaClass.getConstructor().newInstance()
+    copyProperties(user, info)
     val session: Session? = subject.getSession(false)
-    userInfo.token = session?.id.toString()
-    return of(userInfo)
+    info.token = session?.id.toString()
+    return of(info)
   }
 
   @GetMapping("login")
-  fun login() = VIEW {"login"}
+  fun page() = VIEW {"login"}
 
   @RequestMapping("public/token")
   fun token(): Returnable {
@@ -54,6 +55,13 @@ class SystemController {
     val password = jwt.password ?: throw ParamsErrorException("密码不能为空")
     val secret = generator.generate(password, username)
     val token = sign(username, secret)
+    return of(token)
+  }
+
+  @RequestMapping("/refresh")
+  fun refresh(): Returnable {
+    val user = getSubject().principal as User
+    val token = sign(user.username, user.password)
     return of(token)
   }
 }
