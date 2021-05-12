@@ -67,7 +67,7 @@ class RestController {
 
   @GetMapping("jsonp")
   fun jsonpReturn(): JSONPReturn<*> {
-    val jsonp: JSONPReturn<Any?> = JSONPReturn.empty<Any?>()
+    val jsonp: JSONPReturn<Any?> = JSONPReturn.of<Any?>()
     log.info {jsonp.toString()}
     log.info {jsonp.get()}
     return jsonp
@@ -75,8 +75,8 @@ class RestController {
 
   @RequiresRoles("test", "admin", logical = OR)
   @GetMapping("json/basic")
-  fun jsonBasic() = JSONReturn.of()
+  fun jsonBasic() = JSONReturn()
 
   @GetMapping("json/callback")
-  fun jsonCallback(): Returnable = JSONPReturn.of()
+  fun jsonCallback(): Returnable = JSONPReturn.of<Any>()
 }

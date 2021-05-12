@@ -75,7 +75,7 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONPReturn<V> empty() {
+  public static <V> JSONPReturn<V> of() {
     return new JSONPReturn<>();
   }
 

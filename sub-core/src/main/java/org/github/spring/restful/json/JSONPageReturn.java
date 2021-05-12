@@ -40,7 +40,7 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONPageReturn<V> emptyPage() {
+  public static <V> JSONPageReturn<V> of() {
     return new JSONPageReturn<>();
   }
 

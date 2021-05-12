@@ -10,7 +10,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Data
-public abstract class TreeNode<I, E> implements IJson {
+public class TreeNode<I, E> implements IJson {
   @NonNull
   private I pid;
 
