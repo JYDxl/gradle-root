@@ -49,7 +49,7 @@ public interface CustomFilterInvoker {
   }
 
   default JWTToken generateJwtToken(ServletRequest request) {
-    val token    = toHttp(request).getHeader("token");
+    val token    = toHttp(request).getHeader("Token");
     val username = getUsername(token);
     return new JWTToken(username, token);
   }
@@ -103,7 +103,7 @@ public interface CustomFilterInvoker {
   }
 
   default boolean hasJWTToken(ServletRequest request) {
-    return isNotBlank(toHttp(request).getHeader("token"));
+    return isNotBlank(toHttp(request).getHeader("Token"));
   }
 
   default boolean isNotJWT(ServletRequest request) {
