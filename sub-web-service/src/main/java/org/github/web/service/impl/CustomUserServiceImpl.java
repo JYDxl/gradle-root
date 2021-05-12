@@ -84,7 +84,6 @@ public class CustomUserServiceImpl implements ICustomUserService {
   public @NonNull UserInfoDTO queryUserInfo(@NonNull String username) throws AuthenticationException {
     val userInfo = userMapper.queryUserInfo(username);
     if (userInfo == null) throw new AuthenticationException("用户未注册");
-    //TODO 禁用、锁定等等
     return userInfo;
   }
 

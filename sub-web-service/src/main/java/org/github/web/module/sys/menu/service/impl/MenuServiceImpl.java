@@ -45,7 +45,7 @@ public class MenuServiceImpl implements IMenuService {
     query.like(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
     val page    = query.page(new Page<SysMenuEntity>(bo).sort(bo));
     val records = page.getRecords();
-    if (records.isEmpty()) return JSONPageReturn.emptyPage();
+    if (records.isEmpty()) return JSONPageReturn.of();
     return JSONPageReturn.of(page, this::applySysMenuEntity2QueryMenuListVO);
   }
 

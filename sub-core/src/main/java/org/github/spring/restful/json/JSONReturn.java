@@ -54,12 +54,6 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public static JSONReturn of() {
-    return new JSONReturn();
-  }
-
-  /** Generator. */
-  @NonNull
   public static JSONReturn of(int code, @NonNull String msg) {
     return new JSONReturn(code, msg);
   }

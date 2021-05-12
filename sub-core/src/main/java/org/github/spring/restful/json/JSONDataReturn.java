@@ -36,13 +36,13 @@ public class JSONDataReturn<T> extends JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONDataReturn<V> empty() {
+  public static <V> JSONDataReturn<V> of() {
     return new JSONDataReturn<>();
   }
 
   /** Generator. */
   @NonNull
-  public static <T, R> JSONDataReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+  public static <T, R extends T> JSONDataReturn<R> of(T data, @NonNull Function<T,R> mapper) {
     return of(ofNullable(data).map(mapper).orElse(null));
   }
 

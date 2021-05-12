@@ -62,7 +62,7 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONArrayReturn<V> emptyArray() {
+  public static <V> JSONArrayReturn<V> of() {
     return new JSONArrayReturn<>();
   }
 
@@ -81,7 +81,7 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <T, R> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
+  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
     return new JSONArrayReturn<>(data.stream().map(mapper).toArray());
   }
 }

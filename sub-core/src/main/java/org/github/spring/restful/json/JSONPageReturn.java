@@ -40,7 +40,7 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONPageReturn<V> emptyPage() {
+  public static <V> JSONPageReturn<V> of() {
     return new JSONPageReturn<>();
   }
 
@@ -60,7 +60,7 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   /** Generator. */
   @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <T, R> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
+  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
     return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).toArray());
   }
 }

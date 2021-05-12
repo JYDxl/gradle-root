@@ -36,18 +36,18 @@ spring:
       pool-name: hikari-cp
       max-lifetime: 1800000
       connection-test-query: select 1
-  #  rabbitmq:
-  #    username: root
-  #    password: XLrootJYD713
-  #    publisher-returns: true
-  #    virtual-host: /
-  #    host: aliyun
-  #    port: 5672
-  #    listener:
-  #      simple:
-  #        acknowledge-mode: auto
-  #        prefetch: 0
-  #    publisher-confirm-type: simple
+  rabbitmq:
+    username: root
+    password: XLrootJYD713
+    publisher-returns: true
+    virtual-host: /
+    host: aliyun
+    port: 5672
+    listener:
+      simple:
+        acknowledge-mode: auto
+        prefetch: 0
+    publisher-confirm-type: simple
   task:
     scheduling:
       pool:

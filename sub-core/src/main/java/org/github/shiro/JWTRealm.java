@@ -30,9 +30,9 @@ public class JWTRealm extends AbstractRealm {
       verify(token.getCredentials().toString(), token.getPrincipal().toString(), info.getCredentials().toString());
     } catch (Exception e) {
       log.error(e.getMessage(), e);
-      if (e instanceof SignatureVerificationException) throw new AuthenticationException("签名无效");
-      if (e instanceof AlgorithmMismatchException) throw new AuthenticationException("算法不匹配");
-      if (e instanceof InvalidClaimException) throw new AuthenticationException("token内容不匹配");
+      if (e instanceof SignatureVerificationException) throw new AuthenticationException("签名验证异常");
+      if (e instanceof AlgorithmMismatchException) throw new AuthenticationException("算法匹配异常");
+      if (e instanceof InvalidClaimException) throw new AuthenticationException("内容匹配异常");
       if (e instanceof TokenExpiredException) throw new AuthenticationException("token已过期");
       throw new AuthenticationException("token校验失败");
     }

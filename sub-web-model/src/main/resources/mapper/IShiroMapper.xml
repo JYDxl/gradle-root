@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.github.web.system.mapper.IShiroMapper">
+    <resultMap id="authorInfo" type="org.github.web.model.shiro.AuthorInfo">
+        <result column="role_code" property="roleCode"/>
+        <collection property="perms" ofType="java.lang.String">
+            <result column="perms"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryAuthorInfo" resultMap="authorInfo">
+        select r.role_code,
+               m.perms
+        from sys_user_role ur
+                 left join sys_role r on ur.role_id = r.role_id
+                 left join sys_role_menu rm on r.role_id = rm.role_id
+                 left join sys_menu m on rm.menu_id = m.menu_id
+        where ur.user_id = #{userId}
+          and m.perms is not null
+    </select>
+</mapper>

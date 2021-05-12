@@ -35,7 +35,7 @@ fun main() {
     url = "jdbc:mysql://aliyun:3306/web"
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
-    password = "root"
+    password = "XLrootJYD713"
     generator.dataSource = this
   }
 

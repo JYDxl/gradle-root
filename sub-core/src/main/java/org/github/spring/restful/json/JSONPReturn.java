@@ -75,13 +75,13 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONPReturn<V> empty() {
+  public static <V> JSONPReturn<V> of() {
     return new JSONPReturn<>();
   }
 
   /** Generator. */
   @NonNull
-  public static <T, R> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+  public static <T, R extends T> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
     return of(ofNullable(data).map(mapper).orElse(null));
   }
 
