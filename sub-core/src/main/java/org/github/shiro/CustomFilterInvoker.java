@@ -125,7 +125,7 @@ public interface CustomFilterInvoker {
 //    val username  = principal.getUsername();
 //    val password  = principal.getPassword();
 //    val token     = sign(username, password);
-//    toHttp(response).addHeader("token", token);
+//    toHttp(response).addHeader("Token", token);
 //  }
 
   default void sessionKickOut(Subject subject) {
