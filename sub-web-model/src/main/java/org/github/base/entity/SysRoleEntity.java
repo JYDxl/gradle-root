@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-08
+ * @since 2021-05-12
  */
 @SuppressWarnings("all")
 @Data
@@ -35,6 +35,11 @@ public class SysRoleEntity extends Model<SysRoleEntity> {
   @ApiModelProperty(value = "角色名称")
   @TableField("role_name")
   private @Nullable String roleName;
+
+  /** 角色编码 */
+  @ApiModelProperty(value = "角色编码")
+  @TableField("role_code")
+  private @Nullable String roleCode;
 
   /** 备注 */
   @ApiModelProperty(value = "备注")

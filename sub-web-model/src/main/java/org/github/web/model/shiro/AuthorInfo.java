@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class AuthorInfo {
-    private @Nullable String roleCode;
+  private @Nullable String roleCode;
 
-    private @Nullable List<String> perms;
+  private @Nullable List<String> perms;
 }

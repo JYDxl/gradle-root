@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-08
+ * @since 2021-05-12
  */
 public interface ISysRoleService extends IService<SysRoleEntity> {}

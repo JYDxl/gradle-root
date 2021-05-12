@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-08
+ * @since 2021-05-12
  */
 @MyBatisMapper
 public interface ISysRoleMenuMapper extends IMapper<SysRoleMenuEntity> {}

@@ -10,6 +10,6 @@ import java.util.List;
 
 @MyBatisMapper
 public interface IShiroMapper {
-    @InterceptorIgnore(illegalSql = "true")
-    @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull @Param("userId") Long userId);
+  @InterceptorIgnore(illegalSql = "true")
+  @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull @Param("userId") Long userId);
 }

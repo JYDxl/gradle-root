@@ -19,25 +19,25 @@ import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 public class ShiroServiceImpl implements IShiroService {
-    @Autowired
-    private ISysUserService sysUserService;
-    @Autowired
-    private IShiroMapper shiroMapper;
+  @Autowired
+  private ISysUserService sysUserService;
+  @Autowired
+  private IShiroMapper    shiroMapper;
 
-    @Override
-    public @NonNull UserDTO queryUser(@NonNull String username) {
-        val query = sysUserService.lambdaQuery();
-        query.eq(SysUserEntity::getUsername, username);
-        val entity = query.one();
-        if (entity == null) throw new AuthenticationException("用户未注册");
-        if (disabled.getCode().equals(entity.getStatus())) throw new AuthenticationException("该用户已禁用");
-        val user = new UserDTO();
-        copyProperties(entity, user);
-        return user;
-    }
+  @Override
+  public @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull Long userId) {
+    return shiroMapper.queryAuthorInfo(userId);
+  }
 
-    @Override
-    public @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull Long userId) {
-        return shiroMapper.queryAuthorInfo(userId);
-    }
+  @Override
+  public @NonNull UserDTO queryUser(@NonNull String username) {
+    val query = sysUserService.lambdaQuery();
+    query.eq(SysUserEntity::getUsername, username);
+    val entity = query.one();
+    if (entity == null) throw new AuthenticationException("用户未注册");
+    if (disabled.getCode().equals(entity.getStatus())) throw new AuthenticationException("该用户已禁用");
+    val user = new UserDTO();
+    copyProperties(entity, user);
+    return user;
+  }
 }

@@ -16,21 +16,21 @@ import io.netty.channel.epoll.Epoll.isAvailable as epollIsAvailable
 
 val serverSocketChannel: Class<out ServerChannel>
   get() = when {
-    epollIsAvailable()  -> EpollServerSocketChannel::class.java
-    else                -> NioServerSocketChannel::class.java
+    epollIsAvailable() -> EpollServerSocketChannel::class.java
+    else               -> NioServerSocketChannel::class.java
   }
 
 val socketChannel: Class<out Channel>
   get() = when {
-    epollIsAvailable()  -> EpollSocketChannel::class.java
-    else                -> NioSocketChannel::class.java
+    epollIsAvailable() -> EpollSocketChannel::class.java
+    else               -> NioSocketChannel::class.java
   }
 
 fun eventLoopGroup(threads: Int, poolName: String): MultithreadEventLoopGroup {
   val threadFactory = DefaultThreadFactory(poolName)
   return when {
-    epollIsAvailable()  -> EpollEventLoopGroup(threads, threadFactory)
-    else                -> NioEventLoopGroup(threads, threadFactory)
+    epollIsAvailable() -> EpollEventLoopGroup(threads, threadFactory)
+    else               -> NioEventLoopGroup(threads, threadFactory)
   }
 }
 

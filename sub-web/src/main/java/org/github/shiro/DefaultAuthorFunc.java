@@ -19,26 +19,26 @@ import static java.util.Objects.requireNonNull;
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
 
 public class DefaultAuthorFunc implements AuthorFunc {
-    @Override
-    public @NonNull AuthorizationInfo apply(@NonNull PrincipalCollection principals) {
-        UserDTO user = (UserDTO) principals.getPrimaryPrincipal();
-        val appCtx = getAppCtx();
-        val shiroService = appCtx.getBean(IShiroService.class);
-        val list = shiroService.queryAuthorInfo(requireNonNull(user.getUserId()));
-        val roles = list.stream()
-                .map(AuthorInfo::getRoleCode)
-                .filter(StringUtils::isNotBlank)
-                .collect(toImmutableSet());
-        val perms = list.stream()
-                .map(AuthorInfo::getPerms)
-                .filter(Objects::nonNull)
-                .flatMap(List::stream)
-                .filter(Objects::nonNull)
-                .flatMap(v -> stream(v.split(",")))
-                .collect(toImmutableSet());
-        val info = new SimpleAuthorizationInfo();
-        info.setRoles(roles);
-        info.setStringPermissions(perms);
-        return info;
-    }
+  @Override
+  public @NonNull AuthorizationInfo apply(@NonNull PrincipalCollection principals) {
+    UserDTO user         = (UserDTO) principals.getPrimaryPrincipal();
+    val     appCtx       = getAppCtx();
+    val     shiroService = appCtx.getBean(IShiroService.class);
+    val     list         = shiroService.queryAuthorInfo(requireNonNull(user.getUserId()));
+    val roles = list.stream()
+      .map(AuthorInfo::getRoleCode)
+      .filter(StringUtils::isNotBlank)
+      .collect(toImmutableSet());
+    val perms = list.stream()
+      .map(AuthorInfo::getPerms)
+      .filter(Objects::nonNull)
+      .flatMap(List::stream)
+      .filter(Objects::nonNull)
+      .flatMap(v -> stream(v.split(",")))
+      .collect(toImmutableSet());
+    val info = new SimpleAuthorizationInfo();
+    info.setRoles(roles);
+    info.setStringPermissions(perms);
+    return info;
+  }
 }

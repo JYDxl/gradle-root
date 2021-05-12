@@ -8,14 +8,14 @@ import javax.servlet.ServletResponse;
 
 @Slf4j
 public class CustomLogoutFilter extends LogoutFilter implements CustomFilterInvoker {
-    @Override
-    protected void issueRedirect(ServletRequest request, ServletResponse response, String redirectUrl) throws Exception {
-        logoutSucceed(request, response);
-    }
+  @Override
+  public boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
+    if (isJWT(request) && !executeJWTLogin(request, response, log)) return false;
+    return super.preHandle(request, response);
+  }
 
-    @Override
-    public boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
-        if (isJWT(request) && !executeJWTLogin(request, response, log)) return false;
-        return super.preHandle(request, response);
-    }
+  @Override
+  protected void issueRedirect(ServletRequest request, ServletResponse response, String redirectUrl) throws Exception {
+    logoutSucceed(request, response);
+  }
 }

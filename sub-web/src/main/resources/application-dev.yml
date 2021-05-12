@@ -61,6 +61,10 @@ spring:
     redis:
       repositories:
         enabled: false
+    mongodb:
+      host: aliyun
+      database: mongo
+      password: XLrootJYD713
   thymeleaf:
     prefix: classpath:/static/
   cloud:

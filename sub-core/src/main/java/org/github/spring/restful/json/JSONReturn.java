@@ -22,6 +22,11 @@ public class JSONReturn implements JSON {
   @NonNull
   private String retMsg  = "OK";
 
+  @Override
+  public String toString() {
+    return get();
+  }
+
   @NonNull
   @Override
   public String get() {
@@ -31,11 +36,6 @@ public class JSONReturn implements JSON {
   @Override
   public boolean functional() {
     return false;
-  }
-
-  @Override
-  public String toString() {
-    return get();
   }
 
   /** WITH retCode. */
@@ -54,14 +54,14 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public static JSONReturn of(int code, @NonNull String msg) {
-    return new JSONReturn(code, msg);
+  public static JSONReturn error() {
+    return of(-2, "SYSTEM ERROR");
   }
 
   /** Generator. */
   @NonNull
-  public static JSONReturn error() {
-    return of(-2, "SYSTEM ERROR");
+  public static JSONReturn of(int code, @NonNull String msg) {
+    return new JSONReturn(code, msg);
   }
 
   /** Generator. */
