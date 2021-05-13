@@ -15,8 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.collect.ImmutableList.copyOf;
 import static com.google.common.collect.ImmutableList.toImmutableList;
@@ -25,6 +23,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.*;
 import static java.util.stream.Stream.concat;
+import static org.github.ops.SpringsKt.json;
 import static org.github.util.tree.TreeUtil.buildTree;
 
 @ExtendWith(SpringExtension.class)
@@ -35,8 +34,6 @@ class TreeUtilTest {
   private ITabSafeQuestionTypeService safeQuestionTypeService;
   @Autowired
   private ITabSafeQuestionDataService safeQuestionDataService;
-  @Autowired
-  private ObjectMapper                mapper;
 
   private @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
     val vo = new TreeVO(firstNonNull(data.getQuestionTypeId(), ""), data.getId(), data.getCheckContent());
@@ -59,7 +56,7 @@ class TreeUtilTest {
   }
 
   @Test
-  void testGenerateTree() throws JsonProcessingException {
+  void testGenerateTree() {
     val typeQuery = safeQuestionTypeService.lambdaQuery();
     typeQuery.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
     val typeList   = typeQuery.list();
@@ -75,7 +72,7 @@ class TreeUtilTest {
     reduceList(list);
 
     val tree = buildTree(list, "", comparing(TreeVO::getName));
-    val json = mapper.writeValueAsString(tree);
+    val json = json(tree, null);
     log.info(json);
   }
 

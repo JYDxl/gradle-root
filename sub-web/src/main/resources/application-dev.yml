@@ -62,9 +62,7 @@ spring:
       repositories:
         enabled: false
     mongodb:
-      host: aliyun
-      database: mongo
-      password: XLrootJYD713
+      uri: mongodb://root:XLrootJYD713@aliyun:27017/local
   thymeleaf:
     prefix: classpath:/static/
   cloud:
