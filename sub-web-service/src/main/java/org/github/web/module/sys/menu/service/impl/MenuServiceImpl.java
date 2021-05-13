@@ -1,6 +1,7 @@
 package org.github.web.module.sys.menu.service.impl;
 
 import java.util.List;
+
 import lombok.*;
 import org.github.base.Page;
 import org.github.base.entity.SysMenuEntity;
@@ -15,6 +16,7 @@ import org.github.web.module.sys.menu.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static cn.hutool.core.text.CharSequenceUtil.*;
+import static java.util.Collections.emptyList;
 import static org.github.web.common.CacheNameEnum.*;
 import static org.github.web.enums.MenuTypeEnum.*;
 import static org.springframework.beans.BeanUtils.*;
@@ -43,7 +45,9 @@ public class MenuServiceImpl implements IMenuService {
   public @NonNull JSONPageReturn<QueryMenuListVO> queryMenuList(@NonNull QueryMenuListBO bo) {
     val query = sysMenuService.lambdaQuery();
     query.likeRight(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
-    val page = query.page(new Page<SysMenuEntity>(bo).sort(bo));
+    val page = query.page(new Page<>(bo));
+    val list = page.getRecords();
+    if (list.isEmpty()) return JSONPageReturn.of(page, emptyList());
     return JSONPageReturn.of(page, this::applySysMenuEntity2QueryMenuListVO);
   }
 

@@ -26,7 +26,7 @@ public class Sort {
     this.sortOrder = order;
   }
 
-  public @Nullable OrderItem sort() {
+  protected @Nullable OrderItem sort() {
     if (sortName == null) return null;
     val order = underLine ? toUnderlineCase(sortName) : sortName;
     return sortOrder.equals("asc") ? asc(order) : desc(order);

@@ -18,7 +18,7 @@ public class PageParam extends Sort implements IParam {
 
   private @NonNull List<Sort> sortList = of();
 
-  public List<OrderItem> sortList() {
+  protected @NonNull List<OrderItem> sortList() {
     return sortList.stream().map(Sort::sort).filter(Objects::nonNull).collect(toImmutableList());
   }
 }

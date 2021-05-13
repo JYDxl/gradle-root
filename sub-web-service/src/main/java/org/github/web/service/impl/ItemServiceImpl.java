@@ -50,7 +50,7 @@ public class ItemServiceImpl implements IItemService {
 
   @Override
   public IPage<ItemSearchVO> catItems(ItemSearchByCatBO bo) {
-    val page = new Page<ItemSearchVO>(bo.getPageNumber(), bo.getPageSize());
+    val page = new Page<ItemSearchVO>(bo);
     itemMapper.catItems(bo, page);
     return page;
   }
@@ -110,14 +110,14 @@ public class ItemServiceImpl implements IItemService {
 
   @Override
   public IPage<ItemCommentVO> queryPagedComments(ItemCommentBO bo) {
-    val page = new Page<ItemCommentVO>(bo.getPageNumber(), bo.getPageSize());
+    val page = new Page<ItemCommentVO>(bo);
     itemMapper.queryPagedComments(bo, page);
     return page;
   }
 
   @Override
   public IPage<ItemSearchVO> search(ItemSearchBO bo) {
-    val page = new Page<ItemSearchVO>(bo.getPageNumber(), bo.getPageSize());
+    val page = new Page<ItemSearchVO>(bo);
     itemMapper.search(bo, page);
     return page;
   }

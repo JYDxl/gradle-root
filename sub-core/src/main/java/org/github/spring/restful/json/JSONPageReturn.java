@@ -63,4 +63,10 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
     return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).toArray());
   }
+
+  /** Generator. */
+  @NonNull
+  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull List<R> data) {
+    return of(page.getTotal(), data);
+  }
 }

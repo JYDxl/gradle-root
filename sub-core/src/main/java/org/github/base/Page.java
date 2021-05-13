@@ -5,18 +5,9 @@ import lombok.*;
 import static com.google.common.base.MoreObjects.*;
 
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T> {
-  public Page() {}
-
-  public Page(long current, long size) {
-    super(current, size);
-  }
-
   public Page(PageParam param) {
-    this(param.getPageNumber(), param.getPageSize(), param.isSearchCount());
-  }
-
-  public Page(long current, long size, boolean isSearchCount) {
-    super(current, size, isSearchCount);
+    super(param.getPageNumber(), param.getPageSize(), param.isSearchCount());
+    this.sort(param).sortList(param);
   }
 
   @Override
@@ -34,15 +25,14 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
       .toString();
   }
 
-  public Page<T> sort(PageParam param) {
+  protected Page<T> sort(PageParam param) {
     val sort = param.sort();
     if (sort != null) super.addOrder(sort);
     return this;
   }
 
-  public Page<T> sortList(PageParam param) {
+  protected void sortList(PageParam param) {
     val list = param.sortList();
     super.addOrder(list);
-    return this;
   }
 }
