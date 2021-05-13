@@ -42,10 +42,8 @@ public class MenuServiceImpl implements IMenuService {
   @Override
   public @NonNull JSONPageReturn<QueryMenuListVO> queryMenuList(@NonNull QueryMenuListBO bo) {
     val query = sysMenuService.lambdaQuery();
-    query.like(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
-    val page    = query.page(new Page<SysMenuEntity>(bo).sort(bo));
-    val records = page.getRecords();
-    if (records.isEmpty()) return JSONPageReturn.of();
+    query.likeRight(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
+    val page = query.page(new Page<SysMenuEntity>(bo).sort(bo));
     return JSONPageReturn.of(page, this::applySysMenuEntity2QueryMenuListVO);
   }
 

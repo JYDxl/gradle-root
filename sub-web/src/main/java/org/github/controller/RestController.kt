@@ -78,5 +78,5 @@ class RestController {
   fun jsonBasic() = JSONReturn()
 
   @GetMapping("json/callback")
-  fun jsonCallback(): Returnable = JSONPReturn.of<Any>()
+  fun jsonCallback(): Returnable = JSONPReturn.of<Any?>()
 }

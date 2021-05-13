@@ -67,10 +67,10 @@ spring:
       password: XLrootJYD713
   thymeleaf:
     prefix: classpath:/static/
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ubuntu:8848
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ubuntu:8848
 
 server:
   port: 8088
