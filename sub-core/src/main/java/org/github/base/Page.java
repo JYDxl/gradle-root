@@ -10,6 +10,17 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
     this.sort(param).sortList(param);
   }
 
+  protected void sortList(PageParam param) {
+    val list = param.sortList();
+    super.addOrder(list);
+  }
+
+  protected Page<T> sort(PageParam param) {
+    val sort = param.sort();
+    if (sort != null) super.addOrder(sort);
+    return this;
+  }
+
   @Override
   public @NonNull List<T> getRecords() {
     return super.getRecords();
@@ -22,17 +33,7 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
       .add("size", size)
       .add("records", records)
       .add("total", total)
+      .add("order", orders)
       .toString();
-  }
-
-  protected Page<T> sort(PageParam param) {
-    val sort = param.sort();
-    if (sort != null) super.addOrder(sort);
-    return this;
-  }
-
-  protected void sortList(PageParam param) {
-    val list = param.sortList();
-    super.addOrder(list);
   }
 }

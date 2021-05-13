@@ -62,7 +62,7 @@ spring:
       repositories:
         enabled: false
     mongodb:
-      uri: mongodb://root:XLrootJYD713@aliyun:27017/local
+      uri: mongodb://root:XLrootJYD713@aliyun:27017/mongo?authSource=admin
   thymeleaf:
     prefix: classpath:/static/
   cloud:
