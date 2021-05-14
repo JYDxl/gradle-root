@@ -9,6 +9,6 @@ public interface IJson extends Serializable, Supplier<String> {
   @NonNull
   @Override
   default String get() {
-    return json(this, null);
+    return json(this);
   }
 }

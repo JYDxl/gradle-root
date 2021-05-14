@@ -30,7 +30,7 @@ public class JSONReturn implements JSON {
   @NonNull
   @Override
   public String get() {
-    return json(this, null);
+    return json(this);
   }
 
   @Override

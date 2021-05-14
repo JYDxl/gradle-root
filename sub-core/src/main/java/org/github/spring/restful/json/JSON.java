@@ -37,7 +37,7 @@ public interface JSON extends Returnable {
   /** Generator. */
   @NonNull
   static JSON of(@NonNull Object json) {
-    return of(json(json, null));
+    return of(json(json));
   }
 
   /** Generator. */

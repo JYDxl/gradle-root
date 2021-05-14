@@ -1,13 +1,10 @@
 package org.github.base.entity;
 
 import org.github.base.Model;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.*;
 import java.io.Serializable;
+import javax.annotation.Nullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -19,8 +16,9 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-04-25
+ * @since 2021-05-14
  */
+@SuppressWarnings("all")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tab_safe_question_data")
@@ -33,52 +31,52 @@ public class TabSafeQuestionDataEntity extends Model<TabSafeQuestionDataEntity> 
   /** 主键id */
   @ApiModelProperty(value = "主键id")
   @TableId(value = "id", type = IdType.ASSIGN_ID)
-  private String id;
+  private @Nullable String id;
 
   /** 项目id */
   @ApiModelProperty(value = "项目id")
   @TableField("project_id")
-  private String projectId;
+  private @Nullable String projectId;
 
   /** 问题类型id */
   @ApiModelProperty(value = "问题类型id")
   @TableField("question_type_id")
-  private String questionTypeId;
+  private @Nullable String questionTypeId;
 
   /** 问题级别（字典） */
   @ApiModelProperty(value = "问题级别（字典）")
   @TableField("question_level")
-  private String questionLevel;
+  private @Nullable String questionLevel;
 
   /** 整改天数 */
   @ApiModelProperty(value = "整改天数")
   @TableField("rectify_dates")
-  private Integer rectifyDates;
+  private @Nullable Integer rectifyDates;
 
   /** 排查内容 */
   @ApiModelProperty(value = "排查内容")
   @TableField("check_content")
-  private String checkContent;
+  private @Nullable String checkContent;
 
   /** 整改要求 */
   @ApiModelProperty(value = "整改要求")
   @TableField("rectify_require")
-  private String rectifyRequire;
+  private @Nullable String rectifyRequire;
 
   /** 0 使用  禁用 */
   @ApiModelProperty(value = "0 使用  禁用")
   @TableField("is_use")
-  private Integer isUse;
+  private @Nullable Integer isUse;
 
   /** 创建人 */
   @ApiModelProperty(value = "创建人")
   @TableField("creater")
-  private String creater;
+  private @Nullable String creater;
 
   /** 创建时间 */
   @ApiModelProperty(value = "创建时间")
   @TableField("create_time")
-  private LocalDateTime createTime;
+  private @Nullable LocalDateTime createTime;
 
   @Override
   protected Serializable pkVal() {

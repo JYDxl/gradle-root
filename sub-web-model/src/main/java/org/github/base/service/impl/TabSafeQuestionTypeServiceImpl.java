@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-04-25
+ * @since 2021-05-14
  */
 @Service
 public class TabSafeQuestionTypeServiceImpl extends ServiceImpl<ITabSafeQuestionTypeMapper, TabSafeQuestionTypeEntity> implements ITabSafeQuestionTypeService {}

@@ -54,7 +54,7 @@ public class UserServiceImplCustom implements IUserService {
     if (one == null) {
       return JSONReturn.error().withRetMsg("用户名或密码错误");
     }
-    CookieUtils.setCookie(getReq(), getResp(), "user", json(one, null), true);
+    CookieUtils.setCookie(getReq(), getResp(), "user", json(one), true);
     return new JSONDataReturn<>(one);
   }
 

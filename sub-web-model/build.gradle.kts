@@ -8,6 +8,7 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
+  compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
 
   api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
   api("com.baomidou:mybatis-plus-extension:$mybatisplus")

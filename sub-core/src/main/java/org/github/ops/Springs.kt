@@ -9,7 +9,7 @@ import java.io.OutputStream
 
 fun Any?.writeValue(output: OutputStream, mapper: ObjectMapper? = null) = (mapper ?: objectMapper).writeValue(output, this)
 
-fun Any?.json(mapper: ObjectMapper? = null): String = (mapper ?: objectMapper).writeValueAsString(this)
+fun Any?.json(): String = objectMapper.writeValueAsString(this)
 
 val <T: Any> T.proxy get() = appCtx.getBean(this::class.java)
 
