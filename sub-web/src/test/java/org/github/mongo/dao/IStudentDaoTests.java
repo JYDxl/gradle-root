@@ -16,31 +16,31 @@ import static org.springframework.data.domain.Sort.sort;
 @SpringBootTest
 @Slf4j
 class IStudentDaoTests {
-    @Autowired
-    IStudentDao studentDao;
+  @Autowired
+  IStudentDao studentDao;
 
-    @Test
-    void save() {
-        val student = new Student();
-        student.setId("2");
-        student.setName("Rose");
-        student.setAge(13);
-        studentDao.save(student);
-        log.info(student.toString());
-    }
+  @Test
+  void findAll() {
+    val students = studentDao.findAll();
+    log.info(students.toString());
+    val all = studentDao.findAll(sort(Student.class).by(Student::getAge));
+    log.info(all.toString());
+  }
 
-    @Test
-    void findAll() {
-        val students = studentDao.findAll();
-        log.info(students.toString());
-        val all = studentDao.findAll(sort(Student.class).by(Student::getAge));
-        log.info(all.toString());
-    }
+  @Test
+  void page() {
+    val pageRequest = PageRequest.of(1, 10, sort(Student.class).by(Student::getAge));
+    val page        = studentDao.findAll(pageRequest);
+    log.info(page.toString());
+  }
 
-    @Test
-    void page() {
-        val pageRequest = PageRequest.of(1, 10, sort(Student.class).by(Student::getAge));
-        val page = studentDao.findAll(pageRequest);
-        log.info(page.toString());
-    }
+  @Test
+  void save() {
+    val student = new Student();
+    student.setId("2");
+    student.setName("Rose");
+    student.setAge(13);
+    studentDao.save(student);
+    log.info(student.toString());
+  }
 }

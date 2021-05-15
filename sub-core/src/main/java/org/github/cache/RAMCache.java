@@ -25,8 +25,12 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
   }
 
   @SuppressWarnings("unchecked")
-  public @NonNull <T> CacheSupplier<T, ?> getCache(@NonNull CacheNameSupplier name) {
-    return (CacheSupplier<T, ?>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
+  @Override
+  public void onApplicationEvent(CacheEvent event) {
+    val name  = event.getName();
+    val cache = map.get(event.getName());
+    if (cache == null) throw throwing(name);
+    cache.accept(event);
   }
 
   private RuntimeException throwing(CacheNameSupplier name) {
@@ -34,11 +38,7 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
   }
 
   @SuppressWarnings("unchecked")
-  @Override
-  public void onApplicationEvent(CacheEvent event) {
-    val name = event.getName();
-    val cache = map.get(event.getName());
-    if (cache == null) throw throwing(name);
-    cache.accept(event);
+  public @NonNull <T> CacheSupplier<T,?> getCache(@NonNull CacheNameSupplier name) {
+    return (CacheSupplier<T,?>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
   }
 }

@@ -55,7 +55,7 @@ fun main() {
     superServiceImplClass = ServiceImpl::class.jvmName
     logicDeleteFieldName = "deleted"
     versionFieldName = "version"
-    likeTable = LikeTable("tab_safe_question_data")
+    likeTable = LikeTable("_")
     generator.strategy = this
   }
 

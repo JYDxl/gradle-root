@@ -1,57 +1,87 @@
 package org.github.util.tree;
 
+import java.util.List;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.slf4j.*;
 import org.github.base.entity.TabSafeQuestionDataEntity;
 import org.github.base.entity.TabSafeQuestionTypeEntity;
-import org.github.web.model.vo.TreeVO;
 import org.github.base.service.ITabSafeQuestionDataService;
 import org.github.base.service.ITabSafeQuestionTypeService;
+import org.github.web.model.vo.TreeVO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
-
-import static com.google.common.base.MoreObjects.firstNonNull;
+import static com.google.common.base.MoreObjects.*;
 import static com.google.common.collect.ImmutableList.copyOf;
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Comparator.comparing;
-import static java.util.Comparator.nullsFirst;
-import static java.util.Objects.requireNonNull;
-import static java.util.function.Function.identity;
+import static com.google.common.collect.ImmutableList.*;
+import static com.google.common.collect.ImmutableListMultimap.*;
+import static com.google.common.collect.Lists.*;
+import static java.util.Comparator.*;
+import static java.util.Objects.*;
+import static java.util.function.Function.*;
 import static java.util.stream.Collectors.*;
-import static java.util.stream.Stream.concat;
-import static org.github.ops.SpringsKt.json;
-import static org.github.util.tree.TreeUtil.buildTree;
-import static org.github.util.tree.TreeUtil.findAllChild;
+import static java.util.stream.Stream.*;
+import static org.github.ops.SpringsKt.*;
+import static org.github.util.tree.TreeUtil.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Slf4j
 class TreeUtilTest {
   @Autowired
-  private ITabSafeQuestionTypeService safeQuestionTypeService;
+  ITabSafeQuestionTypeService safeQuestionTypeService;
   @Autowired
-  private ITabSafeQuestionDataService safeQuestionDataService;
+  ITabSafeQuestionDataService safeQuestionDataService;
 
-  private @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
+  @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
     val vo = new TreeVO(firstNonNull(data.getQuestionTypeId(), ""), requireNonNull(data.getId()), requireNonNull(data.getCheckContent()));
     vo.setLeaf(true);
     return vo;
   }
 
-  private @NonNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
+  @Test
+  void buildTreeTest() {
+    val typeQuery = safeQuestionTypeService.lambdaQuery();
+    typeQuery.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
+    val typeList   = typeQuery.list();
+    val typeStream = typeList.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO);
+
+    val dataQuery = safeQuestionDataService.lambdaQuery();
+    dataQuery.eq(TabSafeQuestionDataEntity::getProjectId, "-1");
+    dataQuery.eq(TabSafeQuestionDataEntity::getIsUse, 0);
+    val dataList   = dataQuery.list();
+    val dataStream = dataList.stream().map(this::applyTabSafeQuestionDataEntity2TreeVO);
+
+    val list = concat(typeStream, dataStream).collect(toList());
+    reduceList(list);
+
+    val tree = buildTree(list, "", nullsFirst(comparing(TreeVO::getName)));
+    val json = json(tree);
+    log.info(json);
+  }
+
+  @Test
+  void findAllChildTest() {
+    val query = safeQuestionTypeService.lambdaQuery();
+    query.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
+    val data  = query.list();
+    val list  = data.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO).collect(toList());
+    val index = list.stream().collect(toImmutableListMultimap(TreeNode::getPid, identity()));
+    val root  = index.get("");
+    val ids   = root.stream().map(TreeVO::getId).collect(toImmutableList());
+    val child = findAllChild(list, true, ids);
+    log.info(json(child));
+  }
+
+  @NonNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
     val vo = new TreeVO(firstNonNull(type.getParentId(), ""), requireNonNull(type.getId()), requireNonNull(type.getTypeName()));
     vo.setLeaf(false);
     return vo;
   }
 
-  private void reduceList(List<TreeVO> list) {
+  void reduceList(List<TreeVO> list) {
     val pidList = list.stream().map(TreeVO::getPid).collect(toImmutableList());
     val subList = list.stream().filter(v -> !pidList.contains(v.getId())).filter(v -> !v.isLeaf()).collect(toImmutableList());
     if (subList.isEmpty()) return;
@@ -127,53 +157,19 @@ class TreeUtilTest {
     val result = copyOf(map.values());
     log.info(result.toString());
   }
-
-  @Test
-  void buildTreeTest() {
-    val typeQuery = safeQuestionTypeService.lambdaQuery();
-    typeQuery.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
-    val typeList   = typeQuery.list();
-    val typeStream = typeList.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO);
-
-    val dataQuery = safeQuestionDataService.lambdaQuery();
-    dataQuery.eq(TabSafeQuestionDataEntity::getProjectId, "-1");
-    dataQuery.eq(TabSafeQuestionDataEntity::getIsUse, 0);
-    val dataList   = dataQuery.list();
-    val dataStream = dataList.stream().map(this::applyTabSafeQuestionDataEntity2TreeVO);
-
-    val list = concat(typeStream, dataStream).collect(toList());
-    reduceList(list);
-
-    val tree = buildTree(list, "", nullsFirst(comparing(TreeVO::getName)));
-    val json = json(tree);
-    log.info(json);
-  }
-
-  @Test
-  void findAllChildTest() {
-    val query = safeQuestionTypeService.lambdaQuery();
-    query.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
-    val data = query.list();
-    val list = data.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO).collect(toList());
-    val index = list.stream().collect(toImmutableListMultimap(TreeNode::getPid, identity()));
-    val root = index.get("");
-    val ids = root.stream().map(TreeNode::getId).collect(toList());
-    val child = findAllChild(list, true, ids);
-    log.info(json(child));
-  }
 }
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 class CollectVO {
-  private int    normal = 0;
-  private int    major  = 0;
-  private int    risk   = 0;
-  private int    check  = 0;
-  private String date;
+  int    normal = 0;
+  int    major  = 0;
+  int    risk   = 0;
+  int    check  = 0;
+  String date;
 
-  public CollectVO reduce(CollectVO vo) {
+  CollectVO reduce(CollectVO vo) {
     return new CollectVO(normal + vo.normal, major + vo.major, risk + vo.risk, check + vo.check, vo.date);
   }
 }

@@ -17,7 +17,7 @@ import static org.github.web.common.CacheName.*;
 import static org.github.web.enums.Enable.*;
 
 @Component
-public class SysMenuNameCache extends CustomCache<String, SysMenuEntity> {
+public class SysMenuNameCache extends CustomCache<String,SysMenuEntity> {
   @Autowired
   private ISysMenuService sysMenuService;
 

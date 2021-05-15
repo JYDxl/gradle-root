@@ -3,7 +3,7 @@ package org.github.web.enums;
 import lombok.*;
 import org.github.base.IEnum;
 
-public enum Sex implements IEnum<Integer, String> {
+public enum Sex implements IEnum<Integer,String> {
   man(0, "男"),
   woman(1, "女");
 

@@ -1,19 +1,20 @@
 package org.github.util.tree;
 
-import com.google.common.collect.*;
-import lombok.NonNull;
-import lombok.val;
-
-import javax.annotation.Nullable;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.uniqueIndex;
-import static com.google.common.collect.Multimaps.toMultimap;
-import static java.util.function.Function.identity;
+import javax.annotation.Nullable;
+import lombok.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import static com.google.common.collect.ImmutableList.*;
+import static com.google.common.collect.ImmutableListMultimap.*;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Multimaps.*;
+import static java.util.Collections.*;
+import static java.util.function.Function.*;
 
 public abstract class TreeUtil {
   public static <T extends TreeNode<I,E>, I, E> @NonNull List<T> buildTree(@NonNull List<T> list, @NonNull I pid, @Nullable Comparator<T> comparator) {
@@ -34,17 +35,17 @@ public abstract class TreeUtil {
     }
   }
 
-  public static <T extends TreeNode<I, E>, I, E> @NonNull List<List<T>> findAllChild(@NonNull List<T> list, boolean includeThemself, @NonNull List<I> ids) {
+  public static <T extends TreeNode<I,E>, I, E> @NonNull List<List<T>> findAllChild(@NonNull List<T> list, boolean includeThemself, @NonNull List<I> ids) {
     val index = list.stream().collect(toImmutableListMultimap(TreeNode::getPid, identity()));
-    val map = uniqueIndex(list, T::getId);
+    val map   = uniqueIndex(list, T::getId);
     return ids.stream().map(id -> {
       List<T> result = includeThemself ? newArrayList(map.get(id)) : newArrayList();
-      recursion(ids, index, result);
+      recursion(singletonList(id), index, result);
       return result;
     }).collect(toImmutableList());
   }
 
-  private static <I, T extends TreeNode<I, E>, E> void recursion(List<I> input, ImmutableListMultimap<I, T> index, List<T> result) {
+  private static <I, T extends TreeNode<I,E>, E> void recursion(List<I> input, ImmutableListMultimap<I,T> index, List<T> result) {
     for (I id : input) {
       List<T> subList = index.get(id);
       if (subList.isEmpty()) continue;

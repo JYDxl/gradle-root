@@ -30,14 +30,14 @@ public interface JSON extends Returnable {
 
   /** Generator. */
   @NonNull
-  static JSON of(@NonNull String json) {
-    return json::toString;
+  static JSON of(@NonNull Object json) {
+    return of(json(json));
   }
 
   /** Generator. */
   @NonNull
-  static JSON of(@NonNull Object json) {
-    return of(json(json));
+  static JSON of(@NonNull String json) {
+    return json::toString;
   }
 
   /** Generator. */
