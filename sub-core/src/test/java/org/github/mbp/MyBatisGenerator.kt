@@ -32,7 +32,7 @@ fun main() {
   }
 
   DataSourceConfig().apply {
-    url = "jdbc:mysql://aliyun:3306/web"
+    url = "jdbc:mysql://www.jydxl.link:3306/web"
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
     password = "XLrootJYD713"

@@ -19,10 +19,10 @@ spring:
       pool:
         max-active: 24
         max-idle: 12
-    host: aliyun
+    host: www.jydxl.link
     password: XLrootJYD713
   datasource:
-    url: jdbc:p6spy:mysql://aliyun:3306/web?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
+    url: jdbc:p6spy:mysql://www.jydxl.link:3306/web?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     username: root
     password: XLrootJYD713
@@ -41,7 +41,7 @@ spring:
     password: XLrootJYD713
     publisher-returns: true
     virtual-host: /
-    host: aliyun
+    host: www.jydxl.link
     port: 5672
     listener:
       simple:
@@ -62,13 +62,13 @@ spring:
       repositories:
         enabled: false
     mongodb:
-      uri: mongodb://root:XLrootJYD713@aliyun:27017/mongo?authSource=admin
+      uri: mongodb://root:XLrootJYD713@www.jydxl.link:27017/mongo?authSource=admin
   thymeleaf:
     prefix: classpath:/static/
-  cloud:
-    nacos:
-      discovery:
-        server-addr: ubuntu:8848
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: ubuntu:8848
 
 server:
   port: 8088
@@ -100,5 +100,5 @@ shiro:
 
 shiro-redis:
   redis-manager:
-    host: aliyun:6379
+    host: www.jydxl.link:6379
     password: XLrootJYD713
