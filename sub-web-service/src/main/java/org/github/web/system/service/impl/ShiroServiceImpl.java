@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.github.web.enums.EnableEnum.disabled;
+import static org.github.web.enums.Enable.disabled;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service

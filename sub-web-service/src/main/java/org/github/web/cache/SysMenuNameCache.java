@@ -11,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static com.google.common.collect.ImmutableMap.*;
 import static java.lang.Long.*;
-import static org.github.web.common.CacheNameEnum.*;
-import static org.github.web.enums.EnableEnum.*;
+import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
+import static org.github.web.common.CacheName.*;
+import static org.github.web.enums.Enable.*;
 
 @Component
-public class SysMenuNameCache extends CustomCache<String> {
+public class SysMenuNameCache extends CustomCache<String, SysMenuEntity> {
   @Autowired
   private ISysMenuService sysMenuService;
 
@@ -35,5 +37,15 @@ public class SysMenuNameCache extends CustomCache<String> {
     query.eq(SysMenuEntity::getMenuId, parseLong(key));
     val entity = query.oneOpt();
     return entity.map(SysMenuEntity::getName).orElse(null);
+  }
+
+  @Override
+  public @NonNull String getKey(SysMenuEntity entity) {
+    return requireNonNull(entity.getMenuId()).toString();
+  }
+
+  @Override
+  public @Nullable String getValue(SysMenuEntity entity) {
+    return ofNullable(entity).filter(v -> enabled.getCode().equals(v.getEnabled())).map(SysMenuEntity::getName).orElse(null);
   }
 }

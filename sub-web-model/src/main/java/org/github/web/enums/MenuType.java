@@ -3,7 +3,7 @@ package org.github.web.enums;
 import lombok.*;
 import org.github.base.IEnum;
 
-public enum MenuTypeEnum implements IEnum<Integer,String> {
+public enum MenuType implements IEnum<Integer,String> {
   //类型   0：目录   1：菜单   2：按钮
   directory(0, "目录"),
   menu(1, "菜单"),
@@ -13,7 +13,7 @@ public enum MenuTypeEnum implements IEnum<Integer,String> {
 
   private final String value;
 
-  MenuTypeEnum(Integer code, String value) {
+  MenuType(Integer code, String value) {
     this.code = code;
     this.value = value;
   }

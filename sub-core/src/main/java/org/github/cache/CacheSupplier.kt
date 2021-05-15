@@ -1,36 +1,36 @@
 package org.github.cache
 
-import net.oschina.j2cache.CacheChannel
+import cn.hutool.core.lang.Pair
+import java.util.function.Consumer
 import java.util.function.Function
 import java.util.function.Supplier
 
-interface CacheSupplier<V>: Function<String, V?>, Supplier<Map<String, V?>> {
+interface CacheSupplier<V, E> : Function<String, V?>, Supplier<Map<String, V?>>, Consumer<CacheEvent<E>> {
   val region: CacheNameSupplier
-
-  val channel: CacheChannel
-
-  val prefix: String get() = "j2cache:"
 
   override fun get(): Map<String, V?>
 
   override fun apply(key: String): V?
 
-  @Suppress("UNCHECKED_CAST", "DEPRECATION")
-  fun get(key: Any?): V? = if (key == null) null else channel.get(region.apply(prefix), key.toString(), {apply(key.toString())}).value as V?
+  override fun accept(event: CacheEvent<E>) = Unit
 
-  @Suppress("UNCHECKED_CAST", "DEPRECATION")
-  fun getSome(keys: Collection<String>): Map<String, V?> = channel.get(region.apply(prefix), keys, this::apply).mapValues {it.value.value as V?}
+  fun getKey(entity: E): String
 
-  @Suppress("UNCHECKED_CAST")
-  fun getAll(): Map<String, V?> = channel.get(region.apply(prefix), channel.keys(region.apply(prefix))).mapValues {it.value.value as V?}
+  fun getValue(entity: E): V?
 
-  fun set(key: Any, value: V?) = channel.set(region.apply(prefix), key.toString(), value)
+  fun get(key: Any?): V? = if (key == null) null else apply(key.toString())
 
-  fun setSome(values: Map<String, V?>) = channel.set(region.apply(prefix), values)
+  fun getSome(keys: Collection<String>): Map<String, V?> = get().filterKeys { keys.contains(it) }
 
-  fun del(vararg keys: String) = channel.evict(region.apply(prefix), *keys)
+  fun getAll(): List<Pair<String, V?>> = get().filterValues { it != null }.mapTo(arrayListOf()) { Pair<String, V?>(it.key, it.value) }
 
-  fun delAll() = channel.clear(region.apply(prefix))
+  fun set(key: Any, value: V?) = Unit
 
-  fun loadAll() = setSome(get())
+  fun setSome(values: Map<String, V?>) = Unit
+
+  fun del(vararg keys: String) = Unit
+
+  fun delAll() = Unit
+
+  fun loadAll() = Unit
 }

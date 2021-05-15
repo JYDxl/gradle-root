@@ -3,7 +3,7 @@ package org.github.web.enums;
 import lombok.*;
 import org.github.base.IEnum;
 
-public enum EnableEnum implements IEnum<Integer,String> {
+public enum Enable implements IEnum<Integer,String> {
   disabled(0, "禁用"),
   enabled(1, "启用");
 
@@ -11,7 +11,7 @@ public enum EnableEnum implements IEnum<Integer,String> {
 
   private final String value;
 
-  EnableEnum(Integer code, String value) {
+  Enable(Integer code, String value) {
     this.code = code;
     this.value = value;
   }
