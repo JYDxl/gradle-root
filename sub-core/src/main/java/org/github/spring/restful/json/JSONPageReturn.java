@@ -46,14 +46,14 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
 
   /** Generator. */
   @NonNull
-  public static <V> JSONPageReturn<V> of(@NonNull IPage<V> page) {
+  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page) {
     return of(page.getTotal(), page.getRecords());
   }
 
   /** Generator. */
   @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <V> JSONPageReturn<V> of(long total, @NonNull List<V> data) {
+  public static <T, R extends T> JSONPageReturn<R> of(long total, @NonNull List<T> data) {
     return (JSONPageReturn) new JSONPageReturn<>(total).withData(data);
   }
 

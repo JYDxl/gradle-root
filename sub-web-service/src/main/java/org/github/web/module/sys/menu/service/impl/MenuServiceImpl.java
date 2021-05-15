@@ -16,7 +16,6 @@ import org.github.web.module.sys.menu.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static cn.hutool.core.text.CharSequenceUtil.*;
-import static java.util.Collections.emptyList;
 import static org.github.web.common.CacheName.*;
 import static org.github.web.enums.MenuType.*;
 import static org.springframework.beans.BeanUtils.*;
@@ -47,7 +46,7 @@ public class MenuServiceImpl implements IMenuService {
     query.likeRight(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
     val page = query.page(new Page<>(bo));
     val list = page.getRecords();
-    if (list.isEmpty()) return JSONPageReturn.of(page, emptyList());
+    if (list.isEmpty()) return JSONPageReturn.of(page);
     return JSONPageReturn.of(page, this::applySysMenuEntity2QueryMenuListVO);
   }
 

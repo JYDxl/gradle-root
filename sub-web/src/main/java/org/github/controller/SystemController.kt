@@ -42,11 +42,18 @@ class SystemController {
   @GetMapping("login")
   fun page() = VIEW {"login"}
 
-  @RequestMapping("public/token")
+  @RequestMapping("/token")
   fun token(): Returnable {
     val subject: Subject = getSubject()
     val session: Session? = subject.getSession(false)
     return of(session?.id)
+  }
+
+  @RequestMapping("/refresh")
+  fun refresh(): Returnable {
+    val user = getSubject().principal as User
+    val token = sign(user.username, user.password)
+    return of(token)
   }
 
   @PostMapping("public/jwt")
@@ -55,13 +62,6 @@ class SystemController {
     val password = jwt.password ?: throw ParamsErrorException("密码不能为空")
     val secret = generator.generate(password, username)
     val token = sign(username, secret)
-    return of(token)
-  }
-
-  @RequestMapping("/refresh")
-  fun refresh(): Returnable {
-    val user = getSubject().principal as User
-    val token = sign(user.username, user.password)
     return of(token)
   }
 }

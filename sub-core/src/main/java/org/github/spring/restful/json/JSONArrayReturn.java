@@ -69,13 +69,13 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** Generator. */
   @SafeVarargs
   @NonNull
-  public static <V> JSONArrayReturn<V> of(V... data) {
+  public static <T, R extends T> JSONArrayReturn<R> of(T... data) {
     return new JSONArrayReturn<>(data);
   }
 
   /** Generator. */
   @NonNull
-  public static <V> JSONArrayReturn<V> of(@NonNull Collection<V> data) {
+  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data) {
     return new JSONArrayReturn<>(data.toArray());
   }
 

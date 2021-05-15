@@ -5,6 +5,7 @@ val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
 val shiro: String by System.getProperties()
+val p6spy: String by System.getProperties()
 val jna: String by System.getProperties()
 val jwt: String by System.getProperties()
 
@@ -43,6 +44,7 @@ dependencies {
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
   compileOnly("io.netty:netty-all:$netty")
   compileOnly("com.auth0:java-jwt:$jwt")
+  compileOnly("p6spy:p6spy:$p6spy")
 
   testImplementation("commons-codec:commons-codec:$commonscodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")
