@@ -16,11 +16,13 @@ public enum Enable implements IEnum<Integer,String> {
     this.value = value;
   }
 
-  @NonNull @Override public Integer getCode() {
+  @Override
+  public @NonNull Integer getCode() {
     return code;
   }
 
-  @NonNull @Override public String getValue() {
+  @Override
+  public @NonNull String getValue() {
     return value;
   }
 }

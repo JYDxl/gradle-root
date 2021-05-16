@@ -12,19 +12,17 @@ import static com.google.common.collect.Maps.*;
 import static java.lang.String.*;
 import static java.util.Optional.*;
 
-@SuppressWarnings("rawtypes")
 public class RAMCache implements InitializingBean, ApplicationListener<CacheEvent> {
   @Autowired
-  private List<CacheSupplier<?,?,?>> caches;
+  private List<CacheSupplier<?,?>> caches;
 
-  private Map<CacheNameSupplier,CacheSupplier<?,?,?>> map;
+  private Map<CacheNameSupplier,CacheSupplier<?,?>> map;
 
   @Override
   public void afterPropertiesSet() throws Exception {
     map = uniqueIndex(caches, CacheSupplier::getRegion);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public void onApplicationEvent(CacheEvent event) {
     val name  = event.getName();
@@ -38,7 +36,7 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
   }
 
   @SuppressWarnings("unchecked")
-  public @NonNull <T> CacheSupplier<T,?,?> getCache(@NonNull CacheNameSupplier name) {
-    return (CacheSupplier<T,?,?>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
+  public @NonNull <R> CacheSupplier<?,R> getCache(@NonNull CacheNameSupplier name) {
+    return (CacheSupplier<?,R>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
   }
 }
