@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Pair
 import net.oschina.j2cache.CacheChannel
 import org.github.cache.CacheStatus.*
 
-interface J2CacheSupplier<V, E>: CacheSupplier<V, E> {
+interface J2CacheSupplier<V, E, R> : CacheSupplier<V, E, R> {
   val channel: CacheChannel
 
   val prefix: String get() = "j2cache:"
@@ -29,7 +29,7 @@ interface J2CacheSupplier<V, E>: CacheSupplier<V, E> {
   override fun getSome(keys: Collection<String>): Map<String, V?> = channel.get(region.apply(prefix), keys, this::apply).mapValues {it.value.value as V?}
 
   @Suppress("UNCHECKED_CAST")
-  override fun getAll(): List<Pair<String, V?>> = channel.get(region.apply(prefix), channel.keys(region.apply(prefix))).mapValues {it.value.value as V?}.mapTo(arrayListOf()) {Pair<String, V?>(it.key, it.value)}
+  override fun getAll(): List<Pair<String, V>> = channel.get(region.apply(prefix), channel.keys(region.apply(prefix))).filterValues {it.value != null && filter.test(it.value as V)}.mapTo(arrayListOf()) {Pair<String, V>(it.key, it.value.value as V)}
 
   override fun set(key: Any, value: V?) = channel.set(region.apply(prefix), key.toString(), value)
 

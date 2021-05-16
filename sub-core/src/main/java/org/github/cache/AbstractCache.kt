@@ -1,3 +1,3 @@
 package org.github.cache
 
-abstract class AbstractCache<V, E>: CacheSupplier<V, E>
+abstract class AbstractCache<V, E, R>: CacheSupplier<V, E, R>

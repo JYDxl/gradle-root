@@ -12,12 +12,10 @@ import org.springframework.stereotype.Component;
 import static com.google.common.collect.ImmutableMap.*;
 import static java.lang.Long.*;
 import static java.util.Objects.requireNonNull;
-import static java.util.Optional.ofNullable;
 import static org.github.web.common.CacheName.*;
-import static org.github.web.enums.Enable.*;
 
 @Component
-public class SysMenuNameCache extends CustomCache<String,SysMenuEntity> {
+public class SysMenuNameCache extends CustomCache<SysMenuEntity,SysMenuEntity,String> {
   @Autowired
   private ISysMenuService sysMenuService;
 
@@ -25,18 +23,17 @@ public class SysMenuNameCache extends CustomCache<String,SysMenuEntity> {
     return sysMenuName;
   }
 
-  @NonNull @Override public Map<String,String> get() {
+  @NonNull @Override public Map<String,SysMenuEntity> get() {
     val query = sysMenuService.lambdaQuery();
-    query.eq(SysMenuEntity::getEnabled, enabled.getCode());
+    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
     val list = query.list();
-    return list.stream().collect(toImmutableMap(Function.<SysMenuEntity>identity().andThen(SysMenuEntity::getMenuId).andThen(Object::toString), SysMenuEntity::getName));
+    return list.stream().collect(toImmutableMap(Function.<SysMenuEntity>identity().andThen(SysMenuEntity::getMenuId).andThen(Object::toString), Function.identity()));
   }
 
-  @Nullable @Override public String apply(@NonNull String key) {
+  @Nullable @Override public SysMenuEntity apply(@NonNull String key) {
     val query = sysMenuService.lambdaQuery();
     query.eq(SysMenuEntity::getMenuId, parseLong(key));
-    val entity = query.oneOpt();
-    return entity.map(SysMenuEntity::getName).orElse(null);
+    return query.one();
   }
 
   @Override
@@ -45,7 +42,13 @@ public class SysMenuNameCache extends CustomCache<String,SysMenuEntity> {
   }
 
   @Override
-  public @Nullable String getValue(SysMenuEntity entity) {
-    return ofNullable(entity).filter(v -> enabled.getCode().equals(v.getEnabled())).map(SysMenuEntity::getName).orElse(null);
+  public @Nullable SysMenuEntity getValue(SysMenuEntity entity) {
+    return entity;
+  }
+
+  @NonNull
+  @Override
+  public Function<SysMenuEntity, String> getMapper() {
+    return SysMenuEntity::getName;
   }
 }

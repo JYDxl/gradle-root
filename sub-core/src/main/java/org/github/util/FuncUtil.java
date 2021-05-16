@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
 import lombok.*;
@@ -33,5 +34,9 @@ public abstract class FuncUtil {
 
   public static <T> Stream<T> stream(@Nullable Collection<T> collection) {
     return collection == null || collection.isEmpty() ? Stream.empty() : collection.stream();
+  }
+
+  public static <T> Predicate<T> pass() {
+    return v -> true;
   }
 }

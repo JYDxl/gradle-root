@@ -15,9 +15,9 @@ import static java.util.Optional.*;
 @SuppressWarnings("rawtypes")
 public class RAMCache implements InitializingBean, ApplicationListener<CacheEvent> {
   @Autowired
-  private List<CacheSupplier<?,?>> caches;
+  private List<CacheSupplier<?,?,?>> caches;
 
-  private Map<CacheNameSupplier,CacheSupplier<?,?>> map;
+  private Map<CacheNameSupplier,CacheSupplier<?,?,?>> map;
 
   @Override
   public void afterPropertiesSet() throws Exception {
@@ -38,7 +38,7 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
   }
 
   @SuppressWarnings("unchecked")
-  public @NonNull <T> CacheSupplier<T,?> getCache(@NonNull CacheNameSupplier name) {
-    return (CacheSupplier<T,?>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
+  public @NonNull <T> CacheSupplier<T,?,?> getCache(@NonNull CacheNameSupplier name) {
+    return (CacheSupplier<T,?,?>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
   }
 }
