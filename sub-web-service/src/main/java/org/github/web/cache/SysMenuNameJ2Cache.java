@@ -9,7 +9,6 @@ import lombok.*;
 import org.github.base.entity.SysMenuEntity;
 import org.github.base.service.ISysMenuService;
 import org.github.cache.CacheNameSupplier;
-import org.github.util.FuncUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static com.google.common.collect.ImmutableMap.*;
@@ -36,7 +35,7 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
 
   @Override
   public @NonNull Predicate<SysMenuEntity> getFilter() {
-    return FuncUtil.<SysMenuEntity>nonNull().and(v -> enabled.getCode().equals(v.getEnabled()));
+    return v -> v != null && enabled.getCode().equals(v.getEnabled());
   }
 
   @Override

@@ -3,11 +3,12 @@ package org.github.cache
 import cn.hutool.core.lang.Pair
 import com.google.common.collect.ImmutableList.of
 import org.github.util.FuncUtil.*
+import org.springframework.beans.factory.InitializingBean
 import java.util.function.Consumer
 import java.util.function.Function
 import java.util.function.Predicate
 
-interface CacheSupplier<E, R>: Function<String, E?>, Consumer<CacheEvent> {
+interface CacheSupplier<E, R>: Function<String, E?>, Consumer<CacheEvent>, InitializingBean {
   val name: CacheNameSupplier
 
   val filter: Predicate<E?> get() = nonNull()
@@ -39,4 +40,6 @@ interface CacheSupplier<E, R>: Function<String, E?>, Consumer<CacheEvent> {
   fun delAll() = Unit
 
   fun loadAll() = Unit
+
+  override fun afterPropertiesSet() = loadAll()
 }

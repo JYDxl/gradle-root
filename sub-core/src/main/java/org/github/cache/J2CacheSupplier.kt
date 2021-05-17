@@ -15,16 +15,17 @@ interface J2CacheSupplier<E, R>: CacheSupplier<E, R> {
   @Suppress("UNCHECKED_CAST")
   override fun accept(event: CacheEvent) {
     val source = event.source
+    val status = event.status
     if (source is Collection<*>) {
       source as Collection<String>
-      when (source) {
+      when (status) {
         add -> setSome(source)
         modify -> setSome(source)
         delete -> del(*source.toTypedArray())
       }
     } else {
       source as String
-      when (source) {
+      when (status) {
         add -> set(source)
         modify -> set(source)
         delete -> del(source)
