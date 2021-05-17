@@ -11,9 +11,9 @@ import java.util.function.Predicate
 interface CacheSupplier<E, R>: Function<String, E?>, Consumer<CacheEvent>, InitializingBean {
   val name: CacheNameSupplier
 
-  val filter: Predicate<E?> get() = nonNull()
-
   val mapper: Function<E?, R?>
+
+  val filter: Predicate<E?> get() = nonNull()
 
   val proxy: Function<E?, R?> get() = optional(mapper, null)
 

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.*;
 import static java.lang.Long.*;
+import static java.util.function.Function.identity;
 import static org.github.web.common.CacheName.*;
 import static org.github.web.enums.Enable.*;
 
@@ -28,6 +29,7 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
   public @Nullable SysMenuEntity apply(@NonNull String key) {
     val query = sysMenuService.lambdaQuery();
     query.eq(SysMenuEntity::getMenuId, parseLong(key));
+    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
     return query.one();
   }
 
@@ -49,9 +51,9 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
   @Override
   public @NonNull Map<String, SysMenuEntity> load(@NonNull Collection<String> keys) {
     val query = sysMenuService.lambdaQuery();
-    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
     query.in(!keys.isEmpty(), SysMenuEntity::getMenuId, keys.stream().map(Long::parseLong).collect(toImmutableList()));
+    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
     val list = query.list();
-    return list.stream().collect(toImmutableMap(v -> v.pkVal().toString(), Function.identity()));
+    return list.stream().collect(toImmutableMap(v -> v.pkVal().toString(), identity()));
   }
 }
