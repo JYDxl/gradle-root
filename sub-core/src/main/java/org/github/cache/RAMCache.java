@@ -20,7 +20,7 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    map = uniqueIndex(caches, CacheSupplier::getRegion);
+    map = uniqueIndex(caches, CacheSupplier::getName);
   }
 
   @Override

@@ -2,6 +2,7 @@ package org.github.util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -38,5 +39,9 @@ public abstract class FuncUtil {
 
   public static <T> Predicate<T> pass() {
     return v -> true;
+  }
+
+  public static <T> Predicate<T> nonNull() {
+    return Objects::nonNull;
   }
 }

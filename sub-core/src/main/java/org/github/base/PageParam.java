@@ -10,7 +10,7 @@ import static com.google.common.collect.ImmutableList.*;
 @ToString(callSuper = true)
 @Data
 public class PageParam extends Sort implements IParam {
-  private int pageNumber = 1;
+  private int pageNum = 1;
 
   private int pageSize = 10;
 

@@ -3,6 +3,8 @@ package org.github.cache;
 import lombok.NonNull;
 import org.springframework.context.ApplicationEvent;
 
+import java.util.Collection;
+
 import static cn.hutool.core.date.LocalDateTimeUtil.of;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
@@ -18,6 +20,12 @@ public class CacheEvent extends ApplicationEvent {
     this.name = name;
   }
 
+  public CacheEvent(@NonNull Collection<String> id, @NonNull CacheStatus status, @NonNull CacheNameSupplier name) {
+    super(id);
+    this.status = status;
+    this.name = name;
+  }
+
   @Override
   public String toString() {
     return toStringHelper(this)
@@ -26,10 +34,6 @@ public class CacheEvent extends ApplicationEvent {
       .add("name", name)
       .add("time", of(getTimestamp()))
       .toString();
-  }
-
-  public @NonNull String getId() {
-    return source.toString();
   }
 
   public @NonNull CacheNameSupplier getName() {

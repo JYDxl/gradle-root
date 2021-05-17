@@ -1,0 +1,5 @@
+<root>
+    <item name='java.util.EventObject java.lang.Object getSource()'>
+        <annotation name='lombok.NonNull'/>
+    </item>
+</root>

@@ -10,35 +10,44 @@ interface J2CacheSupplier<E, R>: CacheSupplier<E, R> {
 
   val prefix: String get() = "j2cache:"
 
-  override fun get(): Map<String, E?>
+  val region: String get() = name.apply(prefix)
 
-  override fun apply(key: String): E?
-
+  @Suppress("UNCHECKED_CAST")
   override fun accept(event: CacheEvent) {
-    val id = event.id
-    when (event.status) {
-      add    -> set(id)
-      modify -> set(id)
-      delete -> del(id)
+    val source = event.source
+    if (source is Collection<*>) {
+      source as Collection<String>
+      when (source) {
+        add -> setSome(source)
+        modify -> setSome(source)
+        delete -> del(*source.toTypedArray())
+      }
+    } else {
+      source as String
+      when (source) {
+        add -> set(source)
+        modify -> set(source)
+        delete -> del(source)
+      }
     }
   }
 
   @Suppress("UNCHECKED_CAST")
-  override fun get(key: Any?): R? = if (key == null) null else proxy.apply(channel.get(region.apply(prefix), key.toString(), {apply(key.toString())}).value as E?)
+  override fun get(key: Any?): R? = if (key == null) null else proxy.apply(channel.get(region, key.toString(), { apply(key.toString()) }).value as E?)
 
   @Suppress("UNCHECKED_CAST")
-  override fun getSome(keys: Collection<String>): Map<String, R?> = channel.get(region.apply(prefix), keys, this::apply).mapValues {proxy.apply(it.value.value as E?)}
+  override fun getSome(keys: Collection<String>): Map<String, R?> = channel.get(region, keys, this::apply).mapValues { proxy.apply(it.value.value as E?) }
 
   @Suppress("UNCHECKED_CAST")
-  override fun getAll(filter: Predicate<E>): List<Pair<String, R>> = channel.get(region.apply(prefix), channel.keys(region.apply(prefix))).filterValues {it.value != null && filter.test(it.value as E)}.mapTo(arrayListOf()) {Pair<String, R>(it.key, proxy.apply(it.value.value as E))}
+  override fun getAll(filter: Predicate<E?>): List<Pair<String, R>> = channel.get(region, channel.keys(region)).filterValues { filter.test(it.value as E?) }.mapTo(arrayListOf()) { Pair<String, R>(it.key, proxy.apply(it.value.value as E)) }
 
-  override fun set(key: Any) = channel.set(region.apply(prefix), key.toString(), apply(key.toString()))
+  override fun set(key: Any) = channel.set(region, key.toString(), apply(key.toString()))
 
-  override fun setSome(keys: Collection<String>) = channel.set(region.apply(prefix), get().filterKeys {keys.contains(it)})
+  override fun setSome(keys: Collection<String>) = channel.set(region, load(keys))
 
-  override fun del(vararg keys: String) = channel.evict(region.apply(prefix), *keys)
+  override fun del(vararg keys: String) = channel.evict(region, *keys)
 
-  override fun delAll() = channel.clear(region.apply(prefix))
+  override fun delAll() = channel.clear(region)
 
-  override fun load() = channel.set(region.apply(prefix), get())
+  override fun loadAll() = channel.set(region, load())
 }

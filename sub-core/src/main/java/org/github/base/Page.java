@@ -6,7 +6,7 @@ import static com.google.common.base.MoreObjects.*;
 
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T> {
   public Page(PageParam param) {
-    super(param.getPageNumber(), param.getPageSize(), param.isSearchCount());
+    super(param.getPageNum(), param.getPageSize(), param.isSearchCount());
     this.sort(param).sortList(param);
   }
 
@@ -29,9 +29,9 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
   @Override
   public String toString() {
     return toStringHelper(this)
-      .add("current", current)
+      .add("num", current)
       .add("size", size)
-      .add("records", records)
+      .add("data", records)
       .add("total", total)
       .add("order", orders)
       .toString();

@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-11
+ * @since 2021-05-17
  */
 public interface ISysMenuService extends IService<SysMenuEntity> {}

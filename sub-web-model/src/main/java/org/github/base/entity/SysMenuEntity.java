@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-11
+ * @since 2021-05-17
  */
 @SuppressWarnings("all")
 @Data
@@ -71,7 +71,7 @@ public class SysMenuEntity extends Model<SysMenuEntity> {
   private @Nullable Integer enabled;
 
   @Override
-  protected Serializable pkVal() {
+  public Serializable pkVal() {
     return this.menuId;
   }
 

@@ -129,7 +129,7 @@ public class ${entity} implements Serializable {
 
 <#if activeRecord>
   @Override
-  protected Serializable pkVal() {
+  public Serializable pkVal() {
   <#if keyPropertyName??>
     return this.${keyPropertyName};
   <#else>
