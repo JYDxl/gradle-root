@@ -55,7 +55,7 @@ fun main() {
     superServiceImplClass = ServiceImpl::class.jvmName
     logicDeleteFieldName = "deleted"
     versionFieldName = "version"
-    likeTable = LikeTable("sys_menu")
+    likeTable = LikeTable("")
     generator.strategy = this
   }
 

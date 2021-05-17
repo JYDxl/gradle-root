@@ -26,21 +26,8 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
   private ISysMenuService sysMenuService;
 
   @Override
-  public @Nullable SysMenuEntity apply(@NonNull String key) {
-    val query = sysMenuService.lambdaQuery();
-    query.eq(SysMenuEntity::getMenuId, parseLong(key));
-    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
-    return query.one();
-  }
-
-  @Override
   public @NonNull CacheNameSupplier getName() {
     return sysMenuName;
-  }
-
-  @Override
-  public @NonNull Predicate<SysMenuEntity> getFilter() {
-    return v -> v != null && enabled.getCode().equals(v.getEnabled());
   }
 
   @Override
@@ -49,11 +36,24 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
   }
 
   @Override
-  public @NonNull Map<String, SysMenuEntity> load(@NonNull Collection<String> keys) {
+  public @NonNull Predicate<SysMenuEntity> getFilter() {
+    return v -> v != null && enabled.getCode().equals(v.getEnabled());
+  }
+
+  @Override
+  public @NonNull Map<String,SysMenuEntity> load(@NonNull Collection<String> keys) {
     val query = sysMenuService.lambdaQuery();
     query.in(!keys.isEmpty(), SysMenuEntity::getMenuId, keys.stream().map(Long::parseLong).collect(toImmutableList()));
     query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
     val list = query.list();
     return list.stream().collect(toImmutableMap(v -> v.pkVal().toString(), identity()));
+  }
+
+  @Override
+  public @Nullable SysMenuEntity apply(@NonNull String key) {
+    val query = sysMenuService.lambdaQuery();
+    query.eq(SysMenuEntity::getMenuId, parseLong(key));
+    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
+    return query.one();
   }
 }

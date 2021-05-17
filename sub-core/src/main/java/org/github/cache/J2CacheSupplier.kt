@@ -34,13 +34,13 @@ interface J2CacheSupplier<E, R>: CacheSupplier<E, R> {
   }
 
   @Suppress("UNCHECKED_CAST")
-  override fun get(key: Any?): R? = if (key == null) null else proxy.apply(channel.get(region, key.toString(), { apply(key.toString()) }).value as E?)
+  override fun get(key: Any?): R? = if (key == null) null else proxy.apply(channel.get(region, key.toString(), {apply(key.toString())}).value as E?)
 
   @Suppress("UNCHECKED_CAST")
-  override fun getSome(keys: Collection<String>): Map<String, R?> = channel.get(region, keys, this::apply).mapValues { proxy.apply(it.value.value as E?) }
+  override fun getSome(keys: Collection<String>): Map<String, R?> = channel.get(region, keys, this::apply).mapValues {proxy.apply(it.value.value as E?)}
 
   @Suppress("UNCHECKED_CAST")
-  override fun getAll(filter: Predicate<E?>): List<Pair<String, R>> = channel.get(region, channel.keys(region)).filterValues { filter.test(it.value as E?) }.mapTo(arrayListOf()) { Pair<String, R>(it.key, proxy.apply(it.value.value as E)) }
+  override fun getAll(filter: Predicate<E?>): List<Pair<String, R>> = channel.get(region, channel.keys(region)).filterValues {filter.test(it.value as E?)}.mapTo(arrayListOf()) {Pair<String, R>(it.key, proxy.apply(it.value.value as E))}
 
   override fun set(key: Any) = channel.set(region, key.toString(), apply(key.toString()))
 
