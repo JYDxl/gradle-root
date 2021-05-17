@@ -5,12 +5,15 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
+
 import lombok.*;
 import org.github.base.entity.SysMenuEntity;
 import org.github.base.service.ISysMenuService;
 import org.github.cache.CacheNameSupplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.*;
 import static java.lang.Long.*;
 import static org.github.web.common.CacheName.*;
@@ -47,7 +50,7 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
   public @NonNull Map<String, SysMenuEntity> load(@NonNull Collection<String> keys) {
     val query = sysMenuService.lambdaQuery();
     query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
-    query.in(!keys.isEmpty(), SysMenuEntity::getMenuId, keys);
+    query.in(!keys.isEmpty(), SysMenuEntity::getMenuId, keys.stream().map(Long::parseLong).collect(toImmutableList()));
     val list = query.list();
     return list.stream().collect(toImmutableMap(v -> v.pkVal().toString(), Function.identity()));
   }
