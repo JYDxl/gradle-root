@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: sub-web
+    name: web-server
   cloud:
     nacos:
       discovery:
@@ -10,4 +10,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        group: SUB
+        group: server
+        shared-configs:
+          - data-id: j2cache-${spring.profiles.active}.properties
+            group: server

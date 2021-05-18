@@ -95,4 +95,4 @@ shiro:
 shiro-redis:
   redis-manager:
     host: ${spring.redis.host}:${spring.redis.port}
-    password: ${${spring.redis.password}}
+    password: ${spring.redis.password}
