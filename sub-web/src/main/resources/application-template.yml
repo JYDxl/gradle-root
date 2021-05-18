@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: sub-web
   output:
     ansi:
       enabled: always
@@ -65,10 +63,6 @@ spring:
       uri: mongodb://root:XLrootJYD713@www.jydxl.link:27017/mongo?authSource=admin
   thymeleaf:
     prefix: classpath:/static/
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: ubuntu:8848
 
 server:
   port: 8088
@@ -100,5 +94,5 @@ shiro:
 
 shiro-redis:
   redis-manager:
-    host: www.jydxl.link:6379
-    password: XLrootJYD713
+    host: ${spring.redis.host}:${spring.redis.port}
+    password: ${${spring.redis.password}}
