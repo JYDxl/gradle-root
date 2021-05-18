@@ -65,7 +65,6 @@ class ShiroConfig {
     addPathDefinition("/login", "authc")
     addPathDefinition("/logout", "logout")
 
-    addPathDefinition("/rest/**", "authc")
     addPathDefinition("/**", "authc")
   }
 

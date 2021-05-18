@@ -1,5 +1,0 @@
-<root>
-  <item name='java.net.ServerSocket java.net.Socket accept()'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>

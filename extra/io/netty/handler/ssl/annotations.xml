@@ -1,5 +1,0 @@
-<root>
-  <item name='io.netty.handler.ssl.SslContextBuilder io.netty.handler.ssl.SslContext build()'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>

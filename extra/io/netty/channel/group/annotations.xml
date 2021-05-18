@@ -1,8 +1,0 @@
-<root>
-  <item name='io.netty.channel.group.ChannelMatcher boolean matches(io.netty.channel.Channel) 0'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-  <item name='io.netty.channel.group.ChannelMatchers io.netty.channel.group.ChannelMatcher compose(io.netty.channel.group.ChannelMatcher...)'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>

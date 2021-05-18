@@ -1,5 +1,0 @@
-<root>
-  <item name='org.slf4j.LoggerFactory org.slf4j.Logger getLogger(java.lang.String)'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>

@@ -1,5 +1,0 @@
-<root>
-  <item name='com.google.protobuf.util.JsonFormat.Printer java.lang.String print(com.google.protobuf.MessageOrBuilder)'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>
