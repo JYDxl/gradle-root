@@ -91,7 +91,11 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-//  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+
+  implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 

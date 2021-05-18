@@ -16,12 +16,6 @@ spring:
         server-addr: ubuntu:8848
   thymeleaf:
     check-template-location: false
-  jackson:
-    time-zone: Asia/Shanghai
-    date-format: yyyy-MM-dd HH:mm:ss
-    default-property-inclusion: always
-    serialization:
-      fail_on_empty_beans: false
 
 server:
   port: 8000

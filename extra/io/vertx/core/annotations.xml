@@ -1,5 +1,0 @@
-<root>
-  <item name='io.vertx.core.Handler void handle(E) 0'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>

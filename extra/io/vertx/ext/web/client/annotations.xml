@@ -1,8 +1,0 @@
-<root>
-  <item name='io.vertx.ext.web.client.HttpResponse T body()'>
-    <annotation name='org.jetbrains.annotations.Nullable'/>
-  </item>
-  <item name='io.vertx.ext.web.client.WebClient io.vertx.ext.web.client.WebClient create(io.vertx.core.Vertx, io.vertx.ext.web.client.WebClientOptions)'>
-    <annotation name='lombok.NonNull'/>
-  </item>
-</root>
