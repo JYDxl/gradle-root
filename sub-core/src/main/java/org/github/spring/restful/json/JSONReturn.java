@@ -23,8 +23,8 @@ public class JSONReturn implements JSON {
   private String retMsg  = "OK";
 
   @Override
-  public String toString() {
-    return get();
+  public boolean functional() {
+    return false;
   }
 
   @NonNull
@@ -34,8 +34,8 @@ public class JSONReturn implements JSON {
   }
 
   @Override
-  public boolean functional() {
-    return false;
+  public String toString() {
+    return get();
   }
 
   /** WITH retCode. */

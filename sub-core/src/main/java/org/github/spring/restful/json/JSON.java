@@ -17,15 +17,15 @@ import static org.github.ops.SpringsKt.*;
  */
 @FunctionalInterface
 public interface JSON extends Returnable {
-  @Override
-  default void accept(@NonNull OutputStream output) {
-    writeValue(this, output, null);
-  }
-
   @NonNull
   @Override
   default MediaType mediaType() {
     return JSON_UTF_8;
+  }
+
+  @Override
+  default void accept(@NonNull OutputStream output) {
+    writeValue(this, output, null);
   }
 
   /** Generator. */

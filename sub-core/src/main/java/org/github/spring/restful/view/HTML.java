@@ -16,16 +16,16 @@ import static com.google.common.net.MediaType.*;
  */
 @FunctionalInterface
 public interface HTML extends Returnable {
-  @Deprecated
-  @Override
-  default void accept(@NonNull OutputStream output) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
   @NonNull
   @Override
   default MediaType mediaType() {
     return HTML_UTF_8;
+  }
+
+  @Deprecated
+  @Override
+  default void accept(@NonNull OutputStream output) throws Exception {
+    throw new UnsupportedOperationException();
   }
 
   /** Generator. */

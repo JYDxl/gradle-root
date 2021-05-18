@@ -16,16 +16,16 @@ class FILEImpl implements FILE {
   private final InputStream input;
 
   @Override
+  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    res.addHeader("Content-Disposition", "attachment;filename=" + name);
+    FILE.super.collect(req, res);
+  }
+
+  @Override
   public void accept(@NonNull OutputStream output) throws Exception {
     try (val in = input) {
       copy(in, output);
     }
-  }
-
-  @Override
-  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    res.addHeader("Content-Disposition", "attachment;filename=" + name);
-    FILE.super.collect(req, res);
   }
 
   @NonNull

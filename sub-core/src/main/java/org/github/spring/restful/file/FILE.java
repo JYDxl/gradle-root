@@ -22,12 +22,8 @@ import static com.google.common.net.MediaType.*;
 public interface FILE extends Returnable {
   @NonNull
   @Override
-  String get();
-
-  @Deprecated
-  @Override
-  default void accept(@NonNull Writer writer) {
-    throw new UnsupportedOperationException();
+  default MediaType mediaType() {
+    return OCTET_STREAM;
   }
 
   @Deprecated
@@ -36,11 +32,15 @@ public interface FILE extends Returnable {
     return false;
   }
 
+  @Deprecated
+  @Override
+  default void accept(@NonNull Writer writer) {
+    throw new UnsupportedOperationException();
+  }
+
   @NonNull
   @Override
-  default MediaType mediaType() {
-    return OCTET_STREAM;
-  }
+  String get();
 
   /**
    * Generator.

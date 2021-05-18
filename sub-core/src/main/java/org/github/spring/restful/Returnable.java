@@ -21,10 +21,26 @@ import static com.google.common.net.MediaType.*;
  */
 @FunctionalInterface
 public interface Returnable extends Serializable, Supplier<String> {
-  /** 获取数据. */
-  @Nullable
-  @Override
-  String get();
+  /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
+  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    res.setContentType(mediaType().toString());
+    if (functional()) {
+      accept(res.getWriter());
+    } else {
+      accept(res.getOutputStream());
+    }
+  }
+
+  /** 获取返回类型. */
+  @NonNull
+  default MediaType mediaType() {
+    return PLAIN_TEXT_UTF_8;
+  }
+
+  /** 直接通过函数接口传递数据? */
+  default boolean functional() {
+    return true;
+  }
 
   /** 通过字符流{@link Writer}处理数据. */
   default void accept(@NonNull Writer writer) throws Exception {
@@ -36,26 +52,10 @@ public interface Returnable extends Serializable, Supplier<String> {
     throw new UnsupportedOperationException();
   }
 
-  /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
-  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    res.setContentType(mediaType().toString());
-    if (functional()) {
-      accept(res.getWriter());
-    } else {
-      accept(res.getOutputStream());
-    }
-  }
-
-  /** 直接通过函数接口传递数据? */
-  default boolean functional() {
-    return true;
-  }
-
-  /** 获取返回类型. */
-  @NonNull
-  default MediaType mediaType() {
-    return PLAIN_TEXT_UTF_8;
-  }
+  /** 获取数据. */
+  @Nullable
+  @Override
+  String get();
 
   /** 数据已被完全处理? 未处理完毕的数据将交由Spring继续处理(现阶段只对视图有效). */
   default boolean terminated() {
@@ -64,14 +64,14 @@ public interface Returnable extends Serializable, Supplier<String> {
 
   /** Generator. */
   @NonNull
-  static Returnable of(@NonNull Object data) {
-    return data::toString;
+  static Returnable of() {
+    return of("");
   }
 
   /** Generator. */
   @NonNull
-  static Returnable of() {
-    return of("");
+  static Returnable of(@NonNull Object data) {
+    return data::toString;
   }
 
   /** Generator. */

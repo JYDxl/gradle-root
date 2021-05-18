@@ -30,9 +30,9 @@ appender("problem", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-logger("org.springframework.transaction", TRACE)
-logger("com.baomidou", TRACE)
-logger("org.github", TRACE)
-logger("io.netty", TRACE)
-logger("io.vertx", TRACE)
-root(DEBUG, ["console", "records", "problem"])
+logger("org.springframework.transaction", DEBUG)
+logger("com.baomidou", DEBUG)
+logger("org.github", DEBUG)
+logger("io.netty", DEBUG)
+logger("io.vertx", DEBUG)
+root(INFO, ["console", "records", "problem"])

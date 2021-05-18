@@ -19,9 +19,23 @@ import static com.google.common.net.MediaType.*;
  */
 @FunctionalInterface
 public interface VIEW extends Returnable {
+  @Deprecated
+  @Override
+  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    throw new UnsupportedOperationException();
+  }
+
   @NonNull
   @Override
-  String get();
+  default MediaType mediaType() {
+    return HTML_UTF_8;
+  }
+
+  @Deprecated
+  @Override
+  default boolean functional() {
+    throw new UnsupportedOperationException();
+  }
 
   @Deprecated
   @Override
@@ -35,23 +49,9 @@ public interface VIEW extends Returnable {
     throw new UnsupportedOperationException();
   }
 
-  @Deprecated
-  @Override
-  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Deprecated
-  @Override
-  default boolean functional() {
-    throw new UnsupportedOperationException();
-  }
-
   @NonNull
   @Override
-  default MediaType mediaType() {
-    return HTML_UTF_8;
-  }
+  String get();
 
   @Override
   default boolean terminated() {
@@ -60,14 +60,14 @@ public interface VIEW extends Returnable {
 
   /** Generator. */
   @NonNull
-  static VIEW of(@NonNull String view) {
-    //noinspection NullableProblems
-    return view::toString;
+  static VIEW of() {
+    return of("/");
   }
 
   /** Generator. */
   @NonNull
-  static VIEW of() {
-    return of("/");
+  static VIEW of(@NonNull String view) {
+    //noinspection NullableProblems
+    return view::toString;
   }
 }

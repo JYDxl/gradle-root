@@ -17,8 +17,8 @@ import java.util.*
 class CacheConfig {
   @Bean
   fun cacheChannel(): CacheChannel {
-    val source: MapPropertySource = getAll().first { it.dataId.contains("j2cache-.*\\.properties".toRegex()) }
-    val properties = Properties().apply { putAll(source.source) }
+    val source: MapPropertySource = getAll().first {it.dataId.contains("j2cache-.*\\.properties".toRegex())}
+    val properties = Properties().apply {putAll(source.source)}
     val config: J2CacheConfig = initFromConfig(properties)
     val builder: J2CacheBuilder = init(config)
     return builder.channel

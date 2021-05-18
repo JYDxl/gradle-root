@@ -1,8 +1,8 @@
 package org.github.spring.mvc
 
+import org.github.ops.debug
 import org.github.ops.error
 import org.github.ops.log
-import org.github.ops.trace
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.Returnable.nil
 import org.springframework.core.MethodParameter
@@ -39,6 +39,6 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
       mavContainer.viewName = value.get()
     }
     mavContainer.isRequestHandled = value.terminated()
-    value.apply {log.trace {"Writing [${mediaType()}] ====> ${get()}"}}
+    value.apply {log.debug {"Writing [${mediaType()}] ====> ${get()}"}}
   }
 }

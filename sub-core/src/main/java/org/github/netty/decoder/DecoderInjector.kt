@@ -2,6 +2,7 @@ package org.github.netty.decoder
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled.EMPTY_BUFFER
+import io.netty.channel.Channel
 import io.netty.channel.ChannelHandlerContext
 import org.github.netty.ops.info
 import org.github.netty.ops.prettyHexDump
@@ -14,7 +15,7 @@ interface DecoderInjector {
   val failIfNecessary: ((ByteBuf) -> Unit)?
 
   fun inject(ctx: ChannelHandlerContext, buf: ByteBuf, func: () -> ByteBuf?): ByteBuf? {
-    val channel = ctx.channel()
+    val channel: Channel = ctx.channel()
     // if(!channel.isActive) return func()
     log.trace {"$channel ${channel.info} >>>>>STASH: ${buf.readableBytes()}B\n${buf.prettyHexDump}"}
     failIfNecessary?.invoke(buf)

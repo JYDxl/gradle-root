@@ -33,18 +33,6 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   @NonNull
   private String callback = "callback";
 
-  @Deprecated
-  @Override
-  public void accept(@NonNull OutputStream output) {
-    throw new UnsupportedOperationException();
-  }
-
-  @NonNull
-  @Override
-  public MediaType mediaType() {
-    return JAVASCRIPT_UTF_8;
-  }
-
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     if ("callback".equals(callback)) setCallback(firstNonNull(req.getParameter("callback"), "callback"));
@@ -60,6 +48,18 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   @Override
   public boolean functional() {
     return true;
+  }
+
+  @NonNull
+  @Override
+  public MediaType mediaType() {
+    return JAVASCRIPT_UTF_8;
+  }
+
+  @Deprecated
+  @Override
+  public void accept(@NonNull OutputStream output) {
+    throw new UnsupportedOperationException();
   }
 
   @Override
