@@ -52,9 +52,8 @@ public interface Returnable extends Serializable, Supplier<String> {
   }
 
   /** 获取数据. */
-  @Nullable
   @Override
-  String get();
+  @Nullable String get();
 
   /** 数据已被完全处理? 未处理完毕的数据将交由Spring继续处理(现阶段只对视图有效). */
   default boolean terminated() {

@@ -52,7 +52,7 @@ public class EnumCache {
   }
 
   @SuppressWarnings("unchecked")
-  public @NonNull <C, V, E extends Class<? extends IEnum<C,V>>> BiMap<C,V> getAll(@NonNull E clazz) {
+  public <C, V, E extends Class<? extends IEnum<C,V>>> @NonNull BiMap<C,V> getAll(@NonNull E clazz) {
     return (BiMap<C,V>) copyOf(table.row(clazz));
   }
 }

@@ -45,7 +45,7 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public @NonNull static <V> JSONArrayReturn<V> of() {
+  public static <V> @NonNull JSONArrayReturn<V> of() {
     return new JSONArrayReturn<>();
   }
 

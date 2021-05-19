@@ -36,7 +36,7 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
   }
 
   @SuppressWarnings("unchecked")
-  public @NonNull <R> CacheSupplier<?,R> getCache(@NonNull CacheNameSupplier name) {
+  public <R> @NonNull CacheSupplier<?,R> getCache(@NonNull CacheNameSupplier name) {
     return (CacheSupplier<?,R>) ofNullable(map.get(name)).orElseThrow(() -> throwing(name));
   }
 }

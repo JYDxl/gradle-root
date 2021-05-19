@@ -17,11 +17,9 @@ import static java.util.Objects.requireNonNull;
 @ToString(callSuper = true)
 @Data
 public class UserInfoDTO extends UserEntity implements User {
-  private @Nullable
-  List<RoleInfoDTO> roleList;
+  private @Nullable List<RoleInfoDTO> roleList;
 
-  private @Nullable
-  String token;
+  private @Nullable String token;
 
   @Override
   public @NonNull String getUsername() {
