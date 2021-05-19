@@ -39,13 +39,13 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   }
 
   @Override
-  public @NonNull String get() {
-    return callback + "(" + super.get() + ")";
+  public boolean functional() {
+    return true;
   }
 
   @Override
-  public boolean functional() {
-    return true;
+  public @NonNull String get() {
+    return callback + "(" + super.get() + ")";
   }
 
   @Override

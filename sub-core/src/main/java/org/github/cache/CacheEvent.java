@@ -10,19 +10,18 @@ import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class CacheEvent extends ApplicationEvent {
   private final @NonNull CacheStatus       status;
-
   private final @NonNull CacheNameSupplier name;
 
   public CacheEvent(@NonNull String id, @NonNull CacheStatus status, @NonNull CacheNameSupplier name) {
     super(id);
     this.status = status;
-    this.name = name;
+    this.name   = name;
   }
 
   public CacheEvent(@NonNull Collection<String> id, @NonNull CacheStatus status, @NonNull CacheNameSupplier name) {
     super(id);
     this.status = status;
-    this.name = name;
+    this.name   = name;
   }
 
   @Override

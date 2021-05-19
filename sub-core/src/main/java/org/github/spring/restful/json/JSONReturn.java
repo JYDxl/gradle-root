@@ -17,7 +17,7 @@ import static org.github.ops.SpringsKt.*;
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态码. */
-  private int    retCode = 0;
+  private          int    retCode = 0;
   /** 返回的信息. */
   private @NonNull String retMsg  = "OK";
 
