@@ -16,9 +16,8 @@ import static com.google.common.net.MediaType.*;
  */
 @FunctionalInterface
 public interface HTML extends Returnable {
-  @NonNull
   @Override
-  default MediaType mediaType() {
+  default @NonNull MediaType mediaType() {
     return HTML_UTF_8;
   }
 
@@ -29,14 +28,12 @@ public interface HTML extends Returnable {
   }
 
   /** Generator. */
-  @NonNull
-  static HTML of(@NonNull String html) {
+  static @NonNull HTML of(@NonNull String html) {
     return html::toString;
   }
 
   /** Generator. */
-  @NonNull
-  static HTML nil() {
+  static @NonNull HTML nil() {
     return () -> null;
   }
 }

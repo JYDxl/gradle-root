@@ -20,11 +20,9 @@ import static org.apache.commons.lang3.tuple.Triple.of;
 @Slf4j
 @Data
 public class EnumCache {
-  @NonNull
-  private final String packageName;
+  private final @NonNull String packageName;
 
-  @NonNull
-  private final Table<Class<? extends IEnum<?,?>>,?,?> table;
+  private final @NonNull Table<Class<? extends IEnum<?,?>>,?,?> table;
 
   public EnumCache(@NonNull String packageName) {
     this.packageName = packageName;

@@ -30,8 +30,7 @@ import static java.util.Optional.*;
 public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** callback. */
   @JsonIgnore
-  @NonNull
-  private String callback = "callback";
+  private @NonNull String callback = "callback";
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
@@ -39,9 +38,8 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
     super.collect(req, res);
   }
 
-  @NonNull
   @Override
-  public String get() {
+  public @NonNull String get() {
     return callback + "(" + super.get() + ")";
   }
 
@@ -50,9 +48,8 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
     return true;
   }
 
-  @NonNull
   @Override
-  public MediaType mediaType() {
+  public @NonNull MediaType mediaType() {
     return JAVASCRIPT_UTF_8;
   }
 
@@ -74,21 +71,18 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   }
 
   /** Generator. */
-  @NonNull
-  public static <V> JSONPReturn<V> of() {
+  public static <V> @NonNull JSONPReturn<V> of() {
     return new JSONPReturn<>();
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+  public static <T, R extends T> @NonNull JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
     return of(ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */
-  @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <V> JSONPReturn<V> of(V data) {
+  public static <V> @NonNull JSONPReturn<V> of(V data) {
     return (JSONPReturn) new JSONPReturn<>().withData(data);
   }
 }

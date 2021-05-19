@@ -9,11 +9,9 @@ import static com.google.common.io.ByteStreams.*;
 
 @Data
 class FILEImpl implements FILE {
-  @NonNull
-  private final String name;
+  private final @NonNull String name;
 
-  @NonNull
-  private final InputStream input;
+  private final @NonNull InputStream input;
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
@@ -28,9 +26,8 @@ class FILEImpl implements FILE {
     }
   }
 
-  @NonNull
   @Override
-  public String get() {
+  public @NonNull String get() {
     return name;
   }
 

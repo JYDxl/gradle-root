@@ -20,9 +20,8 @@ import static com.google.common.net.MediaType.*;
  * @see org.github.spring.restful.Returnable
  */
 public interface FILE extends Returnable {
-  @NonNull
   @Override
-  default MediaType mediaType() {
+  default @NonNull MediaType mediaType() {
     return OCTET_STREAM;
   }
 
@@ -38,15 +37,13 @@ public interface FILE extends Returnable {
     throw new UnsupportedOperationException();
   }
 
-  @NonNull
   @Override
-  String get();
+  @NonNull String get();
 
   /**
    * Generator.
    */
-  @NonNull
-  static FILE of(@NonNull File file) {
+  static @NonNull FILE of(@NonNull File file) {
     try {
       return new FILEImpl(file.getName(), new FileInputStream(file));
     } catch (FileNotFoundException e) {
@@ -57,8 +54,7 @@ public interface FILE extends Returnable {
   /**
    * Generator.
    */
-  @NonNull
-  static FILE of(@NonNull String name, @NonNull InputStream input) {
+  static @NonNull FILE of(@NonNull String name, @NonNull InputStream input) {
     return new FILEImpl(name, input);
   }
 }

@@ -6,9 +6,8 @@ import lombok.*;
 import static org.github.ops.SpringsKt.*;
 
 public interface IJson extends Serializable, Supplier<String> {
-  @NonNull
   @Override
-  default String get() {
+  default @NonNull String get() {
     return json(this);
   }
 }

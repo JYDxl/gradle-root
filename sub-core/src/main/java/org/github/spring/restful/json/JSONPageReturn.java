@@ -2,9 +2,12 @@ package org.github.spring.restful.json;
 
 import lombok.*;
 import org.github.base.IPage;
+import org.github.base.PageInfo;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Function;
+
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 /**
  * JSON of page.
@@ -32,41 +35,40 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   }
 
   /** WITH total. */
-  @NonNull
-  public JSONPageReturn<E> withTotal(long total) {
+  public @NonNull JSONPageReturn<E> withTotal(long total) {
     setTotal(total);
     return this;
   }
 
   /** Generator. */
-  @NonNull
-  public static <V> JSONPageReturn<V> of() {
+  public static <V> @NonNull JSONPageReturn<V> of() {
     return new JSONPageReturn<>();
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page) {
+  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page) {
     return of(page.getTotal(), page.getRecords());
   }
 
   /** Generator. */
-  @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <T, R extends T> JSONPageReturn<R> of(long total, @NonNull List<T> data) {
+  public static <T, R extends T> @NonNull JSONPageReturn<R> of(long total, @NonNull Collection<T> data) {
     return (JSONPageReturn) new JSONPageReturn<>(total).withData(data);
   }
 
   /** Generator. */
-  @NonNull
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
-    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).toArray());
+  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
+    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).collect(toImmutableList()));
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull List<R> data) {
+  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Collection<R> data) {
     return of(page.getTotal(), data);
+  }
+
+  /** Generator. */
+  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull PageInfo<T> page) {
+    return of(page.getTotal(), page.getData());
   }
 }

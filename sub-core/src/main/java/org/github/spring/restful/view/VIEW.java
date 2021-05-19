@@ -25,9 +25,8 @@ public interface VIEW extends Returnable {
     throw new UnsupportedOperationException();
   }
 
-  @NonNull
   @Override
-  default MediaType mediaType() {
+  default @NonNull MediaType mediaType() {
     return HTML_UTF_8;
   }
 
@@ -49,9 +48,8 @@ public interface VIEW extends Returnable {
     throw new UnsupportedOperationException();
   }
 
-  @NonNull
   @Override
-  String get();
+  @NonNull String get();
 
   @Override
   default boolean terminated() {
@@ -59,14 +57,12 @@ public interface VIEW extends Returnable {
   }
 
   /** Generator. */
-  @NonNull
-  static VIEW of() {
+  static @NonNull VIEW of() {
     return of("/");
   }
 
   /** Generator. */
-  @NonNull
-  static VIEW of(@NonNull String view) {
+  static @NonNull VIEW of(@NonNull String view) {
     //noinspection NullableProblems
     return view::toString;
   }

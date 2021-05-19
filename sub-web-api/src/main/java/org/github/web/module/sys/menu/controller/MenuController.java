@@ -3,6 +3,7 @@ package org.github.web.module.sys.menu.controller;
 import java.util.List;
 import org.github.base.entity.SysMenuEntity;
 import org.github.spring.restful.Returnable;
+import org.github.spring.restful.json.JSONPageReturn;
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;
 import org.github.web.module.sys.menu.service.IMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class MenuController {
 
   @PostMapping("list")
   public Returnable queryMenuList(@RequestBody QueryMenuListBO bo) {
-    return menuService.queryMenuList(bo);
+    return JSONPageReturn.of(menuService.queryMenuList(bo));
   }
 
   @PostMapping("select")

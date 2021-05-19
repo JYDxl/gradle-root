@@ -1,10 +1,12 @@
 package org.github.spring.restful.json;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.function.Function;
+
 import lombok.*;
-import static java.util.Arrays.*;
+
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.Collections.emptyList;
 
 /**
  * JSON of array.
@@ -23,8 +25,7 @@ import static java.util.Arrays.*;
 @Data
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** data. */
-  @NonNull
-  private Object[] data = {};
+  private @NonNull Collection<? extends E> data = emptyList();
 
   @Override
   public String toString() {
@@ -33,55 +34,29 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
 
   /** GET data. */
   @SuppressWarnings("unchecked")
-  @NonNull
-  public E[] toArray() {
-    return (E[]) data;
-  }
-
-  /** GET data. */
-  @SuppressWarnings("unchecked")
-  @NonNull
-  public List<E> toList() {
-    return (List<E>) asList(data);
+  public @NonNull E[] toArray() {
+    return (E[]) data.toArray();
   }
 
   /** WITH data. */
-  @SafeVarargs
-  @NonNull
-  public final JSONArrayReturn<E> withData(E... data) {
+  public @NonNull JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
     setData(data);
     return this;
   }
 
-  /** WITH data. */
-  @NonNull
-  public JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
-    setData(data.toArray());
-    return this;
-  }
-
   /** Generator. */
-  @NonNull
-  public static <V> JSONArrayReturn<V> of() {
+  public @NonNull static <V> JSONArrayReturn<V> of() {
     return new JSONArrayReturn<>();
   }
 
   /** Generator. */
-  @SafeVarargs
-  @NonNull
-  public static <T, R extends T> JSONArrayReturn<R> of(T... data) {
-    return new JSONArrayReturn<>(data);
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  public static <T, R extends T> @NonNull JSONArrayReturn<R> of(@NonNull Collection<T> data) {
+    return new JSONArrayReturn(data);
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data) {
-    return new JSONArrayReturn<>(data.toArray());
-  }
-
-  /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
-    return new JSONArrayReturn<>(data.stream().map(mapper).toArray());
+  public static <T, R extends T> @NonNull JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
+    return new JSONArrayReturn<>(data.stream().map(mapper).collect(toImmutableList()));
   }
 }

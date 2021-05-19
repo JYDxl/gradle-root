@@ -4,12 +4,12 @@ import java.util.List;
 
 import lombok.*;
 import org.github.base.Page;
+import org.github.base.PageInfo;
 import org.github.base.entity.SysMenuEntity;
 import org.github.base.service.ISysMenuService;
 import org.github.cache.RAMCache;
 import org.github.spring.restful.json.JSONArrayReturn;
 import org.github.spring.restful.json.JSONDataReturn;
-import org.github.spring.restful.json.JSONPageReturn;
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;
 import org.github.web.module.sys.menu.model.vo.QueryMenuListVO;
 import org.github.web.module.sys.menu.service.IMenuService;
@@ -41,13 +41,13 @@ public class MenuServiceImpl implements IMenuService {
   }
 
   @Override
-  public @NonNull JSONPageReturn<QueryMenuListVO> queryMenuList(@NonNull QueryMenuListBO bo) {
+  public @NonNull PageInfo<QueryMenuListVO> queryMenuList(@NonNull QueryMenuListBO bo) {
     val query = sysMenuService.lambdaQuery();
     query.likeRight(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
     val page = query.page(new Page<>(bo));
     val list = page.getRecords();
-    if (list.isEmpty()) return JSONPageReturn.of(page);
-    return JSONPageReturn.of(page, this::applySysMenuEntity2QueryMenuListVO);
+    if (list.isEmpty()) return PageInfo.of(page);
+    return PageInfo.of(page, this::applySysMenuEntity2QueryMenuListVO);
   }
 
   @Override

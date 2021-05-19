@@ -19,17 +19,15 @@ public class JSONReturn implements JSON {
   /** 返回的状态码. */
   private int    retCode = 0;
   /** 返回的信息. */
-  @NonNull
-  private String retMsg  = "OK";
+  private @NonNull String retMsg  = "OK";
 
   @Override
   public boolean functional() {
     return false;
   }
 
-  @NonNull
   @Override
-  public String get() {
+  public @NonNull String get() {
     return json(this);
   }
 
@@ -39,34 +37,29 @@ public class JSONReturn implements JSON {
   }
 
   /** WITH retCode. */
-  @NonNull
-  public JSONReturn withRetCode(int retCode) {
+  public @NonNull JSONReturn withRetCode(int retCode) {
     setRetCode(retCode);
     return this;
   }
 
   /** WITH retMsg. */
-  @NonNull
-  public JSONReturn withRetMsg(@NonNull String retMsg) {
+  public @NonNull JSONReturn withRetMsg(@NonNull String retMsg) {
     setRetMsg(retMsg);
     return this;
   }
 
   /** Generator. */
-  @NonNull
-  public static JSONReturn error() {
+  public static @NonNull JSONReturn error() {
     return of(-2, "SYSTEM ERROR");
   }
 
   /** Generator. */
-  @NonNull
-  public static JSONReturn of(int code, @NonNull String msg) {
+  public static @NonNull JSONReturn of(int code, @NonNull String msg) {
     return new JSONReturn(code, msg);
   }
 
   /** Generator. */
-  @NonNull
-  public static JSONReturn warn() {
+  public static @NonNull JSONReturn warn() {
     return of(-1, "PARAMS ERROR");
   }
 }

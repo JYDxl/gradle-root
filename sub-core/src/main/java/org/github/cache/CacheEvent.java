@@ -9,10 +9,9 @@ import static cn.hutool.core.date.LocalDateTimeUtil.of;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class CacheEvent extends ApplicationEvent {
-  @NonNull
-  private final CacheStatus       status;
-  @NonNull
-  private final CacheNameSupplier name;
+  private final @NonNull CacheStatus       status;
+
+  private final @NonNull CacheNameSupplier name;
 
   public CacheEvent(@NonNull String id, @NonNull CacheStatus status, @NonNull CacheNameSupplier name) {
     super(id);
