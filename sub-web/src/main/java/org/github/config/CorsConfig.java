@@ -17,7 +17,7 @@ public class CorsConfig {
   public FilterRegistrationBean<CorsFilter> corsFilter() {
     val config = new CorsConfiguration();
     config.setAllowCredentials(true);
-    config.setAllowedOrigins(of("*"));
+    config.setAllowedOriginPatterns(of("*"));
     config.setAllowedMethods(of("*"));
     config.setAllowedHeaders(of("*"));
     val source = new UrlBasedCorsConfigurationSource();

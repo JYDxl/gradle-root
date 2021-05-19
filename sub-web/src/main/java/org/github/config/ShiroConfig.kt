@@ -59,6 +59,8 @@ class ShiroConfig {
     addPathDefinition("/swagger-ui/**", "anon")
     addPathDefinition("/v3/api-docs", "anon")
 
+    addPathDefinition("/actuator/**", "anon")
+
     addPathDefinition("/static/**", "anon")
     addPathDefinition("/public/**", "anon")
 

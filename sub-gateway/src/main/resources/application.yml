@@ -15,13 +15,18 @@ spring:
       discovery:
         server-addr: ubuntu:8848
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allow-credentials: true
+            allowedOriginPatterns: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: web
           uri: lb://web-server
           predicates:
-            - name: Path
-              args:
-                pattern: /web/**
+            - Path=/web/**
           filters:
             - StripPrefix=1
 
