@@ -4,4 +4,5 @@ appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
+logger("org.github", TRACE)
 root(DEBUG, ["console"])

@@ -36,11 +36,18 @@ tasks.getByName<Task>("distZip") {enabled = false}
 tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
+val netty: String by System.getProperties()
+
 dependencies {
   implementation(project(":sub-core"))
   implementation(project(":sub-api"))
 
+  implementation("io.netty:netty-all:$netty")
+
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+
   implementation("org.springframework.cloud:spring-cloud-starter-gateway") {exclude(group = "io.netty")}
+  implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
+
   implementation("org.springframework.boot:spring-boot-starter-actuator")
 }

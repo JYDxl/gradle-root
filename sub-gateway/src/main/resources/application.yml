@@ -16,17 +16,17 @@ spring:
         server-addr: ubuntu:8848
     gateway:
       routes:
-        - id: nacos-route
-          uri: lb://service-gateway-provider
+        - id: web
+          uri: lb://web-server
           predicates:
             - name: Path
-
-  jackson:
-    time-zone: Asia/Shanghai
-    date-format: yyyy-MM-dd HH:mm:ss
-    default-property-inclusion: always
-    serialization:
-      fail_on_empty_beans: false
+              args:
+                pattern: /web/**
+          filters:
+            - StripPrefix=1
 
 server:
   port: 13650
+
+logging:
+  config: classpath:logback.groovy

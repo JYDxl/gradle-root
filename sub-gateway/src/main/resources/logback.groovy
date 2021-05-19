@@ -45,6 +45,6 @@ appender("packets", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
+logger("org.springframework.cloud", DEBUG)
 logger("org.github", TRACE)
-logger("io.netty", TRACE)
-root(DEBUG, ["console", "records", "problem", "packets"])
+root(INFO, ["console", "records", "problem", "packets"])

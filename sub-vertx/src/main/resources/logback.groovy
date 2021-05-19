@@ -30,4 +30,7 @@ appender("problem", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
+logger("org.github", TRACE)
+logger("io.netty", TRACE)
+logger("io.vertx", TRACE)
 root(DEBUG, ["console", "records", "problem"])
