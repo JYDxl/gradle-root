@@ -63,6 +63,13 @@ spring:
       uri: mongodb://root:XLrootJYD713@www.jydxl.link:27017/mongo?authSource=admin
   thymeleaf:
     prefix: classpath:/static/
+  zipkin:
+    sender:
+      type: rabbit
+  sleuth:
+    sampler:
+      probability: 1.0
+      rate: 10
 
 server:
   port: 8088

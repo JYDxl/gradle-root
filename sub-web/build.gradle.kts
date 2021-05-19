@@ -92,6 +92,8 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
+  implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
+  implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
