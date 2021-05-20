@@ -12,7 +12,7 @@ import static org.github.ops.SpringsKt.getResp;
 import static org.github.shiro.JWTUtil.getUsername;
 
 public abstract class ShiroDubboDataValidator {
-    public static <T> Subject validate(ShiroDubboDataWrapper<T> wrapper) {
+    public static <T> void validate(ShiroDubboDataWrapper<T> wrapper) {
         val hasToken = isNotBlank(wrapper.getToken());
         val hasJWT = isNotBlank(wrapper.getJwt());
         checkArgument(hasToken || hasJWT);
@@ -21,13 +21,11 @@ public abstract class ShiroDubboDataValidator {
         if (hasToken) {
             val subject = req != null && resp != null ? new WebSubject.Builder(req, resp).sessionId(wrapper.getToken()).buildSubject() : new Subject.Builder().sessionId(wrapper.getToken()).buildSubject();
             bind(subject);
-            return subject;
         } else {
             val username = getUsername(wrapper.getJwt());
             val jwtToken = new JWTToken(username, wrapper.getJwt());
             val subject = req != null && resp != null ? new WebSubject.Builder(req, resp).buildSubject() : new Subject.Builder().buildSubject();
             subject.login(jwtToken);
-            return subject;
         }
     }
 }

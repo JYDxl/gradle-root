@@ -17,7 +17,7 @@ fun main() {
 
   GlobalConfig().apply {
     val path = requireNotNull(getProperty("user.dir"))
-    outputDir = "$path/sub-web-model/src/main/java"
+    outputDir = "$path/sub-mysql-web/src/main/java"
     serviceImplName = "%sServiceImpl"
     serviceName = "I%sService"
     mapperName = "I%sMapper"
