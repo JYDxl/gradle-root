@@ -5,10 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.github.dubbo.web.IEchoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @DubboService
-@Service
 @Slf4j
 public class EchoServiceImpl implements IEchoService {
     @Autowired
