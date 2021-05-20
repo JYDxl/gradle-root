@@ -1,4 +1,4 @@
-package org.github.web.controller;
+package org.github.controller;
 
 import org.github.web.model.dto.NoticePO;
 import org.github.spring.restful.Returnable;

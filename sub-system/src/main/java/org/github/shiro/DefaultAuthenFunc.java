@@ -1,9 +1,10 @@
 package org.github.shiro;
 
-import lombok.*;
-import org.github.web.system.service.IShiroService;
+import lombok.NonNull;
+import lombok.val;
 import org.apache.shiro.authc.AuthenticationToken;
-import static org.github.spring.bootstrap.AppCtxHolder.*;
+
+import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
 
 public class DefaultAuthenFunc implements AuthenFunc {
   @Override

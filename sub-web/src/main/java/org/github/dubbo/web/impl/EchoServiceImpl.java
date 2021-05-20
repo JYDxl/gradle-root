@@ -1,0 +1,21 @@
+package org.github.dubbo.web.impl;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.github.dubbo.web.IEchoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@DubboService
+@Service
+@Slf4j
+public class EchoServiceImpl implements IEchoService {
+    @Autowired
+    private ObjectMapper mapper;
+
+    @Override
+    public String echo(String message) throws Exception {
+        return mapper.writeValueAsString(message);
+    }
+}

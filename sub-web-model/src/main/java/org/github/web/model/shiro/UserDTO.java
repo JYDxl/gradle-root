@@ -29,4 +29,9 @@ public class UserDTO extends SysUserEntity implements User {
   public @Nullable String getSalt() {
     return super.getSalt();
   }
+
+  @Override
+  public @NonNull Long getUserId() {
+    return requireNonNull(super.getUserId());
+  }
 }

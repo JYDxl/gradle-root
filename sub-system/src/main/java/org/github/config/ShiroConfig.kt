@@ -16,6 +16,7 @@ import org.github.ops.log
 import org.github.shiro.*
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.Collections.singletonList
@@ -28,8 +29,12 @@ class ShiroConfig {
   @Value("#{@environment['shiro.loginUrl']}")
   protected lateinit var loginUrl: String
 
+  @ConditionalOnMissingBean
+  @Bean
   fun authorFunc() = DefaultAuthorFunc()
 
+  @ConditionalOnMissingBean
+  @Bean
   fun authenFunc() = DefaultAuthenFunc()
 
   @Bean

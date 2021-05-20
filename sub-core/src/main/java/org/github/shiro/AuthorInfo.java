@@ -1,4 +1,4 @@
-package org.github.web.model.shiro;
+package org.github.shiro;
 
 import lombok.Data;
 

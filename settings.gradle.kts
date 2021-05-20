@@ -6,6 +6,7 @@ pluginManagement {
 
 rootProject.name = "gradle-root"
 
+include("sub-system")
 include("sub-core")
 include("sub-api")
 
@@ -16,6 +17,8 @@ include("sub-admin")
 include("sub-netty")
 
 include("sub-vertx")
+
+include("sub-client")
 
 include("sub-web-service")
 include("sub-web-model")

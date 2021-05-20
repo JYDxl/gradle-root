@@ -1,0 +1,16 @@
+dubbo:
+  cloud:
+    subscribed-services: web-server
+  protocols:
+    dubbo:
+      port: -1
+
+spring:
+  application:
+    name: sub-client
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848

@@ -70,6 +70,8 @@ spring:
     sampler:
       probability: 1.0
       rate: 10
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8088
@@ -103,3 +105,14 @@ shiro-redis:
   redis-manager:
     host: ${spring.redis.host}:${spring.redis.port}
     password: ${spring.redis.password}
+
+dubbo:
+  scan:
+    base-packages: org.github.dubbo.web.impl
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: spring-cloud://localhost
+  cloud:
+    subscribed-services:

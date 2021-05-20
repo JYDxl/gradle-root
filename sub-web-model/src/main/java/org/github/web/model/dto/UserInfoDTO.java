@@ -37,4 +37,9 @@ public class UserInfoDTO extends UserEntity implements User {
   public String getSalt() {
     return super.getSalt();
   }
+
+  @Override
+  public @NonNull String getUserId() {
+    return requireNonNull(getId()).toString();
+  }
 }

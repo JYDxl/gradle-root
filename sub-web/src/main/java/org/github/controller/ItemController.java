@@ -1,4 +1,4 @@
-package org.github.web.controller;
+package org.github.controller;
 
 import org.github.web.model.bo.ItemCommentBO;
 import org.github.web.model.bo.ItemSearchBO;

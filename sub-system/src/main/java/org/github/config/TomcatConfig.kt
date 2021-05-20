@@ -1,4 +1,4 @@
-//package org.github.config
+package org.github.config//package org.github.config
 //
 //import org.apache.catalina.core.AprLifecycleListener
 //import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory

@@ -1,4 +1,4 @@
-package org.github.web.controller
+package org.github.controller
 
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.authc.UsernamePasswordToken
