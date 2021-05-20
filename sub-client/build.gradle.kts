@@ -45,6 +45,6 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-actuator")
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
-  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo")
+  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
   implementation("io.netty:netty-all:$netty")
 }

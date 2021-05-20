@@ -7,5 +7,6 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-web")
 
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
-  compileOnly("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis")
+
+  compileOnly("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis") {exclude(group = "redis.clients")}
 }

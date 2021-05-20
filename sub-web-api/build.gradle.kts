@@ -9,5 +9,5 @@ dependencies {
   compileOnly("org.hibernate.validator:hibernate-validator")
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 
-  compileOnly("com.alibaba.cloud:spring-cloud-starter-dubbo")
+  compileOnly("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 }
