@@ -46,7 +46,7 @@ public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
     query.in(!keys.isEmpty(), SysMenuEntity::getMenuId, keys.stream().map(Long::parseLong).collect(toImmutableList()));
     query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
     val list = query.list();
-    return list.stream().collect(toImmutableMap(v -> v.pkVal().toString(), identity()));
+    return list.stream().collect(toImmutableMap(v -> v.getMenuId().toString(), identity()));
   }
 
   @Override

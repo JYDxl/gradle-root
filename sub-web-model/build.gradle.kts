@@ -11,6 +11,4 @@ dependencies {
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
-
-  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }

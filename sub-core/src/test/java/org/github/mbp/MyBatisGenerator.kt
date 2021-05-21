@@ -2,6 +2,7 @@ package org.github.mbp
 
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
 import com.baomidou.mybatisplus.generator.config.*
+import com.baomidou.mybatisplus.generator.config.ConstVal.*
 import com.baomidou.mybatisplus.generator.config.po.LikeTable
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
@@ -13,8 +14,9 @@ fun main() {
   val generator = CustomAutoGenerator().apply {templateEngine = FreemarkerTemplateEngine()}
 
   GlobalConfig().apply {
-    val path = requireNotNull(getProperty("user.dir"))
-    outputDir = "$path/sub-mysql-web/src/main/java"
+//    val path = requireNotNull(getProperty("user.dir"))
+//    outputDir = "$path/sub-mysql-web/src/main/java"
+    outputDir = null
     serviceImplName = "%sServiceImpl"
     serviceName = "I%sService"
     mapperName = "I%sMapper"
@@ -36,8 +38,21 @@ fun main() {
   }
 
   PackageConfig().apply {
-    parent = "org.github"
-    moduleName = "base"
+//    parent = "org.github"
+//    moduleName = "base"
+
+    val subName = "sub-mysql-web"
+    val subEntityName = "$subName-entity"
+    val subMapperName = "$subName-mapper"
+    val packageName = "org/github/base"
+    val path = "${requireNotNull(getProperty("user.dir"))}/$subName"
+
+    pathInfo = mapOf(
+      ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/entity",
+      MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/mapper",
+      SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/service",
+      SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/service/path"
+    )
     generator.packageInfo = this
   }
 
