@@ -1,8 +1,8 @@
-package org.github.mongo.dao;
+package org.github.web.mongo.dao;
 
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.github.mongo.model.Student;
+import org.github.web.mongo.model.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

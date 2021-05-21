@@ -6,6 +6,6 @@ dependencies {
 
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
 
-  api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
-  api("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisplus")
+  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
 }
