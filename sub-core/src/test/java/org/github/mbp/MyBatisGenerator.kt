@@ -40,13 +40,13 @@ fun main() {
   }
 
   PackageConfig().apply {
-    parent = "org.github"
+    parent = "org.github.mysql.web"
     moduleName = "base"
 
     val subName = "sub-mysql-web"
     val subEntityName = "$subName-entity"
     val subMapperName = "$subName-mapper"
-    val packageName = "org/github/base"
+    val packageName = "org/github/mysql/web/base"
     val path = "${requireNotNull(getProperty("user.dir"))}/"
 
     pathInfo = mapOf(

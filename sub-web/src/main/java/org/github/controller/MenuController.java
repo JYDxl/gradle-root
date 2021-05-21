@@ -1,6 +1,6 @@
 package org.github.controller;
 
-import org.github.base.entity.SysMenuEntity;
+import org.github.mysql.web.base.entity.SysMenuEntity;
 import org.github.spring.restful.Returnable;
 import org.github.spring.restful.json.JSONPageReturn;
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;

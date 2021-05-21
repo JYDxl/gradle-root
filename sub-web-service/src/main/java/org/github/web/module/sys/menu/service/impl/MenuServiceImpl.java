@@ -5,9 +5,9 @@ import java.util.List;
 import lombok.*;
 import org.github.base.Page;
 import org.github.base.PageInfo;
-import org.github.base.entity.SysMenuEntity;
-import org.github.base.service.ISysMenuService;
 import org.github.cache.RAMCache;
+import org.github.mysql.web.base.entity.SysMenuEntity;
+import org.github.mysql.web.base.service.ISysMenuService;
 import org.github.spring.restful.json.JSONArrayReturn;
 import org.github.spring.restful.json.JSONDataReturn;
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static cn.hutool.core.text.CharSequenceUtil.*;
 import static org.github.web.common.CacheName.*;
-import static org.github.base.enums.MenuType.*;
+import static org.github.mysql.web.base.enums.MenuType.*;
 import static org.springframework.beans.BeanUtils.*;
 
 @Service

@@ -7,9 +7,9 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import lombok.*;
-import org.github.base.entity.SysMenuEntity;
-import org.github.base.service.ISysMenuService;
 import org.github.cache.CacheNameSupplier;
+import org.github.mysql.web.base.entity.SysMenuEntity;
+import org.github.mysql.web.base.service.ISysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,7 @@ import static com.google.common.collect.ImmutableMap.*;
 import static java.lang.Long.*;
 import static java.util.function.Function.identity;
 import static org.github.web.common.CacheName.*;
-import static org.github.base.enums.Enable.*;
+import static org.github.mysql.web.base.enums.Enable.*;
 
 @Component
 public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {

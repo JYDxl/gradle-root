@@ -3,7 +3,7 @@ package org.github.web.module.sys.menu.service;
 import java.util.List;
 import lombok.*;
 import org.github.base.PageInfo;
-import org.github.base.entity.SysMenuEntity;
+import org.github.mysql.web.base.entity.SysMenuEntity;
 import org.github.spring.restful.json.JSONArrayReturn;
 import org.github.spring.restful.json.JSONDataReturn;
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;
