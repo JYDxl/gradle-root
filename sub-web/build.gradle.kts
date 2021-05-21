@@ -60,7 +60,7 @@ dependencies {
   implementation(project(":sub-core"))
   implementation(project(":sub-api"))
 
-  implementation(project(":sub-mysql-web"))
+  implementation(project(":sub-mysql-web-mapper"))
 
   implementation(project(":sub-web-service"))
   implementation(project(":sub-web-model"))

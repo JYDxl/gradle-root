@@ -1,17 +1,19 @@
-package org.github.web.enums;
+package org.github.base.enums;
 
-import lombok.*;
+import lombok.NonNull;
 import org.github.base.IEnum;
 
-public enum Sex implements IEnum<Integer,String> {
-  man(0, "男"),
-  woman(1, "女");
+public enum MenuType implements IEnum<Integer,String> {
+  //类型   0：目录   1：菜单   2：按钮
+  directory(0, "目录"),
+  menu(1, "菜单"),
+  button(2, "按钮");
 
   private final Integer code;
 
   private final String value;
 
-  Sex(Integer code, String value) {
+  MenuType(Integer code, String value) {
     this.code = code;
     this.value = value;
   }

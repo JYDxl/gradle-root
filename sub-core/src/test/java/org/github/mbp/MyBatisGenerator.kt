@@ -26,6 +26,7 @@ fun main() {
     isFileOverride = true
     isSwagger2 = true
     isOpen = false
+
     generator.globalConfig = this
   }
 
@@ -34,25 +35,27 @@ fun main() {
     driverName = "com.mysql.cj.jdbc.Driver"
     username = "root"
     password = "XLrootJYD713"
+
     generator.dataSource = this
   }
 
   PackageConfig().apply {
-//    parent = "org.github"
-//    moduleName = "base"
+    parent = "org.github"
+    moduleName = "base"
 
     val subName = "sub-mysql-web"
     val subEntityName = "$subName-entity"
     val subMapperName = "$subName-mapper"
     val packageName = "org/github/base"
-    val path = "${requireNotNull(getProperty("user.dir"))}/$subName"
+    val path = "${requireNotNull(getProperty("user.dir"))}/"
 
     pathInfo = mapOf(
       ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/entity",
       MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/mapper",
       SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/service",
-      SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/service/path"
+      SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/service/impl"
     )
+
     generator.packageInfo = this
   }
 
@@ -67,6 +70,7 @@ fun main() {
     logicDeleteFieldName = "deleted"
     versionFieldName = "version"
     likeTable = LikeTable("")
+
     generator.strategy = this
   }
 
@@ -77,6 +81,7 @@ fun main() {
     serviceImpl = "serviceImpl.java"
     mapper = "mapper.java"
     setEntity("entity.java")
+
     generator.template = this
   }
 

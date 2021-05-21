@@ -1,20 +1,20 @@
-package org.github.web.system.service.impl;
+package org.github.shiro.service.impl;
 
 import lombok.NonNull;
 import lombok.val;
 import org.apache.shiro.authc.AuthenticationException;
 import org.github.base.entity.SysUserEntity;
 import org.github.base.service.ISysUserService;
-import org.github.web.model.shiro.AuthorInfo;
-import org.github.web.model.shiro.UserDTO;
-import org.github.web.system.mapper.IShiroMapper;
-import org.github.web.system.service.IShiroService;
+import org.github.shiro.AuthorInfo;
+import org.github.shiro.IShiroService;
+import org.github.shiro.mapper.IShiroMapper;
+import org.github.shiro.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.github.web.enums.Enable.disabled;
+import static org.github.base.enums.Enable.disabled;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
@@ -25,8 +25,8 @@ public class ShiroServiceImpl implements IShiroService {
   private IShiroMapper    shiroMapper;
 
   @Override
-  public @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull Long userId) {
-    return shiroMapper.queryAuthorInfo(userId);
+  public @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull String userId){
+    return shiroMapper.queryAuthorInfo(Long.valueOf(userId));
   }
 
   @Override

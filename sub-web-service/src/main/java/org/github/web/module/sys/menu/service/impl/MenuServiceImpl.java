@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static cn.hutool.core.text.CharSequenceUtil.*;
 import static org.github.web.common.CacheName.*;
-import static org.github.web.enums.MenuType.*;
+import static org.github.base.enums.MenuType.*;
 import static org.springframework.beans.BeanUtils.*;
 
 @Service

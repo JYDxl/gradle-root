@@ -18,7 +18,7 @@ import static com.google.common.collect.ImmutableMap.*;
 import static java.lang.Long.*;
 import static java.util.function.Function.identity;
 import static org.github.web.common.CacheName.*;
-import static org.github.web.enums.Enable.*;
+import static org.github.base.enums.Enable.*;
 
 @Component
 public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {

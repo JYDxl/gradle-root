@@ -10,7 +10,8 @@ include("sub-system")
 include("sub-core")
 include("sub-api")
 
-include("sub-mysql-web")
+include("sub-mysql-web-entity")
+include("sub-mysql-web-mapper")
 
 include("sub-gateway")
 

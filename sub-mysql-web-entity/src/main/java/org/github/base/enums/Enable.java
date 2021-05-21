@@ -1,6 +1,6 @@
-package org.github.web.enums;
+package org.github.base.enums;
 
-import lombok.*;
+import lombok.NonNull;
 import org.github.base.IEnum;
 
 public enum Enable implements IEnum<Integer,String> {

@@ -1,10 +1,10 @@
-package org.github.web.system.mapper;
+package org.github.shiro.mapper;
 
 import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import lombok.NonNull;
 import org.apache.ibatis.annotations.Param;
 import org.github.mybatis.MyBatisMapper;
-import org.github.web.model.shiro.AuthorInfo;
+import org.github.shiro.AuthorInfo;
 
 import java.util.List;
 
