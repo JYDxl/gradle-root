@@ -45,7 +45,7 @@ fun main() {
 
     val subName = "sub-mysql-web"
     val subEntityName = "$subName-entity"
-    val subMapperName = "$subName-mapper"
+    val subMapperName = "$subName-service"
     val packageName = parent.replace('.', '/')
     val path = "${getProperty("user.dir")}/"
 
@@ -67,8 +67,8 @@ fun main() {
     superMapperClass = IMapper::class.jvmName
     superServiceClass = IService::class.jvmName
     superServiceImplClass = ServiceImpl::class.jvmName
-    logicDeleteFieldName = "deleted"
-    versionFieldName = "version"
+    // logicDeleteFieldName = "deleted"
+    // versionFieldName = "version"
     likeTable = LikeTable("")
 
     generator.strategy = this
