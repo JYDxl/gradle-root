@@ -53,23 +53,18 @@ val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
 val shiro: String by System.getProperties()
+val jedis: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
 
-  implementation(project(":sub-mysql-web-service"))
-
   implementation(project(":sub-web-service"))
   implementation(project(":sub-web-model"))
   implementation(project(":sub-web-api"))
 
   implementation("io.netty:netty-all:$netty")
-  implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
-  implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
-  implementation("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
-  implementation("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")
@@ -81,7 +76,7 @@ dependencies {
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:$jwt")
   implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis")
-  implementation("redis.clients:jedis:3.6.0")
+  implementation("redis.clients:jedis:$jedis")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
