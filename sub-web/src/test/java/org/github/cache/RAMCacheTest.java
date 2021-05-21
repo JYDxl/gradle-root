@@ -2,7 +2,6 @@ package org.github.cache;
 
 import lombok.*;
 import lombok.extern.slf4j.*;
-import org.github.base.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,10 @@ class RAMCacheTest {
 
   @Test
   void getCache() {
-    val userCache = ramCache.<UserEntity>getCache(user);
-    val userMap   = userCache.getAll();
-    log.info(userMap.toString());
-    log.info(userCache.toString());
+    val sysMenuNameCache = ramCache.<String>getCache(sysMenuName);
+    val sysMenuNameList = sysMenuNameCache.getAll();
+    log.info(sysMenuNameList.toString());
+    log.info(sysMenuNameCache.toString());
     try {
       ramCache.<String>getCache(username);
     } catch (Exception e) {

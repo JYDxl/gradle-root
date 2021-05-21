@@ -52,10 +52,8 @@ tasks.withType<Test> {
 }
 
 dependencies {
-  api("com.google.protobuf:protobuf-java-util:$protobuf")
-  api("io.netty:netty-tcnative-boringssl-static:$tcnative")
-  api("io.netty:netty-all:$netty")
+  implementation("com.google.protobuf:protobuf-java-util:$protobuf")
+  implementation("io.netty:netty-tcnative-boringssl-static:$tcnative")
+  implementation("io.netty:netty-all:$netty")
   implementation(project(":sub-core"))
-
-  compileOnly("org.springframework.boot:spring-boot-starter-web")
 }

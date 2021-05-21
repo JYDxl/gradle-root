@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.github.web.system.mapper.IShiroMapper">
   <resultMap id="authorInfo" type="org.github.web.model.shiro.AuthorInfo">
-    <result column="role_code" property="roleCode"/>
+    <result column="role_code" property="role"/>
     <collection property="perms" ofType="java.lang.String">
       <result column="perms"/>
     </collection>

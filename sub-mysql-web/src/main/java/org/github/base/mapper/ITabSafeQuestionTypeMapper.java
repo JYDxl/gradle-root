@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-20
+ * @since 2021-05-21
  */
 @MyBatisMapper
 public interface ITabSafeQuestionTypeMapper extends IMapper<TabSafeQuestionTypeEntity> {}

@@ -1,10 +1,8 @@
 package org.github.base.entity;
 
-import org.github.base.Model;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.*;
-import java.io.Serializable;
-import javax.annotation.Nullable;
+import org.github.base.IEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,49 +14,44 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-20
+ * @since 2021-05-21
  */
 @SuppressWarnings("all")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_role")
 @ApiModel(value="SysRoleEntity对象", description="角色")
-public class SysRoleEntity extends Model<SysRoleEntity> {
+public class SysRoleEntity extends IEntity {
 
   /** UID */
   private static final long serialVersionUID = 1L;
 
   @TableId(value = "role_id", type = IdType.AUTO)
-  private @Nullable Long roleId;
+  private Long roleId;
 
   /** 角色名称 */
   @ApiModelProperty(value = "角色名称")
   @TableField("role_name")
-  private @Nullable String roleName;
+  private String roleName;
 
   /** 角色编码 */
   @ApiModelProperty(value = "角色编码")
   @TableField("role_code")
-  private @Nullable String roleCode;
+  private String roleCode;
 
   /** 备注 */
   @ApiModelProperty(value = "备注")
   @TableField("remark")
-  private @Nullable String remark;
+  private String remark;
 
   /** 创建者ID */
   @ApiModelProperty(value = "创建者ID")
   @TableField("create_user_id")
-  private @Nullable Long createUserId;
+  private Long createUserId;
 
   /** 创建时间 */
   @ApiModelProperty(value = "创建时间")
   @TableField("create_time")
-  private @Nullable LocalDateTime createTime;
-
-  @Override
-  public Serializable pkVal() {
-    return this.roleId;
-  }
+  private LocalDateTime createTime;
 
 }

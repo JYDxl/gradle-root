@@ -2,7 +2,7 @@ val mybatisplus: String by System.getProperties()
 val swagger: String by System.getProperties()
 
 dependencies {
-  compileOnly(project(":sub-mysql-web"))
+  api(project(":sub-mysql-web"))
 
   compileOnly(project(":sub-core"))
 
@@ -11,9 +11,6 @@ dependencies {
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
-
-  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisplus")
-  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }

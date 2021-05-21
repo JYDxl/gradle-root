@@ -39,9 +39,6 @@ tasks.getByName<Task>("bootDistZip") {enabled = false}
 val netty: String by System.getProperties()
 
 dependencies {
-  implementation(project(":sub-core"))
-  implementation(project(":sub-api"))
-
   implementation("de.codecentric:spring-boot-admin-starter-server") {exclude(group = "io.netty")}
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("io.netty:netty-all:$netty")

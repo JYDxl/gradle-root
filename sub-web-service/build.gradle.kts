@@ -1,8 +1,9 @@
 val shiro: String by System.getProperties()
 
 dependencies {
-  implementation(project(":sub-core"))
-  implementation(project(":sub-web-model"))
+  compileOnly(project(":sub-core"))
+
+  api(project(":sub-web-model"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.springframework.boot:spring-boot-starter-jdbc")

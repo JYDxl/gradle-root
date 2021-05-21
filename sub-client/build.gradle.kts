@@ -64,11 +64,11 @@ dependencies {
   implementation(project(":sub-web-model"))
   implementation(project(":sub-web-api"))
 
-  api("io.netty:netty-all:$netty")
-  api("io.vertx:vertx-web") {exclude(group = "io.netty")}
-  api("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
-  api("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
-  api("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
+  implementation("io.netty:netty-all:$netty")
+  implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
+  implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
+  implementation("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
+  implementation("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")

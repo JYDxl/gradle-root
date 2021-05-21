@@ -53,13 +53,15 @@ tasks.withType<Test> {
 }
 
 dependencies {
-  api("io.netty:netty-all:$netty")
-  api("io.vertx:vertx-web") {exclude(group = "io.netty")}
-  api("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
-  api("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
-  api("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
-
   implementation(project(":sub-core"))
+
+  implementation("io.netty:netty-all:$netty")
+
+  implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
+  implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
+  implementation("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
+  implementation("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
+
   implementation("com.google.inject:guice:$guice")
 
   testImplementation("io.vertx:vertx-junit5") {exclude(group = "io.netty")}

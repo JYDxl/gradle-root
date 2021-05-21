@@ -1,10 +1,8 @@
 package org.github.base.entity;
 
-import org.github.base.Model;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.*;
-import java.io.Serializable;
-import javax.annotation.Nullable;
+import org.github.base.IEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,14 +14,14 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-20
+ * @since 2021-05-21
  */
 @SuppressWarnings("all")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tab_safe_question_type")
 @ApiModel(value="TabSafeQuestionTypeEntity对象", description="安全问题类别")
-public class TabSafeQuestionTypeEntity extends Model<TabSafeQuestionTypeEntity> {
+public class TabSafeQuestionTypeEntity extends IEntity {
 
   /** UID */
   private static final long serialVersionUID = 1L;
@@ -31,56 +29,51 @@ public class TabSafeQuestionTypeEntity extends Model<TabSafeQuestionTypeEntity> 
   /** 主键id */
   @ApiModelProperty(value = "主键id")
   @TableId(value = "id", type = IdType.ASSIGN_ID)
-  private @Nullable String id;
+  private String id;
 
   /** 项目id */
   @ApiModelProperty(value = "项目id")
   @TableField("project_id")
-  private @Nullable String projectId;
+  private String projectId;
 
   /** 父级类型id */
   @ApiModelProperty(value = "父级类型id")
   @TableField("parent_id")
-  private @Nullable String parentId;
+  private String parentId;
 
   /** 父级类型名称 */
   @ApiModelProperty(value = "父级类型名称")
   @TableField("parent_name")
-  private @Nullable String parentName;
+  private String parentName;
 
   /** 问题类型编码 */
   @ApiModelProperty(value = "问题类型编码")
   @TableField("type_code")
-  private @Nullable String typeCode;
+  private String typeCode;
 
   /** 问题类型名称 */
   @ApiModelProperty(value = "问题类型名称")
   @TableField("type_name")
-  private @Nullable String typeName;
+  private String typeName;
 
   /** 备注 */
   @ApiModelProperty(value = "备注")
   @TableField("remark")
-  private @Nullable String remark;
+  private String remark;
 
   /** 排序 */
   @ApiModelProperty(value = "排序")
-  @TableField("order")
-  private @Nullable Integer order;
+  @TableField("sort")
+  private Integer sort;
 
   /** 创建人 */
   @ApiModelProperty(value = "创建人")
   @TableField("creater")
-  private @Nullable String creater;
+  private String creater;
 
   /** 创建时间 */
   @ApiModelProperty(value = "创建时间")
   @TableField("create_time")
-  private @Nullable LocalDateTime createTime;
-
-  @Override
-  public Serializable pkVal() {
-    return this.id;
-  }
+  private LocalDateTime createTime;
 
 }
