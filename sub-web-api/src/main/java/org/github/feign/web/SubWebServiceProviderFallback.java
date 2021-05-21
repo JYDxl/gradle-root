@@ -1,3 +1,3 @@
-package org.github.api.module.web;
+package org.github.feign.web;
 
 public class SubWebServiceProviderFallback implements ISubWebServiceProvider {}

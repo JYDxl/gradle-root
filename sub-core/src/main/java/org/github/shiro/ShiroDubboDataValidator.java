@@ -6,6 +6,7 @@ import org.apache.shiro.web.subject.WebSubject;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.shiro.SecurityUtils.getSubject;
 import static org.apache.shiro.util.ThreadContext.bind;
 import static org.github.ops.SpringsKt.getReq;
 import static org.github.ops.SpringsKt.getResp;
@@ -13,6 +14,8 @@ import static org.github.shiro.JWTUtil.getUsername;
 
 public abstract class ShiroDubboDataValidator {
     public static <T> void validate(ShiroDubboDataWrapper<T> wrapper) {
+        val current = getSubject();
+        if (current.isAuthenticated() && current.getPrincipal() != null) return;
         val hasToken = isNotBlank(wrapper.getToken());
         val hasJWT = isNotBlank(wrapper.getJwt());
         checkArgument(hasToken || hasJWT);

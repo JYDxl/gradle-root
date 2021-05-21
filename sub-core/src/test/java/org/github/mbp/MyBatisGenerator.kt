@@ -14,8 +14,8 @@ fun main() {
   val generator = CustomAutoGenerator().apply {templateEngine = FreemarkerTemplateEngine()}
 
   GlobalConfig().apply {
-//    val path = requireNotNull(getProperty("user.dir"))
-//    outputDir = "$path/sub-mysql-web/src/main/java"
+    val path: String = getProperty("user.dir")
+    outputDir = "$path/src/main/java"
     outputDir = null
     serviceImplName = "%sServiceImpl"
     serviceName = "I%sService"
@@ -46,8 +46,8 @@ fun main() {
     val subName = "sub-mysql-web"
     val subEntityName = "$subName-entity"
     val subMapperName = "$subName-mapper"
-    val packageName = "org/github/mysql/web/base"
-    val path = "${requireNotNull(getProperty("user.dir"))}/"
+    val packageName = parent.replace('.', '/')
+    val path = "${getProperty("user.dir")}/"
 
     pathInfo = mapOf(
       ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/entity",

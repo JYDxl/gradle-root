@@ -69,4 +69,10 @@ public class SysUserEntity extends IEntity {
   @TableField("create_time")
   private LocalDateTime createTime;
 
+  /** 0：未删除 1：已删除 */
+  @ApiModelProperty(value = "0：未删除 1：已删除")
+  @TableField("deleted")
+  @TableLogic
+  private Integer deleted;
+
 }

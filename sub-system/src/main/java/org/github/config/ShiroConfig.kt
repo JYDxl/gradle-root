@@ -62,6 +62,7 @@ class ShiroConfig {
   fun shiroFilterChainDefinition() = DefaultShiroFilterChainDefinition().apply {
     addPathDefinition("/swagger-resources/**", "anon")
     addPathDefinition("/swagger-ui/**", "anon")
+    addPathDefinition("/v2/api-docs", "anon")
     addPathDefinition("/v3/api-docs", "anon")
 
     addPathDefinition("/actuator/**", "anon")

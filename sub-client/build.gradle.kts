@@ -58,7 +58,6 @@ val jwt: String by System.getProperties()
 dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
-  implementation(project(":sub-api"))
 
   implementation(project(":sub-web-service"))
   implementation(project(":sub-web-model"))
