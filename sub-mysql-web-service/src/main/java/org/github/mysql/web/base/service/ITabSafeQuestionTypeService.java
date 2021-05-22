@@ -1,7 +1,7 @@
 package org.github.mysql.web.base.service;
 
 import org.github.mysql.web.base.entity.TabSafeQuestionTypeEntity;
-import org.github.base.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
@@ -9,6 +9,6 @@ import org.github.base.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-21
+ * @since 2021-05-22
  */
 public interface ITabSafeQuestionTypeService extends IService<TabSafeQuestionTypeEntity> {}

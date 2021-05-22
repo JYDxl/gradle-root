@@ -33,7 +33,6 @@ spring:
       idle-timeout: 600000
       pool-name: hikari-cp
       max-lifetime: 1800000
-      connection-test-query: select 1
   rabbitmq:
     username: root
     password: XLrootJYD713

@@ -1,12 +1,15 @@
 package org.github.mbp
 
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
+import com.baomidou.mybatisplus.extension.service.IService
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.ConstVal.*
 import com.baomidou.mybatisplus.generator.config.po.LikeTable
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
-import org.github.base.*
+import org.github.base.IEntity
+import org.github.base.IMapper
 import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
