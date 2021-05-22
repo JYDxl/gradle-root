@@ -1,5 +1,6 @@
 package org.github.netty.ops
 
+import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled.buffer
 import io.netty.buffer.Unpooled.wrappedBuffer
 import org.github.ops.info
@@ -13,7 +14,7 @@ internal class ByteBufOpsKtTest {
 
   @Test
   fun writeString() {
-    val buf = buffer(4)
+    val buf: ByteBuf = buffer(4)
     val str = "nico"
     buf.writeString(str)
     assertEquals(str, buf.toString(UTF_8))
@@ -22,7 +23,7 @@ internal class ByteBufOpsKtTest {
   @Test
   fun beforeRelease() {
     val str = "2333"
-    val buf = wrappedBuffer(str.toByteArray())
+    val buf: ByteBuf = wrappedBuffer(str.toByteArray())
     buf.beforeRelease {
       assertEquals(str, buf.toString(UTF_8))
     }
@@ -31,7 +32,7 @@ internal class ByteBufOpsKtTest {
 
   @Test
   fun getPrettyHexDump() {
-    val buf = wrappedBuffer("2333".toByteArray())
+    val buf: ByteBuf = wrappedBuffer("2333".toByteArray())
     buf.beforeRelease {
       log.info {buf.prettyHexDump}
     }
@@ -39,7 +40,7 @@ internal class ByteBufOpsKtTest {
 
   @Test
   fun getHexDump() {
-    val buf = wrappedBuffer("2333".toByteArray())
+    val buf: ByteBuf = wrappedBuffer("2333".toByteArray())
     buf.beforeRelease {
       log.info {buf.hexDump}
     }
@@ -47,14 +48,14 @@ internal class ByteBufOpsKtTest {
 
   @Test
   fun getALLOC_POOLED() {
-    val buf = wrappedBuffer("2333".toByteArray())
+    val buf: ByteBuf = wrappedBuffer("2333".toByteArray())
     buf.release()
     log.info {buf}
   }
 
   @Test
   fun getALLOC_UNPOOLED() {
-    val buf = wrappedBuffer("2333".toByteArray())
+    val buf: ByteBuf = wrappedBuffer("2333".toByteArray())
     buf.release()
     log.info {buf}
   }

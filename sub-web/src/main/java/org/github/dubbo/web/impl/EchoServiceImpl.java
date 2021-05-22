@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @DubboService
 @Slf4j
 public class EchoServiceImpl implements IEchoService {
-    @Autowired
-    private ObjectMapper mapper;
+  @Autowired
+  private ObjectMapper mapper;
 
-    @Override
-    public String echo(String message) throws Exception {
-        return mapper.writeValueAsString(message);
-    }
+  @Override
+  public String echo(String message) throws Exception {
+    return mapper.writeValueAsString(message);
+  }
 }

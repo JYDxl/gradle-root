@@ -26,9 +26,9 @@ import java.util.Collection;
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  */
 public interface UserService {
-    boolean save(User user);
+  Collection<User> findAll();
 
-    boolean remove(Long userId);
+  boolean remove(Long userId);
 
-    Collection<User> findAll();
+  boolean save(User user);
 }

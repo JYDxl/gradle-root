@@ -12,7 +12,7 @@ public enum Sex implements IEnum<Integer,String> {
   private final String value;
 
   Sex(Integer code, String value) {
-    this.code = code;
+    this.code  = code;
     this.value = value;
   }
 

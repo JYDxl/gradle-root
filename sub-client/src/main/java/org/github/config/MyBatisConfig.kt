@@ -1,6 +1,5 @@
 package org.github.config
 
-import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer
 import com.baomidou.mybatisplus.core.injector.AbstractMethod
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector
 import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn
@@ -23,10 +22,6 @@ class MyBatisConfig {
     // addInnerInterceptor(IllegalSQLInnerInterceptor())
     addInnerInterceptor(BlockAttackInnerInterceptor())
   }
-
-  @Bean
-  @Suppress("DEPRECATION")
-  fun configurationCustomizer() = ConfigurationCustomizer {it.isUseDeprecatedExecutor = false}
 
   @Bean
   fun customSqlInjector() = CustomSqlInjector()

@@ -12,7 +12,7 @@ public enum Enable implements IEnum<Integer,String> {
   private final String value;
 
   Enable(Integer code, String value) {
-    this.code = code;
+    this.code  = code;
     this.value = value;
   }
 

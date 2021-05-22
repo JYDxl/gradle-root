@@ -14,7 +14,7 @@ public enum MenuType implements IEnum<Integer,String> {
   private final String value;
 
   MenuType(Integer code, String value) {
-    this.code = code;
+    this.code  = code;
     this.value = value;
   }
 

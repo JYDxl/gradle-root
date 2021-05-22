@@ -9,8 +9,7 @@ import static com.google.common.io.ByteStreams.*;
 
 @Data
 class FILEImpl implements FILE {
-  private final @NonNull String name;
-
+  private final @NonNull String      name;
   private final @NonNull InputStream input;
 
   @Override

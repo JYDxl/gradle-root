@@ -13,22 +13,22 @@ import static org.github.ops.SpringsKt.getResp;
 import static org.github.shiro.JWTUtil.getUsername;
 
 public abstract class ShiroDubboDataValidator {
-    public static <T> void validate(ShiroDubboDataWrapper<T> wrapper) {
-        val current = getSubject();
-        if (current.isAuthenticated() && current.getPrincipal() != null) return;
-        val hasToken = isNotBlank(wrapper.getToken());
-        val hasJWT = isNotBlank(wrapper.getJwt());
-        checkArgument(hasToken || hasJWT);
-        val req = getReq();
-        val resp = getResp();
-        if (hasToken) {
-            val subject = req != null && resp != null ? new WebSubject.Builder(req, resp).sessionId(wrapper.getToken()).buildSubject() : new Subject.Builder().sessionId(wrapper.getToken()).buildSubject();
-            bind(subject);
-        } else {
-            val username = getUsername(wrapper.getJwt());
-            val jwtToken = new JWTToken(username, wrapper.getJwt());
-            val subject = req != null && resp != null ? new WebSubject.Builder(req, resp).buildSubject() : new Subject.Builder().buildSubject();
-            subject.login(jwtToken);
-        }
+  public static <T> void validate(ShiroDubboDataWrapper<T> wrapper) {
+    val current = getSubject();
+    if (current.isAuthenticated() && current.getPrincipal() != null) return;
+    val hasToken = isNotBlank(wrapper.getToken());
+    val hasJWT   = isNotBlank(wrapper.getJwt());
+    checkArgument(hasToken || hasJWT);
+    val req  = getReq();
+    val resp = getResp();
+    if (hasToken) {
+      val subject = req != null && resp != null ? new WebSubject.Builder(req, resp).sessionId(wrapper.getToken()).buildSubject() : new Subject.Builder().sessionId(wrapper.getToken()).buildSubject();
+      bind(subject);
+    } else {
+      val username = getUsername(wrapper.getJwt());
+      val jwtToken = new JWTToken(username, wrapper.getJwt());
+      val subject  = req != null && resp != null ? new WebSubject.Builder(req, resp).buildSubject() : new Subject.Builder().buildSubject();
+      subject.login(jwtToken);
     }
+  }
 }

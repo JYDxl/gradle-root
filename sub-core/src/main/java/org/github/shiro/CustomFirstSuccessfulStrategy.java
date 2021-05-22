@@ -11,7 +11,8 @@ public class CustomFirstSuccessfulStrategy extends FirstSuccessfulStrategy {
     setStopAfterFirstSuccess(true);
   }
 
-  @Override public AuthenticationInfo afterAttempt(Realm realm, AuthenticationToken token, AuthenticationInfo singleRealmInfo, AuthenticationInfo aggregateInfo, Throwable throwable) throws AuthenticationException {
+  @Override
+  public AuthenticationInfo afterAttempt(Realm realm, AuthenticationToken token, AuthenticationInfo singleRealmInfo, AuthenticationInfo aggregateInfo, Throwable throwable) throws AuthenticationException {
     if (throwable == null) return super.afterAttempt(realm, token, singleRealmInfo, aggregateInfo, null);
     throw (throwable instanceof AuthenticationException ? ((AuthenticationException) throwable) : new AuthenticationException(throwable));
   }

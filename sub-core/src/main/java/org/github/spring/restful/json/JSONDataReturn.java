@@ -1,6 +1,7 @@
 package org.github.spring.restful.json;
 
 import java.util.function.Function;
+import javax.annotation.Nullable;
 import lombok.*;
 import static java.util.Optional.*;
 
@@ -21,7 +22,7 @@ import static java.util.Optional.*;
 @Data
 public class JSONDataReturn<T> extends JSONReturn implements JSON {
   /** data. */
-  private T data;
+  private @Nullable T data;
 
   @Override
   public String toString() {

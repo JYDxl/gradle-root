@@ -8,8 +8,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ItemCommentBO extends PageParam {
-  private String itemId;
-
+  private String  itemId;
   private Integer level;
 
   @Override

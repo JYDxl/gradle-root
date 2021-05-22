@@ -26,7 +26,7 @@ public class EnumCache {
 
   public EnumCache(@NonNull String packageName) {
     this.packageName = packageName;
-    this.table = load(packageName);
+    this.table       = load(packageName);
   }
 
   private Table<Class<? extends IEnum<?,?>>,?,?> load(String packageName) {

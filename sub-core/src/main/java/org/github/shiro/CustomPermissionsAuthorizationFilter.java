@@ -31,7 +31,8 @@ public class CustomPermissionsAuthorizationFilter extends PermissionsAuthorizati
     return false;
   }
 
-  @Override public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+  @Override
+  public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
     return isJWT(request) ? executeJWTLogin(request, response, log) && super.onPreHandle(request, response, mappedValue) : super.onPreHandle(request, response, mappedValue);
   }
 

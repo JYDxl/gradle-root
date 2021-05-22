@@ -64,7 +64,6 @@ public class WaitAndNotify {
     }
   }
 
-  private static final Queue<String> QUEUE = new LinkedList<>();
-
-  private static final int MAX_SIZE = 10;
+  private static final Queue<String> QUEUE    = new LinkedList<>();
+  private static final int           MAX_SIZE = 10;
 }

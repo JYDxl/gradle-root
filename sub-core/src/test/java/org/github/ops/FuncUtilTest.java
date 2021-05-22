@@ -40,6 +40,5 @@ class FuncUtilTest {
 @Data
 class User {
   private String firstName;
-
   private String lastName;
 }

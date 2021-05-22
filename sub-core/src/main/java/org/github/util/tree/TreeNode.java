@@ -11,13 +11,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @Data
 public class TreeNode<I, E> implements IJson {
-  private @NonNull I pid;
-
-  private @NonNull I id;
-
-  private @NonNull String name;
-
-  private @Nullable E extra;
-
+  private @NonNull  I                             pid;
+  private @NonNull  I                             id;
+  private @NonNull  String                        name;
+  private @Nullable E                             extra;
   private @Nullable List<? extends TreeNode<I,E>> child;
 }

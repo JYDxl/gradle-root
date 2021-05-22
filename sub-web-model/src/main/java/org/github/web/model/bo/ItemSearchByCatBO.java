@@ -8,8 +8,7 @@ import static com.google.common.base.Preconditions.*;
 @Data
 public class ItemSearchByCatBO extends PageParam {
   private Integer catId;
-
-  private String sort;
+  private String  sort;
 
   @Override
   public @NonNull ItemSearchByCatBO valid() {

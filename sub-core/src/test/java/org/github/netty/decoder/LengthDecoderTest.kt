@@ -1,5 +1,6 @@
 package org.github.netty.decoder
 
+import io.netty.buffer.ByteBuf
 import io.netty.buffer.Unpooled.buffer
 import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
@@ -24,7 +25,7 @@ internal class LengthDecoderTest {
     // val buf = compositeBuffer(4).apply { addComponents(true, head1, part1, head2, part2) }
     val part1 = LengthDecoder::class.jvmName.toByteArray()
     val part2 = EmbeddedChannel::class.jvmName.toByteArray()
-    val buf = buffer(4 + part1.size + 4 + part2.size).apply {
+    val buf: ByteBuf = buffer(4 + part1.size + 4 + part2.size).apply {
       writeInt(part1.size)
       writeBytes(part1)
       writeInt(part2.size)
@@ -32,11 +33,11 @@ internal class LengthDecoderTest {
     }
     assertTrue(channel.writeInbound(buf))
     assertTrue(channel.finish())
-    val msg1 = channel.readInbound<String>()
+    val msg1: String = channel.readInbound()
     assertEquals(msg1, LengthDecoder::class.jvmName)
-    val msg2 = channel.readInbound<String>()
+    val msg2: String = channel.readInbound()
     assertEquals(msg2, EmbeddedChannel::class.jvmName)
-    val msg3 = channel.readInbound<String>()
+    val msg3: String? = channel.readInbound<String>()
     assertNull(msg3)
     println(channel.mark)
   }

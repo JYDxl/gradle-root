@@ -7,7 +7,6 @@ import org.apache.shiro.authc.AuthenticationToken;
 @Data
 public class JWTToken implements AuthenticationToken {
   private final @NonNull String username;
-
   private final @NonNull String token;
 
   @Override

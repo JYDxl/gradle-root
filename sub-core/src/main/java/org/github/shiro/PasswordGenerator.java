@@ -13,7 +13,7 @@ public class PasswordGenerator {
   private final int hashIterations;
 
   public PasswordGenerator(@NonNull String hashAlgorithm, int hashIterations) {
-    this.hashAlgorithm = hashAlgorithm;
+    this.hashAlgorithm  = hashAlgorithm;
     this.hashIterations = hashIterations;
   }
 

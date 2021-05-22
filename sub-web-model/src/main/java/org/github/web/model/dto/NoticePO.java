@@ -7,6 +7,5 @@ import static com.google.common.collect.ImmutableList.*;
 @Data
 public class NoticePO {
   private List<String> noticeIdList = of();
-
-  private String noticeIds;
+  private String       noticeIds;
 }

@@ -15,7 +15,7 @@ class AsyncConfig(private val builder: TaskExecutorBuilder): AsyncConfigurer {
   /** log. */
   private val log = AsyncUncaughtExceptionHandler::class.log
 
-  override fun getAsyncUncaughtExceptionHandler() = AsyncUncaughtExceptionHandler { ex, method, params ->
+  override fun getAsyncUncaughtExceptionHandler() = AsyncUncaughtExceptionHandler {ex, method, params ->
     log.error("Exception thrown by async method $method with arguments ${params.joinToString(prefix = "[", postfix = "]")}", ex)
   }
 
