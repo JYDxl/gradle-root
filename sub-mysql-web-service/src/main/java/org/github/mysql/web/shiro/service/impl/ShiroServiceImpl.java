@@ -6,7 +6,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.github.mysql.web.shiro.mapper.IShiroMapper;
 import org.github.mysql.web.shiro.model.UserDTO;
 import org.github.shiro.AuthorInfo;
-import org.github.shiro.IShiroService;
+import org.github.service.IShiroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

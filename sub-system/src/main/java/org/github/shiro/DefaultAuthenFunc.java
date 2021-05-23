@@ -2,6 +2,7 @@ package org.github.shiro;
 
 import lombok.NonNull;
 import lombok.val;
+import org.github.service.IShiroService;
 import org.apache.shiro.authc.AuthenticationToken;
 
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
