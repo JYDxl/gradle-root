@@ -19,7 +19,7 @@ interface CacheSupplier<E, R>: Function<String, E?>, Consumer<CacheEvent>, Initi
 
   fun load(keys: Collection<String> = of()): Map<String, E?>
 
-  override fun apply(key: String): E?
+  override fun apply(key: String): E? = load(of(key)).firstNotNullOfOrNull {it.value}
 
   override fun accept(event: CacheEvent) = Unit
 
