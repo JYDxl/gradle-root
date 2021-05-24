@@ -12,25 +12,25 @@ import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.util.concurrent.DefaultThreadFactory
-import io.netty.channel.epoll.Epoll.isAvailable as epollIsAvailable
+import io.netty.channel.epoll.Epoll.isAvailable
 
 val serverSocketChannel: Class<out ServerChannel>
   get() = when {
-    epollIsAvailable() -> EpollServerSocketChannel::class.java
-    else               -> NioServerSocketChannel::class.java
+    isAvailable() -> EpollServerSocketChannel::class.java
+    else          -> NioServerSocketChannel::class.java
   }
 
 val socketChannel: Class<out Channel>
   get() = when {
-    epollIsAvailable() -> EpollSocketChannel::class.java
-    else               -> NioSocketChannel::class.java
+    isAvailable() -> EpollSocketChannel::class.java
+    else          -> NioSocketChannel::class.java
   }
 
 fun eventLoopGroup(threads: Int, poolName: String): MultithreadEventLoopGroup {
   val threadFactory = DefaultThreadFactory(poolName)
   return when {
-    epollIsAvailable() -> EpollEventLoopGroup(threads, threadFactory)
-    else               -> NioEventLoopGroup(threads, threadFactory)
+    isAvailable() -> EpollEventLoopGroup(threads, threadFactory)
+    else          -> NioEventLoopGroup(threads, threadFactory)
   }
 }
 

@@ -1,4 +1,4 @@
-package org.github.dubbo.web.impl;
+package org.github.web.dubbo.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

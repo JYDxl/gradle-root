@@ -1,8 +1,9 @@
 val shiro: String by System.getProperties()
 
 dependencies {
+  api(project(":sub-web-model"))
+
   compileOnly(project(":sub-core"))
-  compileOnly(project(":sub-web-model"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")

@@ -107,7 +107,7 @@ shiro-redis:
 
 dubbo:
   scan:
-    base-packages: org.github.dubbo.web.impl
+    base-packages: org.github.web.dubbo.impl
   protocol:
     name: dubbo
     port: -1
