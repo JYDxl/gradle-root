@@ -14,21 +14,30 @@
  * limitations under the License.
  */
 
-package org.github.dubbo.web;
+package org.github.web.dubbo;
 
 import org.github.web.model.User;
 
-import java.util.Collection;
+import java.util.Map;
 
 /**
- * {@link User} Service.
+ * Rest Service.
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  */
-public interface UserService {
-  Collection<User> findAll();
+public interface RestService {
 
-  boolean remove(Long userId);
+  String form(String form);
 
-  boolean save(User user);
+  String headers(String header, String header2, Integer param);
+
+  String param(String param);
+
+  String params(int a, String b);
+
+  String pathVariables(String path1, String path2, String param);
+
+  User requestBodyMap(Map<String,Object> data, String param);
+
+  Map<String,Object> requestBodyUser(User user);
 }

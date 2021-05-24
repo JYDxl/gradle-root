@@ -1,4 +1,4 @@
-package org.github.dubbo.web;
+package org.github.web.dubbo;
 
 /**
  * Echo Service.

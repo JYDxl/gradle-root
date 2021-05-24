@@ -1,7 +1,7 @@
 package org.github.controller;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.github.dubbo.web.IEchoService;
+import org.github.web.dubbo.IEchoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
