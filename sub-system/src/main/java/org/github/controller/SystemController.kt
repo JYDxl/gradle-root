@@ -32,7 +32,7 @@ class SystemController {
   fun token() = of(systemService.token())
 
   @RequestMapping("/jwt")
-  fun refresh(): JSONDataReturn<String> = of(systemService.jwt())
+  fun jwt(): JSONDataReturn<String> = of(systemService.jwt())
 
   @PostMapping("public/jwt")
   fun jwt(@RequestBody jwt: JWTLogin): JSONDataReturn<String> = of(systemService.jwt(jwt))

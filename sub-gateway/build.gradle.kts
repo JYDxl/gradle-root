@@ -8,6 +8,7 @@ plugins {
 application {
   mainClass.set("org.github.GatewayKt")
   applicationDefaultJvmArgs = listOf(
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
     "-ea",
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
@@ -16,6 +17,7 @@ application {
     "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
     "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
     "--add-opens=java.base/java.util=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
     "--add-opens=java.base/java.lang=ALL-UNNAMED",
     "--add-opens=java.base/java.math=ALL-UNNAMED",
     "--add-opens=java.base/java.text=ALL-UNNAMED",

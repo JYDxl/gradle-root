@@ -18,6 +18,7 @@ application {
     "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
     "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
     "--add-opens=java.base/java.util=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
     "--add-opens=java.base/java.lang=ALL-UNNAMED",
     "--add-opens=java.base/java.math=ALL-UNNAMED",
     "--add-opens=java.base/java.text=ALL-UNNAMED",
@@ -60,8 +61,6 @@ dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
 
-  implementation(project(":sub-web-service"))
-  implementation(project(":sub-web-model"))
   implementation(project(":sub-web-api"))
 
   implementation("io.netty:netty-all:$netty")
@@ -95,6 +94,8 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
   implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+
+  implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
