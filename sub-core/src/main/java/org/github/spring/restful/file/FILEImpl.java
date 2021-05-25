@@ -29,12 +29,12 @@ class FILEImpl implements FILE {
   }
 
   @Override
-  public @NonNull String get() {
-    return decode(name);
+  public String toString() {
+    return get();
   }
 
   @Override
-  public String toString() {
-    return get();
+  public @NonNull String get() {
+    return decode(name);
   }
 }

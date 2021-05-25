@@ -5,11 +5,11 @@ import org.github.shiro.User
 import org.github.spring.restful.json.JSONDataReturn
 
 interface ISystemService {
-    fun login(): JSONDataReturn<User>
+  fun login(): JSONDataReturn<User>
 
-    fun token(): JSONDataReturn<String?>
+  fun token(): JSONDataReturn<String?>
 
-    fun jwt(): JSONDataReturn<String>
+  fun jwt(): JSONDataReturn<String>
 
-    fun jwt(login: JWTLogin): JSONDataReturn<String>
+  fun jwt(login: JWTLogin): JSONDataReturn<String>
 }

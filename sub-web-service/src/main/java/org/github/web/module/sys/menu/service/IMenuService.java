@@ -11,13 +11,13 @@ import org.github.web.module.sys.menu.model.vo.QueryMenuListVO;
 import java.util.List;
 
 public interface IMenuService {
-    @NonNull JSONDataReturn<Boolean> delMenuList(@NonNull List<Long> ids);
+  @NonNull JSONDataReturn<Boolean> delMenuList(@NonNull List<Long> ids);
 
-    @NonNull JSONDataReturn<SysMenuEntity> queryMenuInfo(@NonNull Long menuId);
+  @NonNull JSONDataReturn<SysMenuEntity> queryMenuInfo(@NonNull Long menuId);
 
-    @NonNull JSONPageReturn<QueryMenuListVO> queryMenuPage(@NonNull QueryMenuListBO bo);
+  @NonNull JSONPageReturn<QueryMenuListVO> queryMenuPage(@NonNull QueryMenuListBO bo);
 
-    @NonNull JSONArrayReturn<SysMenuEntity> queryMenuTree();
+  @NonNull JSONArrayReturn<SysMenuEntity> queryMenuTree();
 
-    @NonNull JSONDataReturn<Boolean> saveOrUpdate(@NonNull SysMenuEntity bo);
+  @NonNull JSONDataReturn<Boolean> saveOrUpdate(@NonNull SysMenuEntity bo);
 }

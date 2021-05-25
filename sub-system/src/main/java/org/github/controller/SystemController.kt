@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.RequestMapping
 @RequestMapping("/")
 @Controller
 class SystemController {
-    private val log = SystemController::class.log
+  private val log = SystemController::class.log
 
-    @Autowired
-    private lateinit var systemService: ISystemService
+  @Autowired
+  private lateinit var systemService: ISystemService
 
-    @GetMapping("login")
-    fun page(): Returnable = VIEW { "login" }
+  @GetMapping("login")
+  fun page(): Returnable = VIEW {"login"}
 
-    @PostMapping("login")
-    fun login(): Returnable = systemService.login()
+  @PostMapping("login")
+  fun login(): Returnable = systemService.login()
 
-    @RequestMapping("/token")
-    fun token(): Returnable = systemService.token()
+  @RequestMapping("/token")
+  fun token(): Returnable = systemService.token()
 
-    @RequestMapping("/jwt")
-    fun jwt(): Returnable = systemService.jwt()
+  @RequestMapping("/jwt")
+  fun jwt(): Returnable = systemService.jwt()
 
-    @PostMapping("public/jwt")
-    fun jwt(@RequestBody login: JWTLogin): Returnable = systemService.jwt(login)
+  @PostMapping("public/jwt")
+  fun jwt(@RequestBody login: JWTLogin): Returnable = systemService.jwt(login)
 }

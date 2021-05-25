@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class EchoController {
-    @DubboReference
-    private IEchoService echoService;
-    @Autowired
-    private IServiceProviderWebServer webServer;
+  @DubboReference
+  private IEchoService              echoService;
+  @Autowired
+  private IServiceProviderWebServer webServer;
 
-    @GetMapping("/echo")
-    public String echo(String message) throws Exception {
-        return echoService.echo(message);
-    }
+  @GetMapping("/basic")
+  public JSONReturn basic() {
+    return webServer.basic();
+  }
 
-    @GetMapping("/basic")
-    public JSONReturn basic() {
-        return webServer.basic();
-    }
+  @GetMapping("/echo")
+  public String echo(String message) throws Exception {
+    return echoService.echo(message);
+  }
 }

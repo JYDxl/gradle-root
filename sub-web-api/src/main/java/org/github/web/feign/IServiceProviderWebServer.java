@@ -9,6 +9,6 @@ import static org.github.constant.Constants.SERVICE_PROVIDER_WEB_SERVER;
 
 @FeignClient(value = SERVICE_PROVIDER_WEB_SERVER, fallback = ServiceProviderWebServerFallback.class)
 public interface IServiceProviderWebServer {
-    @GetMapping("/rest/json/basic")
-    JSONReturn basic();
+  @GetMapping("/rest/json/basic")
+  JSONReturn basic();
 }
