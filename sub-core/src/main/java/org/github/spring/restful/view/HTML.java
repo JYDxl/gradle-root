@@ -31,9 +31,4 @@ public interface HTML extends Returnable {
   static @NonNull HTML of(@NonNull String html) {
     return html::toString;
   }
-
-  /** Generator. */
-  static @NonNull HTML nil() {
-    return () -> null;
-  }
 }

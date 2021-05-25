@@ -38,11 +38,13 @@ public abstract class TreeUtil {
   public static <T extends TreeNode<I,E>, I, E> @NonNull List<List<T>> findAllChild(@NonNull List<T> list, boolean includeThemself, @NonNull List<I> ids) {
     val index = list.stream().collect(toImmutableListMultimap(TreeNode::getPid, identity()));
     val map   = uniqueIndex(list, T::getId);
-    return ids.stream().map(id -> {
-      List<T> result = includeThemself ? newArrayList(map.get(id)) : newArrayList();
-      recursion(singletonList(id), index, result);
-      return result;
-    }).collect(toImmutableList());
+    return ids.stream()
+            .map(id -> {
+              List<T> result = includeThemself ? newArrayList(map.get(id)) : newArrayList();
+              recursion(singletonList(id), index, result);
+              return result;
+            })
+            .collect(toImmutableList());
   }
 
   private static <I, T extends TreeNode<I,E>, E> void recursion(List<I> input, ImmutableListMultimap<I,T> index, List<T> result) {
