@@ -1,15 +1,17 @@
 package org.github.spring.restful.file;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.Writer;
+import java.io.*;
+import cn.hutool.core.io.IORuntimeException;
 import lombok.*;
 import org.github.exception.ParamsErrorException;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
+import org.springframework.core.io.Resource;
+
+import static cn.hutool.core.util.URLUtil.encode;
 import static com.google.common.net.MediaType.*;
+import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Top interface of file.
@@ -45,9 +47,9 @@ public interface FILE extends Returnable {
    */
   static @NonNull FILE of(@NonNull File file) {
     try {
-      return new FILEImpl(file.getName(), new FileInputStream(file));
+      return new FILEImpl(encode(file.getName()), new FileInputStream(file));
     } catch (FileNotFoundException e) {
-      throw new ParamsErrorException("文件不存在",e);
+      throw new ParamsErrorException(format("文件[%s]不存在", file.getName()), e);
     }
   }
 
@@ -55,6 +57,20 @@ public interface FILE extends Returnable {
    * Generator.
    */
   static @NonNull FILE of(@NonNull String name, @NonNull InputStream input) {
-    return new FILEImpl(name, input);
+    return new FILEImpl(encode(name), input);
+  }
+
+  /**
+   * Generator.
+   */
+  static @NonNull FILE of(@NonNull Resource resource) {
+    val name = requireNonNull(resource.getFilename());
+    try {
+      return new FILEImpl(name, resource.getInputStream());
+    } catch (FileNotFoundException e) {
+      throw new ParamsErrorException(format("文件[%s]不存在", name), e);
+    } catch (IOException e) {
+      throw new IORuntimeException(e);
+    }
   }
 }

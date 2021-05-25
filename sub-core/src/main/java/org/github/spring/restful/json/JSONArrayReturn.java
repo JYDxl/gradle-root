@@ -32,12 +32,6 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
     return get();
   }
 
-  /** GET data. */
-  @SuppressWarnings("unchecked")
-  public @NonNull E[] toArray() {
-    return (E[]) data.toArray();
-  }
-
   /** WITH data. */
   public @NonNull JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
     setData(data);
