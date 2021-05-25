@@ -76,7 +76,10 @@ dependencies {
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:$jwt")
-  implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis")
+  implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis") {
+    exclude(group = "org.apache.maven.plugins")
+    exclude(group = "redis.clients")
+  }
   implementation("redis.clients:jedis:$jedis")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 

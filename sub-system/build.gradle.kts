@@ -8,5 +8,8 @@ dependencies {
 
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 
-  compileOnly("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis") {exclude(group = "redis.clients")}
+  compileOnly("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis") {
+    exclude(group = "org.apache.maven.plugins")
+    exclude(group = "redis.clients")
+  }
 }

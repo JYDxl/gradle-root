@@ -50,7 +50,7 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   public static @NonNull JSONReturn error() {
-    return of(-2, "SYSTEM ERROR");
+    return of(-2, "系统错误");
   }
 
   /** Generator. */
@@ -60,6 +60,6 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   public static @NonNull JSONReturn warn() {
-    return of(-1, "PARAMS ERROR");
+    return of(-1, "参数错误");
   }
 }

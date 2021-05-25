@@ -17,7 +17,7 @@ class ErrorController {
   fun handleThrowable(e: Throwable) = error().also {log.error(e) {}}
 
   @ExceptionHandler(ParamsErrorException::class)
-  fun handleParamsErrorException(e: ParamsErrorException) = warn().withRetMsg(e.localizedMessage).also {log.error(e) {}}
+  fun handleParamsErrorException(e: Exception) = warn().withRetMsg(e.localizedMessage).also {log.error(e) {}}
 
   @ExceptionHandler(ShiroException::class)
   fun handleShiroException(e: ShiroException) = warn().withRetMsg("权限不足").also {log.error(e) {}}

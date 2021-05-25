@@ -2,7 +2,6 @@ package org.github.spring.restful.json;
 
 import lombok.*;
 import org.github.base.IPage;
-import org.github.base.PageInfo;
 
 import java.util.Collection;
 import java.util.function.Function;
@@ -65,10 +64,5 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   /** Generator. */
   public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Collection<R> data) {
     return of(page.getTotal(), data);
-  }
-
-  /** Generator. */
-  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull PageInfo<T> page) {
-    return of(page.getTotal(), page.getData());
   }
 }

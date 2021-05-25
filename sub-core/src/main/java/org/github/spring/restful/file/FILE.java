@@ -47,7 +47,7 @@ public interface FILE extends Returnable {
     try {
       return new FILEImpl(file.getName(), new FileInputStream(file));
     } catch (FileNotFoundException e) {
-      throw new ParamsErrorException(e);
+      throw new ParamsErrorException("文件不存在",e);
     }
   }
 
