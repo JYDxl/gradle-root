@@ -4,7 +4,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import lombok.*;
+
+import static cn.hutool.core.util.URLUtil.decode;
 import static com.google.common.io.ByteStreams.*;
 
 @Data
@@ -27,11 +30,11 @@ class FILEImpl implements FILE {
 
   @Override
   public @NonNull String get() {
-    return name;
+    return decode(name);
   }
 
   @Override
   public String toString() {
-    return name;
+    return get();
   }
 }

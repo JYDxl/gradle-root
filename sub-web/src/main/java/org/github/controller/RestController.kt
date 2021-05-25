@@ -2,6 +2,7 @@ package org.github.controller
 
 import org.apache.shiro.authz.annotation.Logical.OR
 import org.apache.shiro.authz.annotation.RequiresRoles
+import org.github.ops.appCtx
 import org.github.ops.info
 import org.github.ops.log
 import org.github.spring.restful.Returnable
@@ -10,10 +11,10 @@ import org.github.spring.restful.json.JSON
 import org.github.spring.restful.json.JSONPReturn
 import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.view.VIEW
+import org.springframework.core.io.Resource
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import java.io.File
 
 @Controller
 @RequestMapping("/rest/")
@@ -43,13 +44,9 @@ class RestController {
   }
 
   @GetMapping("file")
-  fun file(): FILE {
-    val file = FILE.of(File("Dockerfile"))
-//    val file = FILE.of("test", FileInputStream(File("Dockerfile")))
-//    val file = FILE {"Dockerfile"}
-    log.info {file.toString()}
-    log.info {file.get()}
-    return file
+  fun file(): Returnable {
+    val resource: Resource = appCtx.getResources("classpath*:spy.properties").first()
+    return FILE.of(resource)
   }
 
   @GetMapping("json")

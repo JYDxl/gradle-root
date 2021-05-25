@@ -8,6 +8,7 @@ import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import org.springframework.core.io.Resource;
 
+import static cn.hutool.core.util.URLUtil.decode;
 import static cn.hutool.core.util.URLUtil.encode;
 import static com.google.common.net.MediaType.*;
 import static java.lang.String.format;
@@ -68,7 +69,7 @@ public interface FILE extends Returnable {
     try {
       return new FILEImpl(name, resource.getInputStream());
     } catch (FileNotFoundException e) {
-      throw new ParamsErrorException(format("文件[%s]不存在", name), e);
+      throw new ParamsErrorException(format("文件[%s]不存在", decode(name)), e);
     } catch (IOException e) {
       throw new IORuntimeException(e);
     }
