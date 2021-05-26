@@ -14,5 +14,5 @@ dependencies {
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
-  compileOnly("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
+//  compileOnly("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 }

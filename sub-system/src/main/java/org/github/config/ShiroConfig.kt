@@ -11,7 +11,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition
 import org.apache.shiro.web.filter.mgt.DefaultFilter.invalidRequest
-import org.github.ops.debug
+import org.github.ops.info
 import org.github.ops.log
 import org.github.shiro.*
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator
@@ -92,13 +92,13 @@ class ShiroConfig {
     filters = object: ForwardingMap<String, Filter>() {
       override fun delegate(): Map<String, Filter> = of(
         "logout", CustomLogoutFilter(),
-        "perms", CustomPermissionsAuthorizationFilter(),
         "authc", CustomCommonAuthenticationFilter(true),
+        "perms", CustomPermissionsAuthorizationFilter(),
         "roles", CustomRolesAuthorizationFilter(),
-        "user", CustomUserFilter()
+        //"user", CustomUserFilter()
       )
 
-      override fun put(key: String, value: Filter): Filter? = log.debug {"忽略Spring中注册的的Filter[$key : $value]"}.let {null}
+      override fun put(key: String, value: Filter): Filter? = log.info {"忽略Spring中注册的的Filter[$key : $value]"}.let {null}
     }
   }
 

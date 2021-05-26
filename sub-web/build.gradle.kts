@@ -37,6 +37,7 @@ tasks.withType<Test> {
   enabled = false
 }
 
+tasks.getByName<Task>("jar") {enabled = false}
 tasks.getByName<Task>("startScripts") {enabled = false}
 tasks.getByName<Task>("distTar") {enabled = false}
 tasks.getByName<Task>("distZip") {enabled = false}
@@ -62,8 +63,6 @@ dependencies {
   implementation(project(":sub-core"))
 
   implementation(project(":sub-web-service"))
-  implementation(project(":sub-web-model"))
-  implementation(project(":sub-web-api"))
 
   implementation("io.netty:netty-all:$netty")
 
@@ -100,7 +99,7 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
-  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
+//  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 
