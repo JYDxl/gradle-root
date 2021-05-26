@@ -63,6 +63,7 @@ dependencies {
   implementation(project(":sub-core"))
 
   implementation(project(":sub-web-api"))
+  implementation(project(":sub-mysql-web-service"))
 
   implementation("io.netty:netty-all:$netty")
   implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
