@@ -14,14 +14,14 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-22
+ * @since 2021-05-26
  */
 @SuppressWarnings("all")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_user")
-@ApiModel(value="SysUserEntity对象", description="系统用户")
-public class SysUserEntity extends IEntity {
+@ApiModel(value="SysUserMbpEntity对象", description="系统用户")
+public class SysUserMbpEntity extends IEntity {
 
   /** UID */
   private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
-import org.github.mysql.web.base.entity.SysUserEntity;
+import org.github.mysql.web.base.entity.SysUserMbpEntity;
 import org.github.shiro.User;
 
 import javax.annotation.Nullable;
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
-public class UserDTO extends SysUserEntity implements User {
+public class UserDTO extends SysUserMbpEntity implements User {
   private @Nullable String token;
 
   @Override

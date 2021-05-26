@@ -1,6 +1,6 @@
 package org.github.mysql.web.base.service;
 
-import org.github.mysql.web.base.entity.SysRoleEntity;
+import org.github.mysql.web.base.entity.SysRoleMbpEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-22
+ * @since 2021-05-26
  */
-public interface ISysRoleService extends IService<SysRoleEntity> {}
+public interface ISysRoleMbpService extends IService<SysRoleMbpEntity> {}

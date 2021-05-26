@@ -1,6 +1,6 @@
 package org.github.mysql.web.base.mapper;
 
-import org.github.mysql.web.base.entity.SysUserEntity;
+import org.github.mysql.web.base.entity.SysUserMbpEntity;
 import org.github.base.IMapper;
 import org.github.mybatis.MyBatisMapper;
 
@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-22
+ * @since 2021-05-26
  */
 @MyBatisMapper
-public interface ISysUserMapper extends IMapper<SysUserEntity> {}
+public interface ISysUserMbpMapper extends IMapper<SysUserMbpEntity> {}

@@ -14,14 +14,14 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-22
+ * @since 2021-05-26
  */
 @SuppressWarnings("all")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("tab_safe_question_type")
-@ApiModel(value="TabSafeQuestionTypeEntity对象", description="安全问题类别")
-public class TabSafeQuestionTypeEntity extends IEntity {
+@ApiModel(value="TabSafeQuestionTypeMbpEntity对象", description="安全问题类别")
+public class TabSafeQuestionTypeMbpEntity extends IEntity {
 
   /** UID */
   private static final long serialVersionUID = 1L;

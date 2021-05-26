@@ -4,8 +4,8 @@ import lombok.NonNull;
 import lombok.val;
 import org.github.base.Page;
 import org.github.cache.RAMCache;
-import org.github.mysql.web.base.entity.SysMenuEntity;
-import org.github.mysql.web.base.service.ISysMenuService;
+import org.github.mysql.web.base.entity.SysMenuMbpEntity;
+import org.github.mysql.web.base.service.ISysMenuMbpService;
 import org.github.spring.restful.json.JSONArrayReturn;
 import org.github.spring.restful.json.JSONDataReturn;
 import org.github.spring.restful.json.JSONPageReturn;
@@ -20,46 +20,46 @@ import java.util.List;
 import static cn.hutool.core.text.CharSequenceUtil.isNotBlank;
 import static org.github.mysql.web.base.enums.MenuType.button;
 import static org.github.mysql.web.base.enums.MenuType.directory;
-import static org.github.web.common.CacheName.sysMenuName;
+import static org.github.web.common.CacheName.*;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 public class MenuServiceImpl implements IMenuService {
   @Autowired
-  private ISysMenuService sysMenuService;
+  private ISysMenuMbpService SysMenuMbpService;
   @Autowired
-  private RAMCache        ramCache;
+  private RAMCache           ramCache;
 
   @Override
   public @NonNull JSONDataReturn<Boolean> delMenuList(@NonNull List<Long> ids) {
     if (ids.isEmpty()) return JSONDataReturn.of(false);
-    val result = sysMenuService.removeByIds(ids);
+    val result = SysMenuMbpService.removeByIds(ids);
     return JSONDataReturn.of(result);
   }
 
   @Override
-  public @NonNull JSONDataReturn<SysMenuEntity> queryMenuInfo(@NonNull Long menuId) {
-    val entity = sysMenuService.getById(menuId);
+  public @NonNull JSONDataReturn<SysMenuMbpEntity> queryMenuInfo(@NonNull Long menuId) {
+    val entity = SysMenuMbpService.getById(menuId);
     return JSONDataReturn.of(entity);
   }
 
   @Override
   public @NonNull JSONPageReturn<QueryMenuListVO> queryMenuPage(@NonNull QueryMenuListBO bo) {
-    val query = sysMenuService.lambdaQuery();
-    query.likeRight(isNotBlank(bo.getName()), SysMenuEntity::getName, bo.getName());
+    val query = SysMenuMbpService.lambdaQuery();
+    query.likeRight(isNotBlank(bo.getName()), SysMenuMbpEntity::getName, bo.getName());
     val page = query.page(new Page<>(bo));
     val list = page.getRecords();
     if (list.isEmpty()) return JSONPageReturn.of(page);
-    return JSONPageReturn.of(page, this::applySysMenuEntity2QueryMenuListVO);
+    return JSONPageReturn.of(page, this::applySysMenuMbpEntity2QueryMenuListVO);
   }
 
   @Override
-  public @NonNull JSONArrayReturn<SysMenuEntity> queryMenuTree() {
-    val query = sysMenuService.lambdaQuery();
-    query.ne(SysMenuEntity::getType, button.getCode());
+  public @NonNull JSONArrayReturn<SysMenuMbpEntity> queryMenuTree() {
+    val query = SysMenuMbpService.lambdaQuery();
+    query.ne(SysMenuMbpEntity::getType, button.getCode());
     val list = query.list();
 
-    val root = new SysMenuEntity();
+    val root = new SysMenuMbpEntity();
     root.setMenuId(0L);
     root.setParentId(-1L);
     root.setName("根目录");
@@ -74,12 +74,12 @@ public class MenuServiceImpl implements IMenuService {
   }
 
   @Override
-  public @NonNull JSONDataReturn<Boolean> saveOrUpdate(@NonNull SysMenuEntity bo) {
-    val result = sysMenuService.saveOrUpdate(bo);
+  public @NonNull JSONDataReturn<Boolean> saveOrUpdate(@NonNull SysMenuMbpEntity bo) {
+    val result = SysMenuMbpService.saveOrUpdate(bo);
     return JSONDataReturn.of(result);
   }
 
-  private @NonNull QueryMenuListVO applySysMenuEntity2QueryMenuListVO(@NonNull SysMenuEntity entity) {
+  private @NonNull QueryMenuListVO applySysMenuMbpEntity2QueryMenuListVO(@NonNull SysMenuMbpEntity entity) {
     val vo = new QueryMenuListVO();
     copyProperties(entity, vo);
     vo.setParentName(ramCache.<String>getCache(sysMenuName).get(vo.getParentId()));

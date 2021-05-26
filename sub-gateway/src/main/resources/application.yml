@@ -29,9 +29,15 @@ spring:
             - Path=/web/**
           filters:
             - StripPrefix=1
+        - id: client
+            uri: lb://sub-client
+            predicates:
+              - Path=/client/**
+            filters:
+              - StripPrefix=1
 
 server:
-  port: 13650
+  port: 80
 
 logging:
   config: classpath:logback.groovy

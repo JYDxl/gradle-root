@@ -4,6 +4,7 @@ import org.github.ops.log
 import org.github.service.ISystemService
 import org.github.shiro.JWTLogin
 import org.github.spring.restful.Returnable
+import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.view.VIEW
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -24,14 +25,14 @@ class SystemController {
   fun page(): Returnable = VIEW {"login"}
 
   @PostMapping("login")
-  fun login(): Returnable = systemService.login()
+  fun login(): Returnable = JSONDataReturn.of(systemService.login())
 
   @RequestMapping("/token")
-  fun token(): Returnable = systemService.token()
+  fun token(): Returnable = JSONDataReturn.of(systemService.token())
 
   @RequestMapping("/jwt")
-  fun jwt(): Returnable = systemService.jwt()
+  fun jwt(): Returnable = JSONDataReturn.of(systemService.jwt())
 
   @PostMapping("public/jwt")
-  fun jwt(@RequestBody login: JWTLogin): Returnable = systemService.jwt(login)
+  fun jwt(@RequestBody login: JWTLogin): Returnable = JSONDataReturn.of(systemService.jwt(login))
 }

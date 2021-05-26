@@ -13,14 +13,14 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-22
+ * @since 2021-05-26
  */
 @SuppressWarnings("all")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("sys_menu")
-@ApiModel(value="SysMenuEntity对象", description="菜单管理")
-public class SysMenuEntity extends IEntity {
+@ApiModel(value="SysMenuMbpEntity对象", description="菜单管理")
+public class SysMenuMbpEntity extends IEntity {
 
   /** UID */
   private static final long serialVersionUID = 1L;

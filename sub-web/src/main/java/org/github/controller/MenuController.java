@@ -1,6 +1,6 @@
 package org.github.controller;
 
-import org.github.mysql.web.base.entity.SysMenuEntity;
+import org.github.mysql.web.base.entity.SysMenuMbpEntity;
 import org.github.spring.restful.Returnable;
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;
 import org.github.web.module.sys.menu.service.IMenuService;
@@ -37,7 +37,7 @@ public class MenuController {
   }
 
   @PostMapping({"save", "update"})
-  public Returnable saveOrUpdate(@RequestBody SysMenuEntity bo) {
+  public Returnable saveOrUpdate(@RequestBody SysMenuMbpEntity bo) {
     return menuService.saveOrUpdate(bo);
   }
 }
