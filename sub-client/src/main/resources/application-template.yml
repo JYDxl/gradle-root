@@ -103,9 +103,9 @@ shiro-redis:
     host: ${spring.redis.host}:${spring.redis.port}
     password: ${spring.redis.password}
 
-dubbo:
-  cloud:
-    subscribed-services: web-server
-  protocols:
-    dubbo:
-      port: -1
+#dubbo:
+#  cloud:
+#    subscribed-services: web-server
+#  protocols:
+#    dubbo:
+#      port: -1
