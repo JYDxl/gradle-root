@@ -32,6 +32,7 @@ tasks.withType<BootJar> {
   archiveFileName.set("admin-boot.jar")
 }
 
+tasks.getByName<Task>("jar") {enabled = false}
 tasks.getByName<Task>("startScripts") {enabled = false}
 tasks.getByName<Task>("distTar") {enabled = false}
 tasks.getByName<Task>("distZip") {enabled = false}

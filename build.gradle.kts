@@ -72,6 +72,7 @@ subprojects {
     maven {url = uri("http://maven.aliyun.com/repository/spring");isAllowInsecureProtocol = true}
     maven {url = uri("http://maven.aliyun.com/repository/google");isAllowInsecureProtocol = true}
     mavenCentral()
+    mavenLocal()
   }
 
   tasks.withType<KotlinCompile> {

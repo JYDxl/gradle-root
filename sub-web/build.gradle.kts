@@ -37,6 +37,7 @@ tasks.withType<Test> {
   enabled = false
 }
 
+tasks.getByName<Task>("jar") {enabled = false}
 tasks.getByName<Task>("startScripts") {enabled = false}
 tasks.getByName<Task>("distTar") {enabled = false}
 tasks.getByName<Task>("distZip") {enabled = false}
