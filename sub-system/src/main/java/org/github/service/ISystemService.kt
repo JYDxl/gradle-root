@@ -11,4 +11,6 @@ interface ISystemService {
   fun jwt(): String
 
   fun jwt(login: JWTLogin): String
+
+  fun feign(): Pair<String?, String?>
 }

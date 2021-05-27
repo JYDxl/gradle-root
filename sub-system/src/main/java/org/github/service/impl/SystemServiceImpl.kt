@@ -45,4 +45,10 @@ class SystemServiceImpl: ISystemService {
     val secret = generator.generate(password, username)
     return sign(username, secret)
   }
+
+  override fun feign(): Pair<String?, String?> {
+    val token = token()
+    val jwt = if (token.isNullOrBlank()) jwt() else null
+    return Pair(token, jwt)
+  }
 }

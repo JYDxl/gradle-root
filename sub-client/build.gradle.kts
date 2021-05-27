@@ -101,6 +101,7 @@ dependencies {
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
   implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+  implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
