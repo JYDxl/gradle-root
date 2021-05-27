@@ -1,7 +1,7 @@
 pluginManagement {
-  repositories {
-    gradlePluginPortal()
-  }
+    repositories {
+        gradlePluginPortal()
+    }
 }
 
 rootProject.name = "gradle-root"
@@ -26,3 +26,8 @@ include("sub-web-service")
 include("sub-web-model")
 include("sub-web-api")
 include("sub-web")
+
+include("sub-auth-service")
+include("sub-auth-model")
+include("sub-auth-api")
+include("sub-auth")

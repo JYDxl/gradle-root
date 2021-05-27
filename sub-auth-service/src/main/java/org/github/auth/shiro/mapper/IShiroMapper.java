@@ -1,4 +1,4 @@
-package org.github.mysql.web.shiro.mapper;
+package org.github.auth.shiro.mapper;
 
 import lombok.NonNull;
 import org.apache.ibatis.annotations.Param;

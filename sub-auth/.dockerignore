@@ -1,0 +1,3 @@
+*
+!build/libs/auth-boot.jar
+!build/bootScripts/sub-auth

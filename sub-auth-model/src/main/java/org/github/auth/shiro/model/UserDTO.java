@@ -1,4 +1,4 @@
-package org.github.mysql.web.shiro.model;
+package org.github.auth.shiro.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

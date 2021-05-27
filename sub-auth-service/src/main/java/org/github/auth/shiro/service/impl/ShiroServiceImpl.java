@@ -1,12 +1,12 @@
-package org.github.mysql.web.shiro.service.impl;
+package org.github.auth.shiro.service.impl;
 
 import lombok.NonNull;
 import lombok.val;
 import org.apache.shiro.authc.AuthenticationException;
-import org.github.mysql.web.shiro.mapper.IShiroMapper;
+import org.github.auth.shiro.mapper.IShiroMapper;
 import org.github.mysql.web.shiro.model.UserDTO;
-import org.github.shiro.AuthorInfo;
 import org.github.service.IShiroService;
+import org.github.shiro.AuthorInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
