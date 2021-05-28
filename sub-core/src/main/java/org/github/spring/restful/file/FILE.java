@@ -8,11 +8,10 @@ import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import org.springframework.core.io.Resource;
 
-import static cn.hutool.core.util.URLUtil.decode;
-import static cn.hutool.core.util.URLUtil.encode;
+import static cn.hutool.core.util.URLUtil.*;
 import static com.google.common.net.MediaType.*;
-import static java.lang.String.format;
-import static java.util.Objects.requireNonNull;
+import static java.lang.String.*;
+import static java.util.Objects.*;
 
 /**
  * Top interface of file.

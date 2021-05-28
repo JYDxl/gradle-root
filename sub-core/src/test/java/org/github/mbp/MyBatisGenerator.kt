@@ -20,10 +20,10 @@ fun main() {
     val path: String = getProperty("user.dir")
     outputDir = "$path/src/main/java"
     outputDir = null
-    serviceImplName = "%sServiceImpl"
-    serviceName = "I%sService"
-    mapperName = "I%sMapper"
-    entityName = "%sEntity"
+    serviceImplName = "%sMbpServiceImpl"
+    serviceName = "I%sMbpService"
+    mapperName = "I%sMbpMapper"
+    entityName = "%sMbpEntity"
     author = "JYD_XL"
     idType = ASSIGN_ID
     isFileOverride = true

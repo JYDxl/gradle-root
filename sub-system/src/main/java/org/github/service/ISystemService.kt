@@ -4,11 +4,13 @@ import org.github.shiro.JWTLogin
 import org.github.shiro.User
 
 interface ISystemService {
-    fun login(): User
+  fun login(): User
 
-    fun token(): String?
+  fun token(): String?
 
-    fun jwt(): String
+  fun jwt(): String
 
-    fun jwt(login: JWTLogin): String
+  fun jwt(login: JWTLogin): String
+
+  fun feign(): Pair<String?, String?>
 }

@@ -3,10 +3,10 @@ package org.github.util.tree;
 import java.util.List;
 import lombok.*;
 import lombok.extern.slf4j.*;
-import org.github.mysql.web.base.entity.TabSafeQuestionDataEntity;
-import org.github.mysql.web.base.entity.TabSafeQuestionTypeEntity;
-import org.github.mysql.web.base.service.ITabSafeQuestionDataService;
-import org.github.mysql.web.base.service.ITabSafeQuestionTypeService;
+import org.github.mysql.web.base.entity.TabSafeQuestionDataMbpEntity;
+import org.github.mysql.web.base.entity.TabSafeQuestionTypeMbpEntity;
+import org.github.mysql.web.base.service.ITabSafeQuestionDataMbpService;
+import org.github.mysql.web.base.service.ITabSafeQuestionTypeMbpService;
 import org.github.web.model.vo.TreeVO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,11 +31,11 @@ import static org.github.util.tree.TreeUtil.*;
 @Slf4j
 class TreeUtilTest {
   @Autowired
-  ITabSafeQuestionTypeService safeQuestionTypeService;
+  ITabSafeQuestionTypeMbpService safeQuestionTypeService;
   @Autowired
-  ITabSafeQuestionDataService safeQuestionDataService;
+  ITabSafeQuestionDataMbpService safeQuestionDataService;
 
-  @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
+  @NonNull TreeVO applyTabSafeQuestionDataMbpEntity2TreeVO(@NonNull TabSafeQuestionDataMbpEntity data) {
     val vo = new TreeVO(firstNonNull(data.getQuestionTypeId(), ""), requireNonNull(data.getId()), requireNonNull(data.getCheckContent()));
     vo.setLeaf(true);
     return vo;
@@ -44,15 +44,15 @@ class TreeUtilTest {
   @Test
   void buildTreeTest() {
     val typeQuery = safeQuestionTypeService.lambdaQuery();
-    typeQuery.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
+    typeQuery.eq(TabSafeQuestionTypeMbpEntity::getProjectId, "-1");
     val typeList   = typeQuery.list();
-    val typeStream = typeList.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO);
+    val typeStream = typeList.stream().map(this::applyTabSafeQuestionTypeMbpEntity2TreeVO);
 
     val dataQuery = safeQuestionDataService.lambdaQuery();
-    dataQuery.eq(TabSafeQuestionDataEntity::getProjectId, "-1");
-    dataQuery.eq(TabSafeQuestionDataEntity::getIsUse, 0);
+    dataQuery.eq(TabSafeQuestionDataMbpEntity::getProjectId, "-1");
+    dataQuery.eq(TabSafeQuestionDataMbpEntity::getIsUse, 0);
     val dataList   = dataQuery.list();
-    val dataStream = dataList.stream().map(this::applyTabSafeQuestionDataEntity2TreeVO);
+    val dataStream = dataList.stream().map(this::applyTabSafeQuestionDataMbpEntity2TreeVO);
 
     val list = concat(typeStream, dataStream).collect(toList());
     reduceList(list);
@@ -65,9 +65,9 @@ class TreeUtilTest {
   @Test
   void findAllChildTest() {
     val query = safeQuestionTypeService.lambdaQuery();
-    query.eq(TabSafeQuestionTypeEntity::getProjectId, "-1");
+    query.eq(TabSafeQuestionTypeMbpEntity::getProjectId, "-1");
     val data  = query.list();
-    val list  = data.stream().map(this::applyTabSafeQuestionTypeEntity2TreeVO).collect(toList());
+    val list  = data.stream().map(this::applyTabSafeQuestionTypeMbpEntity2TreeVO).collect(toList());
     val index = list.stream().collect(toImmutableListMultimap(TreeNode::getPid, identity()));
     val root  = index.get("");
     val ids   = root.stream().map(TreeVO::getId).collect(toImmutableList());
@@ -75,7 +75,7 @@ class TreeUtilTest {
     log.info(json(child));
   }
 
-  @NonNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
+  @NonNull TreeVO applyTabSafeQuestionTypeMbpEntity2TreeVO(@NonNull TabSafeQuestionTypeMbpEntity type) {
     val vo = new TreeVO(firstNonNull(type.getParentId(), ""), requireNonNull(type.getId()), requireNonNull(type.getTypeName()));
     vo.setLeaf(false);
     return vo;
