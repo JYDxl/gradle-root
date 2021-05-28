@@ -3,6 +3,7 @@ package ${package.Entity};
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
+import javax.annotation.Nullable;
 <#if swagger2>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -93,7 +94,7 @@ public class ${entity} implements Serializable {
   <#if (logicDeleteFieldName!"") == field.name>
   @TableLogic
   </#if>
-  private ${field.propertyType} ${field.propertyName};
+  private @Nullable ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
 <#if !entityLombokModel>

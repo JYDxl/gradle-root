@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-26
+ * @since 2021-05-28
  */
 @Service
 public class SysMenuMbpServiceImpl extends ServiceImpl<ISysMenuMbpMapper, SysMenuMbpEntity> implements ISysMenuMbpService {}

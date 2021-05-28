@@ -2,6 +2,7 @@ package org.github.mysql.web.base.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import org.github.base.IEntity;
+import javax.annotation.Nullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -13,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-26
+ * @since 2021-05-28
  */
 @SuppressWarnings("all")
 @Data
@@ -28,11 +29,11 @@ public class PaymentMbpEntity extends IEntity {
   /** id */
   @ApiModelProperty(value = "id")
   @TableId(value = "id", type = IdType.AUTO)
-  private Long id;
+  private @Nullable Long id;
 
   /** serial */
   @ApiModelProperty(value = "serial")
   @TableField("serial")
-  private String serial;
+  private @Nullable String serial;
 
 }
