@@ -12,17 +12,17 @@ import org.github.shiro.AuthorInfo
 
 @FeignClient(SERVICE_PROVIDER_AUTH_SERVER)
 interface IServiceProviderAuthServer {
-    @GetMapping("/security/user/{username}")
-    fun user(
-        @RequestParam("token") token: String?,
-        @RequestHeader("Token") jwt: String?,
-        @PathVariable("username") username: String
-    ): JSONDataReturn<UserDTO>
+  @GetMapping("/security/user/{username}")
+  fun user(
+    @RequestParam("token") token: String?,
+    @RequestHeader("Token") jwt: String?,
+    @PathVariable("username") username: String
+  ): JSONDataReturn<UserDTO>
 
-    @GetMapping("/security/auth/{userId}")
-    fun auth(
-        @RequestParam("token") token: String?,
-        @RequestHeader("Token") jwt: String?,
-        @PathVariable("userId") userId: String
-    ): JSONDataReturn<List<AuthorInfo>>
+  @GetMapping("/security/auth/{userId}")
+  fun auth(
+    @RequestParam("token") token: String?,
+    @RequestHeader("Token") jwt: String?,
+    @PathVariable("userId") userId: String
+  ): JSONDataReturn<List<AuthorInfo>>
 }

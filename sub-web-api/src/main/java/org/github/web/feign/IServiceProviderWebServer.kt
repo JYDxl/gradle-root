@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(SERVICE_PROVIDER_WEB_SERVER)
 interface IServiceProviderWebServer {
-    @GetMapping("/rest/json/basic")
-    fun basic(
-        @RequestParam("token") token: String?,
-        @RequestHeader("Token") jwt: String?,
-    ): JSONReturn
+  @GetMapping("/rest/json/basic")
+  fun basic(
+    @RequestParam("token") token: String?,
+    @RequestHeader("Token") jwt: String?,
+  ): JSONReturn
 }

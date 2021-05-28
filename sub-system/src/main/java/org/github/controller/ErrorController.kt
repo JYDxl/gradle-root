@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
 class ErrorController {
-    private val log = ErrorController::class.log
+  private val log = ErrorController::class.log
 
-    @ExceptionHandler(Throwable::class)
-    fun handleThrowable(e: Throwable): JSONReturn = error().apply { if (hasChinese(e.localizedMessage)) withRetMsg(e.localizedMessage) }.also { log.error(e) {} }
+  @ExceptionHandler(Throwable::class)
+  fun handleThrowable(e: Throwable): JSONReturn = error().apply {if (hasChinese(e.localizedMessage)) withRetMsg(e.localizedMessage)}.also {log.error(e) {}}
 
-    @ExceptionHandler(ParamsErrorException::class)
-    fun handleParamsErrorException(e: Exception): JSONReturn = warn().withRetMsg(e.localizedMessage).also { log.error(e) {} }
+  @ExceptionHandler(ParamsErrorException::class)
+  fun handleParamsErrorException(e: Exception): JSONReturn = warn().withRetMsg(e.localizedMessage).also {log.error(e) {}}
 
-    @ExceptionHandler(ShiroException::class)
-    fun handleShiroException(e: ShiroException): JSONReturn = warn().apply { withRetMsg(if (hasChinese(e.localizedMessage)) e.localizedMessage else "权限不足") }.also { log.error(e) {} }
+  @ExceptionHandler(ShiroException::class)
+  fun handleShiroException(e: ShiroException): JSONReturn = warn().apply {withRetMsg(if (hasChinese(e.localizedMessage)) e.localizedMessage else "权限不足")}.also {log.error(e) {}}
 }

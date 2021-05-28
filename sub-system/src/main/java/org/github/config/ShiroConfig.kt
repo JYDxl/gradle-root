@@ -92,7 +92,7 @@ class ShiroConfig {
     filters = object: ForwardingMap<String, Filter>() {
       override fun delegate(): Map<String, Filter> = of(
         "logout", CustomLogoutFilter(),
-        "authc", CustomCommonAuthenticationFilter(true),
+        "authc", CustomJWTAuthenticationFilter(true),
         "perms", CustomPermissionsAuthorizationFilter(),
         "roles", CustomRolesAuthorizationFilter(),
         //"user", CustomUserFilter()
