@@ -1,7 +1,7 @@
 import ch.qos.logback.classic.filter.ThresholdFilter
 
 def out = "%d %5level --- [%25.25thread] %-30.30logger{30} : %msg%n"
-def dir = "logs/sub-netty"
+def dir = "logs/sub-gateway"
 
 appender("console", ConsoleAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
@@ -30,6 +30,5 @@ appender("problem", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-logger("org.springframework.cloud", DEBUG)
 logger("org.github", TRACE)
 root(INFO, ["console", "records", "problem"])
