@@ -1,17 +1,10 @@
 package org.github.config;
 
 import org.apache.shiro.spring.config.web.autoconfigure.ShiroWebAutoConfiguration;
-import org.crazycake.shiro.CacheManagerProperties;
-import org.crazycake.shiro.IRedisManager;
-import org.crazycake.shiro.RedisCacheManager;
-import org.crazycake.shiro.RedisClusterManager;
-import org.crazycake.shiro.RedisManager;
-import org.crazycake.shiro.RedisManagerProperties;
-import org.crazycake.shiro.RedisSentinelManager;
-import org.crazycake.shiro.RedisSessionDAO;
-import org.crazycake.shiro.RedisSessionDAOProperties;
+import org.crazycake.shiro.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,6 +17,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 @PropertySource("classpath:shiro-redis.properties")
 @EnableConfigurationProperties({RedisManagerProperties.class, CacheManagerProperties.class, RedisSessionDAOProperties.class})
 @ConditionalOnProperty(name = "shiro-redis.enabled", matchIfMissing = true)
+@EnableAutoConfiguration(exclude = ShiroRedisAutoConfiguration.class)
 @AutoConfigureBefore({ShiroWebAutoConfiguration.class})
 public class ShiroRedisConfig {
   @Autowired
