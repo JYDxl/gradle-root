@@ -1,6 +1,7 @@
 package org.github.service
 
 import org.github.shiro.JWTLogin
+import org.github.shiro.Token
 import org.github.shiro.User
 
 interface ISystemService {
@@ -12,5 +13,5 @@ interface ISystemService {
 
   fun jwt(login: JWTLogin): String
 
-  fun feign(): Pair<String?, String?>
+  fun feign(): Token
 }

@@ -14,4 +14,6 @@ dependencies {
     exclude(group = "org.apache.maven.plugins")
     exclude(group = "redis.clients")
   }
+
+  compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 }

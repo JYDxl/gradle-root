@@ -5,10 +5,8 @@ import org.apache.shiro.session.Session
 import org.apache.shiro.subject.Subject
 import org.github.exception.ParamsErrorException
 import org.github.service.ISystemService
-import org.github.shiro.JWTLogin
+import org.github.shiro.*
 import org.github.shiro.JWTUtil.sign
-import org.github.shiro.PasswordGenerator
-import org.github.shiro.User
 import org.springframework.beans.BeanUtils.copyProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -43,12 +41,14 @@ class SystemServiceImpl: ISystemService {
     val username = login.username ?: throw ParamsErrorException("用户名不能为空")
     val password = login.password ?: throw ParamsErrorException("密码不能为空")
     val secret = generator.generate(password, username)
-    return sign(username, secret)
+    val jwt = sign(username, secret)
+    getSubject().login(JWTToken(username, jwt))
+    return jwt
   }
 
-  override fun feign(): Pair<String?, String?> {
+  override fun feign(): Token {
     val token = token()
     val jwt = if (token.isNullOrBlank()) jwt() else null
-    return Pair(token, jwt)
+    return Token(token, jwt)
   }
 }
