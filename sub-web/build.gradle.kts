@@ -70,8 +70,6 @@ dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
 
-  implementation(project(":sub-auth-api"))
-
   implementation(project(":sub-web-service"))
 
   implementation("io.netty:netty-all:$netty")
@@ -93,7 +91,6 @@ dependencies {
   implementation("io.springfox:springfox-boot-starter:$swagger")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
-  implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
   implementation("org.springframework.boot:spring-boot-starter-cache")
   implementation("org.springframework.boot:spring-boot-starter-aop")

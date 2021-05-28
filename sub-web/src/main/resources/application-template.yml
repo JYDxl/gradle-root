@@ -61,7 +61,7 @@ spring:
     mongodb:
       uri: mongodb://root:XLrootJYD713@www.jydxl.link:27017/mongo?authSource=admin
   thymeleaf:
-    prefix: classpath:/static/
+    check-template-location: false
   zipkin:
     sender:
       type: rabbit
