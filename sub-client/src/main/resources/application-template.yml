@@ -103,12 +103,8 @@ shiro-redis:
     password: ${spring.redis.password}
 
 #dubbo:
-#  scan:
-#    base-packages: org.github.web.dubbo.impl
-#  protocol:
-#    name: dubbo
-#    port: -1
-#  registry:
-#    address: spring-cloud://localhost
 #  cloud:
-#    subscribed-services:
+#    subscribed-services: web-server
+#  protocols:
+#    dubbo:
+#      port: -1

@@ -13,3 +13,6 @@ spring:
         group: server
         shared-configs:
           - data-id: j2cache-${spring.profiles.active}.properties
+
+server:
+  port: 8081
