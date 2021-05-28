@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.lang.Long.valueOf;
 import static org.github.mysql.web.base.enums.Deleted.deleted;
 import static org.github.mysql.web.base.enums.Enable.disabled;
 
@@ -24,7 +25,7 @@ public class AuthShiroServiceImpl implements IShiroService {
 
   @Override
   public @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull String userId) {
-    return shiroMapper.queryAuthorInfo(Long.valueOf(userId));
+    return shiroMapper.queryAuthorInfo(valueOf(userId));
   }
 
   @Override

@@ -1,23 +1,28 @@
-package org.github.auth.feign;
+package org.github.auth.feign
 
-import org.github.auth.shiro.model.UserDTO;
-import org.github.shiro.AuthorInfo;
-import org.github.spring.restful.json.JSONDataReturn;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.cloud.openfeign.FeignClient
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RequestHeader
+import org.springframework.web.bind.annotation.PathVariable
+import org.github.spring.restful.json.JSONDataReturn
+import org.github.auth.shiro.model.UserDTO
+import org.github.constant.Constants.SERVICE_PROVIDER_AUTH_SERVER
+import org.github.shiro.AuthorInfo
 
-import java.util.List;
-
-import static org.github.constant.Constants.SERVICE_PROVIDER_AUTH_SERVER;
-
-@FeignClient(value = SERVICE_PROVIDER_AUTH_SERVER)
-public interface IServiceProviderAuthServer {
+@FeignClient(SERVICE_PROVIDER_AUTH_SERVER)
+interface IServiceProviderAuthServer {
     @GetMapping("/security/user/{username}")
-    JSONDataReturn<UserDTO> user(@RequestParam("token") String token, @RequestHeader("Token") String jwt, @PathVariable("username") String username);
+    fun user(
+        @RequestParam("token") token: String?,
+        @RequestHeader("Token") jwt: String?,
+        @PathVariable("username") username: String
+    ): JSONDataReturn<UserDTO>
 
     @GetMapping("/security/auth/{userId}")
-    JSONDataReturn<List<AuthorInfo>> auth(@RequestParam("token") String token, @RequestHeader("Token") String jwt, @PathVariable("userId") String userId);
+    fun auth(
+        @RequestParam("token") token: String?,
+        @RequestHeader("Token") jwt: String?,
+        @PathVariable("userId") userId: String
+    ): JSONDataReturn<List<AuthorInfo>>
 }

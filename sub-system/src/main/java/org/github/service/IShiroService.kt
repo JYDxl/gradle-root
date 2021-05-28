@@ -1,13 +1,10 @@
-package org.github.service;
+package org.github.service
 
-import lombok.NonNull;
-import org.github.shiro.AuthorInfo;
-import org.github.shiro.User;
+import org.github.shiro.AuthorInfo
+import org.github.shiro.User
 
-import java.util.List;
+interface IShiroService {
+    fun queryAuthorInfo(userId: String): List<AuthorInfo>
 
-public interface IShiroService {
-    @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull String userId);
-
-    @NonNull User queryUser(@NonNull String username);
+    fun queryUser(username: String): User
 }

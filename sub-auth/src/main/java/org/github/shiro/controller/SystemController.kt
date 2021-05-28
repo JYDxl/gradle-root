@@ -7,11 +7,9 @@ import org.github.shiro.JWTLogin
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
-@RequestMapping("/")
-@Controller
+@RestController
 class SystemController {
     private val log = SystemController::class.log
 
@@ -21,21 +19,39 @@ class SystemController {
     @Autowired
     private lateinit var shiroService: IShiroService
 
-    @GetMapping("security/user/{username}")
-    fun user(@PathVariable username: String): Returnable = JSONDataReturn.of(shiroService.queryUser(username))
+    @GetMapping("/security/user/{username}")
+    fun user(@PathVariable username: String): Returnable {
+        val user = shiroService.queryUser(username)
+        return JSONDataReturn.of(user)
+    }
 
-    @GetMapping("security/auth/{userId}")
-    fun auth(@PathVariable userId: String): Returnable = JSONDataReturn.of(shiroService.queryAuthorInfo(userId))
+    @GetMapping("/security/auth/{userId}")
+    fun auth(@PathVariable userId: String): Returnable {
+        val auth = shiroService.queryAuthorInfo(userId)
+        return JSONDataReturn.of(auth)
+    }
 
-    @PostMapping("login")
-    fun login(): Returnable = JSONDataReturn.of(systemService.login())
+    @PostMapping("/login")
+    fun login(): Returnable {
+        val user = systemService.login()
+        return JSONDataReturn.of(user)
+    }
 
-    @RequestMapping("token")
-    fun token(): Returnable = JSONDataReturn.of(systemService.token())
+    @RequestMapping("/token")
+    fun token(): Returnable {
+        val token = systemService.token()
+        return JSONDataReturn.of(token)
+    }
 
-    @RequestMapping("jwt")
-    fun jwt(): Returnable = JSONDataReturn.of(systemService.jwt())
+    @RequestMapping("/jwt")
+    fun jwt(): Returnable {
+        val jwt = systemService.jwt()
+        return JSONDataReturn.of(jwt)
+    }
 
-    @PostMapping("public/jwt")
-    fun jwt(@RequestBody login: JWTLogin): Returnable = JSONDataReturn.of(systemService.jwt(login))
+    @PostMapping("/public/jwt")
+    fun jwt(@RequestBody login: JWTLogin): Returnable {
+        val jwt = systemService.jwt(login)
+        return JSONDataReturn.of(jwt)
+    }
 }
