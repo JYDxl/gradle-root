@@ -2,6 +2,8 @@ val shiroredis: String by System.getProperties()
 val shiro: String by System.getProperties()
 
 dependencies {
+  api(project(":sub-auth-api"))
+
   compileOnly(project(":sub-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")

@@ -6,11 +6,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.github.service.IShiroService;
 
 import java.util.List;
 import java.util.Objects;
 
-import org.github.service.IShiroService;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static java.util.Arrays.stream;
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;

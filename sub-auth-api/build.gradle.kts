@@ -1,7 +1,7 @@
 val shiro: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-web-model"))
+  api(project(":sub-auth-model"))
 
   compileOnly(project(":sub-core"))
 

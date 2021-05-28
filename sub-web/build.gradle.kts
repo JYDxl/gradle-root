@@ -62,6 +62,8 @@ dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
 
+  implementation(project(":sub-auth-api"))
+
   implementation(project(":sub-web-service"))
 
   implementation("io.netty:netty-all:$netty")

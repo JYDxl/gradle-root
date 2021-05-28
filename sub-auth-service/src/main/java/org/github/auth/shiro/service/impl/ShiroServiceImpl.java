@@ -4,10 +4,11 @@ import lombok.NonNull;
 import lombok.val;
 import org.apache.shiro.authc.AuthenticationException;
 import org.github.auth.shiro.mapper.IShiroMapper;
-import org.github.mysql.web.shiro.model.UserDTO;
-import org.github.service.IShiroService;
+import org.github.auth.shiro.model.UserDTO;
 import org.github.shiro.AuthorInfo;
+import org.github.service.IShiroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import static org.github.mysql.web.base.enums.Deleted.deleted;
 import static org.github.mysql.web.base.enums.Enable.disabled;
 
+@Primary
 @Service
 public class ShiroServiceImpl implements IShiroService {
   @Autowired
