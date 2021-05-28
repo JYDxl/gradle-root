@@ -18,7 +18,7 @@ import static org.github.mysql.web.base.enums.Enable.disabled;
 
 @Primary
 @Service
-public class ShiroServiceImpl implements IShiroService {
+public class AuthShiroServiceImpl implements IShiroService {
   @Autowired
   private IShiroMapper shiroMapper;
 

@@ -6,7 +6,6 @@ import org.github.service.IShiroService
 import org.github.shiro.JWTLogin
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn
-import org.github.spring.restful.view.VIEW
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
@@ -27,9 +26,6 @@ class SystemController {
 
     @GetMapping("security/auth/{userId}")
     fun auth(@PathVariable userId: String): Returnable = JSONDataReturn.of(shiroService.queryAuthorInfo(userId))
-
-    @GetMapping("login")
-    fun auth(): Returnable = VIEW { "login" }
 
     @PostMapping("login")
     fun login(): Returnable = JSONDataReturn.of(systemService.login())

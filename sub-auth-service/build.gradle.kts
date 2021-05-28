@@ -4,7 +4,6 @@ dependencies {
   compileOnly(project(":sub-system"))
   compileOnly(project(":sub-core"))
 
-  api(project(":sub-auth-api"))
   api(project(":sub-auth-model"))
   api(project(":sub-mysql-web-service"))
 
