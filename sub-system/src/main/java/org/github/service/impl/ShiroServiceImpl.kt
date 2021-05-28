@@ -1,6 +1,7 @@
 package org.github.service.impl
 
 import org.github.auth.feign.IServiceProviderAuthServer
+import org.github.exception.RemoteErrorException
 import org.github.service.IShiroService
 import org.github.service.ISystemService
 import org.github.shiro.AuthorInfo
@@ -18,13 +19,15 @@ class ShiroServiceImpl: IShiroService {
 
   override fun queryAuthorInfo(userId: String): List<AuthorInfo> {
     val (token, jwt) = systemService.feign()
-    //TODO 异常处理等
-    return requireNotNull(authServer.auth(token, jwt, userId).data)
+    val res = authServer.auth(token, jwt, userId)
+    if (res.failure()) throw RemoteErrorException(res)
+    return requireNotNull(res.data)
   }
 
   override fun queryUser(username: String): User {
     val (token, jwt) = systemService.feign()
-    //TODO 异常处理等
-    return requireNotNull(authServer.user(token, jwt, username).data)
+    val res = authServer.user(token, jwt, username)
+    if (res.failure()) throw RemoteErrorException(res)
+    return requireNotNull(res.data)
   }
 }

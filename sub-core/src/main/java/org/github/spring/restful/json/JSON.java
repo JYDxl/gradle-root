@@ -46,4 +46,10 @@ public interface JSON extends Returnable {
   static @NonNull JSON nil() {
     return () -> null;
   }
+
+  int CODE_OK = 0;
+
+  int CODE_PARAMS_ERROR = -1;
+
+  int CODE_SYSTEM_ERROR = -2;
 }

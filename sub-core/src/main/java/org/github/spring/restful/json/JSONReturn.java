@@ -17,7 +17,7 @@ import static org.github.ops.SpringsKt.*;
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态码. */
-  private          int    retCode = 0;
+  private          int    retCode = CODE_OK;
   /** 返回的信息. */
   private @NonNull String retMsg  = "OK";
 
@@ -36,6 +36,14 @@ public class JSONReturn implements JSON {
     return get();
   }
 
+  public boolean failure() {
+    return !success();
+  }
+
+  public boolean success() {
+    return retCode == CODE_OK;
+  }
+
   /** WITH retCode. */
   public @NonNull JSONReturn withRetCode(int retCode) {
     setRetCode(retCode);
@@ -50,7 +58,7 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   public static @NonNull JSONReturn error() {
-    return of(-2, "系统错误");
+    return of(CODE_SYSTEM_ERROR, "系统错误");
   }
 
   /** Generator. */
@@ -60,6 +68,6 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   public static @NonNull JSONReturn warn() {
-    return of(-1, "参数错误");
+    return of(CODE_PARAMS_ERROR, "参数错误");
   }
 }
