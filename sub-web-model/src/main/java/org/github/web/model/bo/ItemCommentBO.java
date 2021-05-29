@@ -2,14 +2,15 @@ package org.github.web.model.bo;
 
 import lombok.*;
 import org.github.base.PageParam;
+import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.*;
 import static org.apache.commons.lang3.StringUtils.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ItemCommentBO extends PageParam {
-  private String  itemId;
-  private Integer level;
+  private @Nullable String  itemId;
+  private @Nullable Integer level;
 
   @Override
   public @NonNull ItemCommentBO valid() {

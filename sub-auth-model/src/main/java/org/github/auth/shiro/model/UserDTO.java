@@ -9,6 +9,7 @@ import org.github.mysql.web.base.entity.SysUserMbpEntity;
 import org.github.shiro.User;
 
 import javax.annotation.Nullable;
+import static java.util.Objects.requireNonNull;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -18,13 +19,13 @@ public class UserDTO extends SysUserMbpEntity implements User {
 
   @Override
   public @NonNull String getUsername() {
-    return super.getUsername();
+    return requireNonNull(super.getUsername());
   }
 
   @JsonIgnore
   @Override
   public @NonNull String getPassword() {
-    return super.getPassword();
+    return requireNonNull(super.getPassword());
   }
 
   @JsonIgnore
@@ -35,6 +36,6 @@ public class UserDTO extends SysUserMbpEntity implements User {
 
   @Override
   public @NonNull Long getUserId() {
-    return super.getUserId();
+    return requireNonNull(super.getUserId());
   }
 }
