@@ -17,10 +17,12 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="PaymentEntity对象", description="支付表")
 open class PaymentEntity : IEntity() {
 
+    /** id */
     @ApiModelProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)
     open var id: Long? = null
 
+    /** serial */
     @ApiModelProperty(value = "serial")
     @TableField("serial")
     open var serial: String? = null

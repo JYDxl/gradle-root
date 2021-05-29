@@ -38,10 +38,9 @@ open class ${entity} : Serializable {
 </#if>
 
 <#if field.comment!?length gt 0>
+    /** ${field.comment} */
 <#if swagger2>
     @ApiModelProperty(value = "${field.comment}")
-<#else>
-    /** ${field.comment} */
 </#if>
 </#if>
 <#if field.keyFlag>

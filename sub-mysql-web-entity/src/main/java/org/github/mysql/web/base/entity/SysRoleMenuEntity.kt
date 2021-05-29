@@ -20,10 +20,12 @@ open class SysRoleMenuEntity : IEntity() {
     @TableId(value = "id", type = IdType.AUTO)
     open var id: Long? = null
 
+    /** 角色ID */
     @ApiModelProperty(value = "角色ID")
     @TableField("role_id")
     open var roleId: Long? = null
 
+    /** 菜单ID */
     @ApiModelProperty(value = "菜单ID")
     @TableField("menu_id")
     open var menuId: Long? = null

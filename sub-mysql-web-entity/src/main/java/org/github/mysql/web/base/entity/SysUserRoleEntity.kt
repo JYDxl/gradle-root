@@ -20,10 +20,12 @@ open class SysUserRoleEntity : IEntity() {
     @TableId(value = "id", type = IdType.AUTO)
     open var id: Long? = null
 
+    /** 用户ID */
     @ApiModelProperty(value = "用户ID")
     @TableField("user_id")
     open var userId: Long? = null
 
+    /** 角色ID */
     @ApiModelProperty(value = "角色ID")
     @TableField("role_id")
     open var roleId: Long? = null
