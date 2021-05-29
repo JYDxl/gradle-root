@@ -9,12 +9,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * <p>
  * 角色与菜单对应关系 服务实现类
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @Service
 open class SysRoleMenuServiceImpl : ServiceImpl<ISysRoleMenuMapper, SysRoleMenuEntity>(), ISysRoleMenuService

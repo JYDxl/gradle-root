@@ -7,13 +7,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 系统用户
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("sys_user")
 @ApiModel(value="SysUserEntity对象", description="系统用户")
@@ -72,4 +71,5 @@ open class SysUserEntity : IEntity() {
         ", deleted=" + deleted +
         "}"
     }
+
 }

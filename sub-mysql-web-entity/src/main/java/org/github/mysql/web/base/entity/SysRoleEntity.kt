@@ -7,13 +7,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 角色
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("sys_role")
 @ApiModel(value="SysRoleEntity对象", description="角色")
@@ -52,4 +51,5 @@ open class SysRoleEntity : IEntity() {
         ", createTime=" + createTime +
         "}"
     }
+
 }

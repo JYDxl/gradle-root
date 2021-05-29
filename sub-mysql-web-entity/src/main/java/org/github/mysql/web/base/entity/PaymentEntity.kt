@@ -6,13 +6,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 支付表
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("payment")
 @ApiModel(value="PaymentEntity对象", description="支付表")
@@ -32,4 +31,5 @@ open class PaymentEntity : IEntity() {
         ", serial=" + serial +
         "}"
     }
+
 }

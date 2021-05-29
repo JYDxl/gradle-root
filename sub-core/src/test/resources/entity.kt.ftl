@@ -10,11 +10,10 @@ import ${pkg}
 <#if swagger2>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 </#if>
 /**
- * <p>
  * ${table.comment}
- * </p>
  *
  * @author ${author}
  * @since ${date}
@@ -112,4 +111,5 @@ open class ${entity} : Serializable {
 </#list>
         "}"
     }
+
 }

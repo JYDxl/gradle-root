@@ -6,11 +6,9 @@ import org.github.mysql.web.base.entity.PaymentEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * <p>
  * 支付表 服务类
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 interface IPaymentService : IService<PaymentEntity>

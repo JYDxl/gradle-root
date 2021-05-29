@@ -7,13 +7,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 安全问题类别
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("tab_safe_question_type")
 @ApiModel(value="TabSafeQuestionTypeEntity对象", description="安全问题类别")
@@ -73,4 +72,5 @@ open class TabSafeQuestionTypeEntity : IEntity() {
         ", createTime=" + createTime +
         "}"
     }
+
 }

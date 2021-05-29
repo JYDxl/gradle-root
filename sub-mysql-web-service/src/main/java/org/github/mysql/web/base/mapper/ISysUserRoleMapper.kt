@@ -7,12 +7,10 @@ import org.github.base.IMapper;
 import org.github.mybatis.MyBatisMapper;
 
 /**
- * <p>
  * 用户与角色对应关系 Mapper 接口
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @MyBatisMapper
 interface ISysUserRoleMapper : IMapper<SysUserRoleEntity>

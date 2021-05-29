@@ -6,13 +6,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 菜单管理
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("sys_menu")
 @ApiModel(value="SysMenuEntity对象", description="菜单管理")
@@ -66,4 +65,5 @@ open class SysMenuEntity : IEntity() {
         ", enabled=" + enabled +
         "}"
     }
+
 }

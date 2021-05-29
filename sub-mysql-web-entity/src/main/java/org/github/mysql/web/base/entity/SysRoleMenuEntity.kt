@@ -6,13 +6,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 角色与菜单对应关系
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("sys_role_menu")
 @ApiModel(value="SysRoleMenuEntity对象", description="角色与菜单对应关系")
@@ -36,4 +35,5 @@ open class SysRoleMenuEntity : IEntity() {
         ", menuId=" + menuId +
         "}"
     }
+
 }

@@ -6,13 +6,12 @@ import com.baomidou.mybatisplus.annotation.*
 import org.github.base.IEntity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
 /**
- * <p>
  * 用户与角色对应关系
- * </p>
  *
  * @author JYD_XL
- * @since 2021-05-29
+ * @since 2021-05-30
  */
 @TableName("sys_user_role")
 @ApiModel(value="SysUserRoleEntity对象", description="用户与角色对应关系")
@@ -36,4 +35,5 @@ open class SysUserRoleEntity : IEntity() {
         ", roleId=" + roleId +
         "}"
     }
+
 }

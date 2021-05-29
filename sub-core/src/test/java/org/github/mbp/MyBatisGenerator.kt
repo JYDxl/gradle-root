@@ -57,7 +57,8 @@ fun main() {
       ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/entity",
       MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/mapper",
       SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/service",
-      SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/service/impl"
+      SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/service/impl",
+//      XML_PATH to "$path/$subMapperName/src/main/resources/mapper"
     )
 
     generator.packageInfo = this
@@ -80,7 +81,7 @@ fun main() {
 
   TemplateConfig().apply {
     controller = null
-    xml = null
+//    xml = "mapper.xml"
     service = "service.java"
     serviceImpl = "serviceImpl.java"
     mapper = "mapper.java"

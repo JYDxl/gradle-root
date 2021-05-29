@@ -9,9 +9,7 @@ import ${superMapperClassPackage};
 import org.github.mybatis.MyBatisMapper;
 
 /**
- * <p>
  * ${table.comment!} Mapper 接口
- * </p>
  *
  * @author ${author}
  * @since ${date}
