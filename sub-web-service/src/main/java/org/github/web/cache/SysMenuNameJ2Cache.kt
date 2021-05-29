@@ -1,48 +1,32 @@
-package org.github.web.cache;
+package org.github.web.cache
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import lombok.*;
-import org.github.cache.CacheNameSupplier;
-import org.github.mysql.web.base.entity.SysMenuEntity;
-import org.github.mysql.web.base.service.ISysMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import static com.google.common.collect.ImmutableList.*;
-import static com.google.common.collect.ImmutableMap.*;
-import static java.util.Objects.*;
-import static java.util.function.Function.identity;
-import static org.github.mysql.web.base.enums.Enable.*;
-import static org.github.web.common.CacheName.*;
+import com.baomidou.mybatisplus.extension.kotlin.KtQueryChainWrapper
+import org.github.cache.CacheNameSupplier
+import org.github.mysql.web.base.entity.SysMenuEntity
+import org.github.mysql.web.base.enums.Enable.enabled
+import org.github.mysql.web.base.service.ISysMenuService
+import org.github.web.common.CacheName.sysMenuName
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
+import java.util.function.Function
+import java.util.function.Predicate
 
 @Component
-public class SysMenuNameJ2Cache extends CustomJ2Cache<SysMenuEntity,String> {
+class SysMenuNameJ2Cache: CustomJ2Cache<SysMenuEntity?, String?>() {
   @Autowired
-  private ISysMenuService sysMenuService;
+  private lateinit var sysMenuService: ISysMenuService
 
-  @Override
-  public @NonNull CacheNameSupplier getName() {
-    return sysMenuName;
-  }
+  override val name: CacheNameSupplier get() = sysMenuName
 
-  @Override
-  public @NonNull Function<SysMenuEntity,String> getMapper() {
-    return SysMenuEntity::getName;
-  }
+  override val mapper: Function<SysMenuEntity?, String?> get() = Function {it?.name}
 
-  @Override
-  public @NonNull Predicate<SysMenuEntity> getFilter() {
-    return v -> v != null && enabled.getCode().equals(v.getEnabled());
-  }
+  override val filter: Predicate<SysMenuEntity?> get() = Predicate {it != null && enabled.code == it.enabled}
 
-  @Override
-  public @NonNull Map<String,SysMenuEntity> load(@NonNull Collection<String> keys) {
-    val query = sysMenuService.lambdaQuery();
-    query.in(!keys.isEmpty(), SysMenuEntity::getMenuId, keys.stream().map(Long::parseLong).collect(toImmutableList()));
-    query.select(SysMenuEntity::getMenuId, SysMenuEntity::getName, SysMenuEntity::getEnabled);
-    val list = query.list();
-    return list.stream().collect(toImmutableMap(v -> requireNonNull(v.getMenuId()).toString(), identity()));
+  override fun load(keys: Collection<String>): Map<String, SysMenuEntity?> {
+    val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
+    query.`in`(keys.isNotEmpty(), SysMenuEntity::menuId, keys.map {it.toLong()})
+    query.select(SysMenuEntity::menuId, SysMenuEntity::name, SysMenuEntity::enabled)
+    val list: MutableList<SysMenuEntity> = query.list()
+    return list.associateBy {it.menuId.toString()}
   }
 }

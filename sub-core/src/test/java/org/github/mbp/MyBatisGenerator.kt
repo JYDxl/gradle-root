@@ -28,7 +28,7 @@ fun main() {
     idType = ASSIGN_ID
     isFileOverride = true
     isSwagger2 = true
-//    isKotlin = true
+    isKotlin = true
     isOpen = false
 
     generator.globalConfig = this
