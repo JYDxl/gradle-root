@@ -1,4 +1,4 @@
-package org.github.ops
+package org.github.spring.ops
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
@@ -7,7 +7,7 @@ import org.springframework.web.context.request.RequestContextHolder.getRequestAt
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
 
-fun Any?.writeValue(output: OutputStream, mapper: ObjectMapper? = null) = (mapper ?: objectMapper).writeValue(output, this)
+fun Any?.writeValue(output: OutputStream) = objectMapper.writeValue(output, this)
 
 fun Any?.json(): String = objectMapper.writeValueAsString(this)
 

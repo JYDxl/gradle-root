@@ -5,7 +5,7 @@ import feign.RequestTemplate;
 import lombok.val;
 
 import static java.util.Objects.requireNonNull;
-import static org.github.ops.SpringsKt.getReq;
+import static org.github.spring.ops.SpringsKt.getReq;
 
 public class FeignRequestConfig implements RequestInterceptor {
   @Override

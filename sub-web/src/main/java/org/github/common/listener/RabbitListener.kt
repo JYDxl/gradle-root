@@ -2,7 +2,7 @@
 //
 //import org.github.ops.info
 //import org.github.ops.log
-//import org.github.ops.json
+//import org.github.spring.ops.json
 //import org.springframework.amqp.rabbit.annotation.RabbitListener
 //import org.springframework.stereotype.Component
 //

@@ -23,7 +23,7 @@ import static java.util.Objects.*;
 import static java.util.function.Function.*;
 import static java.util.stream.Collectors.*;
 import static java.util.stream.Stream.*;
-import static org.github.ops.SpringsKt.*;
+import static org.github.spring.ops.SpringsKt.*;
 import static org.github.util.tree.TreeUtil.*;
 
 @ExtendWith(SpringExtension.class)

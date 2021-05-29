@@ -2,7 +2,7 @@ package org.github.controller
 
 import org.apache.shiro.authz.annotation.Logical.OR
 import org.apache.shiro.authz.annotation.RequiresRoles
-import org.github.ops.appCtx
+import org.github.spring.ops.appCtx
 import org.github.ops.info
 import org.github.ops.log
 import org.github.spring.restful.Returnable
