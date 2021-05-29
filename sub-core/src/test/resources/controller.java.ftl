@@ -1,3 +1,7 @@
+<#if kotlin>
+@file:Suppress("RedundantSemicolon")
+
+</#if>
 package ${package.Controller};
 
 

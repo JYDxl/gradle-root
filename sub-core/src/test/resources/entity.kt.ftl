@@ -1,3 +1,7 @@
+<#if kotlin>
+@file:Suppress("RedundantSemicolon")
+
+</#if>
 package ${package.Entity}
 
 <#list table.importPackages as pkg>
@@ -22,13 +26,12 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="${entity}对象", description="${table.comment!}")
 </#if>
 <#if superEntityClass??>
-class ${entity} : ${superEntityClass}<#if activeRecord><${entity}></#if> {
+open class ${entity} : ${superEntityClass}<#if activeRecord><${entity}></#if>() {
 <#elseif activeRecord>
-class ${entity} : Model<${entity}>() {
+open class ${entity} : Model<${entity}>() {
 <#else>
-class ${entity} : Serializable {
+open class ${entity} : Serializable {
 </#if>
-
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
 <#if field.keyFlag>
@@ -37,11 +40,9 @@ class ${entity} : Serializable {
 
 <#if field.comment!?length gt 0>
 <#if swagger2>
-        @ApiModelProperty(value = "${field.comment}")
+    @ApiModelProperty(value = "${field.comment}")
 <#else>
-    /**
-     * ${field.comment}
-     */
+    /** ${field.comment} */
 </#if>
 </#if>
 <#if field.keyFlag>
@@ -73,13 +74,12 @@ class ${entity} : Serializable {
     @TableLogic
 </#if>
     <#if field.propertyType == "Integer">
-    var ${field.propertyName}: Int? = null
+    open var ${field.propertyName}: Int? = null
     <#else>
-    var ${field.propertyName}: ${field.propertyType}? = null
+    open var ${field.propertyName}: ${field.propertyType}? = null
     </#if>
 </#list>
 <#-- ----------  END 字段循环遍历  ---------->
-
 
 <#if entityColumnConstant>
     companion object {

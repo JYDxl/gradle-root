@@ -1,5 +1,5 @@
 FROM jre-alpine
 RUN apk add tomcat-native && rm -rf /var/cache/apk/*
-COPY build/libs/web-boot.jar /lib/web-boot.jar
-COPY build/bootScripts/sub-web /script/runner
+COPY build/libs/auth-boot.jar /lib/auth-boot.jar
+COPY build/bootScripts/sub-auth /script/runner
 CMD ./script/runner

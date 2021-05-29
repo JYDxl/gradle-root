@@ -8,7 +8,7 @@ plugins {
 application {
   mainClass.set("org.github.ClientKt")
   applicationDefaultJvmArgs = listOf(
-    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+//    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
 
     "-ea",
 

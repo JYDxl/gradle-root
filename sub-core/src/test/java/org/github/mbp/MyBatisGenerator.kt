@@ -20,14 +20,15 @@ fun main() {
     val path: String = getProperty("user.dir")
     outputDir = "$path/src/main/java"
     outputDir = null
-    serviceImplName = "%sMbpServiceImpl"
-    serviceName = "I%sMbpService"
-    mapperName = "I%sMbpMapper"
-    entityName = "%sMbpEntity"
+    serviceImplName = "%sServiceImpl"
+    serviceName = "I%sService"
+    mapperName = "I%sMapper"
+    entityName = "%sEntity"
     author = "JYD_XL"
     idType = ASSIGN_ID
     isFileOverride = true
     isSwagger2 = true
+//    isKotlin = true
     isOpen = false
 
     generator.globalConfig = this
@@ -83,6 +84,7 @@ fun main() {
     service = "service.java"
     serviceImpl = "serviceImpl.java"
     mapper = "mapper.java"
+    entityKt = "entity.kt"
     setEntity("entity.java")
 
     generator.template = this
