@@ -12,7 +12,7 @@ application {
 
     "-ea",
 
-    "-Dspring.profiles.active=prod",
+    "-Dspring.profiles.active=dev",
     "-Dspring.cloud.nacos.discovery.server-addr=ubuntu:8848",
 
     "-Djava.library.path=/usr/lib",
