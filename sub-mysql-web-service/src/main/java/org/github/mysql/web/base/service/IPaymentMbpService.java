@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-28
+ * @since 2021-05-29
  */
 public interface IPaymentMbpService extends IService<PaymentMbpEntity> {}

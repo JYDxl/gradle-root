@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-28
+ * @since 2021-05-29
  */
 @SuppressWarnings("all")
 @Data
@@ -23,17 +23,17 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value="PaymentMbpEntity对象", description="支付表")
 public class PaymentMbpEntity extends IEntity {
 
-  /** UID */
-  private static final long serialVersionUID = 1L;
+    /** UID */
+    private static final long serialVersionUID = 1L;
 
-  /** id */
-  @ApiModelProperty(value = "id")
-  @TableId(value = "id", type = IdType.AUTO)
-  private @Nullable Long id;
+    /** id */
+    @ApiModelProperty(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
+    private @Nullable Long id;
 
-  /** serial */
-  @ApiModelProperty(value = "serial")
-  @TableField("serial")
-  private @Nullable String serial;
+    /** serial */
+    @ApiModelProperty(value = "serial")
+    @TableField("serial")
+    private @Nullable String serial;
 
 }

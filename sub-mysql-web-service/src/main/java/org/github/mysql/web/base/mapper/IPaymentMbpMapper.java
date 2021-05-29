@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-28
+ * @since 2021-05-29
  */
 @MyBatisMapper
 public interface IPaymentMbpMapper extends IMapper<PaymentMbpEntity> {}

@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author JYD_XL
- * @since 2021-05-28
+ * @since 2021-05-29
  */
 @SuppressWarnings("all")
 @Data
@@ -24,57 +24,57 @@ import lombok.EqualsAndHashCode;
 @ApiModel(value="TabSafeQuestionDataMbpEntity对象", description="安全问题库")
 public class TabSafeQuestionDataMbpEntity extends IEntity {
 
-  /** UID */
-  private static final long serialVersionUID = 1L;
+    /** UID */
+    private static final long serialVersionUID = 1L;
 
-  /** 主键id */
-  @ApiModelProperty(value = "主键id")
-  @TableId(value = "id", type = IdType.ASSIGN_ID)
-  private @Nullable String id;
+    /** 主键id */
+    @ApiModelProperty(value = "主键id")
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private @Nullable String id;
 
-  /** 项目id */
-  @ApiModelProperty(value = "项目id")
-  @TableField("project_id")
-  private @Nullable String projectId;
+    /** 项目id */
+    @ApiModelProperty(value = "项目id")
+    @TableField("project_id")
+    private @Nullable String projectId;
 
-  /** 问题类型id */
-  @ApiModelProperty(value = "问题类型id")
-  @TableField("question_type_id")
-  private @Nullable String questionTypeId;
+    /** 问题类型id */
+    @ApiModelProperty(value = "问题类型id")
+    @TableField("question_type_id")
+    private @Nullable String questionTypeId;
 
-  /** 问题级别（字典） */
-  @ApiModelProperty(value = "问题级别（字典）")
-  @TableField("question_level")
-  private @Nullable String questionLevel;
+    /** 问题级别（字典） */
+    @ApiModelProperty(value = "问题级别（字典）")
+    @TableField("question_level")
+    private @Nullable String questionLevel;
 
-  /** 整改天数 */
-  @ApiModelProperty(value = "整改天数")
-  @TableField("rectify_dates")
-  private @Nullable Integer rectifyDates;
+    /** 整改天数 */
+    @ApiModelProperty(value = "整改天数")
+    @TableField("rectify_dates")
+    private @Nullable Integer rectifyDates;
 
-  /** 排查内容 */
-  @ApiModelProperty(value = "排查内容")
-  @TableField("check_content")
-  private @Nullable String checkContent;
+    /** 排查内容 */
+    @ApiModelProperty(value = "排查内容")
+    @TableField("check_content")
+    private @Nullable String checkContent;
 
-  /** 整改要求 */
-  @ApiModelProperty(value = "整改要求")
-  @TableField("rectify_require")
-  private @Nullable String rectifyRequire;
+    /** 整改要求 */
+    @ApiModelProperty(value = "整改要求")
+    @TableField("rectify_require")
+    private @Nullable String rectifyRequire;
 
-  /** 0 使用  禁用 */
-  @ApiModelProperty(value = "0 使用  禁用")
-  @TableField("is_use")
-  private @Nullable Integer isUse;
+    /** 0 使用  禁用 */
+    @ApiModelProperty(value = "0 使用  禁用")
+    @TableField("is_use")
+    private @Nullable Integer isUse;
 
-  /** 创建人 */
-  @ApiModelProperty(value = "创建人")
-  @TableField("creater")
-  private @Nullable String creater;
+    /** 创建人 */
+    @ApiModelProperty(value = "创建人")
+    @TableField("creater")
+    private @Nullable String creater;
 
-  /** 创建时间 */
-  @ApiModelProperty(value = "创建时间")
-  @TableField("create_time")
-  private @Nullable LocalDateTime createTime;
+    /** 创建时间 */
+    @ApiModelProperty(value = "创建时间")
+    @TableField("create_time")
+    private @Nullable LocalDateTime createTime;
 
 }
