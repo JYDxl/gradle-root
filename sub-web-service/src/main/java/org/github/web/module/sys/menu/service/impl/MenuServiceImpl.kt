@@ -13,9 +13,9 @@ import com.baomidou.mybatisplus.extension.kotlin.KtQueryChainWrapper
 import org.github.base.Page
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.mysql.web.base.enums.MenuType
-import org.github.mysql.web.base.enums.MenuType.button
+import org.github.mysql.web.base.enums.MenuType.BUTTON
 import org.github.ops.isNotBlank
-import org.github.web.common.CacheName.sysMenuName
+import org.github.web.common.CacheName.SYS_MENU_NAME
 import org.springframework.beans.BeanUtils.copyProperties
 import org.springframework.stereotype.Service
 
@@ -49,7 +49,7 @@ class MenuServiceImpl : IMenuService {
 
     override fun queryMenuTree(): JSONArrayReturn<SysMenuEntity> {
         val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
-        query.ne(SysMenuEntity::type, button.code)
+        query.ne(SysMenuEntity::type, BUTTON.code)
         val list: MutableList<SysMenuEntity> = query.list()
         val root = SysMenuEntity()
         root.menuId = 0L
@@ -57,7 +57,7 @@ class MenuServiceImpl : IMenuService {
         root.name = "根目录"
         // root.setUrl();
         // root.setPerms();
-        root.type = MenuType.directory.code
+        root.type = MenuType.DIRECTORY.code
         root.icon = "fa fa-car"
         root.orderNum = 0
         list.add(root)
@@ -71,6 +71,6 @@ class MenuServiceImpl : IMenuService {
 
     private fun applySysMenuEntity2QueryMenuListVO(entity: SysMenuEntity) = QueryMenuListVO().apply {
         copyProperties(entity, this)
-        parentName = ramCache.getCache<String>(sysMenuName).get(parentId)
+        parentName = ramCache.getCache<String>(SYS_MENU_NAME).get(parentId)
     }
 }

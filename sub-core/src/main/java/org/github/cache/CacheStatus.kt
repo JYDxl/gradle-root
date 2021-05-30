@@ -1,5 +1,5 @@
-package org.github.cache;
+package org.github.cache
 
-public enum CacheStatus {
-  add, modify, delete
+enum class CacheStatus {
+    ADD, MODIFY, DELETE
 }

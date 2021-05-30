@@ -2,8 +2,8 @@ package org.github.auth.shiro.service.impl
 
 import org.apache.shiro.authc.AuthenticationException
 import org.github.auth.shiro.mapper.IShiroMapper
-import org.github.mysql.web.base.enums.Deleted.deleted
-import org.github.mysql.web.base.enums.Enable.disabled
+import org.github.mysql.web.base.enums.Deleted.DELETED
+import org.github.mysql.web.base.enums.Enable.DISABLED
 import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User
@@ -26,8 +26,8 @@ class AuthShiroServiceImpl : IShiroService {
 
     override fun queryUser(username: String): JSONDataReturn<out User> {
         val user = shiroMapper.queryUserInfo(username) ?: throw AuthenticationException("用户未注册")
-        if (disabled.code == user.status) throw AuthenticationException("该用户已禁用")
-        if (deleted.code == user.deleted) throw AuthenticationException("该用户已注销")
+        if (DISABLED.code == user.status) throw AuthenticationException("该用户已禁用")
+        if (DELETED.code == user.deleted) throw AuthenticationException("该用户已注销")
         return JSONDataReturn.of(user)
     }
 }

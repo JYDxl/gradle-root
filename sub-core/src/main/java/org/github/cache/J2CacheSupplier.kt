@@ -19,16 +19,16 @@ interface J2CacheSupplier<E, R>: CacheSupplier<E, R> {
     if (source is Collection<*>) {
       source as Collection<String>
       when (status) {
-        add    -> setSome(source)
-        modify -> setSome(source)
-        delete -> del(*source.toTypedArray())
+        ADD    -> setSome(source)
+        MODIFY -> setSome(source)
+        DELETE -> del(*source.toTypedArray())
       }
     } else {
       source as String
       when (status) {
-        add    -> set(source)
-        modify -> set(source)
-        delete -> del(source)
+        ADD    -> set(source)
+        MODIFY -> set(source)
+        DELETE -> del(source)
       }
     }
   }

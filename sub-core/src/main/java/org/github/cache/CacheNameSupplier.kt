@@ -1,10 +1,9 @@
-package org.github.cache;
+package org.github.cache
 
-import java.util.function.UnaryOperator;
+import java.util.function.UnaryOperator
 
-public interface CacheNameSupplier extends UnaryOperator<String> {
-  @Override
-  default String apply(String prefix) {
-    return prefix + this;
-  }
+interface CacheNameSupplier : UnaryOperator<String> {
+    override fun apply(prefix: String): String {
+        return prefix + this
+    }
 }

@@ -18,12 +18,12 @@ class RAMCacheTest {
 
   @Test
   void getCache() {
-    val sysMenuNameCache = ramCache.<String>getCache(sysMenuName);
+    val sysMenuNameCache = ramCache.<String>getCache(SYS_MENU_NAME);
     val sysMenuNameList  = sysMenuNameCache.getAll();
     log.info(sysMenuNameList.toString());
     log.info(sysMenuNameCache.toString());
     try {
-      ramCache.<String>getCache(username);
+      ramCache.<String>getCache(USERNAME);
     } catch (Exception e) {
       log.error(e.getMessage(), e);
     }

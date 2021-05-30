@@ -1,9 +1,7 @@
-package org.github.web.common;
+package org.github.web.common
 
-import org.github.cache.CacheNameSupplier;
+import org.github.cache.CacheNameSupplier
 
-public enum CacheName implements CacheNameSupplier {
-  user,
-  username,
-  sysMenuName
+enum class CacheName : CacheNameSupplier {
+    USER, USERNAME, SYS_MENU_NAME
 }

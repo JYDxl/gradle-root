@@ -1,9 +1,6 @@
-package org.github.base;
+package org.github.base
 
-import lombok.*;
-
-public interface IEnum<C, V> {
-  @NonNull C getCode();
-
-  @NonNull V getValue();
+interface IEnum<C : Any, V : Any> {
+    val code: C
+    val value: V
 }

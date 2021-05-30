@@ -50,7 +50,7 @@ class TreeUtilTest {
 
     val dataQuery = safeQuestionDataService.lambdaQuery();
     dataQuery.eq(TabSafeQuestionDataEntity::getProjectId, "-1");
-    dataQuery.eq(TabSafeQuestionDataEntity::getIsUse, 0);
+    dataQuery.eq(TabSafeQuestionDataEntity::isUse, 0);
     val dataList   = dataQuery.list();
     val dataStream = dataList.stream().map(this::applyTabSafeQuestionDataEntity2TreeVO);
 
