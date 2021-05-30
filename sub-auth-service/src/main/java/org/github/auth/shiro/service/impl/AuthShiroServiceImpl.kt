@@ -15,19 +15,19 @@ import org.springframework.stereotype.Service
 
 @Primary
 @Service
-class AuthShiroServiceImpl : IShiroService {
-    @Autowired
-    private lateinit var shiroMapper: IShiroMapper
+class AuthShiroServiceImpl: IShiroService {
+  @Autowired
+  private lateinit var shiroMapper: IShiroMapper
 
-    override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
-        val list = shiroMapper.queryAuthorInfo(userId.toLong())
-        return JSONArrayReturn.of(list)
-    }
+  override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
+    val list = shiroMapper.queryAuthorInfo(userId.toLong())
+    return JSONArrayReturn.of(list)
+  }
 
-    override fun queryUser(username: String): JSONDataReturn<out User> {
-        val user = shiroMapper.queryUserInfo(username) ?: throw AuthenticationException("用户未注册")
-        if (DISABLED.code == user.status) throw AuthenticationException("该用户已禁用")
-        if (DELETED.code == user.deleted) throw AuthenticationException("该用户已注销")
-        return JSONDataReturn.of(user)
-    }
+  override fun queryUser(username: String): JSONDataReturn<out User> {
+    val user = shiroMapper.queryUserInfo(username) ?: throw AuthenticationException("用户未注册")
+    if (DISABLED.code == user.status) throw AuthenticationException("该用户已禁用")
+    if (DELETED.code == user.deleted) throw AuthenticationException("该用户已注销")
+    return JSONDataReturn.of(user)
+  }
 }

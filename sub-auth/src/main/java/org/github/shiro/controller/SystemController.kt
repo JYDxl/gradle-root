@@ -1,11 +1,10 @@
 package org.github.shiro.controller
 
-import org.github.service.ISystemService
 import org.github.ops.log
 import org.github.service.IShiroService
+import org.github.service.ISystemService
 import org.github.shiro.JWTLogin
 import org.github.spring.restful.Returnable
-import org.github.spring.restful.json.JSONDataReturn
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -21,37 +20,31 @@ class SystemController {
 
   @GetMapping("/security/user/{username}")
   fun user(@PathVariable username: String): Returnable {
-    val user = shiroService.queryUser(username)
-    return JSONDataReturn.of(user)
+    return shiroService.queryUser(username)
   }
 
   @GetMapping("/security/auth/{userId}")
   fun auth(@PathVariable userId: String): Returnable {
-    val auth = shiroService.queryAuthorInfo(userId)
-    return JSONDataReturn.of(auth)
+    return shiroService.queryAuthorInfo(userId)
   }
 
   @PostMapping("/login")
   fun login(): Returnable {
-    val user = systemService.login()
-    return JSONDataReturn.of(user)
+    return systemService.login()
   }
 
   @RequestMapping("/token")
   fun token(): Returnable {
-    val token = systemService.token()
-    return JSONDataReturn.of(token)
+    return systemService.token()
   }
 
   @RequestMapping("/jwt")
   fun jwt(): Returnable {
-    val jwt = systemService.jwt()
-    return JSONDataReturn.of(jwt)
+    return systemService.jwt()
   }
 
   @PostMapping("/public/jwt")
   fun jwt(@RequestBody login: JWTLogin): Returnable {
-    val jwt = systemService.jwt(login)
-    return JSONDataReturn.of(jwt)
+    return systemService.jwt(login)
   }
 }

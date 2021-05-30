@@ -11,31 +11,31 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/sys/menu/")
 @RestController
 class MenuController {
-    @Autowired
-    private lateinit var menuService: IMenuService
+  @Autowired
+  private lateinit var menuService: IMenuService
 
-    @PostMapping("del")
-    fun delMenuList(@RequestBody ids: List<Long>): Returnable {
-        return menuService.delMenuList(ids)
-    }
+  @PostMapping("del")
+  fun delMenuList(@RequestBody ids: List<Long>): Returnable {
+    return menuService.delMenuList(ids)
+  }
 
-    @GetMapping("info/{menuId}")
-    fun queryMenuInfo(@PathVariable menuId: Long): Returnable {
-        return menuService.queryMenuInfo(menuId)
-    }
+  @GetMapping("info/{menuId}")
+  fun queryMenuInfo(@PathVariable menuId: Long): Returnable {
+    return menuService.queryMenuInfo(menuId)
+  }
 
-    @PostMapping("list")
-    fun queryMenuPage(@RequestBody bo: QueryMenuListBO): Returnable {
-        return menuService.queryMenuPage(bo)
-    }
+  @PostMapping("page")
+  fun queryMenuPage(@RequestBody bo: QueryMenuListBO): Returnable {
+    return menuService.queryMenuPage(bo)
+  }
 
-    @PostMapping("select")
-    fun queryMenuTree(): Returnable {
-        return menuService.queryMenuTree()
-    }
+  @PostMapping("select")
+  fun queryMenuTree(): Returnable {
+    return menuService.queryMenuTree()
+  }
 
-    @PostMapping("save", "update")
-    fun saveOrUpdate(@RequestBody bo: SysMenuEntity): Returnable {
-        return menuService.saveOrUpdate(bo)
-    }
+  @PostMapping("save", "update")
+  fun saveOrUpdate(@RequestBody bo: SysMenuEntity): Returnable {
+    return menuService.saveOrUpdate(bo)
+  }
 }

@@ -13,21 +13,21 @@ import java.util.function.Function
 import java.util.function.Predicate
 
 @Component
-class SysMenuNameJ2Cache : AbstractJ2Cache<SysMenuEntity?, String?>() {
-    @Autowired
-    private lateinit var sysMenuService: ISysMenuService
+class SysMenuNameJ2Cache: AbstractJ2Cache<SysMenuEntity?, String?>() {
+  @Autowired
+  private lateinit var sysMenuService: ISysMenuService
 
-    override val name: CacheNameSupplier get() = SYS_MENU_NAME
+  override val name: CacheNameSupplier get() = SYS_MENU_NAME
 
-    override val mapper: Function<SysMenuEntity?, String?> get() = Function { it?.name }
+  override val mapper: Function<SysMenuEntity?, String?> get() = Function {it?.name}
 
-    override val filter: Predicate<SysMenuEntity?> get() = Predicate { it != null && ENABLED.code == it.enabled }
+  override val filter: Predicate<SysMenuEntity?> get() = Predicate {it != null && ENABLED.code == it.enabled}
 
-    override fun load(keys: Collection<String>): Map<String, SysMenuEntity?> {
-        val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
-        query.`in`(keys.isNotEmpty(), SysMenuEntity::menuId, keys.map { it.toLong() })
-        query.select(SysMenuEntity::menuId, SysMenuEntity::name, SysMenuEntity::enabled)
-        val list: List<SysMenuEntity> = query.list()
-        return list.associateBy { it.menuId.toString() }
-    }
+  override fun load(keys: Collection<String>): Map<String, SysMenuEntity?> {
+    val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
+    query.`in`(keys.isNotEmpty(), SysMenuEntity::menuId, keys.map {it.toLong()})
+    query.select(SysMenuEntity::menuId, SysMenuEntity::name, SysMenuEntity::enabled)
+    val list: List<SysMenuEntity> = query.list()
+    return list.associateBy {it.menuId.toString()}
+  }
 }

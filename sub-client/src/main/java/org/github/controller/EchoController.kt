@@ -25,7 +25,7 @@ class EchoController {
   // }
   @GetMapping("/basic")
   fun basic(): JSONReturn {
-    val (token, jwt) = systemService.feign()
+    val (token, jwt) = requireNotNull(systemService.feign().data)
     return webServer.basic(token, jwt)
   }
 }

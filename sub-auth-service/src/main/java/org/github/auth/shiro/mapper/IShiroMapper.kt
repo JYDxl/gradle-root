@@ -7,7 +7,7 @@ import org.github.auth.shiro.model.UserDTO
 
 @MyBatisMapper
 interface IShiroMapper {
-    fun queryAuthorInfo(@Param("userId") userId: Long): List<AuthorInfo>
+  fun queryAuthorInfo(@Param("userId") userId: Long): List<AuthorInfo>
 
-    fun queryUserInfo(@Param("username") username: String): UserDTO?
+  fun queryUserInfo(@Param("username") username: String): UserDTO?
 }

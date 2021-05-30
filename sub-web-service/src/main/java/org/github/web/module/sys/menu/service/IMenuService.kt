@@ -8,13 +8,13 @@ import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
 import org.github.spring.restful.json.JSONArrayReturn
 
 interface IMenuService {
-    fun delMenuList(ids: List<Long>): JSONDataReturn<Boolean>
+  fun delMenuList(ids: List<Long>): JSONDataReturn<Boolean>
 
-    fun queryMenuInfo(menuId: Long): JSONDataReturn<SysMenuEntity?>
+  fun queryMenuInfo(menuId: Long): JSONDataReturn<SysMenuEntity?>
 
-    fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO>
+  fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO>
 
-    fun queryMenuTree(): JSONArrayReturn<SysMenuEntity>
+  fun queryMenuTree(): JSONArrayReturn<SysMenuEntity>
 
-    fun saveOrUpdate(bo: SysMenuEntity): JSONDataReturn<Boolean>
+  fun saveOrUpdate(bo: SysMenuEntity): JSONDataReturn<Boolean>
 }
