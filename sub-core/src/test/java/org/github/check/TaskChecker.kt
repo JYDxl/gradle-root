@@ -5,7 +5,7 @@ import org.github.ops.log
 import org.github.ops.trace
 
 fun main() {
-  val tasks = ""
+  val tasks = """"""
   val map = tasks.splitToSequence('\n').filter {it.startsWith("> Task :")}.map {Task(it.substringBeforeLast(':'), it.substringAfterLast(':'), it)}.groupBy {it.name}
   map.forEach {(task, list) ->
     log.info {task}

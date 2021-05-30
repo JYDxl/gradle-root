@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory.getLogger
 import java.util.Comparator.naturalOrder
 
 fun main() {
-  val versions = ""
+  val versions = """"""
   val set: Set<String> = versions.split('\n').stream()
     .filter {it.contains(" -> ")}
     .collect(toImmutableSortedSet(naturalOrder()))

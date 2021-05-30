@@ -7,7 +7,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
 
 fun main() {
-  val versions = ""
+  val versions = """"""
   val multiset: Multiset<String> = versions.split('\n').stream().map {it.substringBeforeLast(':')}.collect(toImmutableMultiset())
   multiset.forEachEntry {dep: String, count -> if (count > 1) log.warn {dep.substringAfter(':')}}
 }
