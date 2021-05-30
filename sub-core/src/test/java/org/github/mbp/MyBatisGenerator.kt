@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.generator.config.ConstVal.*
 import com.baomidou.mybatisplus.generator.config.po.LikeTable
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
-import org.github.base.IEntity
+import org.github.base.Entity
 import org.github.base.IMapper
 import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
@@ -68,7 +68,7 @@ fun main() {
     naming = underline_to_camel
     isEntityTableFieldAnnotationEnable = true
     isEntityLombokModel = true
-    superEntityClass = IEntity::class.jvmName
+    superEntityClass = Entity::class.jvmName
     superMapperClass = IMapper::class.jvmName
     superServiceClass = IService::class.jvmName
     superServiceImplClass = ServiceImpl::class.jvmName

@@ -3,7 +3,7 @@
 package org.github.mysql.web.base.entity
 
 import com.baomidou.mybatisplus.annotation.*
-import org.github.base.IEntity
+import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @TableName("sys_menu")
 @ApiModel(value="SysMenuEntity对象", description="菜单管理")
-open class SysMenuEntity : IEntity() {
+open class SysMenuEntity : Entity() {
 
     @TableId(value = "menu_id", type = IdType.AUTO)
     open var menuId: Long? = null

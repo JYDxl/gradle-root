@@ -4,7 +4,7 @@ package org.github.mysql.web.base.entity
 
 import java.time.LocalDateTime
 import com.baomidou.mybatisplus.annotation.*
-import org.github.base.IEntity
+import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @TableName("tab_safe_question_data")
 @ApiModel(value="TabSafeQuestionDataEntity对象", description="安全问题库")
-open class TabSafeQuestionDataEntity : IEntity() {
+open class TabSafeQuestionDataEntity : Entity() {
 
     /** 主键id */
     @ApiModelProperty(value = "主键id")

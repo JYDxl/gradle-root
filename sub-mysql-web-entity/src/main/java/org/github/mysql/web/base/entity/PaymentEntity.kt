@@ -3,7 +3,7 @@
 package org.github.mysql.web.base.entity
 
 import com.baomidou.mybatisplus.annotation.*
-import org.github.base.IEntity
+import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @TableName("payment")
 @ApiModel(value="PaymentEntity对象", description="支付表")
-open class PaymentEntity : IEntity() {
+open class PaymentEntity : Entity() {
 
     /** id */
     @ApiModelProperty(value = "id")

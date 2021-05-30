@@ -4,7 +4,7 @@ package org.github.mysql.web.base.entity
 
 import java.time.LocalDateTime
 import com.baomidou.mybatisplus.annotation.*
-import org.github.base.IEntity
+import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @TableName("sys_role")
 @ApiModel(value="SysRoleEntity对象", description="角色")
-open class SysRoleEntity : IEntity() {
+open class SysRoleEntity : Entity() {
 
     @TableId(value = "role_id", type = IdType.AUTO)
     open var roleId: Long? = null
