@@ -1,14 +1,16 @@
 package org.github.auth.shiro.service.impl
 
 import org.apache.shiro.authc.AuthenticationException
-import org.springframework.context.annotation.Primary
-import org.github.service.IShiroService
-import org.springframework.beans.factory.annotation.Autowired
 import org.github.auth.shiro.mapper.IShiroMapper
+import org.github.mysql.web.base.enums.Deleted.deleted
+import org.github.mysql.web.base.enums.Enable.disabled
+import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
-import org.github.auth.shiro.model.UserDTO
-import org.github.mysql.web.base.enums.Enable
-import org.github.mysql.web.base.enums.Deleted
+import org.github.shiro.User
+import org.github.spring.restful.json.JSONArrayReturn
+import org.github.spring.restful.json.JSONDataReturn
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Service
 
 @Primary
@@ -17,14 +19,15 @@ class AuthShiroServiceImpl : IShiroService {
     @Autowired
     private lateinit var shiroMapper: IShiroMapper
 
-    override fun queryAuthorInfo(userId: String): List<AuthorInfo> {
-        return shiroMapper.queryAuthorInfo(userId.toLong())
+    override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
+        val list = shiroMapper.queryAuthorInfo(userId.toLong())
+        return JSONArrayReturn.of(list)
     }
 
-    override fun queryUser(username: String): UserDTO {
+    override fun queryUser(username: String): JSONDataReturn<out User> {
         val user = shiroMapper.queryUserInfo(username) ?: throw AuthenticationException("用户未注册")
-        if (Enable.disabled.code == user.status) throw AuthenticationException("该用户已禁用")
-        if (Deleted.deleted.code == user.deleted) throw AuthenticationException("该用户已注销")
-        return user
+        if (disabled.code == user.status) throw AuthenticationException("该用户已禁用")
+        if (deleted.code == user.deleted) throw AuthenticationException("该用户已注销")
+        return JSONDataReturn.of(user)
     }
 }
