@@ -1,17 +1,13 @@
-package org.github.auth.shiro.mapper;
+package org.github.auth.shiro.mapper
 
-import lombok.NonNull;
-import org.apache.ibatis.annotations.Param;
-import org.github.auth.shiro.model.UserDTO;
-import org.github.mybatis.MyBatisMapper;
-import org.github.shiro.AuthorInfo;
-
-import javax.annotation.Nullable;
-import java.util.List;
+import org.apache.ibatis.annotations.Param
+import org.github.mybatis.MyBatisMapper
+import org.github.shiro.AuthorInfo
+import org.github.auth.shiro.model.UserDTO
 
 @MyBatisMapper
-public interface IShiroMapper {
-  @NonNull List<AuthorInfo> queryAuthorInfo(@NonNull @Param("userId") Long userId);
+interface IShiroMapper {
+    fun queryAuthorInfo(@Param("userId") userId: Long): List<AuthorInfo>
 
-  @Nullable UserDTO queryUserInfo(@NonNull @Param("username") String username);
+    fun queryUserInfo(@Param("username") username: String): UserDTO?
 }

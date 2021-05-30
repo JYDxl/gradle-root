@@ -10,7 +10,6 @@ fun main() {
   val versions = ""
   val set: Set<String> = versions.split('\n').stream()
     .filter {it.contains(" -> ")}
-    .map {it.substringAfter(":  - ")}
     .collect(toImmutableSortedSet(naturalOrder()))
   set.forEach {log.info {it}}
 }
