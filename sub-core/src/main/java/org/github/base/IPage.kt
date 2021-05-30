@@ -1,10 +1,9 @@
-package org.github.base;
+package org.github.base
 
-import java.util.List;
-import lombok.*;
+import com.baomidou.mybatisplus.core.metadata.IPage
 
-public interface IPage<T> extends IJson, com.baomidou.mybatisplus.core.metadata.IPage<T> {
-  @NonNull List<T> getRecords();
+interface IPage<T> : IJson, IPage<T> {
+    override fun getRecords(): List<T>
 
-  long getTotal();
+    override fun getTotal(): Long
 }

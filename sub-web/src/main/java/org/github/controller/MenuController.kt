@@ -1,43 +1,41 @@
-package org.github.controller;
+package org.github.controller
 
-import org.github.mysql.web.base.entity.SysMenuEntity;
-import org.github.spring.restful.Returnable;
-import org.github.web.module.sys.menu.model.bo.QueryMenuListBO;
-import org.github.web.module.sys.menu.service.IMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired
+import org.github.web.module.sys.menu.service.IMenuService
+import org.github.spring.restful.Returnable
+import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
+import org.github.mysql.web.base.entity.SysMenuEntity
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/sys/menu/")
-@Controller
-public class MenuController {
-  @Autowired
-  private IMenuService menuService;
+@RestController
+class MenuController {
+    @Autowired
+    private lateinit var menuService: IMenuService
 
-  @PostMapping("del")
-  public Returnable delMenuList(@RequestBody List<Long> ids) {
-    return menuService.delMenuList(ids);
-  }
+    @PostMapping("del")
+    fun delMenuList(@RequestBody ids: List<Long>): Returnable {
+        return menuService.delMenuList(ids)
+    }
 
-  @GetMapping("info/{menuId}")
-  public Returnable queryMenuInfo(@PathVariable Long menuId) {
-    return menuService.queryMenuInfo(menuId);
-  }
+    @GetMapping("info/{menuId}")
+    fun queryMenuInfo(@PathVariable menuId: Long): Returnable {
+        return menuService.queryMenuInfo(menuId)
+    }
 
-  @PostMapping("list")
-  public Returnable queryMenuPage(@RequestBody QueryMenuListBO bo) {
-    return menuService.queryMenuPage(bo);
-  }
+    @PostMapping("list")
+    fun queryMenuPage(@RequestBody bo: QueryMenuListBO): Returnable {
+        return menuService.queryMenuPage(bo)
+    }
 
-  @PostMapping("select")
-  public Returnable queryMenuTree() {
-    return menuService.queryMenuTree();
-  }
+    @PostMapping("select")
+    fun queryMenuTree(): Returnable {
+        return menuService.queryMenuTree()
+    }
 
-  @PostMapping({"save", "update"})
-  public Returnable saveOrUpdate(@RequestBody SysMenuEntity bo) {
-    return menuService.saveOrUpdate(bo);
-  }
+    @PostMapping("save", "update")
+    fun saveOrUpdate(@RequestBody bo: SysMenuEntity): Returnable {
+        return menuService.saveOrUpdate(bo)
+    }
 }
