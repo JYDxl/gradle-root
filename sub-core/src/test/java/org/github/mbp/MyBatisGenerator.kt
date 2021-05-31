@@ -69,7 +69,7 @@ fun main() {
                 .enableSerialVersionUID()
                 .idType(ASSIGN_ID)
                 .naming(underline_to_camel)
-                //.enableActiveRecord().superClass(Model::class.jvmName)
+//                .enableActiveRecord().superClass(Model::class.jvmName)
                 .superClass(Entity::class.jvmName)
                 .formatFileName("%sEntity")
 

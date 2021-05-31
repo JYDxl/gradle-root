@@ -3,6 +3,7 @@ package ${package.Entity};
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
+import javax.annotation.Nullable;
 <#if swagger>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,25 +11,27 @@ import io.swagger.annotations.ApiModelProperty;
 <#if entityLombokModel>
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
     <#if chainModel>
 import lombok.experimental.Accessors;
     </#if>
 </#if>
 
 /**
- * <p>
  * ${table.comment!}
- * </p>
  *
  * @author ${author}
  * @since ${date}
  */
+@SuppressWarnings("all")
 <#if entityLombokModel>
 @Data
     <#if superEntityClass??>
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
     <#else>
 @EqualsAndHashCode(callSuper = false)
+@ToString(callSuper = false)
     </#if>
     <#if chainModel>
 @Accessors(chain = true)
@@ -127,7 +130,7 @@ public class ${entity} implements Serializable {
 
 <#if activeRecord>
     @Override
-    public Serializable pkVal() {
+    public java.io.Serializable pkVal() {
     <#if keyPropertyName??>
         return this.${keyPropertyName};
     <#else>
