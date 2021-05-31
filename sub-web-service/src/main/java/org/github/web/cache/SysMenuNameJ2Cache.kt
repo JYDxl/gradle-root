@@ -1,8 +1,8 @@
 package org.github.web.cache
 
-import com.baomidou.mybatisplus.extension.kotlin.KtQueryChainWrapper
 import org.github.cache.AbstractJ2Cache
 import org.github.cache.CacheNameSupplier
+import org.github.mybatis.ktQueryWrapper
 import org.github.mysql.web.base.entity.SysMenuEntity
 import org.github.mysql.web.base.enums.Enable.ENABLED
 import org.github.mysql.web.base.service.ISysMenuService
@@ -24,7 +24,7 @@ class SysMenuNameJ2Cache: AbstractJ2Cache<SysMenuEntity?, String?>() {
   override val filter: Predicate<SysMenuEntity?> get() = Predicate {it != null && ENABLED.code == it.enabled}
 
   override fun load(keys: Collection<String>): Map<String, SysMenuEntity?> {
-    val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
+    val query = sysMenuService.ktQueryWrapper()
     query.`in`(keys.isNotEmpty(), SysMenuEntity::menuId, keys.map {it.toLong()})
     query.select(SysMenuEntity::menuId, SysMenuEntity::name, SysMenuEntity::enabled)
     val list: List<SysMenuEntity> = query.list()

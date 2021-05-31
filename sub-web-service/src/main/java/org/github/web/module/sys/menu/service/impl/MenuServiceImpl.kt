@@ -9,8 +9,8 @@ import org.github.mysql.web.base.entity.SysMenuEntity
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
 import org.github.spring.restful.json.JSONPageReturn
 import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
-import com.baomidou.mybatisplus.extension.kotlin.KtQueryChainWrapper
 import org.github.base.Page
+import org.github.mybatis.ktQueryWrapper
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.mysql.web.base.enums.MenuType
 import org.github.mysql.web.base.enums.MenuType.BUTTON
@@ -39,7 +39,7 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO> {
-    val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
+    val query = sysMenuService.ktQueryWrapper()
     query.likeRight(bo.name.isNotBlank(), SysMenuEntity::name, bo.name)
     val page: Page<SysMenuEntity> = query.page(Page(bo))
     val list: List<SysMenuEntity> = page.records
@@ -48,7 +48,7 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuTree(): JSONArrayReturn<SysMenuEntity> {
-    val query: KtQueryChainWrapper<SysMenuEntity> = sysMenuService.ktQuery()
+    val query = sysMenuService.ktQueryWrapper()
     query.ne(SysMenuEntity::type, BUTTON.code)
     val list: MutableList<SysMenuEntity> = query.list()
     val root = SysMenuEntity()
