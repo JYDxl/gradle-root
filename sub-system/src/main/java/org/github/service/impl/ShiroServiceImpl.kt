@@ -19,12 +19,12 @@ class ShiroServiceImpl: IShiroService {
   private lateinit var systemService: ISystemService
 
   override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
-    val (token, jwt) = requireNotNull(systemService.feign().data)
+    val (token, jwt) = systemService.feign()
     return authServer.auth(token, jwt, userId)
   }
 
   override fun queryUser(username: String): JSONDataReturn<out User> {
-    val (token, jwt) = requireNotNull(systemService.feign().data)
+    val (token, jwt) = systemService.feign()
     return authServer.user(token, jwt, username)
   }
 }

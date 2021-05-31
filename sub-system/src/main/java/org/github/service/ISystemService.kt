@@ -14,5 +14,5 @@ interface ISystemService {
 
   fun jwt(login: JWTLogin): JSONDataReturn<String>
 
-  fun feign(): JSONDataReturn<Token>
+  fun feign(): Token
 }

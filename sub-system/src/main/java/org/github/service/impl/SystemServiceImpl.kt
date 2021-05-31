@@ -49,9 +49,9 @@ class SystemServiceImpl: ISystemService {
     return JSONDataReturn.of(jwt)
   }
 
-  override fun feign(): JSONDataReturn<Token> {
+  override fun feign(): Token {
     val token = token().data
     val jwt = if (token.isNullOrBlank()) jwt().data else null
-    return JSONDataReturn.of(Token(token, jwt))
+    return Token(token, jwt)
   }
 }
