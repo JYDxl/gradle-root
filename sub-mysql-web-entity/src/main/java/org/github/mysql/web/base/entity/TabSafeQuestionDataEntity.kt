@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 安全问题库
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 @TableName("tab_safe_question_data")
 @ApiModel(value = "TabSafeQuestionDataEntity对象", description = "安全问题库")

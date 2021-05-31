@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 角色与菜单对应关系 服务类
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 interface ISysRoleMenuService : IService<SysRoleMenuEntity>

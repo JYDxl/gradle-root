@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * 系统用户 服务实现类
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 @Service
 open class SysUserServiceImpl : ServiceImpl<ISysUserMapper, SysUserEntity>(), ISysUserService

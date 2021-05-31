@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 系统用户
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 @TableName("sys_user")
 @ApiModel(value = "SysUserEntity对象", description = "系统用户")

@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 角色
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 @TableName("sys_role")
 @ApiModel(value = "SysRoleEntity对象", description = "角色")

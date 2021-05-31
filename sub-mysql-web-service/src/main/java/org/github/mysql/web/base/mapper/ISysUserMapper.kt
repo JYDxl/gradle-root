@@ -10,7 +10,7 @@ import org.github.mybatis.MyBatisMapper;
  * 系统用户 Mapper 接口
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 @MyBatisMapper
 interface ISysUserMapper : IMapper<SysUserEntity>

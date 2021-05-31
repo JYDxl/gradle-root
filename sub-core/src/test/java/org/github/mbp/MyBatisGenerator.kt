@@ -19,10 +19,7 @@ import kotlin.reflect.jvm.jvmName
 fun main() {
     object : SimpleAutoGenerator() {
         override fun globalConfigBuilder(): IConfigBuilder<GlobalConfig> {
-//            val path: String = getProperty("user.dir")
-
             return GlobalConfig.Builder()
-//                .outputDir("$path/src/main/java")
                 .author("JYD_XL")
                 .fileOverride()
                 .enableSwagger()
@@ -53,10 +50,13 @@ fun main() {
                 .pathInfo(
                     mapOf(
                         ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
+
+                        CONTROLLER_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/controller",
                         MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",
                         SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service",
                         SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service/impl",
-//      XML_PATH to "$path/$subMapperName/src/main/resources/mapper"
+
+                        XML_PATH to "$path/$subMapperName/src/main/resources/mapper"
                     )
                 )
         }
@@ -69,8 +69,7 @@ fun main() {
                 .enableSerialVersionUID()
                 .idType(ASSIGN_ID)
                 .naming(underline_to_camel)
-//                .enableActiveRecord()
-//                .superClass(Model::class.jvmName)
+                //.enableActiveRecord().superClass(Model::class.jvmName)
                 .superClass(Entity::class.jvmName)
                 .formatFileName("%sEntity")
 

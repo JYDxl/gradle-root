@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 用户与角色对应关系
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 @TableName("sys_user_role")
 @ApiModel(value = "SysUserRoleEntity对象", description = "用户与角色对应关系")

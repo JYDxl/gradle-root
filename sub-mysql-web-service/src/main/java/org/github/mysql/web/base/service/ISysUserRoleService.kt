@@ -9,6 +9,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 用户与角色对应关系 服务类
  *
  * @author JYD_XL
- * @since 2021-05-30
+ * @since 2021-05-31
  */
 interface ISysUserRoleService : IService<SysUserRoleEntity>
