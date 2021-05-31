@@ -30,5 +30,6 @@ appender("problem", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
+logger("org.springframework.cloud.gateway", DEBUG)
 logger("org.github", TRACE)
 root(INFO, ["console", "records", "problem"])

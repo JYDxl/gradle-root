@@ -33,6 +33,12 @@ class SystemController {
     return systemService.login()
   }
 
+  @PostMapping("/logout")
+  fun logout(): Returnable {
+    //TODO 待实现，待测试 首先调用logout，其次清理shiro的cache，包括用户和权限(权限和用户cache名配置到文件中，feign()调用的错误统一包装为登录过期)
+    return Returnable.of()
+  }
+
   @RequestMapping("/token")
   fun token(): Returnable {
     return systemService.token()

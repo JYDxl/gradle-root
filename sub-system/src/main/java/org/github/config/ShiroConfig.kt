@@ -91,11 +91,11 @@ class ShiroConfig {
     filterChainDefinitionMap = definition.filterChainMap
     filters = object: ForwardingMap<String, Filter>() {
       override fun delegate(): Map<String, Filter> = of(
-        "logout", CustomLogoutFilter(),
-        "authc", CustomJWTAuthenticationFilter(true),
+//        "logout", CustomLogoutFilter(),
+        "authc", CustomJWTAuthenticationFilter(false),
         "perms", CustomPermissionsAuthorizationFilter(),
         "roles", CustomRolesAuthorizationFilter(),
-        //"user", CustomUserFilter()
+//        "user", CustomUserFilter()
       )
 
       override fun put(key: String, value: Filter): Filter? = log.info {"忽略Spring中注册的的Filter[$key : $value]"}.let {null}
