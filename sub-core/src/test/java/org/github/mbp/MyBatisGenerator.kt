@@ -3,10 +3,13 @@ package org.github.mbp
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
 import com.baomidou.mybatisplus.extension.service.IService
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
+import com.baomidou.mybatisplus.generator.SimpleAutoGenerator
 import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.ConstVal.*
-import com.baomidou.mybatisplus.generator.config.po.LikeTable
+import com.baomidou.mybatisplus.generator.config.TemplateType.CONTROLLER
+import com.baomidou.mybatisplus.generator.config.TemplateType.XML
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
+import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import org.github.base.Entity
 import org.github.base.IMapper
@@ -14,82 +17,86 @@ import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
 fun main() {
-  val generator = CustomAutoGenerator().apply {templateEngine = FreemarkerTemplateEngine()}
+    object : SimpleAutoGenerator() {
+        override fun globalConfigBuilder(): IConfigBuilder<GlobalConfig> {
+//            val path: String = getProperty("user.dir")
 
-  GlobalConfig().apply {
-    val path: String = getProperty("user.dir")
-    outputDir = "$path/src/main/java"
-    outputDir = null
-    serviceImplName = "%sServiceImpl"
-    serviceName = "I%sService"
-    mapperName = "I%sMapper"
-    entityName = "%sEntity"
-    author = "JYD_XL"
-    idType = ASSIGN_ID
-    isFileOverride = true
-    isSwagger2 = true
-    isKotlin = true
-    isOpen = false
+            return GlobalConfig.Builder()
+//                .outputDir("$path/src/main/java")
+                .author("JYD_XL")
+                .fileOverride()
+                .enableSwagger()
+                .enableKotlin()
+                .openDir(false)
+        }
 
-    generator.globalConfig = this
-  }
+        override fun dataSourceConfigBuilder(): IConfigBuilder<DataSourceConfig> {
+            val url = "jdbc:mysql://www.jydxl.link:3306/web"
+            val username = "root"
+            val password = "XLrootJYD713"
 
-  DataSourceConfig().apply {
-    url = "jdbc:mysql://www.jydxl.link:3306/web"
-    driverName = "com.mysql.cj.jdbc.Driver"
-    username = "root"
-    password = "XLrootJYD713"
+            return DataSourceConfig.Builder(url, username, password)
+        }
 
-    generator.dataSource = this
-  }
+        override fun packageConfigBuilder(): IConfigBuilder<PackageConfig> {
+            val parent = "org.github.mysql.web"
+            val moduleName = "base"
+            val subName = "sub-mysql-web"
+            val subEntityName = "$subName-entity"
+            val subMapperName = "$subName-service"
+            val packageName = parent.replace('.', '/')
+            val path = "${getProperty("user.dir")}/"
 
-  PackageConfig().apply {
-    parent = "org.github.mysql.web"
-    moduleName = "base"
-
-    val subName = "sub-mysql-web"
-    val subEntityName = "$subName-entity"
-    val subMapperName = "$subName-service"
-    val packageName = parent.replace('.', '/')
-    val path = "${getProperty("user.dir")}/"
-
-    pathInfo = mapOf(
-      ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/entity",
-      MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/mapper",
-      SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/service",
-      SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/service/impl",
+            return PackageConfig.Builder()
+                .parent(parent)
+                .moduleName(moduleName)
+                .pathInfo(
+                    mapOf(
+                        ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
+                        MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",
+                        SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service",
+                        SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service/impl",
 //      XML_PATH to "$path/$subMapperName/src/main/resources/mapper"
-    )
+                    )
+                )
+        }
 
-    generator.packageInfo = this
-  }
+        override fun strategyConfigBuilder(): IConfigBuilder<StrategyConfig> {
+            return StrategyConfig.Builder()
+                .entityBuilder()
+                .enableLombok()
+                .enableTableFieldAnnotation()
+                .enableSerialVersionUID()
+                .idType(ASSIGN_ID)
+                .naming(underline_to_camel)
+//                .enableActiveRecord()
+//                .superClass(Model::class.jvmName)
+                .superClass(Entity::class.jvmName)
+                .formatFileName("%sEntity")
 
-  StrategyConfig().apply {
-    naming = underline_to_camel
-    isEntityTableFieldAnnotationEnable = true
-    isEntityLombokModel = true
-    superEntityClass = Entity::class.jvmName
-    superMapperClass = IMapper::class.jvmName
-    superServiceClass = IService::class.jvmName
-    superServiceImplClass = ServiceImpl::class.jvmName
-    // logicDeleteFieldName = "deleted"
-    // versionFieldName = "version"
-    likeTable = LikeTable("")
+                .mapperBuilder()
+                .superClass(IMapper::class.jvmName)
+                .formatMapperFileName("I%sMapper")
 
-    generator.strategy = this
-  }
+                .serviceBuilder()
+                .superServiceClass(IService::class.jvmName)
+                .formatServiceFileName("I%sService")
+                .superServiceImplClass(ServiceImpl::class.jvmName)
+                .formatServiceImplFileName("%sServiceImpl")
+        }
 
-  TemplateConfig().apply {
-    controller = null
-//    xml = "mapper.xml"
-    service = "service.java"
-    serviceImpl = "serviceImpl.java"
-    mapper = "mapper.java"
-    entityKt = "entity.kt"
-    setEntity("entity.java")
+        override fun templateConfigBuilder(): IConfigBuilder<TemplateConfig> {
+            return TemplateConfig.Builder()
+                .disable(CONTROLLER)
+                .disable(XML)
+                .entity("/entity.java")
+                .entityKt("/entity.kt")
+                .mapper("/mapper.java")
+                .service("/service.java", "/serviceImpl.java")
+        }
 
-    generator.template = this
-  }
-
-  generator.execute()
+        override fun templateEngine(): AbstractTemplateEngine {
+            return FreemarkerTemplateEngine()
+        }
+    }.execute()
 }

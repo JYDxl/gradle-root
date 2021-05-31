@@ -3,8 +3,7 @@ package ${package.Entity};
 <#list table.importPackages as pkg>
 import ${pkg};
 </#list>
-import javax.annotation.Nullable;
-<#if swagger2>
+<#if swagger>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 </#if>
@@ -17,12 +16,13 @@ import lombok.experimental.Accessors;
 </#if>
 
 /**
+ * <p>
  * ${table.comment!}
+ * </p>
  *
  * @author ${author}
  * @since ${date}
  */
-@SuppressWarnings("all")
 <#if entityLombokModel>
 @Data
     <#if superEntityClass??>
@@ -35,10 +35,10 @@ import lombok.experimental.Accessors;
     </#if>
 </#if>
 <#if table.convert>
-@TableName("${table.name}")
+@TableName("${schemaName}${table.name}")
 </#if>
-<#if swagger2>
-@ApiModel(value="${entity}对象", description="${table.comment!}")
+<#if swagger>
+@ApiModel(value = "${entity}对象", description = "${table.comment!}")
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
@@ -60,7 +60,7 @@ public class ${entity} implements Serializable {
 
     <#if field.comment!?length gt 0>
     /** ${field.comment} */
-        <#if swagger2>
+        <#if swagger>
     @ApiModelProperty(value = "${field.comment}")
         </#if>
     </#if>
@@ -85,11 +85,11 @@ public class ${entity} implements Serializable {
     @TableField("${field.annotationColumnName}")
     </#if>
     <#-- 乐观锁注解 -->
-    <#if (versionFieldName!"") == field.name>
+    <#if field.versionField>
     @Version
     </#if>
     <#-- 逻辑删除注解 -->
-    <#if (logicDeleteFieldName!"") == field.name>
+    <#if field.logicDeleteField>
     @TableLogic
     </#if>
     private @Nullable ${field.propertyType} ${field.propertyName};

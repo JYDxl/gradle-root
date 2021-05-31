@@ -2,8 +2,11 @@
 
 package org.github.mysql.web.base.entity
 
+import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableField
+import com.baomidou.mybatisplus.annotation.TableId
+import com.baomidou.mybatisplus.annotation.TableName
 import java.time.LocalDateTime
-import com.baomidou.mybatisplus.annotation.*
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-05-30
  */
 @TableName("sys_role")
-@ApiModel(value="SysRoleEntity对象", description="角色")
+@ApiModel(value = "SysRoleEntity对象", description = "角色")
 open class SysRoleEntity : Entity() {
 
     @TableId(value = "role_id", type = IdType.AUTO)
@@ -33,7 +36,6 @@ open class SysRoleEntity : Entity() {
 
     /** 备注 */
     @ApiModelProperty(value = "备注")
-    @TableField("remark")
     open var remark: String? = null
 
     /** 创建者ID */

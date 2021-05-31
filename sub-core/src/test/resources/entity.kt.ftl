@@ -7,11 +7,11 @@ package ${package.Entity}
 <#list table.importPackages as pkg>
 import ${pkg}
 </#list>
-<#if swagger2>
+<#if swagger>
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
 </#if>
+
 /**
  * ${table.comment}
  *
@@ -19,10 +19,10 @@ import io.swagger.annotations.ApiModelProperty;
  * @since ${date}
  */
 <#if table.convert>
-@TableName("${table.name}")
+@TableName("${schemaName}${table.name}")
 </#if>
-<#if swagger2>
-@ApiModel(value="${entity}对象", description="${table.comment!}")
+<#if swagger>
+@ApiModel(value = "${entity}对象", description = "${table.comment!}")
 </#if>
 <#if superEntityClass??>
 open class ${entity} : ${superEntityClass}<#if activeRecord><${entity}></#if>() {
@@ -39,7 +39,7 @@ open class ${entity} : Serializable {
 
 <#if field.comment!?length gt 0>
     /** ${field.comment} */
-<#if swagger2>
+<#if swagger>
     @ApiModelProperty(value = "${field.comment}")
 </#if>
 </#if>
@@ -64,11 +64,11 @@ open class ${entity} : Serializable {
     @TableField("${field.annotationColumnName}")
 </#if>
 <#-- 乐观锁注解 -->
-<#if (versionFieldName!"") == field.name>
+<#if field.versionField>
     @Version
 </#if>
 <#-- 逻辑删除注解 -->
-<#if (logicDeleteFieldName!"") == field.name>
+<#if field.logicDeleteField>
     @TableLogic
 </#if>
     <#if field.propertyType == "Integer">
@@ -90,7 +90,7 @@ open class ${entity} : Serializable {
 
 </#if>
 <#if activeRecord>
-    override fun pkVal(): Serializable? {
+    override fun pkVal(): java.io.Serializable? {
 <#if keyPropertyName??>
         return ${keyPropertyName}
 <#else>

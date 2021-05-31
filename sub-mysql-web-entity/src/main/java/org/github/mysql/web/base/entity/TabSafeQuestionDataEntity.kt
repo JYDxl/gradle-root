@@ -2,8 +2,11 @@
 
 package org.github.mysql.web.base.entity
 
+import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableField
+import com.baomidou.mybatisplus.annotation.TableId
+import com.baomidou.mybatisplus.annotation.TableName
 import java.time.LocalDateTime
-import com.baomidou.mybatisplus.annotation.*
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-05-30
  */
 @TableName("tab_safe_question_data")
-@ApiModel(value="TabSafeQuestionDataEntity对象", description="安全问题库")
+@ApiModel(value = "TabSafeQuestionDataEntity对象", description = "安全问题库")
 open class TabSafeQuestionDataEntity : Entity() {
 
     /** 主键id */
@@ -60,7 +63,6 @@ open class TabSafeQuestionDataEntity : Entity() {
 
     /** 创建人 */
     @ApiModelProperty(value = "创建人")
-    @TableField("creater")
     open var creater: String? = null
 
     /** 创建时间 */

@@ -2,8 +2,11 @@
 
 package org.github.mysql.web.base.entity
 
+import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableField
+import com.baomidou.mybatisplus.annotation.TableId
+import com.baomidou.mybatisplus.annotation.TableName
 import java.time.LocalDateTime
-import com.baomidou.mybatisplus.annotation.*
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-05-30
  */
 @TableName("sys_user")
-@ApiModel(value="SysUserEntity对象", description="系统用户")
+@ApiModel(value = "SysUserEntity对象", description = "系统用户")
 open class SysUserEntity : Entity() {
 
     @TableId(value = "user_id", type = IdType.AUTO)
@@ -23,32 +26,26 @@ open class SysUserEntity : Entity() {
 
     /** 用户名 */
     @ApiModelProperty(value = "用户名")
-    @TableField("username")
     open var username: String? = null
 
     /** 密码 */
     @ApiModelProperty(value = "密码")
-    @TableField("password")
     open var password: String? = null
 
     /** salt */
     @ApiModelProperty(value = "salt")
-    @TableField("salt")
     open var salt: String? = null
 
     /** 状态  0：禁用 1：正常 */
     @ApiModelProperty(value = "状态  0：禁用 1：正常")
-    @TableField("status")
     open var status: Int? = null
 
     /** 邮箱 */
     @ApiModelProperty(value = "邮箱")
-    @TableField("email")
     open var email: String? = null
 
     /** 手机号 */
     @ApiModelProperty(value = "手机号")
-    @TableField("mobile")
     open var mobile: String? = null
 
     /** 创建者ID */
@@ -63,7 +60,6 @@ open class SysUserEntity : Entity() {
 
     /** 0：未删除 1：已删除 */
     @ApiModelProperty(value = "0：未删除 1：已删除")
-    @TableField("deleted")
     open var deleted: Int? = null
 
     override fun toString(): String {

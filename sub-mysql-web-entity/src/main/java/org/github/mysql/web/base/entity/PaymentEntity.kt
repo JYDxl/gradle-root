@@ -2,7 +2,9 @@
 
 package org.github.mysql.web.base.entity
 
-import com.baomidou.mybatisplus.annotation.*
+import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableId
+import com.baomidou.mybatisplus.annotation.TableName
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2021-05-30
  */
 @TableName("payment")
-@ApiModel(value="PaymentEntity对象", description="支付表")
+@ApiModel(value = "PaymentEntity对象", description = "支付表")
 open class PaymentEntity : Entity() {
 
     /** id */
@@ -24,7 +26,6 @@ open class PaymentEntity : Entity() {
 
     /** serial */
     @ApiModelProperty(value = "serial")
-    @TableField("serial")
     open var serial: String? = null
 
     override fun toString(): String {
