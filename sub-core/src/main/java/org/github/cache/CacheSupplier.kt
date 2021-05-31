@@ -15,21 +15,19 @@ interface CacheSupplier<E, R>: Function<String, E?>, Consumer<CacheEvent>, Initi
 
   val filter: Predicate<E?> get() = nonNull()
 
-  val proxy: Function<E?, R?> get() = optional(mapper, null)
-
   fun load(keys: Collection<String> = of()): Map<String, E?>
 
   override fun apply(key: String): E? = load(of(key)).firstNotNullOfOrNull {it.value}
 
   override fun accept(event: CacheEvent) = Unit
 
-  fun get(key: Any?): R? = if (key == null) null else proxy.apply(apply(key.toString()))
+  fun get(key: Any?): R? = if (key == null) null else mapper.apply(apply(key.toString()))
 
-  fun getSome(keys: Collection<String>): Map<String, R?> = load(keys).mapValues {proxy.apply(it.value)}
+  fun getSome(keys: Collection<String>): Map<String, R?> = load(keys).mapValues {mapper.apply(it.value)}
 
   fun getAll(): List<Pair<String, R>> = getAll(filter)
 
-  fun getAll(filter: Predicate<E?>): List<Pair<String, R>> = load().filterValues {filter.test(it)}.mapTo(arrayListOf()) {Pair<String, R>(it.key, proxy.apply(it.value))}
+  fun getAll(filter: Predicate<E?>): List<Pair<String, R>> = load().filterValues {filter.test(it)}.mapTo(arrayListOf()) {Pair<String, R>(it.key, mapper.apply(it.value))}
 
   fun set(key: Any) = Unit
 
