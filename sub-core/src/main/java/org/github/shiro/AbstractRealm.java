@@ -13,6 +13,12 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 public abstract class AbstractRealm extends AuthorizingRealm {
 
+  public static final String SHIRO_CACHE_KEY_WEB_SUB_PREFIX = "authen:web";
+
+  public static final String SHIRO_CACHE_KEY_JWT_SUB_PREFIX = "authen:jwt";
+
+  public static final String SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX = "author";
+
   private final AuthorFunc author;
 
   private final AuthenFunc authen;

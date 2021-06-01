@@ -3,11 +3,11 @@ package org.github.shiro;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 
-public class AuthRealm extends AbstractRealm {
-  public AuthRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen) {
+public class WEBRealm extends AbstractRealm {
+  public WEBRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen, String authenticationCacheName, String authorizationCacheName) {
     super(matcher, author, authen);
-    setAuthenticationCacheName("authen:web");
-    setAuthorizationCacheName("author");
+    setAuthenticationCacheName(authenticationCacheName);
+    setAuthorizationCacheName(authorizationCacheName);
   }
 
   @Override

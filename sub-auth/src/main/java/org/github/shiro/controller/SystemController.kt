@@ -18,12 +18,12 @@ class SystemController {
   @Autowired
   private lateinit var shiroService: IShiroService
 
-  @GetMapping("/security/user/{username}")
+  @GetMapping("/public/security/user/{username}")
   fun user(@PathVariable username: String): Returnable {
     return shiroService.queryUser(username)
   }
 
-  @GetMapping("/security/auth/{userId}")
+  @GetMapping("/public/security/auth/{userId}")
   fun auth(@PathVariable userId: String): Returnable {
     return shiroService.queryAuthorInfo(userId)
   }
@@ -31,12 +31,6 @@ class SystemController {
   @PostMapping("/login")
   fun login(): Returnable {
     return systemService.login()
-  }
-
-  @PostMapping("/logout")
-  fun logout(): Returnable {
-    //TODO 待实现，待测试 首先调用logout，其次清理shiro的cache，包括用户和权限(权限和用户cache名配置到文件中，feign()调用的错误统一包装为登录过期)
-    return Returnable.of()
   }
 
   @RequestMapping("/token")

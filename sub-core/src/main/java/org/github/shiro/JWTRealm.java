@@ -13,10 +13,10 @@ import static org.github.shiro.JWTUtil.verify;
 
 @Slf4j
 public class JWTRealm extends AbstractRealm {
-  public JWTRealm(AuthorFunc author, AuthenFunc authen) {
+  public JWTRealm(AuthorFunc author, AuthenFunc authen, String authenticationCacheName, String authorizationCacheName) {
     super(null, author, authen);
-    setAuthenticationCacheName("authen:jwt");
-    setAuthorizationCacheName("author");
+    setAuthenticationCacheName(authenticationCacheName);
+    setAuthorizationCacheName(authorizationCacheName);
   }
 
   @Override

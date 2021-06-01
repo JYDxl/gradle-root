@@ -12,6 +12,6 @@ public class CustomWebSessionStorageEvaluator extends DefaultWebSessionStorageEv
   @Override
   public boolean isSessionStorageEnabled(Subject subject) {
     val realmNames = ofNullable(subject.getPrincipals()).map(PrincipalCollection::getRealmNames).orElse(of());
-    return realmNames.contains(AuthRealm.class.getName()) || super.isSessionStorageEnabled(subject);
+    return realmNames.contains(WEBRealm.class.getName()) || super.isSessionStorageEnabled(subject);
   }
 }

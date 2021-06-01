@@ -27,7 +27,16 @@ class ShiroConfig {
   private val log = ShiroConfig::class.log
 
   @Value("#{@environment['shiro.loginUrl']}")
-  protected lateinit var loginUrl: String
+  private lateinit var loginUrl: String
+
+  @Value("#{ @environment['shiro-redis.cache-manager.webSubPrefix'] ?: T(org.github.shiro.AbstractRealm).SHIRO_CACHE_KEY_WEB_SUB_PREFIX }")
+  private lateinit var shiroCacheKeyWebSubPrefix: String
+
+  @Value("#{ @environment['shiro-redis.cache-manager.jwtSubPrefix'] ?: T(org.github.shiro.AbstractRealm).SHIRO_CACHE_KEY_JWT_SUB_PREFIX }")
+  private lateinit var shiroCacheKeyJwtSubPrefix: String
+
+  @Value("#{ @environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.AbstractRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX }")
+  private lateinit var shiroCacheKeyAuthorSubPrefix: String
 
   @ConditionalOnMissingBean
   @Bean
@@ -38,10 +47,16 @@ class ShiroConfig {
   fun authenFunc() = DefaultAuthenFunc()
 
   @Bean
-  fun authRealm(credentialsMatcher: CredentialsMatcher) = AuthRealm(credentialsMatcher, authorFunc(), authenFunc())
+  fun authRealm(credentialsMatcher: CredentialsMatcher) = WEBRealm(
+    credentialsMatcher,
+    authorFunc(),
+    authenFunc(),
+    shiroCacheKeyWebSubPrefix,
+    shiroCacheKeyAuthorSubPrefix
+  )
 
   @Bean
-  fun jwtRealm() = JWTRealm(authorFunc(), authenFunc())
+  fun jwtRealm() = JWTRealm(authorFunc(), authenFunc(), shiroCacheKeyJwtSubPrefix, shiroCacheKeyAuthorSubPrefix)
 
   @Bean
   fun authorizer() = ModularRealmAuthorizer()
@@ -91,7 +106,7 @@ class ShiroConfig {
     filterChainDefinitionMap = definition.filterChainMap
     filters = object: ForwardingMap<String, Filter>() {
       override fun delegate(): Map<String, Filter> = of(
-//        "logout", CustomLogoutFilter(),
+        "logout", CustomLogoutFilter(),
         "authc", CustomJWTAuthenticationFilter(false),
         "perms", CustomPermissionsAuthorizationFilter(),
         "roles", CustomRolesAuthorizationFilter(),
