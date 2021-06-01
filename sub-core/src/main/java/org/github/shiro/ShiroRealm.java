@@ -11,11 +11,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import static org.apache.commons.lang3.StringUtils.*;
 
-public abstract class AbstractRealm extends AuthorizingRealm {
+public abstract class ShiroRealm extends AuthorizingRealm {
 
-  public static final String SHIRO_CACHE_KEY_WEB_SUB_PREFIX = "authen:web";
-
-  public static final String SHIRO_CACHE_KEY_JWT_SUB_PREFIX = "authen:jwt";
+  public static final String SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX = "authen";
 
   public static final String SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX = "author";
 
@@ -23,7 +21,7 @@ public abstract class AbstractRealm extends AuthorizingRealm {
 
   private final AuthenFunc authen;
 
-  public AbstractRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen) {
+  public ShiroRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen) {
     super(matcher);
     this.author = author;
     this.authen = authen;
@@ -45,8 +43,8 @@ public abstract class AbstractRealm extends AuthorizingRealm {
   }
 
   @Override
-  public String getName() {
-    return getClass().getName();
+  public final String getName() {
+    return ShiroRealm.class.getName();
   }
 
   @Override

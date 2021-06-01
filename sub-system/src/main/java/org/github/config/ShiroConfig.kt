@@ -29,13 +29,10 @@ class ShiroConfig {
   @Value("#{@environment['shiro.loginUrl']}")
   private lateinit var loginUrl: String
 
-  @Value("#{ @environment['shiro-redis.cache-manager.webSubPrefix'] ?: T(org.github.shiro.AbstractRealm).SHIRO_CACHE_KEY_WEB_SUB_PREFIX }")
-  private lateinit var shiroCacheKeyWebSubPrefix: String
+  @Value("#{ @environment['shiro-redis.cache-manager.authenSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX }")
+  private lateinit var shiroCacheKeyAuthenSubPrefix: String
 
-  @Value("#{ @environment['shiro-redis.cache-manager.jwtSubPrefix'] ?: T(org.github.shiro.AbstractRealm).SHIRO_CACHE_KEY_JWT_SUB_PREFIX }")
-  private lateinit var shiroCacheKeyJwtSubPrefix: String
-
-  @Value("#{ @environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.AbstractRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX }")
+  @Value("#{ @environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX }")
   private lateinit var shiroCacheKeyAuthorSubPrefix: String
 
   @ConditionalOnMissingBean
@@ -51,12 +48,12 @@ class ShiroConfig {
     credentialsMatcher,
     authorFunc(),
     authenFunc(),
-    shiroCacheKeyWebSubPrefix,
+    shiroCacheKeyAuthenSubPrefix,
     shiroCacheKeyAuthorSubPrefix
   )
 
   @Bean
-  fun jwtRealm() = JWTRealm(authorFunc(), authenFunc(), shiroCacheKeyJwtSubPrefix, shiroCacheKeyAuthorSubPrefix)
+  fun jwtRealm() = JWTRealm(authorFunc(), authenFunc(), shiroCacheKeyAuthenSubPrefix, shiroCacheKeyAuthorSubPrefix)
 
   @Bean
   fun authorizer() = ModularRealmAuthorizer()

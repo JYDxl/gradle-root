@@ -12,7 +12,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import static org.github.shiro.JWTUtil.verify;
 
 @Slf4j
-public class JWTRealm extends AbstractRealm {
+public class JWTRealm extends ShiroRealm {
   public JWTRealm(AuthorFunc author, AuthenFunc authen, String authenticationCacheName, String authorizationCacheName) {
     super(null, author, authen);
     setAuthenticationCacheName(authenticationCacheName);

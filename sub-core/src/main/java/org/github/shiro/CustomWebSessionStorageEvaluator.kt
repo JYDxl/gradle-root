@@ -1,17 +1,12 @@
-package org.github.shiro;
+package org.github.shiro
 
-import lombok.val;
-import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.web.mgt.DefaultWebSessionStorageEvaluator;
+import org.apache.shiro.subject.Subject
+import org.apache.shiro.web.mgt.DefaultWebSessionStorageEvaluator
+import org.apache.shiro.web.subject.WebSubject
+import org.github.spring.ops.req
 
-import static com.google.common.collect.ImmutableSet.of;
-import static java.util.Optional.ofNullable;
-
-public class CustomWebSessionStorageEvaluator extends DefaultWebSessionStorageEvaluator {
-  @Override
-  public boolean isSessionStorageEnabled(Subject subject) {
-    val realmNames = ofNullable(subject.getPrincipals()).map(PrincipalCollection::getRealmNames).orElse(of());
-    return realmNames.contains(WEBRealm.class.getName()) || super.isSessionStorageEnabled(subject);
-  }
+class CustomWebSessionStorageEvaluator : DefaultWebSessionStorageEvaluator() {
+    override fun isSessionStorageEnabled(subject: Subject): Boolean {
+        return (subject.isAuthenticated && subject is WebSubject && req?.getHeader("Token").isNullOrBlank()) || super.isSessionStorageEnabled(subject)
+    }
 }

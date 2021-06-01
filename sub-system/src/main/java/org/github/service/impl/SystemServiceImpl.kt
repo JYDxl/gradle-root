@@ -45,7 +45,6 @@ class SystemServiceImpl: ISystemService {
     val password = login.password ?: throw ParamsErrorException("密码不能为空")
     val secret = generator.generate(password, username)
     val jwt = sign(username, secret)
-    getSubject().login(JWTToken(username, jwt))
     return JSONDataReturn.of(jwt)
   }
 
