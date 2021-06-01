@@ -24,7 +24,7 @@ class SystemServiceImpl: ISystemService {
     val info = user.javaClass.getConstructor().newInstance()
     copyProperties(user, info)
     val session: Session? = subject.getSession(false)
-    info.token = session?.id.toString()
+    info.token = session?.id?.toString()
     return JSONDataReturn.of(info)
   }
 

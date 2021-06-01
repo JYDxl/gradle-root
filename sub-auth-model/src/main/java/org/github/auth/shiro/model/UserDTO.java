@@ -1,15 +1,10 @@
 package org.github.auth.shiro.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NonNull;
-import lombok.ToString;
+import javax.annotation.Nullable;
+import lombok.*;
 import org.github.mysql.web.base.entity.SysUserEntity;
 import org.github.shiro.User;
-
-import javax.annotation.Nullable;
-import static java.util.Objects.requireNonNull;
+import static java.util.Objects.*;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
@@ -27,13 +22,11 @@ public class UserDTO extends SysUserEntity implements User {
     return requireNonNull(super.getUsername());
   }
 
-  @JsonIgnore
   @Override
   public @NonNull String getPassword() {
     return requireNonNull(super.getPassword());
   }
 
-  @JsonIgnore
   @Override
   public @Nullable String getSalt() {
     return super.getSalt();
