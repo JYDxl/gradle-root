@@ -13,12 +13,7 @@ import static org.apache.commons.lang3.StringUtils.*;
 
 public abstract class ShiroRealm extends AuthorizingRealm {
 
-  public static final String SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX = "authen";
-
-  public static final String SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX = "author";
-
   private final AuthorFunc author;
-
   private final AuthenFunc authen;
 
   public ShiroRealm(CredentialsMatcher matcher, AuthorFunc author, AuthenFunc authen) {
@@ -56,4 +51,8 @@ public abstract class ShiroRealm extends AuthorizingRealm {
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     return author.apply(principals);
   }
+
+  public static final String SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX = "authen";
+
+  public static final String SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX = "author";
 }

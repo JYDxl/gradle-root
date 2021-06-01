@@ -44,13 +44,7 @@ class ShiroConfig {
   fun authenFunc() = DefaultAuthenFunc()
 
   @Bean
-  fun authRealm(credentialsMatcher: CredentialsMatcher) = WEBRealm(
-    credentialsMatcher,
-    authorFunc(),
-    authenFunc(),
-    shiroCacheKeyAuthenSubPrefix,
-    shiroCacheKeyAuthorSubPrefix
-  )
+  fun authRealm(credentialsMatcher: CredentialsMatcher) = WEBRealm(credentialsMatcher, authorFunc(), authenFunc(), shiroCacheKeyAuthenSubPrefix, shiroCacheKeyAuthorSubPrefix)
 
   @Bean
   fun jwtRealm() = JWTRealm(authorFunc(), authenFunc(), shiroCacheKeyAuthenSubPrefix, shiroCacheKeyAuthorSubPrefix)
