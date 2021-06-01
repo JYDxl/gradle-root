@@ -8,6 +8,7 @@ import org.github.service.ISystemService
 import org.github.shiro.*
 import org.github.shiro.JWTUtil.sign
 import org.github.spring.restful.json.JSONDataReturn
+import org.github.spring.restful.json.JSONReturn
 import org.springframework.beans.BeanUtils.copyProperties
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -52,5 +53,10 @@ class SystemServiceImpl: ISystemService {
     val token = token().data
     val jwt = if (token.isNullOrBlank()) jwt().data else null
     return Token(token, jwt)
+  }
+
+  override fun logout(): JSONReturn {
+    getSubject().logout()
+    return JSONReturn().withRetMsg("退出成功")
   }
 }

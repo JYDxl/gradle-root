@@ -33,6 +33,11 @@ class SystemController {
     return systemService.login()
   }
 
+  @PostMapping("/logout")
+  fun logout(): Returnable {
+    return systemService.logout()
+  }
+
   @RequestMapping("/token")
   fun token(): Returnable {
     return systemService.token()

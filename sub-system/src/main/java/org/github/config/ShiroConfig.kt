@@ -29,10 +29,10 @@ class ShiroConfig {
   @Value("#{@environment['shiro.loginUrl']}")
   private lateinit var loginUrl: String
 
-  @Value("#{ @environment['shiro-redis.cache-manager.authenSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX }")
+  @Value("#{@environment['shiro-redis.cache-manager.authenSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX}")
   private lateinit var shiroCacheKeyAuthenSubPrefix: String
 
-  @Value("#{ @environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX }")
+  @Value("#{@environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX}")
   private lateinit var shiroCacheKeyAuthorSubPrefix: String
 
   @ConditionalOnMissingBean
@@ -103,7 +103,7 @@ class ShiroConfig {
     filterChainDefinitionMap = definition.filterChainMap
     filters = object: ForwardingMap<String, Filter>() {
       override fun delegate(): Map<String, Filter> = of(
-        "logout", CustomLogoutFilter(),
+//        "logout", CustomLogoutFilter(),
         "authc", CustomJWTAuthenticationFilter(false),
         "perms", CustomPermissionsAuthorizationFilter(),
         "roles", CustomRolesAuthorizationFilter(),
