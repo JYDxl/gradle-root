@@ -1,4 +1,4 @@
-package org.github.shiro.controller
+package org.github.controller
 
 import org.github.ops.log
 import org.github.service.IShiroService

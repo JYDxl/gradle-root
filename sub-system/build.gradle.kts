@@ -1,4 +1,5 @@
 val shiroredis: String by System.getProperties()
+val swagger: String by System.getProperties()
 val shiro: String by System.getProperties()
 
 dependencies {
@@ -8,6 +9,7 @@ dependencies {
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
 
+  compileOnly("io.springfox:springfox-boot-starter:$swagger")
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 
   compileOnly("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis") {

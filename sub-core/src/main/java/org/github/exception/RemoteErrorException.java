@@ -6,7 +6,9 @@ import org.github.spring.restful.json.JSONReturn;
 public class RemoteErrorException extends RuntimeException {
   private final @NonNull JSONReturn data;
 
-  public RemoteErrorException(@NonNull JSONReturn data) {this.data = data;}
+  public RemoteErrorException(@NonNull JSONReturn data) {
+    this.data = data;
+  }
 
   public RemoteErrorException(String message, @NonNull JSONReturn data) {
     super(message);
