@@ -22,7 +22,6 @@ import ${superControllerClassPackage};
  * </p>
  *
  * @author ${author}
- * @since ${date}
  */
 <#if restControllerStyle>
 @RestController

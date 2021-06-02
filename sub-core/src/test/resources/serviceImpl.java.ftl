@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
  * ${table.comment!} 服务实现类
  *
  * @author ${author}
- * @since ${date}
  */
 @Service
 <#if kotlin>

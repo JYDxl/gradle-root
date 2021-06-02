@@ -12,7 +12,6 @@ import org.github.mybatis.MyBatisMapper;
  * ${table.comment!} Mapper 接口
  *
  * @author ${author}
- * @since ${date}
  */
 @MyBatisMapper
 <#if kotlin>
