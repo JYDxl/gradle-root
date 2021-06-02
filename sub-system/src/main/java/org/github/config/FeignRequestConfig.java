@@ -1,12 +1,13 @@
 package org.github.config;
 
 import lombok.*;
+import org.github.shiro.ShiroOps;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import static java.util.Objects.*;
 import static org.github.spring.ops.SpringsKt.*;
 
-public class FeignRequestConfig implements RequestInterceptor {
+public class FeignRequestConfig implements RequestInterceptor, ShiroOps {
   @Override
   public void apply(RequestTemplate template) {
     val req = requireNonNull(getReq());
@@ -17,6 +18,6 @@ public class FeignRequestConfig implements RequestInterceptor {
       template.header(name, req.getHeader(name));
     }
 
-    template.query("token", req.getParameter("token"));
+    template.query(JSESSIONID, req.getParameter(JSESSIONID));
   }
 }

@@ -2,6 +2,7 @@ package org.github.config
 
 import io.swagger.annotations.ApiOperation
 import org.apache.shiro.web.servlet.ShiroHttpSession.DEFAULT_SESSION_ID_NAME
+import org.github.shiro.ShiroOps.JWT
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.PathSelectors.any
@@ -31,7 +32,7 @@ class SwaggerConfig {
 
   fun getGlobalRequestParameters(): List<RequestParameter> = listOf(
     RequestParameterBuilder()
-      .name("Token")
+      .name(JWT)
       .description("JWT Token")
       .required(false)
       .`in`(HEADER)

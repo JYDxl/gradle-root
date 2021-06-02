@@ -33,7 +33,7 @@ import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
 import static org.github.spring.restful.json.JSONReturn.warn;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
-public interface CustomFilterInvoker {
+public interface CustomFilterInvoker extends ShiroOps {
   default boolean executeJWTLogin(ServletRequest request, ServletResponse response, Logger log) throws IOException {
     val token = generateJwtToken(request);
     if (log.isDebugEnabled()) log.debug("JWT Login submission detected. Attempting to execute login: {}", token);
@@ -49,7 +49,7 @@ public interface CustomFilterInvoker {
   }
 
   default JWTToken generateJwtToken(ServletRequest request) {
-    val token    = toHttp(request).getHeader("Token");
+    val token    = toHttp(request).getHeader(JWT);
     val username = getUsername(token);
     return new JWTToken(username, token);
   }
@@ -103,7 +103,7 @@ public interface CustomFilterInvoker {
   }
 
   default boolean hasJWTToken(ServletRequest request) {
-    return isNotBlank(toHttp(request).getHeader("Token"));
+    return isNotBlank(toHttp(request).getHeader(JWT));
   }
 
   default boolean isNotJWT(ServletRequest request) {
@@ -125,7 +125,7 @@ public interface CustomFilterInvoker {
 //    val username  = principal.getUsername();
 //    val password  = principal.getPassword();
 //    val token     = sign(username, password);
-//    toHttp(response).addHeader("Token", token);
+//    toHttp(response).addHeader(JWT, token);
 //  }
 
   default void sessionKickOut(Subject subject) {
