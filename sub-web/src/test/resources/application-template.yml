@@ -93,9 +93,6 @@ logging:
 shiro:
   userNativeSessionManager: true
   loginUrl: /login
-  sessionManager:
-    cookie:
-      name: token
 
 shiro-redis:
   redis-manager:

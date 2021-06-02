@@ -1,6 +1,7 @@
 package org.github.config
 
 import io.swagger.annotations.ApiOperation
+import org.apache.shiro.web.servlet.ShiroHttpSession.DEFAULT_SESSION_ID_NAME
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.PathSelectors.any
@@ -8,6 +9,7 @@ import springfox.documentation.builders.RequestHandlerSelectors.basePackage
 import springfox.documentation.builders.RequestHandlerSelectors.withMethodAnnotation
 import springfox.documentation.builders.RequestParameterBuilder
 import springfox.documentation.service.ParameterType.HEADER
+import springfox.documentation.service.ParameterType.QUERY
 import springfox.documentation.service.RequestParameter
 import springfox.documentation.spi.DocumentationType.OAS_30
 import springfox.documentation.spring.web.plugins.Docket
@@ -33,6 +35,12 @@ class SwaggerConfig {
       .description("JWT Token")
       .required(false)
       .`in`(HEADER)
+      .build(),
+    RequestParameterBuilder()
+      .name(DEFAULT_SESSION_ID_NAME)
+      .description("WEB Token")
+      .required(false)
+      .`in`(QUERY)
       .build(),
   )
 }
