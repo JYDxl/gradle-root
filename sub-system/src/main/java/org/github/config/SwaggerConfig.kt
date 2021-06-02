@@ -1,7 +1,7 @@
 package org.github.config
 
 import io.swagger.annotations.ApiOperation
-import org.apache.shiro.web.servlet.ShiroHttpSession.DEFAULT_SESSION_ID_NAME
+import org.github.shiro.ShiroOps.JSESSIONID
 import org.github.shiro.ShiroOps.JWT
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -38,7 +38,7 @@ class SwaggerConfig {
       .`in`(HEADER)
       .build(),
     RequestParameterBuilder()
-      .name(DEFAULT_SESSION_ID_NAME)
+      .name(JSESSIONID)
       .description("WEB Token")
       .required(false)
       .`in`(QUERY)
