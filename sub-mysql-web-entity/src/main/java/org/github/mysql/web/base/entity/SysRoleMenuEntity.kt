@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiModelProperty;
  * 角色与菜单对应关系
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @TableName("sys_role_menu")
 @ApiModel(value = "SysRoleMenuEntity对象", description = "角色与菜单对应关系")

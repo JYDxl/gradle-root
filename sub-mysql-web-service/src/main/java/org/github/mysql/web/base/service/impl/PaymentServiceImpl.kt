@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  * 支付表 服务实现类
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @Service
 open class PaymentServiceImpl : ServiceImpl<IPaymentMapper, PaymentEntity>(), IPaymentService

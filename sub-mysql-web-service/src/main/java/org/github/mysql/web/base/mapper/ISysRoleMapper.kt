@@ -10,7 +10,6 @@ import org.github.mybatis.MyBatisMapper;
  * 角色 Mapper 接口
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @MyBatisMapper
 interface ISysRoleMapper : IMapper<SysRoleEntity>

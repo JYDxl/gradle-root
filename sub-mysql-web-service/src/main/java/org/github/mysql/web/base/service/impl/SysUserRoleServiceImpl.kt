@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  * 用户与角色对应关系 服务实现类
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @Service
 open class SysUserRoleServiceImpl : ServiceImpl<ISysUserRoleMapper, SysUserRoleEntity>(), ISysUserRoleService

@@ -9,6 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * 安全问题类别 服务类
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 interface ITabSafeQuestionTypeService : IService<TabSafeQuestionTypeEntity>

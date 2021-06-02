@@ -14,7 +14,6 @@ import io.swagger.annotations.ApiModelProperty;
  * 菜单管理
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @TableName("sys_menu")
 @ApiModel(value = "SysMenuEntity对象", description = "菜单管理")

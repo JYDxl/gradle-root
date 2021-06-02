@@ -27,11 +27,6 @@ class FILEImpl implements FILE {
   }
 
   @Override
-  public @NonNull MediaType mediaType() {
-    return firstNonNull(type, FILE.super.mediaType());
-  }
-
-  @Override
   public void accept(@NonNull OutputStream output) throws Exception {
     try (val in = input) {
       copy(in, output);
@@ -39,12 +34,17 @@ class FILEImpl implements FILE {
   }
 
   @Override
-  public String toString() {
-    return get();
+  public @NonNull MediaType mediaType() {
+    return firstNonNull(type, FILE.super.mediaType());
   }
 
   @Override
   public @NonNull String get() {
     return decode(name);
+  }
+
+  @Override
+  public String toString() {
+    return get();
   }
 }

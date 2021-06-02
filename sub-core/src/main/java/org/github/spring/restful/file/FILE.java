@@ -47,6 +47,13 @@ public interface FILE extends Returnable {
   /**
    * Generator.
    */
+  static @NonNull FILE of(@NonNull File file) {
+    return of(file, null);
+  }
+
+  /**
+   * Generator.
+   */
   static @NonNull FILE of(@NonNull File file, @Nullable MediaType type) {
     try {
       return new FILEImpl(encode(file.getName()), new FileInputStream(file), type);
@@ -58,8 +65,22 @@ public interface FILE extends Returnable {
   /**
    * Generator.
    */
+  static @NonNull FILE of(@NonNull String name, @NonNull InputStream input) {
+    return of(name, input, null);
+  }
+
+  /**
+   * Generator.
+   */
   static @NonNull FILE of(@NonNull String name, @NonNull InputStream input, @Nullable MediaType type) {
     return new FILEImpl(encode(name), input, type);
+  }
+
+  /**
+   * Generator.
+   */
+  static @NonNull FILE of(@NonNull Resource resource) {
+    return of(resource, null);
   }
 
   /**
@@ -74,26 +95,5 @@ public interface FILE extends Returnable {
     } catch (IOException e) {
       throw new IORuntimeException(e);
     }
-  }
-
-  /**
-   * Generator.
-   */
-  static @NonNull FILE of(@NonNull File file) {
-    return of(file, null);
-  }
-
-  /**
-   * Generator.
-   */
-  static @NonNull FILE of(@NonNull String name, @NonNull InputStream input) {
-    return of(name, input, null);
-  }
-
-  /**
-   * Generator.
-   */
-  static @NonNull FILE of(@NonNull Resource resource) {
-    return of(resource, null);
   }
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  * 安全问题类别 服务实现类
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @Service
 open class TabSafeQuestionTypeServiceImpl : ServiceImpl<ITabSafeQuestionTypeMapper, TabSafeQuestionTypeEntity>(), ITabSafeQuestionTypeService

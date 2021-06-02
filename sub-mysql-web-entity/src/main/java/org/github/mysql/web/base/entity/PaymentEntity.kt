@@ -13,7 +13,6 @@ import io.swagger.annotations.ApiModelProperty;
  * 支付表
  *
  * @author JYD_XL
- * @since 2021-05-31
  */
 @TableName("payment")
 @ApiModel(value = "PaymentEntity对象", description = "支付表")
