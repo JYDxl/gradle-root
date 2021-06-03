@@ -1,12 +1,12 @@
 package org.github.service.impl
 
-import org.apache.shiro.SecurityUtils.getSubject
-import org.apache.shiro.session.Session
-import org.apache.shiro.subject.Subject
 import org.github.exception.ParamsErrorException
 import org.github.service.ISystemService
 import org.github.shiro.*
 import org.github.shiro.JWTUtil.sign
+import org.github.shiro.ops.principal
+import org.github.shiro.ops.session
+import org.github.shiro.ops.subject
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.springframework.beans.BeanUtils.copyProperties
@@ -19,24 +19,20 @@ class SystemServiceImpl: ISystemService {
   private lateinit var generator: PasswordGenerator
 
   override fun login(): JSONDataReturn<User> {
-    val subject: Subject = getSubject()
-    val user = subject.principal as User
+    val user = principal as User
     val info = user.javaClass.getConstructor().newInstance()
     copyProperties(user, info)
-    val session: Session? = subject.getSession(false)
     info.jsessionid = session?.id?.toString()
     return JSONDataReturn.of(info)
   }
 
   override fun jsessionid(): JSONDataReturn<String?> {
-    val subject: Subject = getSubject()
-    val session: Session? = subject.getSession(false)
     val jsessionid = session?.id?.toString()
     return JSONDataReturn.of(jsessionid)
   }
 
   override fun jwt(): JSONDataReturn<String> {
-    val user = getSubject().principal as User
+    val user = principal as User
     val jwt = sign(user.username, user.password)
     return JSONDataReturn.of(jwt)
   }
@@ -50,13 +46,13 @@ class SystemServiceImpl: ISystemService {
   }
 
   override fun feign(): Token {
-    val jsessionid = jsessionid().data
+    val jsessionid = session?.id?.toString()
     val jwt = if (jsessionid.isNullOrBlank()) jwt().data else null
     return Token(jsessionid, jwt)
   }
 
   override fun logout(): JSONReturn {
-    getSubject().logout()
+    subject.logout()
     return JSONReturn().withRetMsg("退出成功")
   }
 }
