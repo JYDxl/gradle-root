@@ -8,8 +8,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.shiro.SecurityUtils.getSubject;
 import static org.apache.shiro.util.ThreadContext.bind;
-import static org.github.spring.ops.SpringsKt.getReq;
-import static org.github.spring.ops.SpringsKt.getResp;
+import static org.github.spring.ops.SpringKt.getReq;
+import static org.github.spring.ops.SpringKt.getResp;
 import static org.github.shiro.JWTUtil.getUsername;
 
 public abstract class ShiroDubboDataValidator {
