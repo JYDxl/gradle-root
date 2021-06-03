@@ -4,7 +4,7 @@ import org.github.cache.AbstractJ2Cache
 import org.github.cache.CacheNameSupplier
 import org.github.mybatis.ktQueryWrapper
 import org.github.mysql.web.base.entity.SysMenuEntity
-import org.github.mysql.web.base.enums.Enable.ENABLED
+import org.github.mysql.web.base.enums.Enabled.ENABLED
 import org.github.mysql.web.base.service.ISysMenuService
 import org.github.web.common.CacheName.SYS_MENU_NAME
 import org.springframework.beans.factory.annotation.Autowired

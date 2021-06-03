@@ -12,8 +12,8 @@ import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
 import org.github.base.Page
 import org.github.mybatis.ktQueryWrapper
 import org.github.spring.restful.json.JSONArrayReturn
-import org.github.mysql.web.base.enums.MenuType
 import org.github.mysql.web.base.enums.MenuType.BUTTON
+import org.github.mysql.web.base.enums.MenuType.DIRECTORY
 import org.github.ops.isNotBlank
 import org.github.web.common.CacheName.SYS_MENU_NAME
 import org.springframework.beans.BeanUtils.copyProperties
@@ -57,7 +57,7 @@ class MenuServiceImpl: IMenuService {
     root.name = "根目录"
     // root.setUrl();
     // root.setPerms();
-    root.type = MenuType.DIRECTORY.code
+    root.type = DIRECTORY.code
     root.icon = "fa fa-car"
     root.orderNum = 0
     list.add(root)

@@ -24,9 +24,9 @@ class EnumCacheTest {
 
   @Test
   void getTest() {
-    val value1 = enumCache.get(Sex.class, 0);
+    val value1 = enumCache.get(Sex.class, "0");
     log.info(value1);
-    val value2 = enumCache.get(Sex.class, 2);
+    val value2 = enumCache.get(Sex.class, "2");
     log.info(value2);
   }
 

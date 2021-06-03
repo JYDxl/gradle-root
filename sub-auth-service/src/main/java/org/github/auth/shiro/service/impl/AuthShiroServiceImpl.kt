@@ -3,7 +3,7 @@ package org.github.auth.shiro.service.impl
 import org.apache.shiro.authc.AuthenticationException
 import org.github.auth.shiro.mapper.IShiroMapper
 import org.github.mysql.web.base.enums.Deleted.DELETED
-import org.github.mysql.web.base.enums.Enable.DISABLED
+import org.github.mysql.web.base.enums.Enabled.DISABLED
 import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User

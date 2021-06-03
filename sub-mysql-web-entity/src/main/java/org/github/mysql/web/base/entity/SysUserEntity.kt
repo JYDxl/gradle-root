@@ -20,7 +20,9 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value = "SysUserEntity对象", description = "系统用户")
 open class SysUserEntity : Entity() {
 
-    @TableId(value = "user_id", type = IdType.AUTO)
+    /** 主键 */
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
     open var userId: Long? = null
 
     /** 用户名 */
@@ -35,9 +37,9 @@ open class SysUserEntity : Entity() {
     @ApiModelProperty(value = "salt")
     open var salt: String? = null
 
-    /** 状态  0：禁用 1：正常 */
-    @ApiModelProperty(value = "状态  0：禁用 1：正常")
-    open var status: Int? = null
+    /** 状态 0：禁用 1：正常 */
+    @ApiModelProperty(value = "状态 0：禁用 1：正常")
+    open var status: String? = null
 
     /** 邮箱 */
     @ApiModelProperty(value = "邮箱")
@@ -57,9 +59,9 @@ open class SysUserEntity : Entity() {
     @TableField("create_time")
     open var createTime: LocalDateTime? = null
 
-    /** 0：未删除 1：已删除 */
-    @ApiModelProperty(value = "0：未删除 1：已删除")
-    open var deleted: Int? = null
+    /** 逻辑删除 0：未删除 1：已删除 */
+    @ApiModelProperty(value = "逻辑删除 0：未删除 1：已删除")
+    open var deleted: String? = null
 
     override fun toString(): String {
         return "SysUserEntity{" +
