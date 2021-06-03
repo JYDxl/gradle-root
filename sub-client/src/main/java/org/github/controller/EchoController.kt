@@ -3,8 +3,8 @@ package org.github.controller
 import org.springframework.beans.factory.annotation.Autowired
 import org.github.web.feign.IServiceProviderWebServer
 import org.github.service.ISystemService
+import org.github.spring.restful.Returnable
 import org.springframework.web.bind.annotation.GetMapping
-import org.github.spring.restful.json.JSONReturn
 import org.springframework.web.bind.annotation.RestController
 
 // import org.apache.dubbo.config.annotation.DubboReference;
@@ -24,7 +24,7 @@ class EchoController {
   //     return echoService.echo(message);
   // }
   @GetMapping("/basic")
-  fun basic(): JSONReturn {
+  fun basic(): Returnable {
     val (jsessionid, jwt) = systemService.feign()
     return webServer.basic(jsessionid, jwt)
   }

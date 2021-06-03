@@ -5,13 +5,13 @@ import org.apache.shiro.authz.annotation.RequiresRoles
 import org.github.spring.ops.appCtx
 import org.github.ops.info
 import org.github.ops.log
+import org.github.spring.ops.ktGetResources
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.file.FILE
 import org.github.spring.restful.json.JSON
 import org.github.spring.restful.json.JSONPReturn
 import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.view.VIEW
-import org.springframework.core.io.Resource
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -34,7 +34,7 @@ class RestController {
   }
 
   @GetMapping("view")
-  fun view(): VIEW {
+  fun view(): Returnable {
 //    val view = VIEW.of()
 //    val view = VIEW.of("index")
     val view = VIEW {"index"}
@@ -45,12 +45,12 @@ class RestController {
 
   @GetMapping("file")
   fun file(): Returnable {
-    val resource: Resource = appCtx.getResources("classpath*:spy.properties").first()
+    val resource = appCtx.ktGetResources("classpath*:spy.properties").first()
     return FILE.of(resource)
   }
 
   @GetMapping("json")
-  fun json(): JSON {
+  fun json(): Returnable {
 //    val json = JSON.of()
 //    val json = JSON.of(Pair(1, 2))
 //    val json = JSON.of("{\n  \"name\": \"bob\",\n  \"age\": 13\n}")
@@ -63,7 +63,7 @@ class RestController {
   }
 
   @GetMapping("jsonp")
-  fun jsonpReturn(): JSONPReturn<*> {
+  fun jsonpReturn(): Returnable {
     val jsonp: JSONPReturn<Any?> = JSONPReturn.of<Any?>()
     log.info {jsonp.toString()}
     log.info {jsonp.get()}

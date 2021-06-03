@@ -23,4 +23,8 @@ fun <T : Any> ChainQuery<T>.ktPage(page: IPage<T>): IPage<T> = page(page)
 
 fun <T : Any> ChainQuery<T>.ktList(): MutableList<T> = list()
 
+fun <T : Any> ChainQuery<T>.ktInList(`in`: List<Any>): MutableList<T> = if (`in`.isEmpty()) arrayListOf() else list()
+
 fun <T : Any> IService<T>.ktGetById(id: java.io.Serializable): T? = getById(id)
+
+fun <T : Any> IService<T>.ktListByIds(ids: List<java.io.Serializable>): MutableList<T> = if (ids.isEmpty()) arrayListOf() else listByIds(ids)

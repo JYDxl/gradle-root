@@ -2,6 +2,8 @@ package org.github.spring.ops
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
+import org.springframework.context.ApplicationContext
+import org.springframework.core.io.Resource
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
 import org.springframework.web.context.request.ServletRequestAttributes
@@ -22,3 +24,5 @@ val appCtx = getAppCtx()
 val webAppCtx = appCtx as WebApplicationContext
 
 val objectMapper = appCtx.getBean(ObjectMapper::class.java)
+
+fun ApplicationContext.ktGetResources(locationPattern: String): Array<Resource> = getResources(locationPattern)
