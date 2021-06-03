@@ -24,15 +24,15 @@ class SystemServiceImpl: ISystemService {
     val info = user.javaClass.getConstructor().newInstance()
     copyProperties(user, info)
     val session: Session? = subject.getSession(false)
-    info.token = session?.id?.toString()
+    info.jsessionid = session?.id?.toString()
     return JSONDataReturn.of(info)
   }
 
-  override fun token(): JSONDataReturn<String?> {
+  override fun jsessionid(): JSONDataReturn<String?> {
     val subject: Subject = getSubject()
     val session: Session? = subject.getSession(false)
-    val token = session?.id?.toString()
-    return JSONDataReturn.of(token)
+    val jsessionid = session?.id?.toString()
+    return JSONDataReturn.of(jsessionid)
   }
 
   override fun jwt(): JSONDataReturn<String> {
@@ -50,9 +50,9 @@ class SystemServiceImpl: ISystemService {
   }
 
   override fun feign(): Token {
-    val token = token().data
-    val jwt = if (token.isNullOrBlank()) jwt().data else null
-    return Token(token, jwt)
+    val jsessionid = jsessionid().data
+    val jwt = if (jsessionid.isNullOrBlank()) jwt().data else null
+    return Token(jsessionid, jwt)
   }
 
   override fun logout(): JSONReturn {

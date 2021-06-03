@@ -10,7 +10,7 @@ import static java.util.Objects.*;
 @ToString(callSuper = true)
 @Data
 public class UserDTO extends SysUserEntity implements User {
-  private @Nullable String token;
+  private @Nullable String jsessionid;
 
   @Override
   public @NonNull Long getUserId() {

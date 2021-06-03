@@ -9,7 +9,7 @@ import org.github.spring.restful.json.JSONReturn
 interface ISystemService {
   fun login(): JSONDataReturn<User>
 
-  fun token(): JSONDataReturn<String?>
+  fun jsessionid(): JSONDataReturn<String?>
 
   fun jwt(): JSONDataReturn<String>
 

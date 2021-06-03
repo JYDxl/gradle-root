@@ -1,3 +1,3 @@
 package org.github.shiro
 
-data class Token(val token: String?, val jwt: String?)
+data class Token(val jsessionid: String?, val jwt: String?)

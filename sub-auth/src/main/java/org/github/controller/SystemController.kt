@@ -38,9 +38,9 @@ class SystemController {
     return systemService.logout()
   }
 
-  @RequestMapping("/token")
-  fun token(): Returnable {
-    return systemService.token()
+  @RequestMapping("/jsessionid")
+  fun jsessionid(): Returnable {
+    return systemService.jsessionid()
   }
 
   @RequestMapping("/jwt")

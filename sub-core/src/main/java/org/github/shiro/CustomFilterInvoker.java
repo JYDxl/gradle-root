@@ -90,7 +90,7 @@ public interface CustomFilterInvoker {
     val user      = principal.getClass().getConstructor().newInstance();
     copyProperties(principal, user);
     val session = subject.getSession(false);
-    ((User) user).setToken(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
+    ((User) user).setJsessionid(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
     resp(request, response, new JSONDataReturn<>(user));
   }
 
