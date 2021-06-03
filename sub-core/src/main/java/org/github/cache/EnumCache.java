@@ -64,7 +64,7 @@ public class EnumCache {
   }
 
   @SuppressWarnings("unchecked")
-  public <C, V, E extends Class<? extends IEnum<C, V>>> @NonNull List<Pair<C, V>> getList(@NonNull E clazz) {
-    return ((Map<C, V>) table.row(clazz)).entrySet().stream().map(v -> new Pair<>(v.getKey(), v.getValue())).collect(toImmutableList());
+  public <C, V, E extends Class<? extends IEnum<C,V>>> @NonNull List<Pair<C,V>> getList(@NonNull E clazz) {
+    return ((Map<C,V>) table.row(clazz)).entrySet().stream().map(v -> new Pair<>(v.getKey(), v.getValue())).collect(toImmutableList());
   }
 }

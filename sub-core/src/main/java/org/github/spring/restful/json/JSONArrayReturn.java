@@ -32,6 +32,10 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
     return get();
   }
 
+  public @NonNull Collection<? extends E> getData() {
+    return data;
+  }
+
   /** WITH data. */
   public @NonNull JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
     setData(data);
