@@ -29,7 +29,7 @@ import static org.apache.shiro.SecurityUtils.getSubject;
 import static org.apache.shiro.subject.support.DefaultSubjectContext.PRINCIPALS_SESSION_KEY;
 import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.shiro.JWTUtil.getUsername;
-import static org.github.shiro.ops.ShiroOpsKt.JWT;
+import static org.github.shiro.ops.ShiroKt.JWT;
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
 import static org.github.spring.restful.json.JSONReturn.warn;
 import static org.springframework.beans.BeanUtils.copyProperties;

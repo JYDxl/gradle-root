@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import kotlin.text.Charsets.UTF_8
 
-internal class ByteBufOpsKtTest {
-  private val log = ByteBufOpsKtTest::class.log
+internal class ByteBufKtTest {
+  private val log = ByteBufKtTest::class.log
 
   @Test
   fun writeString() {

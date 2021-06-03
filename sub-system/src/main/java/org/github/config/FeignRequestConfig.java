@@ -4,7 +4,7 @@ import lombok.*;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import static java.util.Objects.*;
-import static org.github.shiro.ops.ShiroOpsKt.JSESSIONID;
+import static org.github.shiro.ops.ShiroKt.JSESSIONID;
 import static org.github.spring.ops.SpringKt.*;
 
 public class FeignRequestConfig implements RequestInterceptor {
