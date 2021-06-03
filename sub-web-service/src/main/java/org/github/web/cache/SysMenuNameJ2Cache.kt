@@ -2,7 +2,8 @@ package org.github.web.cache
 
 import org.github.cache.AbstractJ2Cache
 import org.github.cache.CacheNameSupplier
-import org.github.mybatis.ktQueryWrapper
+import org.github.mybatis.ops.ktList
+import org.github.mybatis.ops.ktQueryWrapper
 import org.github.mysql.web.base.entity.SysMenuEntity
 import org.github.mysql.web.base.enums.Enabled.ENABLED
 import org.github.mysql.web.base.service.ISysMenuService
@@ -27,7 +28,7 @@ class SysMenuNameJ2Cache: AbstractJ2Cache<SysMenuEntity?, String?>() {
     val query = sysMenuService.ktQueryWrapper()
     query.`in`(keys.isNotEmpty(), SysMenuEntity::menuId, keys.map {it.toLong()})
     query.select(SysMenuEntity::menuId, SysMenuEntity::name, SysMenuEntity::enabled)
-    val list: List<SysMenuEntity> = query.list()
+    val list = query.ktList()
     return list.associateBy {it.menuId.toString()}
   }
 }

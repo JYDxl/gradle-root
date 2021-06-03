@@ -10,7 +10,10 @@ import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
 import org.github.spring.restful.json.JSONPageReturn
 import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
 import org.github.base.Page
-import org.github.mybatis.ktQueryWrapper
+import org.github.mybatis.ops.ktGetById
+import org.github.mybatis.ops.ktList
+import org.github.mybatis.ops.ktPage
+import org.github.mybatis.ops.ktQueryWrapper
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.mysql.web.base.enums.MenuType.BUTTON
 import org.github.mysql.web.base.enums.MenuType.DIRECTORY
@@ -34,15 +37,15 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuInfo(menuId: Long): JSONDataReturn<SysMenuEntity?> {
-    val entity: SysMenuEntity? = sysMenuService.getById(menuId)
+    val entity = sysMenuService.ktGetById(menuId)
     return JSONDataReturn.of(entity)
   }
 
   override fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO> {
     val query = sysMenuService.ktQueryWrapper()
     query.likeRight(bo.name.isNotBlank(), SysMenuEntity::name, bo.name)
-    val page: Page<SysMenuEntity> = query.page(Page(bo))
-    val list: List<SysMenuEntity> = page.records
+    val page = query.ktPage(Page(bo))
+    val list = page.records
     if (list.isEmpty()) return JSONPageReturn.of(page)
     return JSONPageReturn.of(page) {applySysMenuEntity2QueryMenuListVO(it)}
   }
@@ -50,7 +53,7 @@ class MenuServiceImpl: IMenuService {
   override fun queryMenuTree(): JSONArrayReturn<SysMenuEntity> {
     val query = sysMenuService.ktQueryWrapper()
     query.ne(SysMenuEntity::type, BUTTON.code)
-    val list: MutableList<SysMenuEntity> = query.list()
+    val list = query.ktList()
     val root = SysMenuEntity()
     root.menuId = 0L
     root.parentId = -1L

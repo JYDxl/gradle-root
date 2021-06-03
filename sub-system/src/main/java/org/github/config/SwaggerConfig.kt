@@ -1,8 +1,8 @@
 package org.github.config
 
 import io.swagger.annotations.ApiOperation
-import org.github.shiro.ShiroOps.JSESSIONID
-import org.github.shiro.ShiroOps.JWT
+import org.github.shiro.ops.JSESSIONID
+import org.github.shiro.ops.JWT
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.PathSelectors.any

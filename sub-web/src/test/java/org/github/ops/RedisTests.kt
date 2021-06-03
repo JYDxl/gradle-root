@@ -1,10 +1,10 @@
 //package org.github.ops
 //
 //import com.google.common.collect.ImmutableList.of
-//import org.github.spring.redis.ListRedisScript
-//import org.github.spring.redis.LongRedisScript
-//import org.github.spring.redis.StringRedisOps
-//import org.github.spring.redis.StringRedisScript
+//import org.github.spring.redis.ops.ListRedisScript
+//import org.github.spring.redis.ops.LongRedisScript
+//import org.github.spring.redis.ops.StringRedisOps
+//import org.github.spring.redis.ops.StringRedisScript
 //import org.junit.jupiter.api.Test
 //import org.junit.jupiter.api.extension.ExtendWith
 //import org.springframework.beans.factory.annotation.Autowired

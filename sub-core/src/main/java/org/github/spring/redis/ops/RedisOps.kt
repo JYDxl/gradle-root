@@ -1,4 +1,4 @@
-package org.github.spring.redis
+package org.github.spring.redis.ops
 
 import org.springframework.core.io.Resource
 import org.springframework.data.redis.core.*

@@ -1,9 +1,7 @@
-package org.github.shiro;
+package org.github.shiro.ops
 
-import static org.apache.shiro.web.servlet.ShiroHttpSession.*;
+import org.apache.shiro.web.servlet.ShiroHttpSession.DEFAULT_SESSION_ID_NAME
 
-public interface ShiroOps {
-  String JSESSIONID = DEFAULT_SESSION_ID_NAME;
+const val JSESSIONID = DEFAULT_SESSION_ID_NAME
 
-  String JWT = "Token";
-}
+const val JWT = "Token"
