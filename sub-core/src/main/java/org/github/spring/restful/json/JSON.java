@@ -5,6 +5,7 @@ import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import static com.google.common.net.MediaType.*;
+import static javax.servlet.http.HttpServletResponse.*;
 import static org.github.spring.ops.SpringKt.*;
 
 /**
@@ -47,9 +48,9 @@ public interface JSON extends Returnable {
     return () -> null;
   }
 
-  int CODE_OK = 0;
+  int CODE_OK = SC_OK;
 
-  int CODE_PARAMS_ERROR = -1;
+  int CODE_PARAMS_ERROR = SC_BAD_REQUEST;
 
-  int CODE_SYSTEM_ERROR = -2;
+  int CODE_SYSTEM_ERROR = SC_INTERNAL_SERVER_ERROR;
 }
