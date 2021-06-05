@@ -26,12 +26,15 @@ import javax.servlet.Filter
 class ShiroConfig {
   private val log = ShiroConfig::class.log
 
+  @Suppress("ELValidationInJSP", "SpringElInspection")
   @Value("#{@environment['shiro.loginUrl']}")
   private lateinit var loginUrl: String
 
+  @Suppress("ELValidationInJSP", "SpringElInspection")
   @Value("#{@environment['shiro-redis.cache-manager.authenSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHEN_SUB_PREFIX}")
   private lateinit var shiroCacheKeyAuthenSubPrefix: String
 
+  @Suppress("ELValidationInJSP", "SpringElInspection")
   @Value("#{@environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX}")
   private lateinit var shiroCacheKeyAuthorSubPrefix: String
 
@@ -88,7 +91,7 @@ class ShiroConfig {
   }
 
   @Bean
-  fun shiroFilterFactoryBean(manager: SecurityManager, definition: ShiroFilterChainDefinition) = ShiroFilterFactoryBean().apply {
+  fun shiroFilterFactoryBean(@Suppress("SpringJavaInjectionPointsAutowiringInspection") manager: SecurityManager, definition: ShiroFilterChainDefinition) = ShiroFilterFactoryBean().apply {
     loginUrl = this@ShiroConfig.loginUrl
 //    successUrl = this@ShiroConfig.successUrl
 //    unauthorizedUrl = this@ShiroConfig.unauthorizedUrl
