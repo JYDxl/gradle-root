@@ -10,6 +10,7 @@ application {
   applicationDefaultJvmArgs = listOf(
     "-ea",
 
+    "-Dspring.profiles.active=dev",
     "-Dspring.cloud.nacos.discovery.server-addr=ubuntu:8848",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
@@ -49,6 +50,8 @@ dependencies {
   implementation("io.netty:netty-all:$netty")
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+  implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
   implementation("org.springframework.cloud:spring-cloud-starter-gateway") {exclude(group = "io.netty")}
   implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")

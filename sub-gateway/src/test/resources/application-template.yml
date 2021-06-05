@@ -8,12 +8,7 @@ management:
       show-details: ALWAYS
 
 spring:
-  application:
-    name: gateway-server
   cloud:
-    nacos:
-      discovery:
-        server-addr: ubuntu:8848
     gateway:
       globalcors:
         corsConfigurations:
@@ -44,9 +39,6 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
-
-server:
-  port: 80
 
 logging:
   config: classpath:logback.groovy
