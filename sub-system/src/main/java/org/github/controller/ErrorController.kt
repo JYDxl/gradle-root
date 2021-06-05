@@ -7,8 +7,7 @@ import org.github.exception.RemoteErrorException
 import org.github.ops.error
 import org.github.ops.log
 import org.github.spring.restful.json.JSONReturn
-import org.github.spring.restful.json.JSONReturn.error
-import org.github.spring.restful.json.JSONReturn.warn
+import org.github.spring.restful.json.JSONReturn.*
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
@@ -26,5 +25,5 @@ class ErrorController {
   fun handleRemoteErrorException(e: RemoteErrorException): JSONReturn = e.data.also {log.error(e) {}}
 
   @ExceptionHandler(ShiroException::class)
-  fun handleShiroException(e: ShiroException): JSONReturn = warn().apply {withRetMsg(if (hasChinese(e.localizedMessage)) e.localizedMessage else "权限不足")}.also {log.error(e) {}}
+  fun handleShiroException(e: ShiroException): JSONReturn = auth().apply {withRetMsg(if (hasChinese(e.localizedMessage)) e.localizedMessage else "权限不足")}.also {log.error(e) {}}
 }

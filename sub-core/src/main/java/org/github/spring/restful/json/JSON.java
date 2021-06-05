@@ -53,4 +53,6 @@ public interface JSON extends Returnable {
   int CODE_PARAMS_ERROR = SC_BAD_REQUEST;
 
   int CODE_SYSTEM_ERROR = SC_INTERNAL_SERVER_ERROR;
+
+  int CODE_AUTH_ERROR = SC_UNAUTHORIZED;
 }

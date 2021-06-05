@@ -57,17 +57,22 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn error() {
-    return of(CODE_SYSTEM_ERROR, "系统错误");
-  }
-
-  /** Generator. */
   public static @NonNull JSONReturn of(int code, @NonNull String msg) {
     return new JSONReturn(code, msg);
   }
 
   /** Generator. */
+  public static @NonNull JSONReturn error() {
+    return of(CODE_SYSTEM_ERROR, "系统错误");
+  }
+
+  /** Generator. */
   public static @NonNull JSONReturn warn() {
     return of(CODE_PARAMS_ERROR, "参数错误");
+  }
+
+  /** Generator. */
+  public static @NonNull JSONReturn auth() {
+    return of(CODE_AUTH_ERROR, "权限错误");
   }
 }

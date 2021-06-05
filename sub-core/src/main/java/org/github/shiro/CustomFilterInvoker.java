@@ -11,6 +11,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.github.spring.restful.json.JSON;
 import org.github.spring.restful.json.JSONDataReturn;
+import org.github.spring.restful.json.JSONReturn;
 import org.slf4j.Logger;
 
 import javax.servlet.ServletRequest;
@@ -31,7 +32,7 @@ import static org.apache.shiro.web.util.WebUtils.toHttp;
 import static org.github.shiro.JWTUtil.getUsername;
 import static org.github.shiro.ops.ShiroKt.JWT;
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
-import static org.github.spring.restful.json.JSONReturn.warn;
+import static org.github.spring.restful.json.JSONReturn.auth;
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 public interface CustomFilterInvoker {
@@ -56,7 +57,7 @@ public interface CustomFilterInvoker {
   }
 
   default void loginFailed(ServletRequest request, ServletResponse response, String msg) throws IOException {
-    resp(request, response, warn().withRetMsg(hasChinese(msg) ? msg : "登陆失败"));
+    resp(request, response, auth().withRetMsg(hasChinese(msg) ? msg : "登陆失败"));
   }
 
   default void resp(ServletRequest request, ServletResponse response, JSON json) throws IOException {
@@ -112,11 +113,11 @@ public interface CustomFilterInvoker {
   }
 
   default void logoutSucceed(ServletRequest request, ServletResponse response) throws IOException {
-    resp(request, response, warn().withRetMsg("退出成功"));
+    resp(request, response, new JSONReturn().withRetMsg("退出成功"));
   }
 
   default void notLogin(ServletRequest request, ServletResponse response) throws IOException {
-    resp(request, response, warn().withRetMsg("用户未登录"));
+    resp(request, response, auth().withRetMsg("用户未登录"));
   }
 
 //  default void refreshToken(ServletRequest request, ServletResponse response) {
@@ -148,6 +149,6 @@ public interface CustomFilterInvoker {
   }
 
   default void unauthorized(ServletRequest request, ServletResponse response) throws IOException {
-    resp(request, response, warn().withRetMsg("权限不足"));
+    resp(request, response, auth().withRetMsg("权限不足"));
   }
 }
