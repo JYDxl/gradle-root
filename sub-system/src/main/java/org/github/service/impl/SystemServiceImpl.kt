@@ -1,5 +1,6 @@
 package org.github.service.impl
 
+import org.apache.shiro.ShiroException
 import org.github.exception.ParamsErrorException
 import org.github.service.ISystemService
 import org.github.shiro.*
@@ -32,7 +33,7 @@ class SystemServiceImpl: ISystemService {
   }
 
   override fun jwt(): JSONDataReturn<String> {
-    val user = principal as User
+    val user = principal as User? ?: return JSONDataReturn.of(null)
     val jwt = sign(user.username, user.password)
     return JSONDataReturn.of(jwt)
   }
@@ -48,6 +49,7 @@ class SystemServiceImpl: ISystemService {
   override fun feign(): Token {
     val jsessionid = session?.id?.toString()
     val jwt = if (jsessionid.isNullOrBlank()) jwt().data else null
+    if (jsessionid.isNullOrBlank() && jwt.isNullOrBlank()) throw ShiroException()//权限不足
     return Token(jsessionid, jwt)
   }
 
