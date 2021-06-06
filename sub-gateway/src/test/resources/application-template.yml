@@ -11,12 +11,12 @@ spring:
   cloud:
     gateway:
       globalcors:
-        corsConfigurations:
+        cors-configurations:
           '[/**]':
             allow-credentials: true
-            allowedOriginPatterns: "*"
-            allowedMethods: "*"
-            allowedHeaders: "*"
+            allowed-origin-patterns: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
       routes:
         - id: auth
           uri: lb://auth-server
