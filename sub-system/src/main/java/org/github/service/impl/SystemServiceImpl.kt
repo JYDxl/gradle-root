@@ -1,13 +1,12 @@
 package org.github.service.impl
 
-import org.apache.shiro.ShiroException
 import org.github.exception.ParamsErrorException
 import org.github.service.ISystemService
 import org.github.shiro.*
 import org.github.shiro.JWTUtil.sign
-import org.github.shiro.ops.principal
 import org.github.shiro.ops.session
 import org.github.shiro.ops.subject
+import org.github.shiro.ops.user
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.springframework.beans.BeanUtils.copyProperties
@@ -20,7 +19,6 @@ class SystemServiceImpl: ISystemService {
   private lateinit var generator: PasswordGenerator
 
   override fun login(): JSONDataReturn<User> {
-    val user = principal as User
     val info = user.javaClass.getConstructor().newInstance()
     copyProperties(user, info)
     info.jsessionid = session?.id?.toString()
@@ -33,7 +31,6 @@ class SystemServiceImpl: ISystemService {
   }
 
   override fun jwt(): JSONDataReturn<String> {
-    val user = principal as User? ?: return JSONDataReturn.of(null)
     val jwt = sign(user.username, user.password)
     return JSONDataReturn.of(jwt)
   }
@@ -49,7 +46,6 @@ class SystemServiceImpl: ISystemService {
   override fun feign(): Token {
     val jsessionid = session?.id?.toString()
     val jwt = if (jsessionid.isNullOrBlank()) jwt().data else null
-    if (jsessionid.isNullOrBlank() && jwt.isNullOrBlank()) throw ShiroException()//权限不足
     return Token(jsessionid, jwt)
   }
 

@@ -79,8 +79,8 @@ class ShiroConfig {
     addPathDefinition("/static/**", "anon")
     addPathDefinition("/public/**", "anon")
 
-    addPathDefinition("/login", "authc")
-    addPathDefinition("/logout", "authc")
+    // addPathDefinition("/login", "authc")
+    // addPathDefinition("/logout", "authc")
 
     addPathDefinition("/**", "authc")
   }
