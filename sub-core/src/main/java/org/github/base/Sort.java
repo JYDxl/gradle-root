@@ -6,10 +6,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import lombok.experimental.Accessors;
 import static cn.hutool.core.lang.Validator.*;
 import static cn.hutool.core.text.CharSequenceUtil.*;
 import static com.baomidou.mybatisplus.core.metadata.OrderItem.*;
 
+@Accessors(chain = true)
 @Data
 @ApiModel(value = "Sort对象", description = "排序参数")
 public class Sort {

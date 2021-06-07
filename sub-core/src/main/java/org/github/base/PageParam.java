@@ -6,10 +6,12 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import lombok.experimental.Accessors;
 import static com.google.common.collect.ImmutableList.*;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Accessors(chain = true)
 @Data
 @ApiModel(value = "PageParam对象", description = "分页参数")
 public class PageParam extends Sort implements IParam {
