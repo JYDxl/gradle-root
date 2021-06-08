@@ -39,7 +39,7 @@ open class SysUserEntity : Entity() {
 
     /** 状态 0：禁用 1：正常 */
     @ApiModelProperty(value = "状态 0：禁用 1：正常")
-    open var status: String? = null
+    open var status: Int? = null
 
     /** 邮箱 */
     @ApiModelProperty(value = "邮箱")
@@ -61,7 +61,7 @@ open class SysUserEntity : Entity() {
 
     /** 逻辑删除 0：未删除 1：已删除 */
     @ApiModelProperty(value = "逻辑删除 0：未删除 1：已删除")
-    open var deleted: String? = null
+    open var deleted: Int? = null
 
     override fun toString(): String {
         return "SysUserEntity{" +

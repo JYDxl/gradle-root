@@ -15,8 +15,8 @@ import org.github.mybatis.ops.ktList
 import org.github.mybatis.ops.ktPage
 import org.github.mybatis.ops.ktQueryWrapper
 import org.github.spring.restful.json.JSONArrayReturn
-import org.github.mysql.web.base.enums.MenuType.BUTTON
-import org.github.mysql.web.base.enums.MenuType.DIRECTORY
+import org.github.mysql.web.base.dict.MenuType.BUTTON
+import org.github.mysql.web.base.dict.MenuType.DIRECTORY
 import org.github.ops.isNotBlank
 import org.github.web.common.CacheName.SYS_MENU_NAME
 import org.springframework.beans.BeanUtils.copyProperties

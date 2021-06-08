@@ -39,9 +39,9 @@ open class SysMenuEntity : Entity() {
     @ApiModelProperty(value = "授权(多个用逗号分隔，如：user:list,user:create)")
     open var perms: String? = null
 
-    /** 菜单类型 0：目录 1：菜单 2：按钮 */
-    @ApiModelProperty(value = "菜单类型 0：目录 1：菜单 2：按钮")
-    open var type: String? = null
+    /** 菜单类型 1：目录 2：菜单 3：按钮 */
+    @ApiModelProperty(value = "菜单类型 1：目录 2：菜单 3：按钮")
+    open var type: Int? = null
 
     /** 菜单图标 */
     @ApiModelProperty(value = "菜单图标")
@@ -54,7 +54,7 @@ open class SysMenuEntity : Entity() {
 
     /** 启用状态 0：禁用 1：启用 */
     @ApiModelProperty(value = "启用状态 0：禁用 1：启用")
-    open var enabled: String? = null
+    open var enabled: Int? = null
 
     override fun toString(): String {
         return "SysMenuEntity{" +

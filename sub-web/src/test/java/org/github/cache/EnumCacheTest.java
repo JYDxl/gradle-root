@@ -2,7 +2,7 @@ package org.github.cache;
 
 import lombok.extern.slf4j.*;
 import lombok.*;
-import org.github.mysql.web.base.enums.Sex;
+import org.github.mysql.web.base.dict.Sex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +24,9 @@ class EnumCacheTest {
 
   @Test
   void getTest() {
-    val value1 = enumCache.get(Sex.class, "0");
+    val value1 = enumCache.get(Sex.class, 0);
     log.info(value1);
-    val value2 = enumCache.get(Sex.class, "2");
+    val value2 = enumCache.get(Sex.class, 2);
     log.info(value2);
   }
 
