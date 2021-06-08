@@ -41,9 +41,9 @@ fun mysqlWeb() {
     }
 
     override fun packageConfigBuilder(): IConfigBuilder<PackageConfig> {
-      val parent = "org.github.mysql.web"
+      val parent = "org.github.mysql.mydb"
       val moduleName = "base"
-      val subName = "sub-mysql-web"
+      val subName = "sub-mysql-mydb"
       val subEntityName = "$subName-entity"
       val subMapperName = "$subName-service"
       val packageName = parent.replace('.', '/')

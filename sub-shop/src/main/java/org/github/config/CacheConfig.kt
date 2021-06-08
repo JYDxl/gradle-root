@@ -7,7 +7,6 @@ import net.oschina.j2cache.J2CacheBuilder.init
 import net.oschina.j2cache.J2CacheConfig
 import net.oschina.j2cache.J2CacheConfig.initFromConfig
 import org.github.cache.EnumCache
-import org.github.cache.RAMCache
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.MapPropertySource
@@ -27,6 +26,6 @@ class CacheConfig {
   @Bean
   fun enumCache() = EnumCache("org.github")
 
-  @Bean
-  fun ramCache() = RAMCache()
+  // @Bean
+  // fun ramCache() = RAMCache()
 }

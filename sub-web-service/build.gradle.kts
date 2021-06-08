@@ -5,7 +5,7 @@ dependencies {
 
   api(project(":sub-web-model"))
 
-  api(project(":sub-mysql-web-service"))
+  api(project(":sub-mysql-mydb-service"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.springframework.boot:spring-boot-starter-jdbc")

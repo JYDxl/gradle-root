@@ -12,14 +12,14 @@ import org.github.spring.restful.json.JSON
 import org.github.spring.restful.json.JSONPReturn
 import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.view.VIEW
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
-@Controller
+@RestController
 @RequestMapping("/rest/")
-class RestController {
-  private val log = RestController::class.log
+class ReturnController {
+  private val log = ReturnController::class.log
 
   @GetMapping("returnable")
   fun returnable(): Returnable {

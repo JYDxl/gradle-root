@@ -32,6 +32,13 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+        - id: shop
+          uri: lb://shop-server
+          predicates:
+            - Path=/shop/**
+          filters:
+            - StripPrefix=1
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
         - id: client
           uri: lb://sub-client
           predicates:

@@ -6,8 +6,9 @@ pluginManagement {
 
 rootProject.name = "gradle-root"
 
-include("sub-system")
 include("sub-core")
+
+include("sub-system")
 
 include("sub-gateway")
 
@@ -19,8 +20,8 @@ include("sub-vertx")
 
 include("sub-client")
 
-include("sub-mysql-web-entity")
-include("sub-mysql-web-service")
+include("sub-mysql-mydb-entity")
+include("sub-mysql-mydb-service")
 
 include("sub-web-service")
 include("sub-web-model")

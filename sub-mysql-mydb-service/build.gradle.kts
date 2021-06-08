@@ -11,5 +11,5 @@ dependencies {
   api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
   api("com.baomidou:mybatis-plus-extension:$mybatisplus")
 
-  api(project(":sub-mysql-web-entity"))
+  api(project(":sub-mysql-mydb-entity"))
 }
