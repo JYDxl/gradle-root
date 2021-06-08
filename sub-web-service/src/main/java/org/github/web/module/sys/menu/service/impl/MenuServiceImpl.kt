@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service
 class MenuServiceImpl: IMenuService {
   @Autowired
   private lateinit var sysMenuService: ISysMenuService
+
   @Autowired
   private lateinit var menuMapper: IMenuMapper
 
