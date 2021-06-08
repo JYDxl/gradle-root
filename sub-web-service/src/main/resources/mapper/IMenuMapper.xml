@@ -3,9 +3,9 @@
 <mapper namespace="org.github.web.module.sys.menu.mapper.IMenuMapper">
     <select id="queryPage" resultType="org.github.web.module.sys.menu.model.vo.QueryMenuListVO">
         select sm.*,
-               sm1.name as parent_name
+               smp.name as parent_name
         from sys_menu sm
-                 left join sys_menu sm1 on sm.parent_id = sm1.menu_id
+                 left join sys_menu smp on sm.parent_id = smp.menu_id
         <where>
             <if test="bo.name!=null and bo.name!=''">
                 and sm.name like concat('%',#{bo.name},'%')
