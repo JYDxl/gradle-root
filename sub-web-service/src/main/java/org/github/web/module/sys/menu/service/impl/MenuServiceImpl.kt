@@ -3,7 +3,6 @@ package org.github.web.module.sys.menu.service.impl
 import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.github.mysql.web.base.service.ISysMenuService
-import org.github.cache.RAMCache
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.mysql.web.base.entity.SysMenuEntity
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
@@ -12,23 +11,19 @@ import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
 import org.github.base.Page
 import org.github.mybatis.ops.ktGetById
 import org.github.mybatis.ops.ktList
-import org.github.mybatis.ops.ktPage
 import org.github.mybatis.ops.ktQueryWrapper
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.mysql.web.base.dict.MenuType.BUTTON
 import org.github.mysql.web.base.dict.MenuType.DIRECTORY
-import org.github.ops.isNotBlank
-import org.github.web.common.CacheName.SYS_MENU_NAME
-import org.springframework.beans.BeanUtils.copyProperties
+import org.github.web.module.sys.menu.mapper.IMenuMapper
 import org.springframework.stereotype.Service
 
 @Service
 class MenuServiceImpl: IMenuService {
   @Autowired
   private lateinit var sysMenuService: ISysMenuService
-
   @Autowired
-  private lateinit var ramCache: RAMCache
+  private lateinit var menuMapper: IMenuMapper
 
   override fun delMenuList(ids: List<Long>): JSONDataReturn<Boolean> {
     if (ids.isEmpty()) return JSONDataReturn.of(false)
@@ -42,12 +37,8 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO> {
-    val query = sysMenuService.ktQueryWrapper()
-    query.likeRight(bo.name.isNotBlank(), SysMenuEntity::name, bo.name)
-    val page = query.ktPage(Page(bo))
-    val list = page.records
-    if (list.isEmpty()) return JSONPageReturn.of(page)
-    return JSONPageReturn.of(page) {applySysMenuEntity2QueryMenuListVO(it)}
+    val page = menuMapper.queryPage(Page(bo), bo)
+    return JSONPageReturn.of(page)
   }
 
   override fun queryMenuTree(): JSONArrayReturn<SysMenuEntity> {
@@ -70,10 +61,5 @@ class MenuServiceImpl: IMenuService {
   override fun saveOrUpdate(bo: SysMenuEntity): JSONDataReturn<Boolean> {
     val result = sysMenuService.saveOrUpdate(bo)
     return JSONDataReturn.of(result)
-  }
-
-  private fun applySysMenuEntity2QueryMenuListVO(entity: SysMenuEntity) = QueryMenuListVO().apply {
-    copyProperties(entity, this)
-    parentName = ramCache.getCache<String>(SYS_MENU_NAME).get(parentId)
   }
 }
