@@ -39,7 +39,7 @@ open class SysUserEntity : Entity() {
 
     /** 状态  0：禁用 1：正常 */
     @ApiModelProperty(value = "状态  0：禁用 1：正常")
-    open var status: Int? = null
+    open var enabled: Int? = null
 
     /** 邮箱 */
     @ApiModelProperty(value = "邮箱")
@@ -59,6 +59,16 @@ open class SysUserEntity : Entity() {
     @TableField("create_time")
     open var createTime: LocalDateTime? = null
 
+    /** 修改人id */
+    @ApiModelProperty(value = "修改人id")
+    @TableField("modifier_id")
+    open var modifierId: Long? = null
+
+    /** 修改时间 */
+    @ApiModelProperty(value = "修改时间")
+    @TableField("modify_time")
+    open var modifyTime: LocalDateTime? = null
+
     /** 0：未删除 1：已删除 */
     @ApiModelProperty(value = "0：未删除 1：已删除")
     open var deleted: Int? = null
@@ -69,11 +79,13 @@ open class SysUserEntity : Entity() {
         ", username=" + username +
         ", password=" + password +
         ", salt=" + salt +
-        ", status=" + status +
+        ", enabled=" + enabled +
         ", email=" + email +
         ", mobile=" + mobile +
         ", creatorId=" + creatorId +
         ", createTime=" + createTime +
+        ", modifierId=" + modifierId +
+        ", modifyTime=" + modifyTime +
         ", deleted=" + deleted +
         "}"
     }

@@ -26,7 +26,7 @@ class AuthShiroServiceImpl: IShiroService {
 
   override fun queryUser(username: String): JSONDataReturn<out User> {
     val user = shiroMapper.queryUserInfo(username) ?: throw AuthenticationException("用户未注册")
-    if (DISABLED.code == user.status) throw AuthenticationException("该用户已禁用")
+    if (DISABLED.code == user.enabled) throw AuthenticationException("该用户已禁用")
     if (DELETED.code == user.deleted) throw AuthenticationException("该用户已注销")
     return JSONDataReturn.of(user)
   }
