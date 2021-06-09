@@ -5,7 +5,7 @@
     select sm.*,
     smp.name as parent_name
     from sys_menu sm
-    left join sys_menu smp on sm.parent_id = smp.menu_id
+    left join sys_menu smp on sm.parent_id = smp.id
     <where>
       <if test="bo.name!=null and bo.name!=''">
         and sm.name like concat(#{bo.name},'%')

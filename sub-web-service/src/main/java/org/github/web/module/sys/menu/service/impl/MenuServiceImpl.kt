@@ -2,9 +2,9 @@ package org.github.web.module.sys.menu.service.impl
 
 import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
-import org.github.mysql.web.base.service.ISysMenuService
+import org.github.mysql.mydb.base.service.ISysMenuService
 import org.github.spring.restful.json.JSONDataReturn
-import org.github.mysql.web.base.entity.SysMenuEntity
+import org.github.mysql.mydb.base.entity.SysMenuEntity
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
 import org.github.spring.restful.json.JSONPageReturn
 import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
@@ -13,8 +13,8 @@ import org.github.mybatis.ops.ktGetById
 import org.github.mybatis.ops.ktList
 import org.github.mybatis.ops.ktQueryWrapper
 import org.github.spring.restful.json.JSONArrayReturn
-import org.github.mysql.web.base.dict.MenuType.BUTTON
-import org.github.mysql.web.base.dict.MenuType.DIRECTORY
+import org.github.mysql.mydb.base.dict.MenuType.BUTTON
+import org.github.mysql.mydb.base.dict.MenuType.DIRECTORY
 import org.github.web.module.sys.menu.mapper.IMenuMapper
 import org.springframework.stereotype.Service
 
@@ -47,7 +47,7 @@ class MenuServiceImpl: IMenuService {
     query.ne(SysMenuEntity::type, BUTTON.code)
     val list = query.ktList()
     val root = SysMenuEntity()
-    root.menuId = 0L
+    root.id = 0L
     root.parentId = -1L
     root.name = "根目录"
     // root.setUrl();

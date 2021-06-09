@@ -1,6 +1,6 @@
 package org.github.web.module.sys.menu.service
 
-import org.github.mysql.web.base.entity.PaymentEntity
+import org.github.mysql.mydb.base.entity.PaymentEntity
 
 interface IPayService {
   fun create(bo: PaymentEntity): Boolean

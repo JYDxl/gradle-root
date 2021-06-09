@@ -2,7 +2,7 @@ package org.github.cache;
 
 import lombok.extern.slf4j.*;
 import lombok.*;
-import org.github.mysql.web.base.dict.Sex;
+import org.github.mysql.mydb.base.dict.Sex;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

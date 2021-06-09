@@ -2,7 +2,7 @@ package org.github.auth.shiro.model;
 
 import javax.annotation.Nullable;
 import lombok.*;
-import org.github.mysql.web.base.entity.SysUserEntity;
+import org.github.mysql.mydb.base.entity.SysUserEntity;
 import org.github.shiro.User;
 import static java.util.Objects.*;
 
@@ -14,7 +14,7 @@ public class UserDTO extends SysUserEntity implements User {
 
   @Override
   public @NonNull Long getUserId() {
-    return requireNonNull(super.getUserId());
+    return requireNonNull(super.getId());
   }
 
   @Override

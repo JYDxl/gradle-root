@@ -1,6 +1,6 @@
 package org.github.controller
 
-import org.github.mysql.web.base.entity.PaymentEntity
+import org.github.mysql.mydb.base.entity.PaymentEntity
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.web.module.sys.menu.service.IPayService

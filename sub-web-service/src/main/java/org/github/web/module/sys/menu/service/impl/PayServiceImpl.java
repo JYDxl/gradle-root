@@ -2,8 +2,8 @@ package org.github.web.module.sys.menu.service.impl;
 
 import lombok.*;
 import org.github.exception.ParamsErrorException;
-import org.github.mysql.web.base.entity.PaymentEntity;
-import org.github.mysql.web.base.service.IPaymentService;
+import org.github.mysql.mydb.base.entity.PaymentEntity;
+import org.github.mysql.mydb.base.service.IPaymentService;
 import org.github.web.module.sys.menu.service.IPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

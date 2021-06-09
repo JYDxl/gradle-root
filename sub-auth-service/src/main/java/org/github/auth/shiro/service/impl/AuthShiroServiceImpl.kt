@@ -2,8 +2,8 @@ package org.github.auth.shiro.service.impl
 
 import org.apache.shiro.authc.AuthenticationException
 import org.github.auth.shiro.mapper.IShiroMapper
-import org.github.mysql.web.base.dict.Deleted.DELETED
-import org.github.mysql.web.base.dict.Enabled.DISABLED
+import org.github.mysql.mydb.base.dict.Deleted.DELETED
+import org.github.mysql.mydb.base.dict.Enabled.DISABLED
 import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User

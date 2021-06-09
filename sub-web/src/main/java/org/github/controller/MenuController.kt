@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.github.web.module.sys.menu.service.IMenuService
 import org.github.spring.restful.Returnable
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
-import org.github.mysql.web.base.entity.SysMenuEntity
+import org.github.mysql.mydb.base.entity.SysMenuEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.bind.annotation.RestController
 
