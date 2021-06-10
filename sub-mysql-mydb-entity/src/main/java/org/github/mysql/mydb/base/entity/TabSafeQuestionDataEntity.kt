@@ -60,6 +60,7 @@ open class TabSafeQuestionDataEntity : Entity() {
 
     /** 创建人 */
     @ApiModelProperty(value = "创建人")
+    @TableField("creater")
     open var creater: String? = null
 
     /** 创建时间 */

@@ -83,7 +83,7 @@ public class ${entity} implements Serializable {
         <#else>
     @TableField(fill = FieldFill.${field.fill})
         </#if>
-    <#elseif field.convert>
+    <#else>
     @TableField("${field.annotationColumnName}")
     </#if>
     <#-- 乐观锁注解 -->
