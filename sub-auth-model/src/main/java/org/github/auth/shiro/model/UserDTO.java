@@ -13,8 +13,8 @@ public class UserDTO extends SysUserEntity implements User {
   private @Nullable String jsessionid;
 
   @Override
-  public @NonNull Long getUserId() {
-    return requireNonNull(super.getId());
+  public @NonNull String getUserId() {
+    return requireNonNull(super.getId()).toString();
   }
 
   @Override
