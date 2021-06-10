@@ -37,3 +37,5 @@ val isWriteable get() = ChannelMatcher {it.isWritable}
 val ChannelMatcher.andWriteable: ChannelMatcher get() = compose(this, isWriteable)
 
 val Channel.ktPipeline: ChannelPipeline get() = pipeline()
+
+val ChannelHandlerContext.ktChannel: Channel get() = channel()
