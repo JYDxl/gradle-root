@@ -1,13 +1,11 @@
-@file:Suppress("RedundantSemicolon")
-
 package org.github.mysql.mydb.base.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 支付表
@@ -26,6 +24,10 @@ open class PaymentEntity : Entity() {
     /** 序列号 */
     @ApiModelProperty(value = "序列号")
     open var serial: String? = null
+
+    override fun pkVal(): java.io.Serializable? {
+        return id
+    }
 
     override fun toString(): String {
         return "PaymentEntity{" +

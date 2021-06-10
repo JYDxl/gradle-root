@@ -1,5 +1,3 @@
-@file:Suppress("RedundantSemicolon")
-
 package org.github.mysql.mydb.base.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
@@ -7,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 属性表
@@ -53,6 +51,10 @@ open class SpAttributeEntity : Entity() {
     @ApiModelProperty(value = "删除时间标志")
     @TableField("delete_time")
     open var deleteTime: Int? = null
+
+    override fun pkVal(): java.io.Serializable? {
+        return id
+    }
 
     override fun toString(): String {
         return "SpAttributeEntity{" +

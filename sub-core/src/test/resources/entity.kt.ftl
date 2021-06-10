@@ -1,15 +1,11 @@
-<#if kotlin>
-@file:Suppress("RedundantSemicolon")
-
-</#if>
 package ${package.Entity}
 
 <#list table.importPackages as pkg>
 import ${pkg}
 </#list>
 <#if swagger>
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 </#if>
 
 /**
@@ -88,7 +84,6 @@ open class ${entity} : Serializable {
     }
 
 </#if>
-<#if activeRecord>
     override fun pkVal(): java.io.Serializable? {
 <#if keyPropertyName??>
         return ${keyPropertyName}
@@ -97,7 +92,6 @@ open class ${entity} : Serializable {
 </#if>
     }
 
-</#if>
     override fun toString(): String {
         return "${entity}{" +
 <#list table.fields as field>

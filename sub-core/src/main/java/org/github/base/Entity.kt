@@ -1,3 +1,3 @@
 package org.github.base
 
-abstract class Entity: IJson
+abstract class Entity: IEntity

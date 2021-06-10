@@ -1,5 +1,3 @@
-@file:Suppress("RedundantSemicolon")
-
 package org.github.mysql.mydb.base.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
@@ -7,8 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 角色-菜单关系表
@@ -33,6 +31,10 @@ open class SysRoleMenuEntity : Entity() {
     @ApiModelProperty(value = "菜单id")
     @TableField("menu_id")
     open var menuId: Long? = null
+
+    override fun pkVal(): java.io.Serializable? {
+        return id
+    }
 
     override fun toString(): String {
         return "SysRoleMenuEntity{" +

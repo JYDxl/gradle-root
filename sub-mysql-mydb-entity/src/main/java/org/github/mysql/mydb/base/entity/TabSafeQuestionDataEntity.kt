@@ -1,5 +1,3 @@
-@file:Suppress("RedundantSemicolon")
-
 package org.github.mysql.mydb.base.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
@@ -8,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 安全问题数据项表
@@ -68,6 +66,10 @@ open class TabSafeQuestionDataEntity : Entity() {
     @ApiModelProperty(value = "创建时间")
     @TableField("create_time")
     open var createTime: LocalDateTime? = null
+
+    override fun pkVal(): java.io.Serializable? {
+        return id
+    }
 
     override fun toString(): String {
         return "TabSafeQuestionDataEntity{" +
