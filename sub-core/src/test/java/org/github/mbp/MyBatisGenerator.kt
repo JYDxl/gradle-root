@@ -11,8 +11,7 @@ import com.baomidou.mybatisplus.generator.config.TemplateType.XML
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
-import org.github.base.Entity
-import org.github.base.IMapper
+import org.github.base.*
 import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
@@ -74,7 +73,7 @@ fun mysqlWeb() {
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
-//                .enableActiveRecord().superClass(Model::class.jvmName)
+               // .enableActiveRecord().superClass(Model::class.jvmName)
         .superClass(Entity::class.jvmName)
         .formatFileName("%sEntity")
 

@@ -83,7 +83,7 @@ public class ${entity} implements Serializable {
         <#else>
     @TableField(fill = FieldFill.${field.fill})
         </#if>
-    <#else>
+    <#elseif field.convert>
     @TableField("${field.annotationColumnName}")
     </#if>
     <#-- 乐观锁注解 -->
@@ -127,7 +127,6 @@ public class ${entity} implements Serializable {
     </#list>
 </#if>
 
-<#if activeRecord>
     @Override
     public java.io.Serializable pkVal() {
     <#if keyPropertyName??>
@@ -137,7 +136,6 @@ public class ${entity} implements Serializable {
     </#if>
     }
 
-</#if>
 <#if !entityLombokModel>
     @Override
     public String toString() {

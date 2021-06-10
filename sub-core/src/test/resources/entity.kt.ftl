@@ -55,7 +55,7 @@ open class ${entity} : Serializable {
 <#else>
     @TableField(fill = FieldFill.${field.fill})
 </#if>
-<#else>
+<#elseif field.convert>
     @TableField("${field.annotationColumnName}")
 </#if>
 <#-- 乐观锁注解 -->

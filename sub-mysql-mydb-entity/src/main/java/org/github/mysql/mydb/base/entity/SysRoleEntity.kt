@@ -35,7 +35,6 @@ open class SysRoleEntity : Entity() {
 
     /** 备注 */
     @ApiModelProperty(value = "备注")
-    @TableField("remark")
     open var remark: String? = null
 
     /** 创建者ID */

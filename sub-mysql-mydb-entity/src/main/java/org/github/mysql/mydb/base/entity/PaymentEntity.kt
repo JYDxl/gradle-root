@@ -23,7 +23,6 @@ open class PaymentEntity : Entity() {
 
     /** 序列号 */
     @ApiModelProperty(value = "序列号")
-    @TableField("serial")
     open var serial: String? = null
 
     override fun pkVal(): java.io.Serializable? {

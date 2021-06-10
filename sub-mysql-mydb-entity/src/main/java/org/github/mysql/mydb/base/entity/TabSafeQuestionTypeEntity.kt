@@ -50,17 +50,14 @@ open class TabSafeQuestionTypeEntity : Entity() {
 
     /** 备注 */
     @ApiModelProperty(value = "备注")
-    @TableField("remark")
     open var remark: String? = null
 
     /** 排序 */
     @ApiModelProperty(value = "排序")
-    @TableField("sort")
     open var sort: Int? = null
 
     /** 创建人 */
     @ApiModelProperty(value = "创建人")
-    @TableField("creater")
     open var creater: String? = null
 
     /** 创建时间 */
