@@ -16,11 +16,11 @@ import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
 fun main() {
-  mysqlWeb()
-  mysqlAuth()
+  mydb()
+  demo()
 }
 
-fun mysqlWeb() {
+fun mydb() {
   object: SimpleAutoGenerator() {
     override fun globalConfigBuilder(): IConfigBuilder<GlobalConfig> {
       return GlobalConfig.Builder()
@@ -104,4 +104,4 @@ fun mysqlWeb() {
   }.execute()
 }
 
-fun mysqlAuth() {}
+fun demo() {}
