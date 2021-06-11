@@ -1,10 +1,10 @@
-package org.github.mysql.mydb.auth.service.impl
+package org.github.auth.shiro.service.impl
 
 import org.apache.shiro.authc.AuthenticationException
-import org.github.mysql.mydb.auth.mapper.IShiroMapper
-import org.github.mysql.mydb.auth.service.IShiroService
+import org.github.auth.shiro.mapper.IShiroMapper
 import org.github.mysql.mydb.base.dict.Deleted.DELETED
 import org.github.mysql.mydb.base.dict.Enabled.DISABLED
+import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User
 import org.github.spring.restful.json.JSONArrayReturn
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service
 
 @Primary
 @Service
-class ShiroServiceImpl: IShiroService {
+class AuthShiroServiceImpl: IShiroService {
   @Autowired
   private lateinit var shiroMapper: IShiroMapper
 

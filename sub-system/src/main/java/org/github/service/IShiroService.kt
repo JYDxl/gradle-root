@@ -1,4 +1,4 @@
-package org.github.mysql.mydb.auth.service
+package org.github.service
 
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User

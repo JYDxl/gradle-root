@@ -1,9 +1,9 @@
-package org.github.mysql.mydb.auth.mapper
+package org.github.auth.shiro.mapper
 
 import org.apache.ibatis.annotations.Param
 import org.github.mybatis.MyBatisMapper
-import org.github.mysql.mydb.model.auth.UserDTO
 import org.github.shiro.AuthorInfo
+import org.github.auth.shiro.model.UserDTO
 
 @MyBatisMapper
 interface IShiroMapper {

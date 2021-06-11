@@ -1,7 +1,7 @@
-package org.github.mysql.mydb.auth.service.impl
+package org.github.service.impl
 
 import org.github.exception.ParamsErrorException
-import org.github.mysql.mydb.auth.service.ISystemService
+import org.github.service.ISystemService
 import org.github.shiro.*
 import org.github.shiro.JWTUtil.sign
 import org.github.shiro.ops.session

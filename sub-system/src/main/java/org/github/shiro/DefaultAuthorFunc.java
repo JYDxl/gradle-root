@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.github.mysql.mydb.auth.service.IShiroService;
+import org.github.service.IShiroService;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class DefaultAuthorFunc implements AuthorFunc {
     val user         = (User) principals.getPrimaryPrincipal();
     val appCtx       = getAppCtx();
     val shiroService = appCtx.getBean(IShiroService.class);
-    val list         = shiroService.queryAuthorInfo(user.getUserId());
+    val list         = shiroService.queryAuthorInfo(user.getUserId().toString());
     val data         = list.getData();
     val roles = data.stream()
       .map(AuthorInfo::getRole)

@@ -1,8 +1,8 @@
 package org.github.controller
 
-import org.github.mysql.mydb.auth.service.ISystemService
 import org.springframework.beans.factory.annotation.Autowired
 import org.github.web.feign.IServiceProviderWebServer
+import org.github.service.ISystemService
 import org.github.spring.restful.Returnable
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
