@@ -35,13 +35,13 @@ open class SysUserEntity : Entity() {
     @ApiModelProperty(value = "盐")
     open var salt: String? = null
 
-    /** 昵称 */
-    @ApiModelProperty(value = "昵称")
-    open var nickname: String? = null
-
     /** 状态  0：禁用 1：正常 */
     @ApiModelProperty(value = "状态  0：禁用 1：正常")
     open var enabled: Int? = null
+
+    /** 昵称 */
+    @ApiModelProperty(value = "昵称")
+    open var nickname: String? = null
 
     /** 邮箱 */
     @ApiModelProperty(value = "邮箱")
@@ -85,8 +85,8 @@ open class SysUserEntity : Entity() {
         ", username=" + username +
         ", password=" + password +
         ", salt=" + salt +
-        ", nickname=" + nickname +
         ", enabled=" + enabled +
+        ", nickname=" + nickname +
         ", email=" + email +
         ", mobile=" + mobile +
         ", creatorId=" + creatorId +
