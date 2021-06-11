@@ -75,6 +75,7 @@ class ShiroConfig {
     addPathDefinition("/v3/api-docs", "anon")
 
     addPathDefinition("/actuator/**", "anon")
+    addPathDefinition("/error", "anon")
 
     addPathDefinition("/static/**", "anon")
     addPathDefinition("/public/**", "anon")
