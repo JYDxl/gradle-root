@@ -1,6 +1,5 @@
 package org.github.controller
 
-import org.github.ops.log
 import org.github.service.IShiroService
 import org.github.service.ISystemService
 import org.github.shiro.JWTLogin
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class SystemController {
-  private val log = SystemController::class.log
-
   @Autowired
   private lateinit var systemService: ISystemService
 
