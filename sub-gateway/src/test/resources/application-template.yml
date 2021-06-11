@@ -23,35 +23,35 @@ spring:
           predicates:
             - Path=/login,/logout,/jsessionid,/jwt,/public/jwt
           filters:
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
         - id: auth
           uri: lb://auth-server
           predicates:
             - Path=/*/login,/*/logout,/*/jsessionid,/*/jwt,/*/public/jwt
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
         - id: web
           uri: lb://web-server
           predicates:
             - Path=/web/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
         - id: shop
           uri: lb://shop-server
           predicates:
             - Path=/shop/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
         - id: client
           uri: lb://sub-client
           predicates:
             - Path=/client/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
 
 logging:
   config: classpath:logback.groovy
