@@ -68,9 +68,9 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/**/*.xml
-  global-config:
-    db-config:
-      update-strategy: ignored
+#  global-config:
+#    db-config:
+#      update-strategy: ignored
 
 info:
   version: 1.0.0
