@@ -16,3 +16,5 @@ val subject: Subject get() = getSubject()
 val session: Session? get() = subject.getSession(false)
 
 val user: User get() = subject.principal as User? ?: throw ShiroException()
+
+val userOrNull: User? get() = subject.principal as User?
