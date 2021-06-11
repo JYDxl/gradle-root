@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.github.auth.shiro.mapper.IShiroMapper">
+<mapper namespace="org.github.mysql.mydb.auth.mapper.IShiroMapper">
   <resultMap id="authorInfo" type="org.github.shiro.AuthorInfo">
     <result column="role_code" property="role"/>
     <collection property="perms" ofType="java.lang.String">
@@ -20,7 +20,7 @@
       and m.perms is not null
   </select>
 
-  <select id="queryUserInfo" resultType="org.github.auth.shiro.model.UserDTO">
+  <select id="queryUserInfo" resultType="org.github.mysql.mydb.model.auth.UserDTO">
     select *
     from sys_user
     where username = #{username}
