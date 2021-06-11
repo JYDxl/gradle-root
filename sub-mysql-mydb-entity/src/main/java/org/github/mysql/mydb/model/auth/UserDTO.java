@@ -1,10 +1,15 @@
-package org.github.auth.shiro.model;
+package org.github.mysql.mydb.model.auth;
 
-import javax.annotation.Nullable;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 import org.github.mysql.mydb.base.entity.SysUserEntity;
 import org.github.shiro.User;
-import static java.util.Objects.*;
+
+import javax.annotation.Nullable;
+
+import static java.util.Objects.requireNonNull;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

@@ -3,7 +3,7 @@ package org.github.shiro;
 import lombok.NonNull;
 import lombok.val;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.github.service.IShiroService;
+import org.github.mysql.mydb.auth.service.IShiroService;
 
 import static java.util.Objects.requireNonNull;
 import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;

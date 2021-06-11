@@ -28,11 +28,6 @@ include("sub-web-model")
 include("sub-web-api")
 include("sub-web")
 
-include("sub-auth-service")
-include("sub-auth-model")
-include("sub-auth-api")
-include("sub-auth")
-
 include("sub-shop-service")
 include("sub-shop-model")
 include("sub-shop-api")

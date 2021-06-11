@@ -1,4 +1,4 @@
-package org.github.service
+package org.github.mysql.mydb.auth.service
 
 import org.github.shiro.JWTLogin
 import org.github.shiro.Token

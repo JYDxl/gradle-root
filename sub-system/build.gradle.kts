@@ -3,7 +3,7 @@ val swagger: String by System.getProperties()
 val shiro: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-auth-api"))
+  api(project(":sub-mysql-mydb-service"))
 
   compileOnly(project(":sub-core"))
 
