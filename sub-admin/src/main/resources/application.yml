@@ -21,4 +21,9 @@ server:
   port: 8000
 
 logging:
-  config: classpath:logback.groovy
+  file:
+    path: logs/${spring.application.name}
+  logback:
+    rollingpolicy:
+      max-file-size: 1GB
+      max-history: 30

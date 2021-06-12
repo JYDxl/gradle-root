@@ -57,13 +57,13 @@ spring:
   thymeleaf:
     check-template-location: false
   zipkin:
-#    sender:
-#      type: rabbit
+    #    sender:
+    #      type: rabbit
     base-url: http://ubuntu:9411/
   sleuth:
     sampler:
       probability: 1.0
-#      rate: 10
+  #      rate: 10
   main:
     allow-bean-definition-overriding: true
   cloud:
@@ -88,9 +88,6 @@ management:
     health:
       show-details: ALWAYS
 
-logging:
-  config: classpath:logback.groovy
-
 shiro:
   userNativeSessionManager: true
   loginUrl: /login
@@ -110,3 +107,24 @@ shiro-redis:
 #    address: spring-cloud://localhost
 #  cloud:
 #    subscribed-services:
+
+logging:
+  file:
+    path: logs/${spring.application.name}
+  logback:
+    rollingpolicy:
+      max-file-size: 1GB
+      max-history: 30
+  level:
+    org:
+      springframework:
+        transaction: debug
+        web: debug
+      apache:
+        shiro: debug
+      github: trace
+    com:
+      baomidou: debug
+    io:
+      netty: debug
+      vertx: debug
