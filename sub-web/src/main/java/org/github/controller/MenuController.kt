@@ -7,7 +7,7 @@ import org.github.web.module.sys.menu.service.IMenuService
 import org.github.spring.restful.Returnable
 import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
 import org.github.mysql.mydb.base.entity.SysMenuEntity
-import org.github.ops.trim
+import org.github.ops.trimStrFields
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.bind.annotation.RestController
 
@@ -32,7 +32,7 @@ class MenuController {
   @ApiOperation("分页查询")
   @PostMapping("page")
   fun queryMenuPage(@RequestBody bo: QueryMenuListBO): Returnable {
-    return menuService.queryMenuPage(bo.trim())
+    return menuService.queryMenuPage(bo.trimStrFields())
   }
 
   @PostMapping("select")
@@ -43,6 +43,6 @@ class MenuController {
   @ApiOperation("新增/修改")
   @PostMapping("save", "update")
   fun saveOrUpdate(@RequestBody bo: SysMenuEntity): Returnable {
-    return menuService.saveOrUpdate(bo.trim())
+    return menuService.saveOrUpdate(bo.trimStrFields())
   }
 }
