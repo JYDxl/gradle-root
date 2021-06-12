@@ -10,7 +10,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        group: server
+#        group: server
 
 server:
-  port: 9000
+  port: 8084

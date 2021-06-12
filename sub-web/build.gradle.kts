@@ -109,6 +109,8 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel")
+  implementation("com.alibaba.csp:sentinel-datasource-nacos")
 //  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")

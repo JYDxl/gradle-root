@@ -74,10 +74,6 @@ dependencies {
   implementation(project(":sub-mysql-mydb-service"))
 
   implementation("io.netty:netty-all:$netty")
-  implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
-  implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
-  implementation("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
-  implementation("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
   implementation("org.apache.commons:commons-pool2:$commonspool2")
@@ -101,6 +97,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-aop")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-validation")
+  implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
@@ -113,6 +110,8 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel")
+  implementation("com.alibaba.csp:sentinel-datasource-nacos")
 //  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
