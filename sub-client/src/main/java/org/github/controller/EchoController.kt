@@ -1,5 +1,6 @@
 package org.github.controller
 
+import org.github.exception.RemoteErrorException
 import org.springframework.beans.factory.annotation.Autowired
 import org.github.web.feign.IServiceProviderWebServer
 import org.github.service.ISystemService
@@ -26,6 +27,8 @@ class EchoController {
   @GetMapping("/basic")
   fun basic(): Returnable {
     val (jsessionid, jwt) = systemService.feign()
-    return webServer.basic(jsessionid, jwt)
+    val basic = webServer.basic(jsessionid, jwt)
+    if (basic.failure()) throw RemoteErrorException(basic)
+    return basic
   }
 }
