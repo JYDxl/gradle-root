@@ -4,7 +4,6 @@ import org.github.ops.trimStrFields
 import org.github.service.IShiroService
 import org.github.service.ISystemService
 import org.github.shiro.JWTLogin
-import org.github.spring.restful.Returnable
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -17,37 +16,23 @@ class SystemController {
   private lateinit var shiroService: IShiroService
 
   @GetMapping("/public/security/user/{username}")
-  fun user(@PathVariable username: String): Returnable {
-    return shiroService.queryUser(username.trim())
-  }
+  fun user(@PathVariable username: String) = shiroService.queryUser(username.trim())
 
   @GetMapping("/public/security/auth/{userId}")
-  fun auth(@PathVariable userId: String): Returnable {
-    return shiroService.queryAuthorInfo(userId.trim())
-  }
+  fun auth(@PathVariable userId: String) = shiroService.queryAuthorInfo(userId.trim())
 
   @PostMapping("/login")
-  fun login(): Returnable {
-    return systemService.login()
-  }
+  fun login() = systemService.login()
 
   @PostMapping("/logout")
-  fun logout(): Returnable {
-    return systemService.logout()
-  }
+  fun logout() = systemService.logout()
 
   @RequestMapping("/jsessionid")
-  fun jsessionid(): Returnable {
-    return systemService.jsessionid()
-  }
+  fun jsessionid() = systemService.jsessionid()
 
   @RequestMapping("/jwt")
-  fun jwt(): Returnable {
-    return systemService.jwt()
-  }
+  fun jwt() = systemService.jwt()
 
   @PostMapping("/public/jwt")
-  fun jwt(@RequestBody login: JWTLogin): Returnable {
-    return systemService.jwt(login.trimStrFields())
-  }
+  fun jwt(@RequestBody login: JWTLogin) = systemService.jwt(login.trimStrFields())
 }
