@@ -1,6 +1,7 @@
 package org.github.spring.restful.json;
 
 import lombok.*;
+import org.github.exception.RemoteErrorException;
 import static org.github.spring.ops.SpringKt.*;
 
 /**
@@ -34,6 +35,10 @@ public class JSONReturn implements JSON {
   @Override
   public String toString() {
     return get();
+  }
+
+  public void throwIfFailed() throws RemoteErrorException {
+    if (failure()) throw new RemoteErrorException(this);
   }
 
   public boolean failure() {
