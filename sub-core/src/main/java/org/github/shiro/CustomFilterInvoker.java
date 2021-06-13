@@ -1,6 +1,13 @@
 package org.github.shiro;
 
-import lombok.val;
+import java.io.IOException;
+import java.util.Objects;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import lombok.*;
+import org.github.spring.restful.json.JSON;
+import org.github.spring.restful.json.JSONDataReturn;
+import org.github.spring.restful.json.JSONReturn;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -9,31 +16,21 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.github.spring.restful.json.JSON;
-import org.github.spring.restful.json.JSONDataReturn;
-import org.github.spring.restful.json.JSONReturn;
 import org.slf4j.Logger;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import java.io.IOException;
-import java.util.Objects;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import static cn.hutool.core.lang.Validator.hasChinese;
-import static com.google.common.base.MoreObjects.firstNonNull;
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.Optional.ofNullable;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.shiro.SecurityUtils.getSecurityManager;
+import static cn.hutool.core.lang.Validator.*;
+import static com.google.common.base.MoreObjects.*;
+import static com.google.common.collect.ImmutableList.*;
+import static java.util.Optional.*;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.apache.shiro.SecurityUtils.getSubject;
-import static org.apache.shiro.subject.support.DefaultSubjectContext.PRINCIPALS_SESSION_KEY;
-import static org.apache.shiro.web.util.WebUtils.toHttp;
-import static org.github.shiro.JWTUtil.getUsername;
-import static org.github.shiro.ops.ShiroKt.JWT;
-import static org.github.spring.bootstrap.AppCtxHolder.getAppCtx;
-import static org.github.spring.restful.json.JSONReturn.auth;
-import static org.springframework.beans.BeanUtils.copyProperties;
+import static org.apache.shiro.SecurityUtils.*;
+import static org.apache.shiro.subject.support.DefaultSubjectContext.*;
+import static org.apache.shiro.web.util.WebUtils.*;
+import static org.github.shiro.JWTUtil.*;
+import static org.github.shiro.ops.ShiroKt.*;
+import static org.github.spring.bootstrap.AppCtxHolder.*;
+import static org.github.spring.restful.json.JSONReturn.*;
 
 public interface CustomFilterInvoker {
   default boolean executeJWTLogin(ServletRequest request, ServletResponse response, Logger log) throws IOException {
@@ -87,12 +84,8 @@ public interface CustomFilterInvoker {
   }
 
   default void onWEBLoginSuccess(@SuppressWarnings("unused") AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
-    val principal = subject.getPrincipal();
-    val user      = principal.getClass().getConstructor().newInstance();
-    copyProperties(principal, user);
     val session = subject.getSession(false);
-    ((User) user).setJsessionid(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null));
-    resp(request, response, new JSONDataReturn<>(user));
+    resp(request, response, new JSONDataReturn<>(ofNullable(session).map(Session::getId).map(Objects::toString).orElse(null)));
   }
 
   default void onWEBLoginFailure(@SuppressWarnings("unused") AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response, Logger log) throws Exception {

@@ -2,12 +2,11 @@ package org.github.service
 
 import org.github.shiro.JWTLogin
 import org.github.shiro.Token
-import org.github.shiro.User
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 
 interface ISystemService {
-  fun login(): JSONDataReturn<User>
+  fun login(): JSONDataReturn<String?>
 
   fun jsessionid(): JSONDataReturn<String?>
 
