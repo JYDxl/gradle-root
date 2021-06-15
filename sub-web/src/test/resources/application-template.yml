@@ -5,6 +5,9 @@ spring:
     default-property-inclusion: always
     serialization:
       fail_on_empty_beans: false
+  devtools:
+    livereload:
+      port: ${random.int[35729,65536]}
   mvc:
     log-request-details: true
   redis:
