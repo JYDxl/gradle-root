@@ -10,7 +10,7 @@ application {
   applicationDefaultJvmArgs = listOf(
     "-ea",
 
-    "-Dspring.cloud.nacos.discovery.server-addr=ubuntu:8848",
+    "-Dspring.cloud.nacos.discovery.server-addr=localhost:8848",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
