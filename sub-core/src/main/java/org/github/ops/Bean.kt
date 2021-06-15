@@ -8,4 +8,4 @@ fun <T: Any> T.trimStrFields(vararg ignore: String = emptyArray()): T = trimStrF
 
 fun <T> T?.notNullAnd(predicate: (T) -> Boolean, msg: () -> String?) = this?.takeIf(predicate) ?: throw ParamsErrorException(msg().toString())
 
-fun <T, R: T> R.copy(entity: T) = apply { copyProperties(entity, this) }
+fun <T, R: T> R.copy(entity: T) = apply {copyProperties(entity, this)}
