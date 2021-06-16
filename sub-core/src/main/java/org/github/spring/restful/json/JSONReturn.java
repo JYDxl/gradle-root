@@ -2,6 +2,10 @@ package org.github.spring.restful.json;
 
 import lombok.*;
 import org.github.exception.RemoteErrorException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import static org.github.spring.ops.SpringKt.*;
 
 /**
@@ -59,6 +63,12 @@ public class JSONReturn implements JSON {
   public @NonNull JSONReturn withRetMsg(@NonNull String retMsg) {
     setRetMsg(retMsg);
     return this;
+  }
+
+  @Override
+  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    res.setStatus(retCode);
+    JSON.super.collect(req, res);
   }
 
   /** Generator. */

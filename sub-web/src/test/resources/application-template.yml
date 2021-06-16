@@ -131,3 +131,9 @@ logging:
     io:
       netty: debug
       vertx: debug
+
+feign:
+  okhttp:
+    enabled: true
+  sentinel:
+    enabled: true
