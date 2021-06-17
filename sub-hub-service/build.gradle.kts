@@ -4,7 +4,7 @@ dependencies {
   compileOnly(project(":sub-system"))
   compileOnly(project(":sub-core"))
 
-  api(project(":sub-auth-model"))
+  api(project(":sub-hub-model"))
   api(project(":sub-mysql-mydb-service"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")

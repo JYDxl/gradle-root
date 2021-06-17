@@ -6,8 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 
 @SpringBootApplication
 @EnableDiscoveryClient
-class Auth
+class Hub
 
 fun main(args: Array<String>) {
-  runApplication<Auth>(*args)
+  runApplication<Hub>(*args)
 }

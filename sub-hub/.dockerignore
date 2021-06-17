@@ -1,0 +1,3 @@
+*
+!build/libs/hub-boot.jar
+!build/bootScripts/sub-hub

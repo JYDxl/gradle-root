@@ -8,7 +8,7 @@ import org.github.auth.shiro.model.UserDTO
 import org.github.shiro.AuthorInfo
 import org.github.spring.restful.json.JSONArrayReturn
 
-@FeignClient("auth-server")
+@FeignClient("hub-server")
 interface IServiceProviderAuthServer {
   @GetMapping("/public/security/user/{username}")
   fun user(@PathVariable("username") username: String): JSONDataReturn<UserDTO>

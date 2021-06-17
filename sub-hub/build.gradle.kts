@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-  mainClass.set("org.github.AuthKt")
+  mainClass.set("org.github.HubKt")
   applicationDefaultJvmArgs = listOf(
 //    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
 
@@ -38,7 +38,7 @@ application {
 }
 
 tasks.withType<BootJar> {
-  archiveFileName.set("auth-boot.jar")
+  archiveFileName.set("hub-boot.jar")
 }
 
 tasks.withType<Test> {
@@ -70,7 +70,7 @@ dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
 
-  implementation(project(":sub-auth-service"))
+  implementation(project(":sub-hub-service"))
 
   implementation("io.netty:netty-all:$netty")
 
