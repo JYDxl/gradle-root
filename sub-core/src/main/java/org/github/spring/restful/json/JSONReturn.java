@@ -27,6 +27,12 @@ public class JSONReturn implements JSON {
   private @NonNull String retMsg  = "OK";
 
   @Override
+  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    res.setStatus(retCode);
+    JSON.super.collect(req, res);
+  }
+
+  @Override
   public boolean functional() {
     return false;
   }
@@ -63,12 +69,6 @@ public class JSONReturn implements JSON {
   public @NonNull JSONReturn withRetMsg(@NonNull String retMsg) {
     setRetMsg(retMsg);
     return this;
-  }
-
-  @Override
-  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    res.setStatus(retCode);
-    JSON.super.collect(req, res);
   }
 
   /** Generator. */

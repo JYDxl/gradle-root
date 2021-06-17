@@ -19,13 +19,13 @@ spring:
             allowed-headers: "*"
       routes:
         - id: default
-          uri: lb://auth-server
+          uri: lb://hub-server
           predicates:
             - Path=/login,/logout,/jsessionid,/jwt,/public/jwt
           filters:
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
         - id: auth
-          uri: lb://auth-server
+          uri: lb://hub-server
           predicates:
             - Path=/*/login,/*/logout,/*/jsessionid,/*/jwt,/*/public/jwt
           filters:

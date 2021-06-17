@@ -1,6 +1,6 @@
 package org.github.service.impl
 
-import org.github.auth.feign.IServiceProviderAuthServer
+import org.github.auth.feign.IServiceProviderHubServer
 import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User
@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service
 @Service
 class ShiroServiceImpl: IShiroService {
   @Autowired(required = false)
-  private lateinit var authServer: IServiceProviderAuthServer
+  private lateinit var hubServer: IServiceProviderHubServer
 
   override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
-    val auth = authServer.auth(userId)
+    val auth = hubServer.auth(userId)
     auth.throwIfFailed()
     return auth
   }
 
   override fun queryUser(username: String): JSONDataReturn<out User> {
-    val user = authServer.user(username)
+    val user = hubServer.user(username)
     user.throwIfFailed()
     return user
   }
