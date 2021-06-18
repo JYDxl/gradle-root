@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static org.github.spring.ops.SpringKt.*;
+import static org.springframework.http.HttpStatus.OK;
 
 /**
  * JSON of basic.
@@ -22,9 +23,9 @@ import static org.github.spring.ops.SpringKt.*;
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态码. */
-  private          int    retCode = CODE_OK;
+  private          int    retCode = OK.value();
   /** 返回的信息. */
-  private @NonNull String retMsg  = "OK";
+  private @NonNull String retMsg  = OK.getReasonPhrase();
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
@@ -56,7 +57,7 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return retCode == CODE_OK;
+    return retCode == OK.value();
   }
 
   /** WITH retCode. */

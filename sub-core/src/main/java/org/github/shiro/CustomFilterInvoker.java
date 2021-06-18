@@ -5,7 +5,6 @@ import java.util.Objects;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import lombok.*;
-import org.github.spring.restful.json.JSON;
 import org.github.spring.restful.json.JSONDataReturn;
 import org.github.spring.restful.json.JSONReturn;
 import org.apache.shiro.authc.AuthenticationException;
@@ -57,9 +56,10 @@ public interface CustomFilterInvoker {
     resp(request, response, auth().withRetMsg(hasChinese(msg) ? msg : "登陆失败"));
   }
 
-  default void resp(ServletRequest request, ServletResponse response, JSON json) throws IOException {
+  default void resp(ServletRequest request, ServletResponse response, JSONReturn json) throws IOException {
     val httpServletResponse = toHttp(response);
     httpServletResponse.setContentType(json.mediaType().toString());
+    httpServletResponse.setStatus(json.getRetCode());
     httpServletResponse.getWriter().write(firstNonNull(json.get(), "null"));
   }
 

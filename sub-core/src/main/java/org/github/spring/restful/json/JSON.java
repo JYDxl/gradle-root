@@ -48,8 +48,6 @@ public interface JSON extends Returnable {
     return () -> null;
   }
 
-  int CODE_OK = SC_OK;
-
   int CODE_PARAMS_ERROR = SC_BAD_REQUEST;
 
   int CODE_SYSTEM_ERROR = SC_INTERNAL_SERVER_ERROR;
