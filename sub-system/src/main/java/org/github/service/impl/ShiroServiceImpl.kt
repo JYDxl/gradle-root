@@ -16,13 +16,11 @@ class ShiroServiceImpl: IShiroService {
 
   override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
     val auth = hubServer.auth(userId)
-    auth.throwIfFailed()
-    return auth
+    return auth.apply { throwIfFailed() }
   }
 
   override fun queryUser(username: String): JSONDataReturn<out User> {
     val user = hubServer.user(username)
-    user.throwIfFailed()
-    return user
+    return user.apply { throwIfFailed() }
   }
 }

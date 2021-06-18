@@ -27,7 +27,6 @@ class EchoController {
   fun basic(): Returnable {
     val (jsessionid, jwt) = systemService.feign()
     val basic = webServer.basic(jsessionid, jwt)
-    basic.throwIfFailed()
-    return basic
+    return basic.apply { throwIfFailed() }
   }
 }
