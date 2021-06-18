@@ -32,7 +32,7 @@ fun mydb() {
     }
 
     override fun dataSourceConfigBuilder(): IConfigBuilder<DataSourceConfig> {
-      val url = "jdbc:mysql://www.jydxl.link:3306/mydb"
+      val url = "jdbc:mysql://jydxl.link:3306/mydb"
       val username = "root"
       val password = "XLrootJYD713"
 
