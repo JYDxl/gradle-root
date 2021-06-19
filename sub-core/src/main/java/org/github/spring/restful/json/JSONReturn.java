@@ -88,6 +88,11 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
+  public static @NonNull JSONReturn path() {
+    return of(CODE_404_ERROR, "路径错误");
+  }
+
+  /** Generator. */
   public static @NonNull JSONReturn auth() {
     return of(CODE_AUTH_ERROR, "权限错误");
   }

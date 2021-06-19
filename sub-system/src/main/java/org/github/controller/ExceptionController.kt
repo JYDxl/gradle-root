@@ -9,18 +9,19 @@ import org.github.ops.log
 import org.github.spring.restful.json.JSONReturn.*
 import org.springframework.http.HttpStatus.resolve
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageConversionException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class ErrorController {
-  private val log = ErrorController::class.log
+class ExceptionController {
+  private val log = ExceptionController::class.log
 
   @ExceptionHandler(Throwable::class)
   fun handleThrowable(e: Throwable) = error().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, requireNotNull(resolve(it.retCode)))}.also {log.error(e) {}}
 
-  @ExceptionHandler(ParamsErrorException::class)
-  fun handleParamsErrorException(e: ParamsErrorException) = warn().withRetMsg(e.localizedMessage).let {ResponseEntity(it, requireNotNull(resolve(it.retCode)))}.also {log.error(e) {}}
+  @ExceptionHandler(ParamsErrorException::class, HttpMessageConversionException::class)
+  fun handleParamsErrorException(e: Exception) = warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, requireNotNull(resolve(it.retCode)))}.also {log.error(e) {}}
 
   @ExceptionHandler(RemoteErrorException::class)
   fun handleRemoteErrorException(e: RemoteErrorException) = e.data.let {ResponseEntity(it, requireNotNull(resolve(it.retCode)))}.also {log.error(e) {}}
