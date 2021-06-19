@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class ErrorController {
-  private val log = ErrorController::class.log
+class ExceptionController {
+  private val log = ExceptionController::class.log
 
   @ExceptionHandler(Throwable::class)
   fun handleThrowable(e: Throwable) = error().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, requireNotNull(resolve(it.retCode)))}.also {log.error(e) {}}
