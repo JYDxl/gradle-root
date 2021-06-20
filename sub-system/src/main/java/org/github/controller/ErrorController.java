@@ -25,21 +25,21 @@ import static org.springframework.http.ResponseEntity.status;
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class ErrorController extends BasicErrorController {
-    public ErrorController(ErrorAttributes errorAttributes, ServerProperties serverProperties, List<ErrorViewResolver> errorViewResolvers) {
-        super(errorAttributes, serverProperties.getError(), errorViewResolvers);
-    }
+  public ErrorController(ErrorAttributes errorAttributes, ServerProperties serverProperties, List<ErrorViewResolver> errorViewResolvers) {
+    super(errorAttributes, serverProperties.getError(), errorViewResolvers);
+  }
 
-    @RequestMapping
-    @Override
-    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
-        val error = super.error(request);
-        if (error.getStatusCode().equals(NOT_FOUND)) return status(NOT_FOUND.value()).body(beanToMap(path()));
-        return badRequest().body(beanToMap(warn()));
-    }
+  @Deprecated
+  @Override
+  public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
+    return super.errorHtml(request, response);
+  }
 
-    @Deprecated
-    @Override
-    public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
-        return super.errorHtml(request, response);
-    }
+  @RequestMapping
+  @Override
+  public ResponseEntity<Map<String,Object>> error(HttpServletRequest request) {
+    val error = super.error(request);
+    if (error.getStatusCode().equals(NOT_FOUND)) return status(NOT_FOUND.value()).body(beanToMap(path()));
+    return badRequest().body(beanToMap(warn()));
+  }
 }
