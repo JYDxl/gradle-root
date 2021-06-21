@@ -9,6 +9,7 @@ val springadmin: String by System.getProperties()
 val springboot: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val fastjson: String by System.getProperties()
+val protobuf: String by System.getProperties()
 val j2cache: String by System.getProperties()
 val jackson: String by System.getProperties()
 val alibaba: String by System.getProperties()
@@ -132,6 +133,7 @@ subprojects {
     }
     implementation("com.alibaba:fastjson:$fastjson")
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+    implementation("com.google.protobuf:protobuf-java:$protobuf")
 
     implementation("commons-io:commons-io:2.10.0")
     implementation("org.ow2.asm:asm:9.1")
