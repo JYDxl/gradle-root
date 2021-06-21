@@ -1,6 +1,7 @@
 package org.github.config
 
 import cn.hutool.core.date.DatePattern.*
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer
 import com.fasterxml.jackson.datatype.guava.GuavaModule
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter.ofPattern
 class JacksonConfig {
   @Bean
   fun jackson2ObjectMapperBuilderCustomizer() = Jackson2ObjectMapperBuilderCustomizer {it
+    .serializerByType(Long::class.java, ToStringSerializer.instance)
     .serializerByType(LocalDate::class.java, LocalDateSerializer(ofPattern(NORM_DATE_PATTERN)))
     .serializerByType(LocalTime::class.java, LocalTimeSerializer(ofPattern(NORM_TIME_PATTERN)))
     .serializerByType(LocalDateTime::class.java, LocalDateTimeSerializer(ofPattern(NORM_DATETIME_PATTERN)))
