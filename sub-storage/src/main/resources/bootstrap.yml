@@ -15,4 +15,4 @@ spring:
           - data-id: j2cache-${spring.profiles.active}.properties
 
 server:
-  port: 8083
+  port: 8087
