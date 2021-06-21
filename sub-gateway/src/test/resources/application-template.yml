@@ -45,6 +45,27 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+        - id: account
+            uri: lb://account-server
+            predicates:
+              - Path=/account/**
+            filters:
+              - StripPrefix=1
+              - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+        - id: order
+            uri: lb://order-server
+            predicates:
+              - Path=/order/**
+            filters:
+              - StripPrefix=1
+              - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+        - id: storage
+            uri: lb://storage-server
+            predicates:
+              - Path=/storage/**
+            filters:
+              - StripPrefix=1
+              - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
         - id: client
           uri: lb://sub-client
           predicates:

@@ -6,7 +6,7 @@ plugins {
 }
 
 application {
-  mainClass.set("org.github.ShopKt")
+  mainClass.set("org.github.OrderKt")
   applicationDefaultJvmArgs = listOf(
 //    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
 
@@ -38,7 +38,7 @@ application {
 }
 
 tasks.withType<BootJar> {
-  archiveFileName.set("shop-boot.jar")
+  archiveFileName.set("order-boot.jar")
 }
 
 tasks.withType<Test> {
@@ -70,7 +70,7 @@ dependencies {
   implementation(project(":sub-system"))
   implementation(project(":sub-core"))
 
-  implementation(project(":sub-shop-service"))
+  implementation(project(":sub-order-service"))
 
   implementation("io.netty:netty-all:$netty")
 
