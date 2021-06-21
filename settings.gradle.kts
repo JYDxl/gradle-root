@@ -6,17 +6,17 @@ pluginManagement {
 
 rootProject.name = "gradle-root"
 
-include("sub-core")
+include("sub-system-core")
 
-include("sub-system")
+include("sub-system-config")
 
-include("sub-gateway")
+include("sub-cloud-gateway")
 
-include("sub-admin")
+include("sub-cloud-admin")
 
-include("sub-netty")
+include("sub-single-netty")
 
-include("sub-vertx")
+include("sub-single-vertx")
 
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
@@ -30,32 +30,32 @@ include("sub-mysql-seata-order-service")
 include("sub-mysql-seata-storage-entity")
 include("sub-mysql-seata-storage-service")
 
-include("sub-web-service")
-include("sub-web-model")
-include("sub-web-api")
-include("sub-web")
+include("sub-module-web-service")
+include("sub-module-web-model")
+include("sub-module-web-api")
+include("sub-module-web")
 
-include("sub-hub-service")
-include("sub-hub-model")
-include("sub-hub-api")
-include("sub-hub")
+include("sub-module-hub-service")
+include("sub-module-hub-model")
+include("sub-module-hub-api")
+include("sub-module-hub")
 
-include("sub-shop-service")
-include("sub-shop-model")
-include("sub-shop-api")
-include("sub-shop")
+include("sub-module-shop-service")
+include("sub-module-shop-model")
+include("sub-module-shop-api")
+include("sub-module-shop")
 
-include("sub-account-service")
-include("sub-account-model")
-include("sub-account-api")
-include("sub-account")
+include("sub-module-account-service")
+include("sub-module-account-model")
+include("sub-module-account-api")
+include("sub-module-account")
 
-include("sub-order-service")
-include("sub-order-model")
-include("sub-order-api")
-include("sub-order")
+include("sub-module-order-service")
+include("sub-module-order-model")
+include("sub-module-order-api")
+include("sub-module-order")
 
-include("sub-storage-service")
-include("sub-storage-model")
-include("sub-storage-api")
-include("sub-storage")
+include("sub-module-storage-service")
+include("sub-module-storage-model")
+include("sub-module-storage-api")
+include("sub-module-storage")
