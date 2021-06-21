@@ -18,8 +18,6 @@ include("sub-netty")
 
 include("sub-vertx")
 
-include("sub-client")
-
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
 

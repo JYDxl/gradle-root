@@ -66,13 +66,6 @@ spring:
             filters:
               - StripPrefix=1
               - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
-        - id: client
-          uri: lb://sub-client
-          predicates:
-            - Path=/client/**
-          filters:
-            - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
 
 logging:
   file:
