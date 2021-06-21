@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-class Shop
+class Account
 
 fun main(args: Array<String>) {
-  runApplication<Shop>(*args)
+  runApplication<Account>(*args)
 }

@@ -3,9 +3,9 @@ val shiro: String by System.getProperties()
 dependencies {
   compileOnly(project(":sub-core"))
 
-  api(project(":sub-shop-model"))
+  api(project(":sub-account-model"))
 
-  api(project(":sub-mysql-mydb-service"))
+  api(project(":sub-mysql-seata-account-service"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.springframework.boot:spring-boot-starter-jdbc")

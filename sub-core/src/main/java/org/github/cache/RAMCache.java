@@ -8,19 +8,21 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 
+import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.collect.Maps.*;
 import static java.lang.String.*;
+import static java.util.Collections.emptyList;
 import static java.util.Optional.*;
 
 public class RAMCache implements InitializingBean, ApplicationListener<CacheEvent> {
-  @Autowired
+  @Autowired(required = false)
   private List<CacheSupplier<?,?>> caches;
 
   private Map<CacheNameSupplier,CacheSupplier<?,?>> map;
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    map = uniqueIndex(caches, CacheSupplier::getName);
+    map = uniqueIndex(firstNonNull(caches, emptyList()), CacheSupplier::getName);
   }
 
   @Override

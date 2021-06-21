@@ -20,5 +20,7 @@ dependencies {
     exclude(group = "redis.clients")
   }
 
+  compileOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 }
