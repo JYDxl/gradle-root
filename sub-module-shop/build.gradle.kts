@@ -5,6 +5,7 @@ plugins {
   application
 }
 
+val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
 val nacosIp: String by System.getProperties()
 
@@ -15,7 +16,7 @@ application {
 
     "-ea",
 
-    "-Dspring.profiles.active=dev",
+    "-Dspring.profiles.active=$activeProfiles",
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
     "-Dspring.cloud.nacos.discovery.ip=$nacosIp",
 
