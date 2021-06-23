@@ -23,4 +23,6 @@ dependencies {
   compileOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
 
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+  annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }

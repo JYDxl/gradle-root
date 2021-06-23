@@ -5,7 +5,6 @@ import com.google.common.collect.ImmutableMap.of
 import org.apache.shiro.authc.credential.CredentialsMatcher
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher
 import org.apache.shiro.authz.ModularRealmAuthorizer
-import org.apache.shiro.crypto.hash.Sha256Hash.ALGORITHM_NAME
 import org.apache.shiro.mgt.SecurityManager
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition
@@ -15,13 +14,16 @@ import org.github.ops.info
 import org.github.ops.log
 import org.github.shiro.*
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.util.Collections.singletonList
 import javax.servlet.Filter
 
+@EnableConfigurationProperties(SecurityProperties::class)
 @Configuration
 class ShiroConfig {
   private val log = ShiroConfig::class.log
@@ -37,6 +39,9 @@ class ShiroConfig {
   @Suppress("ELValidationInJSP", "SpringElInspection")
   @Value("#{@environment['shiro-redis.cache-manager.authorSubPrefix'] ?: T(org.github.shiro.ShiroRealm).SHIRO_CACHE_KEY_AUTHOR_SUB_PREFIX}")
   private lateinit var shiroCacheKeyAuthorSubPrefix: String
+
+  @Autowired
+  private lateinit var securityProperties: SecurityProperties
 
   @ConditionalOnMissingBean
   @Bean
@@ -57,15 +62,15 @@ class ShiroConfig {
 
   @Bean
   fun credentialsMatcher() = HashedCredentialsMatcher().apply {
-    hashAlgorithmName = ALGORITHM_NAME
-    hashIterations = 2
+    hashAlgorithmName = securityProperties.hashAlgorithm
+    hashIterations = securityProperties.hashIterations
   }
 
   @Bean
   fun authenticationStrategy() = CustomFirstSuccessfulStrategy()
 
   @Bean
-  fun passwordGenerator() = PasswordGenerator(ALGORITHM_NAME, 2)
+  fun passwordGenerator() = PasswordGenerator(securityProperties.hashAlgorithm, securityProperties.hashIterations)
 
   @Bean
   fun shiroFilterChainDefinition() = DefaultShiroFilterChainDefinition().apply {
