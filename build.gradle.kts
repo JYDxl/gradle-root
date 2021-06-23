@@ -2,11 +2,11 @@ import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val kotlinxcoroutines: String by System.getProperties()
-val commonslang3: String by System.getProperties()
-val springcloud: String by System.getProperties()
-val springadmin: String by System.getProperties()
-val springboot: String by System.getProperties()
+val kotlinxCoroutines: String by System.getProperties()
+val commonsLang3: String by System.getProperties()
+val springCloud: String by System.getProperties()
+val springAdmin: String by System.getProperties()
+val springBoot: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val fastjson: String by System.getProperties()
 val protobuf: String by System.getProperties()
@@ -21,8 +21,8 @@ val guice: String by System.getProperties()
 val vertx: String by System.getProperties()
 
 plugins {
-  val dependencymanagement: String by System.getProperties()
-  val springboot: String by System.getProperties()
+  val dependencyManagement: String by System.getProperties()
+  val springBoot: String by System.getProperties()
   val benmanes: String by System.getProperties()
   val kotlin: String by System.getProperties()
   val shadow: String by System.getProperties()
@@ -30,8 +30,8 @@ plugins {
   java
 
   id("com.github.johnrengelman.shadow") version shadow apply false
-  id("org.springframework.boot") version springboot apply false
-  id("io.spring.dependency-management") version dependencymanagement apply false
+  id("org.springframework.boot") version springBoot apply false
+  id("io.spring.dependency-management") version dependencyManagement apply false
   id("org.jetbrains.kotlin.jvm") version kotlin apply false
   id("org.jetbrains.kotlin.plugin.spring") version kotlin apply false
   id("com.github.ben-manes.versions") version benmanes apply false
@@ -59,10 +59,10 @@ subprojects {
 
   configure<DependencyManagementExtension> {
     imports {
-      mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springcloud")
-      mavenBom("org.springframework.boot:spring-boot-starter-parent:$springboot")
+      mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloud")
+      mavenBom("org.springframework.boot:spring-boot-starter-parent:$springBoot")
       mavenBom("com.alibaba.cloud:spring-cloud-alibaba-dependencies:$alibaba")
-      mavenBom("de.codecentric:spring-boot-admin-dependencies:$springadmin")
+      mavenBom("de.codecentric:spring-boot-admin-dependencies:$springAdmin")
       mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
     }
@@ -103,16 +103,16 @@ subprojects {
     implementation("ch.qos.logback:logback-classic")
     implementation("org.slf4j:jul-to-slf4j")
 
-    implementation("org.apache.commons:commons-lang3:$commonslang3")
+    implementation("org.apache.commons:commons-lang3:$commonsLang3")
     implementation("org.codehaus.groovy:groovy:$groovy")
     implementation("com.google.inject:guice:$guice")
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxcoroutines")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxcoroutines")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxcoroutines")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxcoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutines")
 
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")

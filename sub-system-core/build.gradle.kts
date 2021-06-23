@@ -1,5 +1,5 @@
-val commonscodec: String by System.getProperties()
-val mybatisplus: String by System.getProperties()
+val commonsCodec: String by System.getProperties()
+val mybatisPlus: String by System.getProperties()
 val javassist: String by System.getProperties()
 val byteman: String by System.getProperties()
 val swagger: String by System.getProperties()
@@ -42,20 +42,20 @@ dependencies {
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
-  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
   compileOnly("io.netty:netty-all:$netty")
   compileOnly("com.auth0:java-jwt:$jwt")
   compileOnly("p6spy:p6spy:$p6spy")
 
-  testImplementation("commons-codec:commons-codec:$commonscodec")
+  testImplementation("commons-codec:commons-codec:$commonsCodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")
   testImplementation("org.javassist:javassist:$javassist")
   testImplementation("net.java.dev.jna:jna:$jna")
   testImplementation("io.netty:netty-all:$netty")
 
   testImplementation("com.baomidou:mybatis-plus-generator:3.5.0")
-  testImplementation("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  testImplementation("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   testImplementation("mysql:mysql-connector-java:$mysql")
   testImplementation("org.freemarker:freemarker")
 }

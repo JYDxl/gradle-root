@@ -5,13 +5,17 @@ plugins {
   application
 }
 
+val serverAddr: String by System.getProperties()
+val nacosIp: String by System.getProperties()
+
 application {
   mainClass.set("org.github.GatewayKt")
   applicationDefaultJvmArgs = listOf(
     "-ea",
 
     "-Dspring.profiles.active=dev",
-    "-Dspring.cloud.nacos.discovery.server-addr=ubuntu:8848",
+    "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
+    "-Dspring.cloud.nacos.discovery.ip=$nacosIp",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",

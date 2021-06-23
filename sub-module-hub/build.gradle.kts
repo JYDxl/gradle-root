@@ -5,17 +5,19 @@ plugins {
   application
 }
 
+val serverAddr: String by System.getProperties()
+val nacosIp: String by System.getProperties()
+
 application {
   mainClass.set("org.github.HubKt")
   applicationDefaultJvmArgs = listOf(
-//    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5000",
 
     "-ea",
 
     "-Dspring.profiles.active=dev",
-    "-Dspring.cloud.nacos.discovery.server-addr=ubuntu:8848",
-
-    "-Djava.library.path=/usr/lib",
+    "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
+    "-Dspring.cloud.nacos.discovery.ip=$nacosIp",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
@@ -52,9 +54,9 @@ tasks.getByName<Task>("distZip") {enabled = false}
 tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
-val commonspool2: String by System.getProperties()
-val mybatisplus: String by System.getProperties()
-val shiroredis: String by System.getProperties()
+val commonsPool2: String by System.getProperties()
+val mybatisPlus: String by System.getProperties()
+val shiroRedis: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val redisson: String by System.getProperties()
 val swagger: String by System.getProperties()
@@ -74,8 +76,8 @@ dependencies {
 
   implementation("io.netty:netty-all:$netty")
 
-  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisplus")
-  implementation("org.apache.commons:commons-pool2:$commonspool2")
+  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
+  implementation("org.apache.commons:commons-pool2:$commonsPool2")
   implementation("com.squareup.retrofit2:retrofit:$retrofit")
   implementation("com.squareup.okhttp3:okhttp:$okhttp3")
   implementation("mysql:mysql-connector-java:$mysql")
@@ -83,7 +85,7 @@ dependencies {
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:$jwt")
-  implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroredis") {
+  implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroRedis") {
     exclude(group = "org.apache.maven.plugins")
     exclude(group = "redis.clients")
   }

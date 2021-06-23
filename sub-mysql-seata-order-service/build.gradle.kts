@@ -1,4 +1,4 @@
-val mybatisplus: String by System.getProperties()
+val mybatisPlus: String by System.getProperties()
 val shiro: String by System.getProperties()
 
 dependencies {
@@ -8,8 +8,8 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
 
-  api("com.baomidou:mybatis-plus-annotation:$mybatisplus")
-  api("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  api("com.baomidou:mybatis-plus-annotation:$mybatisPlus")
+  api("com.baomidou:mybatis-plus-extension:$mybatisPlus")
 
   api(project(":sub-mysql-seata-order-entity"))
 }

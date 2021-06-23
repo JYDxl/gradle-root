@@ -11,7 +11,7 @@ plugins {
 application {
   mainClass.set("org.github.VertxAppKt")
   applicationDefaultJvmArgs = listOf(
-//    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007",
 
     "-ea",
 

@@ -1,4 +1,4 @@
-val mybatisplus: String by System.getProperties()
+val mybatisPlus: String by System.getProperties()
 val swagger: String by System.getProperties()
 
 dependencies {
@@ -6,6 +6,6 @@ dependencies {
 
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
 
-  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisplus")
-  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisplus")
+  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisPlus")
+  compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
 }
