@@ -36,8 +36,8 @@ open class SysUserEntity : Entity() {
     @ApiModelProperty(value = "盐")
     open var salt: String? = null
 
-    /** 启用状态 0：禁用 1：正常 */
-    @ApiModelProperty(value = "启用状态 0：禁用 1：正常")
+    /** 状态  0：禁用 1：正常 */
+    @ApiModelProperty(value = "状态  0：禁用 1：正常")
     open var enabled: Int? = null
 
     /** 昵称 */
@@ -72,8 +72,8 @@ open class SysUserEntity : Entity() {
     @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
     open var modifyTime: LocalDateTime? = null
 
-    /** 删除状态 0：未删除 1：已删除 */
-    @ApiModelProperty(value = "删除状态 0：未删除 1：已删除")
+    /** 0：未删除 1：已删除 */
+    @ApiModelProperty(value = "0：未删除 1：已删除")
     open var deleted: Int? = null
 
     override fun pkVal(): java.io.Serializable? {

@@ -78,12 +78,14 @@ fun mysqlMydb() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
-        .addTableFills(listOf(
-          Column("create_time", INSERT),
-          Column("creator_id", INSERT),
-          Column("modify_time", INSERT_UPDATE),
-          Column("modifier_id", INSERT_UPDATE)
-        ))
+        .addTableFills(
+          listOf(
+            Column("create_time", INSERT),
+            Column("creator_id", INSERT),
+            Column("modify_time", INSERT_UPDATE),
+            Column("modifier_id", INSERT_UPDATE)
+          )
+        )
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -169,12 +171,14 @@ fun mysqlSeataAccount() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
-        .addTableFills(listOf(
-          Column("create_time", INSERT),
-          Column("creator_id", INSERT),
-          Column("modify_time", INSERT_UPDATE),
-          Column("modifier_id", INSERT_UPDATE)
-        ))
+        .addTableFills(
+          listOf(
+            Column("create_time", INSERT),
+            Column("creator_id", INSERT),
+            Column("modify_time", INSERT_UPDATE),
+            Column("modifier_id", INSERT_UPDATE)
+          )
+        )
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -260,12 +264,14 @@ fun mysqlSeataOrder() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
-        .addTableFills(listOf(
-          Column("create_time", INSERT),
-          Column("creator_id", INSERT),
-          Column("modify_time", INSERT_UPDATE),
-          Column("modifier_id", INSERT_UPDATE)
-        ))
+        .addTableFills(
+          listOf(
+            Column("create_time", INSERT),
+            Column("creator_id", INSERT),
+            Column("modify_time", INSERT_UPDATE),
+            Column("modifier_id", INSERT_UPDATE)
+          )
+        )
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -351,12 +357,14 @@ fun mysqlSeataStorage() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
-        .addTableFills(listOf(
-          Column("create_time", INSERT),
-          Column("creator_id", INSERT),
-          Column("modify_time", INSERT_UPDATE),
-          Column("modifier_id", INSERT_UPDATE)
-        ))
+        .addTableFills(
+          listOf(
+            Column("create_time", INSERT),
+            Column("creator_id", INSERT),
+            Column("modify_time", INSERT_UPDATE),
+            Column("modifier_id", INSERT_UPDATE)
+          )
+        )
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -442,12 +450,14 @@ fun postgresqlRunoobdb() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
-        .addTableFills(listOf(
-          Column("create_time", INSERT),
-          Column("creator_id", INSERT),
-          Column("modify_time", INSERT_UPDATE),
-          Column("modifier_id", INSERT_UPDATE)
-        ))
+        .addTableFills(
+          listOf(
+            Column("create_time", INSERT),
+            Column("creator_id", INSERT),
+            Column("modify_time", INSERT_UPDATE),
+            Column("modifier_id", INSERT_UPDATE)
+          )
+        )
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
