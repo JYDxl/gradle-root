@@ -84,7 +84,7 @@ subprojects {
   }
 
   tasks.withType<JavaCompile> {
-    options.compilerArgs.add("-Xlint:unchecked")
+    options.compilerArgs.addAll(listOf("-Xlint:unchecked", "-parameters"))
   }
 
   tasks.withType<Test> {

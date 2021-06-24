@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static cn.hutool.core.lang.UUID.fastUUID;
-import static org.github.mysql.mydb.base.dict.DictKt.DEFAULT_VALUE_INITIAL_PASSWORD;
+import static org.github.shiro.ops.ShiroKt.DEFAULT_VALUE_INITIAL_PASSWORD;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
