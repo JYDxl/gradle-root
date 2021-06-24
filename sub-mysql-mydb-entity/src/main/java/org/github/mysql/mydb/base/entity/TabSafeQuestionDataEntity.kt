@@ -1,5 +1,6 @@
 package org.github.mysql.mydb.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -64,7 +65,7 @@ open class TabSafeQuestionDataEntity : Entity() {
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField("create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     open var createTime: LocalDateTime? = null
 
     override fun pkVal(): java.io.Serializable? {

@@ -1,5 +1,7 @@
 package org.github.mbp
 
+import com.baomidou.mybatisplus.annotation.FieldFill.INSERT
+import com.baomidou.mybatisplus.annotation.FieldFill.INSERT_UPDATE
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
 import com.baomidou.mybatisplus.extension.service.IService
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
@@ -11,13 +13,14 @@ import com.baomidou.mybatisplus.generator.config.TemplateType.XML
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy.underline_to_camel
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
+import com.baomidou.mybatisplus.generator.fill.Column
 import org.github.base.*
 import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
 fun main() {
   mysqlMydb()
-  msyqlSeataAccount()
+  mysqlSeataAccount()
   mysqlSeataOrder()
   mysqlSeataStorage()
 
@@ -75,6 +78,12 @@ fun mysqlMydb() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
+        .addTableFills(listOf(
+          Column("create_time", INSERT),
+          Column("creator_id", INSERT),
+          Column("modify_time", INSERT_UPDATE),
+          Column("modifier_id", INSERT_UPDATE)
+        ))
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -109,7 +118,7 @@ fun mysqlMydb() {
   }.execute()
 }
 
-fun msyqlSeataAccount() {
+fun mysqlSeataAccount() {
   object: SimpleAutoGenerator() {
     override fun globalConfigBuilder(): IConfigBuilder<GlobalConfig> {
       return GlobalConfig.Builder()
@@ -160,6 +169,12 @@ fun msyqlSeataAccount() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
+        .addTableFills(listOf(
+          Column("create_time", INSERT),
+          Column("creator_id", INSERT),
+          Column("modify_time", INSERT_UPDATE),
+          Column("modifier_id", INSERT_UPDATE)
+        ))
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -245,6 +260,12 @@ fun mysqlSeataOrder() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
+        .addTableFills(listOf(
+          Column("create_time", INSERT),
+          Column("creator_id", INSERT),
+          Column("modify_time", INSERT_UPDATE),
+          Column("modifier_id", INSERT_UPDATE)
+        ))
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -330,6 +351,12 @@ fun mysqlSeataStorage() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
+        .addTableFills(listOf(
+          Column("create_time", INSERT),
+          Column("creator_id", INSERT),
+          Column("modify_time", INSERT_UPDATE),
+          Column("modifier_id", INSERT_UPDATE)
+        ))
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)
@@ -415,6 +442,12 @@ fun postgresqlRunoobdb() {
         .entityBuilder()
         .enableLombok()
         .enableTableFieldAnnotation()
+        .addTableFills(listOf(
+          Column("create_time", INSERT),
+          Column("creator_id", INSERT),
+          Column("modify_time", INSERT_UPDATE),
+          Column("modifier_id", INSERT_UPDATE)
+        ))
         .enableSerialVersionUID()
         .idType(ASSIGN_ID)
         .naming(underline_to_camel)

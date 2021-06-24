@@ -11,6 +11,12 @@ const val JSESSIONID = DEFAULT_SESSION_ID_NAME
 
 const val JWT = "Token"
 
+const val DEFAULT_VALUE_ADMIN_ID = -1L
+
+const val DEFAULT_VALUE_ANONYMOUS_ID = -2L
+
+const val DEFAULT_VALUE_INITIAL_PASSWORD = "123456"
+
 val subject: Subject get() = getSubject()
 
 val session: Session? get() = subject.getSession(false)

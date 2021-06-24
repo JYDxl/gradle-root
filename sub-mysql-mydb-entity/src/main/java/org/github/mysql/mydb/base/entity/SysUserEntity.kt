@@ -1,5 +1,6 @@
 package org.github.mysql.mydb.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -53,22 +54,22 @@ open class SysUserEntity : Entity() {
 
     /** 创建人id */
     @ApiModelProperty(value = "创建人id")
-    @TableField("creator_id")
+    @TableField(value = "creator_id", fill = FieldFill.INSERT)
     open var creatorId: Long? = null
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField("create_time")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     open var createTime: LocalDateTime? = null
 
     /** 修改人id */
     @ApiModelProperty(value = "修改人id")
-    @TableField("modifier_id")
+    @TableField(value = "modifier_id", fill = FieldFill.INSERT_UPDATE)
     open var modifierId: Long? = null
 
     /** 修改时间 */
     @ApiModelProperty(value = "修改时间")
-    @TableField("modify_time")
+    @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
     open var modifyTime: LocalDateTime? = null
 
     /** 删除状态 0：未删除 1：已删除 */
