@@ -1,4 +1,4 @@
-package org.github.web.module.sys.menu.model.bo;
+package org.github.web.module.sys.menu.dto;
 
 import javax.annotation.Nullable;
 import io.swagger.annotations.ApiModel;

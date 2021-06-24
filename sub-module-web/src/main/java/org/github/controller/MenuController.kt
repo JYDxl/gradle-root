@@ -4,7 +4,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.github.mysql.mydb.base.entity.SysMenuEntity
 import org.github.ops.trimStrFields
-import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
+import org.github.web.module.sys.menu.dto.QueryMenuListBO
 import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

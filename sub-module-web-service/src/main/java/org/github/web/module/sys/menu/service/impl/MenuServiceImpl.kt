@@ -1,13 +1,14 @@
 package org.github.web.module.sys.menu.service.impl
 
+import org.github.base.IPage
 import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.github.mysql.mydb.base.service.ISysMenuService
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.mysql.mydb.base.entity.SysMenuEntity
-import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
+import org.github.web.module.sys.menu.dto.QueryMenuListBO
 import org.github.spring.restful.json.JSONPageReturn
-import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
+import org.github.web.module.sys.menu.dto.QueryMenuListVO
 import org.github.base.Page
 import org.github.mybatis.ops.ktGetById
 import org.github.mybatis.ops.ktList
@@ -38,7 +39,7 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO> {
-    val page = menuMapper.queryPage(Page(bo), bo)
+    val page: IPage<QueryMenuListVO> = menuMapper.queryPage(Page(bo), bo)
     return JSONPageReturn.of(page)
   }
 

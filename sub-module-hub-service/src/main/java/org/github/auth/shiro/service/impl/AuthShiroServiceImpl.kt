@@ -20,7 +20,7 @@ class AuthShiroServiceImpl: IShiroService {
   private lateinit var shiroMapper: IShiroMapper
 
   override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
-    val list = shiroMapper.queryAuthorInfo(userId.toLong())
+    val list: MutableList<AuthorInfo> = shiroMapper.queryAuthorInfo(userId.toLong())
     return JSONArrayReturn.of(list)
   }
 

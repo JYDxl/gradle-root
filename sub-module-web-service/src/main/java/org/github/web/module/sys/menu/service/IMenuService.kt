@@ -2,9 +2,9 @@ package org.github.web.module.sys.menu.service
 
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.mysql.mydb.base.entity.SysMenuEntity
-import org.github.web.module.sys.menu.model.bo.QueryMenuListBO
+import org.github.web.module.sys.menu.dto.QueryMenuListBO
 import org.github.spring.restful.json.JSONPageReturn
-import org.github.web.module.sys.menu.model.vo.QueryMenuListVO
+import org.github.web.module.sys.menu.dto.QueryMenuListVO
 import org.github.spring.restful.json.JSONArrayReturn
 
 interface IMenuService {
