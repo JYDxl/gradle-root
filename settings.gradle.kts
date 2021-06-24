@@ -30,6 +30,9 @@ include("sub-mysql-seata-order-service")
 include("sub-mysql-seata-storage-entity")
 include("sub-mysql-seata-storage-service")
 
+include("sub-postgresql-runoobdb-entity")
+include("sub-postgresql-runoobdb-service")
+
 include("sub-module-web-service")
 include("sub-module-web-model")
 include("sub-module-web-api")

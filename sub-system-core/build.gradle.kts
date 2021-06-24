@@ -1,5 +1,6 @@
 val commonsCodec: String by System.getProperties()
 val mybatisPlus: String by System.getProperties()
+val postgresql: String by System.getProperties()
 val javassist: String by System.getProperties()
 val byteman: String by System.getProperties()
 val swagger: String by System.getProperties()
@@ -57,5 +58,6 @@ dependencies {
   testImplementation("com.baomidou:mybatis-plus-generator:3.5.0")
   testImplementation("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   testImplementation("mysql:mysql-connector-java:$mysql")
+  testImplementation("org.postgresql:postgresql:$postgresql")
   testImplementation("org.freemarker:freemarker")
 }
