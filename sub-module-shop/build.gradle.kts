@@ -7,7 +7,6 @@ plugins {
 
 val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
-val nacosIp: String by System.getProperties()
 
 application {
   mainClass.set("org.github.ShopKt")
@@ -18,7 +17,6 @@ application {
 
     "-Dspring.profiles.active=$activeProfiles",
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
-    "-Dspring.cloud.nacos.discovery.ip=$nacosIp",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",

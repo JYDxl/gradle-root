@@ -6,7 +6,6 @@ plugins {
 }
 
 val serverAddr: String by System.getProperties()
-val nacosIp: String by System.getProperties()
 
 application {
   mainClass.set("org.github.AdminKt")
@@ -14,7 +13,6 @@ application {
     "-ea",
 
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
-    "-Dspring.cloud.nacos.discovery.ip=$nacosIp",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
