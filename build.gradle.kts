@@ -136,7 +136,7 @@ subprojects {
     implementation("com.google.protobuf:protobuf-java:$protobuf")
 
     implementation("commons-io:commons-io:2.10.0")
-    implementation("org.ow2.asm:asm:9.1")
+    implementation("org.ow2.asm:asm:9.2")
     implementation("org.checkerframework:checker-qual:3.15.0")
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.28.0-GA")
