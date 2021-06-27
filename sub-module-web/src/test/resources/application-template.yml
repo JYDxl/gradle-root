@@ -76,6 +76,7 @@ spring:
     alibaba:
       seata:
         tx-service-group: gradle-root
+
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/**/*.xml
 #  global-config:
