@@ -14,7 +14,7 @@ class ShiroServiceImpl: IShiroService {
   @Autowired(required = false)
   private lateinit var hubServer: IServiceProviderHubServer
 
-  override fun queryAuthorInfo(userId: String): JSONArrayReturn<AuthorInfo> {
+  override fun queryAuthorInfo(userId: Long): JSONArrayReturn<AuthorInfo> {
     val auth = hubServer.auth(userId)
     return auth.apply {throwIfFailed()}
   }

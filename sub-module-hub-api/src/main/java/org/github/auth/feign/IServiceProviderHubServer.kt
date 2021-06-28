@@ -14,5 +14,5 @@ interface IServiceProviderHubServer {
   fun user(@PathVariable("username") username: String): JSONDataReturn<UserDTO>
 
   @GetMapping("/public/security/auth/{userId}")
-  fun auth(@PathVariable("userId") userId: String): JSONArrayReturn<AuthorInfo>
+  fun auth(@PathVariable("userId") userId: Long): JSONArrayReturn<AuthorInfo>
 }

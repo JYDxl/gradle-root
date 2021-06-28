@@ -20,8 +20,8 @@ open class TAccountEntity : Entity() {
 
     /** 主键 */
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Long? = null
+    @TableId(value = "account_id", type = IdType.ASSIGN_ID)
+    open var accountId: Long? = null
 
     /** 用户id */
     @ApiModelProperty(value = "用户id")
@@ -41,12 +41,12 @@ open class TAccountEntity : Entity() {
     open var residue: BigDecimal? = null
 
     override fun pkVal(): java.io.Serializable? {
-        return id
+        return accountId
     }
 
     override fun toString(): String {
         return "TAccountEntity{" +
-        "id=" + id +
+        "accountId=" + accountId +
         ", userId=" + userId +
         ", total=" + total +
         ", used=" + used +

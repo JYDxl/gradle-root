@@ -19,8 +19,8 @@ open class TStorageEntity : Entity() {
 
     /** 主键 */
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Long? = null
+    @TableId(value = "storage_id", type = IdType.ASSIGN_ID)
+    open var storageId: Long? = null
 
     /** 产品id */
     @ApiModelProperty(value = "产品id")
@@ -40,12 +40,12 @@ open class TStorageEntity : Entity() {
     open var residue: Int? = null
 
     override fun pkVal(): java.io.Serializable? {
-        return id
+        return storageId
     }
 
     override fun toString(): String {
         return "TStorageEntity{" +
-        "id=" + id +
+        "storageId=" + storageId +
         ", productId=" + productId +
         ", total=" + total +
         ", used=" + used +

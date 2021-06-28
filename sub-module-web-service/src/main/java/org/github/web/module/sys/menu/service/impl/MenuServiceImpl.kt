@@ -48,7 +48,7 @@ class MenuServiceImpl: IMenuService {
     query.ne(SysMenuEntity::type, BUTTON.code)
     val list = query.ktList()
     val root = SysMenuEntity()
-    root.id = 0L
+    root.menuId = 0L
     root.parentId = -1L
     root.name = "根目录"
     // root.setUrl();

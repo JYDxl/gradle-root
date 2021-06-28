@@ -21,8 +21,8 @@ open class SysUserEntity : Entity() {
 
     /** 主键 */
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Long? = null
+    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
+    open var userId: Long? = null
 
     /** 用户名 */
     @ApiModelProperty(value = "用户名")
@@ -77,12 +77,12 @@ open class SysUserEntity : Entity() {
     open var deleted: Int? = null
 
     override fun pkVal(): java.io.Serializable? {
-        return id
+        return userId
     }
 
     override fun toString(): String {
         return "SysUserEntity{" +
-        "id=" + id +
+        "userId=" + userId +
         ", username=" + username +
         ", password=" + password +
         ", salt=" + salt +

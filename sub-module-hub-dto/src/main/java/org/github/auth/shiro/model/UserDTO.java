@@ -11,8 +11,8 @@ import static java.util.Objects.*;
 @Data
 public class UserDTO extends SysUserEntity implements User {
   @Override
-  public @NonNull String getUserId() {
-    return requireNonNull(super.getId()).toString();
+  public long getId() {
+    return requireNonNull(super.getUserId());
   }
 
   @Override

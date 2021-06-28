@@ -19,7 +19,7 @@ class SystemController {
   fun user(@PathVariable username: String) = shiroService.queryUser(username.trim())
 
   @GetMapping("/public/security/auth/{userId}")
-  fun auth(@PathVariable userId: String) = shiroService.queryAuthorInfo(userId.trim())
+  fun auth(@PathVariable userId: Long) = shiroService.queryAuthorInfo(userId)
 
   @PostMapping("/login")
   fun login() = systemService.login()

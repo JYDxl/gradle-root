@@ -21,7 +21,7 @@ public class DefaultAuthorFunc implements AuthorFunc {
     val user         = (User) principals.getPrimaryPrincipal();
     val appCtx       = getAppCtx();
     val shiroService = appCtx.getBean(IShiroService.class);
-    val list         = shiroService.queryAuthorInfo(user.getUserId().toString());
+    val list         = shiroService.queryAuthorInfo(user.getId());
     val data         = list.getData();
     val roles = data.stream()
       .map(AuthorInfo::getRole)

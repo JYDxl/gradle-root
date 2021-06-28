@@ -1,6 +1,7 @@
 package org.github.order.service.impl
 
-import io.seata.spring.annotation.GlobalTransactional
+import org.github.account.dto.DecreaseAccountBO
+import org.github.account.feign.IServiceProviderAccountServer
 import org.github.mybatis.ops.ktUpdateWrapper
 import org.github.mysql.seata.order.base.entity.TOrderEntity
 import org.github.mysql.seata.order.base.service.ITOrderService
@@ -23,16 +24,23 @@ class OrderServiceImpl: IOrderService {
   private lateinit var storageServer: IServiceProviderStorageServer
 
   @Autowired
+  private lateinit var accountServer: IServiceProviderAccountServer
+
+  @Autowired
   private lateinit var systemService: ISystemService
 
-  @GlobalTransactional
+  // @GlobalTransactional(rollbackFor = [Exception::class])
   override fun createOrder(bo: CreateOrderBO): JSONDataReturn<Boolean> {
     val result = orderMbpService.save(bo)
 
     val (jsessionid, jwt) = systemService.feign()
+
     val decreaseProductBO = DecreaseProductBO().apply {}
     val storageResult = storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO)
     storageResult.throwIfFailed()
+    val decreaseAccountBO = DecreaseAccountBO().apply {}
+    val accountResult = accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO)
+    accountResult.throwIfFailed()
 
     return JSONDataReturn.of(result)
   }

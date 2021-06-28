@@ -20,8 +20,8 @@ open class TOrderEntity : Entity() {
 
     /** 主键 */
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Long? = null
+    @TableId(value = "order_id", type = IdType.ASSIGN_ID)
+    open var orderId: Long? = null
 
     /** 用户id */
     @ApiModelProperty(value = "用户id")
@@ -46,12 +46,12 @@ open class TOrderEntity : Entity() {
     open var status: Int? = null
 
     override fun pkVal(): java.io.Serializable? {
-        return id
+        return orderId
     }
 
     override fun toString(): String {
         return "TOrderEntity{" +
-        "id=" + id +
+        "orderId=" + orderId +
         ", userId=" + userId +
         ", productId=" + productId +
         ", num=" + num +

@@ -19,8 +19,8 @@ open class SysMenuEntity : Entity() {
 
     /** 主键 */
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Long? = null
+    @TableId(value = "menu_id", type = IdType.ASSIGN_ID)
+    open var menuId: Long? = null
 
     /** 父菜单ID */
     @ApiModelProperty(value = "父菜单ID")
@@ -57,12 +57,12 @@ open class SysMenuEntity : Entity() {
     open var enabled: Int? = null
 
     override fun pkVal(): java.io.Serializable? {
-        return id
+        return menuId
     }
 
     override fun toString(): String {
         return "SysMenuEntity{" +
-        "id=" + id +
+        "menuId=" + menuId +
         ", parentId=" + parentId +
         ", name=" + name +
         ", url=" + url +

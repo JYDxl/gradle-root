@@ -14,7 +14,7 @@ class ServiceProviderHubServerFallback: IServiceProviderHubServer {
     throw SystemErrorException("调用超时请稍后重试")
   }
 
-  override fun auth(userId: String): JSONArrayReturn<AuthorInfo> {
+  override fun auth(userId: Long): JSONArrayReturn<AuthorInfo> {
     throw SystemErrorException("调用超时请稍后重试")
   }
 }

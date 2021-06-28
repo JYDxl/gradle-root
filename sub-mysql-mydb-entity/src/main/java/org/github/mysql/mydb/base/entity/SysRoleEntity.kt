@@ -21,8 +21,8 @@ open class SysRoleEntity : Entity() {
 
     /** 主键 */
     @ApiModelProperty(value = "主键")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Long? = null
+    @TableId(value = "role_id", type = IdType.ASSIGN_ID)
+    open var roleId: Long? = null
 
     /** 角色名称 */
     @ApiModelProperty(value = "角色名称")
@@ -49,12 +49,12 @@ open class SysRoleEntity : Entity() {
     open var createTime: LocalDateTime? = null
 
     override fun pkVal(): java.io.Serializable? {
-        return id
+        return roleId
     }
 
     override fun toString(): String {
         return "SysRoleEntity{" +
-        "id=" + id +
+        "roleId=" + roleId +
         ", roleName=" + roleName +
         ", roleCode=" + roleCode +
         ", remark=" + remark +

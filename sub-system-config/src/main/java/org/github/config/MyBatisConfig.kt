@@ -53,5 +53,5 @@ class CustomMetaObjectHandler: MetaObjectHandler {
     strictUpdateFill(entity, "modifierId", {id}, Long::class.java)
   }
 
-  private val id: Long get() = userOrNull?.userId?.toLong() ?: DEFAULT_VALUE_ANONYMOUS_ID
+  private val id: Long get() = userOrNull?.id ?: DEFAULT_VALUE_ANONYMOUS_ID
 }
