@@ -4,7 +4,7 @@ dependencies {
   compileOnly(project(":sub-system-core"))
   compileOnly(project(":sub-system-config"))
 
-  api(project(":sub-module-order-model"))
+  api(project(":sub-module-order-dto"))
   api(project(":sub-mysql-seata-order-service"))
 
   api(project(":sub-module-storage-api"))

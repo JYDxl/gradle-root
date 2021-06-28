@@ -3,7 +3,7 @@ val shiro: String by System.getProperties()
 dependencies {
   compileOnly(project(":sub-system-core"))
 
-  api(project(":sub-module-web-model"))
+  api(project(":sub-module-web-dto"))
 
   api(project(":sub-mysql-mydb-service"))
 

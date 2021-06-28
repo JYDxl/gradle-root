@@ -3,7 +3,7 @@ val shiro: String by System.getProperties()
 dependencies {
   compileOnly(project(":sub-system-core"))
 
-  api(project(":sub-module-storage-model"))
+  api(project(":sub-module-storage-dto"))
 
   api(project(":sub-mysql-seata-storage-service"))
 
