@@ -7,9 +7,4 @@ import org.github.mysql.seata.order.base.entity.TOrderEntity;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
-public class CreateOrderBO extends TOrderEntity implements IParam {
-  @Override
-  public @NonNull Object valid() {
-    return this;
-  }
-}
+public class CreateOrderBO extends TOrderEntity implements IParam {}

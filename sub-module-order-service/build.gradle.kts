@@ -8,6 +8,7 @@ dependencies {
   api(project(":sub-mysql-seata-order-service"))
 
   api(project(":sub-module-storage-api"))
+  api(project(":sub-module-account-api"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.springframework.boot:spring-boot-starter-jdbc")

@@ -8,9 +8,4 @@ public class UpdateOrderStatusBO implements IParam {
   private Long userId;
 
   private Integer status;
-
-  @Override
-  public @NonNull UpdateOrderStatusBO valid() {
-    return this;
-  }
 }

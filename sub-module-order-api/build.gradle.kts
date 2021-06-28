@@ -1,7 +1,7 @@
 val shiro: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-module-order-service"))
+  api(project(":sub-module-order-model"))
 
   compileOnly(project(":sub-system-core"))
 

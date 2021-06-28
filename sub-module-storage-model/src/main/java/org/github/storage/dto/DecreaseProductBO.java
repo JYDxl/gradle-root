@@ -8,9 +8,4 @@ public class DecreaseProductBO implements IParam {
   private Long productId;
 
   private Integer count;
-
-  @Override
-  public @NonNull DecreaseProductBO valid() {
-    return this;
-  }
 }
