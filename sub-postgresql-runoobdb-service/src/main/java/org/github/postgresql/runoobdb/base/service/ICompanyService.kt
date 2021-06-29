@@ -3,7 +3,7 @@
 package org.github.postgresql.runoobdb.base.service;
 
 import org.github.postgresql.runoobdb.base.entity.CompanyEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.github.base.IService;
 
 /**
  *  服务类

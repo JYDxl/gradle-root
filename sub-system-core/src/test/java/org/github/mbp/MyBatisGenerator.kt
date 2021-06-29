@@ -3,8 +3,6 @@ package org.github.mbp
 import com.baomidou.mybatisplus.annotation.FieldFill.INSERT
 import com.baomidou.mybatisplus.annotation.FieldFill.INSERT_UPDATE
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
-import com.baomidou.mybatisplus.extension.service.IService
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import com.baomidou.mybatisplus.generator.SimpleAutoGenerator
 import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.ConstVal.*

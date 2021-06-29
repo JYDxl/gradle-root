@@ -3,7 +3,7 @@
 package org.github.mysql.seata.order.base.service;
 
 import org.github.mysql.seata.order.base.entity.TOrderEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.github.base.IService;
 
 /**
  * 订单表 服务类

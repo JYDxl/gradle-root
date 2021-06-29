@@ -5,7 +5,7 @@ package org.github.mysql.seata.storage.base.service.impl;
 import org.github.mysql.seata.storage.base.entity.TStorageEntity;
 import org.github.mysql.seata.storage.base.mapper.ITStorageMapper;
 import org.github.mysql.seata.storage.base.service.ITStorageService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.github.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

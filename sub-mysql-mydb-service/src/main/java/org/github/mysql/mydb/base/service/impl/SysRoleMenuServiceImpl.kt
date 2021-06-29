@@ -5,7 +5,7 @@ package org.github.mysql.mydb.base.service.impl;
 import org.github.mysql.mydb.base.entity.SysRoleMenuEntity;
 import org.github.mysql.mydb.base.mapper.ISysRoleMenuMapper;
 import org.github.mysql.mydb.base.service.ISysRoleMenuService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.github.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

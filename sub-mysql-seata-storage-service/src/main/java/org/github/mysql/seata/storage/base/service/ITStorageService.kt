@@ -3,7 +3,7 @@
 package org.github.mysql.seata.storage.base.service;
 
 import org.github.mysql.seata.storage.base.entity.TStorageEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.github.base.IService;
 
 /**
  * 库存表 服务类

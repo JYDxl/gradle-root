@@ -3,7 +3,7 @@
 package org.github.mysql.seata.account.base.service;
 
 import org.github.mysql.seata.account.base.entity.TAccountEntity;
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.github.base.IService;
 
 /**
  * 账户表 服务类

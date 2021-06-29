@@ -5,7 +5,7 @@ package org.github.postgresql.runoobdb.base.service.impl;
 import org.github.postgresql.runoobdb.base.entity.CompanyEntity;
 import org.github.postgresql.runoobdb.base.mapper.ICompanyMapper;
 import org.github.postgresql.runoobdb.base.service.ICompanyService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.github.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

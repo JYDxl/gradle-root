@@ -5,7 +5,7 @@ package org.github.mysql.seata.order.base.service.impl;
 import org.github.mysql.seata.order.base.entity.TOrderEntity;
 import org.github.mysql.seata.order.base.mapper.ITOrderMapper;
 import org.github.mysql.seata.order.base.service.ITOrderService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.github.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
