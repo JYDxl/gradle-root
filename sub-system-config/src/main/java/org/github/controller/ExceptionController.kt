@@ -6,10 +6,12 @@ import org.github.exception.RemoteErrorException
 import org.github.ops.error
 import org.github.ops.hasChinese
 import org.github.ops.log
+import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.json.JSONReturn.*
 import org.springframework.http.HttpStatus.resolve
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageConversionException
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
@@ -28,4 +30,10 @@ class ExceptionController {
 
   @ExceptionHandler(ShiroException::class)
   fun handleShiroException(e: ShiroException) = auth().apply {withRetMsg(if (e.localizedMessage.hasChinese()) e.localizedMessage else "权限不足")}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+
+  @ExceptionHandler(MethodArgumentNotValidException::class)
+  fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<JSONReturn> {
+    val msg = e.bindingResult.fieldErrors.joinToString(separator = " && ") { "${it.field}${it.defaultMessage}" }
+    return warn().apply { withRetMsg(msg) }.let { ResponseEntity(it, resolve(it.retCode)!!) }.also { log.error(e) {} }
+  }
 }

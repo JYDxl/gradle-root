@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
 @Api(tags = ["库存管理"])
-@RequestMapping("/public/storage/")
+@RequestMapping("/storage/")
 @RestController
 class StorageController {
   @Autowired

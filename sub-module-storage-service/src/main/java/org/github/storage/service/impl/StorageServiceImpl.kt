@@ -5,7 +5,6 @@ import org.github.mybatis.ops.ktOne
 import org.github.mybatis.ops.ktQueryWrapper
 import org.github.mysql.seata.storage.base.entity.TStorageEntity
 import org.github.mysql.seata.storage.base.service.ITStorageService
-import org.github.ops.notNullAnd
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.storage.dto.DecreaseProductBO
 import org.github.storage.service.IStorageService
@@ -21,9 +20,9 @@ class StorageServiceImpl : IStorageService {
     val query = storageMbpService.ktQueryWrapper()
     query.eq(TStorageEntity::productId, bo.productId)
     val storageEntity = query.ktOne() ?: throw ParamsErrorException("产品【id：${bo.productId}】不存在")
-    if (storageEntity.residue!! < bo.count!!) throw ParamsErrorException("产品【id：${storageEntity.productId}】库存不足【${storageEntity.residue} < ${bo.count}】")
-    storageEntity.used = storageEntity.used?.plus(bo.count!!)
-    storageEntity.residue = storageEntity.residue?.minus(bo.count!!)
+    if (storageEntity.residue!! < bo.count) throw ParamsErrorException("产品【id：${storageEntity.productId}】库存不足【${storageEntity.residue} < ${bo.count}】")
+    storageEntity.used = storageEntity.used!! + bo.count
+    storageEntity.residue = storageEntity.residue!! + bo.count
     val result = storageMbpService.updateById(storageEntity)
     return JSONDataReturn.of(result)
   }
