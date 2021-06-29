@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class StorageServiceImpl : IStorageService {
+class StorageServiceImpl: IStorageService {
   @Autowired
   private lateinit var storageMbpService: ITStorageService
 

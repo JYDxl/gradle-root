@@ -2,6 +2,9 @@ package org.github.order.service.impl
 
 import org.github.account.dto.DecreaseAccountBO
 import org.github.account.feign.IServiceProviderAccountServer
+import org.github.mybatis.ops.ktUpdateWrapper
+import org.github.mysql.seata.order.base.dict.OrderStatus.END
+import org.github.mysql.seata.order.base.entity.TOrderEntity
 import org.github.mysql.seata.order.base.service.ITOrderService
 import org.github.order.dto.CreateOrderBO
 import org.github.order.service.IOrderService
@@ -28,7 +31,7 @@ class OrderServiceImpl: IOrderService {
 
   // @GlobalTransactional(rollbackFor = [Exception::class])
   override fun createOrder(bo: CreateOrderBO): JSONDataReturn<Boolean> {
-    /**
+    /*
      * 1.创建订单
      * 2.减库存
      * 3.减金额
@@ -57,22 +60,11 @@ class OrderServiceImpl: IOrderService {
     decreaseAccountResult.throwIfFailed()
 
     //4.修改订单状态
-    //   val update = orderMbpService.ktUpdateWrapper()
-    //   update.set(TOrderEntity::status, 1)
-    //   update.eq(TOrderEntity::userId, bo.userId)
-    //   update.eq(TOrderEntity::status, bo.status)
-    //   val result = update.update()
-    //   return JSONDataReturn.of(result)
+    val update = orderMbpService.ktUpdateWrapper()
+    update.set(TOrderEntity::status, END)
+    update.eq(TOrderEntity::orderId, bo.orderId)
+    update.update()
 
     return JSONDataReturn.of(result)
   }
-
-  // override fun updateOrderStatus(bo: UpdateOrderStatusBO): JSONDataReturn<Boolean> {
-  //   val update = orderMbpService.ktUpdateWrapper()
-  //   update.set(TOrderEntity::status, 1)
-  //   update.eq(TOrderEntity::userId, bo.userId)
-  //   update.eq(TOrderEntity::status, bo.status)
-  //   val result = update.update()
-  //   return JSONDataReturn.of(result)
-  // }
 }

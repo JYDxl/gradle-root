@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class DecreaseProductBO implements IParam {
-    @NotNull
-    private Long productId;
+  @NotNull
+  private Long productId;
 
-    @NotNull
-    @Min(1)
-    private Integer count;
+  @NotNull
+  @Min(1)
+  private Integer count;
 }

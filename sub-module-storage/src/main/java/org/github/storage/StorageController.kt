@@ -22,8 +22,4 @@ class StorageController {
   @ApiOperation("减库存")
   @PostMapping("decreaseProduct")
   fun decreaseProduct(@RequestBody @Valid bo: DecreaseProductBO) = storageService.decreaseProduct(bo.trimStrFields())
-
-  // @ApiOperation("更新订单状态")
-  // @PostMapping("updateOrderStatus")
-  // fun updateOrderStatus(@RequestBody bo: UpdateOrderStatusBO) = orderService.updateOrderStatus(bo.trimStrFields())
 }

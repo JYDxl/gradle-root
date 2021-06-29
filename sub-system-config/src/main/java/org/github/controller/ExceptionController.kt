@@ -33,7 +33,7 @@ class ExceptionController {
 
   @ExceptionHandler(MethodArgumentNotValidException::class)
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<JSONReturn> {
-    val msg = e.bindingResult.fieldErrors.joinToString(separator = " && ") { "${it.field}${it.defaultMessage}" }
-    return warn().apply { withRetMsg(msg) }.let { ResponseEntity(it, resolve(it.retCode)!!) }.also { log.error(e) {} }
+    val msg = e.bindingResult.fieldErrors.joinToString(separator = " && ") {"${it.field}${it.defaultMessage}"}
+    return warn().apply {withRetMsg(msg)}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
   }
 }

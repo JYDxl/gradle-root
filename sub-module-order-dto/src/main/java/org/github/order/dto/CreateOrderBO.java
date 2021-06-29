@@ -14,41 +14,41 @@ import java.math.BigDecimal;
 @ToString(callSuper = true)
 @Data
 public class CreateOrderBO extends TOrderEntity implements IParam {
-    @NotNull
-    @Override
-    public Long getUserId() {
-        return super.getUserId();
-    }
+  @Null
+  @Override
+  public Long getOrderId() {
+    return super.getOrderId();
+  }
 
-    @Null
-    @Override
-    public Long getOrderId() {
-        return super.getOrderId();
-    }
+  @NotNull
+  @Override
+  public Long getUserId() {
+    return super.getUserId();
+  }
 
-    @NotNull
-    @Override
-    public Long getProductId() {
-        return super.getProductId();
-    }
+  @NotNull
+  @Override
+  public Long getProductId() {
+    return super.getProductId();
+  }
 
-    @NotNull
-    @Min(1)
-    @Override
-    public Integer getNum() {
-        return super.getNum();
-    }
+  @NotNull
+  @Min(1)
+  @Override
+  public Integer getNum() {
+    return super.getNum();
+  }
 
-    @NotNull
-    @DecimalMin("0")
-    @Override
-    public BigDecimal getMoney() {
-        return super.getMoney();
-    }
+  @NotNull
+  @DecimalMin("0")
+  @Override
+  public BigDecimal getMoney() {
+    return super.getMoney();
+  }
 
-    @Null
-    @Override
-    public Integer getStatus() {
-        return super.getStatus();
-    }
+  @Null
+  @Override
+  public Integer getStatus() {
+    return super.getStatus();
+  }
 }

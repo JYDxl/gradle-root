@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class AccountServiceImpl : IAccountService {
+class AccountServiceImpl: IAccountService {
   @Autowired
   private lateinit var accountMbpService: ITAccountService
 

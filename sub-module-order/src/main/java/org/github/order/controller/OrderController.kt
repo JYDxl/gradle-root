@@ -22,8 +22,4 @@ class OrderController {
   @ApiOperation("创建订单")
   @PostMapping("createOrder")
   fun createOrder(@RequestBody @Valid bo: CreateOrderBO) = orderService.createOrder(bo.trimStrFields())
-
-  // @ApiOperation("更新订单状态")
-  // @PostMapping("updateOrderStatus")
-  // fun updateOrderStatus(@RequestBody bo: UpdateOrderStatusBO) = orderService.updateOrderStatus(bo.trimStrFields())
 }
