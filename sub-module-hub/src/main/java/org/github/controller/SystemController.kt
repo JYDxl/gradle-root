@@ -1,13 +1,18 @@
 package org.github.controller
 
-import org.github.ops.trimStrFields
+import org.github.ops.trim
 import org.github.service.IShiroService
 import org.github.service.ISystemService
-import org.github.shiro.JWTLogin
+import org.github.shiro.WEBLogin
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 
 @RestController
+@Validated
 class SystemController {
   @Autowired
   private lateinit var systemService: ISystemService
@@ -16,10 +21,10 @@ class SystemController {
   private lateinit var shiroService: IShiroService
 
   @GetMapping("/public/security/user/{username}")
-  fun user(@PathVariable username: String) = shiroService.queryUser(username.trim())
+  fun user(@PathVariable @NotBlank username: String) = shiroService.queryUser(username.trim())
 
   @GetMapping("/public/security/auth/{userId}")
-  fun auth(@PathVariable userId: Long) = shiroService.queryAuthorInfo(userId)
+  fun auth(@PathVariable @NotNull userId: Long) = shiroService.queryAuthorInfo(userId)
 
   @PostMapping("/login")
   fun login() = systemService.login()
@@ -34,5 +39,5 @@ class SystemController {
   fun jwt() = systemService.jwt()
 
   @PostMapping("/public/jwt")
-  fun jwt(@RequestBody login: JWTLogin) = systemService.jwt(login.trimStrFields())
+  fun jwt(@RequestBody @Valid bo: WEBLogin) = systemService.jwt(bo.trim())
 }

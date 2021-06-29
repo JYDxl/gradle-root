@@ -9,6 +9,7 @@ dependencies {
   compileOnly(project(":sub-system-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
+  compileOnly("jakarta.validation:jakarta.validation-api")
 
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")

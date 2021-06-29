@@ -1,12 +1,9 @@
 package org.github.service.impl
 
-import org.github.ops.isNotBlank
-import org.github.ops.notNullAnd
+import org.apache.shiro.authc.UsernamePasswordToken
 import org.github.service.ISystemService
-import org.github.shiro.JWTLogin
-import org.github.shiro.JWTToken
+import org.github.shiro.*
 import org.github.shiro.JWTUtil.sign
-import org.github.shiro.Token
 import org.github.shiro.ops.session
 import org.github.shiro.ops.subject
 import org.github.shiro.ops.user
@@ -30,10 +27,8 @@ class SystemServiceImpl: ISystemService {
     return JSONDataReturn.of(jwt)
   }
 
-  override fun jwt(login: JWTLogin): JSONDataReturn<String> {
-    val username = login.username.notNullAnd({it.isNotBlank()}) {"用户名不能为空"}
-    val password = login.password.notNullAnd({it.isNotBlank()}) {"密码不能为空"}
-    subject.login(JWTToken(username, password))
+  override fun jwt(bo: WEBLogin): JSONDataReturn<String> {
+    subject.login(UsernamePasswordToken(bo.username, bo.password, bo.isRememberMe, bo.host))
     return jwt()
   }
 

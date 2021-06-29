@@ -2,7 +2,7 @@ package org.github.storage
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import org.github.ops.trimStrFields
+import org.github.ops.trim
 import org.github.storage.dto.DecreaseProductBO
 import org.github.storage.service.IStorageService
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,5 +21,5 @@ class StorageController {
 
   @ApiOperation("减库存")
   @PostMapping("decreaseProduct")
-  fun decreaseProduct(@RequestBody @Valid bo: DecreaseProductBO) = storageService.decreaseProduct(bo.trimStrFields())
+  fun decreaseProduct(@RequestBody @Valid bo: DecreaseProductBO) = storageService.decreaseProduct(bo.trim())
 }

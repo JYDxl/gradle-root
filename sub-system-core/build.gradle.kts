@@ -41,6 +41,7 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-aop")
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
+  compileOnly("jakarta.validation:jakarta.validation-api")
 
   compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")

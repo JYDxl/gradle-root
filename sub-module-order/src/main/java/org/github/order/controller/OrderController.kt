@@ -2,7 +2,7 @@ package org.github.order.controller
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import org.github.ops.trimStrFields
+import org.github.ops.trim
 import org.github.order.dto.CreateOrderBO
 import org.github.order.service.IOrderService
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,5 +21,5 @@ class OrderController {
 
   @ApiOperation("创建订单")
   @PostMapping("createOrder")
-  fun createOrder(@RequestBody @Valid bo: CreateOrderBO) = orderService.createOrder(bo.trimStrFields())
+  fun createOrder(@RequestBody @Valid bo: CreateOrderBO) = orderService.createOrder(bo.trim())
 }

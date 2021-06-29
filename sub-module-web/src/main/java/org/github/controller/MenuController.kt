@@ -3,7 +3,7 @@ package org.github.controller
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.github.mysql.mydb.base.entity.SysMenuEntity
-import org.github.ops.trimStrFields
+import org.github.ops.trim
 import org.github.web.module.sys.menu.dto.QueryMenuListBO
 import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,12 +25,12 @@ class MenuController {
 
   @ApiOperation("分页查询")
   @PostMapping("page")
-  fun queryMenuPage(@RequestBody bo: QueryMenuListBO) = menuService.queryMenuPage(bo.trimStrFields())
+  fun queryMenuPage(@RequestBody bo: QueryMenuListBO) = menuService.queryMenuPage(bo.trim())
 
   @PostMapping("select")
   fun queryMenuTree() = menuService.queryMenuTree()
 
   @ApiOperation("新增/修改")
   @PostMapping("save", "update")
-  fun saveOrUpdate(@RequestBody bo: SysMenuEntity) = menuService.saveOrUpdate(bo.trimStrFields())
+  fun saveOrUpdate(@RequestBody bo: SysMenuEntity) = menuService.saveOrUpdate(bo.trim())
 }

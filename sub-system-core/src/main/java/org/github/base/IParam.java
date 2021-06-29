@@ -1,3 +1,8 @@
 package org.github.base;
 
-public interface IParam extends IJson {}
+import lombok.*;
+import static cn.hutool.core.bean.BeanUtil.*;
+
+public interface IParam extends IJson {
+
+}

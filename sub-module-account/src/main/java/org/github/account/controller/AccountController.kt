@@ -4,7 +4,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.github.account.dto.DecreaseAccountBO
 import org.github.account.service.IAccountService
-import org.github.ops.trimStrFields
+import org.github.ops.trim
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -21,5 +21,5 @@ class AccountController {
 
   @ApiOperation("减金额")
   @PostMapping("decreaseMoney")
-  fun decreaseMoney(@RequestBody @Valid bo: DecreaseAccountBO) = accountService.decreaseMoney(bo.trimStrFields())
+  fun decreaseMoney(@RequestBody @Valid bo: DecreaseAccountBO) = accountService.decreaseMoney(bo.trim())
 }

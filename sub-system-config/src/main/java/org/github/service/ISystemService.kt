@@ -1,7 +1,7 @@
 package org.github.service
 
-import org.github.shiro.JWTLogin
 import org.github.shiro.Token
+import org.github.shiro.WEBLogin
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 
@@ -12,7 +12,7 @@ interface ISystemService {
 
   fun jwt(): JSONDataReturn<String>
 
-  fun jwt(login: JWTLogin): JSONDataReturn<String>
+  fun jwt(bo: WEBLogin): JSONDataReturn<String>
 
   fun feign(): Token
 
