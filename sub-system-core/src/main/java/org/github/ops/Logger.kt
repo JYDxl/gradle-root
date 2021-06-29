@@ -4,7 +4,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory.getLogger
 import kotlin.reflect.KClass
 
-fun Logger.trace(ex: Throwable? = null, msg: () -> Any?) {
+inline fun Logger.trace(ex: Throwable? = null, msg: () -> Any?) {
   if (isTraceEnabled) {
     try {
       msg().let {
@@ -21,7 +21,7 @@ fun Logger.trace(ex: Throwable? = null, msg: () -> Any?) {
   }
 }
 
-fun Logger.debug(ex: Throwable? = null, msg: () -> Any?) {
+inline fun Logger.debug(ex: Throwable? = null, msg: () -> Any?) {
   if (isDebugEnabled) {
     try {
       msg().let {
@@ -38,7 +38,7 @@ fun Logger.debug(ex: Throwable? = null, msg: () -> Any?) {
   }
 }
 
-fun Logger.error(ex: Throwable? = null, msg: () -> Any?) {
+inline fun Logger.error(ex: Throwable? = null, msg: () -> Any?) {
   if (isErrorEnabled) {
     try {
       msg().let {
@@ -55,7 +55,7 @@ fun Logger.error(ex: Throwable? = null, msg: () -> Any?) {
   }
 }
 
-fun Logger.info(ex: Throwable? = null, msg: () -> Any?) {
+inline fun Logger.info(ex: Throwable? = null, msg: () -> Any?) {
   if (isInfoEnabled) {
     try {
       msg().let {
@@ -72,7 +72,7 @@ fun Logger.info(ex: Throwable? = null, msg: () -> Any?) {
   }
 }
 
-fun Logger.warn(ex: Throwable? = null, msg: () -> Any?) {
+inline fun Logger.warn(ex: Throwable? = null, msg: () -> Any?) {
   if (isWarnEnabled) {
     try {
       msg().let {
