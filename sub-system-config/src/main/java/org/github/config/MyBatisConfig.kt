@@ -40,7 +40,7 @@ class MyBatisConfig {
   fun customMetaObjectHandler() = CustomMetaObjectHandler()
 
   @Bean
-  fun customIdentifierGenerator(@Suppress("SpringJavaInjectionPointsAutowiringInspection") net: InetUtils) = CustomIdentifierGenerator(net.findFirstNonLoopbackAddress())
+  fun customIdentifierGenerator(@Suppress("SpringJavaInjectionPointsAutowiringInspection") inetUtils: InetUtils) = CustomIdentifierGenerator(inetUtils.findFirstNonLoopbackAddress())
 }
 
 class CustomSqlInjector: DefaultSqlInjector() {
@@ -65,12 +65,12 @@ class CustomMetaObjectHandler: MetaObjectHandler {
 
 class CustomIdentifierGenerator(addr: InetAddress): DefaultIdentifierGenerator(addr) {
   override fun nextId(entity: Any): Long {
-    entity as IEntity
-    return entity.pkVal() as Long? ?: super.nextId(entity)
+    if (entity is IEntity) return entity.pkVal() as Long? ?: super.nextId(entity)
+    return super.nextId(entity)
   }
 
   override fun nextUUID(entity: Any): String {
-    entity as IEntity
-    return entity.pkVal() as String? ?: super.nextUUID(entity)
+    if (entity is IEntity) return entity.pkVal() as String? ?: super.nextUUID(entity)
+    return super.nextUUID(entity)
   }
 }
