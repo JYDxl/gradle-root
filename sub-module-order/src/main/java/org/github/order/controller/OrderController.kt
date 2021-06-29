@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @Api(tags = ["订单管理"])
 @RequestMapping("/order/")
@@ -20,7 +21,7 @@ class OrderController {
 
   @ApiOperation("创建订单")
   @PostMapping("createOrder")
-  fun createOrder(@RequestBody bo: CreateOrderBO) = orderService.createOrder(bo.trimStrFields())
+  fun createOrder(@RequestBody @Valid bo: CreateOrderBO) = orderService.createOrder(bo.trimStrFields())
 
   // @ApiOperation("更新订单状态")
   // @PostMapping("updateOrderStatus")

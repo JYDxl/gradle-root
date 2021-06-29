@@ -1,14 +1,19 @@
 package org.github.account.dto;
 
 import java.math.BigDecimal;
+
 import lombok.*;
 import org.github.base.IParam;
 
-import javax.annotation.Nullable;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class DecreaseAccountBO implements IParam {
-  private @Nullable Long productId;
+    @NotNull
+    private Long userId;
 
-  private @Nullable BigDecimal money;
+    @NotNull
+    @DecimalMin("0")
+    private BigDecimal money;
 }

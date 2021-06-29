@@ -37,7 +37,7 @@ class OrderServiceImpl: IOrderService {
 
     //1.创建订单
     val result = orderMbpService.save(bo)
-
+    //生成token
     val (jsessionid, jwt) = systemService.feign()
 
     //2.减库存
@@ -45,13 +45,16 @@ class OrderServiceImpl: IOrderService {
       productId = bo.productId
       count = bo.num
     }
-    val storageResult = storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO)
-    storageResult.throwIfFailed()
+    val decreaseProductResult = storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO)
+    decreaseProductResult.throwIfFailed()
 
     //3.减金额
-    val decreaseAccountBO = DecreaseAccountBO().apply {}
-    val accountResult = accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO)
-    accountResult.throwIfFailed()
+    val decreaseAccountBO = DecreaseAccountBO().apply {
+      userId = bo.userId
+      money = bo.money
+    }
+    val decreaseAccountResult = accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO)
+    decreaseAccountResult.throwIfFailed()
 
     //4.修改订单状态
     //   val update = orderMbpService.ktUpdateWrapper()

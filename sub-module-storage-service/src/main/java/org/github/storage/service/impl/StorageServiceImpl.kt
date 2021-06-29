@@ -19,11 +19,13 @@ class StorageServiceImpl : IStorageService {
   override fun decreaseProduct(bo: DecreaseProductBO): JSONDataReturn<Boolean> {
     val query = storageMbpService.ktQueryWrapper()
     query.eq(TStorageEntity::productId, bo.productId)
-    val storageEntity = query.ktOne() ?: throw ParamsErrorException("产品【id：${bo.productId}】不存在")
-    if (storageEntity.residue!! < bo.count) throw ParamsErrorException("产品【id：${storageEntity.productId}】库存不足【${storageEntity.residue} < ${bo.count}】")
+    val storageEntity = query.ktOne() ?: throw ParamsErrorException("产品【productId：${bo.productId}】不存在")
+    if (storageEntity.residue!! < bo.count) throw ParamsErrorException("产品【productId：${storageEntity.productId}】库存不足【${storageEntity.residue} < ${bo.count}】")
+
     storageEntity.used = storageEntity.used!! + bo.count
-    storageEntity.residue = storageEntity.residue!! + bo.count
+    storageEntity.residue = storageEntity.residue!! - bo.count
     val result = storageMbpService.updateById(storageEntity)
+
     return JSONDataReturn.of(result)
   }
 }
