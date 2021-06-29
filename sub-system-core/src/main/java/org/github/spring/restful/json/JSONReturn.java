@@ -48,6 +48,7 @@ public class JSONReturn implements JSON {
     return get();
   }
 
+  @Deprecated
   public void throwIfFailed() throws RemoteErrorException {
     if (failure()) throw new RemoteErrorException(this);
   }

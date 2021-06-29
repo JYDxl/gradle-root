@@ -1,5 +1,6 @@
 package org.github.order.service.impl
 
+import io.seata.spring.annotation.GlobalTransactional
 import org.github.account.dto.DecreaseAccountBO
 import org.github.account.feign.IServiceProviderAccountServer
 import org.github.mybatis.ops.ktUpdateWrapper
@@ -29,7 +30,7 @@ class OrderServiceImpl: IOrderService {
   @Autowired
   private lateinit var systemService: ISystemService
 
-  // @GlobalTransactional(rollbackFor = [Exception::class])
+  @GlobalTransactional(rollbackFor = [Exception::class])
   override fun createOrder(bo: CreateOrderBO): JSONDataReturn<Boolean> {
     /*
      * 1.创建订单
@@ -48,20 +49,18 @@ class OrderServiceImpl: IOrderService {
       productId = bo.productId
       count = bo.num
     }
-    val decreaseProductResult = storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO)
-    decreaseProductResult.throwIfFailed()
+    storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO)
 
     //3.减金额
     val decreaseAccountBO = DecreaseAccountBO().apply {
       userId = bo.userId
       money = bo.money
     }
-    val decreaseAccountResult = accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO)
-    decreaseAccountResult.throwIfFailed()
+    accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO)
 
     //4.修改订单状态
     val update = orderMbpService.ktUpdateWrapper()
-    update.set(TOrderEntity::status, END)
+    update.set(TOrderEntity::status, END.code)
     update.eq(TOrderEntity::orderId, bo.orderId)
     update.update()
 

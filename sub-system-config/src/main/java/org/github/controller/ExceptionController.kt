@@ -1,11 +1,13 @@
 package org.github.controller
 
+import feign.FeignException
 import org.apache.shiro.ShiroException
 import org.github.exception.ParamsErrorException
 import org.github.exception.RemoteErrorException
 import org.github.ops.error
 import org.github.ops.hasChinese
 import org.github.ops.log
+import org.github.spring.ops.objectMapper
 import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.json.JSONReturn.*
 import org.springframework.http.HttpStatus.resolve
@@ -35,5 +37,11 @@ class ExceptionController {
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<JSONReturn> {
     val msg = e.bindingResult.fieldErrors.joinToString(separator = " && ") {"${it.field}${it.defaultMessage}"}
     return warn().apply {withRetMsg(msg)}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+  }
+
+  @ExceptionHandler(FeignException::class)
+  fun handleFeignException(e: FeignException): ResponseEntity<JSONReturn> {
+    val data = objectMapper.readValue(e.contentUTF8(), JSONReturn::class.java)!!
+    return data.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
   }
 }
