@@ -17,19 +17,19 @@ class FixedLengthFrameDecoderTest {
     Assertions.assertTrue(channel.writeInbound(input))
     assert(channel.finish())
 
-    val output1 = requireNotNull(channel.readInbound<ByteBuf>())
+    val output1 = channel.readInbound<ByteBuf>()!!
     Assertions.assertEquals(buf.readSlice(3), output1)
     output1.release()
 
-    val output2 = requireNotNull(channel.readInbound<ByteBuf>())
+    val output2 = channel.readInbound<ByteBuf>()!!
     Assertions.assertEquals(buf.readSlice(3), output2)
     output2.release()
 
-    val output3 = requireNotNull(channel.readInbound<ByteBuf>())
+    val output3 = channel.readInbound<ByteBuf>()!!
     Assertions.assertEquals(buf.readSlice(3), output3)
     output3.release()
 
-    val output4 = channel.readInbound<ByteBuf>()
+    val output4: ByteBuf? = channel.readInbound<ByteBuf>()
     Assertions.assertNull(output4)
     buf.release()
   }

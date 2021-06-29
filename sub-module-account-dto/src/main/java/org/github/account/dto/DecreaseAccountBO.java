@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import lombok.*;
 import org.github.base.IParam;
 
+import javax.annotation.Nullable;
+
 @Data
 public class DecreaseAccountBO implements IParam {
-  private Long productId;
+  private @Nullable Long productId;
 
-  private BigDecimal money;
+  private @Nullable BigDecimal money;
 }

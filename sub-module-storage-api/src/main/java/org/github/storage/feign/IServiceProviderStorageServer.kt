@@ -8,12 +8,11 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
 @FeignClient("storage-server")
-@RequestMapping("/storage/")
 interface IServiceProviderStorageServer {
-  @PostMapping("decreaseProduct")
+  @PostMapping("/storage/decreaseProduct")
   fun decreaseProduct(
     @RequestParam(JSESSIONID) jsessionid: String?,
     @RequestHeader(JWT) jwt: String?,
-    @RequestBody bo: DecreaseProductBO
+    @RequestBody bo: DecreaseProductBO,
   ): JSONReturn
 }

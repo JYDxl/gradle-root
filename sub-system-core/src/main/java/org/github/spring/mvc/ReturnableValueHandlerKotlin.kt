@@ -26,8 +26,8 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
 
   override fun handleReturnValue(returnValue: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
     val value = (returnValue ?: nil()) as Returnable
-    val req = requireNotNull(webRequest.getNativeRequest(HttpServletRequest::class.java))
-    val res = requireNotNull(webRequest.getNativeResponse(HttpServletResponse::class.java))
+    val req = webRequest.getNativeRequest(HttpServletRequest::class.java)!!
+    val res = webRequest.getNativeResponse(HttpServletResponse::class.java)!!
     if (value.terminated()) {
       try {
         value.collect(req, res)

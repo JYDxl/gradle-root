@@ -3,9 +3,15 @@ package org.github.storage.dto;
 import lombok.*;
 import org.github.base.IParam;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @Data
 public class DecreaseProductBO implements IParam {
-  private Long productId;
+    @NotNull
+    private Long productId;
 
-  private Integer count;
+    @NotNull
+    @Min(1)
+    private Integer count;
 }

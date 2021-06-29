@@ -19,8 +19,8 @@ fun <T: IEntity> IService<T>.ktInsertBatch(entityList: List<T>): Int {
 }
 
 fun <T: IEntity> IService<T>.ktUpdateByIdSelective(entity: IEntity): Boolean {
-  val record = ktGetById(requireNotNull(entity.pkVal()))
-  copyProperties(entity, requireNotNull(record), create().ignoreNullValue())
+  val record = ktGetById(entity.pkVal()!!)!!
+  copyProperties(entity, record, create().ignoreNullValue())
   return updateById(record)
 }
 
@@ -35,6 +35,8 @@ fun <T: IEntity> IService<T>.ktListByIds(ids: List<java.io.Serializable>): Mutab
 fun <T: IEntity> ChainQuery<T>.ktPage(page: IPage<T>): IPage<T> = page(page)
 
 fun <T: IEntity> ChainQuery<T>.ktList(): MutableList<T> = list()
+
+fun <T: IEntity> ChainQuery<T>.ktOne(): T? = one()
 
 fun <T: IEntity> ChainQuery<T>.ktInList(`in`: List<Any>): MutableList<T> = if (`in`.isEmpty()) arrayListOf() else list()
 
