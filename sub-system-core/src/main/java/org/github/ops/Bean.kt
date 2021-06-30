@@ -10,4 +10,4 @@ fun <T> T?.notNullAnd(predicate: (T) -> Boolean = {true}, msg: () -> String?) = 
 
 fun <T, R: T> R.copy(entity: T) = apply {copyProperties(entity, this)}
 
-fun <T: IJson> T.trim(): T = trimFields() as T
+fun <T: IJson> T.trim(): T = this.also {trimFields()}

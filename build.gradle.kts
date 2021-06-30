@@ -1,5 +1,5 @@
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
-import org.gradle.api.JavaVersion.VERSION_1_8
+import org.gradle.api.JavaVersion.VERSION_11
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinxCoroutines: String by System.getProperties()
@@ -53,8 +53,8 @@ subprojects {
   apply(plugin = "kotlin-spring")
 
   java {
-    sourceCompatibility = VERSION_1_8
-    targetCompatibility = VERSION_1_8
+    sourceCompatibility = VERSION_11
+    targetCompatibility = VERSION_11
   }
 
   configure<DependencyManagementExtension> {
@@ -77,7 +77,7 @@ subprojects {
   }
 
   tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "11"
     kotlinOptions.verbose = true
     kotlinOptions.javaParameters = true
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict")

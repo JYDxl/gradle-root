@@ -12,7 +12,7 @@ public interface IJson extends Serializable, Supplier<String> {
     return json(this);
   }
 
-  default @NonNull Object trimFields() {
-    return trimStrFields(this);
+  default void trimFields() {
+    trimStrFields(this);
   }
 }

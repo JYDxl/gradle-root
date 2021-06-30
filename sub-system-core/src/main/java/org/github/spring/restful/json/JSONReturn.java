@@ -48,9 +48,8 @@ public class JSONReturn implements JSON {
     return get();
   }
 
-  public JSONReturn throwIfFailed() throws RemoteErrorException {
+  public void throwIfFailed() throws RemoteErrorException {
     if (failure()) throw new RemoteErrorException(this);
-    return this;
   }
 
   public boolean failure() {

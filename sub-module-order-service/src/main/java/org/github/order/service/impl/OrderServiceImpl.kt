@@ -11,6 +11,7 @@ import org.github.order.dto.CreateOrderBO
 import org.github.order.service.IOrderService
 import org.github.service.ISystemService
 import org.github.spring.restful.json.JSONDataReturn
+import org.github.spring.restful.ops.check
 import org.github.storage.dto.DecreaseProductBO
 import org.github.storage.feign.IServiceProviderStorageServer
 import org.springframework.beans.factory.annotation.Autowired
@@ -49,14 +50,14 @@ class OrderServiceImpl: IOrderService {
       productId = bo.productId
       count = bo.num
     }
-    storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO)
+    storageServer.decreaseProduct(jsessionid, jwt, decreaseProductBO).check()
 
     //3.减金额
     val decreaseAccountBO = DecreaseAccountBO().apply {
       userId = bo.userId
       money = bo.money
     }
-    accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO)
+    accountServer.decreaseMoney(jsessionid, jwt, decreaseAccountBO).check()
 
     //4.修改订单状态
     val update = orderMbpService.ktUpdateWrapper()

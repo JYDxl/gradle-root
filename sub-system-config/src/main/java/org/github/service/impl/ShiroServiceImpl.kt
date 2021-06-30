@@ -6,6 +6,7 @@ import org.github.shiro.AuthorInfo
 import org.github.shiro.User
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.spring.restful.json.JSONDataReturn
+import org.github.spring.restful.ops.check
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -15,10 +16,10 @@ class ShiroServiceImpl: IShiroService {
   private lateinit var hubServer: IServiceProviderHubServer
 
   override fun queryAuthorInfo(userId: Long): JSONArrayReturn<AuthorInfo> {
-    return hubServer.auth(userId)
+    return hubServer.auth(userId).check()
   }
 
   override fun queryUser(username: String): JSONDataReturn<out User> {
-    return hubServer.user(username)
+    return hubServer.user(username).check()
   }
 }
