@@ -8,9 +8,8 @@ import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
 @FeignClient("account-server")
-@RequestMapping("/account/")
 interface IServiceProviderAccountServer {
-  @PostMapping("decreaseMoney")
+  @PostMapping("/account/decreaseMoney")
   fun decreaseMoney(
     @RequestParam(JSESSIONID) jsessionid: String?,
     @RequestHeader(JWT) jwt: String?,
