@@ -64,7 +64,7 @@ class ReturnController {
 
   @GetMapping("jsonp")
   fun jsonpReturn(): Returnable {
-    val jsonp: JSONPReturn<Any?> = JSONPReturn.of<Any?>()
+    val jsonp = JSONPReturn<Any?>()
     log.info {jsonp.toString()}
     log.info {jsonp.get()}
     return jsonp
@@ -75,5 +75,5 @@ class ReturnController {
   fun jsonBasic() = JSONReturn()
 
   @GetMapping("json/callback")
-  fun jsonCallback(): Returnable = JSONPReturn.of<Any?>()
+  fun jsonCallback() = JSONPReturn<Any?>()
 }
