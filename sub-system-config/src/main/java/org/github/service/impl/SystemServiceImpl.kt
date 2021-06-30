@@ -7,6 +7,7 @@ import org.github.shiro.JWTUtil.sign
 import org.github.shiro.ops.session
 import org.github.shiro.ops.subject
 import org.github.shiro.ops.user
+import org.github.spring.ops.appCtx
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.springframework.stereotype.Service
@@ -28,8 +29,9 @@ class SystemServiceImpl: ISystemService {
   }
 
   override fun jwt(bo: WEBLogin): JSONDataReturn<String> {
-    subject.login(UsernamePasswordToken(bo.username, bo.password, bo.isRememberMe, bo.host))
-    return jwt()
+    val user = appCtx.getBean(WEBRealm::class.java).getAuthenticationInfo(UsernamePasswordToken(bo.username, bo.password)).principals.primaryPrincipal as User
+    val jwt = sign(user.username, user.password)
+    return JSONDataReturn.of(jwt)
   }
 
   override fun feign(): Token {
