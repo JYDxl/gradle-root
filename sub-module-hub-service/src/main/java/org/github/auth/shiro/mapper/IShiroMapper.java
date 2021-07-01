@@ -6,11 +6,10 @@ import lombok.*;
 import org.github.auth.shiro.model.UserDTO;
 import org.github.mybatis.MyBatisMapper;
 import org.github.shiro.AuthorInfo;
-import org.apache.ibatis.annotations.Param;
 
 @MyBatisMapper
 public interface IShiroMapper {
-  @NonNull List<AuthorInfo> queryAuthorInfo(@Param("userId") Long userId);
+  @NonNull List<AuthorInfo> queryAuthorInfo(Long userId);
 
-  @Nullable UserDTO queryUserInfo(@Param("username") String username);
+  @Nullable UserDTO queryUserInfo(String username);
 }

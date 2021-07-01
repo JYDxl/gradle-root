@@ -24,39 +24,39 @@ class ExceptionController {
   private val log = ExceptionController::class.log
 
   @ExceptionHandler(Throwable::class)
-  fun handleThrowable(e: Throwable) = error().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+  fun handleThrowable(e: Throwable) = error().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(ParamsErrorException::class)
-  fun handleParamsErrorException(e: ParamsErrorException) = warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+  fun handleParamsErrorException(e: ParamsErrorException) = warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(HttpMessageNotReadableException::class)
-  fun handleHttpMessageNotReadableException(e: HttpMessageNotReadableException) = warn().apply {withRetMsg("请求体缺失")}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+  fun handleHttpMessageNotReadableException(e: HttpMessageNotReadableException) = warn().apply {withRetMsg("请求体缺失")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(RemoteErrorException::class)
-  fun handleRemoteErrorException(e: RemoteErrorException) = e.data.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+  fun handleRemoteErrorException(e: RemoteErrorException) = e.data.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(ShiroException::class)
-  fun handleShiroException(e: ShiroException) = auth().apply {withRetMsg(if (e.localizedMessage.hasChinese()) e.localizedMessage else "权限不足")}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+  fun handleShiroException(e: ShiroException) = auth().apply {withRetMsg(if (e.localizedMessage.hasChinese()) e.localizedMessage else "权限不足")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(MethodArgumentNotValidException::class)
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<JSONReturn> {
     val msg = e.bindingResult.fieldErrors.joinToString(separator = " && ") {"${it.field}${it.defaultMessage}"}
-    return warn().apply {withRetMsg(msg)}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+    return warn().apply {withRetMsg(msg)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(ConstraintViolationException::class)
   fun handleConstraintViolationException(e: ConstraintViolationException): ResponseEntity<JSONReturn> {
-    return warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+    return warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)
   fun handleMethodArgumentTypeMismatchException(e: MethodArgumentTypeMismatchException): ResponseEntity<JSONReturn> {
-    return warn().apply {withRetMsg("${e.name}: 参数类型不匹配")}.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+    return warn().apply {withRetMsg("${e.name}: 参数类型不匹配")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(FeignException::class)
   fun handleFeignException(e: FeignException): ResponseEntity<JSONReturn> {
     val data = objectMapper.readValue(e.contentUTF8(), JSONReturn::class.java)!!
-    return data.let {ResponseEntity(it, resolve(it.retCode)!!)}.also {log.error(e) {}}
+    return data.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 }

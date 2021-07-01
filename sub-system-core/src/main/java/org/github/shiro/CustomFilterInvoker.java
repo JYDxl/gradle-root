@@ -59,7 +59,7 @@ public interface CustomFilterInvoker {
   default void resp(ServletRequest request, ServletResponse response, JSONReturn json) throws IOException {
     val httpServletResponse = toHttp(response);
     httpServletResponse.setContentType(json.mediaType().toString());
-    httpServletResponse.setStatus(json.getRetCode());
+    httpServletResponse.setStatus(json.getStatus());
     httpServletResponse.getWriter().write(firstNonNull(json.get(), "null"));
   }
 

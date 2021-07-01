@@ -6,8 +6,9 @@ import org.github.exception.RemoteErrorException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import static org.github.spring.ops.SpringKt.*;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 /**
  * JSON of basic.
@@ -22,14 +23,17 @@ import static org.springframework.http.HttpStatus.OK;
 @NoArgsConstructor
 @Data
 public class JSONReturn implements JSON {
-  /** 返回的状态码. */
+  /** 返回的状态. */
   private          int    retCode = OK.value();
   /** 返回的信息. */
   private @NonNull String retMsg  = OK.getReasonPhrase();
+  /** HTTP状态码. */
+  @JsonIgnore
+  private          int    status  = OK.value();
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    res.setStatus(retCode);
+    res.setStatus(status);
     JSON.super.collect(req, res);
   }
 
@@ -57,7 +61,7 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return retCode == OK.value();
+    return status == OK.value();
   }
 
   /** WITH retCode. */
@@ -72,28 +76,34 @@ public class JSONReturn implements JSON {
     return this;
   }
 
-  /** Generator. */
-  public static @NonNull JSONReturn error() {
-    return of(CODE_SYSTEM_ERROR, "系统错误");
+  /** WITH status. */
+  public @NonNull JSONReturn withStatus(int status) {
+    setStatus(status);
+    return this;
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn of(int code, @NonNull String msg) {
-    return new JSONReturn(code, msg);
+  public static @NonNull JSONReturn error() {
+    return of(CODE_SYSTEM_ERROR, "系统错误", INTERNAL_SERVER_ERROR.value());
+  }
+
+  /** Generator. */
+  public static @NonNull JSONReturn of(int code, @NonNull String msg, int status) {
+    return new JSONReturn(code, msg, status);
   }
 
   /** Generator. */
   public static @NonNull JSONReturn warn() {
-    return of(CODE_PARAMS_ERROR, "参数错误");
+    return of(CODE_PARAMS_ERROR, "参数错误", OK.value());
   }
 
   /** Generator. */
   public static @NonNull JSONReturn path() {
-    return of(CODE_404_ERROR, "路径错误");
+    return of(CODE_404_ERROR, "路径错误", OK.value());
   }
 
   /** Generator. */
   public static @NonNull JSONReturn auth() {
-    return of(CODE_AUTH_ERROR, "权限错误");
+    return of(CODE_AUTH_ERROR, "权限错误", OK.value());
   }
 }

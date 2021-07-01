@@ -18,9 +18,8 @@ import java.util.Map;
 import static cn.hutool.core.bean.BeanUtil.beanToMap;
 import static org.github.spring.restful.json.JSONReturn.path;
 import static org.github.spring.restful.json.JSONReturn.warn;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.ResponseEntity.badRequest;
-import static org.springframework.http.ResponseEntity.status;
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.ResponseEntity.*;
 
 @Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
@@ -39,7 +38,7 @@ public class ErrorController extends BasicErrorController {
   @Override
   public ResponseEntity<Map<String,Object>> error(HttpServletRequest request) {
     val error = super.error(request);
-    if (error.getStatusCode().equals(NOT_FOUND)) return status(NOT_FOUND.value()).body(beanToMap(path()));
-    return badRequest().body(beanToMap(warn()));
+    if (error.getStatusCode().equals(NOT_FOUND)) return ok().body(beanToMap(path()));
+    return ok().body(beanToMap(warn()));
   }
 }

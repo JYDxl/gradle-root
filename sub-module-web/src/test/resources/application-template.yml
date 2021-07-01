@@ -73,6 +73,7 @@ spring:
     sentinel:
       transport:
         dashboard: ubuntu:8858
+      eager: true
     alibaba:
       seata:
         tx-service-group: gradle-root
