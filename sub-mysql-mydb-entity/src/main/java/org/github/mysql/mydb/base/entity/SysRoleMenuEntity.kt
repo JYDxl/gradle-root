@@ -32,6 +32,18 @@ open class SysRoleMenuEntity : Entity() {
     @TableField("menu_id")
     open var menuId: Long? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ID : String = "id"
+
+        const val ROLE_ID : String = "role_id"
+
+        const val MENU_ID : String = "menu_id"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return id
     }

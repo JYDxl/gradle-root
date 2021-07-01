@@ -25,6 +25,16 @@ open class PaymentEntity : Entity() {
     @ApiModelProperty(value = "序列号")
     open var serial: String? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ID : String = "id"
+
+        const val SERIAL : String = "serial"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return id
     }

@@ -76,6 +76,38 @@ open class SysUserEntity : Entity() {
     @ApiModelProperty(value = "删除状态 0：未删除 1：已删除")
     open var deleted: Int? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val USER_ID : String = "user_id"
+
+        const val USERNAME : String = "username"
+
+        const val PASSWORD : String = "password"
+
+        const val SALT : String = "salt"
+
+        const val ENABLED : String = "enabled"
+
+        const val NICKNAME : String = "nickname"
+
+        const val EMAIL : String = "email"
+
+        const val MOBILE : String = "mobile"
+
+        const val CREATOR_ID : String = "creator_id"
+
+        const val CREATE_TIME : String = "create_time"
+
+        const val MODIFIER_ID : String = "modifier_id"
+
+        const val MODIFY_TIME : String = "modify_time"
+
+        const val DELETED : String = "deleted"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return userId
     }

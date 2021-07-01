@@ -40,6 +40,22 @@ open class TAccountEntity : Entity() {
     @ApiModelProperty(value = "剩余可用额度")
     open var residue: BigDecimal? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ACCOUNT_ID : String = "account_id"
+
+        const val USER_ID : String = "user_id"
+
+        const val TOTAL : String = "total"
+
+        const val USED : String = "used"
+
+        const val RESIDUE : String = "residue"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return accountId
     }

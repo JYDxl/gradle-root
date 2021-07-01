@@ -39,6 +39,22 @@ open class TStorageEntity : Entity() {
     @ApiModelProperty(value = "剩余库存")
     open var residue: Int? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val STORAGE_ID : String = "storage_id"
+
+        const val PRODUCT_ID : String = "product_id"
+
+        const val TOTAL : String = "total"
+
+        const val USED : String = "used"
+
+        const val RESIDUE : String = "residue"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return storageId
     }

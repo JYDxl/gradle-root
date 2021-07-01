@@ -48,6 +48,24 @@ open class SysRoleEntity : Entity() {
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     open var createTime: LocalDateTime? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ROLE_ID : String = "role_id"
+
+        const val ROLE_NAME : String = "role_name"
+
+        const val ROLE_CODE : String = "role_code"
+
+        const val REMARK : String = "remark"
+
+        const val CREATE_USER_ID : String = "create_user_id"
+
+        const val CREATE_TIME : String = "create_time"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return roleId
     }

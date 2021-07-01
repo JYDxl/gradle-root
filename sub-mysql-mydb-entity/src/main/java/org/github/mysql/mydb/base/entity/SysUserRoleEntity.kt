@@ -32,6 +32,18 @@ open class SysUserRoleEntity : Entity() {
     @TableField("role_id")
     open var roleId: Long? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ID : String = "id"
+
+        const val USER_ID : String = "user_id"
+
+        const val ROLE_ID : String = "role_id"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return id
     }

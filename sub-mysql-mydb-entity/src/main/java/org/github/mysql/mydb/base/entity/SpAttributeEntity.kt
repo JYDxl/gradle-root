@@ -52,6 +52,26 @@ open class SpAttributeEntity : Entity() {
     @TableField("delete_time")
     open var deleteTime: Int? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ID : String = "id"
+
+        const val ATTR_NAME : String = "attr_name"
+
+        const val CAT_ID : String = "cat_id"
+
+        const val ATTR_SEL : String = "attr_sel"
+
+        const val ATTR_WRITE : String = "attr_write"
+
+        const val ATTR_VALS : String = "attr_vals"
+
+        const val DELETE_TIME : String = "delete_time"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return id
     }

@@ -66,6 +66,32 @@ open class TabSafeQuestionTypeEntity : Entity() {
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     open var createTime: LocalDateTime? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ID : String = "id"
+
+        const val PROJECT_ID : String = "project_id"
+
+        const val PARENT_ID : String = "parent_id"
+
+        const val PARENT_NAME : String = "parent_name"
+
+        const val TYPE_CODE : String = "type_code"
+
+        const val TYPE_NAME : String = "type_name"
+
+        const val REMARK : String = "remark"
+
+        const val SORT : String = "sort"
+
+        const val CREATER : String = "creater"
+
+        const val CREATE_TIME : String = "create_time"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return id
     }

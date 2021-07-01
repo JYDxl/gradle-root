@@ -74,8 +74,12 @@ fun mysqlMydb() {
       return StrategyConfig.Builder()
         .addExclude("undo_log")
         .entityBuilder()
+        .enableColumnConstant()
         .enableLombok()
+        .enableSerialVersionUID()
         .enableTableFieldAnnotation()
+        .enableChainModel()
+        // .enableActiveRecord()
         .addTableFills(
           listOf(
             Column("create_time", INSERT),
@@ -167,8 +171,12 @@ fun mysqlSeataAccount() {
       return StrategyConfig.Builder()
         .addExclude("undo_log")
         .entityBuilder()
+        .enableColumnConstant()
         .enableLombok()
+        .enableSerialVersionUID()
         .enableTableFieldAnnotation()
+        .enableChainModel()
+        // .enableActiveRecord()
         .addTableFills(
           listOf(
             Column("create_time", INSERT),
@@ -260,8 +268,12 @@ fun mysqlSeataOrder() {
       return StrategyConfig.Builder()
         .addExclude("undo_log")
         .entityBuilder()
+        .enableColumnConstant()
         .enableLombok()
+        .enableSerialVersionUID()
         .enableTableFieldAnnotation()
+        .enableChainModel()
+        // .enableActiveRecord()
         .addTableFills(
           listOf(
             Column("create_time", INSERT),
@@ -353,8 +365,12 @@ fun mysqlSeataStorage() {
       return StrategyConfig.Builder()
         .addExclude("undo_log")
         .entityBuilder()
+        .enableColumnConstant()
         .enableLombok()
+        .enableSerialVersionUID()
         .enableTableFieldAnnotation()
+        .enableChainModel()
+        // .enableActiveRecord()
         .addTableFills(
           listOf(
             Column("create_time", INSERT),
@@ -446,8 +462,12 @@ fun postgresqlRunoobdb() {
       return StrategyConfig.Builder()
         .addExclude("undo_log")
         .entityBuilder()
+        .enableColumnConstant()
         .enableLombok()
+        .enableSerialVersionUID()
         .enableTableFieldAnnotation()
+        .enableChainModel()
+        // .enableActiveRecord()
         .addTableFills(
           listOf(
             Column("create_time", INSERT),

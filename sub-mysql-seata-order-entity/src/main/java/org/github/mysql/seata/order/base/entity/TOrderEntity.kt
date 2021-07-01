@@ -45,6 +45,24 @@ open class TOrderEntity : Entity() {
     @ApiModelProperty(value = "订单状态 0：创建中 1：已结束")
     open var status: Int? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val ORDER_ID : String = "order_id"
+
+        const val USER_ID : String = "user_id"
+
+        const val PRODUCT_ID : String = "product_id"
+
+        const val NUM : String = "num"
+
+        const val MONEY : String = "money"
+
+        const val STATUS : String = "status"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return orderId
     }

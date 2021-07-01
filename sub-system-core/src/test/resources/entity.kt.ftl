@@ -74,16 +74,18 @@ open class ${entity} : Serializable {
 </#list>
 <#-- ----------  END 字段循环遍历  ---------->
 
-<#if entityColumnConstant>
     companion object {
+
+        private const val serialVersionUID = 1L
+<#if entityColumnConstant>
 <#list table.fields as field>
 
         const val ${field.name?upper_case} : String = "${field.name}"
-
 </#list>
+</#if>
+
     }
 
-</#if>
     override fun pkVal(): java.io.Serializable? {
 <#if keyPropertyName??>
         return ${keyPropertyName}

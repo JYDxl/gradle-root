@@ -56,6 +56,30 @@ open class SysMenuEntity : Entity() {
     @ApiModelProperty(value = "是否启用（0：启用 1：禁用）")
     open var enabled: Int? = null
 
+    companion object {
+
+        private const val serialVersionUID = 1L
+
+        const val MENU_ID : String = "menu_id"
+
+        const val PARENT_ID : String = "parent_id"
+
+        const val NAME : String = "name"
+
+        const val URL : String = "url"
+
+        const val PERMS : String = "perms"
+
+        const val TYPE : String = "type"
+
+        const val ICON : String = "icon"
+
+        const val ORDER_NUM : String = "order_num"
+
+        const val ENABLED : String = "enabled"
+
+    }
+
     override fun pkVal(): java.io.Serializable? {
         return menuId
     }
