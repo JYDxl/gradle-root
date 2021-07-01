@@ -93,17 +93,22 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn warn() {
-    return of(CODE_PARAMS_ERROR, "参数错误", OK.value());
+  public static @NonNull JSONReturn param() {
+    return warn(CODE_PARAMS_ERROR, "参数错误");
+  }
+
+  /** Generator. */
+  public static @NonNull JSONReturn warn(int code, @NonNull String msg) {
+    return of(code, msg, OK.value());
   }
 
   /** Generator. */
   public static @NonNull JSONReturn path() {
-    return of(CODE_404_ERROR, "路径错误", OK.value());
+    return warn(CODE_404_ERROR, "路径错误");
   }
 
   /** Generator. */
   public static @NonNull JSONReturn auth() {
-    return of(CODE_AUTH_ERROR, "权限错误", OK.value());
+    return warn(CODE_AUTH_ERROR, "权限错误");
   }
 }

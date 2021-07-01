@@ -27,10 +27,10 @@ class ExceptionController {
   fun handleThrowable(e: Throwable) = error().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(ParamsErrorException::class)
-  fun handleParamsErrorException(e: ParamsErrorException) = warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+  fun handleParamsErrorException(e: ParamsErrorException) = param().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(HttpMessageNotReadableException::class)
-  fun handleHttpMessageNotReadableException(e: HttpMessageNotReadableException) = warn().apply {withRetMsg("请求体缺失")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+  fun handleHttpMessageNotReadableException(e: HttpMessageNotReadableException) = param().apply {withRetMsg("请求体缺失")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(RemoteErrorException::class)
   fun handleRemoteErrorException(e: RemoteErrorException) = e.data.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
@@ -41,17 +41,17 @@ class ExceptionController {
   @ExceptionHandler(MethodArgumentNotValidException::class)
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<JSONReturn> {
     val msg = e.bindingResult.fieldErrors.joinToString(separator = " && ") {"${it.field}${it.defaultMessage}"}
-    return warn().apply {withRetMsg(msg)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+    return param().apply {withRetMsg(msg)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(ConstraintViolationException::class)
   fun handleConstraintViolationException(e: ConstraintViolationException): ResponseEntity<JSONReturn> {
-    return warn().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+    return param().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)
   fun handleMethodArgumentTypeMismatchException(e: MethodArgumentTypeMismatchException): ResponseEntity<JSONReturn> {
-    return warn().apply {withRetMsg("${e.name}: 参数类型不匹配")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+    return param().apply {withRetMsg("${e.name}: 参数类型不匹配")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(FeignException::class)
