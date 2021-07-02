@@ -1,16 +1,17 @@
 package org.github.ops
 
-import com.google.common.base.Strings.*
+import com.google.common.base.Strings.padEnd
 import io.vertx.core.DeploymentOptions
+import io.vertx.core.Promise
 import io.vertx.core.Verticle
 import io.vertx.core.Vertx
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.eventbus.DeliveryOptions
 import io.vertx.core.eventbus.Message
 import io.vertx.core.eventbus.MessageConsumer
-import io.vertx.core.json.Json.*
+import io.vertx.core.json.Json.encode
 import io.vertx.kotlin.coroutines.await
-import io.vertx.kotlin.coroutines.toChannel
+import io.vertx.kotlin.coroutines.toReceiveChannel
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.github.const.Consumers
 import org.github.model.BufferAble
@@ -21,9 +22,9 @@ import kotlin.reflect.KClass
 
 inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.consumer(consumers: Consumers, maxBufferSize: Int = 100): ReceiveChannel<Message<Buffer>> {
   val address = consumers.toString()
-  val consumer: MessageConsumer<Buffer> = eventBus().consumer<Buffer>(address)
-  log.info { "[CONSUMER注册成功] ${address.pad("ADDRESS:")} | ${T::class.pad("EXPECTED:")} | REPLY:${R::class.java.name}" }
-  return consumer.setMaxBufferedMessages(maxBufferSize).toChannel(this)
+  val consumer: MessageConsumer<Buffer> = eventBus().consumer(address)
+  log.info {"[CONSUMER注册成功] ${address.pad("ADDRESS:")} | ${T::class.pad("EXPECTED:")} | REPLY:${R::class.java.name}"}
+  return consumer.setMaxBufferedMessages(maxBufferSize).toReceiveChannel(this)
 }
 
 suspend inline fun <reified T: BufferAble, reified R: BufferAble> Vertx.requestAwait(consumers: Consumers, message: T, options: DeliveryOptions = defaultDeliveryOptions): Pair<Message<Buffer>, R> {
@@ -42,11 +43,11 @@ suspend fun Vertx.deploy(verticle: Verticle, options: DeploymentOptions = defaul
   log.deploySuccess(id, verticle::class, options)
 }
 
-suspend fun <T> Vertx.executeAwait(ordered: Boolean = false, blockingCodeHandler: () -> T?) = executeBlocking<T>(
-  {
+suspend fun <T> Vertx.executeAwait(ordered: Boolean = false, blockingCodeHandler: () -> T?): T = executeBlocking(
+  {it: Promise<T> ->
     try {
       it.complete(blockingCodeHandler())
-    } catch(e: Exception) {
+    } catch (e: Exception) {
       it.fail(e)
     }
   }, ordered
@@ -60,7 +61,7 @@ fun String.pad(prefix: String): String {
 fun KClass<*>.pad(prefix: String) = java.name.pad(prefix)
 
 fun Logger.deploySuccess(id: String, clazz: KClass<out Verticle>, options: DeploymentOptions) {
-  info { "[VERTICLE部署成功] ${id.pad("ID:")} | ${clazz.pad("CLASS:")} | OPTIONS:${encode(options)}" }
+  info {"[VERTICLE部署成功] ${id.pad("ID:")} | ${clazz.pad("CLASS:")} | OPTIONS:${encode(options)}"}
 }
 
 const val maxLen = 40

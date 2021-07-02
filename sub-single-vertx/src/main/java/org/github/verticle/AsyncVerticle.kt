@@ -3,7 +3,7 @@ package org.github.verticle
 import io.vertx.core.eventbus.Message
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import io.vertx.kotlin.coroutines.await
-import io.vertx.kotlin.coroutines.toChannel
+import io.vertx.kotlin.coroutines.toReceiveChannel
 import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.delay
@@ -18,12 +18,12 @@ class AsyncVerticle: CoroutineVerticle() {
     val channel: ReceiveChannel<Message<String>> = eventBus
       .localConsumer<String>("a.b.c")
       .setMaxBufferedMessages(Int.MAX_VALUE)
-      .toChannel(vertx)
+      .toReceiveChannel(vertx)
     launch {
-      for(msg in channel) {
+      for (msg in channel) {
         launch {
           val body = msg.body()
-          log.info { body }
+          log.info {body}
           delay(500)
           msg.reply(body)
         }
@@ -31,8 +31,8 @@ class AsyncVerticle: CoroutineVerticle() {
     }
     launch {
       val timeChannel: ReceiveChannel<Long> =
-        vertx.periodicStream(Duration.ofSeconds(1).toMillis()).toChannel(vertx)
-      for(ignore in timeChannel) {
+        vertx.periodicStream(Duration.ofSeconds(1).toMillis()).toReceiveChannel(vertx)
+      for (ignore in timeChannel) {
         repeat(100_000) {
           launch(Default) {
             eventBus.request<String>(

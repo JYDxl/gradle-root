@@ -7,7 +7,7 @@ import io.vertx.core.net.NetServerOptions
 import io.vertx.core.net.NetSocket
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import io.vertx.kotlin.coroutines.await
-import io.vertx.kotlin.coroutines.toChannel
+import io.vertx.kotlin.coroutines.toReceiveChannel
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.launch
 import org.github.ops.error
@@ -49,12 +49,12 @@ class NetVerticle: CoroutineVerticle() {
   }
 
   private fun initBusiness() {
-    val channel: ReceiveChannel<NetSocket> = netServer.connectStream().toChannel(vertx)
+    val channel: ReceiveChannel<NetSocket> = netServer.connectStream().toReceiveChannel(vertx)
     launch {
-      for(socket in channel) {
+      for (socket in channel) {
         try {
           initSocket(socket)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
           log.error(e) {}
         }
       }
@@ -62,6 +62,6 @@ class NetVerticle: CoroutineVerticle() {
   }
 
   private suspend fun initSocket(socket: NetSocket) {
-    launch { socket.pipe().endOnSuccess(false).to(socket).await() }
+    launch {socket.pipe().endOnSuccess(false).to(socket).await()}
   }
 }

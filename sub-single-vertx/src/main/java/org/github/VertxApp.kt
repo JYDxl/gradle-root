@@ -3,13 +3,12 @@ package org.github
 import io.vertx.core.DeploymentOptions
 import io.vertx.core.Vertx
 import io.vertx.core.VertxOptions
-import io.vertx.ext.web.common.WebEnvironment.*
+import io.vertx.ext.web.common.WebEnvironment.SYSTEM_PROPERTY_NAME
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import org.github.ops.deploySupplier
 import org.github.verticle.WebSocketServerVerticle
-import java.lang.System.*
-import java.util.function.Supplier
+import java.lang.System.setProperty
 
 suspend fun main() = coroutineScope {
   setProperty(SYSTEM_PROPERTY_NAME, "dev")
@@ -29,7 +28,7 @@ suspend fun main() = coroutineScope {
   // }
 
   //部署多个实例
-  val deploymentOptions = DeploymentOptions().apply { instances = vertxOptions.eventLoopPoolSize }
+  val deploymentOptions = DeploymentOptions().apply {instances = vertxOptions.eventLoopPoolSize}
   //  launch { vertx.deploySupplier(Supplier { HttpServerVerticle() }, HttpServerVerticle::class, deploymentOptions) }
   //  launch { vertx.deploy(MySqlVerticle(), MySqlVerticle::class) }
   //  launch { vertx.deploy(WebClientVerticle()) }
@@ -37,7 +36,7 @@ suspend fun main() = coroutineScope {
   //  vertx.deploy(FileServerVerticle())
   //  vertx.deploy(AsyncVerticle())
   // launch { vertx.deploy(HttpServerVerticle()) }
-  launch { vertx.deploySupplier(Supplier { WebSocketServerVerticle() }, deploymentOptions) }
+  launch {vertx.deploySupplier({WebSocketServerVerticle()}, deploymentOptions)}
   // launch { vertx.deploy(NetClientVerticle("docker.for.mac.localhost", 10000)) }
   //    launch { vertx.deploySupplier(Supplier { NetClientVerticle("localhost", 3000) }, deploymentOptions) }
   return@coroutineScope
