@@ -21,6 +21,9 @@ include("sub-single-vertx")
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
 
+include("sub-mysql-leadnews-entity")
+include("sub-mysql-leadnews-service")
+
 include("sub-mysql-seata-account-entity")
 include("sub-mysql-seata-account-service")
 
