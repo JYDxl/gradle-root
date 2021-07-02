@@ -18,10 +18,11 @@ import kotlin.reflect.jvm.jvmName
 
 fun main() {
   mysqlMydb()
+  mysqlLeadnews()
+
   mysqlSeataAccount()
   mysqlSeataOrder()
   mysqlSeataStorage()
-  mysqlLeadNews()
 
   postgresqlRunoobdb()
 }
@@ -414,7 +415,7 @@ fun mysqlSeataStorage() {
   }.execute()
 }
 
-fun mysqlLeadNews() {
+fun mysqlLeadnews() {
   object: SimpleAutoGenerator() {
     override fun globalConfigBuilder(): IConfigBuilder<GlobalConfig> {
       return GlobalConfig.Builder()
@@ -426,7 +427,7 @@ fun mysqlLeadNews() {
     }
 
     override fun dataSourceConfigBuilder(): IConfigBuilder<DataSourceConfig> {
-      val url = "jdbc:mysql://jydxl.link:3306/lead_news"
+      val url = "jdbc:mysql://jydxl.link:3306/leadnews"
       val username = "root"
       val password = "XLrootJYD713"
 

@@ -51,6 +51,11 @@ include("sub-module-shop-dto")
 include("sub-module-shop-api")
 include("sub-module-shop")
 
+include("sub-module-leadnews-service")
+include("sub-module-leadnews-dto")
+include("sub-module-leadnews-api")
+include("sub-module-leadnews")
+
 include("sub-module-account-service")
 include("sub-module-account-dto")
 include("sub-module-account-api")
