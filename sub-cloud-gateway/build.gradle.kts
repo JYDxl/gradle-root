@@ -53,6 +53,10 @@ val netty: String by System.getProperties()
 dependencies {
   implementation("io.netty:netty-all:$netty")
 
+  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
+  implementation("com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway")
+  implementation("com.alibaba.csp:sentinel-datasource-nacos")
+
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")

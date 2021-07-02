@@ -66,6 +66,25 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+    sentinel:
+      transport:
+        dashboard: ubuntu:8858
+      eager: true
+      datasource:
+        gw-flow:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}-gw-flow-rules
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: gw-flow
+        gw-api-group:
+          nacos:
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            dataId: ${spring.application.name}-gw-api-group-rules
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: gw-api-group
 
 logging:
   file:
