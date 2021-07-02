@@ -5,8 +5,9 @@ import org.github.base.IPage;
 import org.github.mybatis.MyBatisMapper;
 import org.github.web.module.sys.menu.dto.QueryMenuListBO;
 import org.github.web.module.sys.menu.dto.QueryMenuListVO;
+import org.apache.ibatis.annotations.Param;
 
 @MyBatisMapper
 public interface IMenuMapper {
-  @NonNull IPage<QueryMenuListVO> queryPage(IPage<QueryMenuListVO> page, QueryMenuListBO bo);
+  @NonNull IPage<QueryMenuListVO> queryPage(@Param("page") IPage<QueryMenuListVO> page, @Param("bo") QueryMenuListBO bo);
 }
