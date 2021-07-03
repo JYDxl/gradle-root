@@ -2,9 +2,9 @@ package org.github.controller
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import org.github.mysql.mydb.base.entity.SysMenuEntity
 import org.github.ops.trim
 import org.github.web.module.sys.menu.dto.QueryMenuListBO
+import org.github.web.module.sys.menu.dto.SaveOrUpdateMenuBO
 import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -32,5 +32,5 @@ class MenuController {
 
   @ApiOperation("新增/修改")
   @PostMapping("save", "update")
-  fun saveOrUpdate(@RequestBody bo: SysMenuEntity) = menuService.saveOrUpdate(bo.trim())
+  fun saveOrUpdate(@RequestBody bo: SaveOrUpdateMenuBO) = menuService.saveOrUpdate(bo.trim())
 }

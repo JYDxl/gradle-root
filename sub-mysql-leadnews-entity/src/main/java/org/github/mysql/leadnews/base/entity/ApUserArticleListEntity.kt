@@ -21,25 +21,25 @@ open class ApUserArticleListEntity : Entity() {
     /** 主键 */
     @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Int? = null
+    open var id: Long? = null
 
-    /** 用户ID */
-    @ApiModelProperty(value = "用户ID")
+    /** 用户id */
+    @ApiModelProperty(value = "用户id")
     @TableField("user_id")
-    open var userId: Int? = null
+    open var userId: Long? = null
 
-    /** 频道ID */
-    @ApiModelProperty(value = "频道ID")
+    /** 频道id */
+    @ApiModelProperty(value = "频道id")
     @TableField("channel_id")
-    open var channelId: Int? = null
+    open var channelId: Long? = null
 
-    /** 动态ID */
-    @ApiModelProperty(value = "动态ID")
+    /** 动态id */
+    @ApiModelProperty(value = "动态id")
     @TableField("article_id")
-    open var articleId: Int? = null
+    open var articleId: Long? = null
 
-    /** 是否展示 */
-    @ApiModelProperty(value = "是否展示")
+    /** 是否展示 0：不展示 1：展示 */
+    @ApiModelProperty(value = "是否展示 0：不展示 1：展示")
     @TableField("is_show")
     open var isShow: Int? = null
 
@@ -48,15 +48,15 @@ open class ApUserArticleListEntity : Entity() {
     @TableField("recommend_time")
     open var recommendTime: LocalDateTime? = null
 
-    /** 是否阅读 */
-    @ApiModelProperty(value = "是否阅读")
+    /** 是否阅读 0：未阅读 1：已阅读 */
+    @ApiModelProperty(value = "是否阅读 0：未阅读 1：已阅读")
     @TableField("is_read")
     open var isRead: Int? = null
 
-    /** 推荐算法 */
-    @ApiModelProperty(value = "推荐算法")
+    /** 推荐算法id */
+    @ApiModelProperty(value = "推荐算法id")
     @TableField("strategy_id")
-    open var strategyId: Int? = null
+    open var strategyId: Long? = null
 
     companion object {
 

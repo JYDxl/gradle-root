@@ -1,6 +1,6 @@
 package org.github.service.impl
 
-import org.github.auth.feign.IServiceProviderHubServer
+import org.github.auth.feign.IHubServerAPI
 import org.github.service.IShiroService
 import org.github.shiro.AuthorInfo
 import org.github.shiro.User
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class ShiroServiceImpl: IShiroService {
   @Autowired(required = false)
-  private lateinit var hubServer: IServiceProviderHubServer
+  private lateinit var hubServer: IHubServerAPI
 
   override fun queryAuthorInfo(userId: Long): JSONArrayReturn<AuthorInfo> {
     return hubServer.auth(userId).check()

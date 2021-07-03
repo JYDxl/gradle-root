@@ -1,0 +1,3 @@
+*
+!build/libs/leadnews-article-boot.jar
+!build/bootScripts/sub-module-leadnews-article

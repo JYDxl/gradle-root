@@ -2,7 +2,7 @@ package org.github.order.service.impl
 
 import io.seata.spring.annotation.GlobalTransactional
 import org.github.account.dto.DecreaseAccountBO
-import org.github.account.feign.IServiceProviderAccountServer
+import org.github.account.feign.IAccountServerAPI
 import org.github.mybatis.ops.ktUpdateWrapper
 import org.github.mysql.seata.order.base.dict.OrderStatus.END
 import org.github.mysql.seata.order.base.entity.TOrderEntity
@@ -13,7 +13,7 @@ import org.github.service.ISystemService
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.ops.check
 import org.github.storage.dto.DecreaseProductBO
-import org.github.storage.feign.IServiceProviderStorageServer
+import org.github.storage.feign.IStorageServerAPI
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -23,10 +23,10 @@ class OrderServiceImpl: IOrderService {
   private lateinit var orderMbpService: ITOrderService
 
   @Autowired
-  private lateinit var storageServer: IServiceProviderStorageServer
+  private lateinit var storageServer: IStorageServerAPI
 
   @Autowired
-  private lateinit var accountServer: IServiceProviderAccountServer
+  private lateinit var accountServer: IAccountServerAPI
 
   @Autowired
   private lateinit var systemService: ISystemService

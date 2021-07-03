@@ -9,7 +9,7 @@ import org.github.shiro.AuthorInfo
 import org.github.spring.restful.json.JSONArrayReturn
 
 @FeignClient("hub-server")
-interface IServiceProviderHubServer {
+interface IHubServerAPI {
   @GetMapping("/public/security/user/{username}")
   fun user(@PathVariable("username") username: String): JSONDataReturn<UserDTO>
 

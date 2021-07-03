@@ -1,5 +1,6 @@
 package org.github.mysql.leadnews.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -18,47 +19,49 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(value = "ApArticleEntity对象", description = "文章信息表，存储已发布的文章")
 open class ApArticleEntity : Entity() {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    open var id: Int? = null
+    /** 主键 */
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    open var id: Long? = null
 
     /** 标题 */
     @ApiModelProperty(value = "标题")
     open var title: String? = null
 
-    /** 文章作者的ID */
-    @ApiModelProperty(value = "文章作者的ID")
+    /** 作者id */
+    @ApiModelProperty(value = "作者id")
     @TableField("author_id")
-    open var authorId: Int? = null
+    open var authorId: Long? = null
 
     /** 作者昵称 */
     @ApiModelProperty(value = "作者昵称")
     @TableField("author_name")
     open var authorName: String? = null
 
-    /** 文章所属频道ID */
-    @ApiModelProperty(value = "文章所属频道ID")
+    /** 所属频道id */
+    @ApiModelProperty(value = "所属频道id")
     @TableField("channel_id")
-    open var channelId: Int? = null
+    open var channelId: Long? = null
 
-    /** 频道名称 */
-    @ApiModelProperty(value = "频道名称")
+    /** 所属频道名称 */
+    @ApiModelProperty(value = "所属频道名称")
     @TableField("channel_name")
     open var channelName: String? = null
 
-    /** 文章布局	            0 无图文章	            1 单图文章	            2 多图文章 */
-    @ApiModelProperty(value = "文章布局	            0 无图文章	            1 单图文章	            2 多图文章")
+    /** 文章布局 0：无图文章 1：单图文章 2：多图文章 */
+    @ApiModelProperty(value = "文章布局 0：无图文章 1：单图文章 2：多图文章")
     open var layout: Int? = null
 
-    /** 文章标记	            0 普通文章	            1 热点文章	            2 置顶文章	            3 精品文章	            4 大V 文章 */
-    @ApiModelProperty(value = "文章标记	            0 普通文章	            1 热点文章	            2 置顶文章	            3 精品文章	            4 大V 文章")
+    /** 文章标记 0：普通文章 1：热点文章 2：置顶文章 3：精品文章 4：大V文章 */
+    @ApiModelProperty(value = "文章标记 0：普通文章 1：热点文章 2：置顶文章 3：精品文章 4：大V文章")
     open var flag: Int? = null
 
-    /** 文章图片	            多张逗号分隔 */
-    @ApiModelProperty(value = "文章图片	            多张逗号分隔")
+    /** 文章图片，多张逗号分隔 */
+    @ApiModelProperty(value = "文章图片，多张逗号分隔")
     open var images: String? = null
 
-    /** 文章标签最多3个 逗号分隔 */
-    @ApiModelProperty(value = "文章标签最多3个 逗号分隔")
+    /** 文章标签最多3个，逗号分隔 */
+    @ApiModelProperty(value = "文章标签最多3个，逗号分隔")
     open var labels: String? = null
 
     /** 点赞数量 */
@@ -94,8 +97,8 @@ open class ApArticleEntity : Entity() {
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField("created_time")
-    open var createdTime: LocalDateTime? = null
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    open var createTime: LocalDateTime? = null
 
     /** 发布时间 */
     @ApiModelProperty(value = "发布时间")
@@ -105,7 +108,7 @@ open class ApArticleEntity : Entity() {
     /** 同步状态 */
     @ApiModelProperty(value = "同步状态")
     @TableField("sync_status")
-    open var syncStatus: Boolean? = null
+    open var syncStatus: Int? = null
 
     /** 来源 */
     @ApiModelProperty(value = "来源")
@@ -149,7 +152,7 @@ open class ApArticleEntity : Entity() {
 
         const val COUNTY_ID : String = "county_id"
 
-        const val CREATED_TIME : String = "created_time"
+        const val CREATE_TIME : String = "create_time"
 
         const val PUBLISH_TIME : String = "publish_time"
 
@@ -182,7 +185,7 @@ open class ApArticleEntity : Entity() {
         ", provinceId=" + provinceId +
         ", cityId=" + cityId +
         ", countyId=" + countyId +
-        ", createdTime=" + createdTime +
+        ", createTime=" + createTime +
         ", publishTime=" + publishTime +
         ", syncStatus=" + syncStatus +
         ", origin=" + origin +

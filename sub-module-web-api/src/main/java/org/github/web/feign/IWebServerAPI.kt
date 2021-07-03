@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient("web-server")
-interface IServiceProviderWebServer {
+interface IWebServerAPI {
   @GetMapping("/rest/json/basic")
   fun basic(
     @RequestParam(JSESSIONID) jsessionid: String?,
