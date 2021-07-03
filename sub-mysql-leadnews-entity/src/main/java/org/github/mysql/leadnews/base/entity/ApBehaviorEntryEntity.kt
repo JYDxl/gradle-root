@@ -1,5 +1,6 @@
 package org.github.mysql.leadnews.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -21,21 +22,21 @@ open class ApBehaviorEntryEntity : Entity() {
     /** 主键 */
     @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Int? = null
+    open var id: Long? = null
 
-    /** 实体类型	            0终端设备	            1用户 */
-    @ApiModelProperty(value = "实体类型	            0终端设备	            1用户")
+    /** 实体类型 0：终端设备 1：用户 */
+    @ApiModelProperty(value = "实体类型 0：终端设备 1：用户")
     open var type: Int? = null
 
-    /** 实体ID */
-    @ApiModelProperty(value = "实体ID")
+    /** 实体id */
+    @ApiModelProperty(value = "实体id")
     @TableField("entry_id")
-    open var entryId: Int? = null
+    open var entryId: Long? = null
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField("created_time")
-    open var createdTime: LocalDateTime? = null
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    open var createTime: LocalDateTime? = null
 
     /** 分片 */
     @ApiModelProperty(value = "分片")
@@ -51,7 +52,7 @@ open class ApBehaviorEntryEntity : Entity() {
 
         const val ENTRY_ID : String = "entry_id"
 
-        const val CREATED_TIME : String = "created_time"
+        const val CREATE_TIME : String = "create_time"
 
         const val BURST : String = "burst"
 
@@ -66,7 +67,7 @@ open class ApBehaviorEntryEntity : Entity() {
         "id=" + id +
         ", type=" + type +
         ", entryId=" + entryId +
-        ", createdTime=" + createdTime +
+        ", createTime=" + createTime +
         ", burst=" + burst +
         "}"
     }

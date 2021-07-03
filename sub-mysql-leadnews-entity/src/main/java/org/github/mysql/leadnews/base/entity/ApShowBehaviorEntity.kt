@@ -1,5 +1,6 @@
 package org.github.mysql.leadnews.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -18,21 +19,23 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel(value = "ApShowBehaviorEntity对象", description = "APP文章展现行为表")
 open class ApShowBehaviorEntity : Entity() {
 
+    /** 主键 */
+    @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    open var id: Int? = null
+    open var id: Long? = null
 
-    /** 实体ID */
-    @ApiModelProperty(value = "实体ID")
+    /** 实体id */
+    @ApiModelProperty(value = "实体id")
     @TableField("entry_id")
-    open var entryId: Int? = null
+    open var entryId: Long? = null
 
-    /** 文章ID */
-    @ApiModelProperty(value = "文章ID")
+    /** 文章id */
+    @ApiModelProperty(value = "文章id")
     @TableField("article_id")
-    open var articleId: Int? = null
+    open var articleId: Long? = null
 
-    /** 是否点击 */
-    @ApiModelProperty(value = "是否点击")
+    /** 是否点击 0：否 1：是 */
+    @ApiModelProperty(value = "是否点击 0：否 1：是")
     @TableField("is_click")
     open var isClick: Int? = null
 
@@ -41,10 +44,10 @@ open class ApShowBehaviorEntity : Entity() {
     @TableField("show_time")
     open var showTime: LocalDateTime? = null
 
-    /** 登录时间 */
-    @ApiModelProperty(value = "登录时间")
-    @TableField("created_time")
-    open var createdTime: LocalDateTime? = null
+    /** 创建时间 */
+    @ApiModelProperty(value = "创建时间")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    open var createTime: LocalDateTime? = null
 
     companion object {
 
@@ -60,7 +63,7 @@ open class ApShowBehaviorEntity : Entity() {
 
         const val SHOW_TIME : String = "show_time"
 
-        const val CREATED_TIME : String = "created_time"
+        const val CREATE_TIME : String = "create_time"
 
     }
 
@@ -75,7 +78,7 @@ open class ApShowBehaviorEntity : Entity() {
         ", articleId=" + articleId +
         ", isClick=" + isClick +
         ", showTime=" + showTime +
-        ", createdTime=" + createdTime +
+        ", createTime=" + createTime +
         "}"
     }
 

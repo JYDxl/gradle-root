@@ -2,7 +2,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: leadnews-server
+    name: leadnews-behavior-server
   cloud:
     nacos:
       discovery:

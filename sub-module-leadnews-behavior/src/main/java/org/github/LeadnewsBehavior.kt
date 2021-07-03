@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-class Leadnews
+class LeadnewsBehavior
 
 fun main(args: Array<String>) {
-  runApplication<Leadnews>(*args)
+  runApplication<LeadnewsBehavior>(*args)
 }

@@ -9,7 +9,7 @@ val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
 
 application {
-  mainClass.set("org.github.LeadnewsKt")
+  mainClass.set("org.github.LeadnewsBehaviorKt")
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5002",
 
@@ -40,7 +40,7 @@ application {
 }
 
 tasks.withType<BootJar> {
-  archiveFileName.set("leadnews-boot.jar")
+  archiveFileName.set("leadnews-behavior-boot.jar")
 }
 
 tasks.withType<Test> {
