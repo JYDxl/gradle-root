@@ -1,5 +1,6 @@
 package org.github.mysql.blog.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -10,21 +11,23 @@ import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
 /**
- * 
+ * 用户登录信息表
  *
  * @author JYD_XL
  */
 @TableName("tb_user_auth")
-@ApiModel(value = "UserAuthEntity对象", description = "")
+@ApiModel(value = "UserAuthEntity对象", description = "用户登录信息表")
 open class UserAuthEntity : Entity() {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    open var id: Int? = null
+    /** 主键 */
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    open var id: Long? = null
 
-    /** 用户信息id */
-    @ApiModelProperty(value = "用户信息id")
+    /** 用户个人信息id */
+    @ApiModelProperty(value = "用户个人信息id")
     @TableField("user_info_id")
-    open var userInfoId: Int? = null
+    open var userInfoId: Long? = null
 
     /** 用户名 */
     @ApiModelProperty(value = "用户名")
@@ -37,27 +40,27 @@ open class UserAuthEntity : Entity() {
     /** 登录类型 */
     @ApiModelProperty(value = "登录类型")
     @TableField("login_type")
-    open var loginType: Boolean? = null
+    open var loginType: Int? = null
 
     /** 用户登录ip */
     @ApiModelProperty(value = "用户登录ip")
     @TableField("ip_addr")
     open var ipAddr: String? = null
 
-    /** ip来源 */
-    @ApiModelProperty(value = "ip来源")
+    /** 用户登录ip来源 */
+    @ApiModelProperty(value = "用户登录ip来源")
     @TableField("ip_source")
     open var ipSource: String? = null
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField("create_time")
-    open var createTime: LocalDateTime? = null
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
+    open var createdAt: LocalDateTime? = null
 
     /** 上次登录时间 */
     @ApiModelProperty(value = "上次登录时间")
-    @TableField("last_login_time")
-    open var lastLoginTime: LocalDateTime? = null
+    @TableField("last_login_at")
+    open var lastLoginAt: LocalDateTime? = null
 
     companion object {
 
@@ -77,9 +80,9 @@ open class UserAuthEntity : Entity() {
 
         const val IP_SOURCE : String = "ip_source"
 
-        const val CREATE_TIME : String = "create_time"
+        const val CREATED_AT : String = "created_at"
 
-        const val LAST_LOGIN_TIME : String = "last_login_time"
+        const val LAST_LOGIN_AT : String = "last_login_at"
 
     }
 
@@ -96,8 +99,8 @@ open class UserAuthEntity : Entity() {
         ", loginType=" + loginType +
         ", ipAddr=" + ipAddr +
         ", ipSource=" + ipSource +
-        ", createTime=" + createTime +
-        ", lastLoginTime=" + lastLoginTime +
+        ", createdAt=" + createdAt +
+        ", lastLoginAt=" + lastLoginAt +
         "}"
     }
 

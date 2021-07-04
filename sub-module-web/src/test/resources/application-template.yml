@@ -128,6 +128,7 @@ logging:
       springframework:
         transaction: debug
         web: debug
+        security: debug
       apache:
         shiro: debug
       github: trace

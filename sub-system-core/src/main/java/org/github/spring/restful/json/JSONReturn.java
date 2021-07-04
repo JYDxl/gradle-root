@@ -21,10 +21,10 @@ import static org.github.spring.restful.ops.Result.*;
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态. */
-  private final    int    retCode;
+  private          int    retCode;
   /** HTTP状态码. */
   @JsonIgnore
-  private final    int    status;
+  private          int    status;
   /** 返回的信息. */
   private @NonNull String retMsg;
 
@@ -57,6 +57,16 @@ public class JSONReturn implements JSON {
   @Override
   public String toString() {
     return get();
+  }
+
+  @Deprecated
+  public void setRetCode(int retCode) {
+    this.retCode = retCode;
+  }
+
+  @Deprecated
+  public void setStatus(int status) {
+    this.status = status;
   }
 
   public void throwIfFailed() throws RemoteErrorException {

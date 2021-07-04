@@ -9,7 +9,7 @@ import org.github.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- *  服务实现类
+ * 用户个人信息表 服务实现类
  *
  * @author JYD_XL
  */

@@ -7,7 +7,7 @@ import org.github.base.IMapper;
 import org.github.mybatis.MyBatisMapper;
 
 /**
- *  Mapper 接口
+ * 用户登录信息表 Mapper 接口
  *
  * @author JYD_XL
  */

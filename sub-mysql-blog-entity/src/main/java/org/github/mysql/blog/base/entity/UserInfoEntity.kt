@@ -1,5 +1,6 @@
 package org.github.mysql.blog.base.entity
 
+import com.baomidou.mybatisplus.annotation.FieldFill
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
@@ -10,21 +11,21 @@ import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
 /**
- * 
+ * 用户个人信息表
  *
  * @author JYD_XL
  */
 @TableName("tb_user_info")
-@ApiModel(value = "UserInfoEntity对象", description = "")
+@ApiModel(value = "UserInfoEntity对象", description = "用户个人信息表")
 open class UserInfoEntity : Entity() {
 
-    /** 用户ID */
-    @ApiModelProperty(value = "用户ID")
-    @TableId(value = "id", type = IdType.AUTO)
-    open var id: Int? = null
+    /** 主键 */
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    open var id: Long? = null
 
-    /** 邮箱号 */
-    @ApiModelProperty(value = "邮箱号")
+    /** 邮箱地址 */
+    @ApiModelProperty(value = "邮箱地址")
     open var email: String? = null
 
     /** 用户昵称 */
@@ -46,18 +47,18 @@ open class UserInfoEntity : Entity() {
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField("create_time")
-    open var createTime: LocalDateTime? = null
+    @TableField(value = "created_at", fill = FieldFill.INSERT)
+    open var createdAt: LocalDateTime? = null
 
     /** 更新时间 */
     @ApiModelProperty(value = "更新时间")
-    @TableField("update_time")
-    open var updateTime: LocalDateTime? = null
+    @TableField(value = "updated_at", fill = FieldFill.INSERT_UPDATE)
+    open var updatedAt: LocalDateTime? = null
 
-    /** 是否禁用 */
-    @ApiModelProperty(value = "是否禁用")
-    @TableField("is_disable")
-    open var isDisable: Boolean? = null
+    /** 是否禁用 0：未禁用 1：已禁用 */
+    @ApiModelProperty(value = "是否禁用 0：未禁用 1：已禁用")
+    @TableField("is_disabled")
+    open var isDisabled: Int? = null
 
     companion object {
 
@@ -75,11 +76,11 @@ open class UserInfoEntity : Entity() {
 
         const val WEB_SITE : String = "web_site"
 
-        const val CREATE_TIME : String = "create_time"
+        const val CREATED_AT : String = "created_at"
 
-        const val UPDATE_TIME : String = "update_time"
+        const val UPDATED_AT : String = "updated_at"
 
-        const val IS_DISABLE : String = "is_disable"
+        const val IS_DISABLED : String = "is_disabled"
 
     }
 
@@ -95,9 +96,9 @@ open class UserInfoEntity : Entity() {
         ", avatar=" + avatar +
         ", intro=" + intro +
         ", webSite=" + webSite +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDisable=" + isDisable +
+        ", createdAt=" + createdAt +
+        ", updatedAt=" + updatedAt +
+        ", isDisabled=" + isDisabled +
         "}"
     }
 

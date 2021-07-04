@@ -6,7 +6,7 @@ import org.github.mysql.blog.base.entity.UserInfoEntity;
 import org.github.base.IService;
 
 /**
- *  服务类
+ * 用户个人信息表 服务类
  *
  * @author JYD_XL
  */

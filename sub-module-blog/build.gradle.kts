@@ -56,7 +56,7 @@ tasks.getByName<Task>("bootDistZip") {enabled = false}
 
 val commonsPool2: String by System.getProperties()
 val mybatisPlus: String by System.getProperties()
-val shiroRedis: String by System.getProperties()
+// val shiroRedis: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val redisson: String by System.getProperties()
 val swagger: String by System.getProperties()
@@ -83,12 +83,13 @@ dependencies {
   implementation("mysql:mysql-connector-java:$mysql")
   implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
-  implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
+  // implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:$jwt")
-  implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroRedis") {
-    exclude(group = "org.apache.maven.plugins")
-    exclude(group = "redis.clients")
-  }
+  // implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroRedis") {
+  //   exclude(group = "org.apache.maven.plugins")
+  //   exclude(group = "redis.clients")
+  // }
+  implementation("org.apache.shiro:shiro-core:$shiro")
   implementation("redis.clients:jedis:$jedis")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 
@@ -97,6 +98,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-cache")
   implementation("org.springframework.boot:spring-boot-starter-aop")
   implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("org.springframework.boot:spring-boot-starter-security")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
