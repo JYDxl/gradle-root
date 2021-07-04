@@ -59,17 +59,17 @@ open class SysUserEntity : Entity() {
 
     /** 创建时间 */
     @ApiModelProperty(value = "创建时间")
-    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @TableField("create_time")
     open var createTime: LocalDateTime? = null
 
     /** 修改人id */
     @ApiModelProperty(value = "修改人id")
-    @TableField(value = "modifier_id", fill = FieldFill.INSERT_UPDATE)
+    @TableField("modifier_id")
     open var modifierId: Long? = null
 
     /** 修改时间 */
     @ApiModelProperty(value = "修改时间")
-    @TableField(value = "modify_time", fill = FieldFill.INSERT_UPDATE)
+    @TableField("modify_time")
     open var modifyTime: LocalDateTime? = null
 
     /** 删除状态 0：未删除 1：已删除 */

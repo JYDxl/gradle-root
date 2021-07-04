@@ -18,7 +18,10 @@ import kotlin.reflect.jvm.jvmName
 
 fun main() {
   mysqlMydb()
+
   mysqlLeadnews()
+
+  mysqlBlog()
 
   mysqlSeataAccount()
   mysqlSeataOrder()
@@ -84,10 +87,10 @@ fun mysqlMydb() {
         // .enableActiveRecord()
         .addTableFills(
           listOf(
-            Column("create_time", INSERT),
+            Column("created_at", INSERT),
             Column("creator_id", INSERT),
-            Column("modify_time", INSERT_UPDATE),
-            Column("modifier_id", INSERT_UPDATE)
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
           )
         )
         .enableSerialVersionUID()
@@ -181,10 +184,10 @@ fun mysqlSeataAccount() {
         // .enableActiveRecord()
         .addTableFills(
           listOf(
-            Column("create_time", INSERT),
+            Column("created_at", INSERT),
             Column("creator_id", INSERT),
-            Column("modify_time", INSERT_UPDATE),
-            Column("modifier_id", INSERT_UPDATE)
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
           )
         )
         .enableSerialVersionUID()
@@ -278,10 +281,10 @@ fun mysqlSeataOrder() {
         // .enableActiveRecord()
         .addTableFills(
           listOf(
-            Column("create_time", INSERT),
+            Column("created_at", INSERT),
             Column("creator_id", INSERT),
-            Column("modify_time", INSERT_UPDATE),
-            Column("modifier_id", INSERT_UPDATE)
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
           )
         )
         .enableSerialVersionUID()
@@ -375,10 +378,10 @@ fun mysqlSeataStorage() {
         // .enableActiveRecord()
         .addTableFills(
           listOf(
-            Column("create_time", INSERT),
+            Column("created_at", INSERT),
             Column("creator_id", INSERT),
-            Column("modify_time", INSERT_UPDATE),
-            Column("modifier_id", INSERT_UPDATE)
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
           )
         )
         .enableSerialVersionUID()
@@ -472,10 +475,108 @@ fun mysqlLeadnews() {
         // .enableActiveRecord()
         .addTableFills(
           listOf(
-            Column("create_time", INSERT),
+            Column("created_at", INSERT),
             Column("creator_id", INSERT),
-            Column("modify_time", INSERT_UPDATE),
-            Column("modifier_id", INSERT_UPDATE)
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
+          )
+        )
+        .enableSerialVersionUID()
+        .idType(ASSIGN_ID)
+        .naming(underline_to_camel)
+        // .enableActiveRecord().superClass(Model::class.jvmName)
+        .superClass(Entity::class.jvmName)
+        .formatFileName("%sEntity")
+
+        .mapperBuilder()
+        .superClass(IMapper::class.jvmName)
+        .formatMapperFileName("I%sMapper")
+
+        .serviceBuilder()
+        .superServiceClass(IService::class.jvmName)
+        .formatServiceFileName("I%sService")
+        .superServiceImplClass(ServiceImpl::class.jvmName)
+        .formatServiceImplFileName("%sServiceImpl")
+    }
+
+    override fun templateConfigBuilder(): IConfigBuilder<TemplateConfig> {
+      return TemplateConfig.Builder()
+        .disable(CONTROLLER)
+        .disable(XML)
+        .entity("/entity.java")
+        .entityKt("/entity.kt")
+        .mapper("/mapper.java")
+        .service("/service.java", "/serviceImpl.java")
+    }
+
+    override fun templateEngine(): AbstractTemplateEngine {
+      return FreemarkerTemplateEngine()
+    }
+  }.execute()
+}
+
+fun mysqlBlog() {
+  object: SimpleAutoGenerator() {
+    override fun globalConfigBuilder(): IConfigBuilder<GlobalConfig> {
+      return GlobalConfig.Builder()
+        .author("JYD_XL")
+        .fileOverride()
+        .enableSwagger()
+        .enableKotlin()
+        .openDir(false)
+    }
+
+    override fun dataSourceConfigBuilder(): IConfigBuilder<DataSourceConfig> {
+      val url = "jdbc:mysql://jydxl.link:3306/blog"
+      val username = "root"
+      val password = "XLrootJYD713"
+
+      return DataSourceConfig.Builder(url, username, password)
+    }
+
+    override fun packageConfigBuilder(): IConfigBuilder<PackageConfig> {
+      val parent = "org.github.mysql.blog"
+      val moduleName = "base"
+      val subName = "sub-mysql-blog"
+      val subEntityName = "$subName-entity"
+      val subMapperName = "$subName-service"
+      val packageName = parent.replace('.', '/')
+      val path = "${getProperty("user.dir")}/"
+
+      return PackageConfig.Builder()
+        .parent(parent)
+        .moduleName(moduleName)
+        .pathInfo(
+          mapOf(
+            ENTITY_PATH to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
+
+            CONTROLLER_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/controller",
+            MAPPER_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",
+            SERVICE_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service",
+            SERVICE_IMPL_PATH to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service/impl",
+
+            XML_PATH to "$path/$subMapperName/src/main/resources/mapper"
+          )
+        )
+    }
+
+    override fun strategyConfigBuilder(): IConfigBuilder<StrategyConfig> {
+      return StrategyConfig.Builder()
+        .addExclude("undo_log")
+        .addTablePrefix("tb_")
+        .entityBuilder()
+        .enableColumnConstant()
+        .enableLombok()
+        .enableSerialVersionUID()
+        .enableTableFieldAnnotation()
+        .enableChainModel()
+        // .enableActiveRecord()
+        .addTableFills(
+          listOf(
+            Column("created_at", INSERT),
+            Column("creator_id", INSERT),
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
           )
         )
         .enableSerialVersionUID()
@@ -569,10 +670,10 @@ fun postgresqlRunoobdb() {
         // .enableActiveRecord()
         .addTableFills(
           listOf(
-            Column("create_time", INSERT),
+            Column("created_at", INSERT),
             Column("creator_id", INSERT),
-            Column("modify_time", INSERT_UPDATE),
-            Column("modifier_id", INSERT_UPDATE)
+            Column("updated_at", INSERT_UPDATE),
+            Column("updater_id", INSERT_UPDATE)
           )
         )
         .enableSerialVersionUID()
