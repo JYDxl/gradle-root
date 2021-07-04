@@ -5,7 +5,6 @@ import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
 import static com.google.common.net.MediaType.*;
-import static javax.servlet.http.HttpServletResponse.*;
 import static org.github.spring.ops.SpringKt.*;
 
 /**
@@ -47,12 +46,4 @@ public interface JSON extends Returnable {
   static @NonNull JSON nil() {
     return () -> null;
   }
-
-  int CODE_PARAMS_ERROR = SC_BAD_REQUEST;
-
-  int CODE_404_ERROR = SC_NOT_FOUND;
-
-  int CODE_SYSTEM_ERROR = SC_INTERNAL_SERVER_ERROR;
-
-  int CODE_AUTH_ERROR = SC_UNAUTHORIZED;
 }
