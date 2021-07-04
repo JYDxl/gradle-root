@@ -1,14 +1,13 @@
 package org.github.spring.restful.json;
 
-import lombok.*;
-import org.github.exception.RemoteErrorException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import lombok.*;
+import org.github.exception.RemoteErrorException;
+import org.github.spring.restful.ops.Result;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import static org.github.spring.ops.SpringKt.*;
-import static org.springframework.http.HttpStatus.*;
+import static org.github.spring.restful.ops.Result.*;
 
 /**
  * JSON of basic.
@@ -19,17 +18,25 @@ import static org.springframework.http.HttpStatus.*;
  * @see org.github.spring.restful.Returnable
  * @see org.github.spring.restful.json.JSON
  */
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态. */
-  private          int    retCode = OK.value();
-  /** 返回的信息. */
-  private @NonNull String retMsg  = OK.getReasonPhrase();
+  private final    int    retCode;
   /** HTTP状态码. */
   @JsonIgnore
-  private          int    status  = OK.value();
+  private final    int    status;
+  /** 返回的信息. */
+  private @NonNull String retMsg;
+
+  public JSONReturn() {
+    this(SUCCESS.getCode(), SUCCESS.getMsg(), SUCCESS.getStatus().value());
+  }
+
+  private JSONReturn(int retCode, @NonNull String retMsg, int status) {
+    this.retCode = retCode;
+    this.retMsg  = retMsg;
+    this.status  = status;
+  }
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
@@ -61,13 +68,7 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return status == OK.value();
-  }
-
-  /** WITH retCode. */
-  public @NonNull JSONReturn withRetCode(int retCode) {
-    setRetCode(retCode);
-    return this;
+    return retCode == SUCCESS.getCode();
   }
 
   /** WITH retMsg. */
@@ -76,39 +77,33 @@ public class JSONReturn implements JSON {
     return this;
   }
 
-  /** WITH status. */
-  public @NonNull JSONReturn withStatus(int status) {
-    setStatus(status);
-    return this;
-  }
-
   /** Generator. */
   public static @NonNull JSONReturn error() {
-    return of(CODE_SYSTEM_ERROR, "系统错误", INTERNAL_SERVER_ERROR.value());
+    return of(SYSTEM_ERROR);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn of(int code, @NonNull String msg, int status) {
-    return new JSONReturn(code, msg, status);
+  public static @NonNull JSONReturn of(Result result) {
+    return new JSONReturn(result.getCode(), result.getMsg(), result.getStatus().value());
+  }
+
+  /** Generator. */
+  public static @NonNull JSONReturn ok() {
+    return of(SUCCESS);
   }
 
   /** Generator. */
   public static @NonNull JSONReturn param() {
-    return warn(CODE_PARAMS_ERROR, "参数错误");
-  }
-
-  /** Generator. */
-  public static @NonNull JSONReturn warn(int code, @NonNull String msg) {
-    return of(code, msg, OK.value());
+    return of(PARAMS_ERROR);
   }
 
   /** Generator. */
   public static @NonNull JSONReturn path() {
-    return warn(CODE_404_ERROR, "路径错误");
+    return of(PATH_ERROR);
   }
 
   /** Generator. */
   public static @NonNull JSONReturn auth() {
-    return warn(CODE_AUTH_ERROR, "权限错误");
+    return of(AUTH_ERROR);
   }
 }

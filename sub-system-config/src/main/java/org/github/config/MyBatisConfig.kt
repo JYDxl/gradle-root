@@ -49,15 +49,15 @@ class CustomSqlInjector: DefaultSqlInjector() {
 
 class CustomMetaObjectHandler: MetaObjectHandler {
   override fun insertFill(entity: MetaObject) {
-    strictInsertFill(entity, "createTime", {now()}, LocalDateTime::class.java)
+    strictInsertFill(entity, "createdAt", {now()}, LocalDateTime::class.java)
     strictInsertFill(entity, "creatorId", {id}, Long::class.java)
-    strictInsertFill(entity, "modifyTime", {now()}, LocalDateTime::class.java)
-    strictInsertFill(entity, "modifierId", {id}, Long::class.java)
+    strictInsertFill(entity, "updatedAt", {now()}, LocalDateTime::class.java)
+    strictInsertFill(entity, "updaterId", {id}, Long::class.java)
   }
 
   override fun updateFill(entity: MetaObject) {
-    strictUpdateFill(entity, "modifyTime", {now()}, LocalDateTime::class.java)
-    strictUpdateFill(entity, "modifierId", {id}, Long::class.java)
+    strictUpdateFill(entity, "updatedAt", {now()}, LocalDateTime::class.java)
+    strictUpdateFill(entity, "updaterId", {id}, Long::class.java)
   }
 
   private val id: Long get() = userOrNull?.id ?: DEFAULT_VALUE_ANONYMOUS_ID

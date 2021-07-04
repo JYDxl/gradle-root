@@ -106,7 +106,7 @@ public interface CustomFilterInvoker {
   }
 
   default void logoutSucceed(ServletRequest request, ServletResponse response) throws IOException {
-    resp(request, response, new JSONReturn().withRetMsg("退出成功"));
+    resp(request, response, new JSONReturn());
   }
 
   default void notLogin(ServletRequest request, ServletResponse response) throws IOException {

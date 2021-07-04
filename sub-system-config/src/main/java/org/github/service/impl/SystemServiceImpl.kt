@@ -42,6 +42,6 @@ class SystemServiceImpl: ISystemService {
 
   override fun logout(): JSONReturn {
     subject.logout()
-    return JSONReturn().withRetMsg("退出成功")
+    return JSONReturn()
   }
 }
