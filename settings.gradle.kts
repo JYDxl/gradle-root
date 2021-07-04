@@ -21,6 +21,9 @@ include("sub-single-vertx")
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
 
+include("sub-mysql-blog-entity")
+include("sub-mysql-blog-service")
+
 include("sub-mysql-leadnews-entity")
 include("sub-mysql-leadnews-service")
 
@@ -45,6 +48,11 @@ include("sub-module-hub-service")
 include("sub-module-hub-dto")
 include("sub-module-hub-api")
 include("sub-module-hub")
+
+include("sub-module-blog-service")
+include("sub-module-blog-dto")
+include("sub-module-blog-api")
+include("sub-module-blog")
 
 include("sub-module-shop-service")
 include("sub-module-shop-dto")
