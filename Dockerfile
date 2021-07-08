@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:11.0.11-11.48.21-jre-headless as jre-alpine
+FROM azul/zulu-openjdk-alpine:11.0.11-11.48.21-jre as jre-alpine
 
 RUN \
 #设置镜像地址
@@ -8,11 +8,13 @@ RUN \
 #安装常用工具包
 #    && apk add curl tree bash iproute2 \
 #设置时区
-    && apk add -U tzdata \
+    && apk add --no-cache tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && echo 'Asia/Shanghai' > /etc/timezone \
-    && apk del tzdata \
-    && rm -rf /var/cache/apk/*
+    && echo "Asia/Shanghai" > /etc/timezone \
+    && rm -rf /var/cache/apk/* \
+    && rm -rf /root/.cache \
+    && rm -rf /tmp/*
+
 #配置环境
 ENV LANG zh_CN.UTF-8
 ENV TZ Asia/Shanghai
