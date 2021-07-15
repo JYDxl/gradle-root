@@ -135,9 +135,9 @@ subprojects {
     implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
     implementation("com.google.protobuf:protobuf-java:$protobuf")
 
-    implementation("commons-io:commons-io:2.10.0")
+    implementation("commons-io:commons-io:2.11.0")
     implementation("org.ow2.asm:asm:9.2")
-    implementation("org.checkerframework:checker-qual:3.15.0")
+    implementation("org.checkerframework:checker-qual:3.16.0")
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.28.0-GA")
 //    implementation("com.github.ifeilong:feilong:3.0.10")

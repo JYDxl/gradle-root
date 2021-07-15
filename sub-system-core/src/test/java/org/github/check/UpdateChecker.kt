@@ -2,8 +2,7 @@ package org.github.check
 
 import com.google.common.collect.ImmutableSortedSet.toImmutableSortedSet
 import org.github.ops.info
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory.getLogger
+import org.github.ops.log
 import java.util.Comparator.naturalOrder
 
 fun main() {
@@ -14,4 +13,4 @@ fun main() {
   set.forEach {log.info {it}}
 }
 
-private val log: Logger = getLogger("main")
+private val log = "main".log

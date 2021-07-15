@@ -30,9 +30,25 @@ publishing {
 tasks.withType<Test> {
   jvmArgs = listOf(
     "-ea",
+
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=paranoid",
-    "-Djava.net.preferIPv4Stack=true"
+    "-Djava.net.preferIPv4Stack=true",
+
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
+    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
+    "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
+    "--add-opens=java.base/java.util=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
+    "--add-opens=java.base/java.lang=ALL-UNNAMED",
+    "--add-opens=java.base/java.math=ALL-UNNAMED",
+    "--add-opens=java.base/java.text=ALL-UNNAMED",
+    "--add-opens=java.base/java.time=ALL-UNNAMED",
+    "--add-opens=java.base/java.nio=ALL-UNNAMED",
+    "--add-opens=java.base/java.net=ALL-UNNAMED",
+
+    "--illegal-access=deny"
   )
 }
 
