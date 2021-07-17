@@ -1,13 +1,21 @@
 package org.github.shiro;
 
-import lombok.Data;
-
+import java.util.Set;
 import javax.annotation.Nullable;
-import java.util.List;
+import lombok.*;
+import org.apache.commons.lang3.StringUtils;
+import static com.google.common.base.Splitter.*;
+import static com.google.common.collect.ImmutableSet.*;
+import static org.apache.commons.lang3.StringUtils.*;
 
 @Data
 public class AuthorInfo {
-  private @Nullable String role;
+  private @Nullable String roleCode;
 
-  private @Nullable List<String> perms;
+  private @Nullable String permCodes;
+
+  public @NonNull Set<String> getPermCodeSet() {
+    if (isBlank(permCodes)) return of();
+    return on(',').splitToStream(permCodes).filter(StringUtils::isNotBlank).collect(toImmutableSet());
+  }
 }
