@@ -102,6 +102,8 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
+  implementation("org.springframework.kafka:spring-kafka") {exclude(group = "io.netty")}
+
   implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
   implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
@@ -118,6 +120,7 @@ dependencies {
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+  testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty")}
 //  testImplementation("org.springframework.security:spring-security-test")
 //  implementation("org.redisson:redisson:$redisson") {exclude(group = "io.netty")}
 }
