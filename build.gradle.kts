@@ -142,7 +142,7 @@ subprojects {
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.28.0-GA")
 //    implementation("com.github.ifeilong:feilong:3.0.10")
-    implementation("org.t-io:tio-core:3.7.3.v20210706-RELEASE")
+    implementation("org.t-io:tio-core:3.7.4.v20210808-RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
