@@ -32,8 +32,8 @@ plugins {
   id("com.github.johnrengelman.shadow") version shadow apply false
   id("org.springframework.boot") version springBoot apply false
   id("io.spring.dependency-management") version dependencyManagement apply false
-  id("org.jetbrains.kotlin.jvm") version kotlin apply false
-  id("org.jetbrains.kotlin.plugin.spring") version kotlin apply false
+  kotlin("jvm") version kotlin apply false
+  kotlin("plugin.spring") version kotlin apply false
   id("com.github.ben-manes.versions") version benmanes apply false
 }
 
@@ -73,8 +73,8 @@ subprojects {
     maven {url = uri("https://maven.aliyun.com/repository/public")}
     maven {url = uri("https://maven.aliyun.com/repository/google")}
     maven {url = uri("https://maven.aliyun.com/repository/spring")}
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
   }
 
   tasks.withType<KotlinCompile> {
@@ -141,6 +141,7 @@ subprojects {
     implementation("org.checkerframework:checker-qual:3.17.0")
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.28.0-GA")
+    implementation("net.sf.jopt-simple:jopt-simple:5.0.4")
 //    implementation("com.github.ifeilong:feilong:3.0.10")
     implementation("org.t-io:tio-core:3.7.4.v20210808-RELEASE")
 

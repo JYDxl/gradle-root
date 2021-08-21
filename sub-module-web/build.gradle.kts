@@ -101,6 +101,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+  implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty")}
 
   implementation("org.springframework.kafka:spring-kafka") {exclude(group = "io.netty")}
 

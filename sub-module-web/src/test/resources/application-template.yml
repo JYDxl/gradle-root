@@ -58,7 +58,7 @@ spring:
   zipkin:
     sender:
       type: rabbit
-  #    base-url: http://ubuntu:9411/
+  #    base-url: http://jydxl.link:9411/
   sleuth:
     sampler:
       probability: 1.0
@@ -68,7 +68,7 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: ubuntu:8858
+        dashboard: jydxl.link:8858
       eager: true
     alibaba:
       seata:
@@ -78,7 +78,10 @@ spring:
       max-file-size: 100MB
       max-request-size: 500MB
   kafka:
-    bootstrap-servers: ubuntu:9092
+    bootstrap-servers: jydxl.link:9092
+  elasticsearch:
+    rest:
+      uris: http://jydxl.link:9200
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/**/*.xml
@@ -114,7 +117,7 @@ shiro-redis:
 #    name: dubbo
 #    port: -1
 #  registry:
-#    address: spring-cloud://ubuntu
+#    address: spring-cloud://jydxl.link
 #  cloud:
 #    subscribed-services:
 

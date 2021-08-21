@@ -68,7 +68,7 @@ spring:
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
     sentinel:
       transport:
-        dashboard: ubuntu:8858
+        dashboard: jydxl.link:8858
       eager: true
       datasource:
         gw-flow:
