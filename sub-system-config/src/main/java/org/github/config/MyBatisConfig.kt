@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator
 import com.baomidou.mybatisplus.core.injector.AbstractMethod
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector
+import com.baomidou.mybatisplus.core.metadata.TableInfo
 import com.baomidou.mybatisplus.extension.injector.methods.InsertBatchSomeColumn
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor
 import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor
@@ -44,7 +45,7 @@ class MyBatisConfig {
 }
 
 class CustomSqlInjector: DefaultSqlInjector() {
-  override fun getMethodList(mapperClass: Class<*>): MutableList<AbstractMethod> = super.getMethodList(mapperClass).apply {add(InsertBatchSomeColumn())}
+  override fun getMethodList(mapperClass: Class<*>, tableInfo: TableInfo): MutableList<AbstractMethod> = super.getMethodList(mapperClass, tableInfo).apply {add(InsertBatchSomeColumn())}
 }
 
 class CustomMetaObjectHandler: MetaObjectHandler {
