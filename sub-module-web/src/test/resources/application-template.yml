@@ -78,7 +78,7 @@ spring:
       max-file-size: 100MB
       max-request-size: 500MB
   kafka:
-    bootstrap-servers: jydxl.link:9092
+    bootstrap-servers: jydxl.link:9093,jydxl.link:9094,jydxl.link:9095
   elasticsearch:
     rest:
       uris: http://jydxl.link:9200
