@@ -5,3 +5,5 @@ services:
     container_name: web
     build: .
     network_mode: host
+    volumes:
+      - /opt/volumes/web/logs:/logs

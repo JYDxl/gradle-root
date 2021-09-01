@@ -6,7 +6,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: jydxl.link:8848
+        server-addr: jydxl.link:8849,jydxl.link:8850,jydxl.link:8851
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
