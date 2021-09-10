@@ -110,10 +110,11 @@ subprojects {
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutines")
 
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jackson")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jackson")
