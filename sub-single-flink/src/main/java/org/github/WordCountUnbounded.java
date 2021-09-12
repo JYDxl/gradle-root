@@ -17,7 +17,7 @@ public class WordCountUnbounded {
     ds
       .flatMap(new FlatMapFunction<String,Tuple2<String,Integer>>() {
         @Override public void flatMap(String value, Collector<Tuple2<String,Integer>> out) {
-          stream(value.split(" ")).map(v -> Tuple2.of(v, 1)).forEach(out::collect);
+          stream(value.split("\\s*")).map(v -> Tuple2.of(v, 1)).forEach(out::collect);
         }
       })
       .keyBy(new KeySelector<Tuple2<String,Integer>,String>() {

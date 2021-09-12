@@ -78,10 +78,10 @@ spring:
       max-file-size: 100MB
       max-request-size: 500MB
   kafka:
-    bootstrap-servers: jydxl.link:9093,jydxl.link:9094,jydxl.link:9095
+    bootstrap-servers: jydxl.link:9092,jydxl.link:9093,jydxl.link:9094
   elasticsearch:
     rest:
-      uris: http://jydxl.link:9200
+      uris: http://jydxl.link:9200,http://jydxl.link:9201,http://jydxl.link:9202
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/**/*.xml
