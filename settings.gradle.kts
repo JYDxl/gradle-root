@@ -20,8 +20,6 @@ include("sub-single-netty")
 
 include("sub-single-vertx")
 
-include("sub-single-flink")
-
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
 
