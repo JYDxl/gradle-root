@@ -46,9 +46,7 @@ tasks.withType<Test> {
     "--add-opens=java.base/java.text=ALL-UNNAMED",
     "--add-opens=java.base/java.time=ALL-UNNAMED",
     "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    "--add-opens=java.base/java.net=ALL-UNNAMED",
-
-    "--illegal-access=deny"
+    "--add-opens=java.base/java.net=ALL-UNNAMED"
   )
 }
 
