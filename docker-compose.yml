@@ -7,8 +7,6 @@ services:
     network_mode: host
     volumes:
       - /opt/volumes/hub/logs:/logs
-    environment:
-      - TZ=Asia/Shanghai
 
   web:
     container_name: web
@@ -16,5 +14,3 @@ services:
     network_mode: host
     volumes:
       - /opt/volumes/web/logs:/logs
-    environment:
-      - TZ=Asia/Shanghai
