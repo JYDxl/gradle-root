@@ -11,7 +11,7 @@ val serverAddr: String by System.getProperties()
 application {
   mainClass.set("org.github.BlogKt")
   applicationDefaultJvmArgs = listOf(
-    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5002",
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5000",
 
     "-ea",
 
