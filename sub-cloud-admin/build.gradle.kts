@@ -49,5 +49,6 @@ val netty: String by System.getProperties()
 dependencies {
   implementation("de.codecentric:spring-boot-admin-starter-server") {exclude(group = "io.netty")}
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+  implementation("com.alibaba.nacos:nacos-client:2.0.3")
   implementation("io.netty:netty-all:$netty")
 }

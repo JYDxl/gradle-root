@@ -112,9 +112,11 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+  implementation("com.alibaba.nacos:nacos-client:2.0.3")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
   implementation("com.alibaba.csp:sentinel-datasource-nacos")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {exclude(group = "com.alibaba", module = "druid")}
+  implementation("io.seata:seata-spring-boot-starter:1.4.2")
 //  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")

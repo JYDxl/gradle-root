@@ -22,6 +22,7 @@ dependencies {
   }
 
   compileOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+  compileOnly("com.alibaba.nacos:nacos-client:2.0.3")
 
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 

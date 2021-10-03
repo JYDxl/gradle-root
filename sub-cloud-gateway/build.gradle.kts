@@ -57,6 +57,7 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+  implementation("com.alibaba.nacos:nacos-client:2.0.3")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
   implementation("org.springframework.cloud:spring-cloud-starter-gateway") {exclude(group = "io.netty")}
