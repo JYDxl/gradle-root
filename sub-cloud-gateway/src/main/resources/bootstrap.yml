@@ -6,11 +6,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: jydxl.link:8848,jydxl.link:8849,jydxl.link:8850
+        server-addr: nacos-cluster0:8848,nacos-cluster1:8848,nacos-cluster2:8848,nacos-cluster3:8848
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
 #        group: server
-
-server:
-  port: 8080

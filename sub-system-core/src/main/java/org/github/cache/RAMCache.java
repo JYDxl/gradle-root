@@ -21,7 +21,7 @@ public class RAMCache implements InitializingBean, ApplicationListener<CacheEven
   private Map<CacheNameSupplier,CacheSupplier<?,?>> map;
 
   @Override
-  public void afterPropertiesSet() throws Exception {
+  public void afterPropertiesSet() {
     map = uniqueIndex(firstNonNull(caches, emptyList()), CacheSupplier::getName);
   }
 

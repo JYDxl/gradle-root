@@ -12,7 +12,7 @@ plugins {
 application {
   mainClass.set("org.github.ChatServerKt")
   applicationDefaultJvmArgs = listOf(
-    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5000",
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
 
     "-ea",
 

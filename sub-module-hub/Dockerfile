@@ -8,3 +8,5 @@ RUN apk add tzdata \
 COPY build/libs/hub-boot.jar /lib/hub-boot.jar
 COPY build/bootScripts/sub-module-hub /script/runner
 CMD ./script/runner
+
+EXPOSE 8080 5005

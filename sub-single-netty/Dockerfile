@@ -8,3 +8,5 @@ RUN apk add tzdata \
 COPY build/libs/netty-boot.jar /lib/netty-boot.jar
 COPY build/scriptsShadow/sub-netty /script/runner
 CMD ./script/runner
+
+EXPOSE 8080 5005
