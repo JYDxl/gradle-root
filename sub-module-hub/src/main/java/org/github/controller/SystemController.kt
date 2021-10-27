@@ -1,6 +1,6 @@
 package org.github.controller
 
-import org.github.ops.trim
+import cn.hutool.core.bean.BeanUtil.trimStrFields
 import org.github.service.IShiroService
 import org.github.service.ISystemService
 import org.github.shiro.WEBLogin
@@ -39,5 +39,5 @@ class SystemController {
   fun jwt() = systemService.jwt()
 
   @PostMapping("/public/jwt")
-  fun jwt(@RequestBody @Valid bo: WEBLogin) = systemService.jwt(bo.trim())
+  fun jwt(@RequestBody @Valid bo: WEBLogin) = systemService.jwt(trimStrFields(bo))
 }

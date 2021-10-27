@@ -1,11 +1,11 @@
 package org.github.controller
 
+import cn.hutool.core.lang.Validator.hasChinese
 import feign.FeignException
 import org.apache.shiro.ShiroException
 import org.github.exception.ParamsErrorException
 import org.github.exception.RemoteErrorException
 import org.github.ops.error
-import org.github.ops.hasChinese
 import org.github.ops.log
 import org.github.spring.ops.objectMapper
 import org.github.spring.restful.json.JSONReturn
@@ -24,10 +24,10 @@ class ExceptionController {
   private val log = ExceptionController::class.log
 
   @ExceptionHandler(Throwable::class)
-  fun handleThrowable(e: Throwable) = error().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+  fun handleThrowable(e: Throwable) = error().apply {if (hasChinese(e.localizedMessage)) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(ParamsErrorException::class)
-  fun handleParamsErrorException(e: ParamsErrorException) = param().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+  fun handleParamsErrorException(e: ParamsErrorException) = param().apply {if (hasChinese(e.localizedMessage)) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(HttpMessageNotReadableException::class)
   fun handleHttpMessageNotReadableException(e: HttpMessageNotReadableException) = param().apply {withRetMsg("请求体缺失")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
@@ -36,7 +36,7 @@ class ExceptionController {
   fun handleRemoteErrorException(e: RemoteErrorException) = e.data.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(ShiroException::class)
-  fun handleShiroException(e: ShiroException) = auth().apply {withRetMsg(if (e.localizedMessage.hasChinese()) e.localizedMessage else "权限不足")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+  fun handleShiroException(e: ShiroException) = auth().apply {withRetMsg(if (hasChinese(e.localizedMessage)) e.localizedMessage else "权限不足")}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
 
   @ExceptionHandler(MethodArgumentNotValidException::class)
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<JSONReturn> {
@@ -46,7 +46,7 @@ class ExceptionController {
 
   @ExceptionHandler(ConstraintViolationException::class)
   fun handleConstraintViolationException(e: ConstraintViolationException): ResponseEntity<JSONReturn> {
-    return param().apply {if (e.localizedMessage.hasChinese()) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
+    return param().apply {if (hasChinese(e.localizedMessage)) withRetMsg(e.localizedMessage)}.let {ResponseEntity(it, resolve(it.status)!!)}.also {log.error(e) {}}
   }
 
   @ExceptionHandler(MethodArgumentTypeMismatchException::class)

@@ -1,8 +1,8 @@
 package org.github.controller
 
+import cn.hutool.core.bean.BeanUtil.trimStrFields
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
-import org.github.ops.trim
 import org.github.web.module.sys.menu.dto.QueryMenuListBO
 import org.github.web.module.sys.menu.dto.SaveOrUpdateMenuBO
 import org.github.web.module.sys.menu.service.IMenuService
@@ -25,12 +25,12 @@ class MenuController {
 
   @ApiOperation("分页查询")
   @PostMapping("page")
-  fun queryMenuPage(@RequestBody bo: QueryMenuListBO) = menuService.queryMenuPage(bo.trim())
+  fun queryMenuPage(@RequestBody bo: QueryMenuListBO) = menuService.queryMenuPage(trimStrFields(bo))
 
   @PostMapping("select")
   fun queryMenuTree() = menuService.queryMenuTree()
 
   @ApiOperation("新增/修改")
   @PostMapping("save", "update")
-  fun saveOrUpdate(@RequestBody bo: SaveOrUpdateMenuBO) = menuService.saveOrUpdate(bo.trim())
+  fun saveOrUpdate(@RequestBody bo: SaveOrUpdateMenuBO) = menuService.saveOrUpdate(trimStrFields(bo))
 }

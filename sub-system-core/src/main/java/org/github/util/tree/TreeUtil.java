@@ -28,11 +28,11 @@ public abstract class TreeUtil {
 
   private static <T extends TreeNode<I,E>, I, E> void recursion(Collection<T> list, Multimap<I,T> index) {
     for (T item : list) {
-      val id      = item.getId();
-      val subList = index.get(id);
-      if (subList.isEmpty()) continue;
-      item.setChild(subList);
-      recursion(subList, index);
+      val id  = item.getId();
+      val sub = index.get(id);
+      if (sub.isEmpty()) continue;
+      item.setChild(sub);
+      recursion(sub, index);
     }
   }
 }
