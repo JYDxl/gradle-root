@@ -17,20 +17,20 @@ public class MethodInvokeLogger {
   @AfterReturning(value = "pointcut()", returning = "value")
   public void afterReturning(JoinPoint point, @Nullable Object value) {
     val name = point.getSignature().toShortString();
-    log.info("返回结果: {} ====> {}", name, value);
+    log.debug("返回结果: {} ====> {}", name, value);
   }
 
   @AfterThrowing(value = "pointcut()", throwing = "e")
   public void afterThrowing(JoinPoint point, Exception e) {
     val name = point.getSignature().toShortString();
-    log.error("抛出异常: {} ====> {}", name, e.getMessage());
+    log.debug("抛出异常: {} ====> {}", name, e.getMessage());
   }
 
   @Before("pointcut()")
   public void before(JoinPoint point) {
     val name = point.getSignature().toShortString();
     val args = point.getArgs();
-    log.info("执行方法: {} ====> {}", name, Arrays.toString(args));
+    log.debug("执行方法: {} ====> {}", name, Arrays.toString(args));
   }
 
   @Pointcut("execution(* org.github..*Controller.*(..)) || execution(* org.github..*Service.*(..)) || execution(* org.github..*Mapper.*(..))")

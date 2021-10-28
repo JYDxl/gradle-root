@@ -144,7 +144,7 @@ subprojects {
     implementation("org.javassist:javassist:3.28.0-GA")
     implementation("net.sf.jopt-simple:jopt-simple:5.0.4")
     // implementation("com.github.ifeilong:feilong:3.0.10")
-    implementation("org.t-io:tio-core:3.7.4.v20210808-RELEASE")
+    implementation("org.t-io:tio-core:3.7.5.v20211028-RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
