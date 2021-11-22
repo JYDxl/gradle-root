@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import java.io.Serializable
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -29,22 +30,27 @@ open class SysMenuEntity : Entity() {
 
     /** 菜单名称 */
     @ApiModelProperty(value = "菜单名称")
+    @TableField("name")
     open var name: String? = null
 
     /** 菜单URL */
     @ApiModelProperty(value = "菜单URL")
+    @TableField("url")
     open var url: String? = null
 
     /** 授权(多个用逗号分隔，如：user:list,user:create) */
     @ApiModelProperty(value = "授权(多个用逗号分隔，如：user:list,user:create)")
+    @TableField("perms")
     open var perms: String? = null
 
     /** 类型   0：目录   1：菜单   2：按钮 */
     @ApiModelProperty(value = "类型   0：目录   1：菜单   2：按钮")
-    open var type: Int? = null
+    @TableField("type")
+    open var type: String? = null
 
     /** 菜单图标 */
     @ApiModelProperty(value = "菜单图标")
+    @TableField("icon")
     open var icon: String? = null
 
     /** 排序 */
@@ -54,7 +60,8 @@ open class SysMenuEntity : Entity() {
 
     /** 是否启用（0：启用 1：禁用） */
     @ApiModelProperty(value = "是否启用（0：启用 1：禁用）")
-    open var enabled: Int? = null
+    @TableField("enabled")
+    open var enabled: String? = null
 
     companion object {
 
@@ -80,7 +87,7 @@ open class SysMenuEntity : Entity() {
 
     }
 
-    override fun pkVal(): java.io.Serializable? {
+    override fun pkVal(): Serializable? {
         return menuId
     }
 

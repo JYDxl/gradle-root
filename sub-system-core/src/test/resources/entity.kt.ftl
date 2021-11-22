@@ -86,7 +86,7 @@ open class ${entity} : Serializable {
 
     }
 
-    override fun pkVal(): java.io.Serializable? {
+    override fun pkVal(): Serializable? {
 <#if keyPropertyName??>
         return ${keyPropertyName}
 <#else>

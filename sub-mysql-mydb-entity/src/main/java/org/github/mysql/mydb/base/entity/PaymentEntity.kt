@@ -1,8 +1,10 @@
 package org.github.mysql.mydb.base.entity
 
 import com.baomidou.mybatisplus.annotation.IdType
+import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import java.io.Serializable
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -23,6 +25,7 @@ open class PaymentEntity : Entity() {
 
     /** 序列号 */
     @ApiModelProperty(value = "序列号")
+    @TableField("serial")
     open var serial: String? = null
 
     companion object {
@@ -35,7 +38,7 @@ open class PaymentEntity : Entity() {
 
     }
 
-    override fun pkVal(): java.io.Serializable? {
+    override fun pkVal(): Serializable? {
         return id
     }
 

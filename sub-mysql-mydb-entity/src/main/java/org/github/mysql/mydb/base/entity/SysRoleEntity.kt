@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel
@@ -35,6 +36,7 @@ open class SysRoleEntity : Entity() {
 
     /** 备注 */
     @ApiModelProperty(value = "备注")
+    @TableField("remark")
     open var remark: String? = null
 
     /** 创建者ID */
@@ -65,7 +67,7 @@ open class SysRoleEntity : Entity() {
 
     }
 
-    override fun pkVal(): java.io.Serializable? {
+    override fun pkVal(): Serializable? {
         return roleId
     }
 

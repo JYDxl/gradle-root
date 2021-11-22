@@ -1,10 +1,12 @@
 package org.github.mysql.mydb.base.dict
 
-import org.github.base.IEnum
+import org.github.base.BaseEnum
 
-enum class MenuType(override val code: Int, override val value: String): IEnum<Int, String> {
-  //类型   1：目录   2：菜单   3：按钮
-  DIRECTORY(1, "目录"),
-  MENU(2, "菜单"),
-  BUTTON(3, "按钮");
+enum class MenuType(override val code: String, override val value: String): BaseEnum {
+    /** 目录 */
+  DIRECTORY("directory","目录"),
+    /** 菜单 */
+  MENU("menu","菜单"),
+    /** 按钮 */
+  BUTTON("button","按钮"),
 }

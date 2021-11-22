@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel
@@ -26,30 +27,37 @@ open class SysUserEntity : Entity() {
 
     /** 用户名 */
     @ApiModelProperty(value = "用户名")
+    @TableField("username")
     open var username: String? = null
 
     /** 密码 */
     @ApiModelProperty(value = "密码")
+    @TableField("password")
     open var password: String? = null
 
     /** 盐 */
     @ApiModelProperty(value = "盐")
+    @TableField("salt")
     open var salt: String? = null
 
     /** 启用状态 0：禁用 1：启用 */
     @ApiModelProperty(value = "启用状态 0：禁用 1：启用")
-    open var enabled: Int? = null
+    @TableField("enabled")
+    open var enabled: String? = null
 
     /** 昵称 */
     @ApiModelProperty(value = "昵称")
+    @TableField("nickname")
     open var nickname: String? = null
 
     /** 邮箱 */
     @ApiModelProperty(value = "邮箱")
+    @TableField("email")
     open var email: String? = null
 
     /** 手机号 */
     @ApiModelProperty(value = "手机号")
+    @TableField("mobile")
     open var mobile: String? = null
 
     /** 创建人id */
@@ -74,7 +82,8 @@ open class SysUserEntity : Entity() {
 
     /** 删除状态 0：未删除 1：已删除 */
     @ApiModelProperty(value = "删除状态 0：未删除 1：已删除")
-    open var deleted: Int? = null
+    @TableField("deleted")
+    open var deleted: String? = null
 
     companion object {
 
@@ -108,7 +117,7 @@ open class SysUserEntity : Entity() {
 
     }
 
-    override fun pkVal(): java.io.Serializable? {
+    override fun pkVal(): Serializable? {
         return userId
     }
 

@@ -1,5 +1,14 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package org.github.mbp
 
+import cn.hutool.core.io.FileUtil.*
+import cn.hutool.core.util.StrUtil.toCamelCase
+import cn.hutool.db.Db.use
+import cn.hutool.db.Entity.create
+import cn.hutool.db.ds.simple.SimpleDataSource
+import cn.hutool.extra.template.TemplateEngine
+import cn.hutool.extra.template.TemplateUtil
 import com.baomidou.mybatisplus.annotation.FieldFill.INSERT
 import com.baomidou.mybatisplus.annotation.FieldFill.INSERT_UPDATE
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
@@ -22,9 +31,10 @@ fun main() {
 }
 
 fun mysqlMydb() {
-  val url = "jdbc:mysql://jydxl.link:3306/mydb"
+  val url = "jdbc:mysql://mac:3306/mydb"
   val username = "root"
   val password = "XLrootJYD713"
+  val enableKotlin = true
   val dataSourceBuilder = DataSourceConfig.Builder(url, username, password)
 
   val generator: FastAutoGenerator = FastAutoGenerator.create(dataSourceBuilder)
@@ -33,19 +43,21 @@ fun mysqlMydb() {
     it.author("JYD_XL")
       .fileOverride()
       .enableSwagger()
-      .enableKotlin()
       .disableOpenDir()
+    if (enableKotlin) it.enableKotlin()
   }
 
-  generator.packageConfig {it: PackageConfig.Builder ->
-    val parent = "org.github.mysql.mydb"
-    val moduleName = "base"
-    val subName = "sub-mysql-mydb"
-    val subEntityName = "$subName-entity"
-    val subMapperName = "$subName-service"
-    val packageName = parent.replace('.', '/')
-    val path = "${getProperty("user.dir")}/"
+  val parent = "org.github.mysql.mydb"
+  val moduleName = "base"
+  val subName = "sub-mysql-mydb"
+  val subEntityName = "$subName-entity"
+  val subMapperName = "$subName-service"
+  val packageName = parent.replace('.', '/')
+  val path = "${getProperty("user.dir")}/"
 
+  del("$path/$subEntityName/src/main/java/$packageName/$moduleName")
+  del("$path/$subMapperName/src/main/resources/mapper")
+  generator.packageConfig {it: PackageConfig.Builder ->
     it.parent(parent)
       .moduleName(moduleName)
       .pathInfo(
@@ -104,6 +116,33 @@ fun mysqlMydb() {
   }
 
   generator.templateEngine(FreemarkerTemplateEngine())
-
   generator.execute()
+
+  //重新生成枚举
+  del("$path/$subEntityName/src/main/java/$packageName/$moduleName/dict")
+  val ds = SimpleDataSource(url, username, password)
+
+  val list: MutableList<Item> = use(ds).findAll(create("sys_dict_item"), Item::class.java)
+  val engine: TemplateEngine = TemplateUtil.createEngine()
+  val map: Map<String, List<Item>> = list.groupBy(Item::dictName)
+  map.forEach {(dictName, list) ->
+    val name = toCamelCase(dictName).replaceFirstChar {it.uppercase()}
+    val params = mapOf(
+      "name" to name,
+      "list" to list,
+      "pack" to "$packageName/$moduleName/dict".replace('/', '.')
+    )
+    val fileName = if (enableKotlin) "$name.kt" else "$name.java"
+    val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
+    val content: String = engine.getTemplate(readUtf8String(template)).render(params)
+    writeUtf8String(content, "$path/$subEntityName/src/main/java/$packageName/$moduleName/dict/$fileName")
+  }
+}
+
+@Suppress("unused")
+class Item {
+  lateinit var dictName: String
+  lateinit var name: String
+  lateinit var label: String
+  lateinit var intro: String
 }

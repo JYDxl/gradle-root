@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel
@@ -60,6 +61,7 @@ open class TabSafeQuestionDataEntity : Entity() {
 
     /** 创建人 */
     @ApiModelProperty(value = "创建人")
+    @TableField("creater")
     open var creater: String? = null
 
     /** 创建时间 */
@@ -93,7 +95,7 @@ open class TabSafeQuestionDataEntity : Entity() {
 
     }
 
-    override fun pkVal(): java.io.Serializable? {
+    override fun pkVal(): Serializable? {
         return id
     }
 
