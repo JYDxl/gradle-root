@@ -19,6 +19,7 @@ val hutool: String by System.getProperties()
 val guava: String by System.getProperties()
 val guice: String by System.getProperties()
 val vertx: String by System.getProperties()
+val netty: String by System.getProperties()
 
 plugins {
   val dependencyManagement: String by System.getProperties()
@@ -66,6 +67,7 @@ subprojects {
       mavenBom("de.codecentric:spring-boot-admin-dependencies:$springAdmin")
       mavenBom("com.fasterxml.jackson:jackson-bom:$jackson")
       mavenBom("io.vertx:vertx-dependencies:$vertx")
+      mavenBom("io.netty:netty-bom:$netty")
     }
   }
 
