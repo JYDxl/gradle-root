@@ -23,7 +23,7 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as ByteBuf
     msg.beforeRelease {
-      log.debug { "Client received: ${toString(UTF_8)}" }
+      log.debug {"Client received: ${toString(UTF_8)}"}
     }
   }
 

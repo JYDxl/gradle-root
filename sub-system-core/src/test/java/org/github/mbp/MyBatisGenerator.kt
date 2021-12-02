@@ -31,7 +31,7 @@ fun main() {
 }
 
 fun mysqlMydb() {
-  val url = "jdbc:mysql://mac:3306/mydb"
+  val url = "jdbc:mysql://frp:3306/mydb"
   val username = "root"
   val password = "XLrootJYD713"
   val enableKotlin = true
@@ -56,6 +56,7 @@ fun mysqlMydb() {
   val path = "${getProperty("user.dir")}/"
 
   del("$path/$subEntityName/src/main/java/$packageName/$moduleName")
+  del("$path/$subMapperName/src/main/java/$packageName/$moduleName")
   del("$path/$subMapperName/src/main/resources/mapper")
   generator.packageConfig {it: PackageConfig.Builder ->
     it.parent(parent)
@@ -81,6 +82,7 @@ fun mysqlMydb() {
       .enableLombok()
       .enableTableFieldAnnotation()
       .enableChainModel()
+      .versionColumnName("version")
       .addTableFills(
         listOf(
           Column("created_at", INSERT),
@@ -145,4 +147,5 @@ class Item {
   lateinit var name: String
   lateinit var label: String
   lateinit var intro: String
+  var code: Int = 0
 }

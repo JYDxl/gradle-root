@@ -10,15 +10,15 @@ public enum ${name} implements BaseEnum {
   <#else>
     /** ${item.label} */
   </#if>
-  ${item.name?upper_case}("${item.name}","${item.label}"),
+  ${item.name?upper_case}(${item.code},"${item.label}"),
 </#list>
   ;
 
-  private final String code;
+  private final int code;
 
   private final String value;
 
-  ${name}(String code, String value) {
+  ${name}(int code, String value) {
     this.code  = code;
     this.value = value;
   }

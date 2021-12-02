@@ -23,49 +23,49 @@ spring:
           predicates:
             - Path=/login,/logout,/jsessionid,/jwt,/public/jwt
           filters:
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: auth
           uri: lb://hub-server
           predicates:
             - Path=/*/login,/*/logout,/*/jsessionid,/*/jwt,/*/public/jwt
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: web
           uri: lb://web-server
           predicates:
             - Path=/web/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: shop
           uri: lb://shop-server
           predicates:
             - Path=/shop/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: account
           uri: lb://account-server
           predicates:
             - Path=/account/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: order
           uri: lb://order-server
           predicates:
             - Path=/order/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: storage
           uri: lb://storage-server
           predicates:
             - Path=/storage/**
           filters:
             - StripPrefix=1
-            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary, RETAIN_UNIQUE
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
     sentinel:
       transport:
         dashboard: jydxl.link:8858

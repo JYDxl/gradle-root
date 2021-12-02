@@ -2,11 +2,11 @@ package org.github.mysql.mydb.base.dict
 
 import org.github.base.BaseEnum
 
-enum class MenuType(override val code: String, override val value: String): BaseEnum {
+enum class MenuType(override val code: Int, override val value: String): BaseEnum {
     /** 目录 */
-  DIRECTORY("directory","目录"),
+  DIRECTORY(0,"目录"),
     /** 菜单 */
-  MENU("menu","菜单"),
+  MENU(1,"菜单"),
     /** 按钮 */
-  BUTTON("button","按钮"),
+  BUTTON(2,"按钮"),
 }

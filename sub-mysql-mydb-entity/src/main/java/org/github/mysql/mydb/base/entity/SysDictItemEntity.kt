@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
+import com.baomidou.mybatisplus.annotation.Version
 import java.io.Serializable
 import org.github.base.Entity
 import io.swagger.annotations.ApiModel
@@ -43,14 +44,15 @@ open class SysDictItemEntity : Entity() {
     @TableField("intro")
     open var intro: String? = null
 
-    /** 排序码 */
-    @ApiModelProperty(value = "排序码")
-    @TableField("sort")
-    open var sort: Int? = null
+    /** 码值【排序值】 */
+    @ApiModelProperty(value = "码值【排序值】")
+    @TableField("code")
+    open var code: Int? = null
 
     /** 当前版本 */
     @ApiModelProperty(value = "当前版本")
     @TableField("version")
+    @Version
     open var version: Int? = null
 
     companion object {
@@ -67,7 +69,7 @@ open class SysDictItemEntity : Entity() {
 
         const val INTRO : String = "intro"
 
-        const val SORT : String = "sort"
+        const val CODE : String = "code"
 
         const val VERSION : String = "version"
 
@@ -84,7 +86,7 @@ open class SysDictItemEntity : Entity() {
         ", name=" + name +
         ", label=" + label +
         ", intro=" + intro +
-        ", sort=" + sort +
+        ", code=" + code +
         ", version=" + version +
         "}"
     }

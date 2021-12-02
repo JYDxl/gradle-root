@@ -128,7 +128,7 @@ public class ${entity} implements Serializable {
 </#if>
 
     @Override
-    public java.io.Serializable pkVal() {
+    public Serializable pkVal() {
     <#if keyPropertyName??>
         return this.${keyPropertyName};
     <#else>
