@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import com.google.common.net.MediaType;
-import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
+import static org.github.util.ObjUtil.*;
 
 /**
  * Top interface of all.

@@ -5,13 +5,10 @@ import java.io.OutputStream;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.common.net.MediaType;
 import lombok.*;
-
-import static cn.hutool.core.util.URLUtil.decode;
-import static com.google.common.base.MoreObjects.firstNonNull;
-import static com.google.common.io.ByteStreams.*;
+import com.google.common.net.MediaType;
+import static cn.hutool.core.util.URLUtil.*;
+import static org.github.util.ObjUtil.*;
 
 @AllArgsConstructor
 @Data
@@ -28,8 +25,8 @@ class FILEImpl implements FILE {
 
   @Override
   public void accept(@NonNull OutputStream output) throws Exception {
-    try (val in = input) {
-      copy(in, output);
+    try (input) {
+      input.transferTo(output);
     }
   }
 

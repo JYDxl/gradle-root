@@ -41,6 +41,10 @@ public abstract class FuncUtil {
     return v -> true;
   }
 
+  public static <T> Predicate<T> noPass() {
+    return v -> false;
+  }
+
   public static <T> Predicate<T> nonNull() {
     return Objects::nonNull;
   }

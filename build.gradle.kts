@@ -141,7 +141,7 @@ subprojects {
 
     implementation("commons-io:commons-io:2.11.0")
     implementation("org.ow2.asm:asm:9.2")
-    implementation("org.checkerframework:checker-qual:3.19.0")
+    implementation("org.checkerframework:checker-qual:3.20.0")
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.28.0-GA")
     implementation("net.sf.jopt-simple:jopt-simple:5.0.4")

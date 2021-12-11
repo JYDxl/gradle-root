@@ -43,7 +43,7 @@ open class SysUserEntity : Entity() {
     /** 启用状态 0：禁用 1：启用 */
     @ApiModelProperty(value = "启用状态 0：禁用 1：启用")
     @TableField("enabled")
-    open var enabled: String? = null
+    open var enabled: Int? = null
 
     /** 昵称 */
     @ApiModelProperty(value = "昵称")
@@ -83,7 +83,7 @@ open class SysUserEntity : Entity() {
     /** 删除状态 0：未删除 1：已删除 */
     @ApiModelProperty(value = "删除状态 0：未删除 1：已删除")
     @TableField("deleted")
-    open var deleted: String? = null
+    open var deleted: Int? = null
 
     companion object {
 

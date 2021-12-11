@@ -18,7 +18,6 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.slf4j.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static cn.hutool.core.lang.Validator.*;
-import static com.google.common.base.MoreObjects.*;
 import static com.google.common.collect.ImmutableList.*;
 import static java.util.Optional.*;
 import static org.apache.commons.lang3.StringUtils.*;
@@ -30,6 +29,7 @@ import static org.github.shiro.JWTUtil.*;
 import static org.github.shiro.ops.ShiroKt.*;
 import static org.github.spring.bootstrap.AppCtxHolder.*;
 import static org.github.spring.restful.json.JSONReturn.*;
+import static org.github.util.ObjUtil.*;
 
 public interface CustomFilterInvoker {
   default boolean executeJWTLogin(ServletRequest request, ServletResponse response, Logger log) throws IOException {

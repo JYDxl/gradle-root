@@ -22,11 +22,11 @@ class SwaggerConfig {
   @Bean
   fun docket(): Docket {
     return Docket(OAS_30)
-      .select()
-      .apis(withMethodAnnotation(ApiOperation::class.java))
-      .apis(basePackage("org.github"))
-      .paths(any())
-      .build()
+      .select()!!
+      .apis(withMethodAnnotation(ApiOperation::class.java))!!
+      .apis(basePackage("org.github"))!!
+      .paths(any())!!
+      .build()!!
       .globalRequestParameters(getGlobalRequestParameters())
   }
 
