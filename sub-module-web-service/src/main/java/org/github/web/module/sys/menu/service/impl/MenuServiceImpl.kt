@@ -1,22 +1,21 @@
 package org.github.web.module.sys.menu.service.impl
 
-import org.github.base.IPage
-import org.github.web.module.sys.menu.service.IMenuService
-import org.springframework.beans.factory.annotation.Autowired
-import org.github.mysql.mydb.base.service.ISysMenuService
-import org.github.spring.restful.json.JSONDataReturn
-import org.github.mysql.mydb.base.entity.SysMenuEntity
-import org.github.web.module.sys.menu.dto.QueryMenuListBO
-import org.github.spring.restful.json.JSONPageReturn
-import org.github.web.module.sys.menu.dto.QueryMenuListVO
 import org.github.base.Page
 import org.github.mybatis.ops.ktGetById
 import org.github.mybatis.ops.ktList
 import org.github.mybatis.ops.ktQueryWrapper
-import org.github.spring.restful.json.JSONArrayReturn
 import org.github.mysql.mydb.base.dict.MenuType.BUTTON
 import org.github.mysql.mydb.base.dict.MenuType.DIRECTORY
+import org.github.mysql.mydb.base.entity.SysMenuEntity
+import org.github.mysql.mydb.base.service.ISysMenuService
+import org.github.spring.restful.json.JSONArrayReturn
+import org.github.spring.restful.json.JSONDataReturn
+import org.github.spring.restful.json.JSONPageReturn
+import org.github.web.module.sys.menu.dto.QueryMenuListBO
+import org.github.web.module.sys.menu.dto.QueryMenuListVO
 import org.github.web.module.sys.menu.mapper.IMenuMapper
+import org.github.web.module.sys.menu.service.IMenuService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
@@ -39,7 +38,7 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO> {
-    val page: IPage<QueryMenuListVO> = menuMapper.queryPage(Page(bo), bo)
+    val page = menuMapper.queryPage(Page(bo), bo)
     return JSONPageReturn.of(page)
   }
 
