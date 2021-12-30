@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "org.github.module.file.common.dto.protobuf";
+option java_outer_classname = "FileProto";
+
+message FileDownloadReqProto{
+  string path = 1;
+}
+
+message FileDownloadResProto{
+  int64 offset = 1;
+  int64 length = 2;
+  int32 pathLen = 3;
+  string pathName = 4;
+}

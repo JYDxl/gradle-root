@@ -9,6 +9,7 @@ import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.file.common.codec.FrameDecoder
 import org.github.module.file.common.codec.MsgCodec
 import org.github.module.file.common.dto.FileDownloadReq
+import org.github.module.file.common.dto.protobuf.FileProto.FileDownloadReqProto
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import org.github.ops.info
@@ -37,7 +38,7 @@ fun main() {
     .channel()!!
   val path = "/Volumes/EXTRA/电影/教父三部曲/The.Godfather.Part.II.1974.mkv"
   log.info {"文件【$path】下载开始"}
-  channel.writeAndFlush(FileDownloadReq(path), channel.voidPromise())
+  channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
   channel.closeFuture().addListener {group.shutdownGracefully()}.sync()
   log.info {"文件【$path】下载完成"}
 }

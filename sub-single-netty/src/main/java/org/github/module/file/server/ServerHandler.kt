@@ -17,7 +17,7 @@ import kotlin.text.Charsets.UTF_8
 class ServerHandler(override val log: Logger = ServerHandler::class.log): ChannelInboundHandlerAdapter(), InputHandler {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as FileDownloadReq
-    val path = msg.path
+    val path = msg.body.path
     val pathName = getName(path)
     val pathLen = pathName.toByteArray(UTF_8).size
     val maxFileLen = MAX_LENGTH - (CMD_LENGTH + LEN_LENGTH + OFFSET_LENGTH + LENGTH_LENGTH + PATH_LENGTH + pathLen)

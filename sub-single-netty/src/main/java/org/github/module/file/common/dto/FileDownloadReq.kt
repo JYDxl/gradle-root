@@ -2,30 +2,33 @@ package org.github.module.file.common.dto
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
-import io.netty.buffer.ByteBufUtil.encodeString
 import io.netty.channel.Channel
 import org.github.module.file.common.dto.CMD.FILE_DOWNLOAD_REQ
-import java.nio.CharBuffer.wrap
-import kotlin.text.Charsets.UTF_8
+import org.github.module.file.common.dto.protobuf.FileProto.FileDownloadReqProto
+import org.github.module.file.common.dto.protobuf.FileProto.FileDownloadReqProto.parseFrom
 
-class FileDownloadReq(var path: String = ""): Msg(), Input, Output {
+class FileDownloadReq: Msg(), Input, Output {
+  lateinit var body: FileDownloadReqProto
+
   init {
     cmd = FILE_DOWNLOAD_REQ
   }
 
   override fun fill(buf: ByteBuf, channel: Channel) {
     super.fill(buf, channel)
-    path = buf.readCharSequence(len.toInt(), UTF_8).toString()
+    body = parseFrom(buf.nioBuffer())
   }
 
   override fun toByteBuf(alloc: ByteBufAllocator, channel: Channel): ByteBuf {
-    val tail = encodeString(alloc, wrap(path), UTF_8)
-    len = tail.readableBytes().toLong()
+    val bytes = body.toByteArray()
+    len = bytes.size.toLong()
+    val tail = alloc.buffer(len.toInt())
+    tail.writeBytes(bytes)
     val head = super.toByteBuf(alloc, channel)
     return alloc.compositeBuffer(2).addComponents(true, head, tail)
   }
 
   override fun desc(): String {
-    return super.desc() + "path=$path, "
+    return super.desc() + "path=${body.path}, "
   }
 }
