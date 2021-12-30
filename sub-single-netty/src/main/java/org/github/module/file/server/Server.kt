@@ -7,16 +7,14 @@ import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
-import org.github.module.file.common.decoder.FrameDecoder
-import org.github.module.file.common.decoder.MsgDecoder
-import org.github.module.file.common.encoder.MsgEncoder
+import org.github.module.file.common.codec.FrameDecoder
+import org.github.module.file.common.codec.MsgCodec
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
-  val msgDecoder = MsgDecoder()
-  val msgEncoder = MsgEncoder()
+  val msgCodec = MsgCodec()
 
   val boss = eventLoopGroup(1, DefaultThreadFactory("file-server-boss"))
   val worker = eventLoopGroup(0, DefaultThreadFactory("file-server-worker"))
@@ -31,8 +29,7 @@ fun main() {
         ch.pipeline()!!.apply {
           addLast(loggingHandler)
           addLast(FrameDecoder())
-          addLast(msgDecoder)
-          addLast(msgEncoder)
+          addLast(msgCodec)
           addLast(ServerHandler())
         }
       }

@@ -1,4 +1,4 @@
-package org.github.module.file.common.decoder
+package org.github.module.file.common.codec
 
 import org.github.module.file.common.MAX_LENGTH
 import org.github.netty.decoder.LengthDecoder
