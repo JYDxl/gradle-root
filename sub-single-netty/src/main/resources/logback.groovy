@@ -45,6 +45,6 @@ appender("packets", RollingFileAppender) {
   encoder(PatternLayoutEncoder) { pattern = out }
 }
 
-logger("org.github", TRACE)
-logger("io.netty", TRACE)
+logger("org.github", INFO)
+logger("io.netty", INFO)
 root(DEBUG, ["console", "records", "problem", "packets"])

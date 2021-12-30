@@ -9,14 +9,15 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.ws.HttpServerHandler
 import org.github.module.ws.WsTextServerHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 
 fun main() {
-  val boss = eventLoopGroup(1, "ws-boss")
-  val worker = eventLoopGroup(0, "ws-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("ws-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("ws-worker"))
 
   val loggingHandler = LoggingHandler(TRACE)
   val wsTextServerHandler = WsTextServerHandler()

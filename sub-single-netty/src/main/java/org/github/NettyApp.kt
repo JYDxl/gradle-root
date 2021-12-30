@@ -12,6 +12,7 @@ import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.AttributeKey
+import io.netty.util.concurrent.DefaultThreadFactory
 import io.netty.util.concurrent.EventExecutor
 import io.netty.util.concurrent.Future
 import org.github.netty.decoder.LineDecoder
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit.*
 import kotlin.text.Charsets.UTF_8
 
 fun main() {
-  val group = eventLoopGroup(1, "tcp-client")
+  val group = eventLoopGroup(1, DefaultThreadFactory("tcp-client"))
   val bootstrap = Bootstrap()
   val address = createUnresolved("localhost", 10000)
 

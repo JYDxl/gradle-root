@@ -7,6 +7,7 @@ import io.netty.channel.group.DefaultChannelGroup
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import io.netty.util.concurrent.Future
 import io.netty.util.concurrent.ImmediateEventExecutor.*
 import org.github.module.chat.ChatEncoder
@@ -16,8 +17,8 @@ import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 
 fun main() {
-  val boss = eventLoopGroup(1, "chat-boss")
-  val worker = eventLoopGroup(0, "chat-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("chat-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("chat-worker"))
 
   val loggingHandler = LoggingHandler(TRACE)
   val stringDecoder = StringDecoder()

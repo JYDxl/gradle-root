@@ -8,12 +8,13 @@ import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.http.HttpServerHandler
 import org.github.netty.ops.eventLoopGroup
 
 fun main() {
-  val boss = eventLoopGroup(1, "http-boss")
-  val worker = eventLoopGroup(0, "http-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("http-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("http-worker"))
 
   val loggingHandler = LoggingHandler(TRACE)
   val httpServerHandler = HttpServerHandler()

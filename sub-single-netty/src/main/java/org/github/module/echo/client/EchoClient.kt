@@ -5,6 +5,7 @@ import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.echo.client.handler.EchoClientHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
@@ -12,7 +13,7 @@ import org.github.netty.ops.socketChannel
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val echoClientHandler = EchoClientHandler()
-  val group = eventLoopGroup(1, "echo-client")
+  val group = eventLoopGroup(1, DefaultThreadFactory("echo-client"))
   Bootstrap()
     .group(group)
     .channel(socketChannel)

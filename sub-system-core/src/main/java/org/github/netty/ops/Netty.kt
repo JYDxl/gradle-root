@@ -10,7 +10,7 @@ import io.netty.channel.group.ChannelMatchers.compose
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
-import io.netty.util.concurrent.DefaultThreadFactory
+import java.util.concurrent.ThreadFactory
 
 val serverSocketChannel: Class<out ServerChannel>
   get() = when {
@@ -24,11 +24,10 @@ val socketChannel: Class<out Channel>
     else          -> NioSocketChannel::class.java
   }
 
-fun eventLoopGroup(threads: Int, poolName: String): MultithreadEventLoopGroup {
-  val threadFactory = DefaultThreadFactory(poolName)
+fun eventLoopGroup(threads: Int, factory: ThreadFactory): MultithreadEventLoopGroup {
   return when {
-    isAvailable() -> EpollEventLoopGroup(threads, threadFactory)
-    else          -> NioEventLoopGroup(threads, threadFactory)
+    isAvailable() -> EpollEventLoopGroup(threads, factory)
+    else          -> NioEventLoopGroup(threads, factory)
   }
 }
 

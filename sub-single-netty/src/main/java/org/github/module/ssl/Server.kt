@@ -11,6 +11,7 @@ import io.netty.channel.group.ChannelMatcher
 import io.netty.channel.group.ChannelMatchers.*
 import io.netty.handler.logging.LogLevel.*
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import io.netty.util.concurrent.GlobalEventExecutor.*
 import org.github.module.ssl.codec.ServerDecoder
 import org.github.module.ssl.codec.ServerEncoder
@@ -34,8 +35,8 @@ fun main() {
   val encoder = ServerEncoder()
   val readWriteHexHandler = ReadWriteHexHandler()
 
-  val boss = eventLoopGroup(2, "ssl-server-boss")
-  val worker = eventLoopGroup(0, "ssl-server-worker")
+  val boss = eventLoopGroup(2, DefaultThreadFactory("ssl-server-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("ssl-server-worker"))
   val group = NativeChannelGroupImpl(INSTANCE)
   val serverHandler = ServerHandler(group)
 

@@ -5,6 +5,7 @@ import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.echo.server.handler.EchoServerHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
@@ -12,8 +13,8 @@ import org.github.ops.info
 import org.slf4j.LoggerFactory.getLogger
 
 fun main() {
-  val boss = eventLoopGroup(1, "echo-boss")
-  val worker = eventLoopGroup(0, "echo-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("echo-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("echo-worker"))
   val loggingHandler = LoggingHandler(TRACE)
   val echoServerHandler = EchoServerHandler()
   ServerBootstrap()

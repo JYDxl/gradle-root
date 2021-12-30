@@ -9,6 +9,7 @@ import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.ssl.SslContext
 import io.netty.handler.ssl.SslContextBuilder.forClient
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.netty.decoder.LineDecoder
 import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.handler.ReadWriteInfoHandler
@@ -31,7 +32,7 @@ fun main() {
   val clientHandler = ClientHandler()
   val readWriteHexHandler = ReadWriteHexHandler()
 
-  val group = eventLoopGroup(1, "ssl-client")
+  val group = eventLoopGroup(1, DefaultThreadFactory("ssl-client"))
   val listener = ChannelFutureListener {group.shutdownGracefully()}
 
   Bootstrap()
