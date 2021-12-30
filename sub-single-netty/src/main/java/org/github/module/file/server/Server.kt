@@ -6,7 +6,6 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import io.netty.handler.stream.ChunkedWriteHandler
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.file.common.decoder.FrameDecoder
 import org.github.module.file.common.decoder.MsgDecoder
@@ -34,7 +33,6 @@ fun main() {
           addLast(FrameDecoder())
           addLast(msgDecoder)
           addLast(msgEncoder)
-          addLast(ChunkedWriteHandler())
           addLast(ServerHandler())
         }
       }
