@@ -43,6 +43,6 @@ class FileDownloadRes(var offset: Long = 0, var length: Long = 0, private var pa
   }
 
   override fun desc(): String {
-    return super.desc() + "offset=$offset, length=$length, pathLen=$pathLen, pathName=$pathName"
+    return super.desc() + "offset=$offset, length=$length, pathLen=$pathLen, pathName=$pathName, "
   }
 }
