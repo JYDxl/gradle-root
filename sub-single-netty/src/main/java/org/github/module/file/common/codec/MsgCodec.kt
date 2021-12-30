@@ -26,5 +26,6 @@ class MsgCodec: MessageToMessageCodec<ByteBuf, Msg>() {
     val msg = parse(cmd).clazz.createInstance()
     msg.fill(input, ctx.channel())
     out.add(msg)
+    log.info {"从设备【${ctx.channel().info}】接收到数据: ${msg.desc()}"}
   }
 }

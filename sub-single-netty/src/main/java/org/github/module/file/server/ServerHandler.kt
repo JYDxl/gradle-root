@@ -16,7 +16,6 @@ import kotlin.text.Charsets.UTF_8
 @Sharable
 class ServerHandler(override val log: Logger = ServerHandler::class.log): ChannelInboundHandlerAdapter(), InputHandler {
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    super<InputHandler>.channelRead(ctx, msg)
     msg as FileDownloadReq
     val path = msg.path
     val pathName = getName(path)

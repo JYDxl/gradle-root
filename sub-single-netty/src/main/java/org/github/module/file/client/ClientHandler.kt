@@ -21,7 +21,6 @@ class ClientHandler(override val log: Logger = ClientHandler::class.log): Channe
   }
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    super<InputHandler>.channelRead(ctx, msg)
     msg as FileDownloadRes
     RandomAccessFile(msg.pathName, "rw").use {
       msg.buf.beforeRelease {readBytes(it.channel, msg.offset, msg.length.toInt())}
