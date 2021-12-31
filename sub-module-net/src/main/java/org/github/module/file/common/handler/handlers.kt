@@ -9,7 +9,7 @@ import org.github.netty.ops.info
 import org.github.netty.ops.mark
 import org.github.ops.error
 import org.github.ops.warn
-import org.github.spring.bootstrap.AppCtxHolder
+import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
 import org.slf4j.Logger
 import java.lang.reflect.ParameterizedType
 
@@ -36,16 +36,18 @@ interface InputHandler: ChannelInboundHandler {
   val list: List<MsgHandler>
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
+    var flag = false
     for (handler in list) {
       if (handler.supports(msg)) {
         handler.handle(ctx, msg)
-        return
+        flag = true
       }
     }
-    val channel = ctx.channel()!!
-    if (channel.hasMark) AppCtxHolder.getAppCtx()?.publishEvent(HeartBeat(channel.mark.get()))
 
-    log.warn {"消息【$msg】暂不处理"}
+    val channel = ctx.channel()!!
+    if (channel.hasMark) getAppCtx()?.publishEvent(HeartBeat(channel.mark.get()))
+
+    if (!flag) log.warn {"消息【$msg】暂不处理"}
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {

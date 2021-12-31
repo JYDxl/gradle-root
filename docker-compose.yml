@@ -4,13 +4,27 @@ services:
   hub:
     container_name: hub
     build: sub-module-hub
-    network_mode: host
+    networks:
+      - backend
     volumes:
       - /opt/volumes/hub/logs:/logs
 
   web:
     container_name: web
     build: sub-module-web
-    network_mode: host
+    networks:
+      - backend
     volumes:
       - /opt/volumes/web/logs:/logs
+
+  net:
+    container_name: net
+    build: sub-module-net
+    networks:
+      - backend
+    volumes:
+      - /opt/volumes/net/logs:/logs
+
+networks:
+  backend:
+    external: true
