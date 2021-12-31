@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "org.github.module.file.common.dto.protobuf";
+option java_outer_classname = "FileProto";
+
+message FileDownloadReqProto{
+  string path = 1;
+}
+
+message FileDownloadResProto{
+  fixed64 offset = 1;
+  fixed64 length = 2;
+  string path = 3;
+}
+
+message LoginReqProto{
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResProto{
+  bool success = 1;
+  string message = 2;
+}

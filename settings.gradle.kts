@@ -40,3 +40,5 @@ include("sub-module-blog-service")
 include("sub-module-blog-dto")
 include("sub-module-blog-api")
 include("sub-module-blog")
+
+include("sub-module-net")

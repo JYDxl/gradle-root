@@ -1,0 +1,3 @@
+*
+!build/libs/net-boot.jar
+!build/bootScripts/sub-module-net
