@@ -11,11 +11,11 @@ import org.github.ops.warn
 import org.slf4j.Logger
 import java.util.concurrent.TimeUnit.MINUTES
 
-class MsgFrameDecoder: LengthDecoder(1, 8, MAX_LENGTH.toInt(), getLength = {buf, _, _ -> buf.getLong(1)}) {
+class MsgFrameDecoder: LengthDecoder(1, 8, MAX_LENGTH.toInt()) {
   override val log: Logger get() = logger
 
   override fun channelActive(ctx: ChannelHandlerContext) {
-    val channel = ctx.channel()
+    val channel = ctx.channel()!!
     log.info {"对象【${channel.info}】上线"}
     channel.closeFuture().addListener {log.warn {"对象【${channel.info}】下线"}}
     ctx.executor().schedule({if (channel.isActive && !channel.hasMark) channel.close()}, 1, MINUTES)

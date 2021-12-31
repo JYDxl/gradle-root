@@ -1,4 +1,4 @@
-package org.github.module.file.common.dto
+package org.github.module.file.common.dto.protocol
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
@@ -6,8 +6,8 @@ import io.netty.buffer.ByteBufUtil.hexDump
 import io.netty.channel.Channel
 import org.github.module.file.common.CMD_LENGTH
 import org.github.module.file.common.LEN_LENGTH
-import org.github.module.file.common.dto.CMD.Companion.parse
-import org.github.module.file.common.dto.CMD.DEFAULT
+import org.github.module.file.common.dto.protocol.CMD.Companion.parse
+import org.github.module.file.common.dto.protocol.CMD.DEFAULT
 import kotlin.reflect.KClass
 
 abstract class Msg: Input, Output {
@@ -29,7 +29,7 @@ abstract class Msg: Input, Output {
 
   override fun toByteBuf(alloc: ByteBufAllocator, channel: Channel): ByteBuf {
     cid = channel.id().asShortText()
-    val buf = alloc.buffer(CMD_LENGTH + LEN_LENGTH)
+    val buf = alloc.buffer(CMD_LENGTH + LEN_LENGTH)!!
     buf.writeByte(cmd.cmd)
     buf.writeLong(len)
     return buf

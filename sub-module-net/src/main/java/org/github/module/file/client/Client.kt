@@ -9,8 +9,10 @@ import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.file.common.codec.MsgCodec
 import org.github.module.file.common.codec.MsgFrameDecoder
-import org.github.module.file.common.dto.FileDownloadReq
-import org.github.module.file.common.dto.protobuf.FileProto.FileDownloadReqProto
+import org.github.module.file.common.dto.protocol.FileDownloadReq
+import org.github.module.file.common.dto.protocol.LoginReq
+import org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto
+import org.github.module.file.common.dto.protocol.protobuf.FileProto.LoginReqProto
 import org.github.module.file.common.handler.FileDownloadResHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
@@ -40,6 +42,10 @@ fun main() {
     .connect("localhost", 10000)!!
     .sync()!!
     .channel()!!
+
+  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername("用户1").setPassword("密码1").build()}, channel.voidPromise())
+  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername("用户2").setPassword("密码2").build()}, channel.voidPromise())
+
   val path = "/Volumes/EXTRA/电影/教父三部曲/The.Godfather.Part.II.1974.mkv"
   log.info {"文件【$path】下载开始"}
   channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())

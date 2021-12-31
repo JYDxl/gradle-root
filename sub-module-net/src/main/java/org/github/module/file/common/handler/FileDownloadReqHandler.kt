@@ -1,24 +1,24 @@
 package org.github.module.file.common.handler
 
-import cn.hutool.core.io.FileUtil
+import cn.hutool.core.io.FileUtil.getName
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.DefaultFileRegion
 import org.github.module.file.common.CMD_LENGTH
 import org.github.module.file.common.FILE_DOWNLOAD_RES_MSG_BODY_LENGTH
 import org.github.module.file.common.LEN_LENGTH
 import org.github.module.file.common.MAX_LENGTH
-import org.github.module.file.common.dto.FileDownloadReq
-import org.github.module.file.common.dto.FileDownloadRes
-import org.github.module.file.common.dto.protobuf.FileProto
+import org.github.module.file.common.dto.protocol.FileDownloadReq
+import org.github.module.file.common.dto.protocol.FileDownloadRes
+import org.github.module.file.common.dto.protocol.protobuf.FileProto
 import org.springframework.stereotype.Component
 import java.io.RandomAccessFile
 
 @Component
 class FileDownloadReqHandler: BaseHandler<FileDownloadReq>(), ServerMsgHandler {
   override fun handle(ctx: ChannelHandlerContext, input: Any) {
-    val msg = type.cast(input)
-    val path = msg.body.path
-    val file = FileUtil.getName(path)
+    val msg = type.cast(input)!!
+    val path = msg.body.path!!
+    val file = getName(path)!!
     val bodyLen = FileProto.FileDownloadResProto.newBuilder().setOffset(1).setLength(1).setPath(file).build().toByteArray().size
     val maxFileLen = MAX_LENGTH - (CMD_LENGTH + LEN_LENGTH + FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bodyLen)
     getFile(path).use {

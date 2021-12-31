@@ -1,4 +1,4 @@
-package org.github.module.file.common.dto
+package org.github.module.file.common.dto.protocol
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
@@ -7,9 +7,9 @@ import io.netty.channel.Channel
 import org.github.module.file.common.CMD_LENGTH
 import org.github.module.file.common.FILE_DOWNLOAD_RES_MSG_BODY_LENGTH
 import org.github.module.file.common.LEN_LENGTH
-import org.github.module.file.common.dto.CMD.Companion.parse
-import org.github.module.file.common.dto.CMD.FILE_DOWNLOAD_RES
-import org.github.module.file.common.dto.protobuf.FileProto.FileDownloadResProto
+import org.github.module.file.common.dto.protocol.CMD.Companion.parse
+import org.github.module.file.common.dto.protocol.CMD.FILE_DOWNLOAD_RES
+import org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadResProto
 import org.github.netty.ops.beforeRelease
 
 class FileDownloadRes: CommonMsg<FileDownloadResProto>() {
@@ -33,15 +33,15 @@ class FileDownloadRes: CommonMsg<FileDownloadResProto>() {
   }
 
   override fun toByteBuf(alloc: ByteBufAllocator, channel: Channel): ByteBuf {
-    val bytes = body.toByteArray()
+    val bytes = body.toByteArray()!!
     len = FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bytes.size + body.length
 
     cid = channel.id().asShortText()
-    val head = alloc.buffer(CMD_LENGTH + LEN_LENGTH)
+    val head = alloc.buffer(CMD_LENGTH + LEN_LENGTH)!!
     head.writeByte(cmd.cmd)
     head.writeLong(len)
 
-    val tail = alloc.buffer(FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bytes.size)
+    val tail = alloc.buffer(FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bytes.size)!!
     tail.writeInt(bytes.size)
     tail.writeBytes(bytes)
     return alloc.compositeBuffer(2).addComponents(true, head, tail).apply {hex = hexDump(this).uppercase()}

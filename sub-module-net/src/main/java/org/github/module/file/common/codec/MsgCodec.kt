@@ -4,8 +4,8 @@ import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageCodec
-import org.github.module.file.common.dto.CMD.Companion.parse
-import org.github.module.file.common.dto.Msg
+import org.github.module.file.common.dto.protocol.CMD.Companion.parse
+import org.github.module.file.common.dto.protocol.Msg
 import org.github.netty.ops.info
 import org.github.ops.info
 import org.github.ops.log

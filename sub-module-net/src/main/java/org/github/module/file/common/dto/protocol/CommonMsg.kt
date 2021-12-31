@@ -1,4 +1,4 @@
-package org.github.module.file.common.dto
+package org.github.module.file.common.dto.protocol
 
 import cn.hutool.core.util.ReflectUtil.getMethod
 import cn.hutool.core.util.ReflectUtil.invokeStatic
@@ -21,9 +21,9 @@ open class CommonMsg<T: Message>: Msg(), Input, Output {
   }
 
   override fun toByteBuf(alloc: ByteBufAllocator, channel: Channel): ByteBuf {
-    val bytes = body.toByteArray()
+    val bytes = body.toByteArray()!!
     len = bytes.size.toLong()
-    val tail = alloc.buffer(len.toInt())
+    val tail = alloc.buffer(len.toInt())!!
     tail.writeBytes(bytes)
     val head = super.toByteBuf(alloc, channel)
     return alloc.compositeBuffer(2).addComponents(true, head, tail).apply {hex = hexDump(this).uppercase()}
