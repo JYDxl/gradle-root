@@ -587,34 +587,28 @@ public final class FileProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>int64 offset = 1;</code>
+     * <code>fixed64 offset = 1;</code>
      * @return The offset.
      */
     long getOffset();
 
     /**
-     * <code>int64 length = 2;</code>
+     * <code>fixed64 length = 2;</code>
      * @return The length.
      */
     long getLength();
 
     /**
-     * <code>int32 pathLen = 3;</code>
-     * @return The pathLen.
+     * <code>string path = 3;</code>
+     * @return The path.
      */
-    int getPathLen();
-
+    java.lang.String getPath();
     /**
-     * <code>string pathName = 4;</code>
-     * @return The pathName.
-     */
-    java.lang.String getPathName();
-    /**
-     * <code>string pathName = 4;</code>
-     * @return The bytes for pathName.
+     * <code>string path = 3;</code>
+     * @return The bytes for path.
      */
     com.google.protobuf.ByteString
-        getPathNameBytes();
+        getPathBytes();
   }
   /**
    * Protobuf type {@code FileDownloadResProto}
@@ -629,7 +623,7 @@ public final class FileProto {
       super(builder);
     }
     private FileDownloadResProto() {
-      pathName_ = "";
+      path_ = "";
     }
 
     @java.lang.Override
@@ -662,25 +656,20 @@ public final class FileProto {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 9: {
 
-              offset_ = input.readInt64();
+              offset_ = input.readFixed64();
               break;
             }
-            case 16: {
+            case 17: {
 
-              length_ = input.readInt64();
+              length_ = input.readFixed64();
               break;
             }
-            case 24: {
-
-              pathLen_ = input.readInt32();
-              break;
-            }
-            case 34: {
+            case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              pathName_ = s;
+              path_ = s;
               break;
             }
             default: {
@@ -718,7 +707,7 @@ public final class FileProto {
     public static final int OFFSET_FIELD_NUMBER = 1;
     private long offset_;
     /**
-     * <code>int64 offset = 1;</code>
+     * <code>fixed64 offset = 1;</code>
      * @return The offset.
      */
     @java.lang.Override
@@ -729,7 +718,7 @@ public final class FileProto {
     public static final int LENGTH_FIELD_NUMBER = 2;
     private long length_;
     /**
-     * <code>int64 length = 2;</code>
+     * <code>fixed64 length = 2;</code>
      * @return The length.
      */
     @java.lang.Override
@@ -737,49 +726,38 @@ public final class FileProto {
       return length_;
     }
 
-    public static final int PATHLEN_FIELD_NUMBER = 3;
-    private int pathLen_;
+    public static final int PATH_FIELD_NUMBER = 3;
+    private volatile java.lang.Object path_;
     /**
-     * <code>int32 pathLen = 3;</code>
-     * @return The pathLen.
+     * <code>string path = 3;</code>
+     * @return The path.
      */
     @java.lang.Override
-    public int getPathLen() {
-      return pathLen_;
-    }
-
-    public static final int PATHNAME_FIELD_NUMBER = 4;
-    private volatile java.lang.Object pathName_;
-    /**
-     * <code>string pathName = 4;</code>
-     * @return The pathName.
-     */
-    @java.lang.Override
-    public java.lang.String getPathName() {
-      java.lang.Object ref = pathName_;
+    public java.lang.String getPath() {
+      java.lang.Object ref = path_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        pathName_ = s;
+        path_ = s;
         return s;
       }
     }
     /**
-     * <code>string pathName = 4;</code>
-     * @return The bytes for pathName.
+     * <code>string path = 3;</code>
+     * @return The bytes for path.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getPathNameBytes() {
-      java.lang.Object ref = pathName_;
+        getPathBytes() {
+      java.lang.Object ref = path_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        pathName_ = b;
+        path_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -801,16 +779,13 @@ public final class FileProto {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (offset_ != 0L) {
-        output.writeInt64(1, offset_);
+        output.writeFixed64(1, offset_);
       }
       if (length_ != 0L) {
-        output.writeInt64(2, length_);
+        output.writeFixed64(2, length_);
       }
-      if (pathLen_ != 0) {
-        output.writeInt32(3, pathLen_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(pathName_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, pathName_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, path_);
       }
       unknownFields.writeTo(output);
     }
@@ -823,18 +798,14 @@ public final class FileProto {
       size = 0;
       if (offset_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, offset_);
+          .computeFixed64Size(1, offset_);
       }
       if (length_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, length_);
+          .computeFixed64Size(2, length_);
       }
-      if (pathLen_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, pathLen_);
-      }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(pathName_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, pathName_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, path_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -855,10 +826,8 @@ public final class FileProto {
           != other.getOffset()) return false;
       if (getLength()
           != other.getLength()) return false;
-      if (getPathLen()
-          != other.getPathLen()) return false;
-      if (!getPathName()
-          .equals(other.getPathName())) return false;
+      if (!getPath()
+          .equals(other.getPath())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -876,10 +845,8 @@ public final class FileProto {
       hash = (37 * hash) + LENGTH_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getLength());
-      hash = (37 * hash) + PATHLEN_FIELD_NUMBER;
-      hash = (53 * hash) + getPathLen();
-      hash = (37 * hash) + PATHNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getPathName().hashCode();
+      hash = (37 * hash) + PATH_FIELD_NUMBER;
+      hash = (53 * hash) + getPath().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1017,9 +984,7 @@ public final class FileProto {
 
         length_ = 0L;
 
-        pathLen_ = 0;
-
-        pathName_ = "";
+        path_ = "";
 
         return this;
       }
@@ -1049,8 +1014,7 @@ public final class FileProto {
         org.github.module.file.common.dto.protobuf.FileProto.FileDownloadResProto result = new org.github.module.file.common.dto.protobuf.FileProto.FileDownloadResProto(this);
         result.offset_ = offset_;
         result.length_ = length_;
-        result.pathLen_ = pathLen_;
-        result.pathName_ = pathName_;
+        result.path_ = path_;
         onBuilt();
         return result;
       }
@@ -1105,11 +1069,8 @@ public final class FileProto {
         if (other.getLength() != 0L) {
           setLength(other.getLength());
         }
-        if (other.getPathLen() != 0) {
-          setPathLen(other.getPathLen());
-        }
-        if (!other.getPathName().isEmpty()) {
-          pathName_ = other.pathName_;
+        if (!other.getPath().isEmpty()) {
+          path_ = other.path_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1143,7 +1104,7 @@ public final class FileProto {
 
       private long offset_ ;
       /**
-       * <code>int64 offset = 1;</code>
+       * <code>fixed64 offset = 1;</code>
        * @return The offset.
        */
       @java.lang.Override
@@ -1151,7 +1112,7 @@ public final class FileProto {
         return offset_;
       }
       /**
-       * <code>int64 offset = 1;</code>
+       * <code>fixed64 offset = 1;</code>
        * @param value The offset to set.
        * @return This builder for chaining.
        */
@@ -1162,7 +1123,7 @@ public final class FileProto {
         return this;
       }
       /**
-       * <code>int64 offset = 1;</code>
+       * <code>fixed64 offset = 1;</code>
        * @return This builder for chaining.
        */
       public Builder clearOffset() {
@@ -1174,7 +1135,7 @@ public final class FileProto {
 
       private long length_ ;
       /**
-       * <code>int64 length = 2;</code>
+       * <code>fixed64 length = 2;</code>
        * @return The length.
        */
       @java.lang.Override
@@ -1182,7 +1143,7 @@ public final class FileProto {
         return length_;
       }
       /**
-       * <code>int64 length = 2;</code>
+       * <code>fixed64 length = 2;</code>
        * @param value The length to set.
        * @return This builder for chaining.
        */
@@ -1193,7 +1154,7 @@ public final class FileProto {
         return this;
       }
       /**
-       * <code>int64 length = 2;</code>
+       * <code>fixed64 length = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearLength() {
@@ -1203,109 +1164,78 @@ public final class FileProto {
         return this;
       }
 
-      private int pathLen_ ;
+      private java.lang.Object path_ = "";
       /**
-       * <code>int32 pathLen = 3;</code>
-       * @return The pathLen.
+       * <code>string path = 3;</code>
+       * @return The path.
        */
-      @java.lang.Override
-      public int getPathLen() {
-        return pathLen_;
-      }
-      /**
-       * <code>int32 pathLen = 3;</code>
-       * @param value The pathLen to set.
-       * @return This builder for chaining.
-       */
-      public Builder setPathLen(int value) {
-        
-        pathLen_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 pathLen = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearPathLen() {
-        
-        pathLen_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object pathName_ = "";
-      /**
-       * <code>string pathName = 4;</code>
-       * @return The pathName.
-       */
-      public java.lang.String getPathName() {
-        java.lang.Object ref = pathName_;
+      public java.lang.String getPath() {
+        java.lang.Object ref = path_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          pathName_ = s;
+          path_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string pathName = 4;</code>
-       * @return The bytes for pathName.
+       * <code>string path = 3;</code>
+       * @return The bytes for path.
        */
       public com.google.protobuf.ByteString
-          getPathNameBytes() {
-        java.lang.Object ref = pathName_;
+          getPathBytes() {
+        java.lang.Object ref = path_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          pathName_ = b;
+          path_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string pathName = 4;</code>
-       * @param value The pathName to set.
+       * <code>string path = 3;</code>
+       * @param value The path to set.
        * @return This builder for chaining.
        */
-      public Builder setPathName(
+      public Builder setPath(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        pathName_ = value;
+        path_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string pathName = 4;</code>
+       * <code>string path = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearPathName() {
+      public Builder clearPath() {
         
-        pathName_ = getDefaultInstance().getPathName();
+        path_ = getDefaultInstance().getPath();
         onChanged();
         return this;
       }
       /**
-       * <code>string pathName = 4;</code>
-       * @param value The bytes for pathName to set.
+       * <code>string path = 3;</code>
+       * @param value The bytes for path to set.
        * @return This builder for chaining.
        */
-      public Builder setPathNameBytes(
+      public Builder setPathBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        pathName_ = value;
+        path_ = value;
         onChanged();
         return this;
       }
@@ -1382,11 +1312,10 @@ public final class FileProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\nfile.proto\"$\n\024FileDownloadReqProto\022\014\n\004" +
-      "path\030\001 \001(\t\"Y\n\024FileDownloadResProto\022\016\n\006of" +
-      "fset\030\001 \001(\003\022\016\n\006length\030\002 \001(\003\022\017\n\007pathLen\030\003 " +
-      "\001(\005\022\020\n\010pathName\030\004 \001(\tB7\n*org.github.modu" +
-      "le.file.common.dto.protobufB\tFileProtob\006" +
-      "proto3"
+      "path\030\001 \001(\t\"D\n\024FileDownloadResProto\022\016\n\006of" +
+      "fset\030\001 \001(\006\022\016\n\006length\030\002 \001(\006\022\014\n\004path\030\003 \001(\t" +
+      "B7\n*org.github.module.file.common.dto.pr" +
+      "otobufB\tFileProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1403,7 +1332,7 @@ public final class FileProto {
     internal_static_FileDownloadResProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FileDownloadResProto_descriptor,
-        new java.lang.String[] { "Offset", "Length", "PathLen", "PathName", });
+        new java.lang.String[] { "Offset", "Length", "Path", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -8,8 +8,4 @@ const val CMD_LENGTH = 1
 
 const val LEN_LENGTH = 8
 
-const val OFFSET_LENGTH = 8
-
-const val LENGTH_LENGTH = 8
-
-const val PATH_LENGTH = 4
+const val FILE_DOWNLOAD_RES_MSG_BODY_LENGTH = 4

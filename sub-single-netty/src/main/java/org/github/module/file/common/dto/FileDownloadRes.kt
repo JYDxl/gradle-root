@@ -4,12 +4,16 @@ import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
 import io.netty.buffer.ByteBufUtil.hexDump
 import io.netty.channel.Channel
-import org.github.module.file.common.*
+import org.github.module.file.common.CMD_LENGTH
+import org.github.module.file.common.FILE_DOWNLOAD_RES_MSG_BODY_LENGTH
+import org.github.module.file.common.LEN_LENGTH
 import org.github.module.file.common.dto.CMD.Companion.parse
 import org.github.module.file.common.dto.CMD.FILE_DOWNLOAD_RES
-import kotlin.text.Charsets.UTF_8
+import org.github.module.file.common.dto.protobuf.FileProto.FileDownloadResProto
+import org.github.netty.ops.beforeRelease
 
-class FileDownloadRes(var offset: Long = 0, var length: Long = 0, private var pathLen: Int = 0, var pathName: String = ""): Msg(), Input, Output {
+class FileDownloadRes: Msg(), Input, Output {
+  lateinit var body: FileDownloadResProto
   lateinit var buf: ByteBuf
 
   init {
@@ -17,32 +21,29 @@ class FileDownloadRes(var offset: Long = 0, var length: Long = 0, private var pa
   }
 
   override fun fill(buf: ByteBuf, channel: Channel) {
-    pathLen = buf.getInt(CMD_LENGTH + LEN_LENGTH + OFFSET_LENGTH + LENGTH_LENGTH)
-    hex = hexDump(buf, 0, CMD_LENGTH + LEN_LENGTH + OFFSET_LENGTH + LENGTH_LENGTH + pathLen).uppercase()
+    val bodyLen = buf.getInt(CMD_LENGTH + LEN_LENGTH)
+    hex = hexDump(buf, 0, CMD_LENGTH + LEN_LENGTH + FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bodyLen).uppercase()
     cmd = parse(buf.readUnsignedByte().toInt())
     len = buf.readLong()
     cid = channel.id().asShortText()
 
-    offset = buf.readLong()
-    length = buf.readLong()
     buf.readInt()
-    pathName = buf.readCharSequence(pathLen, UTF_8).toString()
+    buf.readRetainedSlice(bodyLen).beforeRelease {body = FileDownloadResProto.parseFrom(nioBuffer())}
+
     this.buf = buf.retain()
   }
 
   override fun toByteBuf(alloc: ByteBufAllocator, channel: Channel): ByteBuf {
-    len = OFFSET_LENGTH + LENGTH_LENGTH + PATH_LENGTH + pathLen + length
+    val bytes = body.toByteArray()
+    len = FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bytes.size + body.length
     val head = super.toByteBuf(alloc, channel)
-    val tail = alloc.buffer(OFFSET_LENGTH + LENGTH_LENGTH)
-    tail.writeLong(offset)
-    tail.writeLong(length)
-    val path = alloc.buffer(PATH_LENGTH + pathLen)
-    path.writeInt(pathLen)
-    path.writeCharSequence(pathName, UTF_8)
-    return alloc.compositeBuffer(3).addComponents(true, head, tail, path)
+    val tail = alloc.buffer(FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bytes.size)
+    tail.writeInt(bytes.size)
+    tail.writeBytes(bytes)
+    return alloc.compositeBuffer(2).addComponents(true, head, tail)
   }
 
   override fun desc(): String {
-    return super.desc() + "offset=$offset, length=$length, pathLen=$pathLen, pathName=$pathName, "
+    return super.desc() + "offset=${body.offset - 1}, length=${body.length}, path=${body.path}, "
   }
 }
