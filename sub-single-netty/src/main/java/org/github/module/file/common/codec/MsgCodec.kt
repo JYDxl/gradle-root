@@ -17,7 +17,7 @@ class MsgCodec: MessageToMessageCodec<ByteBuf, Msg>() {
 
   override fun encode(ctx: ChannelHandlerContext, msg: Msg, out: MutableList<Any>) {
     out.add(msg.toByteBuf(ctx.alloc(), ctx.channel()))
-    log.info {"向设备【${ctx.channel().info}】发送了数据: $msg"}
+    log.info {"向对象【${ctx.channel().info}】发送了数据: $msg"}
   }
 
   override fun decode(ctx: ChannelHandlerContext, input: ByteBuf, out: MutableList<Any>) {
@@ -25,6 +25,6 @@ class MsgCodec: MessageToMessageCodec<ByteBuf, Msg>() {
     val msg = parse(cmd).clazz.createInstance()
     msg.fill(input, ctx.channel())
     out.add(msg)
-    log.info {"从设备【${ctx.channel().info}】接收到数据: $msg"}
+    log.info {"从对象【${ctx.channel().info}】接收到数据: $msg"}
   }
 }

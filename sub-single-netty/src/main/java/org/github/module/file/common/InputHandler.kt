@@ -14,7 +14,7 @@ interface InputHandler: ChannelInboundHandler {
   }
 
   override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
-    log.error(cause) {"设备【${ctx.channel().info}】异常: ${cause.message}"}
+    log.error(cause) {"对象【${ctx.channel().info}】异常: ${cause.message}"}
     ctx.close()
   }
 }

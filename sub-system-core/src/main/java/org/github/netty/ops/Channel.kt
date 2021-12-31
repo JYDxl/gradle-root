@@ -11,4 +11,4 @@ val Channel.hasMark get() = hasAttr(KEY_MARK)
 
 val Channel.mark: Attribute<Mark> get() = attr(KEY_MARK)
 
-val Channel.info get() = "MARK: ${if (hasMark) mark.get() else null}"
+val Channel.info get() = "MARK: ${(if (hasMark) mark.get().toString() else toString())}"
