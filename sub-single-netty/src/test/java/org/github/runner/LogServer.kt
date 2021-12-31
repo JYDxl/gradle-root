@@ -7,6 +7,7 @@ import io.netty.channel.ChannelOption.SO_BROADCAST
 import io.netty.channel.socket.nio.NioDatagramChannel
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.log.LogEventEncoder
 import org.github.netty.ops.eventLoopGroup
 import java.net.InetSocketAddress
@@ -16,7 +17,7 @@ fun main() {
   val addr = InetSocketAddress("255.255.255.255", 8000)
   val logEventEncoder = LogEventEncoder(addr)
 
-  val group = eventLoopGroup(0, "log-server")
+  val group = eventLoopGroup(0, DefaultThreadFactory("log-server"))
 
   Bootstrap()
     .group(group)

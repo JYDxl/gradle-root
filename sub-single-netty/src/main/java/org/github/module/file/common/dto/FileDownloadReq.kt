@@ -9,7 +9,7 @@ class FileDownloadReq: CommonMsg<FileDownloadReqProto>() {
     cmd = FILE_DOWNLOAD_REQ
   }
 
-  override fun desc(): String {
-    return super.desc() + "path=${body.path}, "
+  override fun toString(): String {
+    return super.toString() + "path=${body.path}, "
   }
 }

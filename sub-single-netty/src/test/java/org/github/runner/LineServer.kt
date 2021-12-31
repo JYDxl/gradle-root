@@ -8,6 +8,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import io.netty.util.concurrent.ImmediateEventExecutor.INSTANCE
 import org.github.module.line.LineEncoder
 import org.github.module.line.LineServerHandler
@@ -22,8 +23,8 @@ fun main() {
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = LineEncoder()
 
-  val boss = eventLoopGroup(1, "line-boss")
-  val worker = eventLoopGroup(0, "line-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("line-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("line-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

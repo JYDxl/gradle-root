@@ -4,12 +4,13 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.echo.shaded.EchoClientHandler
 import org.github.netty.ops.eventLoopGroup
 import java.nio.ByteOrder.LITTLE_ENDIAN
 
 fun main() {
-  val group = eventLoopGroup(24, "nio-client")
+  val group = eventLoopGroup(24, DefaultThreadFactory("nio-client"))
 
   Bootstrap()
     .group(group)

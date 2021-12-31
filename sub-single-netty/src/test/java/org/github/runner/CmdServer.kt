@@ -6,6 +6,7 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.cmd.CmdDecoder
 import org.github.module.cmd.CmdServerHandler
 import org.github.netty.decoder.LineDecoder
@@ -16,8 +17,8 @@ fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val cmdDecoder = CmdDecoder()
 
-  val boss = eventLoopGroup(1, "cmd-boss")
-  val worker = eventLoopGroup(0, "cmd-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("cmd-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("cmd-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

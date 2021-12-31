@@ -16,7 +16,7 @@ abstract class Msg: Input, Output {
   var hex: String = ""
   var cid: String = ""
 
-  open fun desc(): String {
+  override fun toString(): String {
     return "【${cmd.desc}】 cid=$cid, hex=$hex, cmd=${cmd.cmd}, len=$len, "
   }
 

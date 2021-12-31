@@ -10,6 +10,7 @@ import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import io.netty.util.concurrent.ImmediateEventExecutor.INSTANCE
 import org.github.module.ws.HttpReqHandler
 import org.github.module.ws.TextWsFrameHandler
@@ -21,8 +22,8 @@ fun main() {
   val httpReqHandler = HttpReqHandler("/ws")
   val textWsFrameHandler = TextWsFrameHandler(group)
 
-  val boss = eventLoopGroup(1, "ws-boss")
-  val worker = eventLoopGroup(0, "ws-worker")
+  val boss = eventLoopGroup(1, DefaultThreadFactory("ws-boss"))
+  val worker = eventLoopGroup(0, DefaultThreadFactory("ws-worker"))
 
   ServerBootstrap()
     .group(boss, worker)

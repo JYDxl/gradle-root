@@ -6,6 +6,7 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.nio.NioDatagramChannel
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.log.LogClientHandler
 import org.github.module.log.LogEventDecoder
 import org.github.netty.ops.eventLoopGroup
@@ -15,7 +16,7 @@ fun main() {
   val logEventDecoder = LogEventDecoder()
   val logClientHandler = LogClientHandler()
 
-  val group = eventLoopGroup(0, "log-client")
+  val group = eventLoopGroup(0, DefaultThreadFactory("log-client"))
 
   Bootstrap()
     .group(group)

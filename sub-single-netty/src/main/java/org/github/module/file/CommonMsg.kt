@@ -5,6 +5,7 @@ import cn.hutool.core.util.ReflectUtil.invokeStatic
 import com.google.protobuf.Message
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
+import io.netty.buffer.ByteBufUtil.hexDump
 import io.netty.channel.Channel
 import org.github.module.file.common.dto.Input
 import org.github.module.file.common.dto.Msg
@@ -28,6 +29,6 @@ open class CommonMsg<T: Message>: Msg(), Input, Output {
     val tail = alloc.buffer(len.toInt())
     tail.writeBytes(bytes)
     val head = super.toByteBuf(alloc, channel)
-    return alloc.compositeBuffer(2).addComponents(true, head, tail)
+    return alloc.compositeBuffer(2).addComponents(true, head, tail).apply {hex = hexDump(this).uppercase()}
   }
 }

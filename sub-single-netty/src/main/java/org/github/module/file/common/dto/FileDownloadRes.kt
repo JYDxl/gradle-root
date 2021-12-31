@@ -45,10 +45,10 @@ class FileDownloadRes: CommonMsg<FileDownloadResProto>() {
     val tail = alloc.buffer(FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bytes.size)
     tail.writeInt(bytes.size)
     tail.writeBytes(bytes)
-    return alloc.compositeBuffer(2).addComponents(true, head, tail)
+    return alloc.compositeBuffer(2).addComponents(true, head, tail).apply {hex = hexDump(this).uppercase()}
   }
 
-  override fun desc(): String {
-    return super.desc() + "offset=${body.offset - 1}, length=${body.length}, path=${body.path}, "
+  override fun toString(): String {
+    return super.toString() + "offset=${body.offset - 1}, length=${body.length}, path=${body.path}, "
   }
 }
