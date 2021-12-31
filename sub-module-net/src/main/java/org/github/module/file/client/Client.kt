@@ -14,6 +14,7 @@ import org.github.module.file.common.dto.protocol.LoginReq
 import org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto
 import org.github.module.file.common.dto.protocol.protobuf.FileProto.LoginReqProto
 import org.github.module.file.common.handler.FileDownloadResHandler
+import org.github.module.file.common.handler.LoginResHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import org.github.ops.info
@@ -22,7 +23,7 @@ import org.github.ops.log
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val msgCodec = MsgCodec()
-  val clientHandler = ClientHandler(handlers = of(FileDownloadResHandler()))
+  val clientHandler = ClientHandler(handlers = of(FileDownloadResHandler(), LoginResHandler()))
 
   val group = eventLoopGroup(1, DefaultThreadFactory("file-client"))
 
@@ -43,8 +44,7 @@ fun main() {
     .sync()!!
     .channel()!!
 
-  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername("用户1").setPassword("密码1").build()}, channel.voidPromise())
-  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername("用户2").setPassword("密码2").build()}, channel.voidPromise())
+  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername("用户").setPassword("密码").build()}, channel.voidPromise())
 
   val path = "/Volumes/EXTRA/电影/教父三部曲/The.Godfather.Part.II.1974.mkv"
   log.info {"文件【$path】下载开始"}

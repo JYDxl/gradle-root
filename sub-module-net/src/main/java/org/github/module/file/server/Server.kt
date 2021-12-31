@@ -11,13 +11,14 @@ import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.file.common.codec.MsgCodec
 import org.github.module.file.common.codec.MsgFrameDecoder
 import org.github.module.file.common.handler.FileDownloadReqHandler
+import org.github.module.file.common.handler.LoginReqHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val msgCodec = MsgCodec()
-  val serverHandler = ServerHandler(handlers = of(FileDownloadReqHandler()))
+  val serverHandler = ServerHandler(handlers = of(FileDownloadReqHandler(), LoginReqHandler()))
 
   val boss = eventLoopGroup(1, DefaultThreadFactory("file-server-boss"))
   val worker = eventLoopGroup(0, DefaultThreadFactory("file-server-worker"))
