@@ -10,7 +10,7 @@ import org.github.ops.log
 import org.github.ops.warn
 import java.util.concurrent.TimeUnit.MINUTES
 
-class FrameDecoder: LengthDecoder(1, 8, MAX_LENGTH.toInt(), getLength = {buf, _, _ -> buf.getLong(1)}, log = FrameDecoder::class.log) {
+class MsgFrameDecoder: LengthDecoder(1, 8, MAX_LENGTH.toInt(), getLength = {buf, _, _ -> buf.getLong(1)}, log = MsgFrameDecoder::class.log) {
   override fun channelActive(ctx: ChannelHandlerContext) {
     val channel = ctx.channel()
     log.info {"对象【${channel.info}】上线"}

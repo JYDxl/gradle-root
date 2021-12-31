@@ -7,7 +7,7 @@ import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
-import org.github.module.file.common.codec.FrameDecoder
+import org.github.module.file.common.codec.MsgFrameDecoder
 import org.github.module.file.common.codec.MsgCodec
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
@@ -28,7 +28,7 @@ fun main() {
       override fun initChannel(ch: Channel) {
         ch.pipeline()!!.apply {
           addLast(loggingHandler)
-          addLast(FrameDecoder())
+          addLast(MsgFrameDecoder())
           addLast(msgCodec)
           addLast(ServerHandler())
         }
