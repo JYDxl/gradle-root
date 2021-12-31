@@ -1,27 +1,22 @@
 package org.github.cache;
 
-import cn.hutool.core.lang.Pair;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.Table;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import org.apache.commons.lang3.tuple.Triple;
-import org.github.base.IEnum;
-
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static cn.hutool.core.util.ClassUtil.getPublicMethod;
-import static cn.hutool.core.util.ClassUtil.scanPackageBySuper;
-import static cn.hutool.core.util.ReflectUtil.invoke;
+import javax.annotation.Nullable;
+import lombok.*;
+import lombok.extern.slf4j.*;
+import org.github.base.IEnum;
+import org.apache.commons.lang3.tuple.Triple;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.Table;
+import cn.hutool.core.lang.Pair;
+import static cn.hutool.core.util.ClassUtil.*;
+import static cn.hutool.core.util.ReflectUtil.*;
 import static com.google.common.collect.ImmutableBiMap.copyOf;
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.ImmutableTable.toImmutableTable;
-import static java.util.Arrays.stream;
+import static com.google.common.collect.ImmutableList.*;
+import static com.google.common.collect.ImmutableTable.*;
+import static java.util.Arrays.*;
 import static org.apache.commons.lang3.tuple.Triple.of;
 
 @Slf4j
@@ -44,8 +39,8 @@ public class EnumCache {
   @SuppressWarnings("unchecked")
   private Stream<Triple<Class<? extends IEnum<?,?>>,?,?>> apply(Class<?> clazz) {
     if (!clazz.isEnum()) throw new IllegalStateException();
-    val method = getPublicMethod(clazz, "values");
-    val values = ((IEnum<?,?>[]) invoke(null, method));
+    val method = getMethod(clazz, "values");
+    val values = ((IEnum<?,?>[]) invokeStatic(method));
     val token  = ((Class<? extends IEnum<?,?>>) clazz);
     return stream(values).map(v -> of(token, v.getCode(), v.getValue()));
   }
