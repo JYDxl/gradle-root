@@ -3,9 +3,13 @@ package org.github.module.file.common.handler
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandler
 import org.github.module.file.common.dto.protocol.CommonMsg
+import org.github.module.file.common.dto.protocol.HeartBeat
+import org.github.netty.ops.hasMark
 import org.github.netty.ops.info
+import org.github.netty.ops.mark
 import org.github.ops.error
 import org.github.ops.warn
+import org.github.spring.bootstrap.AppCtxHolder
 import org.slf4j.Logger
 import java.lang.reflect.ParameterizedType
 
@@ -38,6 +42,9 @@ interface InputHandler: ChannelInboundHandler {
         return
       }
     }
+    val channel = ctx.channel()!!
+    if (channel.hasMark) AppCtxHolder.getAppCtx()?.publishEvent(HeartBeat(channel.mark.get()))
+
     log.warn {"消息【$msg】暂不处理"}
   }
 

@@ -8,6 +8,8 @@ import org.github.module.file.common.CMD_LENGTH
 import org.github.module.file.common.LEN_LENGTH
 import org.github.module.file.common.dto.protocol.CMD.Companion.parse
 import org.github.module.file.common.dto.protocol.CMD.DEFAULT
+import org.github.netty.ops.Mark
+import org.springframework.context.ApplicationEvent
 import kotlin.reflect.KClass
 
 abstract class Msg: Input, Output {
@@ -56,3 +58,5 @@ enum class CMD(val cmd: Int, val desc: String, val clazz: KClass<out Msg>) {
     fun parse(cmd: Int) = values().first {it.cmd == cmd}
   }
 }
+
+class HeartBeat(source: Mark): ApplicationEvent(source)
