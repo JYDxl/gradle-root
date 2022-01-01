@@ -46,8 +46,4 @@ class FileDownloadRes: CommonMsg<FileDownloadResProto>() {
     tail.writeBytes(bytes)
     return alloc.compositeBuffer(2).addComponents(true, head, tail).apply {hex = hexDump(this).uppercase()}
   }
-
-  override fun toString(): String {
-    return super.toString() + "offset=${body.offset - 1}, length=${body.length}, path=${body.path}, "
-  }
 }

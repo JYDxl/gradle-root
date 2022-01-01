@@ -7,8 +7,4 @@ class LoginRes: CommonMsg<LoginResProto>() {
   init {
     cmd = LOGIN_RES
   }
-
-  override fun toString(): String {
-    return super.toString() + "success=${body.success}, message=${body.message}, "
-  }
 }

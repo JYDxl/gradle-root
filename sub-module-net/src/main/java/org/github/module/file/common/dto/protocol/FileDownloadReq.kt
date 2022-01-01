@@ -7,8 +7,4 @@ class FileDownloadReq: CommonMsg<FileDownloadReqProto>() {
   init {
     cmd = FILE_DOWNLOAD_REQ
   }
-
-  override fun toString(): String {
-    return super.toString() + "path=${body.path}, "
-  }
 }

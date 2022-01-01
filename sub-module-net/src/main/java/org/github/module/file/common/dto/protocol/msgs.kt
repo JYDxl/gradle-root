@@ -19,7 +19,7 @@ abstract class Msg: Input, Output {
   var cid: String = ""
 
   override fun toString(): String {
-    return "【${cmd.desc}】 cid=$cid, hex=$hex, cmd=${cmd.cmd}, len=$len, "
+    return "【${cmd.desc}】 cid=$cid, hex=$hex, cmd=${cmd.cmd}, len=$len, data="
   }
 
   override fun fill(buf: ByteBuf, channel: Channel) {
@@ -47,7 +47,7 @@ interface Output {
 }
 
 enum class CMD(val cmd: Int, val desc: String, val clazz: KClass<out Msg>) {
-  DEFAULT(0, "默认", Msg::class),
+  DEFAULT(0, "默认", CommonMsg::class),
   FILE_DOWNLOAD_REQ(1, "文件下载请求", FileDownloadReq::class),
   FILE_DOWNLOAD_RES(2, "文件下载响应", FileDownloadRes::class),
   LOGIN_REQ(3, "登录请求", LoginReq::class),

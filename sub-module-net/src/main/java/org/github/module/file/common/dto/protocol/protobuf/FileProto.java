@@ -19,12 +19,18 @@ public final class FileProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string path = 1;</code>
+     * <code>int64 offset = 1;</code>
+     * @return The offset.
+     */
+    long getOffset();
+
+    /**
+     * <code>string path = 2;</code>
      * @return The path.
      */
     java.lang.String getPath();
     /**
-     * <code>string path = 1;</code>
+     * <code>string path = 2;</code>
      * @return The bytes for path.
      */
     com.google.protobuf.ByteString
@@ -76,7 +82,12 @@ public final class FileProto {
             case 0:
               done = true;
               break;
-            case 10: {
+            case 8: {
+
+              offset_ = input.readInt64();
+              break;
+            }
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
               path_ = s;
@@ -114,10 +125,21 @@ public final class FileProto {
               org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto.class, org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto.Builder.class);
     }
 
-    public static final int PATH_FIELD_NUMBER = 1;
+    public static final int OFFSET_FIELD_NUMBER = 1;
+    private long offset_;
+    /**
+     * <code>int64 offset = 1;</code>
+     * @return The offset.
+     */
+    @java.lang.Override
+    public long getOffset() {
+      return offset_;
+    }
+
+    public static final int PATH_FIELD_NUMBER = 2;
     private volatile java.lang.Object path_;
     /**
-     * <code>string path = 1;</code>
+     * <code>string path = 2;</code>
      * @return The path.
      */
     @java.lang.Override
@@ -134,7 +156,7 @@ public final class FileProto {
       }
     }
     /**
-     * <code>string path = 1;</code>
+     * <code>string path = 2;</code>
      * @return The bytes for path.
      */
     @java.lang.Override
@@ -166,8 +188,11 @@ public final class FileProto {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (offset_ != 0L) {
+        output.writeInt64(1, offset_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, path_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, path_);
       }
       unknownFields.writeTo(output);
     }
@@ -178,8 +203,12 @@ public final class FileProto {
       if (size != -1) return size;
 
       size = 0;
+      if (offset_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, offset_);
+      }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, path_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, path_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -196,6 +225,8 @@ public final class FileProto {
       }
       org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto other = (org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto) obj;
 
+      if (getOffset()
+          != other.getOffset()) return false;
       if (!getPath()
           .equals(other.getPath())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -209,6 +240,9 @@ public final class FileProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + OFFSET_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getOffset());
       hash = (37 * hash) + PATH_FIELD_NUMBER;
       hash = (53 * hash) + getPath().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -344,6 +378,8 @@ public final class FileProto {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        offset_ = 0L;
+
         path_ = "";
 
         return this;
@@ -372,6 +408,7 @@ public final class FileProto {
       @java.lang.Override
       public org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto buildPartial() {
         org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto result = new org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto(this);
+        result.offset_ = offset_;
         result.path_ = path_;
         onBuilt();
         return result;
@@ -421,6 +458,9 @@ public final class FileProto {
 
       public Builder mergeFrom(org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto other) {
         if (other == org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto.getDefaultInstance()) return this;
+        if (other.getOffset() != 0L) {
+          setOffset(other.getOffset());
+        }
         if (!other.getPath().isEmpty()) {
           path_ = other.path_;
           onChanged();
@@ -454,9 +494,40 @@ public final class FileProto {
         return this;
       }
 
+      private long offset_ ;
+      /**
+       * <code>int64 offset = 1;</code>
+       * @return The offset.
+       */
+      @java.lang.Override
+      public long getOffset() {
+        return offset_;
+      }
+      /**
+       * <code>int64 offset = 1;</code>
+       * @param value The offset to set.
+       * @return This builder for chaining.
+       */
+      public Builder setOffset(long value) {
+        
+        offset_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 offset = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearOffset() {
+        
+        offset_ = 0L;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object path_ = "";
       /**
-       * <code>string path = 1;</code>
+       * <code>string path = 2;</code>
        * @return The path.
        */
       public java.lang.String getPath() {
@@ -472,7 +543,7 @@ public final class FileProto {
         }
       }
       /**
-       * <code>string path = 1;</code>
+       * <code>string path = 2;</code>
        * @return The bytes for path.
        */
       public com.google.protobuf.ByteString
@@ -489,7 +560,7 @@ public final class FileProto {
         }
       }
       /**
-       * <code>string path = 1;</code>
+       * <code>string path = 2;</code>
        * @param value The path to set.
        * @return This builder for chaining.
        */
@@ -504,7 +575,7 @@ public final class FileProto {
         return this;
       }
       /**
-       * <code>string path = 1;</code>
+       * <code>string path = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearPath() {
@@ -514,7 +585,7 @@ public final class FileProto {
         return this;
       }
       /**
-       * <code>string path = 1;</code>
+       * <code>string path = 2;</code>
        * @param value The bytes for path to set.
        * @return This builder for chaining.
        */
@@ -2678,14 +2749,14 @@ public final class FileProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nfile.proto\"$\n\024FileDownloadReqProto\022\014\n\004" +
-      "path\030\001 \001(\t\"D\n\024FileDownloadResProto\022\016\n\006of" +
-      "fset\030\001 \001(\006\022\016\n\006length\030\002 \001(\006\022\014\n\004path\030\003 \001(\t" +
-      "\"3\n\rLoginReqProto\022\020\n\010username\030\001 \001(\t\022\020\n\010p" +
-      "assword\030\002 \001(\t\"1\n\rLoginResProto\022\017\n\007succes" +
-      "s\030\001 \001(\010\022\017\n\007message\030\002 \001(\tB@\n3org.github.m" +
-      "odule.file.common.dto.protocol.protobufB" +
-      "\tFileProtob\006proto3"
+      "\n\nfile.proto\"4\n\024FileDownloadReqProto\022\016\n\006" +
+      "offset\030\001 \001(\003\022\014\n\004path\030\002 \001(\t\"D\n\024FileDownlo" +
+      "adResProto\022\016\n\006offset\030\001 \001(\006\022\016\n\006length\030\002 \001" +
+      "(\006\022\014\n\004path\030\003 \001(\t\"3\n\rLoginReqProto\022\020\n\010use" +
+      "rname\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"1\n\rLoginRe" +
+      "sProto\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t" +
+      "B@\n3org.github.module.file.common.dto.pr" +
+      "otocol.protobufB\tFileProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2696,7 +2767,7 @@ public final class FileProto {
     internal_static_FileDownloadReqProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FileDownloadReqProto_descriptor,
-        new java.lang.String[] { "Path", });
+        new java.lang.String[] { "Offset", "Path", });
     internal_static_FileDownloadResProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_FileDownloadResProto_fieldAccessorTable = new

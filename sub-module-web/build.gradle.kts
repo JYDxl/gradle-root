@@ -81,7 +81,6 @@ dependencies {
   implementation("com.squareup.retrofit2:retrofit:$retrofit")
   implementation("com.squareup.okhttp3:okhttp:$okhttp3")
   implementation("mysql:mysql-connector-java:$mysql")
-  implementation("io.netty:netty-all:$netty")
   implementation("p6spy:p6spy:$p6spy")
   implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:$jwt")

@@ -4,7 +4,8 @@ option java_package = "org.github.module.file.common.dto.protocol.protobuf";
 option java_outer_classname = "FileProto";
 
 message FileDownloadReqProto{
-  string path = 1;
+  int64 offset = 1;
+  string path = 2;
 }
 
 message FileDownloadResProto{
