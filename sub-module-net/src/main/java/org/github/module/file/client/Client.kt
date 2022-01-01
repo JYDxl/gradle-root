@@ -1,5 +1,7 @@
 package org.github.module.file.client
 
+import cn.hutool.core.io.FileUtil.exist
+import cn.hutool.core.io.FileUtil.getName
 import com.google.common.collect.ImmutableList.of
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
@@ -19,6 +21,7 @@ import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import org.github.ops.info
 import org.github.ops.log
+import java.io.RandomAccessFile
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
@@ -48,7 +51,15 @@ fun main() {
 
   val path = "/Volumes/EXTRA/电影/教父三部曲/The.Godfather.Part.II.1974.mkv"
   log.info {"文件【$path】下载开始"}
-  channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
+  val name = getName(path)
+  if (exist(name)) {
+    RandomAccessFile(name, "r").use {
+      val offset = it.length()
+      channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setOffset(offset).setPath(path).build()}, channel.voidPromise())
+    }
+  } else {
+    channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
+  }
   channel.closeFuture().addListener {group.shutdownGracefully()}.sync()
   log.info {"文件【$path】下载完成"}
 }
