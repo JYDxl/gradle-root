@@ -31,6 +31,6 @@ open class CommonMsg<T: Message>: Msg(), Input, Output {
   }
 
   override fun toString(): String {
-    return super.toString() + printer().print(body)
+    return super.toString() + printer().includingDefaultValueFields().omittingInsignificantWhitespace().print(body)
   }
 }
