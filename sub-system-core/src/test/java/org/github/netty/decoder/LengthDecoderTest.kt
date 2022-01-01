@@ -6,7 +6,7 @@ import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import org.github.netty.ops.mark
+import org.github.netty.ops.markAttr
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import kotlin.Int.Companion.MAX_VALUE
@@ -39,6 +39,6 @@ internal class LengthDecoderTest {
     assertEquals(msg2, EmbeddedChannel::class.jvmName)
     val msg3: String? = channel.readInbound<String>()
     assertNull(msg3)
-    println(channel.mark)
+    println(channel.markAttr)
   }
 }

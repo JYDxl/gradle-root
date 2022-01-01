@@ -1,8 +1,7 @@
-package org.github.module.file.common.dto
+package org.github.module.file.common.dto.protocol
 
-import io.netty.buffer.ByteBufAllocator
+import io.netty.buffer.ByteBufAllocator.DEFAULT
 import io.netty.channel.embedded.EmbeddedChannel
-import org.github.module.file.common.dto.protocol.FileDownloadReq
 import org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto
 import org.github.netty.ops.beforeRelease
 import org.github.ops.info
@@ -14,9 +13,9 @@ internal class FileDownloadReqTest {
 
   @Test
   fun testNew() {
-    val proto = FileDownloadReqProto.newBuilder().setPath("test.txt").build()
+    val proto = FileDownloadReqProto.newBuilder().setPath("test.txt").build()!!
     val req = FileDownloadReq().apply {body = proto}
-    val buf = req.toByteBuf(ByteBufAllocator.DEFAULT, EmbeddedChannel())
+    val buf = req.toByteBuf(DEFAULT, EmbeddedChannel())
     buf.beforeRelease {log.info {req}}
   }
 }

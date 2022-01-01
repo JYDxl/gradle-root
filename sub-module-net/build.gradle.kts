@@ -42,10 +42,6 @@ tasks.withType<BootJar> {
   archiveFileName.set("net-boot.jar")
 }
 
-tasks.withType<Test> {
-  enabled = false
-}
-
 tasks.getByName<Task>("jar") {enabled = false}
 tasks.getByName<Task>("startScripts") {enabled = false}
 tasks.getByName<Task>("distTar") {enabled = false}

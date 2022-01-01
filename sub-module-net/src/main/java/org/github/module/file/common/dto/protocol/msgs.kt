@@ -52,6 +52,8 @@ enum class CMD(val cmd: Int, val desc: String, val clazz: KClass<out Msg>) {
   FILE_DOWNLOAD_RES(2, "文件下载响应", FileDownloadRes::class),
   LOGIN_REQ(3, "登录请求", LoginReq::class),
   LOGIN_RES(4, "登录响应", LoginRes::class),
+  CHAT_REQ(5, "消息请求", ChatReq::class),
+  CHAT_RES(6, "消息响应", ChatRes::class),
   ;
 
   companion object {

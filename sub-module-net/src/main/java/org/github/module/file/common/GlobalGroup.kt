@@ -3,6 +3,7 @@ package org.github.module.file.common
 import io.netty.channel.Channel
 import io.netty.channel.ChannelFuture
 import io.netty.channel.group.ChannelGroupFutureListener
+import io.netty.channel.group.ChannelMatcher
 import io.netty.channel.group.DefaultChannelGroup
 import io.netty.util.concurrent.GlobalEventExecutor.INSTANCE
 import org.github.netty.ops.hasMark
@@ -23,6 +24,15 @@ class GlobalGroup: DefaultChannelGroup("global-group", INSTANCE) {
       }
     })
     return super.add(element)
+  }
+
+  fun findFirst(matcher: ChannelMatcher): Channel? {
+    for (channel: Channel in iterator()) {
+      if (matcher.matches(channel)) {
+        return channel
+      }
+    }
+    return null
   }
 
   companion object {

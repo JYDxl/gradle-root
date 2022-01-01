@@ -23,3 +23,14 @@ message LoginResProto{
   bool success = 1;
   string message = 2;
 }
+
+message ChatReqProto{
+  string from = 1;
+  string to = 2;
+  string content = 3;
+}
+
+message ChatResProto{
+  bool success = 1;
+  string message = 2;
+}
