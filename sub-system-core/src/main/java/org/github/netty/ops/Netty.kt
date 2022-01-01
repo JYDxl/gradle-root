@@ -1,6 +1,8 @@
 package org.github.netty.ops
 
-import io.netty.channel.*
+import io.netty.channel.Channel
+import io.netty.channel.MultithreadEventLoopGroup
+import io.netty.channel.ServerChannel
 import io.netty.channel.epoll.Epoll.isAvailable
 import io.netty.channel.epoll.EpollEventLoopGroup
 import io.netty.channel.epoll.EpollServerSocketChannel
@@ -33,8 +35,8 @@ fun eventLoopGroup(threads: Int, factory: ThreadFactory): MultithreadEventLoopGr
 
 val isWriteable get() = ChannelMatcher {it.isWritable}
 
-val ChannelMatcher.andWriteable: ChannelMatcher get() = compose(this, isWriteable)
+val isActive get() = ChannelMatcher {it.isActive}
 
-val Channel.ktPipeline: ChannelPipeline get() = pipeline()
+val ChannelMatcher.andIsWriteable: ChannelMatcher get() = compose(this, isWriteable)
 
-val ChannelHandlerContext.ktChannel: Channel get() = channel()
+val ChannelMatcher.andIsActive: ChannelMatcher get() = compose(this, isActive)

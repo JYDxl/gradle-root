@@ -21,4 +21,4 @@ val Channel.hasGroup get() = hasAttr(KEY_GROUP)
 
 val Channel.groupAttr: Attribute<Group> get() = attr(KEY_GROUP)
 
-val Channel.group: Mark get() = markAttr.get()
+val Channel.group: Group get() = groupAttr.get()

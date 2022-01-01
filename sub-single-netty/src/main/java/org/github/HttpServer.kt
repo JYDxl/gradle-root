@@ -5,12 +5,11 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.socket.SocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.http.HttpServerHandler
 import org.github.netty.ops.eventLoopGroup
-import org.github.netty.ops.ktPipeline
 import org.github.netty.ops.serverSocketChannel
 
 fun main() {
@@ -26,7 +25,7 @@ fun main() {
     .handler(loggingHandler)
     .childHandler(object: ChannelInitializer<SocketChannel>() {
       override fun initChannel(ch: SocketChannel) {
-        ch.ktPipeline.apply {
+        ch.pipeline()!!.apply {
           addLast("LoggingHandler", loggingHandler)
           addLast("httpServerCodec", HttpServerCodec())
           addLast("httpObjectAggregator", HttpObjectAggregator(512 * 1024))
