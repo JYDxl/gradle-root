@@ -8,8 +8,8 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
-class Web
+class Net
 
 fun main(args: Array<String>) {
-  runApplication<Web>(*args)
+  runApplication<Net>(*args)
 }

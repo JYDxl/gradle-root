@@ -9,6 +9,8 @@ val KEY_MARK: AttributeKey<Mark> = newInstance("MARK")
 
 val Channel.hasMark get() = hasAttr(KEY_MARK)
 
-val Channel.mark: Attribute<Mark> get() = attr(KEY_MARK)
+val Channel.markAttr: Attribute<Mark> get() = attr(KEY_MARK)
 
-val Channel.info get() = (if (hasMark) mark.get().toString() else toString())
+val Channel.mark: Mark get() = markAttr.get()
+
+val Channel.info get() = (if (hasMark) mark.toString() else toString())

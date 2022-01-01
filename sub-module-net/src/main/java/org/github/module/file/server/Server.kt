@@ -8,6 +8,7 @@ import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
+import org.github.module.file.common.GlobalGroup
 import org.github.module.file.common.codec.MsgCodec
 import org.github.module.file.common.codec.MsgFrameDecoder
 import org.github.module.file.common.handler.FileDownloadReqHandler
@@ -18,7 +19,7 @@ import org.github.netty.ops.serverSocketChannel
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
   val msgCodec = MsgCodec()
-  val serverHandler = ServerHandler(handlers = of(FileDownloadReqHandler(), LoginReqHandler()))
+  val serverHandler = ServerHandler(handlers = of(FileDownloadReqHandler(), LoginReqHandler(GlobalGroup())))
 
   val boss = eventLoopGroup(1, DefaultThreadFactory("file-server-boss"))
   val worker = eventLoopGroup(0, DefaultThreadFactory("file-server-worker"))

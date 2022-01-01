@@ -11,7 +11,7 @@ import io.netty.channel.Channel
 import java.lang.reflect.ParameterizedType
 import java.nio.ByteBuffer
 
-open class CommonMsg<T: Message>: Msg(), Input, Output {
+abstract class CommonMsg<T: Message>: Msg(), Input, Output {
   private val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<*>
 
   lateinit var body: T

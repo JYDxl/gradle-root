@@ -45,7 +45,7 @@ interface InputHandler: ChannelInboundHandler {
     }
 
     val channel = ctx.channel()!!
-    if (channel.hasMark) getAppCtx()?.publishEvent(HeartBeat(channel.mark.get()))
+    if (channel.hasMark) getAppCtx()?.publishEvent(HeartBeat(channel.mark))
 
     if (!flag) log.warn {"消息【$msg】暂不处理"}
   }
