@@ -19,7 +19,7 @@ abstract class Msg: Input, Output {
   var cid: String = ""
 
   override fun toString(): String {
-    return "【${cmd.desc}】 cid=$cid, hex=$hex, cmd=${cmd.cmd}, len=$len, data="
+    return "【${cmd.desc}】 cid=$cid, hex=$hex, cmd=${cmd.cmd}, len=$len\n"
   }
 
   override fun fill(buf: ByteBuf, channel: Channel) {

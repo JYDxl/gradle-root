@@ -11,7 +11,7 @@ message FileDownloadReqProto{
 message FileDownloadResProto{
   fixed64 offset = 1;
   fixed64 length = 2;
-  string path = 3;
+  string name = 3;
 }
 
 message LoginReqProto{

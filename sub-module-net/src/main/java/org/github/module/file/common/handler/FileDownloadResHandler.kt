@@ -13,7 +13,7 @@ import java.io.RandomAccessFile
 class FileDownloadResHandler: BaseHandler<FileDownloadRes>(), ClientMsgHandler {
   override fun handle(ctx: ChannelHandlerContext, input: Any) {
     val msg = type.cast(input)!!
-    RandomAccessFile(msg.body.path, "rw").use {
+    RandomAccessFile(msg.body.name, "rw").use {
       msg.buf.beforeRelease {readBytes(it.channel, msg.body.offset - 1, msg.body.length.toInt())}
     }
     if (msg.len < MAX_LENGTH - CMD_LENGTH - LEN_LENGTH) {

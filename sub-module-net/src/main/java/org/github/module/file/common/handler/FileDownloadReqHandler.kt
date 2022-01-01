@@ -18,8 +18,8 @@ class FileDownloadReqHandler: BaseHandler<FileDownloadReq>(), ServerMsgHandler {
   override fun handle(ctx: ChannelHandlerContext, input: Any) {
     val msg = type.cast(input)!!
     val path = msg.body.path!!
-    val file = getName(path)!!
-    val bodyLen = FileProto.FileDownloadResProto.newBuilder().setOffset(1).setLength(1).setPath(file).build().toByteArray().size
+    val name = getName(path)!!
+    val bodyLen = FileProto.FileDownloadResProto.newBuilder().setOffset(1).setLength(1).setName(name).build().toByteArray().size
     val maxFileLen = MAX_LENGTH - (CMD_LENGTH + LEN_LENGTH + FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bodyLen)
     getFile(path).use {
       val length = it.length()
@@ -27,11 +27,11 @@ class FileDownloadReqHandler: BaseHandler<FileDownloadReq>(), ServerMsgHandler {
       val res = length % maxFileLen
       0.until(num).forEach {idx ->
         val offset = idx * maxFileLen
-        ctx.write(FileDownloadRes().apply {body = FileProto.FileDownloadResProto.newBuilder().setOffset(offset + 1).setLength(maxFileLen).setPath(file).build()}, ctx.voidPromise())
+        ctx.write(FileDownloadRes().apply {body = FileProto.FileDownloadResProto.newBuilder().setOffset(offset + 1).setLength(maxFileLen).setName(name).build()}, ctx.voidPromise())
         ctx.write(DefaultFileRegion(getFile(path).channel, offset, maxFileLen), ctx.voidPromise())
       }
       val offset = length - res
-      ctx.write(FileDownloadRes().apply {body = FileProto.FileDownloadResProto.newBuilder().setOffset(offset + 1).setLength(res).setPath(file).build()}, ctx.voidPromise())
+      ctx.write(FileDownloadRes().apply {body = FileProto.FileDownloadResProto.newBuilder().setOffset(offset + 1).setLength(res).setName(name).build()}, ctx.voidPromise())
       ctx.write(DefaultFileRegion(getFile(path).channel, offset, res), ctx.voidPromise())
     }
   }
