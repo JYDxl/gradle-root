@@ -22,6 +22,8 @@ import org.github.netty.ops.socketChannel
 import org.github.ops.info
 import org.github.ops.log
 import java.io.RandomAccessFile
+import java.lang.System.`in`
+import java.util.*
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
@@ -47,7 +49,14 @@ fun main() {
     .sync()!!
     .channel()!!
 
-  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername("用户").setPassword("密码").build()}, channel.voidPromise())
+  val scanner = Scanner(`in`)
+  log.info {"请输入用户名："}
+  val user = scanner.next()!!
+  channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername(user).setPassword(user).build()}, channel.voidPromise())
+  while (scanner.hasNext()) {
+    val cmd = scanner.next()!!
+    execute(cmd)
+  }
 
   val path = "/Volumes/EXTRA/电影/教父三部曲/The.Godfather.Part.II.1974.mkv"
   log.info {"文件【$path】下载开始"}
@@ -62,6 +71,10 @@ fun main() {
   }
   channel.closeFuture().addListener {group.shutdownGracefully()}.sync()
   log.info {"文件【$path】下载完成"}
+}
+
+fun execute(cmd: String) {
+  TODO("实现$cmd")
 }
 
 val log = "client".log

@@ -35,47 +35,47 @@ message ChatResProto{
   string message = 2;
 }
 
-message createGroupReqProto{
+message CreateGroupReqProto{
   string name = 1;
   string members = 2;
 }
 
-message createGroupResProto{
+message CreateGroupResProto{
   bool success = 1;
   string message = 2;
 }
 
-message joinGroupReqProto{
+message JoinGroupReqProto{
   string name = 1;
 }
 
-message joinGroupResProto{
+message JoinGroupResProto{
   bool success = 1;
   string message = 2;
 }
 
-message exitGroupReqProto{
+message ExitGroupReqProto{
   string name = 1;
 }
 
-message exitGroupResProto{
+message ExitGroupResProto{
   bool success = 1;
   string message = 2;
 }
 
-message groupChatReqProto{
+message GroupChatReqProto{
   string from = 1;
   string name = 2;
   string content = 3;
 }
 
-message quitReqProto{
+message QuitReqProto{
 }
 
-message heartbeatReqProto{
-}
-
-message quitResProto{
+message QuitResProto{
   bool success = 1;
   string message = 2;
+}
+
+message HeartBeatReqProto{
 }
