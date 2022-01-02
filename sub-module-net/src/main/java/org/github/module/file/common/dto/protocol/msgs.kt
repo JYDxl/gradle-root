@@ -54,6 +54,7 @@ enum class CMD(val cmd: Int, val desc: String, val clazz: KClass<out Msg>) {
   LOGIN_RES(4, "登录响应", LoginRes::class),
   CHAT_REQ(5, "消息请求", ChatReq::class),
   CHAT_RES(6, "消息响应", ChatRes::class),
+  HEART_BEAT_REQ(7, "心跳请求", HeartBeatReq::class),
   ;
 
   companion object {

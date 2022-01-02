@@ -7,6 +7,7 @@ import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.handler.timeout.IdleStateHandler
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.file.common.GlobalGroup
 import org.github.module.file.common.codec.MsgCodec
@@ -37,6 +38,7 @@ fun main() {
           addLast(loggingHandler)
           addLast(MsgFrameDecoder())
           addLast(msgCodec)
+          addLast(IdleStateHandler(60, 0, 0))
           addLast(serverHandler)
         }
       }

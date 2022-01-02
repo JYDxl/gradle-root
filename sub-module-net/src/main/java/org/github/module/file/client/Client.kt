@@ -8,6 +8,7 @@ import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
+import io.netty.handler.timeout.IdleStateHandler
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.module.file.common.codec.MsgCodec
 import org.github.module.file.common.codec.MsgFrameDecoder
@@ -21,9 +22,11 @@ import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import org.github.ops.info
 import org.github.ops.log
+import org.github.ops.warn
 import java.io.RandomAccessFile
 import java.lang.System.`in`
 import java.util.*
+import kotlin.system.exitProcess
 
 fun main() {
   val loggingHandler = LoggingHandler(TRACE)
@@ -41,6 +44,7 @@ fun main() {
           addLast(loggingHandler)
           addLast(MsgFrameDecoder())
           addLast(msgCodec)
+          addLast(IdleStateHandler(0, 30, 0))
           addLast(clientHandler)
         }
       }
@@ -48,6 +52,12 @@ fun main() {
     .connect("localhost", 10000)!!
     .sync()!!
     .channel()!!
+
+  channel.closeFuture().addListener {
+    group.shutdownGracefully()
+    log.warn {"客户端连接断开，终止程序"}
+    exitProcess(0)
+  }
 
   val scanner = Scanner(`in`)
   log.info {"请输入用户名："}
