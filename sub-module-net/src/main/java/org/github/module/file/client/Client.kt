@@ -51,30 +51,44 @@ fun main() {
 
   val scanner = Scanner(`in`)
   log.info {"请输入用户名："}
-  val user = scanner.next()!!
+  val user = scanner.nextLine()!!
   channel.writeAndFlush(LoginReq().apply {body = LoginReqProto.newBuilder().setUsername(user).setPassword(user).build()}, channel.voidPromise())
-  while (scanner.hasNext()) {
-    val cmd = scanner.next()!!
-    execute(cmd)
-  }
-
-  val path = "/Volumes/EXTRA/电影/教父三部曲/The.Godfather.Part.II.1974.mkv"
-  log.info {"文件【$path】下载开始"}
-  val name = getName(path)
-  if (exist(name)) {
-    RandomAccessFile(name, "r").use {
-      val offset = it.length()
-      channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setOffset(offset).setPath(path).build()}, channel.voidPromise())
-    }
-  } else {
-    channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
-  }
-  channel.closeFuture().addListener {group.shutdownGracefully()}.sync()
-  log.info {"文件【$path】下载完成"}
+  exec(scanner, channel)
+  channel.close().sync()
+  group.shutdownGracefully()
 }
 
-fun execute(cmd: String) {
-  TODO("实现$cmd")
+private fun exec(scanner: Scanner, channel: Channel) {
+  while (scanner.hasNextLine()) {
+    val cmd = scanner.nextLine()!!
+    val list = cmd.split(',')
+    when (list[0]) {
+      "FileDownload" -> {
+        val path = list[1]
+        log.info {"文件【$path】下载开始"}
+
+        val name = getName(path)!!
+        if (exist(name)) {
+          RandomAccessFile(name, "r").use {
+            val offset = it.length()
+            channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setOffset(offset).setPath(path).build()}, channel.voidPromise())
+          }
+        } else {
+          channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
+        }
+        log.info {"文件【$path】下载完成"}
+      }
+      "Chat"         -> {}
+      "CreateGroup"  -> {}
+      "JoinGroup"    -> {}
+      "ExitGroup"    -> {}
+      "GroupChat"    -> {}
+      "Quit"         -> {}
+      else           -> {
+        return
+      }
+    }
+  }
 }
 
 val log = "client".log
