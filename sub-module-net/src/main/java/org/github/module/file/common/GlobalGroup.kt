@@ -12,6 +12,7 @@ import org.github.netty.ops.mark
 import org.github.ops.log
 import org.github.ops.warn
 import org.springframework.stereotype.Component
+import java.util.function.Consumer
 
 @Component
 class GlobalGroup: DefaultChannelGroup("global-group", INSTANCE) {
@@ -33,6 +34,14 @@ class GlobalGroup: DefaultChannelGroup("global-group", INSTANCE) {
       }
     }
     return null
+  }
+
+  fun each(consumer: Consumer<Channel>, matcher: ChannelMatcher) {
+    TODO()
+  }
+
+  fun createGroup(name: String, members: Set<String>) {
+    TODO()
   }
 
   companion object {

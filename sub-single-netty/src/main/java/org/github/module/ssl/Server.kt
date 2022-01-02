@@ -2,24 +2,22 @@ package org.github.module.ssl
 
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.Channel
-import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.ChannelInitializer
-import io.netty.channel.ChannelOption.*
+import io.netty.channel.ChannelOption.SO_REUSEADDR
 import io.netty.channel.group.ChannelMatcher
-import io.netty.channel.group.ChannelMatchers.*
-import io.netty.handler.logging.LogLevel.*
+import io.netty.channel.group.ChannelMatchers.isNot
+import io.netty.channel.group.DefaultChannelGroup
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
-import io.netty.util.concurrent.GlobalEventExecutor.*
+import io.netty.util.concurrent.GlobalEventExecutor.INSTANCE
 import org.github.module.ssl.codec.ServerDecoder
 import org.github.module.ssl.codec.ServerEncoder
 import org.github.module.ssl.codec.toByteBuf
 import org.github.netty.decoder.LineDecoder
-import org.github.netty.group.NativeChannelGroup
-import org.github.netty.group.NativeChannelGroupImpl
-import org.github.netty.handler.ReadWriteHexHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.serverSocketChannel
 
@@ -33,11 +31,10 @@ fun main() {
   // val readWriteInfoHandler = ReadWriteInfoHandler(Function { it.toString().trim() })
   val decoder = ServerDecoder()
   val encoder = ServerEncoder()
-  val readWriteHexHandler = ReadWriteHexHandler()
 
   val boss = eventLoopGroup(2, DefaultThreadFactory("ssl-server-boss"))
   val worker = eventLoopGroup(0, DefaultThreadFactory("ssl-server-worker"))
-  val group = NativeChannelGroupImpl(INSTANCE)
+  val group = DefaultChannelGroup(INSTANCE)
   val serverHandler = ServerHandler(group)
 
   val bootstrap = ServerBootstrap()
@@ -51,7 +48,6 @@ fun main() {
           // addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
           addLast(LineDecoder(1024))
-          addLast(readWriteHexHandler)
           addLast(decoder)
           addLast(encoder)
           // addLast(readWriteInfoHandler)
@@ -65,7 +61,7 @@ fun main() {
 }
 
 @Sharable
-class ServerHandler(private val group: NativeChannelGroup): ChannelInboundHandlerAdapter() {
+class ServerHandler(private val group: DefaultChannelGroup): ChannelInboundHandlerAdapter() {
   override fun channelActive(ctx: ChannelHandlerContext) {
     group.add(ctx.channel())
   }
@@ -80,7 +76,7 @@ class ServerHandler(private val group: NativeChannelGroup): ChannelInboundHandle
   }
 }
 
-fun NativeChannelGroup.writeAndFlush(matcher: ChannelMatcher, message: CharSequence) {
+fun DefaultChannelGroup.writeAndFlush(matcher: ChannelMatcher, message: CharSequence) {
   writeAndFlush(message.toByteBuf(), matcher, true)
 }
 

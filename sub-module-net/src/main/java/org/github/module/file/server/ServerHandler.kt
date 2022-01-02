@@ -1,8 +1,8 @@
 package org.github.module.file.server
 
+import io.netty.channel.ChannelDuplexHandler
 import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
-import io.netty.channel.ChannelInboundHandlerAdapter
 import org.github.module.file.common.handler.InputHandler
 import org.github.module.file.common.handler.MsgHandler
 import org.github.module.file.common.handler.ServerMsgHandler
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @Sharable
-class ServerHandler(val handlers: List<ServerMsgHandler>): ChannelInboundHandlerAdapter(), InputHandler {
+class ServerHandler(val handlers: List<ServerMsgHandler>): ChannelDuplexHandler(), InputHandler {
   override val log = logger
   override val list: List<MsgHandler> get() = handlers
 

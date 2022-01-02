@@ -11,8 +11,6 @@ import io.netty.handler.ssl.SslContext
 import io.netty.handler.ssl.SslContextBuilder.forClient
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.netty.decoder.LineDecoder
-import org.github.netty.handler.ReadWriteHexHandler
-import org.github.netty.handler.ReadWriteInfoHandler
 import org.github.netty.ops.eventLoopGroup
 import org.github.netty.ops.socketChannel
 import java.io.File
@@ -26,11 +24,9 @@ fun main() {
   val sslCtx: SslContext = forClient().keyManager(clientCrt, clientKey).trustManager(ca).build()
 
   val loggingHandler = LoggingHandler(TRACE)
-  val readWriteInfoHandler = ReadWriteInfoHandler {it.toString().trim()}
   val stringDecoder = StringDecoder(UTF_8)
   val stringEncoder = StringEncoder(UTF_8)
   val clientHandler = ClientHandler()
-  val readWriteHexHandler = ReadWriteHexHandler()
 
   val group = eventLoopGroup(1, DefaultThreadFactory("ssl-client"))
   val listener = ChannelFutureListener {group.shutdownGracefully()}
@@ -44,10 +40,8 @@ fun main() {
           addLast(sslCtx.newHandler(ch.alloc()))
           addLast(loggingHandler)
           addLast(LineDecoder(1024, false))
-          addLast(readWriteHexHandler)
           addLast(stringDecoder)
           addLast(stringEncoder)
-          addLast(readWriteInfoHandler)
           addLast(clientHandler)
         }
       }

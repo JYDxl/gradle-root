@@ -1,5 +1,5 @@
 package org.github.netty.ops
 
 interface Group {
-  val id: String
+  val ids: Set<String>
 }
