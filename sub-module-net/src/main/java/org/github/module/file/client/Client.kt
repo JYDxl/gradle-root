@@ -86,7 +86,6 @@ private fun exec(scanner: Scanner, channel: Channel) {
         } else {
           channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
         }
-        log.info {"文件【$path】下载完成"}
       }
       "Chat"         -> {}
       "CreateGroup"  -> {}
@@ -95,7 +94,7 @@ private fun exec(scanner: Scanner, channel: Channel) {
       "GroupChat"    -> {}
       "Quit"         -> {}
       else           -> {
-        return
+        log.warn {"无效命令：$cmd"}
       }
     }
   }
