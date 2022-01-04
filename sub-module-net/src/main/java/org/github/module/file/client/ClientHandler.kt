@@ -11,9 +11,7 @@ import org.github.module.file.common.handler.ClientMsgHandler
 import org.github.module.file.common.handler.InputHandler
 import org.github.module.file.common.handler.MsgHandler
 import org.github.ops.log
-import org.springframework.stereotype.Component
 
-@Component
 @Sharable
 class ClientHandler(val handlers: List<ClientMsgHandler>): ChannelDuplexHandler(), InputHandler {
   override val log = logger

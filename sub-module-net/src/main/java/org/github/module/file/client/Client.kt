@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList.of
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
+import io.netty.channel.ChannelOption.CONNECT_TIMEOUT_MILLIS
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.timeout.IdleStateHandler
@@ -38,6 +39,7 @@ fun main() {
   val channel = Bootstrap()
     .group(group)!!
     .channel(socketChannel)!!
+    .option(CONNECT_TIMEOUT_MILLIS, 1000)!!
     .handler(object: ChannelInitializer<Channel>() {
       override fun initChannel(ch: Channel) {
         ch.pipeline()!!.apply {

@@ -32,4 +32,4 @@ appender("problem", RollingFileAppender) {
 
 logger("org.github", DEBUG)
 logger("io.netty", DEBUG)
-root(DEBUG, ["console", "records", "problem"])
+root(INFO, ["console", "records", "problem"])

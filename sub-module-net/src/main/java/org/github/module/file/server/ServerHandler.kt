@@ -13,10 +13,8 @@ import org.github.netty.ops.info
 import org.github.ops.info
 import org.github.ops.log
 import org.github.ops.warn
-import org.springframework.stereotype.Component
 import java.util.concurrent.TimeUnit.SECONDS
 
-@Component
 @Sharable
 class ServerHandler(val handlers: List<ServerMsgHandler>): ChannelDuplexHandler(), InputHandler {
   override val log = logger

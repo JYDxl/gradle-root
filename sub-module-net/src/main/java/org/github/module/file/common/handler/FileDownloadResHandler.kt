@@ -8,10 +8,8 @@ import org.github.module.file.common.dto.protocol.FileDownloadRes
 import org.github.netty.ops.beforeRelease
 import org.github.ops.info
 import org.github.ops.log
-import org.springframework.stereotype.Component
 import java.io.RandomAccessFile
 
-@Component
 class FileDownloadResHandler: BaseHandler<FileDownloadRes>(), ClientMsgHandler {
   override fun handle(ctx: ChannelHandlerContext, input: Any) {
     val msg = type.cast(input)!!

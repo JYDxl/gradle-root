@@ -11,10 +11,8 @@ import org.github.netty.ops.info
 import org.github.netty.ops.mark
 import org.github.ops.log
 import org.github.ops.warn
-import org.springframework.stereotype.Component
 import java.util.function.Consumer
 
-@Component
 class GlobalGroup: DefaultChannelGroup("global-group", INSTANCE) {
   override fun add(element: Channel): Boolean {
     if (!element.hasMark) return false
