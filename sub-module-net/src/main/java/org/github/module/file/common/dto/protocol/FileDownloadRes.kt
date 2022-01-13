@@ -19,7 +19,7 @@ class FileDownloadRes: CommonMsg<FileDownloadResProto>() {
     cmd = FILE_DOWNLOAD_RES
   }
 
-  override fun fill(buf: ByteBuf, channel: Channel) {
+  override fun toProtoBuf(buf: ByteBuf, channel: Channel) {
     val bodyLen = buf.getInt(CMD_LENGTH + LEN_LENGTH)
     hex = hexDump(buf, 0, CMD_LENGTH + LEN_LENGTH + FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bodyLen).uppercase()
     cmd = parse(buf.readUnsignedByte().toInt())

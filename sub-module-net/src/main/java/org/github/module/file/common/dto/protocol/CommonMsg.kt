@@ -16,8 +16,8 @@ abstract class CommonMsg<T: Message>: Msg(), Input, Output {
 
   lateinit var body: T
 
-  override fun fill(buf: ByteBuf, channel: Channel) {
-    super.fill(buf, channel)
+  override fun toProtoBuf(buf: ByteBuf, channel: Channel) {
+    super.toProtoBuf(buf, channel)
     body = invokeStatic(getMethod(type, "parseFrom", ByteBuffer::class.java), buf.nioBuffer())
   }
 

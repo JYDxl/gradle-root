@@ -23,7 +23,7 @@ class MsgCodec: MessageToMessageCodec<ByteBuf, Msg>() {
   override fun decode(ctx: ChannelHandlerContext, input: ByteBuf, out: MutableList<Any>) {
     val cmd = input.getUnsignedByte(0).toInt()
     val msg = parse(cmd).clazz.createInstance()
-    msg.fill(input, ctx.channel())
+    msg.toProtoBuf(input, ctx.channel())
     out.add(msg)
     log.info {"从对象【${ctx.channel().info}】接收到数据: $msg"}
   }

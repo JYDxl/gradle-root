@@ -22,7 +22,7 @@ abstract class Msg: Input, Output {
     return "【${cmd.desc}】 cid=$cid, hex=$hex, cmd=${cmd.cmd}, len=$len, data="
   }
 
-  override fun fill(buf: ByteBuf, channel: Channel) {
+  override fun toProtoBuf(buf: ByteBuf, channel: Channel) {
     hex = hexDump(buf).uppercase()
     cmd = parse(buf.readUnsignedByte().toInt())
     len = buf.readLong()
@@ -39,7 +39,7 @@ abstract class Msg: Input, Output {
 }
 
 interface Input {
-  fun fill(buf: ByteBuf, channel: Channel)
+  fun toProtoBuf(buf: ByteBuf, channel: Channel)
 }
 
 interface Output {
