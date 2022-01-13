@@ -25,16 +25,28 @@ public final class FileProto {
     long getOffset();
 
     /**
-     * <code>string path = 2;</code>
-     * @return The path.
+     * <code>string src = 2;</code>
+     * @return The src.
      */
-    java.lang.String getPath();
+    java.lang.String getSrc();
     /**
-     * <code>string path = 2;</code>
-     * @return The bytes for path.
+     * <code>string src = 2;</code>
+     * @return The bytes for src.
      */
     com.google.protobuf.ByteString
-        getPathBytes();
+        getSrcBytes();
+
+    /**
+     * <code>string des = 3;</code>
+     * @return The des.
+     */
+    java.lang.String getDes();
+    /**
+     * <code>string des = 3;</code>
+     * @return The bytes for des.
+     */
+    com.google.protobuf.ByteString
+        getDesBytes();
   }
   /**
    * Protobuf type {@code FileDownloadReqProto}
@@ -49,7 +61,8 @@ public final class FileProto {
       super(builder);
     }
     private FileDownloadReqProto() {
-      path_ = "";
+      src_ = "";
+      des_ = "";
     }
 
     @java.lang.Override
@@ -90,7 +103,13 @@ public final class FileProto {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              path_ = s;
+              src_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              des_ = s;
               break;
             }
             default: {
@@ -136,38 +155,76 @@ public final class FileProto {
       return offset_;
     }
 
-    public static final int PATH_FIELD_NUMBER = 2;
-    private volatile java.lang.Object path_;
+    public static final int SRC_FIELD_NUMBER = 2;
+    private volatile java.lang.Object src_;
     /**
-     * <code>string path = 2;</code>
-     * @return The path.
+     * <code>string src = 2;</code>
+     * @return The src.
      */
     @java.lang.Override
-    public java.lang.String getPath() {
-      java.lang.Object ref = path_;
+    public java.lang.String getSrc() {
+      java.lang.Object ref = src_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        path_ = s;
+        src_ = s;
         return s;
       }
     }
     /**
-     * <code>string path = 2;</code>
-     * @return The bytes for path.
+     * <code>string src = 2;</code>
+     * @return The bytes for src.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getPathBytes() {
-      java.lang.Object ref = path_;
+        getSrcBytes() {
+      java.lang.Object ref = src_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        path_ = b;
+        src_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DES_FIELD_NUMBER = 3;
+    private volatile java.lang.Object des_;
+    /**
+     * <code>string des = 3;</code>
+     * @return The des.
+     */
+    @java.lang.Override
+    public java.lang.String getDes() {
+      java.lang.Object ref = des_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        des_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string des = 3;</code>
+     * @return The bytes for des.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getDesBytes() {
+      java.lang.Object ref = des_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        des_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -191,8 +248,11 @@ public final class FileProto {
       if (offset_ != 0L) {
         output.writeInt64(1, offset_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, path_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(src_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, src_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(des_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, des_);
       }
       unknownFields.writeTo(output);
     }
@@ -207,8 +267,11 @@ public final class FileProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, offset_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, path_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(src_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, src_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(des_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, des_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -227,8 +290,10 @@ public final class FileProto {
 
       if (getOffset()
           != other.getOffset()) return false;
-      if (!getPath()
-          .equals(other.getPath())) return false;
+      if (!getSrc()
+          .equals(other.getSrc())) return false;
+      if (!getDes()
+          .equals(other.getDes())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -243,8 +308,10 @@ public final class FileProto {
       hash = (37 * hash) + OFFSET_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getOffset());
-      hash = (37 * hash) + PATH_FIELD_NUMBER;
-      hash = (53 * hash) + getPath().hashCode();
+      hash = (37 * hash) + SRC_FIELD_NUMBER;
+      hash = (53 * hash) + getSrc().hashCode();
+      hash = (37 * hash) + DES_FIELD_NUMBER;
+      hash = (53 * hash) + getDes().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -380,7 +447,9 @@ public final class FileProto {
         super.clear();
         offset_ = 0L;
 
-        path_ = "";
+        src_ = "";
+
+        des_ = "";
 
         return this;
       }
@@ -409,7 +478,8 @@ public final class FileProto {
       public org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto buildPartial() {
         org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto result = new org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto(this);
         result.offset_ = offset_;
-        result.path_ = path_;
+        result.src_ = src_;
+        result.des_ = des_;
         onBuilt();
         return result;
       }
@@ -461,8 +531,12 @@ public final class FileProto {
         if (other.getOffset() != 0L) {
           setOffset(other.getOffset());
         }
-        if (!other.getPath().isEmpty()) {
-          path_ = other.path_;
+        if (!other.getSrc().isEmpty()) {
+          src_ = other.src_;
+          onChanged();
+        }
+        if (!other.getDes().isEmpty()) {
+          des_ = other.des_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -525,78 +599,154 @@ public final class FileProto {
         return this;
       }
 
-      private java.lang.Object path_ = "";
+      private java.lang.Object src_ = "";
       /**
-       * <code>string path = 2;</code>
-       * @return The path.
+       * <code>string src = 2;</code>
+       * @return The src.
        */
-      public java.lang.String getPath() {
-        java.lang.Object ref = path_;
+      public java.lang.String getSrc() {
+        java.lang.Object ref = src_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          path_ = s;
+          src_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string path = 2;</code>
-       * @return The bytes for path.
+       * <code>string src = 2;</code>
+       * @return The bytes for src.
        */
       public com.google.protobuf.ByteString
-          getPathBytes() {
-        java.lang.Object ref = path_;
+          getSrcBytes() {
+        java.lang.Object ref = src_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          path_ = b;
+          src_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string path = 2;</code>
-       * @param value The path to set.
+       * <code>string src = 2;</code>
+       * @param value The src to set.
        * @return This builder for chaining.
        */
-      public Builder setPath(
+      public Builder setSrc(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        path_ = value;
+        src_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string path = 2;</code>
+       * <code>string src = 2;</code>
        * @return This builder for chaining.
        */
-      public Builder clearPath() {
+      public Builder clearSrc() {
         
-        path_ = getDefaultInstance().getPath();
+        src_ = getDefaultInstance().getSrc();
         onChanged();
         return this;
       }
       /**
-       * <code>string path = 2;</code>
-       * @param value The bytes for path to set.
+       * <code>string src = 2;</code>
+       * @param value The bytes for src to set.
        * @return This builder for chaining.
        */
-      public Builder setPathBytes(
+      public Builder setSrcBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        path_ = value;
+        src_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object des_ = "";
+      /**
+       * <code>string des = 3;</code>
+       * @return The des.
+       */
+      public java.lang.String getDes() {
+        java.lang.Object ref = des_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          des_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string des = 3;</code>
+       * @return The bytes for des.
+       */
+      public com.google.protobuf.ByteString
+          getDesBytes() {
+        java.lang.Object ref = des_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          des_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string des = 3;</code>
+       * @param value The des to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDes(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        des_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string des = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDes() {
+        
+        des_ = getDefaultInstance().getDes();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string des = 3;</code>
+       * @param value The bytes for des to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        des_ = value;
         onChanged();
         return this;
       }
@@ -670,16 +820,16 @@ public final class FileProto {
     long getLength();
 
     /**
-     * <code>string name = 3;</code>
-     * @return The name.
+     * <code>string path = 3;</code>
+     * @return The path.
      */
-    java.lang.String getName();
+    java.lang.String getPath();
     /**
-     * <code>string name = 3;</code>
-     * @return The bytes for name.
+     * <code>string path = 3;</code>
+     * @return The bytes for path.
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+        getPathBytes();
   }
   /**
    * Protobuf type {@code FileDownloadResProto}
@@ -694,7 +844,7 @@ public final class FileProto {
       super(builder);
     }
     private FileDownloadResProto() {
-      name_ = "";
+      path_ = "";
     }
 
     @java.lang.Override
@@ -740,7 +890,7 @@ public final class FileProto {
             case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = s;
+              path_ = s;
               break;
             }
             default: {
@@ -797,38 +947,38 @@ public final class FileProto {
       return length_;
     }
 
-    public static final int NAME_FIELD_NUMBER = 3;
-    private volatile java.lang.Object name_;
+    public static final int PATH_FIELD_NUMBER = 3;
+    private volatile java.lang.Object path_;
     /**
-     * <code>string name = 3;</code>
-     * @return The name.
+     * <code>string path = 3;</code>
+     * @return The path.
      */
     @java.lang.Override
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public java.lang.String getPath() {
+      java.lang.Object ref = path_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        name_ = s;
+        path_ = s;
         return s;
       }
     }
     /**
-     * <code>string name = 3;</code>
-     * @return The bytes for name.
+     * <code>string path = 3;</code>
+     * @return The bytes for path.
      */
     @java.lang.Override
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getPathBytes() {
+      java.lang.Object ref = path_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        path_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -855,8 +1005,8 @@ public final class FileProto {
       if (length_ != 0L) {
         output.writeFixed64(2, length_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, name_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, path_);
       }
       unknownFields.writeTo(output);
     }
@@ -875,8 +1025,8 @@ public final class FileProto {
         size += com.google.protobuf.CodedOutputStream
           .computeFixed64Size(2, length_);
       }
-      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(name_)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, name_);
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(path_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, path_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -897,8 +1047,8 @@ public final class FileProto {
           != other.getOffset()) return false;
       if (getLength()
           != other.getLength()) return false;
-      if (!getName()
-          .equals(other.getName())) return false;
+      if (!getPath()
+          .equals(other.getPath())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -916,8 +1066,8 @@ public final class FileProto {
       hash = (37 * hash) + LENGTH_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getLength());
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + PATH_FIELD_NUMBER;
+      hash = (53 * hash) + getPath().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1055,7 +1205,7 @@ public final class FileProto {
 
         length_ = 0L;
 
-        name_ = "";
+        path_ = "";
 
         return this;
       }
@@ -1085,7 +1235,7 @@ public final class FileProto {
         org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadResProto result = new org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadResProto(this);
         result.offset_ = offset_;
         result.length_ = length_;
-        result.name_ = name_;
+        result.path_ = path_;
         onBuilt();
         return result;
       }
@@ -1140,8 +1290,8 @@ public final class FileProto {
         if (other.getLength() != 0L) {
           setLength(other.getLength());
         }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
+        if (!other.getPath().isEmpty()) {
+          path_ = other.path_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1235,78 +1385,78 @@ public final class FileProto {
         return this;
       }
 
-      private java.lang.Object name_ = "";
+      private java.lang.Object path_ = "";
       /**
-       * <code>string name = 3;</code>
-       * @return The name.
+       * <code>string path = 3;</code>
+       * @return The path.
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public java.lang.String getPath() {
+        java.lang.Object ref = path_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          name_ = s;
+          path_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string name = 3;</code>
-       * @return The bytes for name.
+       * <code>string path = 3;</code>
+       * @return The bytes for path.
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getPathBytes() {
+        java.lang.Object ref = path_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          path_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string name = 3;</code>
-       * @param value The name to set.
+       * <code>string path = 3;</code>
+       * @param value The path to set.
        * @return This builder for chaining.
        */
-      public Builder setName(
+      public Builder setPath(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        name_ = value;
+        path_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string name = 3;</code>
+       * <code>string path = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearName() {
+      public Builder clearPath() {
         
-        name_ = getDefaultInstance().getName();
+        path_ = getDefaultInstance().getPath();
         onChanged();
         return this;
       }
       /**
-       * <code>string name = 3;</code>
-       * @param value The bytes for name to set.
+       * <code>string path = 3;</code>
+       * @param value The bytes for path to set.
        * @return This builder for chaining.
        */
-      public Builder setNameBytes(
+      public Builder setPathBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        name_ = value;
+        path_ = value;
         onChanged();
         return this;
       }
@@ -10430,28 +10580,28 @@ public final class FileProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nfile.proto\"4\n\024FileDownloadReqProto\022\016\n\006" +
-      "offset\030\001 \001(\003\022\014\n\004path\030\002 \001(\t\"D\n\024FileDownlo" +
-      "adResProto\022\016\n\006offset\030\001 \001(\006\022\016\n\006length\030\002 \001" +
-      "(\006\022\014\n\004name\030\003 \001(\t\"3\n\rLoginReqProto\022\020\n\010use" +
-      "rname\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\"1\n\rLoginRe" +
-      "sProto\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t" +
-      "\"9\n\014ChatReqProto\022\014\n\004from\030\001 \001(\t\022\n\n\002to\030\002 \001" +
-      "(\t\022\017\n\007content\030\003 \001(\t\"0\n\014ChatResProto\022\017\n\007s" +
-      "uccess\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"4\n\023CreateG" +
-      "roupReqProto\022\014\n\004name\030\001 \001(\t\022\017\n\007members\030\002 " +
-      "\001(\t\"7\n\023CreateGroupResProto\022\017\n\007success\030\001 " +
-      "\001(\010\022\017\n\007message\030\002 \001(\t\"!\n\021JoinGroupReqProt" +
-      "o\022\014\n\004name\030\001 \001(\t\"5\n\021JoinGroupResProto\022\017\n\007" +
-      "success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"!\n\021ExitGr" +
-      "oupReqProto\022\014\n\004name\030\001 \001(\t\"5\n\021ExitGroupRe" +
-      "sProto\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t" +
-      "\"@\n\021GroupChatReqProto\022\014\n\004from\030\001 \001(\t\022\014\n\004n" +
-      "ame\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\"\016\n\014QuitReqPro" +
-      "to\"0\n\014QuitResProto\022\017\n\007success\030\001 \001(\010\022\017\n\007m" +
-      "essage\030\002 \001(\t\"\023\n\021HeartBeatReqProtoB@\n3org" +
-      ".github.module.file.common.dto.protocol." +
-      "protobufB\tFileProtob\006proto3"
+      "\n\nfile.proto\"@\n\024FileDownloadReqProto\022\016\n\006" +
+      "offset\030\001 \001(\003\022\013\n\003src\030\002 \001(\t\022\013\n\003des\030\003 \001(\t\"D" +
+      "\n\024FileDownloadResProto\022\016\n\006offset\030\001 \001(\006\022\016" +
+      "\n\006length\030\002 \001(\006\022\014\n\004path\030\003 \001(\t\"3\n\rLoginReq" +
+      "Proto\022\020\n\010username\030\001 \001(\t\022\020\n\010password\030\002 \001(" +
+      "\t\"1\n\rLoginResProto\022\017\n\007success\030\001 \001(\010\022\017\n\007m" +
+      "essage\030\002 \001(\t\"9\n\014ChatReqProto\022\014\n\004from\030\001 \001" +
+      "(\t\022\n\n\002to\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\"0\n\014ChatR" +
+      "esProto\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(" +
+      "\t\"4\n\023CreateGroupReqProto\022\014\n\004name\030\001 \001(\t\022\017" +
+      "\n\007members\030\002 \001(\t\"7\n\023CreateGroupResProto\022\017" +
+      "\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"!\n\021Join" +
+      "GroupReqProto\022\014\n\004name\030\001 \001(\t\"5\n\021JoinGroup" +
+      "ResProto\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 \001" +
+      "(\t\"!\n\021ExitGroupReqProto\022\014\n\004name\030\001 \001(\t\"5\n" +
+      "\021ExitGroupResProto\022\017\n\007success\030\001 \001(\010\022\017\n\007m" +
+      "essage\030\002 \001(\t\"@\n\021GroupChatReqProto\022\014\n\004fro" +
+      "m\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\017\n\007content\030\003 \001(\t\"\016" +
+      "\n\014QuitReqProto\"0\n\014QuitResProto\022\017\n\007succes" +
+      "s\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\"\023\n\021HeartBeatReq" +
+      "ProtoB@\n3org.github.module.file.common.d" +
+      "to.protocol.protobufB\tFileProtob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -10462,13 +10612,13 @@ public final class FileProto {
     internal_static_FileDownloadReqProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FileDownloadReqProto_descriptor,
-        new java.lang.String[] { "Offset", "Path", });
+        new java.lang.String[] { "Offset", "Src", "Des", });
     internal_static_FileDownloadResProto_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_FileDownloadResProto_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FileDownloadResProto_descriptor,
-        new java.lang.String[] { "Offset", "Length", "Name", });
+        new java.lang.String[] { "Offset", "Length", "Path", });
     internal_static_LoginReqProto_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_LoginReqProto_fieldAccessorTable = new

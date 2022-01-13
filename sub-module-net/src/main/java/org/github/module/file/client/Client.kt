@@ -1,7 +1,6 @@
 package org.github.module.file.client
 
 import cn.hutool.core.io.FileUtil.exist
-import cn.hutool.core.io.FileUtil.getName
 import com.google.common.collect.ImmutableList.of
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
@@ -15,7 +14,7 @@ import org.github.module.file.common.codec.MsgCodec
 import org.github.module.file.common.codec.MsgFrameDecoder
 import org.github.module.file.common.dto.protocol.FileDownloadReq
 import org.github.module.file.common.dto.protocol.LoginReq
-import org.github.module.file.common.dto.protocol.protobuf.FileProto.FileDownloadReqProto
+import org.github.module.file.common.dto.protocol.protobuf.FileProto
 import org.github.module.file.common.dto.protocol.protobuf.FileProto.LoginReqProto
 import org.github.module.file.common.handler.FileDownloadResHandler
 import org.github.module.file.common.handler.LoginResHandler
@@ -76,17 +75,22 @@ private fun exec(scanner: Scanner, channel: Channel) {
     val list = cmd.split(',')
     when (list[0]) {
       "FileDownload" -> {
-        val path = list[1]
-        log.info {"文件【$path】下载开始"}
+        val src = list[1]
+        val des = list[2]
+        log.info {"文件【$src】下载开始"}
 
-        val name = getName(path)!!
-        if (exist(name)) {
-          RandomAccessFile(name, "r").use {
-            val offset = it.length()
-            channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setOffset(offset).setPath(path).build()}, channel.voidPromise())
+        if (!exist(des)) {
+          val tmp = "$des.tmp"
+          if (exist(tmp)) {
+            RandomAccessFile(tmp, "r").use {
+              val offset = it.length()
+              channel.writeAndFlush(FileDownloadReq().apply {body = FileProto.FileDownloadReqProto.newBuilder().setOffset(offset).setSrc(src).setDes(des).build()}, channel.voidPromise())
+            }
+          } else {
+            channel.writeAndFlush(FileDownloadReq().apply {body = FileProto.FileDownloadReqProto.newBuilder().setSrc(src).setDes(des).build()}, channel.voidPromise())
           }
         } else {
-          channel.writeAndFlush(FileDownloadReq().apply {body = FileDownloadReqProto.newBuilder().setPath(path).build()}, channel.voidPromise())
+          log.info {"文件【$src】下载完成"}
         }
       }
       "Chat"         -> {}

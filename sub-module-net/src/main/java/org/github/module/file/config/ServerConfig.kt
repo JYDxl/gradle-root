@@ -58,6 +58,6 @@ class ServerConfig {
       .bind(10000).sync().channel().closeFuture()!!
       .addListener {worker.shutdownGracefully(); boss.shutdownGracefully()}!!
       .channel()!!
-      .apply {markAttr.getAndSet(Device("server", id().asShortText()));globalGroup.add(this)}
+      .apply {markAttr.getAndSet(Device("file-server", id().asShortText()));globalGroup.add(this)}
   }
 }

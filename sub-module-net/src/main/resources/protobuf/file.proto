@@ -5,13 +5,14 @@ option java_outer_classname = "FileProto";
 
 message FileDownloadReqProto{
   int64 offset = 1;
-  string path = 2;
+  string src = 2;
+  string des = 3;
 }
 
 message FileDownloadResProto{
   fixed64 offset = 1;
   fixed64 length = 2;
-  string name = 3;
+  string path = 3;
 }
 
 message LoginReqProto{

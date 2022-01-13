@@ -1,6 +1,5 @@
 package org.github.module.file.common.handler
 
-import cn.hutool.core.io.FileUtil.getName
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.DefaultFileRegion
 import org.github.module.file.common.CMD_LENGTH
@@ -17,23 +16,23 @@ import java.io.RandomAccessFile
 class FileDownloadReqHandler: BaseHandler<FileDownloadReq>(), ServerMsgHandler {
   override fun handle(ctx: ChannelHandlerContext, input: Any) {
     val msg = type.cast(input)!!.body
-    val path = msg.path!!
+    val src = msg.src!!
     val oldOffset = msg.offset
-    val name = getName(path)!!
-    val bodyLen = FileDownloadResProto.newBuilder().setOffset(1).setLength(1).setName(name).build().toByteArray().size
+    val path = msg.des!!
+    val bodyLen = FileDownloadResProto.newBuilder().setOffset(1).setLength(1).setPath(path).build().toByteArray().size
     val maxFileLen = MAX_LENGTH - (CMD_LENGTH + LEN_LENGTH + FILE_DOWNLOAD_RES_MSG_BODY_LENGTH + bodyLen)
-    getFile(path).use {
+    getFile(src).use {
       val length = it.length() - oldOffset
       val num = length / maxFileLen
       val res = length % maxFileLen
       0.until(num).forEach {idx ->
         val newOffset = idx * maxFileLen + oldOffset
-        ctx.write(FileDownloadRes().apply {body = FileDownloadResProto.newBuilder().setOffset(newOffset + 1).setLength(maxFileLen).setName(name).build()}, ctx.voidPromise())
-        ctx.write(DefaultFileRegion(getFile(path).channel, newOffset, maxFileLen), ctx.voidPromise())
+        ctx.write(FileDownloadRes().apply {body = FileDownloadResProto.newBuilder().setOffset(newOffset + 1).setLength(maxFileLen).setPath(path).build()}, ctx.voidPromise())
+        ctx.write(DefaultFileRegion(getFile(src).channel, newOffset, maxFileLen), ctx.voidPromise())
       }
       val newOffset = length - res + oldOffset
-      ctx.write(FileDownloadRes().apply {body = FileDownloadResProto.newBuilder().setOffset(newOffset + 1).setLength(res).setName(name).build()}, ctx.voidPromise())
-      ctx.write(DefaultFileRegion(getFile(path).channel, newOffset, res), ctx.voidPromise())
+      ctx.write(FileDownloadRes().apply {body = FileDownloadResProto.newBuilder().setOffset(newOffset + 1).setLength(res).setPath(path).build()}, ctx.voidPromise())
+      ctx.write(DefaultFileRegion(getFile(src).channel, newOffset, res), ctx.voidPromise())
     }
   }
 
