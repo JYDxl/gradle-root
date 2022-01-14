@@ -13,7 +13,7 @@ internal class FileDownloadResTest {
 
   @Test
   fun testNew() {
-    val proto = FileDownloadResProto.newBuilder().setName("test.txt").setOffset(0).setLength(100).build()!!
+    val proto = FileDownloadResProto.newBuilder().setPath("test.txt").setOffset(0).setLength(100).build()!!
     val req = FileDownloadRes().apply {body = proto}
     val buf = req.toByteBuf(DEFAULT, EmbeddedChannel())
     buf.beforeRelease {log.info {req}}

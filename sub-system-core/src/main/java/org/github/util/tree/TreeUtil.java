@@ -10,18 +10,21 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Multimaps.*;
 import static com.google.common.collect.TreeMultimap.*;
 import static java.util.Optional.*;
+import static org.github.util.FuncUtil.*;
 
 public abstract class TreeUtil {
   public static <T extends TreeNode<I,E>, I, E> @NonNull List<T> buildTree(@NonNull List<T> list, I pid) {
-    val index = index(list, T::getPid);
+    val func  = optional(T::getPid);
+    val index = index(list, func::apply);
     val root  = index.get(ofNullable(pid));
     recursion(root, index);
     return root;
   }
 
   public static <T extends TreeNode<I,E>, I, E> @NonNull List<T> buildTree(@NonNull List<T> list, I pid, @NonNull Comparator<Optional<I>> keyComparator, @NonNull Comparator<T> valueComparator) {
+    val func     = optional(T::getPid);
     val index    = create(keyComparator, valueComparator);
-    val multimap = index(list, T::getPid);
+    val multimap = index(list, func::apply);
     index.putAll(multimap);
     val root = index.get(ofNullable(pid));
     recursion(root, index);

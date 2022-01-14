@@ -13,7 +13,7 @@ internal class FileDownloadReqTest {
 
   @Test
   fun testNew() {
-    val proto = FileDownloadReqProto.newBuilder().setPath("test.txt").build()!!
+    val proto = FileDownloadReqProto.newBuilder().setSrc("test.txt").build()!!
     val req = FileDownloadReq().apply {body = proto}
     val buf = req.toByteBuf(DEFAULT, EmbeddedChannel())
     buf.beforeRelease {log.info {req}}

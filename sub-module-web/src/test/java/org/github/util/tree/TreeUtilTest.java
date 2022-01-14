@@ -1,7 +1,6 @@
 package org.github.util.tree;
 
 import java.util.List;
-import java.util.Optional;
 import lombok.*;
 import lombok.extern.slf4j.*;
 import org.github.mysql.mydb.base.entity.TabSafeQuestionDataEntity;
@@ -32,13 +31,13 @@ class TreeUtilTest {
   ITabSafeQuestionDataService safeQuestionDataService;
 
   @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
-    val vo = new TreeVO(Optional.ofNullable(data.getQuestionTypeId()), requireNonNull(data.getId()), requireNonNull(data.getCheckContent()));
+    val vo = new TreeVO(data.getQuestionTypeId(), requireNonNull(data.getId()), requireNonNull(data.getCheckContent()));
     vo.setLeaf(true);
     return vo;
   }
 
   @NonNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
-    val vo = new TreeVO(Optional.ofNullable(type.getParentId()), requireNonNull(type.getId()), requireNonNull(type.getTypeName()));
+    val vo = new TreeVO(type.getParentId(), requireNonNull(type.getId()), requireNonNull(type.getTypeName()));
     vo.setLeaf(false);
     return vo;
   }
@@ -66,7 +65,7 @@ class TreeUtilTest {
 
   void reduceList(List<TreeVO> list) {
     val pidList = list.stream().map(TreeVO::getPid).collect(toImmutableList());
-    val subList = list.stream().filter(v -> !pidList.contains(Optional.of(v.getId()))).filter(v -> !v.isLeaf()).collect(toImmutableList());
+    val subList = list.stream().filter(v -> !pidList.contains(v.getId())).filter(v -> !v.isLeaf()).collect(toImmutableList());
     if (subList.isEmpty()) return;
     list.removeAll(subList);
     reduceList(list);

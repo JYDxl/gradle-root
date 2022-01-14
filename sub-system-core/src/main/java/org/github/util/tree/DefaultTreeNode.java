@@ -1,16 +1,20 @@
 package org.github.util.tree;
 
 import java.util.Collection;
-import java.util.Optional;
 import javax.annotation.Nullable;
 import lombok.*;
 
-@RequiredArgsConstructor
 @Data
 public class DefaultTreeNode<I, E> implements TreeNode<I,E> {
-  private @NonNull  Optional<I>                         pid;
+  private @Nullable I                                   pid;
   private @NonNull  I                                   id;
   private @NonNull  String                              name;
   private @Nullable E                                   extra;
   private @Nullable Collection<? extends TreeNode<I,E>> child;
+
+  public DefaultTreeNode(@Nullable I pid, @NonNull I id, @NonNull String name) {
+    this.pid  = pid;
+    this.id   = id;
+    this.name = name;
+  }
 }

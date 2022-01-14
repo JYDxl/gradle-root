@@ -90,7 +90,7 @@ private fun exec(scanner: Scanner, channel: Channel) {
             channel.writeAndFlush(FileDownloadReq().apply {body = FileProto.FileDownloadReqProto.newBuilder().setSrc(src).setDes(des).build()}, channel.voidPromise())
           }
         } else {
-          log.info {"文件【$src】下载完成"}
+          log.info {"文件【$src】已经存在"}
         }
       }
       "Chat"         -> {}
