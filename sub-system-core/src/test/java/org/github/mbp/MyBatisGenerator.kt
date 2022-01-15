@@ -16,7 +16,6 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator
 import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.OutputFile.*
 import com.baomidou.mybatisplus.generator.config.TemplateType.CONTROLLER
-import com.baomidou.mybatisplus.generator.config.TemplateType.XML
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import com.baomidou.mybatisplus.generator.fill.Column
 import org.github.base.Entity
@@ -109,7 +108,6 @@ fun mysqlMydb() {
 
   generator.templateConfig {it: TemplateConfig.Builder ->
     it.disable(CONTROLLER)
-      .disable(XML)
       .entity("/entity.java")
       .entityKt("/entity.kt")
       .mapper("/mapper.java")

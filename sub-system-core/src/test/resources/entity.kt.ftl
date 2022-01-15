@@ -1,3 +1,5 @@
+@file:Suppress("UnusedImport", "unused")
+
 package ${package.Entity}
 
 <#list table.importPackages as pkg>

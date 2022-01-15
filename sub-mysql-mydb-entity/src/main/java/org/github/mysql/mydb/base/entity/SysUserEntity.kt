@@ -1,3 +1,5 @@
+@file:Suppress("UnusedImport", "unused")
+
 package org.github.mysql.mydb.base.entity
 
 import com.baomidou.mybatisplus.annotation.FieldFill
