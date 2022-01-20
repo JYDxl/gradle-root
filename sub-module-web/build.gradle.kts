@@ -58,6 +58,7 @@ val shiroRedis: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val redisson: String by System.getProperties()
 val swagger: String by System.getProperties()
+val dynamic: String by System.getProperties()
 val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
@@ -90,6 +91,7 @@ dependencies {
   }
   implementation("redis.clients:jedis:$jedis")
   implementation("io.springfox:springfox-boot-starter:$swagger")
+  implementation("com.baomidou:dynamic-datasource-spring-boot-starter:$dynamic")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
