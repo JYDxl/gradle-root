@@ -1,6 +1,5 @@
 package org.github.spring.restful.view;
 
-import java.io.OutputStream;
 import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +18,6 @@ import static com.google.common.net.MediaType.*;
  */
 @FunctionalInterface
 public interface VIEW extends Returnable {
-  @Deprecated
   @Override
   default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     throw new UnsupportedOperationException();
@@ -30,21 +28,13 @@ public interface VIEW extends Returnable {
     return HTML_UTF_8;
   }
 
-  @Deprecated
   @Override
   default boolean functional() {
     throw new UnsupportedOperationException();
   }
 
-  @Deprecated
   @Override
   default void accept(@NonNull Writer writer) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Deprecated
-  @Override
-  default void accept(@NonNull OutputStream output) throws Exception {
     throw new UnsupportedOperationException();
   }
 

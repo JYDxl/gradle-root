@@ -1,11 +1,8 @@
 package org.github.spring.restful.json;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import org.github.exception.RemoteErrorException;
 import org.github.spring.restful.ops.Result;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import static org.github.spring.ops.SpringKt.*;
 import static org.github.spring.restful.ops.Result.*;
 
@@ -22,26 +19,16 @@ import static org.github.spring.restful.ops.Result.*;
 public class JSONReturn implements JSON {
   /** 返回的状态. */
   private          int    retCode;
-  /** HTTP状态码. */
-  @JsonIgnore
-  private          int    status;
   /** 返回的信息. */
   private @NonNull String retMsg;
 
   public JSONReturn() {
-    this(SUCCESS.getCode(), SUCCESS.getMsg(), SUCCESS.getStatus().value());
+    this(SUCCESS.getCode(), SUCCESS.getMsg());
   }
 
-  private JSONReturn(int retCode, @NonNull String retMsg, int status) {
+  private JSONReturn(int retCode, @NonNull String retMsg) {
     this.retCode = retCode;
     this.retMsg  = retMsg;
-    this.status  = status;
-  }
-
-  @Override
-  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    res.setStatus(status);
-    JSON.super.collect(req, res);
   }
 
   @Override
@@ -59,14 +46,8 @@ public class JSONReturn implements JSON {
     return get();
   }
 
-  @Deprecated
   public void setRetCode(int retCode) {
     this.retCode = retCode;
-  }
-
-  @Deprecated
-  public void setStatus(int status) {
-    this.status = status;
   }
 
   public void throwIfFailed() throws RemoteErrorException {
@@ -94,7 +75,7 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   public static @NonNull JSONReturn of(Result result) {
-    return new JSONReturn(result.getCode(), result.getMsg(), result.getStatus().value());
+    return new JSONReturn(result.getCode(), result.getMsg());
   }
 
   /** Generator. */

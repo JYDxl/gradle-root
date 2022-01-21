@@ -53,7 +53,6 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
     return JAVASCRIPT_UTF_8;
   }
 
-  @Deprecated
   @Override
   public void accept(@NonNull OutputStream output) {
     throw new UnsupportedOperationException();

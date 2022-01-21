@@ -1,15 +1,18 @@
 package org.github.spring.restful.file;
 
-import java.io.*;
-import cn.hutool.core.io.IORuntimeException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Writer;
+import javax.annotation.Nullable;
 import lombok.*;
 import org.github.exception.ParamsErrorException;
 import org.github.spring.restful.Returnable;
-import com.google.common.net.MediaType;
 import org.springframework.core.io.Resource;
-
-import javax.annotation.Nullable;
-
+import com.google.common.net.MediaType;
+import cn.hutool.core.io.IORuntimeException;
 import static cn.hutool.core.util.URLUtil.*;
 import static com.google.common.net.MediaType.*;
 import static java.lang.String.*;
@@ -29,20 +32,15 @@ public interface FILE extends Returnable {
     return OCTET_STREAM;
   }
 
-  @Deprecated
   @Override
   default boolean functional() {
     return false;
   }
 
-  @Deprecated
   @Override
   default void accept(@NonNull Writer writer) {
     throw new UnsupportedOperationException();
   }
-
-  @Override
-  @NonNull String get();
 
   /**
    * Generator.
