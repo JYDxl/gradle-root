@@ -102,7 +102,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-  implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty")}
+  implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
 
   implementation("org.springframework.kafka:spring-kafka") {exclude(group = "io.netty")}
 
@@ -124,7 +124,7 @@ dependencies {
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")
 
-  testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty")}
+  testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
 //  testImplementation("org.springframework.security:spring-security-test")
 //  implementation("org.redisson:redisson:$redisson") {exclude(group = "io.netty")}
 }
