@@ -11,7 +11,6 @@ import org.github.netty.ops.info
 import org.github.netty.ops.mark
 import org.github.ops.log
 import org.github.ops.warn
-import java.util.function.Consumer
 
 class GlobalGroup: DefaultChannelGroup("global-group", INSTANCE) {
   override fun add(element: Channel): Boolean {
@@ -34,13 +33,13 @@ class GlobalGroup: DefaultChannelGroup("global-group", INSTANCE) {
     return null
   }
 
-  fun each(consumer: Consumer<Channel>, matcher: ChannelMatcher) {
-    TODO()
-  }
-
-  fun createGroup(name: String, members: Set<String>) {
-    TODO()
-  }
+  // fun each(consumer: Consumer<Channel>, matcher: ChannelMatcher) {
+  //   TODO()
+  // }
+  //
+  // fun createGroup(name: String, members: Set<String>) {
+  //   TODO()
+  // }
 
   companion object {
     private val log = GlobalGroup::class.log

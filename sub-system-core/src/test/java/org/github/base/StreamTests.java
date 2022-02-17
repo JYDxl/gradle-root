@@ -1,5 +1,6 @@
 package org.github.base;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,40 +11,22 @@ import java.util.stream.Stream;
 import lombok.extern.slf4j.*;
 import lombok.*;
 import org.junit.jupiter.api.Test;
+import static cn.hutool.core.lang.UUID.*;
 import static java.lang.Integer.*;
 import static java.lang.Runtime.*;
 import static java.util.Comparator.*;
 import static java.util.stream.Collector.Characteristics.*;
+import static java.util.stream.Collectors.*;
 import static java.util.stream.IntStream.*;
 
 @Slf4j
 public class StreamTests {
-  // @Test
-  // void testMapMulti() {
-  //   val stream = Stream.of("1", "2", "3", "4", "5");
-  //   val result = stream.mapMultiToInt((str, intConsumer) -> {
-  //     intConsumer.accept(Integer.parseInt(str));
-  //   }).sum();
-  //   log.info("result: {}", result);
-  // }
-
   @Test
   void dropWhile() {
     val stream = range(0, 5);
     val result = stream.dropWhile(num -> num < 3).toArray();
     log.info("result: {}", result);
   }
-
-  // @SuppressWarnings("ResultOfMethodCallIgnored")
-  // @Test
-  // void sort() {
-  //   List<String> list = range(0, 400_0000).mapToObj(v -> randomUUID().toString()).collect(toList());
-  //   log.info(Instant.now().toString());
-  //   list.stream().sorted().collect(toList());
-  //   log.info(Instant.now().toString());
-  //   list.stream().parallel().sorted().collect(toList());
-  //   log.info(Instant.now().toString());
-  // }
 
   @Test
   void parallel() {
@@ -65,10 +48,28 @@ public class StreamTests {
     log.info("result: {}", result);
   }
 
+  @SuppressWarnings("ResultOfMethodCallIgnored")
+  @Test
+  void sort() {
+    List<String> list = range(0, 400_0000).mapToObj(v -> randomUUID().toString()).toList();
+    log.info(Instant.now().toString());
+    list.stream().sorted().collect(toList());
+    log.info(Instant.now().toString());
+    list.stream().parallel().sorted().collect(toList());
+    log.info(Instant.now().toString());
+  }
+
   @Test
   void takeWhile() {
     val stream = range(0, 5);
     val result = stream.takeWhile(num -> num < 3).toArray();
+    log.info("result: {}", result);
+  }
+
+  @Test
+  void testMapMulti() {
+    val stream = Stream.of("1", "2", "3", "4", "5");
+    val result = stream.mapMultiToInt((str, consumer) -> consumer.accept(Integer.parseInt(str))).sum();
     log.info("result: {}", result);
   }
 
