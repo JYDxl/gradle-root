@@ -40,7 +40,6 @@ fun mysqlMydb() {
 
   generator.globalConfig {it: GlobalConfig.Builder ->
     it.author("JYD_XL")
-      .fileOverride()
       .enableSwagger()
       .disableOpenDir()
     if (enableKotlin) it.enableKotlin()
@@ -69,7 +68,7 @@ fun mysqlMydb() {
           service to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service",
           serviceImpl to "$path/$subMapperName/src/main/java/$packageName/$moduleName/service/impl",
 
-          mapperXml to "$path/$subMapperName/src/main/resources/mapper"
+          xml to "$path/$subMapperName/src/main/resources/mapper"
         )
       )
   }

@@ -72,7 +72,7 @@ dependencies {
   testImplementation("net.java.dev.jna:jna:$jna")
   testImplementation("io.netty:netty-all:$netty")
 
-  testImplementation("com.baomidou:mybatis-plus-generator:3.5.1")
+  testImplementation("com.baomidou:mybatis-plus-generator:3.5.2")
   testImplementation("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   testImplementation("mysql:mysql-connector-java:$mysql")
   testImplementation("org.postgresql:postgresql:$postgresql")

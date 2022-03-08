@@ -143,7 +143,7 @@ subprojects {
 
     implementation("commons-io:commons-io:2.11.0")
     implementation("org.ow2.asm:asm:9.2")
-    implementation("org.checkerframework:checker-qual:3.21.2")
+    implementation("org.checkerframework:checker-qual:3.21.3")
     implementation("org.objenesis:objenesis:3.2")
     implementation("org.javassist:javassist:3.28.0-GA")
     implementation("org.t-io:tio-core:3.8.0.v20220128-RELEASE")
