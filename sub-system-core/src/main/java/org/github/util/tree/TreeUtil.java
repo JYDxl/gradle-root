@@ -5,9 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import lombok.*;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Multimaps.*;
 import static java.util.Comparator.*;
 import static java.util.Optional.*;
@@ -32,7 +32,7 @@ public abstract class TreeUtil {
 
     val root = index.get(ofNullable(pid));
     recursion(root, index);
-    return Lists.newArrayList(root);
+    return newArrayList(root);
   }
 
   private static <T extends TreeNode<I,E>, I, E> void recursion(Collection<T> list, Multimap<Optional<I>,T> index) {

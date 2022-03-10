@@ -7,11 +7,11 @@ import cn.hutool.core.util.StrUtil;
 public abstract class ObjUtil {
   @SafeVarargs
   public static <T> T firstNonNull(T... objs) {
-    return firstOne(Objects::nonNull, objs);
+    return first(Objects::nonNull, objs);
   }
 
   @SafeVarargs
-  public static <T> T firstOne(Predicate<T> predicate, T... objs) {
+  public static <T> T first(Predicate<T> predicate, T... objs) {
     for (T obj : objs) {
       if (predicate.test(obj)) {
         return obj;
@@ -21,6 +21,6 @@ public abstract class ObjUtil {
   }
 
   public static CharSequence firstNonBlank(CharSequence... objs) {
-    return firstOne(StrUtil::isNotBlank, objs);
+    return first(StrUtil::isNotBlank, objs);
   }
 }
