@@ -14,7 +14,7 @@ import static java.util.Optional.*;
 import static org.github.util.FuncUtil.*;
 
 public abstract class TreeUtil {
-  public static <T extends TreeNode<I,E>, I, E> @NonNull List<T> buildTree(@NonNull List<T> list, I pid) {
+  private static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> @NonNull List<T> buildTree0(@NonNull List<T> list, I pid) {
     val func  = optional(T::getPid);
     val index = index(list, func::apply);
     val root  = index.get(ofNullable(pid));
@@ -22,13 +22,17 @@ public abstract class TreeUtil {
     return root;
   }
 
-  public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> @NonNull List<T> buildTree(@NonNull List<T> list, I pid, @NonNull Comparator<T> valueComparator) {
-    val func     = optional(T::getPid);
-    val multimap = index(list, func::apply);
+  public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> @NonNull List<T> buildTree(@NonNull List<T> list, I pid, Comparator<T> comparator) {
+    return comparator == null ? buildTree0(list, pid) : buildTree1(list, pid, comparator);
+  }
+
+  private static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> @NonNull List<T> buildTree1(@NonNull List<T> list, I pid, @NonNull Comparator<T> valueComparator) {
+    val func = optional(T::getPid);
+    val tmp  = index(list, func::apply);
 
     val keyComparator = Comparator.<Optional<I>,I>comparing(v -> v.orElse(null), nullsFirst(naturalOrder()));
     val index         = TreeMultimap.create(keyComparator, valueComparator);
-    index.putAll(multimap);
+    index.putAll(tmp);
 
     val root = index.get(ofNullable(pid));
     recursion(root, index);

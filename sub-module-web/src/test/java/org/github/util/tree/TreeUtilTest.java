@@ -58,7 +58,7 @@ class TreeUtilTest {
     val list = concat(typeStream, dataStream).collect(toList());
     reduceList(list);
 
-    val tree = buildTree(list, "");
+    val tree = buildTree(list, "", null);
     val json = json(tree);
     log.info(json);
   }
