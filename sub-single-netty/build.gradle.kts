@@ -72,6 +72,7 @@ tasks.withType<Test> {
 dependencies {
   implementation("com.google.protobuf:protobuf-java-util:$protobuf")
   implementation("io.netty:netty-tcnative-boringssl-static:$tcnative")
+  implementation("io.netty:netty-tcnative-classes:$tcnative")
   implementation("io.netty:netty-all:$netty")
   implementation(project(":sub-system-core"))
 }
