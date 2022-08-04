@@ -1,10 +1,8 @@
 package org.github.controller
 
-import org.apache.shiro.authz.annotation.Logical.OR
-import org.apache.shiro.authz.annotation.RequiresRoles
-import org.github.spring.ops.appCtx
 import org.github.ops.info
 import org.github.ops.log
+import org.github.spring.ops.appCtx
 import org.github.spring.ops.ktGetResources
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.file.FILE
@@ -70,7 +68,6 @@ class ReturnController {
     return jsonp
   }
 
-  @RequiresRoles("test", "admin", logical = OR)
   @GetMapping("json/basic")
   fun jsonBasic() = JSONReturn()
 

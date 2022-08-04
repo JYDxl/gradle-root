@@ -13,8 +13,6 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import org.apache.ibatis.reflection.MetaObject
 import org.github.base.IEntity
 import org.github.mybatis.MyBatisMapper
-import org.github.shiro.ops.DEFAULT_VALUE_ANONYMOUS_ID
-import org.github.shiro.ops.userOrNull
 import org.mybatis.spring.annotation.MapperScan
 import org.springframework.cloud.commons.util.InetUtils
 import org.springframework.context.annotation.Bean
@@ -61,7 +59,7 @@ class CustomMetaObjectHandler: MetaObjectHandler {
     strictUpdateFill(entity, "updaterId", {id}, Long::class.java)
   }
 
-  private val id: Long get() = userOrNull?.id ?: DEFAULT_VALUE_ANONYMOUS_ID
+  private val id: Long get() = 1L
 }
 
 class CustomIdentifierGenerator(addr: InetAddress): DefaultIdentifierGenerator(addr) {

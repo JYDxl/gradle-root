@@ -54,7 +54,6 @@ tasks.getByName<Task>("bootDistZip") {enabled = false}
 
 val commonsPool2: String by System.getProperties()
 val mybatisPlus: String by System.getProperties()
-val shiroRedis: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val redisson: String by System.getProperties()
 val swagger: String by System.getProperties()
@@ -62,7 +61,6 @@ val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
-val shiro: String by System.getProperties()
 val jedis: String by System.getProperties()
 val jwt: String by System.getProperties()
 
@@ -80,12 +78,7 @@ dependencies {
   implementation("com.squareup.okhttp3:okhttp:$okhttp3")
   implementation("mysql:mysql-connector-java:$mysql")
   implementation("p6spy:p6spy:$p6spy")
-  implementation("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   implementation("com.auth0:java-jwt:$jwt")
-  implementation("org.crazycake:shiro-redis-spring-boot-starter:$shiroRedis") {
-    exclude(group = "org.apache.maven.plugins")
-    exclude(group = "redis.clients")
-  }
   implementation("redis.clients:jedis:$jedis")
   implementation("io.springfox:springfox-boot-starter:$swagger")
 

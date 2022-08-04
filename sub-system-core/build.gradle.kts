@@ -6,7 +6,6 @@ val byteman: String by System.getProperties()
 val swagger: String by System.getProperties()
 val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
-val shiro: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val jwt: String by System.getProperties()
 
@@ -58,7 +57,6 @@ dependencies {
 
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
-  compileOnly("org.apache.shiro:shiro-spring-boot-web-starter:$shiro")
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   compileOnly("io.springfox:springfox-boot-starter:$swagger")
   compileOnly("io.netty:netty-all:$netty")

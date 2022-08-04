@@ -1,8 +1,6 @@
 package org.github.config
 
 import io.swagger.annotations.ApiOperation
-import org.github.shiro.ops.JSESSIONID
-import org.github.shiro.ops.JWT
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.PathSelectors.any
@@ -32,13 +30,13 @@ class SwaggerConfig {
 
   fun getGlobalRequestParameters(): List<RequestParameter> = listOf(
     RequestParameterBuilder()
-      .name(JWT)
+      .name("JWT")
       .description("JWT Token")
       .required(false)
       .`in`(HEADER)
       .build(),
     RequestParameterBuilder()
-      .name(JSESSIONID)
+      .name("JSESSIONID")
       .description("WEB Token")
       .required(false)
       .`in`(QUERY)
