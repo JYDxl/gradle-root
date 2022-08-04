@@ -47,7 +47,6 @@ tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
 val netty: String by System.getProperties()
-val nacos: String by System.getProperties()
 
 dependencies {
   implementation("io.netty:netty-all:$netty")
@@ -58,7 +57,6 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
-  implementation("com.alibaba.nacos:nacos-client:$nacos")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
   implementation("org.springframework.cloud:spring-cloud-starter-gateway") {exclude(group = "io.netty")}

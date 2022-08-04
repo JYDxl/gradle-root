@@ -41,6 +41,7 @@ class ServerHandler(val handlers: List<ServerMsgHandler>): ChannelDuplexHandler(
     super<InputHandler>.channelReadComplete(ctx)
   }
 
+  @Deprecated("Deprecated in Java")
   override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
     @Suppress("DEPRECATION")
     super<InputHandler>.exceptionCaught(ctx, cause)

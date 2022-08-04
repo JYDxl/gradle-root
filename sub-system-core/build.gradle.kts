@@ -8,7 +8,6 @@ val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
 val shiro: String by System.getProperties()
 val p6spy: String by System.getProperties()
-val jna: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 plugins {
@@ -69,10 +68,9 @@ dependencies {
   testImplementation("commons-codec:commons-codec:$commonsCodec")
   testImplementation("org.jboss.byteman:byteman:$byteman")
   testImplementation("org.javassist:javassist:$javassist")
-  testImplementation("net.java.dev.jna:jna:$jna")
   testImplementation("io.netty:netty-all:$netty")
 
-  testImplementation("com.baomidou:mybatis-plus-generator:3.5.2")
+  testImplementation("com.baomidou:mybatis-plus-generator:3.5.3")
   testImplementation("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   testImplementation("mysql:mysql-connector-java:$mysql")
   testImplementation("org.postgresql:postgresql:$postgresql")

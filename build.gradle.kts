@@ -14,6 +14,7 @@ val j2cache: String by System.getProperties()
 val jackson: String by System.getProperties()
 val alibaba: String by System.getProperties()
 val logback: String by System.getProperties()
+val feilong: String by System.getProperties()
 val lombok: String by System.getProperties()
 val hutool: String by System.getProperties()
 val guava: String by System.getProperties()
@@ -97,6 +98,13 @@ subprojects {
     }
   }
 
+  configurations {
+    all {
+      exclude("io.netty", "netty-transport-native-kqueue")
+      exclude("io.netty", "netty-resolver-dns-native-macos")
+    }
+  }
+
   dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
@@ -111,6 +119,7 @@ subprojects {
     implementation("com.google.inject:guice:$guice")
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
+    //implementation("com.github.ifeilong:$feilong")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")
@@ -141,10 +150,10 @@ subprojects {
 
     implementation("commons-io:commons-io:2.11.0")
     implementation("org.ow2.asm:asm:9.3")
-    implementation("org.checkerframework:checker-qual:3.21.4")
-    implementation("org.objenesis:objenesis:3.2")
-    implementation("org.javassist:javassist:3.28.0-GA")
-    implementation("org.t-io:tio-core:3.8.1.v20220401-RELEASE")
+    implementation("org.checkerframework:checker-qual:3.24.0")
+    implementation("org.objenesis:objenesis:3.3")
+    implementation("org.javassist:javassist:3.29.0-GA")
+    implementation("org.t-io:tio-core:3.8.2.v20220628-RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

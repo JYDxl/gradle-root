@@ -1,8 +1,8 @@
 package org.github.module.echo.client.handler
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.Unpooled.*
-import io.netty.channel.ChannelHandler.*
+import io.netty.buffer.Unpooled.copiedBuffer
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import org.github.netty.ops.beforeRelease
@@ -27,6 +27,7 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
     }
   }
 
+  @Deprecated("Deprecated in Java")
   override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
     log.error(cause) {}
     ctx.close()

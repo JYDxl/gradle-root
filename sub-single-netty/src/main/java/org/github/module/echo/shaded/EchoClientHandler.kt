@@ -21,7 +21,7 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
   }
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
-    log.info { ByteBufUtil.hexDump(msg as ByteBuf) }
+    log.info {ByteBufUtil.hexDump(msg as ByteBuf)}
     val buffer = Unpooled.buffer(6)
     buffer.writeShortLE(6)
     buffer.writeShortLE(0x2222)
@@ -33,6 +33,7 @@ class EchoClientHandler: ChannelInboundHandlerAdapter() {
     ctx.flush()
   }
 
+  @Deprecated("Deprecated in Java")
   override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
     cause.printStackTrace()
     ctx.close()

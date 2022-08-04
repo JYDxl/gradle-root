@@ -1,6 +1,6 @@
 package org.github.module.line
 
-import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import io.netty.channel.group.ChannelGroup
@@ -15,14 +15,16 @@ class LineServerHandler(private val group: ChannelGroup): ChannelInboundHandlerA
 
   override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
     msg as String
-    group.writeAndFlush(msg.toByteBuf(ctx.alloc()), { it != ctx.channel() }, true)
+    group.writeAndFlush(msg.toByteBuf(ctx.alloc()), {it != ctx.channel()}, true)
   }
 
   override fun channelReadComplete(ctx: ChannelHandlerContext) {
     ctx.flush()
   }
 
-  override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {}
+  @Deprecated("Deprecated in Java")
+  override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
+  }
 
   companion object {
     /** log. */

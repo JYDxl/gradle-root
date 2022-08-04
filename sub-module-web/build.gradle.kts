@@ -66,7 +66,6 @@ val netty: String by System.getProperties()
 val shiro: String by System.getProperties()
 val jedis: String by System.getProperties()
 val seata: String by System.getProperties()
-val nacos: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 dependencies {
@@ -115,7 +114,6 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
-  implementation("com.alibaba.nacos:nacos-client:$nacos")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
   implementation("com.alibaba.csp:sentinel-datasource-nacos")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {exclude(group = "com.alibaba", module = "druid")}

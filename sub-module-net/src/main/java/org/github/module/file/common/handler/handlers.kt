@@ -54,6 +54,7 @@ interface InputHandler: ChannelInboundHandler {
     ctx.flush()
   }
 
+  @Deprecated("Deprecated in Java")
   override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
     log.error(cause) {"对象【${ctx.channel().info}】异常: ${cause.message}"}
     ctx.close()

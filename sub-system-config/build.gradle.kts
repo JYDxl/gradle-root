@@ -2,7 +2,6 @@ val mybatisPlus: String by System.getProperties()
 val shiroRedis: String by System.getProperties()
 val swagger: String by System.getProperties()
 val shiro: String by System.getProperties()
-val nacos: String by System.getProperties()
 
 dependencies {
   api(project(":sub-module-hub-api"))
@@ -23,7 +22,6 @@ dependencies {
   }
 
   compileOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
-  compileOnly("com.alibaba.nacos:nacos-client:$nacos")
 
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 

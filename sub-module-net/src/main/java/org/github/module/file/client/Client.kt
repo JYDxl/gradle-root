@@ -50,7 +50,7 @@ fun main() {
         }
       }
     })!!
-    .connect("localhost", 10000)!!
+    .connect("mac", 10000)!!
     .sync()!!
     .channel()!!
 

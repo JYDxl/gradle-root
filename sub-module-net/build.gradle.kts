@@ -62,7 +62,6 @@ val netty: String by System.getProperties()
 val shiro: String by System.getProperties()
 val jedis: String by System.getProperties()
 val seata: String by System.getProperties()
-val nacos: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 dependencies {
