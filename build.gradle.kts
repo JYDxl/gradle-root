@@ -13,7 +13,6 @@ val protobuf: String by System.getProperties()
 val j2cache: String by System.getProperties()
 val jackson: String by System.getProperties()
 val alibaba: String by System.getProperties()
-val logback: String by System.getProperties()
 val feilong: String by System.getProperties()
 val lombok: String by System.getProperties()
 val hutool: String by System.getProperties()
@@ -111,8 +110,6 @@ subprojects {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("ch.qos.logback:logback-classic:$logback")
-    implementation("ch.qos.logback:logback-core:$logback")
     implementation("org.slf4j:jul-to-slf4j")
 
     implementation("org.apache.commons:commons-lang3:$commonsLang3")
@@ -150,10 +147,10 @@ subprojects {
 
     implementation("commons-io:commons-io:2.11.0")
     implementation("org.ow2.asm:asm:9.3")
-    implementation("org.checkerframework:checker-qual:3.24.0")
+    implementation("org.checkerframework:checker-qual:3.25.0")
     implementation("org.objenesis:objenesis:3.3")
-    implementation("org.javassist:javassist:3.29.0-GA")
-    implementation("org.t-io:tio-core:3.8.2.v20220628-RELEASE")
+    implementation("org.javassist:javassist:3.29.1-GA")
+    implementation("org.t-io:tio-core:3.8.3.v20220902-RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
