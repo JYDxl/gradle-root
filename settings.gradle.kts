@@ -42,3 +42,8 @@ include("sub-module-blog-api")
 include("sub-module-blog")
 
 include("sub-module-net")
+
+include("sub-module-tms-service")
+include("sub-module-tms-dto")
+include("sub-module-tms-api")
+include("sub-module-tms")

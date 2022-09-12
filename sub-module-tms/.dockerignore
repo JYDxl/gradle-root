@@ -1,0 +1,3 @@
+*
+!build/libs/tms-boot.jar
+!build/bootScripts/sub-module-tms
