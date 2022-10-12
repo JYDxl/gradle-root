@@ -28,7 +28,7 @@ plugins {
   val kotlin: String by System.getProperties()
   val shadow: String by System.getProperties()
 
-  java
+  id("java")
 
   id("com.github.johnrengelman.shadow") version shadow apply false
   id("org.springframework.boot") version springBoot apply false
@@ -146,10 +146,10 @@ subprojects {
     implementation("com.google.protobuf:protobuf-java:$protobuf")
 
     implementation("commons-io:commons-io:2.11.0")
-    implementation("org.ow2.asm:asm:9.3")
-    implementation("org.checkerframework:checker-qual:3.25.0")
+    implementation("org.ow2.asm:asm:9.4")
+    implementation("org.checkerframework:checker-qual:3.26.0")
     implementation("org.objenesis:objenesis:3.3")
-    implementation("org.javassist:javassist:3.29.1-GA")
+    implementation("org.javassist:javassist:3.29.2-GA")
     implementation("org.t-io:tio-core:3.8.3.v20220902-RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
