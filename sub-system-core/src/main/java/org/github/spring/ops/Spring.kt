@@ -1,10 +1,11 @@
+@file:Suppress("unused")
+
 package org.github.spring.ops
 
+import cn.hutool.extra.spring.SpringUtil.getApplicationContext
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
 import org.springframework.context.ApplicationContext
 import org.springframework.core.io.Resource
-import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.context.request.RequestContextHolder.getRequestAttributes
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
@@ -19,9 +20,7 @@ val req get() = (getRequestAttributes() as? ServletRequestAttributes)?.request
 
 val resp get() = (getRequestAttributes() as? ServletRequestAttributes)?.response
 
-val appCtx = getAppCtx()
-
-val webAppCtx = appCtx as WebApplicationContext
+val appCtx: ApplicationContext = getApplicationContext()
 
 val objectMapper = appCtx.getBean(ObjectMapper::class.java)
 

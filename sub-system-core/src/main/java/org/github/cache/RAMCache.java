@@ -7,12 +7,11 @@ import lombok.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-
+import static com.google.common.base.MoreObjects.*;
 import static com.google.common.collect.Maps.*;
 import static java.lang.String.*;
-import static java.util.Collections.emptyList;
+import static java.util.Collections.*;
 import static java.util.Optional.*;
-import static org.github.util.ObjUtil.*;
 
 public class RAMCache implements InitializingBean, ApplicationListener<CacheEvent> {
   @Autowired(required = false)

@@ -1,5 +1,6 @@
 package org.github
 
+import cn.hutool.extra.spring.EnableSpringUtil
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient
@@ -12,6 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling
 @EnableFeignClients
 @EnableScheduling
 @EnableAsync
+@EnableSpringUtil
 class Web
 
 fun main(args: Array<String>) {

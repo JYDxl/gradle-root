@@ -1,5 +1,6 @@
 package org.github.module.file.common.handler
 
+import cn.hutool.extra.spring.SpringUtil.getApplicationContext
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandler
 import org.github.module.file.common.dto.protocol.CommonMsg
@@ -9,7 +10,6 @@ import org.github.netty.ops.info
 import org.github.netty.ops.mark
 import org.github.ops.error
 import org.github.ops.warn
-import org.github.spring.bootstrap.AppCtxHolder.getAppCtx
 import org.slf4j.Logger
 import java.lang.reflect.ParameterizedType
 
@@ -45,7 +45,7 @@ interface InputHandler: ChannelInboundHandler {
     }
 
     val channel = ctx.channel()!!
-    if (channel.hasMark) getAppCtx()?.publishEvent(HeartBeat(channel.mark))
+    if (channel.hasMark) getApplicationContext()?.publishEvent(HeartBeat(channel.mark))
 
     if (!flag) log.warn {"消息【$msg】暂不处理"}
   }

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import com.google.common.net.MediaType;
 import static cn.hutool.core.util.URLUtil.*;
-import static org.github.util.ObjUtil.*;
+import static com.google.common.base.MoreObjects.*;
 
 @AllArgsConstructor
 @Data
@@ -31,13 +31,13 @@ class FILEImpl implements FILE {
   }
 
   @Override
-  public @NonNull MediaType mediaType() {
-    return firstNonNull(type, FILE.super.mediaType());
+  public @NonNull String get() {
+    return decode(name);
   }
 
   @Override
-  public @NonNull String get() {
-    return decode(name);
+  public @NonNull MediaType mediaType() {
+    return firstNonNull(type, FILE.super.mediaType());
   }
 
   @Override
