@@ -1,6 +1,6 @@
 package org.github.module.file.common.handler
 
-import cn.hutool.extra.spring.SpringUtil.getApplicationContext
+import cn.hutool.extra.spring.SpringUtil.publishEvent
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandler
 import org.github.module.file.common.dto.protocol.CommonMsg
@@ -45,7 +45,7 @@ interface InputHandler: ChannelInboundHandler {
     }
 
     val channel = ctx.channel()!!
-    if (channel.hasMark) getApplicationContext()?.publishEvent(HeartBeat(channel.mark))
+    if (channel.hasMark) publishEvent(HeartBeat(channel.mark))
 
     if (!flag) log.warn {"消息【$msg】暂不处理"}
   }

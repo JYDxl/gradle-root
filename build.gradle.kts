@@ -7,13 +7,14 @@ val commonsLang3: String by System.getProperties()
 val springCloud: String by System.getProperties()
 val springAdmin: String by System.getProperties()
 val springBoot: String by System.getProperties()
+val asyncTool: String by System.getProperties()
 val caffeine: String by System.getProperties()
 val fastjson: String by System.getProperties()
 val protobuf: String by System.getProperties()
 val j2cache: String by System.getProperties()
 val jackson: String by System.getProperties()
 val alibaba: String by System.getProperties()
-val feilong: String by System.getProperties()
+val aviator: String by System.getProperties()
 val lombok: String by System.getProperties()
 val hutool: String by System.getProperties()
 val guava: String by System.getProperties()
@@ -75,6 +76,7 @@ subprojects {
     maven {url = uri("https://maven.aliyun.com/repository/public")}
     maven {url = uri("https://maven.aliyun.com/repository/google")}
     maven {url = uri("https://maven.aliyun.com/repository/spring")}
+    maven {url = uri("https://jitpack.io")}
     mavenLocal()
     mavenCentral()
   }
@@ -116,7 +118,8 @@ subprojects {
     implementation("com.google.inject:guice:$guice")
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
-    //implementation("com.github.ifeilong:$feilong")
+    implementation("com.googlecode.aviator:aviator:$aviator")
+    implementation("com.gitee.jd-platform-opensource:asyncTool:$asyncTool")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")
