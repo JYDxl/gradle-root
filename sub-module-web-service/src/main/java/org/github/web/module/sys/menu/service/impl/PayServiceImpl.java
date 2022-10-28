@@ -1,7 +1,7 @@
 package org.github.web.module.sys.menu.service.impl;
 
 import lombok.*;
-import org.github.exception.ParamsErrorException;
+import org.github.exception.ClientException;
 import org.github.mysql.mydb.base.entity.PaymentEntity;
 import org.github.mysql.mydb.base.service.IPaymentService;
 import org.github.web.module.sys.menu.service.IPayService;
@@ -22,7 +22,7 @@ public class PayServiceImpl implements IPayService {
   @Override
   public @NonNull PaymentEntity get(long id) {
     val entity = paymentService.getById(id);
-    if (entity == null) throw new ParamsErrorException(format("[id: %s]对应的记录不存在", id));
+    if (entity == null) throw new ClientException(format("[id: %s]对应的记录不存在", id));
     return entity;
   }
 }

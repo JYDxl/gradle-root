@@ -1,7 +1,7 @@
 package org.github.spring.restful.json;
 
 import lombok.*;
-import org.github.exception.RemoteErrorException;
+import org.github.exception.RemoteException;
 import org.github.spring.restful.ops.Result;
 import static org.github.spring.ops.SpringKt.*;
 import static org.github.spring.restful.ops.Result.*;
@@ -50,8 +50,8 @@ public class JSONReturn implements JSON {
     this.retCode = retCode;
   }
 
-  public void throwIfFailed() throws RemoteErrorException {
-    if (failure()) throw new RemoteErrorException(this);
+  public void throwIfFailed() throws RemoteException {
+    if (failure()) throw new RemoteException(this);
   }
 
   public boolean failure() {

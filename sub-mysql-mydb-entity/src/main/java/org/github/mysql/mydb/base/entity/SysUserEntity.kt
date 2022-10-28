@@ -2,16 +2,12 @@
 
 package org.github.mysql.mydb.base.entity
 
-import com.baomidou.mybatisplus.annotation.FieldFill
-import com.baomidou.mybatisplus.annotation.IdType
-import com.baomidou.mybatisplus.annotation.TableField
-import com.baomidou.mybatisplus.annotation.TableId
-import com.baomidou.mybatisplus.annotation.TableName
-import java.io.Serializable
-import java.time.LocalDateTime
-import org.github.base.Entity
+import com.baomidou.mybatisplus.annotation.*
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import org.github.base.Entity
+import java.io.Serializable
+import java.time.LocalDateTime
 
 /**
  * 用户表
@@ -20,125 +16,125 @@ import io.swagger.annotations.ApiModelProperty
  */
 @TableName("sys_user")
 @ApiModel(value = "SysUserEntity对象", description = "用户表")
-open class SysUserEntity : Entity() {
+open class SysUserEntity: Entity() {
 
-    /** 主键 */
-    @ApiModelProperty(value = "主键")
-    @TableId(value = "user_id", type = IdType.ASSIGN_ID)
-    open var userId: Long? = null
+  /** 主键 */
+  @ApiModelProperty(value = "主键")
+  @TableId(value = "user_id", type = IdType.ASSIGN_ID)
+  open var userId: Long? = null
 
-    /** 用户名 */
-    @ApiModelProperty(value = "用户名")
-    @TableField("username")
-    open var username: String? = null
+  /** 用户名 */
+  @ApiModelProperty(value = "用户名")
+  @TableField("username")
+  open var username: String? = null
 
-    /** 密码 */
-    @ApiModelProperty(value = "密码")
-    @TableField("password")
-    open var password: String? = null
+  /** 密码 */
+  @ApiModelProperty(value = "密码")
+  @TableField("password")
+  open var password: String? = null
 
-    /** 盐 */
-    @ApiModelProperty(value = "盐")
-    @TableField("salt")
-    open var salt: String? = null
+  /** 盐 */
+  @ApiModelProperty(value = "盐")
+  @TableField("salt")
+  open var salt: String? = null
 
-    /** 启用状态 0：禁用 1：启用 */
-    @ApiModelProperty(value = "启用状态 0：禁用 1：启用")
-    @TableField("enabled")
-    open var enabled: Int? = null
+  /** 启用状态 0：禁用 1：启用 */
+  @ApiModelProperty(value = "启用状态 0：禁用 1：启用")
+  @TableField("enabled")
+  open var enabled: Int? = null
 
-    /** 昵称 */
-    @ApiModelProperty(value = "昵称")
-    @TableField("nickname")
-    open var nickname: String? = null
+  /** 昵称 */
+  @ApiModelProperty(value = "昵称")
+  @TableField("nickname")
+  open var nickname: String? = null
 
-    /** 邮箱 */
-    @ApiModelProperty(value = "邮箱")
-    @TableField("email")
-    open var email: String? = null
+  /** 邮箱 */
+  @ApiModelProperty(value = "邮箱")
+  @TableField("email")
+  open var email: String? = null
 
-    /** 手机号 */
-    @ApiModelProperty(value = "手机号")
-    @TableField("mobile")
-    open var mobile: String? = null
+  /** 手机号 */
+  @ApiModelProperty(value = "手机号")
+  @TableField("mobile")
+  open var mobile: String? = null
 
-    /** 创建人id */
-    @ApiModelProperty(value = "创建人id")
-    @TableField(value = "creator_id", fill = FieldFill.INSERT)
-    open var creatorId: Long? = null
+  /** 创建人id */
+  @ApiModelProperty(value = "创建人id")
+  @TableField(value = "creator_id", fill = FieldFill.INSERT)
+  open var creatorName: Long? = null
 
-    /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
-    @TableField("create_time")
-    open var createTime: LocalDateTime? = null
+  /** 创建时间 */
+  @ApiModelProperty(value = "创建时间")
+  @TableField("create_time")
+  open var createTime: LocalDateTime? = null
 
-    /** 修改人id */
-    @ApiModelProperty(value = "修改人id")
-    @TableField("modifier_id")
-    open var modifierId: Long? = null
+  /** 修改人id */
+  @ApiModelProperty(value = "修改人id")
+  @TableField("modifier_id")
+  open var modifierId: Long? = null
 
-    /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
-    @TableField("modify_time")
-    open var modifyTime: LocalDateTime? = null
+  /** 修改时间 */
+  @ApiModelProperty(value = "修改时间")
+  @TableField("modify_time")
+  open var modifyTime: LocalDateTime? = null
 
-    /** 删除状态 0：未删除 1：已删除 */
-    @ApiModelProperty(value = "删除状态 0：未删除 1：已删除")
-    @TableField("deleted")
-    open var deleted: Int? = null
+  /** 删除状态 0：未删除 1：已删除 */
+  @ApiModelProperty(value = "删除状态 0：未删除 1：已删除")
+  @TableField("deleted")
+  open var deleted: Int? = null
 
-    companion object {
+  companion object {
 
-        private const val serialVersionUID = 1L
+    private const val serialVersionUID = 1L
 
-        const val USER_ID : String = "user_id"
+    const val USER_ID: String = "user_id"
 
-        const val USERNAME : String = "username"
+    const val USERNAME: String = "username"
 
-        const val PASSWORD : String = "password"
+    const val PASSWORD: String = "password"
 
-        const val SALT : String = "salt"
+    const val SALT: String = "salt"
 
-        const val ENABLED : String = "enabled"
+    const val ENABLED: String = "enabled"
 
-        const val NICKNAME : String = "nickname"
+    const val NICKNAME: String = "nickname"
 
-        const val EMAIL : String = "email"
+    const val EMAIL: String = "email"
 
-        const val MOBILE : String = "mobile"
+    const val MOBILE: String = "mobile"
 
-        const val CREATOR_ID : String = "creator_id"
+    const val CREATOR_ID: String = "creator_id"
 
-        const val CREATE_TIME : String = "create_time"
+    const val CREATE_TIME: String = "create_time"
 
-        const val MODIFIER_ID : String = "modifier_id"
+    const val MODIFIER_ID: String = "modifier_id"
 
-        const val MODIFY_TIME : String = "modify_time"
+    const val MODIFY_TIME: String = "modify_time"
 
-        const val DELETED : String = "deleted"
+    const val DELETED: String = "deleted"
 
-    }
+  }
 
-    override fun pkVal(): Serializable? {
-        return userId
-    }
+  override fun pkVal(): Serializable? {
+    return userId
+  }
 
-    override fun toString(): String {
-        return "SysUserEntity{" +
-        "userId=" + userId +
-        ", username=" + username +
-        ", password=" + password +
-        ", salt=" + salt +
-        ", enabled=" + enabled +
-        ", nickname=" + nickname +
-        ", email=" + email +
-        ", mobile=" + mobile +
-        ", creatorId=" + creatorId +
-        ", createTime=" + createTime +
-        ", modifierId=" + modifierId +
-        ", modifyTime=" + modifyTime +
-        ", deleted=" + deleted +
-        "}"
-    }
+  override fun toString(): String {
+    return "SysUserEntity{" +
+      "userId=" + userId +
+      ", username=" + username +
+      ", password=" + password +
+      ", salt=" + salt +
+      ", enabled=" + enabled +
+      ", nickname=" + nickname +
+      ", email=" + email +
+      ", mobile=" + mobile +
+      ", creatorName=" + creatorName +
+      ", createTime=" + createTime +
+      ", modifierId=" + modifierId +
+      ", modifyTime=" + modifyTime +
+      ", deleted=" + deleted +
+      "}"
+  }
 
 }

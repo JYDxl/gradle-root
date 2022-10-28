@@ -10,9 +10,11 @@ import org.springframework.web.context.request.RequestContextHolder.getRequestAt
 import org.springframework.web.context.request.ServletRequestAttributes
 import java.io.OutputStream
 
+fun ObjectMapper.toJson(obj: Any?): String = if (obj is String) obj else writeValueAsString(obj)
+
 fun Any?.writeValue(output: OutputStream) = objectMapper.writeValue(output, this)
 
-fun Any?.json(): String = objectMapper.writeValueAsString(this)
+fun Any?.json(): String = objectMapper.toJson(this)
 
 val <T: Any> T.proxy get() = appCtx.getBean(this::class.java)
 

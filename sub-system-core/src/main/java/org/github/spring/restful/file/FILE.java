@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.Writer;
 import javax.annotation.Nullable;
 import lombok.*;
-import org.github.exception.ParamsErrorException;
+import org.github.exception.ClientException;
 import org.github.spring.restful.Returnable;
 import org.springframework.core.io.Resource;
 import com.google.common.net.MediaType;
@@ -56,7 +56,7 @@ public interface FILE extends Returnable {
     try {
       return new FILEImpl(encode(file.getName()), new FileInputStream(file), type);
     } catch (FileNotFoundException e) {
-      throw new ParamsErrorException(format("文件[%s]不存在", file.getName()), e);
+      throw new ClientException(format("文件[%s]不存在", file.getName()), e);
     }
   }
 
@@ -89,7 +89,7 @@ public interface FILE extends Returnable {
     try {
       return new FILEImpl(name, resource.getInputStream(), type);
     } catch (FileNotFoundException e) {
-      throw new ParamsErrorException(format("文件[%s]不存在", decode(name)), e);
+      throw new ClientException(format("文件[%s]不存在", decode(name)), e);
     } catch (IOException e) {
       throw new IORuntimeException(e);
     }

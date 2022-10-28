@@ -39,7 +39,7 @@ class MyBatisConfig {
   fun customMetaObjectHandler() = CustomMetaObjectHandler()
 
   @Bean
-  fun customIdentifierGenerator(@Suppress("SpringJavaInjectionPointsAutowiringInspection") inetUtils: InetUtils) = CustomIdentifierGenerator(inetUtils.findFirstNonLoopbackAddress())
+  fun customIdentifierGenerator(inetUtils: InetUtils) = CustomIdentifierGenerator(inetUtils.findFirstNonLoopbackAddress())
 }
 
 class CustomSqlInjector: DefaultSqlInjector() {
@@ -48,18 +48,18 @@ class CustomSqlInjector: DefaultSqlInjector() {
 
 class CustomMetaObjectHandler: MetaObjectHandler {
   override fun insertFill(entity: MetaObject) {
-    strictInsertFill(entity, "createdAt", {now()}, LocalDateTime::class.java)
-    strictInsertFill(entity, "creatorId", {id}, Long::class.java)
-    strictInsertFill(entity, "updatedAt", {now()}, LocalDateTime::class.java)
-    strictInsertFill(entity, "updaterId", {id}, Long::class.java)
+    strictInsertFill(entity, "createdTime", {now()}, LocalDateTime::class.java)
+    strictInsertFill(entity, "creatorName", {name}, String::class.java)
+    strictInsertFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
+    strictInsertFill(entity, "updaterName", {name}, String::class.java)
   }
 
   override fun updateFill(entity: MetaObject) {
-    strictUpdateFill(entity, "updatedAt", {now()}, LocalDateTime::class.java)
-    strictUpdateFill(entity, "updaterId", {id}, Long::class.java)
+    strictUpdateFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
+    strictUpdateFill(entity, "updaterName", {name}, String::class.java)
   }
 
-  private val id: Long get() = 1L
+  private val name: String get() = "anonymous"
 }
 
 class CustomIdentifierGenerator(addr: InetAddress): DefaultIdentifierGenerator(addr) {

@@ -1,6 +1,6 @@
 package org.github.controller
 
-import org.github.exception.ParamsErrorException
+import org.github.exception.ClientException
 import org.github.ops.error
 import org.github.ops.log
 import org.springframework.http.ResponseEntity.badRequest
@@ -16,6 +16,6 @@ class ExceptionController {
   @ExceptionHandler(Throwable::class)
   fun handleThrowable(e: Throwable) = internalServerError().apply {log.error(e) {}}
 
-  @ExceptionHandler(ParamsErrorException::class, ConstraintViolationException::class)
+  @ExceptionHandler(ClientException::class, ConstraintViolationException::class)
   fun handleParamsErrorException(e: Exception) = badRequest().apply {log.error(e) {}}
 }
