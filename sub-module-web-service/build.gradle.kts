@@ -3,7 +3,6 @@ dependencies {
 
   api(project(":sub-module-web-dto"))
 
-  api(project(":sub-mysql-mydb-service"))
   api(project(":sub-mysql-sccore-service"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")

@@ -2,12 +2,8 @@ package org.github.web.module.sys.menu.service.impl
 
 import org.github.base.Page
 import org.github.mybatis.ops.ktGetById
-import org.github.mybatis.ops.ktList
-import org.github.mybatis.ops.ktQueryWrapper
-import org.github.mysql.mydb.base.dict.MenuType.BUTTON
-import org.github.mysql.mydb.base.dict.MenuType.DIRECTORY
-import org.github.mysql.mydb.base.entity.SysMenuEntity
-import org.github.mysql.mydb.base.service.ISysMenuService
+import org.github.mysql.sccore.base.entity.SysMenuEntity
+import org.github.mysql.sccore.base.service.ISysMenuService
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONPageReturn
@@ -43,20 +39,21 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuTree(): JSONArrayReturn<SysMenuEntity> {
-    val query = sysMenuService.ktQueryWrapper()
-    query.ne(SysMenuEntity::type, BUTTON.code)
-    val list = query.ktList()
-    val root = SysMenuEntity()
-    root.menuId = 0L
-    root.parentId = -1L
-    root.name = "根目录"
-    // root.setUrl();
-    // root.setPerms();
-    root.type = DIRECTORY.code
-    root.icon = "fa fa-car"
-    root.orderNum = 0
-    list.add(root)
-    return JSONArrayReturn.of(list)
+    // val query = sysMenuService.ktQueryWrapper()
+    // query.ne(SysMenuEntity::type, BUTTON.code)
+    // val list = query.ktList()
+    // val root = SysMenuEntity()
+    // root.menuId = 0L
+    // root.parentId = -1L
+    // root.name = "根目录"
+    // // root.setUrl();
+    // // root.setPerms();
+    // root.type = DIRECTORY.code
+    // root.icon = "fa fa-car"
+    // root.orderNum = 0
+    // list.add(root)
+    // return JSONArrayReturn.of(list)
+    return JSONArrayReturn.of()
   }
 
   override fun saveOrUpdate(bo: SysMenuEntity): JSONDataReturn<Boolean> {

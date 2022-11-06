@@ -2,7 +2,6 @@ val mybatisPlus: String by System.getProperties()
 val swagger: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-mysql-mydb-entity"))
   api(project(":sub-mysql-sccore-entity"))
 
   compileOnly(project(":sub-system-core"))

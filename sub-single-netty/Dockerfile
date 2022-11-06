@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:17.0.4.1-jre-headless
+FROM azul/zulu-openjdk-alpine:17.0.5-jre-headless
 
 RUN apk add tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \

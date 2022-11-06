@@ -24,7 +24,7 @@ import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
 fun main() {
-  // mysqlMydb()
+  mysqlMydb()
   mysqlSccore()
 }
 
