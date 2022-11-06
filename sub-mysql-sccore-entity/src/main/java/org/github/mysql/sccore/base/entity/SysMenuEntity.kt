@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 菜单管理
@@ -18,86 +16,69 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_menu")
-@ApiModel(value = "SysMenuEntity对象", description = "菜单管理")
 open class SysMenuEntity : Entity() {
 
     /** 主键 */
-    @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: Long? = null
 
     /** 父节点ID（为0时为父节点） */
-    @ApiModelProperty(value = "父节点ID（为0时为父节点）")
     @TableField("parent_id")
     open var parentId: Long? = null
 
     /** 菜单名称 */
-    @ApiModelProperty(value = "菜单名称")
     @TableField("menu_name")
     open var menuName: String? = null
 
     /** 菜单编码 */
-    @ApiModelProperty(value = "菜单编码")
     @TableField("menu_code")
     open var menuCode: String? = null
 
     /** 应用ID */
-    @ApiModelProperty(value = "应用ID")
     @TableField("app_id")
     open var appId: Long? = null
 
     /** 菜单描述 */
-    @ApiModelProperty(value = "菜单描述")
     @TableField("menu_desc")
     open var menuDesc: String? = null
 
     /** 菜单地址 */
-    @ApiModelProperty(value = "菜单地址")
     @TableField("menu_uri")
     open var menuUri: String? = null
 
     /** 菜单排序 */
-    @ApiModelProperty(value = "菜单排序")
     @TableField("menu_order")
     open var menuOrder: Int? = null
 
     /** 菜单类型，1：菜单，2：页面，3：按钮 */
-    @ApiModelProperty(value = "菜单类型，1：菜单，2：页面，3：按钮")
     @TableField("menu_type")
     open var menuType: String? = null
 
     /** icon名称 */
-    @ApiModelProperty(value = "icon名称")
     @TableField("icon_name")
     open var iconName: String? = null
 
     /** 菜单打开方式，1：与框架一致，2：新页面 */
-    @ApiModelProperty(value = "菜单打开方式，1：与框架一致，2：新页面")
     @TableField("menu_open_flag")
     open var menuOpenFlag: String? = null
 
     /** 启动标志，1：启动，2：禁止 */
-    @ApiModelProperty(value = "启动标志，1：启动，2：禁止")
     @TableField("use_flag")
     open var useFlag: String? = null
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
     @TableField("user_create")
     open var userCreate: String? = null
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
     @TableField("create_datetime")
     open var createDatetime: LocalDateTime? = null
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
     @TableField("user_modify")
     open var userModify: String? = null
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
     @TableField("modify_datetime")
     open var modifyDatetime: LocalDateTime? = null
 

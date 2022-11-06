@@ -26,9 +26,6 @@ include("sub-mysql-mydb-service")
 include("sub-mysql-sccore-entity")
 include("sub-mysql-sccore-service")
 
-include("sub-mysql-blog-entity")
-include("sub-mysql-blog-service")
-
 include("sub-module-web-service")
 include("sub-module-web-dto")
 include("sub-module-web-api")
@@ -38,11 +35,6 @@ include("sub-module-hub-service")
 include("sub-module-hub-dto")
 include("sub-module-hub-api")
 include("sub-module-hub")
-
-include("sub-module-blog-service")
-include("sub-module-blog-dto")
-include("sub-module-blog-api")
-include("sub-module-blog")
 
 include("sub-module-net")
 

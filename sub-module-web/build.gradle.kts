@@ -56,7 +56,6 @@ val commonsPool2: String by System.getProperties()
 val mybatisPlus: String by System.getProperties()
 val retrofit: String by System.getProperties()
 val redisson: String by System.getProperties()
-val swagger: String by System.getProperties()
 val dynamic: String by System.getProperties()
 val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
@@ -82,7 +81,6 @@ dependencies {
   implementation("p6spy:p6spy:$p6spy")
   implementation("com.auth0:java-jwt:$jwt")
   implementation("redis.clients:jedis:$jedis")
-  implementation("io.springfox:springfox-boot-starter:$swagger")
   implementation("com.baomidou:dynamic-datasource-spring-boot-starter:$dynamic")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -94,7 +92,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-websocket")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-  implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
+  implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple");exclude(group = "joda-time")}
 
   implementation("org.springframework.kafka:spring-kafka") {exclude(group = "io.netty")}
 
@@ -107,10 +105,10 @@ dependencies {
 
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
-  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
-  implementation("com.alibaba.csp:sentinel-datasource-nacos")
-  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {exclude(group = "com.alibaba", module = "druid")}
-  implementation("io.seata:seata-spring-boot-starter:$seata") {exclude(group = "com.alibaba", module = "druid")}
+  // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
+  // implementation("com.alibaba.csp:sentinel-datasource-nacos")
+  // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {exclude(group = "com.alibaba", module = "druid")}
+  // implementation("io.seata:seata-spring-boot-starter:$seata") {exclude(group = "com.alibaba", module = "druid")}
 //  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
   developmentOnly("org.springframework.boot:spring-boot-devtools")

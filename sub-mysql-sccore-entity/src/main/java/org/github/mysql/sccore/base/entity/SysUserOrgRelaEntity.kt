@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 用户与组织之间的数据关系
@@ -18,7 +16,6 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_user_org_rela")
-@ApiModel(value = "SysUserOrgRelaEntity对象", description = "用户与组织之间的数据关系")
 open class SysUserOrgRelaEntity : Entity() {
 
     @TableId(value = "id", type = IdType.ASSIGN_ID)
@@ -28,7 +25,6 @@ open class SysUserOrgRelaEntity : Entity() {
     open var companyId: Long? = null
 
     /** 用户ID */
-    @ApiModelProperty(value = "用户ID")
     @TableField("user_code")
     open var userCode: String? = null
 

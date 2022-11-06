@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 
@@ -15,7 +13,6 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("log")
-@ApiModel(value = "LogEntity对象", description = "")
 open class LogEntity : Entity() {
 
     @TableField("info")

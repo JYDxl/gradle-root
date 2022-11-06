@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 角色-角色组关系
@@ -18,41 +16,33 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_role_rg_rela")
-@ApiModel(value = "SysRoleRgRelaEntity对象", description = "角色-角色组关系")
 open class SysRoleRgRelaEntity : Entity() {
 
     /** 主键 */
-    @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: Long? = null
 
     /** 角色组ID */
-    @ApiModelProperty(value = "角色组ID")
     @TableField("role_group_id")
     open var roleGroupId: Long? = null
 
     /** 角色ID */
-    @ApiModelProperty(value = "角色ID")
     @TableField("role_id")
     open var roleId: Long? = null
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
     @TableField("user_create")
     open var userCreate: String? = null
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
     @TableField("create_datetime")
     open var createDatetime: LocalDateTime? = null
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
     @TableField("user_modify")
     open var userModify: String? = null
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
     @TableField("modify_datetime")
     open var modifyDatetime: LocalDateTime? = null
 

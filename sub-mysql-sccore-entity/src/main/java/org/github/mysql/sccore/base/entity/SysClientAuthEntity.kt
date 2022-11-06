@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 客户端授权表，登录授权、API授权、文件服务授权、调度授权
@@ -18,56 +16,45 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_client_auth")
-@ApiModel(value = "SysClientAuthEntity对象", description = "客户端授权表，登录授权、API授权、文件服务授权、调度授权")
 open class SysClientAuthEntity : Entity() {
 
     /** 主键 */
-    @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: Long? = null
 
     /** 客户端ID */
-    @ApiModelProperty(value = "客户端ID")
     @TableField("client_id")
     open var clientId: Long? = null
 
     /** 登录授权 */
-    @ApiModelProperty(value = "登录授权")
     @TableField("login_flag")
     open var loginFlag: String? = null
 
     /** 文件服务授权 */
-    @ApiModelProperty(value = "文件服务授权")
     @TableField("fs_flag")
     open var fsFlag: String? = null
 
     /** 开发授权 */
-    @ApiModelProperty(value = "开发授权")
     @TableField("fp_flag")
     open var fpFlag: String? = null
 
     /** 调度授权 */
-    @ApiModelProperty(value = "调度授权")
     @TableField("ts_flag")
     open var tsFlag: String? = null
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
     @TableField("user_create")
     open var userCreate: String? = null
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
     @TableField("create_datetime")
     open var createDatetime: LocalDateTime? = null
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
     @TableField("user_modify")
     open var userModify: String? = null
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
     @TableField("modify_datetime")
     open var modifyDatetime: LocalDateTime? = null
 

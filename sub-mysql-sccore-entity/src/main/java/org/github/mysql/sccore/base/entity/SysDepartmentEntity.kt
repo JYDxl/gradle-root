@@ -7,8 +7,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 部门表
@@ -16,61 +14,49 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_department")
-@ApiModel(value = "SysDepartmentEntity对象", description = "部门表")
 open class SysDepartmentEntity : Entity() {
 
     /** 主键 */
-    @ApiModelProperty(value = "主键")
     @TableField("id")
     open var id: Long? = null
 
     /** 部门名称 */
-    @ApiModelProperty(value = "部门名称")
     @TableField("dept_name")
     open var deptName: String? = null
 
     /** 部门描述 */
-    @ApiModelProperty(value = "部门描述")
     @TableField("dept_desc")
     open var deptDesc: String? = null
 
     /** 上级部门id */
-    @ApiModelProperty(value = "上级部门id")
     @TableField("parent_dept_id")
     open var parentDeptId: Long? = null
 
     /** 所属组织编码 */
-    @ApiModelProperty(value = "所属组织编码")
     @TableField("org_code")
     open var orgCode: String? = null
 
     /** 排序 */
-    @ApiModelProperty(value = "排序")
     @TableField("org_order")
     open var orgOrder: Int? = null
 
     /** 启动标志 */
-    @ApiModelProperty(value = "启动标志")
     @TableField("user_flag")
     open var userFlag: String? = null
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
     @TableField("user_create")
     open var userCreate: String? = null
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
     @TableField("create_datetime")
     open var createDatetime: LocalDateTime? = null
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
     @TableField("user_modify")
     open var userModify: String? = null
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
     @TableField("modify_datetime")
     open var modifyDatetime: LocalDateTime? = null
 

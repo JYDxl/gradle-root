@@ -1,5 +1,4 @@
 val mybatisPlus: String by System.getProperties()
-val swagger: String by System.getProperties()
 
 dependencies {
   api(project(":sub-module-hub-api"))
@@ -8,8 +7,6 @@ dependencies {
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
-
-  compileOnly("io.springfox:springfox-boot-starter:$swagger")
 
   compileOnly("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
 

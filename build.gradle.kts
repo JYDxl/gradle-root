@@ -102,7 +102,7 @@ subprojects {
   configurations {
     all {
       exclude("io.netty", "netty-transport-native-kqueue")
-      exclude("io.netty", "netty-resolver-dns-native-macos")
+      // exclude("io.netty", "netty-resolver-dns-native-macos")
     }
   }
 

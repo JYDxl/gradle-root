@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import com.baomidou.mybatisplus.annotation.Version
 import java.io.Serializable
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 字典明细表
@@ -18,41 +16,33 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("sys_dict_item")
-@ApiModel(value = "SysDictItemEntity对象", description = "字典明细表")
 open class SysDictItemEntity : Entity() {
 
     /** 主键 */
-    @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.AUTO)
     open var id: Long? = null
 
     /** 字典类别 */
-    @ApiModelProperty(value = "字典类别")
     @TableField("dict_name")
     open var dictName: String? = null
 
     /** 字典明细类别 */
-    @ApiModelProperty(value = "字典明细类别")
     @TableField("name")
     open var name: String? = null
 
     /** 字典明细标签 */
-    @ApiModelProperty(value = "字典明细标签")
     @TableField("label")
     open var label: String? = null
 
     /** 字典明细介绍 */
-    @ApiModelProperty(value = "字典明细介绍")
     @TableField("intro")
     open var intro: String? = null
 
     /** 码值【排序值】 */
-    @ApiModelProperty(value = "码值【排序值】")
     @TableField("code")
     open var code: Int? = null
 
     /** 当前版本 */
-    @ApiModelProperty(value = "当前版本")
     @TableField("version")
     @Version
     open var version: Int? = null

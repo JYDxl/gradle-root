@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 导入出配置表
@@ -18,61 +16,49 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_import_config")
-@ApiModel(value = "SysImportConfigEntity对象", description = "导入出配置表")
 open class SysImportConfigEntity : Entity() {
 
     /** ID */
-    @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: Long? = null
 
     /** 客户端ID */
-    @ApiModelProperty(value = "客户端ID")
     @TableField("client_id")
     open var clientId: Long? = null
 
     /** 导入出编码，唯一性 */
-    @ApiModelProperty(value = "导入出编码，唯一性")
     @TableField("import_code")
     open var importCode: String? = null
 
     /** 导入名称 */
-    @ApiModelProperty(value = "导入名称")
     @TableField("import_name")
     open var importName: String? = null
 
     /** 导入描述 */
-    @ApiModelProperty(value = "导入描述")
     @TableField("import_desc")
     open var importDesc: String? = null
 
     /** 导入类型，1：Excel */
-    @ApiModelProperty(value = "导入类型，1：Excel")
     @TableField("import_type")
     open var importType: String? = null
 
     /** 模板格式 */
-    @ApiModelProperty(value = "模板格式")
     @TableField("template_json")
     open var templateJson: String? = null
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
     @TableField("user_create")
     open var userCreate: String? = null
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
     @TableField("create_datetime")
     open var createDatetime: LocalDateTime? = null
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
     @TableField("user_modify")
     open var userModify: String? = null
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
     @TableField("modify_datetime")
     open var modifyDatetime: LocalDateTime? = null
 

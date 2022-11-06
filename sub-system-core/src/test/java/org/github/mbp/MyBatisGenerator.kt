@@ -39,7 +39,6 @@ fun mysqlMydb() {
 
   generator.globalConfig {it: GlobalConfig.Builder ->
     it.author("JYD_XL")
-      .enableSwagger()
       .disableOpenDir()
     if (enableKotlin) it.enableKotlin()
   }
@@ -148,7 +147,6 @@ fun mysqlSccore() {
 
   generator.globalConfig {it: GlobalConfig.Builder ->
     it.author("JYD_XL")
-      .enableSwagger()
       .disableOpenDir()
     if (enableKotlin) it.enableKotlin()
   }

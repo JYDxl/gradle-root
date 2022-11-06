@@ -9,8 +9,6 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.base.Entity
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
 
 /**
  * 企业信息管理
@@ -18,71 +16,57 @@ import io.swagger.annotations.ApiModelProperty
  * @author JYD_XL
  */
 @TableName("t_sys_company")
-@ApiModel(value = "SysCompanyEntity对象", description = "企业信息管理")
 open class SysCompanyEntity : Entity() {
 
     /** 主键 */
-    @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: Long? = null
 
     /** 应用名称 */
-    @ApiModelProperty(value = "应用名称")
     @TableField("company_name")
     open var companyName: String? = null
 
     /** 应用描述 */
-    @ApiModelProperty(value = "应用描述")
     @TableField("company_desc")
     open var companyDesc: String? = null
 
     /** 企业信用代码 */
-    @ApiModelProperty(value = "企业信用代码")
     @TableField("company_code")
     open var companyCode: String? = null
 
     /** 企业所在地 */
-    @ApiModelProperty(value = "企业所在地")
     @TableField("company_org_id")
     open var companyOrgId: String? = null
 
     /** 企业详细地址 */
-    @ApiModelProperty(value = "企业详细地址")
     @TableField("company_address")
     open var companyAddress: String? = null
 
     /** 联系人 */
-    @ApiModelProperty(value = "联系人")
     @TableField("company_person")
     open var companyPerson: String? = null
 
     /** 联系电话 */
-    @ApiModelProperty(value = "联系电话")
     @TableField("company_tel")
     open var companyTel: String? = null
 
     /** 创建人 */
-    @ApiModelProperty(value = "创建人")
     @TableField("user_create")
     open var userCreate: String? = null
 
     /** 创建时间 */
-    @ApiModelProperty(value = "创建时间")
     @TableField("create_datetime")
     open var createDatetime: LocalDateTime? = null
 
     /** 修改人 */
-    @ApiModelProperty(value = "修改人")
     @TableField("user_modify")
     open var userModify: String? = null
 
     /** 修改时间 */
-    @ApiModelProperty(value = "修改时间")
     @TableField("modify_datetime")
     open var modifyDatetime: LocalDateTime? = null
 
     /** 启用标志，1：可用，2：不可用 */
-    @ApiModelProperty(value = "启用标志，1：可用，2：不可用")
     @TableField("use_flag")
     open var useFlag: String? = null
 
