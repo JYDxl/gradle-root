@@ -70,6 +70,8 @@ open class ${entity} : Serializable {
 </#if>
     <#if field.propertyType == "Integer">
     open var ${field.propertyName}: Int? = null
+    <#elseif field.propertyType == "byte[]">
+    open var ${field.propertyName}: ByteArray? = null
     <#else>
     open var ${field.propertyName}: ${field.propertyType}? = null
     </#if>

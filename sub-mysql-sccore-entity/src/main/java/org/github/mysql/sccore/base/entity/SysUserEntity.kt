@@ -31,6 +31,14 @@ open class SysUserEntity : Entity() {
     @TableField("user_pwd")
     open var userPwd: String? = null
 
+    /** 加密方式 */
+    @TableField("algorithm")
+    open var algorithm: String? = null
+
+    /** 秘钥 */
+    @TableField("secret_key")
+    open var secretKey: ByteArray? = null
+
     /** 姓名 */
     @TableField("user_person")
     open var userPerson: String? = null
@@ -117,6 +125,10 @@ open class SysUserEntity : Entity() {
 
         const val USER_PWD : String = "user_pwd"
 
+        const val ALGORITHM : String = "algorithm"
+
+        const val SECRET_KEY : String = "secret_key"
+
         const val USER_PERSON : String = "user_person"
 
         const val USER_SEX : String = "user_sex"
@@ -166,6 +178,8 @@ open class SysUserEntity : Entity() {
         "id=" + id +
         ", userName=" + userName +
         ", userPwd=" + userPwd +
+        ", algorithm=" + algorithm +
+        ", secretKey=" + secretKey +
         ", userPerson=" + userPerson +
         ", userSex=" + userSex +
         ", userBirthday=" + userBirthday +

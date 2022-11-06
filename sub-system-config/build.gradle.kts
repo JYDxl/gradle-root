@@ -1,4 +1,5 @@
 val mybatisPlus: String by System.getProperties()
+val saToken: String by System.getProperties()
 
 dependencies {
   api(project(":sub-module-hub-api"))
@@ -15,4 +16,6 @@ dependencies {
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+  implementation("cn.dev33:sa-token-spring-boot-starter:$saToken")
 }
