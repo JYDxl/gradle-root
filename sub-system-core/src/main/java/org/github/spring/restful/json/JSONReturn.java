@@ -3,6 +3,7 @@ package org.github.spring.restful.json;
 import lombok.*;
 import org.github.exception.RemoteException;
 import org.github.spring.restful.ops.Result;
+import static cn.hutool.core.text.CharSequenceUtil.*;
 import static org.github.spring.ops.SpringKt.*;
 import static org.github.spring.restful.ops.Result.*;
 
@@ -69,32 +70,32 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn error() {
-    return of(SYSTEM_ERROR);
+  public static @NonNull JSONReturn error(String msg) {
+    return of(SYSTEM_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn of(Result result) {
-    return new JSONReturn(result.getCode(), result.getMsg());
+  public static @NonNull JSONReturn of(Result result, String msg) {
+    return new JSONReturn(result.getCode(), firstNonBlank(msg, result.getMsg()));
   }
 
   /** Generator. */
   public static @NonNull JSONReturn ok() {
-    return of(SUCCESS);
+    return of(SUCCESS, null);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn param() {
-    return of(PARAMS_ERROR);
+  public static @NonNull JSONReturn param(String msg) {
+    return of(PARAMS_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn path() {
-    return of(PATH_ERROR);
+  public static @NonNull JSONReturn path(String msg) {
+    return of(PATH_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn auth() {
-    return of(AUTH_ERROR);
+  public static @NonNull JSONReturn auth(String msg) {
+    return of(AUTH_ERROR, msg);
   }
 }

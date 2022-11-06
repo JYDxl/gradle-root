@@ -19,16 +19,6 @@ spring:
         max-idle: 12
     host: frp
     password: XLrootJYD713
-  datasource:
-    url: jdbc:p6spy:mysql://frp:3306/sc_core?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
-    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    username: root
-    password: XLrootJYD713
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      minimum-idle: 6
-      maximum-pool-size: 12
-      pool-name: hikari-cp
   rabbitmq:
     username: root
     password: XLrootJYD713
@@ -72,7 +62,20 @@ spring:
   kafka:
     bootstrap-servers: frp:9092
   elasticsearch:
-    uris: http://frp:9200
+    uris: [ http://frp:9200 ]
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          url: jdbc:p6spy:mysql://frp:3306/sc_core?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
+          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          username: root
+          password: XLrootJYD713
+          type: com.zaxxer.hikari.HikariDataSource
+          pool-name: hikari-cp
+          hikari:
+            minimum-idle: 6
+            maximum-pool-size: 12
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml, classpath*:mapper/**/*.xml
