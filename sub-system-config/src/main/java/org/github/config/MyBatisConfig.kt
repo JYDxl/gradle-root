@@ -48,18 +48,18 @@ class CustomSqlInjector: DefaultSqlInjector() {
 
 class CustomMetaObjectHandler: MetaObjectHandler {
   override fun insertFill(entity: MetaObject) {
-    strictInsertFill(entity, "createdTime", {now()}, LocalDateTime::class.java)
     strictInsertFill(entity, "creatorName", {name}, String::class.java)
-    strictInsertFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
+    strictInsertFill(entity, "createdTime", {now()}, LocalDateTime::class.java)
     strictInsertFill(entity, "updaterName", {name}, String::class.java)
+    strictInsertFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
   }
 
   override fun updateFill(entity: MetaObject) {
-    strictUpdateFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
     strictUpdateFill(entity, "updaterName", {name}, String::class.java)
+    strictUpdateFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
   }
 
-  private val name: String get() = "anonymous"
+  private val name: String get() = ""
 }
 
 class CustomIdentifierGenerator(addr: InetAddress): DefaultIdentifierGenerator(addr) {

@@ -23,6 +23,9 @@ include("sub-single-vertx")
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
 
+include("sub-mysql-sccore-entity")
+include("sub-mysql-sccore-service")
+
 include("sub-mysql-blog-entity")
 include("sub-mysql-blog-service")
 
