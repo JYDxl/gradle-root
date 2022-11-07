@@ -31,20 +31,20 @@ open class SysUserRoleEntity : Entity() {
     open var roleId: Long? = null
 
     /** 创建人 */
-    @TableField("user_create")
-    open var userCreate: String? = null
+    @TableField("creator_name")
+    open var creatorName: String? = null
 
     /** 创建时间 */
-    @TableField("create_datetime")
-    open var createDatetime: LocalDateTime? = null
+    @TableField("created_time")
+    open var createdTime: LocalDateTime? = null
 
     /** 修改人 */
-    @TableField("user_modify")
-    open var userModify: String? = null
+    @TableField("updater_name")
+    open var updaterName: String? = null
 
     /** 修改时间 */
-    @TableField("modify_datetime")
-    open var modifyDatetime: LocalDateTime? = null
+    @TableField("updated_time")
+    open var updatedTime: LocalDateTime? = null
 
     companion object {
 
@@ -56,13 +56,13 @@ open class SysUserRoleEntity : Entity() {
 
         const val ROLE_ID : String = "role_id"
 
-        const val USER_CREATE : String = "user_create"
+        const val CREATOR_NAME : String = "creator_name"
 
-        const val CREATE_DATETIME : String = "create_datetime"
+        const val CREATED_TIME : String = "created_time"
 
-        const val USER_MODIFY : String = "user_modify"
+        const val UPDATER_NAME : String = "updater_name"
 
-        const val MODIFY_DATETIME : String = "modify_datetime"
+        const val UPDATED_TIME : String = "updated_time"
 
     }
 
@@ -75,10 +75,10 @@ open class SysUserRoleEntity : Entity() {
         "id=" + id +
         ", userId=" + userId +
         ", roleId=" + roleId +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
+        ", creatorName=" + creatorName +
+        ", createdTime=" + createdTime +
+        ", updaterName=" + updaterName +
+        ", updatedTime=" + updatedTime +
         "}"
     }
 

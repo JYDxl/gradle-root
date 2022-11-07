@@ -26,10 +26,10 @@ class IndexServiceImpl: IIndexService {
     val password = aes.encryptHex(bo.password)!!
 
     val entity = SysUserEntity().apply {
-      this.userName = bo.username
-      this.userPwd = password
-      this.algorithm = algorithm
-      this.secretKey = key
+      userName = bo.username
+      userPwd = password
+      secretAlgorithm = algorithm
+      secretKey = key
     }
 
     sysUserService.save(entity)
