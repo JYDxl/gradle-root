@@ -67,8 +67,8 @@ spring:
     dynamic:
       datasource:
         master:
-          url: jdbc:p6spy:mysql://frp:3306/sc_core?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
-          driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+          url: jdbc:mysql://frp:3306/sc_core?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
+          driver-class-name: com.mysql.cj.jdbc.Driver
           username: root
           password: XLrootJYD713
           type: com.zaxxer.hikari.HikariDataSource
