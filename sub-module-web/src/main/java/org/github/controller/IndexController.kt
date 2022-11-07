@@ -15,7 +15,7 @@ class IndexController {
   private lateinit var indexService: IIndexService
 
   @PostMapping("login")
-  fun login(@RequestBody bo: LoginBo) = indexService.login(trimStrFields(bo))
+  fun login(@Validated @RequestBody bo: LoginBo) = indexService.login(trimStrFields(bo))
 
   @PostMapping("register")
   fun register(@Validated @RequestBody bo: RegisterBo) = indexService.register(trimStrFields(bo))

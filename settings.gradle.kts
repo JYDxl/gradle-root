@@ -37,8 +37,3 @@ include("sub-module-hub-api")
 include("sub-module-hub")
 
 include("sub-module-net")
-
-include("sub-module-tms-service")
-include("sub-module-tms-dto")
-include("sub-module-tms-api")
-include("sub-module-tms")
