@@ -5,7 +5,7 @@ import cn.dev33.satoken.stp.StpUtil.login
 import cn.hutool.crypto.SecureUtil.generateKey
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm.AES
 import cn.hutool.crypto.symmetric.SymmetricCrypto
-import org.github.exception.ClientException
+import org.github.exception.TokenException
 import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.service.ISysUserService
 import org.github.ops.info
@@ -42,11 +42,11 @@ class IndexServiceImpl: IIndexService {
   }
 
   override fun login(bo: LoginBo): JSONReturn {
-    val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw ClientException("用户名或密码错误")
+    val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw TokenException("用户名或密码错误")
     val crypto = SymmetricCrypto(AES, user.secretKey)
     val password = crypto.encryptHex(bo.password)!!
     if (password != user.userPwd) {
-      throw ClientException("用户名或密码错误")
+      throw TokenException("用户名或密码错误")
     }
     login(user.userName)
     val roleList: MutableList<String> = getRoleList()

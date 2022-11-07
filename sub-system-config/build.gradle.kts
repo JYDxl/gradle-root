@@ -17,5 +17,5 @@ dependencies {
 
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
-  implementation("cn.dev33:sa-token-spring-boot-starter:$saToken")
+  compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
 }
