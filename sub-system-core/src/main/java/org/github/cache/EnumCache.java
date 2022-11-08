@@ -38,6 +38,7 @@ public class EnumCache {
 
   @SuppressWarnings("unchecked")
   private Stream<Triple<Class<? extends IEnum<?,?>>,?,?>> apply(Class<?> clazz) {
+    if (clazz.isInterface()) return Stream.of();
     if (!clazz.isEnum()) throw new IllegalStateException();
     val method = getMethod(clazz, "values");
     val values = ((IEnum<?,?>[]) invokeStatic(method));
