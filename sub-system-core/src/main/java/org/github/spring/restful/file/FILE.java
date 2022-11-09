@@ -9,10 +9,10 @@ import java.io.Writer;
 import javax.annotation.Nullable;
 import lombok.*;
 import org.github.exception.ExternalException;
+import org.github.exception.InternalException;
 import org.github.spring.restful.Returnable;
 import org.springframework.core.io.Resource;
 import com.google.common.net.MediaType;
-import cn.hutool.core.io.IORuntimeException;
 import static cn.hutool.core.util.URLUtil.*;
 import static com.google.common.net.MediaType.*;
 import static java.lang.String.*;
@@ -91,7 +91,7 @@ public interface FILE extends Returnable {
     } catch (FileNotFoundException e) {
       throw new ExternalException(format("文件[%s]不存在", decode(name)), e);
     } catch (IOException e) {
-      throw new IORuntimeException(e);
+      throw new InternalException(format("文件[%s]内容读取失败", decode(name)), e);
     }
   }
 }

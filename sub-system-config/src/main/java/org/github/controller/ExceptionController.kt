@@ -23,7 +23,7 @@ class ExceptionController {
   fun handleExternalException(e: ExternalException) = JSONReturn.external(e.message)
 
   @ExceptionHandler(InternalException::class)
-  fun handleInternalException(e: InternalException) = JSONReturn.internal(e.message)
+  fun handleInternalException(e: InternalException) = JSONReturn.internal(e.message).apply {log.error(e) {}}
 
   @ExceptionHandler(SaTokenException::class)
   fun handleSaTokenException(e: SaTokenException) = ResponseEntity(e.message, UNAUTHORIZED)

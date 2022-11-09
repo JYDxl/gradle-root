@@ -5,8 +5,8 @@ RUN apk add tzdata \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
 
-COPY build/libs/web-boot.jar /lib/web-boot.jar
-COPY build/bootScripts/sub-module-web /script/runner
-CMD ./script/runner
+COPY build/libs/web-boot.jar /app/lib/web-boot.jar
+COPY build/bootScripts/sub-module-web /app/script/runner
+CMD ./app/script/runner
 
 EXPOSE 8080 5005
