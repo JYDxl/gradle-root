@@ -70,7 +70,7 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn error(String msg) {
+  public static @NonNull JSONReturn internal(String msg) {
     return of(SYSTEM_ERROR, msg);
   }
 
@@ -85,7 +85,7 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn param(String msg) {
+  public static @NonNull JSONReturn external(String msg) {
     return of(PARAMS_ERROR, msg);
   }
 

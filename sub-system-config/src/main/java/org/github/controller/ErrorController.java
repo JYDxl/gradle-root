@@ -36,6 +36,6 @@ public class ErrorController extends BasicErrorController {
   public ResponseEntity<Map<String,Object>> error(HttpServletRequest request) {
     val error = super.error(request);
     if (error.getStatusCode().equals(NOT_FOUND)) return ok().body(beanToMap(path(null)));
-    return ok().body(beanToMap(param(null)));
+    return ok().body(beanToMap(external(null)));
   }
 }
