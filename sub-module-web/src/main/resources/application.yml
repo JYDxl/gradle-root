@@ -120,3 +120,6 @@ logging:
 feign:
   okhttp:
     enabled: true
+
+sa-token:
+  token-name: token

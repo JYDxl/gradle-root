@@ -1,6 +1,5 @@
 package org.github.web.module.sys.menu.service.impl
 
-import cn.dev33.satoken.stp.StpUtil.getRoleList
 import cn.dev33.satoken.stp.StpUtil.login
 import cn.hutool.crypto.SecureUtil.generateKey
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm
@@ -8,8 +7,6 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto
 import org.github.exception.ExternalException
 import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.service.ISysUserService
-import org.github.ops.info
-import org.github.ops.log
 import org.github.spring.restful.json.JSONReturn
 import org.github.web.module.index.LoginBo
 import org.github.web.module.index.RegisterBo
@@ -19,8 +16,6 @@ import javax.annotation.Resource
 
 @Service
 class IndexServiceImpl: IIndexService {
-  private val log = IndexServiceImpl::class.log
-
   @Resource
   private lateinit var sysUserService: ISysUserService
 
@@ -51,8 +46,6 @@ class IndexServiceImpl: IIndexService {
       throw ExternalException("用户名或密码错误")
     }
     login(user.userName)
-    val roleList: MutableList<String> = getRoleList()
-    log.info {roleList}
     return JSONReturn.ok()
   }
 }
