@@ -19,17 +19,17 @@ import static org.github.spring.restful.ops.Result.*;
 @Data
 public class JSONReturn implements JSON {
   /** 返回的状态. */
-  private          int    retCode;
+  private          int    code;
   /** 返回的信息. */
-  private @NonNull String retMsg;
+  private @NonNull String msg;
 
   public JSONReturn() {
     this(SUCCESS.getCode(), SUCCESS.getMsg());
   }
 
-  private JSONReturn(int retCode, @NonNull String retMsg) {
-    this.retCode = retCode;
-    this.retMsg  = retMsg;
+  private JSONReturn(int code, @NonNull String msg) {
+    this.code = code;
+    this.msg  = msg;
   }
 
   @Override
@@ -47,8 +47,8 @@ public class JSONReturn implements JSON {
     return get();
   }
 
-  public void setRetCode(int retCode) {
-    this.retCode = retCode;
+  public void setCode(int code) {
+    this.code = code;
   }
 
   public void throwIfFailed() throws RemoteException {
@@ -60,12 +60,12 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return retCode == SUCCESS.getCode();
+    return code == SUCCESS.getCode();
   }
 
-  /** WITH retMsg. */
-  public @NonNull JSONReturn withRetMsg(@NonNull String retMsg) {
-    setRetMsg(retMsg);
+  /** WITH msg. */
+  public @NonNull JSONReturn withMsg(@NonNull String msg) {
+    setMsg(msg);
     return this;
   }
 
