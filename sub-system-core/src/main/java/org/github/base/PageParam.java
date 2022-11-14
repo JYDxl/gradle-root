@@ -12,12 +12,16 @@ import static com.google.common.collect.ImmutableList.*;
 @Accessors(chain = true)
 @Data
 public class PageParam extends Sort implements IParam {
+  /** 当前页 */
   private int pageNum = 1;
 
+  /** 每页条数 */
   private int pageSize = 10;
 
+  /** 是否搜索总条数 */
   private boolean searchCount = true;
 
+  /** 排序方式 */
   private @NonNull List<Sort> sortList = of();
 
   protected @NonNull List<OrderItem> sortList() {

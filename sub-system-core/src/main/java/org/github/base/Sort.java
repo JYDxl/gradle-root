@@ -11,10 +11,13 @@ import static com.baomidou.mybatisplus.core.metadata.OrderItem.*;
 @Accessors(chain = true)
 @Data
 public class Sort {
+  /** 是否使用下划线模式 */
   private boolean underLine = true;
 
+  /** 排序字段 */
   private @Nullable String sortName;
 
+  /** 排序方式 */
   private @NonNull String sortOrder = "asc";
 
   public void setSortName(@Nullable String sortName) {
