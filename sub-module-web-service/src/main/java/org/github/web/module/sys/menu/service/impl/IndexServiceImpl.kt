@@ -1,5 +1,6 @@
 package org.github.web.module.sys.menu.service.impl
 
+import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import cn.dev33.satoken.stp.StpUtil.login
 import cn.hutool.crypto.SecureUtil.generateKey
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm
@@ -7,6 +8,7 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto
 import org.github.exception.ExternalException
 import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.service.ISysUserService
+import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.github.web.module.index.LoginBo
 import org.github.web.module.index.RegisterBo
@@ -21,7 +23,7 @@ class IndexServiceImpl: IIndexService {
 
   override fun register(bo: RegisterBo): JSONReturn {
     val algorithm = bo.algorithm!!
-    val symmetricAlgorithm = SymmetricAlgorithm.valueOf(algorithm)
+    val symmetricAlgorithm = parseAlgorithm(algorithm)
     val key = generateKey(algorithm).encoded!!
     val aes = SymmetricCrypto(symmetricAlgorithm, key)
     val password = aes.encryptHex(bo.password)!!
@@ -39,7 +41,7 @@ class IndexServiceImpl: IIndexService {
 
   override fun login(bo: LoginBo): JSONReturn {
     val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
-    val symmetricAlgorithm = SymmetricAlgorithm.valueOf(user.secretAlgorithm!!)
+    val symmetricAlgorithm = parseAlgorithm(user.secretAlgorithm!!)
     val crypto = SymmetricCrypto(symmetricAlgorithm, user.secretKey)
     val password = crypto.encryptHex(bo.password)!!
     if (password != user.userPwd) {
@@ -47,5 +49,18 @@ class IndexServiceImpl: IIndexService {
     }
     login(user.userName)
     return JSONReturn.ok()
+  }
+
+  override fun token(bo: LoginBo): JSONDataReturn<String> {
+    login(bo)
+    return JSONDataReturn.of(getTokenValue())
+  }
+
+  private fun parseAlgorithm(algorithm: String): SymmetricAlgorithm {
+    try {
+      return SymmetricAlgorithm.valueOf(algorithm)
+    } catch (ignore: Exception) {
+      throw ExternalException("不受支持的加密方式：$algorithm")
+    }
   }
 }

@@ -85,6 +85,7 @@ dependencies {
   implementation("redis.clients:jedis:$jedis")
   implementation("com.baomidou:dynamic-datasource-spring-boot-starter:$dynamic")
   implementation("cn.dev33:sa-token-spring-boot-starter:$saToken")
+  implementation("cn.dev33:sa-token-dao-redis-jackson:$saToken")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")

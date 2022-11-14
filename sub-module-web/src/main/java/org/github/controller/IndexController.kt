@@ -19,4 +19,7 @@ class IndexController {
 
   @PostMapping("register")
   fun register(@Validated @RequestBody bo: RegisterBo) = indexService.register(trimStrFields(bo))
+
+  @PostMapping("token")
+  fun token(@Validated @RequestBody bo: LoginBo) = indexService.token(trimStrFields(bo))
 }
