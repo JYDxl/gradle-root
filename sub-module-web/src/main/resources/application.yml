@@ -123,3 +123,4 @@ feign:
 
 sa-token:
   token-name: token
+  token-style: tik
