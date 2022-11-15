@@ -1,12 +1,10 @@
 package org.github.spring.restful.json;
 
-import lombok.*;
-import org.github.base.IPage;
-
 import java.util.Collection;
 import java.util.function.Function;
-
-import static com.google.common.collect.ImmutableList.toImmutableList;
+import lombok.*;
+import org.github.base.IPage;
+import static com.google.common.collect.ImmutableList.*;
 
 /**
  * JSON of page.
@@ -25,7 +23,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 @NoArgsConstructor
 @Data
 public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
-  /** total. */
+  /** 总数 */
   private long total = 0L;
 
   @Override

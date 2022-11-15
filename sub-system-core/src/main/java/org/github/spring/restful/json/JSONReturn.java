@@ -18,9 +18,9 @@ import static org.github.spring.restful.ops.Result.*;
  */
 @Data
 public class JSONReturn implements JSON {
-  /** 返回的状态. */
+  /** 状态 */
   private          int    code;
-  /** 返回的信息. */
+  /** 信息 */
   private @NonNull String msg;
 
   public JSONReturn() {

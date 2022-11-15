@@ -2,11 +2,9 @@ package org.github.spring.restful.json;
 
 import java.util.Collection;
 import java.util.function.Function;
-
 import lombok.*;
-
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.Collections.emptyList;
+import static com.google.common.collect.ImmutableList.*;
+import static java.util.Collections.*;
 
 /**
  * JSON of array.
@@ -24,7 +22,7 @@ import static java.util.Collections.emptyList;
 @NoArgsConstructor
 @Data
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
-  /** data. */
+  /** 数据 */
   private @NonNull Collection<? extends E> data = emptyList();
 
   @Override

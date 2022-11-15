@@ -21,7 +21,7 @@ import static java.util.Optional.*;
 @NoArgsConstructor
 @Data
 public class JSONDataReturn<T> extends JSONReturn implements JSON {
-  /** data. */
+  /** 数据 */
   private @Nullable T data;
 
   @Override

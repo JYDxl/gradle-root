@@ -28,7 +28,7 @@ import static java.util.Optional.*;
 @NoArgsConstructor
 @Data
 public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
-  /** callback. */
+  /** 回调 */
   @JsonIgnore
   private @NonNull String callback = "callback";
 
