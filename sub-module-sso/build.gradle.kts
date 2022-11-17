@@ -9,15 +9,15 @@ val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
 
 application {
-  mainClass.set("org.github.WebKt")
+  mainClass.set("org.github.SsoKt")
   applicationDefaultJvmArgs = listOf(
-    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15006",
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15005",
 
     "-ea",
 
     "-Dspring.profiles.active=$activeProfiles",
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
-    "-Dserver.port=18081",
+    "-Dserver.port=18080",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
@@ -39,7 +39,7 @@ application {
 }
 
 tasks.withType<BootJar> {
-  archiveFileName.set("web-boot.jar")
+  archiveFileName.set("sso-boot.jar")
 }
 
 tasks.withType<Test> {
@@ -70,8 +70,6 @@ dependencies {
   implementation(project(":sub-system-config"))
   implementation(project(":sub-system-core"))
 
-  implementation(project(":sub-module-web-service"))
-
   implementation("io.netty:netty-all:$netty")
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
@@ -85,6 +83,7 @@ dependencies {
   implementation("cn.dev33:sa-token-spring-boot-starter:$saToken")
   implementation("cn.dev33:sa-token-dao-redis-jackson:$saToken")
   implementation("cn.dev33:sa-token-alone-redis:$saToken")
+  implementation("cn.dev33:sa-token-sso:$saToken")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
@@ -92,7 +91,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-aop")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-validation")
-  implementation("org.springframework.boot:spring-boot-starter-websocket")
+  implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
   implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
   implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple");exclude(group = "joda-time")}
