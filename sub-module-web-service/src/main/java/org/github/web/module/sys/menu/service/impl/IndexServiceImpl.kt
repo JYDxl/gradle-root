@@ -13,7 +13,9 @@ import org.github.spring.restful.json.JSONReturn
 import org.github.web.module.index.DemoVo
 import org.github.web.module.index.LoginBo
 import org.github.web.module.index.RegisterBo
+import org.github.web.module.index.TokenVo
 import org.github.web.module.sys.menu.service.IIndexService
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import javax.annotation.Resource
 
@@ -21,6 +23,9 @@ import javax.annotation.Resource
 class IndexServiceImpl: IIndexService {
   @Resource
   private lateinit var sysUserService: ISysUserService
+
+  @Value("\${sa-token.token-name}")
+  private lateinit var tokenName: String
 
   override fun register(bo: RegisterBo): JSONReturn {
     val algorithm = bo.algorithm!!
@@ -52,9 +57,10 @@ class IndexServiceImpl: IIndexService {
     return JSONReturn.ok()
   }
 
-  override fun token(bo: LoginBo): JSONDataReturn<String> {
+  override fun token(bo: LoginBo): JSONDataReturn<TokenVo> {
     login(bo)
-    return JSONDataReturn.of(getTokenValue())
+    val vo = TokenVo(tokenName, getTokenValue())
+    return JSONDataReturn.of(vo)
   }
 
   override fun demo(): JSONDataReturn<DemoVo> {
