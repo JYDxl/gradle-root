@@ -124,3 +124,9 @@ feign:
 sa-token:
   token-name: token
   token-style: tik
+  alone-redis:
+    database: 15
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
+    password: ${spring.redis.password}
+    timeout: ${spring.redis.timeout}

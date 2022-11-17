@@ -57,7 +57,6 @@ val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
-val jedis: String by System.getProperties()
 val seata: String by System.getProperties()
 val jwt: String by System.getProperties()
 

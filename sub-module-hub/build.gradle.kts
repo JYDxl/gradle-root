@@ -60,7 +60,6 @@ val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val netty: String by System.getProperties()
-val jedis: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 dependencies {
@@ -78,7 +77,6 @@ dependencies {
   implementation("mysql:mysql-connector-java:$mysql")
   implementation("p6spy:p6spy:$p6spy")
   implementation("com.auth0:java-jwt:$jwt")
-  implementation("redis.clients:jedis:$jedis")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
