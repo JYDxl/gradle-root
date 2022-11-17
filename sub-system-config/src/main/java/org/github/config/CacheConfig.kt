@@ -7,12 +7,14 @@ import net.oschina.j2cache.J2CacheConfig
 import net.oschina.j2cache.J2CacheConfig.initFromConfig
 import org.github.cache.EnumCache
 import org.github.cache.RAMCache
+import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.MapPropertySource
 import java.util.*
 
 @Configuration
+@EnableCaching
 class CacheConfig {
   @Bean
   fun j2CacheBuilder(): J2CacheBuilder {
