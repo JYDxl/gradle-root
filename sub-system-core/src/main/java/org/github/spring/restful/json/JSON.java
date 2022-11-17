@@ -1,6 +1,5 @@
 package org.github.spring.restful.json;
 
-import java.io.OutputStream;
 import lombok.*;
 import org.github.spring.restful.Returnable;
 import com.google.common.net.MediaType;
@@ -20,11 +19,6 @@ public interface JSON extends Returnable {
   @Override
   default @NonNull MediaType mediaType() {
     return JSON_UTF_8;
-  }
-
-  @Override
-  default void accept(@NonNull OutputStream output) {
-    writeValue(this, output);
   }
 
   /** Generator. */

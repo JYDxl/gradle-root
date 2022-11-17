@@ -1,13 +1,12 @@
 package org.github.spring.restful.file;
 
 import java.io.InputStream;
-import java.io.OutputStream;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import com.google.common.net.MediaType;
-import static cn.hutool.core.util.URLUtil.*;
+import static cn.hutool.extra.servlet.ServletUtil.*;
 import static com.google.common.base.MoreObjects.*;
 
 @AllArgsConstructor
@@ -19,20 +18,12 @@ class FILEImpl implements FILE {
 
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    res.addHeader("Content-Disposition", "attachment;filename=" + name);
-    FILE.super.collect(req, res);
-  }
-
-  @Override
-  public void accept(@NonNull OutputStream output) throws Exception {
-    try (input) {
-      input.transferTo(output);
-    }
+    write(res, input, mediaType().toString(), name);
   }
 
   @Override
   public @NonNull String get() {
-    return decode(name);
+    return name;
   }
 
   @Override

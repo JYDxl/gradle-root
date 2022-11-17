@@ -1,6 +1,5 @@
 package org.github.spring.restful.view;
 
-import java.io.Writer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
@@ -24,22 +23,12 @@ public interface VIEW extends Returnable {
   }
 
   @Override
+  @NonNull String get();
+
+  @Override
   default @NonNull MediaType mediaType() {
     return HTML_UTF_8;
   }
-
-  @Override
-  default boolean functional() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  default void accept(@NonNull Writer writer) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  @NonNull String get();
 
   @Override
   default boolean terminated() {
@@ -53,7 +42,6 @@ public interface VIEW extends Returnable {
 
   /** Generator. */
   static @NonNull VIEW of(@NonNull String view) {
-    //noinspection NullableProblems
     return view::toString;
   }
 }

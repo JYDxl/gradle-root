@@ -1,12 +1,12 @@
 package org.github.spring.restful.json;
 
-import java.io.OutputStream;
 import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.net.MediaType;
+import static cn.hutool.extra.servlet.ServletUtil.*;
 import static com.google.common.base.MoreObjects.*;
 import static com.google.common.net.MediaType.*;
 import static java.util.Optional.*;
@@ -35,17 +35,7 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   @Override
   public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     if ("callback".equals(callback)) setCallback(firstNonNull(req.getParameter("callback"), "callback"));
-    super.collect(req, res);
-  }
-
-  @Override
-  public boolean functional() {
-    return true;
-  }
-
-  @Override
-  public @NonNull String get() {
-    return callback + "(" + super.get() + ")";
+    write(res, get(), mediaType().toString());
   }
 
   @Override
@@ -54,8 +44,8 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   }
 
   @Override
-  public void accept(@NonNull OutputStream output) {
-    throw new UnsupportedOperationException();
+  public @NonNull String get() {
+    return callback + "(" + super.get() + ")";
   }
 
   @Override

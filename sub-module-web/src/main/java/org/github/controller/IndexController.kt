@@ -22,4 +22,10 @@ class IndexController {
 
   @PostMapping("token")
   fun token(@Validated @RequestBody bo: LoginBo) = indexService.token(trimStrFields(bo))
+
+  /**
+   * 示例
+   */
+  @PostMapping("demo")
+  fun demo() = indexService.demo()
 }

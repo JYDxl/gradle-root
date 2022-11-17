@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Writer;
 import javax.annotation.Nullable;
 import lombok.*;
 import org.github.exception.ExternalException;
@@ -13,7 +12,6 @@ import org.github.exception.InternalException;
 import org.github.spring.restful.Returnable;
 import org.springframework.core.io.Resource;
 import com.google.common.net.MediaType;
-import static cn.hutool.core.util.URLUtil.*;
 import static com.google.common.net.MediaType.*;
 import static java.lang.String.*;
 import static java.util.Objects.*;
@@ -32,16 +30,6 @@ public interface FILE extends Returnable {
     return OCTET_STREAM;
   }
 
-  @Override
-  default boolean functional() {
-    return false;
-  }
-
-  @Override
-  default void accept(@NonNull Writer writer) {
-    throw new UnsupportedOperationException();
-  }
-
   /**
    * Generator.
    */
@@ -54,7 +42,7 @@ public interface FILE extends Returnable {
    */
   static @NonNull FILE of(@NonNull File file, @Nullable MediaType type) {
     try {
-      return new FILEImpl(encode(file.getName()), new FileInputStream(file), type);
+      return new FILEImpl(file.getName(), new FileInputStream(file), type);
     } catch (FileNotFoundException e) {
       throw new ExternalException(format("文件[%s]不存在", file.getName()), e);
     }
@@ -71,7 +59,7 @@ public interface FILE extends Returnable {
    * Generator.
    */
   static @NonNull FILE of(@NonNull String name, @NonNull InputStream input, @Nullable MediaType type) {
-    return new FILEImpl(encode(name), input, type);
+    return new FILEImpl(name, input, type);
   }
 
   /**
@@ -89,9 +77,9 @@ public interface FILE extends Returnable {
     try {
       return new FILEImpl(name, resource.getInputStream(), type);
     } catch (FileNotFoundException e) {
-      throw new ExternalException(format("文件[%s]不存在", decode(name)), e);
+      throw new ExternalException(format("文件[%s]不存在", name), e);
     } catch (IOException e) {
-      throw new InternalException(format("文件[%s]内容读取失败", decode(name)), e);
+      throw new InternalException(format("文件[%s]内容读取失败", name), e);
     }
   }
 }

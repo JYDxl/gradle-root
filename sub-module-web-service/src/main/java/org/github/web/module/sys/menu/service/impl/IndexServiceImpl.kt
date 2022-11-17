@@ -10,6 +10,7 @@ import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.service.ISysUserService
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
+import org.github.web.module.index.DemoVo
 import org.github.web.module.index.LoginBo
 import org.github.web.module.index.RegisterBo
 import org.github.web.module.sys.menu.service.IIndexService
@@ -54,6 +55,10 @@ class IndexServiceImpl: IIndexService {
   override fun token(bo: LoginBo): JSONDataReturn<String> {
     login(bo)
     return JSONDataReturn.of(getTokenValue())
+  }
+
+  override fun demo(): JSONDataReturn<DemoVo> {
+    return JSONDataReturn.of(DemoVo("demo", "demo"))
   }
 
   private fun parseAlgorithm(algorithm: String): SymmetricAlgorithm {

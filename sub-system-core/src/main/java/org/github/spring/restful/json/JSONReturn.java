@@ -1,5 +1,7 @@
 package org.github.spring.restful.json;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import org.github.exception.RemoteException;
 import org.github.spring.restful.ops.Result;
@@ -32,9 +34,9 @@ public class JSONReturn implements JSON {
     this.msg  = msg;
   }
 
-  @Override
-  public boolean functional() {
-    return false;
+  @Override public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+    res.setContentType(mediaType().toString());
+    writeValue(this, res.getOutputStream());
   }
 
   @Override
