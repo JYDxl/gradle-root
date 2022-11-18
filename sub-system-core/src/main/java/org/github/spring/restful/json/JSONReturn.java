@@ -92,12 +92,12 @@ public class JSONReturn implements JSON {
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn path(String msg) {
-    return of(PATH_ERROR, msg);
+  public static @NonNull JSONReturn auth(String msg) {
+    return of(AUTH_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn auth(String msg) {
-    return of(AUTH_ERROR, msg);
+  public static @NonNull JSONReturn perm(String msg) {
+    return of(PERM_ERROR, msg);
   }
 }

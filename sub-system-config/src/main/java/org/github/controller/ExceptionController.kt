@@ -1,6 +1,6 @@
 package org.github.controller
 
-import cn.dev33.satoken.exception.SaTokenException
+import cn.dev33.satoken.exception.*
 import org.github.exception.ExternalException
 import org.github.exception.InternalException
 import org.github.ops.error
@@ -27,6 +27,12 @@ class ExceptionController {
 
   @ExceptionHandler(SaTokenException::class)
   fun handleSaTokenException(e: SaTokenException) = ResponseEntity(e.message, UNAUTHORIZED)
+
+  @ExceptionHandler(NotLoginException::class)
+  fun handleAuthException(e: Exception) = JSONReturn.auth(e.message)
+
+  @ExceptionHandler(NotPermissionException::class, NotRoleException::class, NotSafeException::class)
+  fun handlePermException(e: Exception) = JSONReturn.perm(e.message)
 
   @ExceptionHandler(MethodArgumentNotValidException::class)
   fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException) = JSONReturn.external(e.bindingResult.allErrors[0].defaultMessage)
