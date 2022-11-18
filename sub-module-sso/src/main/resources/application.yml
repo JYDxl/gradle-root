@@ -127,3 +127,7 @@ sa-token:
     port: ${spring.redis.port}
     password: ${spring.redis.password}
     timeout: ${spring.redis.timeout}
+  sso:
+    ticket-timeout: 300
+    allow-url: "*"
+    is-slo: true

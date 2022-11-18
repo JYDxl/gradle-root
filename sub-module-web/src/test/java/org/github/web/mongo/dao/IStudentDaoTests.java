@@ -1,16 +1,15 @@
 package org.github.web.mongo.dao;
 
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import org.github.web.mongo.model.Student;
+import lombok.extern.slf4j.*;
+import lombok.*;
+import org.github.sso.mongo.model.Student;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.springframework.data.domain.Sort.sort;
+import static org.springframework.data.domain.Sort.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
