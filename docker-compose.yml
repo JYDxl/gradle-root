@@ -1,13 +1,13 @@
 version: '3'
 services:
 
-  hub:
-    container_name: hub
-    build: sub-module-hub
+  sso:
+    container_name: sso
+    build: sub-module-sso
     networks:
       - backend
     volumes:
-      - /opt/volumes/hub/logs:/logs
+      - /opt/volumes/sso/logs:/logs
 
   web:
     container_name: web

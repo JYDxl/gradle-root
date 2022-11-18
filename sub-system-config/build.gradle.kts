@@ -2,7 +2,7 @@ val mybatisPlus: String by System.getProperties()
 val saToken: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-module-hub-api"))
+  api(project(":sub-module-sso-api"))
 
   compileOnly(project(":sub-system-core"))
 

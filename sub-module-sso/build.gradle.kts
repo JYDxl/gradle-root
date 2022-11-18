@@ -70,6 +70,8 @@ dependencies {
   implementation(project(":sub-system-config"))
   implementation(project(":sub-system-core"))
 
+  implementation(project(":sub-module-sso-service"))
+
   implementation("io.netty:netty-all:$netty")
 
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
