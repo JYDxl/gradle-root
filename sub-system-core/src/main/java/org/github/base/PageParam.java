@@ -2,6 +2,8 @@ package org.github.base;
 
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.*;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
@@ -13,9 +15,11 @@ import static com.google.common.collect.ImmutableList.*;
 @Data
 public class PageParam extends Sort {
   /** 当前页 */
+  @Min(value = 1, message = "当前页至少为第1页")
   private int pageNum = 1;
 
   /** 每页条数 */
+  @Max(value = 100, message = "每页最多展示100条数据")
   private int pageSize = 10;
 
   /** 是否搜索总条数 */
