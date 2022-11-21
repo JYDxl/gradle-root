@@ -16,7 +16,6 @@ import org.github.web.module.index.RegisterBo
 import org.github.web.module.index.TokenVo
 import org.github.web.module.sys.menu.service.IIndexService
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import javax.annotation.Resource
 
@@ -46,7 +45,6 @@ class IndexServiceImpl: IIndexService {
     return JSONReturn.ok()
   }
 
-  @Cacheable(value = ["index:login"], key = "#bo")
   override fun login(bo: LoginBo): JSONReturn {
     val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
     val symmetricAlgorithm = parseAlgorithm(user.secretAlgorithm!!)
