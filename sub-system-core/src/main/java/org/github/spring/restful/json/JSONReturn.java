@@ -100,4 +100,9 @@ public class JSONReturn implements JSON {
   public static @NonNull JSONReturn perm(String msg) {
     return of(PERM_ERROR, msg);
   }
+
+  /** Generator. */
+  public static @NonNull JSONReturn call(String msg) {
+    return of(CALL_ERROR, msg);
+  }
 }

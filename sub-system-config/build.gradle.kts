@@ -18,5 +18,4 @@ dependencies {
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
-  implementation("net.oschina.j2cache:j2cache-springcache:2.8.0-release") {exclude(group = "org.slf4j", module = "slf4j-simple")}
 }

@@ -1,3 +1,9 @@
 package org.github.base;
 
-public interface IParam extends IJson {}
+import static cn.hutool.core.bean.BeanUtil.*;
+
+public interface IParam extends IJson {
+  default void trim() {
+    trimStrFields(this);
+  }
+}

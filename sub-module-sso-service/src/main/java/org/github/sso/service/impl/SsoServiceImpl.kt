@@ -15,8 +15,10 @@ import org.github.sso.bo.RegisterBo
 import org.github.sso.service.ISsoService
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import org.springframework.validation.annotation.Validated
 import javax.annotation.Resource
 
+@Validated
 @Service
 class SsoServiceImpl: ISsoService {
   @Resource

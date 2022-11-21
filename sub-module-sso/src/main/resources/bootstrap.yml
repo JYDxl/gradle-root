@@ -10,5 +10,3 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        shared-configs:
-          - data-id: j2cache-${spring.profiles.active}.properties

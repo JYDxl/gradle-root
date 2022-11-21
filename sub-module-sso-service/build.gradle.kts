@@ -12,5 +12,5 @@ dependencies {
   compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
-//  compileOnly("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
+  compileOnly("jakarta.validation:jakarta.validation-api")
 }
