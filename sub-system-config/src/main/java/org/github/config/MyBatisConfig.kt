@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import org.apache.ibatis.reflection.MetaObject
 import org.github.base.IEntity
 import org.github.mybatis.MyBatisMapper
+import org.github.spring.ops.user
 import org.mybatis.spring.annotation.MapperScan
 import org.springframework.cloud.commons.util.InetUtils
 import org.springframework.context.annotation.Bean
@@ -48,18 +49,16 @@ class CustomSqlInjector: DefaultSqlInjector() {
 
 class CustomMetaObjectHandler: MetaObjectHandler {
   override fun insertFill(entity: MetaObject) {
-    strictInsertFill(entity, "creatorName", {name}, String::class.java)
+    strictInsertFill(entity, "creatorName", {user}, String::class.java)
     strictInsertFill(entity, "createdTime", {now()}, LocalDateTime::class.java)
-    strictInsertFill(entity, "updaterName", {name}, String::class.java)
+    strictInsertFill(entity, "updaterName", {user}, String::class.java)
     strictInsertFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
   }
 
   override fun updateFill(entity: MetaObject) {
-    strictUpdateFill(entity, "updaterName", {name}, String::class.java)
+    strictUpdateFill(entity, "updaterName", {user}, String::class.java)
     strictUpdateFill(entity, "updatedTime", {now()}, LocalDateTime::class.java)
   }
-
-  private val name: String get() = ""
 }
 
 class CustomIdentifierGenerator(addr: InetAddress): DefaultIdentifierGenerator(addr) {

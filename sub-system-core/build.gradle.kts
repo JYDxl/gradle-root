@@ -2,6 +2,7 @@ val commonsCodec: String by System.getProperties()
 val mybatisPlus: String by System.getProperties()
 val postgresql: String by System.getProperties()
 val javassist: String by System.getProperties()
+val saToken: String by System.getProperties()
 val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
@@ -55,6 +56,8 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
 
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
+
+  compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
 
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   compileOnly("io.netty:netty-all:$netty")
