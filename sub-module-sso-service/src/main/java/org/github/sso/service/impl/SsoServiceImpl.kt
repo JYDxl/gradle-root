@@ -13,7 +13,6 @@ import org.github.spring.restful.json.JSONReturn
 import org.github.sso.bo.LoginBo
 import org.github.sso.bo.RegisterBo
 import org.github.sso.service.ISsoService
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.validation.annotation.Validated
 import javax.annotation.Resource
@@ -42,7 +41,6 @@ class SsoServiceImpl: ISsoService {
     return JSONReturn.ok()
   }
 
-  @Cacheable(value = ["index:login"], key = "#bo")
   override fun login(bo: LoginBo): JSONReturn {
     val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
     val symmetricAlgorithm = parseAlgorithm(user.secretAlgorithm!!)

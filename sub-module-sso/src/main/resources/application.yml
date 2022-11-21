@@ -113,6 +113,7 @@ logging:
     io:
       netty: debug
       vertx: debug
+    root: info
 
 feign:
   okhttp:
@@ -131,3 +132,27 @@ sa-token:
     ticket-timeout: 300
     allow-url: "*"
     is-slo: true
+
+jetcache:
+  statIntervalMinutes: 15
+  areaInCacheName: false
+  local:
+    default:
+      type: caffeine
+      keyConvertor: jackson
+      limit: 100
+      expireAfterWriteInMillis: 100000
+  remote:
+    default:
+      type: redis.lettuce
+      keyConvertor: jackson
+      broadcastChannel: jetcache
+      valueEncoder: java
+      valueDecoder: java
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50
+      uri:
+        - redis://${spring.redis.password}@${spring.redis.host}:${spring.redis.port}/0
+      readFrom: masterPreferred

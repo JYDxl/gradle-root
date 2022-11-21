@@ -1,9 +1,8 @@
 val mybatisPlus: String by System.getProperties()
+val jetcache: String by System.getProperties()
 val saToken: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-module-sso-api"))
-
   compileOnly(project(":sub-system-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
@@ -18,4 +17,5 @@ dependencies {
   annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
+  compileOnly("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache")
 }

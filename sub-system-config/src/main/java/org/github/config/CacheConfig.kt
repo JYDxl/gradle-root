@@ -1,13 +1,13 @@
 package org.github.config
 
+import com.alicp.jetcache.anno.config.EnableMethodCache
 import org.github.cache.EnumCache
 import org.github.cache.RAMCache
-import org.springframework.cache.annotation.EnableCaching
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
+@EnableMethodCache(basePackages = ["org.github"])
 @Configuration
-@EnableCaching
 class CacheConfig {
   @Bean
   fun enumCache() = EnumCache("org.github")

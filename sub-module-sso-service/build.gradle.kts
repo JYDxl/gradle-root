@@ -1,3 +1,4 @@
+val jetcache: String by System.getProperties()
 val saToken: String by System.getProperties()
 
 dependencies {
@@ -13,4 +14,5 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
   compileOnly("jakarta.validation:jakarta.validation-api")
+  compileOnly("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache")
 }
