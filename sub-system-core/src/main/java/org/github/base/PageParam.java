@@ -11,7 +11,7 @@ import static com.google.common.collect.ImmutableList.*;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @Data
-public class PageParam extends Sort implements IParam {
+public class PageParam extends Sort {
   /** 当前页 */
   private int pageNum = 1;
 
@@ -23,6 +23,11 @@ public class PageParam extends Sort implements IParam {
 
   /** 排序方式 */
   private @NonNull List<Sort> sortList = of();
+
+  @Override public void trim() {
+    super.trim();
+    sortList.forEach(Sort::trim);
+  }
 
   protected @NonNull List<OrderItem> sortList() {
     return sortList.stream().map(Sort::sort).filter(Objects::nonNull).collect(toImmutableList());

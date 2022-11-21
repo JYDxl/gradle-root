@@ -10,7 +10,7 @@ import static com.baomidou.mybatisplus.core.metadata.OrderItem.*;
 
 @Accessors(chain = true)
 @Data
-public class Sort {
+public class Sort implements IParam {
   /** 是否使用下划线模式 */
   private boolean underLine = true;
 
