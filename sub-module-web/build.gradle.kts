@@ -85,6 +85,7 @@ dependencies {
   implementation("cn.dev33:sa-token-spring-boot-starter:$saToken")
   implementation("cn.dev33:sa-token-dao-redis-jackson:$saToken")
   implementation("cn.dev33:sa-token-alone-redis:$saToken")
+  implementation("cn.dev33:sa-token-sso:$saToken")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
