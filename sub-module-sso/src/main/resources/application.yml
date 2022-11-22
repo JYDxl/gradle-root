@@ -130,7 +130,7 @@ sa-token:
     timeout: ${spring.redis.timeout}
   sso:
     ticket-timeout: 300
-    allow-url: "*"
+    allow-url: http://frp:18081/sso/login
     is-slo: true
 
 jetcache:
