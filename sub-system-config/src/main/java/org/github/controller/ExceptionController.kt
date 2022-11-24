@@ -11,6 +11,7 @@ import org.github.spring.restful.json.JSONReturn
 import org.github.spring.restful.json.JSONReturn.*
 import org.springframework.http.HttpEntity
 import org.springframework.http.ResponseEntity.ok
+import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -23,8 +24,8 @@ class ExceptionController {
   @ExceptionHandler(Throwable::class)
   fun handleThrowable(e: Throwable) = internal(null).apply {log.error(e) {}}.entity
 
-  @ExceptionHandler(ExternalException::class)
-  fun handleExternalException(e: ExternalException) = external(e.message).entity
+  @ExceptionHandler(ExternalException::class, HttpRequestMethodNotSupportedException::class)
+  fun handleExternalException(e: Exception) = external(e.message).entity
 
   @ExceptionHandler(InternalException::class)
   fun handleInternalException(e: InternalException) = internal(e.message).entity
