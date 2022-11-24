@@ -8,6 +8,7 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto
 import org.github.exception.ExternalException
 import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.service.ISysUserService
+import org.github.spring.ops.proxy
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.github.sso.bo.LoginBo
@@ -54,8 +55,9 @@ class SsoServiceImpl: ISsoService {
   }
 
   override fun token(bo: LoginBo): JSONDataReturn<String> {
-    login(bo)
-    return JSONDataReturn.of(getTokenValue())
+    proxy.login(bo)
+    val token = getTokenValue()!!
+    return JSONDataReturn.of(token)
   }
 
   private fun parseAlgorithm(algorithm: String): SymmetricAlgorithm {
