@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.generator.FastAutoGenerator
 import com.baomidou.mybatisplus.generator.config.*
 import com.baomidou.mybatisplus.generator.config.OutputFile.*
 import com.baomidou.mybatisplus.generator.config.TemplateType.CONTROLLER
+import com.baomidou.mybatisplus.generator.config.TemplateType.XML
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
 import com.baomidou.mybatisplus.generator.fill.Column
 import org.github.base.Entity
@@ -24,7 +25,7 @@ import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
 fun main() {
-  mysqlMydb()
+  // mysqlMydb()
   mysqlSccore()
 }
 
@@ -105,6 +106,7 @@ fun mysqlMydb() {
 
   generator.templateConfig {it: TemplateConfig.Builder ->
     it.disable(CONTROLLER)
+      .disable(XML)
       .entity("/entity.java")
       .entityKt("/entity.kt")
       .mapper("/mapper.java")
@@ -114,26 +116,6 @@ fun mysqlMydb() {
 
   generator.templateEngine(FreemarkerTemplateEngine())
   generator.execute()
-
-  //重新生成枚举
-  del("$path/$subEntityName/src/main/java/$packageName/$moduleName/dict")
-  val ds = SimpleDataSource(url, username, password)
-
-  val list: MutableList<Item> = use(ds).findAll(create("sys_dict_item"), Item::class.java)
-  val engine: TemplateEngine = TemplateUtil.createEngine()
-  val map: Map<String, List<Item>> = list.groupBy(Item::dictName)
-  map.forEach {(dictName, list) ->
-    val name = toCamelCase(dictName).replaceFirstChar {it.uppercase()}
-    val params = mapOf(
-      "name" to name,
-      "list" to list,
-      "pack" to "$packageName/$moduleName/dict".replace('/', '.')
-    )
-    val fileName = if (enableKotlin) "$name.kt" else "$name.java"
-    val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
-    val content: String = engine.getTemplate(readUtf8String(template)).render(params)
-    writeUtf8String(content, "$path/$subEntityName/src/main/java/$packageName/$moduleName/dict/$fileName")
-  }
 }
 
 fun mysqlSccore() {
@@ -187,7 +169,7 @@ fun mysqlSccore() {
       .enableLombok()
       .enableTableFieldAnnotation()
       .enableChainModel()
-      .versionColumnName("version")
+      .versionColumnName("reversion")
       // .addTableFills(
       //   listOf(
       //     Column("creator_name", INSERT),
@@ -214,6 +196,7 @@ fun mysqlSccore() {
 
   generator.templateConfig {it: TemplateConfig.Builder ->
     it.disable(CONTROLLER)
+      .disable(XML)
       .entity("/entity.java")
       .entityKt("/entity.kt")
       .mapper("/mapper.java")
@@ -224,32 +207,43 @@ fun mysqlSccore() {
   generator.templateEngine(FreemarkerTemplateEngine())
   generator.execute()
 
-  //重新生成枚举
-  // del("$path/$subEntityName/src/main/java/$packageName/$moduleName/dict")
-  // val ds = SimpleDataSource(url, username, password)
-  //
-  // val list: MutableList<Item> = use(ds).findAll(create("sys_dict_item"), Item::class.java)
-  // val engine: TemplateEngine = TemplateUtil.createEngine()
-  // val map: Map<String, List<Item>> = list.groupBy(Item::dictName)
-  // map.forEach {(dictName, list) ->
-  //   val name = toCamelCase(dictName).replaceFirstChar {it.uppercase()}
-  //   val params = mapOf(
-  //     "name" to name,
-  //     "list" to list,
-  //     "pack" to "$packageName/$moduleName/dict".replace('/', '.')
-  //   )
-  //   val fileName = if (enableKotlin) "$name.kt" else "$name.java"
-  //   val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
-  //   val content: String = engine.getTemplate(readUtf8String(template)).render(params)
-  //   writeUtf8String(content, "$path/$subEntityName/src/main/java/$packageName/$moduleName/dict/$fileName")
-  // }
+  // 重新生成枚举
+  del("$path/$subEntityName/src/main/java/$packageName/$moduleName/dict")
+  val ds = SimpleDataSource(url, username, password)
+
+  val dictList: MutableList<Dict> = use(ds).findAll(create("t_sys_dict"), Dict::class.java)
+  val index = dictList.associate {Pair(it.code, it.name)}
+
+  val itemList: MutableList<Item> = use(ds).findAll(create("t_sys_dict_item"), Item::class.java)
+  val engine: TemplateEngine = TemplateUtil.createEngine()
+  val map: Map<String, List<Item>> = itemList.groupBy(Item::dictCode)
+  map.forEach {(dictName, list) ->
+    val name = toCamelCase(dictName).replaceFirstChar {it.uppercase()}
+    val params = mapOf(
+      "name" to name,
+      "list" to list,
+      "type" to index[dictName],
+      "pack" to "$packageName/$moduleName/dict".replace('/', '.')
+    )
+    val fileName = if (enableKotlin) "$name.kt" else "$name.java"
+    val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
+    val content: String = engine.getTemplate(readUtf8String(template)).render(params)
+    writeUtf8String(content, "$path/$subEntityName/src/main/java/$packageName/$moduleName/dict/$fileName")
+  }
 }
 
 @Suppress("unused")
 class Item {
+  lateinit var dictCode: String
   lateinit var dictName: String
+  lateinit var code: String
   lateinit var name: String
-  lateinit var label: String
-  lateinit var intro: String
-  var code: Int = 0
+  lateinit var info: String
+}
+
+@Suppress("unused")
+class Dict {
+  lateinit var code: String
+  lateinit var name: String
+  lateinit var info: String
 }

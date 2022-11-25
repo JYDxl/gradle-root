@@ -2,13 +2,18 @@ package ${pack}
 
 import org.github.base.BaseEnum
 
-enum class ${name}(override val code: Int, override val value: String): BaseEnum {
+/**
+ * ${type}
+ *
+ * @author JYD_XL
+ */
+enum class ${name}(override val code: String, override val value: String): BaseEnum {
 <#list list as item>
-  <#if item.intro?has_content>
-    /** ${item.intro} */
+  <#if item.info?has_content>
+    /** ${item.info} */
   <#else>
-    /** ${item.label} */
+    /** ${item.name} */
   </#if>
-  ${item.name?upper_case}(${item.code},"${item.label}"),
+  ${item.code?upper_case}("${item.code}","${item.name}"),
 </#list>
 }

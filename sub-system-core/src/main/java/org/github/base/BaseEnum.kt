@@ -1,3 +1,3 @@
 package org.github.base
 
-interface BaseEnum: IEnum<Int, String>
+interface BaseEnum: IEnum<String, String>
