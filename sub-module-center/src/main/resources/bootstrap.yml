@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: center-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos-cluster:8848
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml

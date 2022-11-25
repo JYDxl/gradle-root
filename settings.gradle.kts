@@ -31,9 +31,9 @@ include("sub-module-web-dto")
 include("sub-module-web-api")
 include("sub-module-web")
 
-include("sub-module-sso-service")
-include("sub-module-sso-dto")
-include("sub-module-sso-api")
-include("sub-module-sso")
+include("sub-module-center-service")
+include("sub-module-center-dto")
+include("sub-module-center-api")
+include("sub-module-center")
 
 include("sub-module-net")

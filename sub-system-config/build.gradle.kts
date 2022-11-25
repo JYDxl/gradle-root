@@ -3,7 +3,7 @@ val jetcache: String by System.getProperties()
 val saToken: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-module-sso-api"))
+  api(project(":sub-module-center-api"))
   api(project(":sub-system-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
