@@ -114,8 +114,6 @@ dependencies {
   // implementation("io.seata:seata-spring-boot-starter:$seata") {exclude(group = "com.alibaba", module = "druid")}
 //  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
-  developmentOnly("org.springframework.boot:spring-boot-devtools")
-
   testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
 //  testImplementation("org.springframework.security:spring-security-test")
 //  implementation("org.redisson:redisson:$redisson") {exclude(group = "io.netty")}

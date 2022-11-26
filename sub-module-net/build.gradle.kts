@@ -69,6 +69,4 @@ dependencies {
   implementation("io.netty:netty-all:$netty")
 
   implementation("org.springframework.boot:spring-boot-starter")
-
-  developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
