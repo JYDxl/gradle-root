@@ -10,7 +10,7 @@ import org.github.mysql.sccore.base.entity.SysUserRoleEntity
 import org.github.mysql.sccore.base.service.ISysRoleService
 import org.github.mysql.sccore.base.service.ISysUserRoleService
 import org.github.mysql.sccore.base.service.ISysUserService
-import org.github.service.SaInterface
+import org.github.service.ISaInterface
 import org.github.spring.ops.proxy
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
@@ -18,7 +18,7 @@ import javax.annotation.Resource
 
 @Component
 @Primary
-class SaRealImpl: SaInterface {
+class SaRealImpl: ISaInterface {
   @Resource
   private lateinit var sysUserService: ISysUserService
 

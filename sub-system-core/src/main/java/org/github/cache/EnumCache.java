@@ -8,7 +8,6 @@ import lombok.*;
 import lombok.extern.slf4j.*;
 import org.github.base.IEnum;
 import org.apache.commons.lang3.tuple.Triple;
-import com.google.common.collect.BiMap;
 import com.google.common.collect.Table;
 import cn.hutool.core.lang.Pair;
 import static cn.hutool.core.util.ClassUtil.*;
@@ -24,43 +23,42 @@ import static org.apache.commons.lang3.tuple.Triple.of;
 public class EnumCache {
   private final @NonNull String packageName;
 
-  private final @NonNull Table<Class<? extends IEnum<?,?>>,?,?> table;
+  private final @NonNull Table<String,?,?> table;
 
   public EnumCache(@NonNull String packageName) {
     this.packageName = packageName;
     this.table       = load(packageName);
   }
 
-  private Table<Class<? extends IEnum<?,?>>,?,?> load(String packageName) {
+  private Table<String,?,?> load(String packageName) {
     val classes = scanPackageBySuper(packageName, IEnum.class);
     return classes.stream().flatMap(this::apply).collect(toImmutableTable(Triple::getLeft, Triple::getMiddle, Triple::getRight));
   }
 
-  @SuppressWarnings("unchecked")
-  private Stream<Triple<Class<? extends IEnum<?,?>>,?,?>> apply(Class<?> clazz) {
+  private Stream<Triple<String,?,?>> apply(Class<?> clazz) {
     if (clazz.isInterface()) return Stream.of();
     if (!clazz.isEnum()) throw new IllegalStateException();
     val method = getMethod(clazz, "values");
     val values = ((IEnum<?,?>[]) invokeStatic(method));
-    val token  = ((Class<? extends IEnum<?,?>>) clazz);
+    val token  = clazz.getSimpleName();
     return stream(values).map(v -> of(token, v.getCode(), v.getValue()));
   }
 
   @SuppressWarnings("unchecked")
-  public @Nullable <C, V, E extends Class<? extends IEnum<C,V>>> V get(@NonNull E clazz, @Nullable C code) {
+  public @Nullable <C, V> V get(@NonNull String type, @Nullable C code) {
     if (code == null) return null;
-    val value = table.get(clazz, code);
-    if (value == null) log.warn("在常量枚举[{}]中发现了未知的类型编码: {}", clazz, code);
+    val value = table.get(type, code);
+    if (value == null) log.warn("在常量枚举[{}]中发现了未知的类型编码: {}", type, code);
     return (V) value;
   }
 
   @SuppressWarnings("unchecked")
-  public <C, V, E extends Class<? extends IEnum<C,V>>> @NonNull BiMap<C,V> getAll(@NonNull E clazz) {
-    return (BiMap<C,V>) copyOf(table.row(clazz));
+  public <C, V> @NonNull Map<C,V> getAll(@NonNull String type) {
+    return (Map<C,V>) copyOf(table.row(type));
   }
 
   @SuppressWarnings("unchecked")
-  public <C, V, E extends Class<? extends IEnum<C,V>>> @NonNull List<Pair<C,V>> getList(@NonNull E clazz) {
-    return ((Map<C,V>) table.row(clazz)).entrySet().stream().map(v -> new Pair<>(v.getKey(), v.getValue())).collect(toImmutableList());
+  public <C, V> @NonNull List<Pair<C,V>> getList(@NonNull String type) {
+    return ((Map<C,V>) table.row(type)).entrySet().stream().map(v -> new Pair<>(v.getKey(), v.getValue())).collect(toImmutableList());
   }
 }

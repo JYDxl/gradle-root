@@ -212,7 +212,7 @@ fun mysqlSccore() {
   val ds = SimpleDataSource(url, username, password)
 
   val dictList: MutableList<Dict> = use(ds).findAll(create("t_sys_dict"), Dict::class.java)
-  val index = dictList.associate {Pair(it.code, it.name)}
+  val index = dictList.associateBy {it.dictCode}
 
   val itemList: MutableList<Item> = use(ds).findAll(create("t_sys_dict_item"), Item::class.java)
   val engine: TemplateEngine = TemplateUtil.createEngine()
@@ -235,15 +235,14 @@ fun mysqlSccore() {
 @Suppress("unused")
 class Item {
   lateinit var dictCode: String
-  lateinit var dictName: String
-  lateinit var code: String
-  lateinit var name: String
-  lateinit var info: String
+  lateinit var itemCode: String
+  lateinit var itemName: String
+  lateinit var itemInfo: String
 }
 
 @Suppress("unused")
 class Dict {
-  lateinit var code: String
-  lateinit var name: String
-  lateinit var info: String
+  lateinit var dictCode: String
+  lateinit var dictName: String
+  lateinit var dictInfo: String
 }

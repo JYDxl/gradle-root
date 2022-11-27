@@ -4,12 +4,12 @@ import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import org.github.center.bo.PermissionsBo
 import org.github.center.bo.RolesBo
 import org.github.center.feign.ICenterServerAPI
-import org.github.service.SaInterface
+import org.github.service.ISaInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SaRemoteImpl: SaInterface {
+class SaRemoteImpl: ISaInterface {
   @Autowired
   private lateinit var centerServerAPI: ICenterServerAPI
 

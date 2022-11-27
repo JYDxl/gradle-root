@@ -18,17 +18,17 @@ open class SysDictItemEntity : Entity() {
     @TableField("dict_code")
     open var dictCode: String? = null
 
-    @TableField("code")
-    open var code: String? = null
+    @TableField("item_code")
+    open var itemCode: String? = null
 
-    @TableField("name")
-    open var name: String? = null
+    @TableField("item_name")
+    open var itemName: String? = null
+
+    @TableField("item_info")
+    open var itemInfo: String? = null
 
     @TableField("sort")
     open var sort: Int? = null
-
-    @TableField("info")
-    open var info: String? = null
 
     @TableField("revision")
     open var revision: Int? = null
@@ -39,13 +39,13 @@ open class SysDictItemEntity : Entity() {
 
         const val DICT_CODE : String = "dict_code"
 
-        const val CODE : String = "code"
+        const val ITEM_CODE : String = "item_code"
 
-        const val NAME : String = "name"
+        const val ITEM_NAME : String = "item_name"
+
+        const val ITEM_INFO : String = "item_info"
 
         const val SORT : String = "sort"
-
-        const val INFO : String = "info"
 
         const val REVISION : String = "revision"
 
@@ -58,10 +58,10 @@ open class SysDictItemEntity : Entity() {
     override fun toString(): String {
         return "SysDictItemEntity{" +
         "dictCode=" + dictCode +
-        ", code=" + code +
-        ", name=" + name +
+        ", itemCode=" + itemCode +
+        ", itemName=" + itemName +
+        ", itemInfo=" + itemInfo +
         ", sort=" + sort +
-        ", info=" + info +
         ", revision=" + revision +
         "}"
     }

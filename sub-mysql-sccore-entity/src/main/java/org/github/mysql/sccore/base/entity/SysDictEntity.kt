@@ -15,14 +15,14 @@ import org.github.base.Entity
 @TableName("t_sys_dict")
 open class SysDictEntity : Entity() {
 
-    @TableField("code")
-    open var code: String? = null
+    @TableField("dict_code")
+    open var dictCode: String? = null
 
-    @TableField("name")
-    open var name: String? = null
+    @TableField("dict_name")
+    open var dictName: String? = null
 
-    @TableField("info")
-    open var info: String? = null
+    @TableField("dict_info")
+    open var dictInfo: String? = null
 
     @TableField("revision")
     open var revision: Int? = null
@@ -31,11 +31,11 @@ open class SysDictEntity : Entity() {
 
         private const val serialVersionUID = 1L
 
-        const val CODE : String = "code"
+        const val DICT_CODE : String = "dict_code"
 
-        const val NAME : String = "name"
+        const val DICT_NAME : String = "dict_name"
 
-        const val INFO : String = "info"
+        const val DICT_INFO : String = "dict_info"
 
         const val REVISION : String = "revision"
 
@@ -47,9 +47,9 @@ open class SysDictEntity : Entity() {
 
     override fun toString(): String {
         return "SysDictEntity{" +
-        "code=" + code +
-        ", name=" + name +
-        ", info=" + info +
+        "dictCode=" + dictCode +
+        ", dictName=" + dictName +
+        ", dictInfo=" + dictInfo +
         ", revision=" + revision +
         "}"
     }

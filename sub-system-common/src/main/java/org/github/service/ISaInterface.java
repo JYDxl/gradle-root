@@ -6,7 +6,7 @@ import cn.dev33.satoken.stp.StpInterface;
 import static com.alicp.jetcache.anno.CacheType.*;
 import static org.github.ConstKt.*;
 
-public interface SaInterface extends StpInterface {
+public interface ISaInterface extends StpInterface {
   @Override
   List<String> getPermissionList(Object loginId, String loginType);
 
