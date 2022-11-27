@@ -16,7 +16,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Configuration
 class WebMvcConfig: WebMvcConfigurer {
   override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
-    registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
+    registry
+      .addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
   }
 
   @Bean
