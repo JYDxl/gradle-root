@@ -1,4 +1,4 @@
-package org.github.center.controller;
+package org.github.web.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

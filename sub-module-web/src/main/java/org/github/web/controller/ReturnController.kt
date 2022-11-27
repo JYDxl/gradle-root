@@ -1,4 +1,4 @@
-package org.github.center.controller
+package org.github.web.controller
 
 import org.github.ops.info
 import org.github.ops.log
