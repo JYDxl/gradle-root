@@ -1,19 +1,19 @@
 package org.github.center.service.impl
 
-import cn.dev33.satoken.stp.StpInterface
 import org.github.mysql.sccore.base.entity.SysRoleEntity
 import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.entity.SysUserRoleEntity
 import org.github.mysql.sccore.base.service.ISysRoleService
 import org.github.mysql.sccore.base.service.ISysUserRoleService
 import org.github.mysql.sccore.base.service.ISysUserService
+import org.github.service.SaInterface
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 import javax.annotation.Resource
 
 @Component
 @Primary
-class SaRealImpl: StpInterface {
+class SaRealImpl: SaInterface {
   @Resource
   private lateinit var sysUserService: ISysUserService
 

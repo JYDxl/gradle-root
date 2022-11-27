@@ -1,15 +1,15 @@
 package org.github.service.impl
 
-import cn.dev33.satoken.stp.StpInterface
 import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import org.github.center.bo.PermissionsBo
 import org.github.center.bo.RolesBo
 import org.github.center.feign.ICenterServerAPI
+import org.github.service.SaInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class SaRemoteImpl: StpInterface {
+class SaRemoteImpl: SaInterface {
   @Autowired
   private lateinit var centerServerAPI: ICenterServerAPI
 
