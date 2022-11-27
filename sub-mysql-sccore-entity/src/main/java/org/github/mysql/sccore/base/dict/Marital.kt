@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package org.github.mysql.sccore.base.dict
 
 import org.github.base.BaseEnum
@@ -18,4 +20,9 @@ enum class Marital(override val code: String, override val value: String): BaseE
   UNMARRIED("unmarried","未婚"),
   /** 丧偶  */
   WIDOWED("widowed","丧偶"),
+  ;
+
+  companion object {
+    const val MARITAL : String = "Marital"
+  }
 }

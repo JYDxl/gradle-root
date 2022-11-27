@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package ${pack}
 
 import org.github.base.BaseEnum
@@ -12,4 +14,9 @@ enum class ${name}(override val code: String, override val value: String): BaseE
   /** ${item.itemName} ${item.itemInfo} */
   ${item.itemCode?upper_case}("${item.itemCode}","${item.itemName}"),
 </#list>
+  ;
+
+  companion object {
+    const val ${name?upper_case} : String = "${name}"
+  }
 }

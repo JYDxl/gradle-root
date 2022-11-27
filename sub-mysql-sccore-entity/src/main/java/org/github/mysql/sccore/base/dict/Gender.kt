@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package org.github.mysql.sccore.base.dict
 
 import org.github.base.BaseEnum
@@ -14,4 +16,9 @@ enum class Gender(override val code: String, override val value: String): BaseEn
   UNKNOWN("unknown","未知"),
   /** 女  */
   WOMEN("women","女"),
+  ;
+
+  companion object {
+    const val GENDER : String = "Gender"
+  }
 }
