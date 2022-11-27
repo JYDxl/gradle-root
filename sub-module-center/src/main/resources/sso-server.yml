@@ -1,0 +1,5 @@
+sa-token:
+  sso:
+    ticket-timeout: 300
+    allow-url: http://frp:18081/sso/login
+    is-slo: true

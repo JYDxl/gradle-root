@@ -1,0 +1,4 @@
+sa-token:
+  sso:
+    auth-url: http://frp:18080/sso/auth
+    is-slo: true

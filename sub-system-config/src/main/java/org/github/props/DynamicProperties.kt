@@ -1,16 +1,10 @@
-package org.github.props;
+package org.github.props
 
-import java.util.List;
-import lombok.*;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.stereotype.Component;
-import static com.google.common.collect.Lists.*;
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.cloud.context.config.annotation.RefreshScope
+import org.springframework.stereotype.Component
 
-@ConfigurationProperties("custom.dynamic")
+@ConfigurationProperties("dynamic")
 @RefreshScope
 @Component
-@Data
-public class DynamicProperties {
-  private List<String> whiteList = newArrayList();
-}
+class DynamicProperties

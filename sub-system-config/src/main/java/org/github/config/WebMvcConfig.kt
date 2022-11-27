@@ -4,9 +4,7 @@ import cn.dev33.satoken.interceptor.SaInterceptor
 import cn.dev33.satoken.stp.StpUtil.checkLogin
 import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of
-import org.github.props.DynamicProperties
 import org.github.spring.mvc.ReturnableValueHandlerKotlin
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler
@@ -17,9 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 @Configuration
 class WebMvcConfig: WebMvcConfigurer {
-  @Autowired
-  private lateinit var dynamicProperties: DynamicProperties
-
   override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
     registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
   }
@@ -33,6 +28,6 @@ class WebMvcConfig: WebMvcConfigurer {
     registry
       .addInterceptor(SaInterceptor {checkLogin()})
       .addPathPatterns("/**")
-      .excludePathPatterns(dynamicProperties.whiteList)
+      .excludePathPatterns("/index/**", "/static/**", "/sso/**", "/favicon.ico", "/error", "/public/**")
   }
 }
