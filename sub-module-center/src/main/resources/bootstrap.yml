@@ -9,9 +9,9 @@ spring:
         server-addr: frp:8848
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
-        file-extension: yml
+        file-extension: yaml
         shared-configs:
-          - data-id: public-${spring.profiles.active}.yml
-          - data-id: sso-server-${spring.profiles.active}.yml
-          - data-id: dynamic-${spring.profiles.active}.yml
+          - data-id: public-${spring.profiles.active}.yaml
+          - data-id: sso-server-${spring.profiles.active}.yaml
+          - data-id: dynamic-${spring.profiles.active}.yaml
             refresh: true

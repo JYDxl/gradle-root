@@ -9,5 +9,5 @@ spring:
         server-addr: frp:8848
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
-        file-extension: yml
+        file-extension: yaml
 #        group: server
