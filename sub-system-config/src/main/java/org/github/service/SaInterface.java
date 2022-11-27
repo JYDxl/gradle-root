@@ -7,7 +7,6 @@ import static com.alicp.jetcache.anno.CacheType.*;
 import static org.github.ConstKt.*;
 
 public interface SaInterface extends StpInterface {
-  @Cached(name = CACHE_NAME_PERMISSION, expire = CACHE_TIMEOUT, cacheType = BOTH)
   @Override
   List<String> getPermissionList(Object loginId, String loginType);
 

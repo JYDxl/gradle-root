@@ -2,7 +2,7 @@ package org.github.center.service.impl
 
 import com.alicp.jetcache.anno.CacheType
 import com.alicp.jetcache.anno.Cached
-import org.github.CACHE_NAME_ROLE_TO_PERMISSION
+import org.github.CACHE_NAME_PERMISSION
 import org.github.CACHE_TIMEOUT
 import org.github.mysql.sccore.base.entity.SysRoleEntity
 import org.github.mysql.sccore.base.entity.SysUserEntity
@@ -43,7 +43,7 @@ class SaRealImpl: SaInterface {
     return roleCodeSet.toList()
   }
 
-  @Cached(name = CACHE_NAME_ROLE_TO_PERMISSION, expire = CACHE_TIMEOUT, cacheType = CacheType.BOTH)
+  @Cached(name = CACHE_NAME_PERMISSION, expire = CACHE_TIMEOUT, cacheType = CacheType.BOTH)
   fun roleToPermissions(role: Any, loginType: String): List<String> {
     TODO()
   }
