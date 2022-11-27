@@ -20,9 +20,6 @@ include("sub-module-netty")
 
 include("sub-module-vertx")
 
-include("sub-mysql-mydb-entity")
-include("sub-mysql-mydb-service")
-
 include("sub-mysql-web-entity")
 include("sub-mysql-web-service")
 
