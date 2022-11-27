@@ -4,6 +4,7 @@ package org.github.mysql.sccore.base.entity
 
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableName
+import com.baomidou.mybatisplus.annotation.Version
 import java.io.Serializable
 import org.github.base.Entity
 
@@ -25,6 +26,7 @@ open class SysDictEntity : Entity() {
     open var dictInfo: String? = null
 
     @TableField("revision")
+    @Version
     open var revision: Int? = null
 
     companion object {
