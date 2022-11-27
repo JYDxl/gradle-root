@@ -11,11 +11,11 @@ import org.github.base.BaseEnum
  */
 enum class Gender(override val code: String, override val value: String): BaseEnum {
   /** 男  */
-  MAN("man","男"),
+  MAN("MAN","男"),
   /** 未知  */
-  UNKNOWN("unknown","未知"),
+  UNKNOWN("UNKNOWN","未知"),
   /** 女  */
-  WOMEN("women","女"),
+  WOMEN("WOMEN","女"),
   ;
 
   companion object {

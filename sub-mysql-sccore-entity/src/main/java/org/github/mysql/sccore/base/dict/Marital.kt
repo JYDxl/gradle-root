@@ -11,15 +11,15 @@ import org.github.base.BaseEnum
  */
 enum class Marital(override val code: String, override val value: String): BaseEnum {
   /** 离婚  */
-  DIVORCE("divorce","离婚"),
+  DIVORCE("DIVORCE","离婚"),
   /** 已婚  */
-  MARRIED("married","已婚"),
+  MARRIED("MARRIED","已婚"),
   /** 未知  */
-  UNKNOWN("unknown","未知"),
+  UNKNOWN("UNKNOWN","未知"),
   /** 未婚  */
-  UNMARRIED("unmarried","未婚"),
+  UNMARRIED("UNMARRIED","未婚"),
   /** 丧偶  */
-  WIDOWED("widowed","丧偶"),
+  WIDOWED("WIDOWED","丧偶"),
   ;
 
   companion object {
