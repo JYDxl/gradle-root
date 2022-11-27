@@ -6,7 +6,7 @@ dependencies {
 
   api(project(":sub-module-web-dto"))
 
-  api(project(":sub-mysql-sccore-service"))
+  api(project(":sub-mysql-web-service"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.springframework.boot:spring-boot-starter-jdbc")

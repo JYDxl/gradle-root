@@ -1,16 +1,16 @@
-package org.github.web.module.sys.menu.service.impl
+package org.github.center.service.impl
 
 import org.github.base.Page
+import org.github.center.bo.QueryMenuListBO
+import org.github.center.mapper.IMenuMapper
+import org.github.center.service.IMenuService
+import org.github.center.vo.QueryMenuListVO
 import org.github.mybatis.ops.ktGetById
 import org.github.mysql.sccore.base.entity.SysMenuEntity
 import org.github.mysql.sccore.base.service.ISysMenuService
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONPageReturn
-import org.github.web.module.sys.menu.dto.QueryMenuListBO
-import org.github.web.module.sys.menu.dto.QueryMenuListVO
-import org.github.web.module.sys.menu.mapper.IMenuMapper
-import org.github.web.module.sys.menu.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 

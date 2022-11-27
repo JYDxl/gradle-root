@@ -1,11 +1,11 @@
-package org.github.web.module.sys.menu.service
+package org.github.center.service
 
+import org.github.center.bo.QueryMenuListBO
+import org.github.center.vo.QueryMenuListVO
 import org.github.mysql.sccore.base.entity.SysMenuEntity
 import org.github.spring.restful.json.JSONArrayReturn
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONPageReturn
-import org.github.web.module.sys.menu.dto.QueryMenuListBO
-import org.github.web.module.sys.menu.dto.QueryMenuListVO
 
 interface IMenuService {
   fun delMenuList(ids: List<Long>): JSONDataReturn<Boolean>

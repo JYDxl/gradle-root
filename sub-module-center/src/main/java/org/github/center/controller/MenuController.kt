@@ -1,9 +1,9 @@
 package org.github.center.controller
 
 import cn.hutool.core.bean.BeanUtil.trimStrFields
-import org.github.web.module.sys.menu.dto.QueryMenuListBO
-import org.github.web.module.sys.menu.dto.SaveOrUpdateMenuBO
-import org.github.web.module.sys.menu.service.IMenuService
+import org.github.center.bo.QueryMenuListBO
+import org.github.center.bo.SaveOrUpdateMenuBO
+import org.github.center.service.IMenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 

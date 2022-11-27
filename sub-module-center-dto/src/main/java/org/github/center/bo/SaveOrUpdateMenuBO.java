@@ -1,4 +1,4 @@
-package org.github.web.module.sys.menu.dto;
+package org.github.center.bo;
 
 import org.github.base.IParam;
 import org.github.mysql.sccore.base.entity.SysMenuEntity;

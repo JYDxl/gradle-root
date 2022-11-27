@@ -1,4 +1,4 @@
-package org.github.web.module.sys.menu.dto;
+package org.github.center.vo;
 
 import javax.annotation.Nullable;
 import lombok.*;
