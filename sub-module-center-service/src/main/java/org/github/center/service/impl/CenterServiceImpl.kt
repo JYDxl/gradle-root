@@ -11,7 +11,6 @@ import org.github.center.service.ICenterService
 import org.github.exception.ExternalException
 import org.github.mysql.sccore.base.entity.SysUserEntity
 import org.github.mysql.sccore.base.service.ISysUserService
-import org.github.spring.ops.proxy
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.springframework.stereotype.Service
@@ -42,7 +41,7 @@ class CenterServiceImpl: ICenterService {
     return JSONReturn.ok()
   }
 
-  override fun login(bo: LoginBo): JSONReturn {
+  override fun token(bo: LoginBo): JSONDataReturn<String> {
     val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
     val symmetricAlgorithm = parseAlgorithm(user.secretAlgorithm!!)
     val crypto = SymmetricCrypto(symmetricAlgorithm, user.secretKey)
@@ -51,11 +50,6 @@ class CenterServiceImpl: ICenterService {
       throw ExternalException("用户名或密码错误")
     }
     login(user.userName)
-    return JSONReturn.ok()
-  }
-
-  override fun token(bo: LoginBo): JSONDataReturn<String> {
-    proxy.login(bo)
     val token = getTokenValue()!!
     return JSONDataReturn.of(token)
   }
