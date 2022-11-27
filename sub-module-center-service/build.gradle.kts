@@ -3,7 +3,7 @@ val saToken: String by System.getProperties()
 
 dependencies {
   compileOnly(project(":sub-system-core"))
-  compileOnly(project(":sub-system-config"))
+  compileOnly(project(":sub-system-common"))
 
   api(project(":sub-module-center-dto"))
 

@@ -68,7 +68,7 @@ val seata: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 dependencies {
-  implementation(project(":sub-system-config"))
+  implementation(project(":sub-system-common"))
   implementation(project(":sub-system-core"))
 
   implementation(project(":sub-module-center-service"))
