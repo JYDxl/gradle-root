@@ -16,9 +16,9 @@ include("sub-cloud-gateway")
 
 include("sub-cloud-admin")
 
-include("sub-single-netty")
+include("sub-module-netty")
 
-include("sub-single-vertx")
+include("sub-module-vertx")
 
 include("sub-mysql-mydb-entity")
 include("sub-mysql-mydb-service")
@@ -35,5 +35,3 @@ include("sub-module-center-service")
 include("sub-module-center-dto")
 include("sub-module-center-api")
 include("sub-module-center")
-
-include("sub-module-net")

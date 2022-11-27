@@ -1,0 +1,3 @@
+*
+!build/libs/netty-boot.jar
+!build/scriptsShadow/sub-module-netty

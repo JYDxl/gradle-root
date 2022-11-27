@@ -1,0 +1,3 @@
+*
+!build/libs/vertx-boot.jar
+!build/scriptsShadow/sub-module-vertx
