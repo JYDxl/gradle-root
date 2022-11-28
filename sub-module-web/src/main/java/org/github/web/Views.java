@@ -4,8 +4,10 @@ import lombok.*;
 import org.github.spring.restful.view.VIEW;
 
 public enum Views implements VIEW {
-  INDEX("index"),
-  INDEX_V1("index_v1");
+  INDEX("frame/index"),
+  MAIN("frame/main"),
+  ROLE("frame/role/index"),
+  ;
   private final String view;
 
   Views(String view) {
