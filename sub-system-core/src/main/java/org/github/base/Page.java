@@ -22,7 +22,8 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
   }
 
   @Override
-  public @NonNull List<T> getRecords() {
+  @NonNull
+  public List<T> getRecords() {
     return super.getRecords();
   }
 

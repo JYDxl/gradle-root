@@ -7,7 +7,8 @@ import static org.github.spring.ops.SpringKt.*;
 
 public interface IJson extends Serializable, Supplier<String> {
   @Override
-  default @NonNull String get() {
+  @NonNull
+  default String get() {
     return json(this);
   }
 }

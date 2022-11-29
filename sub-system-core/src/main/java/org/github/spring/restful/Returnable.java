@@ -26,10 +26,12 @@ public interface Returnable extends Serializable, Supplier<String> {
 
   /** 获取数据. */
   @Override
-  @Nullable String get();
+  @Nullable
+  String get();
 
   /** 获取返回类型. */
-  default @NonNull MediaType mediaType() {
+  @NonNull
+  default MediaType mediaType() {
     return PLAIN_TEXT_UTF_8;
   }
 
@@ -39,17 +41,20 @@ public interface Returnable extends Serializable, Supplier<String> {
   }
 
   /** Generator. */
-  static @NonNull Returnable of() {
+  @NonNull
+  static Returnable of() {
     return of("");
   }
 
   /** Generator. */
-  static @NonNull Returnable of(@NonNull Object data) {
+  @NonNull
+  static Returnable of(@NonNull Object data) {
     return data::toString;
   }
 
   /** Generator. */
-  static @NonNull Returnable nil() {
+  @NonNull
+  static Returnable nil() {
     return () -> null;
   }
 }

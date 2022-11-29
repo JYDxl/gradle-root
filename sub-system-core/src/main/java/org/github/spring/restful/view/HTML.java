@@ -16,12 +16,14 @@ import static com.google.common.net.MediaType.*;
 @FunctionalInterface
 public interface HTML extends Returnable {
   @Override
-  default @NonNull MediaType mediaType() {
+  @NonNull
+  default MediaType mediaType() {
     return HTML_UTF_8;
   }
 
   /** Generator. */
-  static @NonNull HTML of(@NonNull String html) {
+  @NonNull
+  static HTML of(@NonNull String html) {
     return html::toString;
   }
 }

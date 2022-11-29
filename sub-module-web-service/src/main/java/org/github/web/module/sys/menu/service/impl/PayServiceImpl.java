@@ -20,7 +20,7 @@
 //   }
 //
 //   @Override
-//   public @NonNull PaymentEntity get(long id) {
+//   @NonNull public  PaymentEntity get(long id) {
 //     val entity = paymentService.getById(id);
 //     if (entity == null) throw new ClientException(format("[id: %s]对应的记录不存在", id));
 //     return entity;

@@ -30,7 +30,8 @@ public class RemoteException extends RuntimeException {
     this.data = data;
   }
 
-  public @NonNull JSONReturn getData() {
+  @NonNull
+  public JSONReturn getData() {
     return data;
   }
 }

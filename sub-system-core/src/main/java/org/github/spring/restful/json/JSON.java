@@ -17,27 +17,32 @@ import static org.github.spring.ops.SpringKt.*;
 @FunctionalInterface
 public interface JSON extends Returnable {
   @Override
-  default @NonNull MediaType mediaType() {
+  @NonNull
+  default MediaType mediaType() {
     return JSON_UTF_8;
   }
 
   /** Generator. */
-  static @NonNull JSON of(@NonNull Object json) {
+  @NonNull
+  static JSON of(@NonNull Object json) {
     return of(json(json));
   }
 
   /** Generator. */
-  static @NonNull JSON of(@NonNull String json) {
+  @NonNull
+  static JSON of(@NonNull String json) {
     return json::toString;
   }
 
   /** Generator. */
-  static @NonNull JSON of() {
+  @NonNull
+  static JSON of() {
     return of("{}");
   }
 
   /** Generator. */
-  static @NonNull JSON nil() {
+  @NonNull
+  static JSON nil() {
     return () -> null;
   }
 }

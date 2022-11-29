@@ -34,13 +34,15 @@ public class JSONReturn implements JSON {
     this.msg  = msg;
   }
 
-  @Override public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  @Override
+  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
     writeValue(this, res.getOutputStream());
   }
 
   @Override
-  public @NonNull String get() {
+  @NonNull
+  public String get() {
     return json(this);
   }
 
@@ -66,43 +68,58 @@ public class JSONReturn implements JSON {
   }
 
   /** WITH msg. */
-  public @NonNull JSONReturn withMsg(@NonNull String msg) {
+  @NonNull
+  public JSONReturn withMsg(@NonNull String msg) {
     setMsg(msg);
     return this;
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn internal(String msg) {
+  @NonNull
+  public
+  static JSONReturn internal(String msg) {
     return of(SYSTEM_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn of(Result result, String msg) {
+  @NonNull
+  public
+  static JSONReturn of(Result result, String msg) {
     return new JSONReturn(result.getCode(), firstNonBlank(msg, result.getMsg()));
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn ok() {
+  @NonNull
+  public
+  static JSONReturn ok() {
     return of(SUCCESS, null);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn external(String msg) {
+  @NonNull
+  public
+  static JSONReturn external(String msg) {
     return of(PARAMS_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn auth(String msg) {
+  @NonNull
+  public
+  static JSONReturn auth(String msg) {
     return of(AUTH_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn perm(String msg) {
+  @NonNull
+  public
+  static JSONReturn perm(String msg) {
     return of(PERM_ERROR, msg);
   }
 
   /** Generator. */
-  public static @NonNull JSONReturn call(String msg) {
+  @NonNull
+  public
+  static JSONReturn call(String msg) {
     return of(CALL_ERROR, msg);
   }
 }

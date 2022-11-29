@@ -26,7 +26,8 @@ public interface VIEW extends Returnable {
   @NonNull String get();
 
   @Override
-  default @NonNull MediaType mediaType() {
+  @NonNull
+  default MediaType mediaType() {
     return HTML_UTF_8;
   }
 
@@ -36,12 +37,14 @@ public interface VIEW extends Returnable {
   }
 
   /** Generator. */
-  static @NonNull VIEW of() {
+  @NonNull
+  static VIEW of() {
     return of("/");
   }
 
   /** Generator. */
-  static @NonNull VIEW of(@NonNull String view) {
+  @NonNull
+  static VIEW of(@NonNull String view) {
     return view::toString;
   }
 }

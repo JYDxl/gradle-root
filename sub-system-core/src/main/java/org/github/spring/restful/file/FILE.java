@@ -26,21 +26,24 @@ import static java.util.Objects.*;
  */
 public interface FILE extends Returnable {
   @Override
-  default @NonNull MediaType mediaType() {
+  @NonNull
+  default MediaType mediaType() {
     return OCTET_STREAM;
   }
 
   /**
    * Generator.
    */
-  static @NonNull FILE of(@NonNull File file) {
+  @NonNull
+  static FILE of(@NonNull File file) {
     return of(file, null);
   }
 
   /**
    * Generator.
    */
-  static @NonNull FILE of(@NonNull File file, @Nullable MediaType type) {
+  @NonNull
+  static FILE of(@NonNull File file, @Nullable MediaType type) {
     try {
       return new FILEImpl(file.getName(), new FileInputStream(file), type);
     } catch (FileNotFoundException e) {
@@ -51,28 +54,32 @@ public interface FILE extends Returnable {
   /**
    * Generator.
    */
-  static @NonNull FILE of(@NonNull String name, @NonNull InputStream input) {
+  @NonNull
+  static FILE of(@NonNull String name, @NonNull InputStream input) {
     return of(name, input, null);
   }
 
   /**
    * Generator.
    */
-  static @NonNull FILE of(@NonNull String name, @NonNull InputStream input, @Nullable MediaType type) {
+  @NonNull
+  static FILE of(@NonNull String name, @NonNull InputStream input, @Nullable MediaType type) {
     return new FILEImpl(name, input, type);
   }
 
   /**
    * Generator.
    */
-  static @NonNull FILE of(@NonNull Resource resource) {
+  @NonNull
+  static FILE of(@NonNull Resource resource) {
     return of(resource, null);
   }
 
   /**
    * Generator.
    */
-  static @NonNull FILE of(@NonNull Resource resource, @Nullable MediaType type) {
+  @NonNull
+  static FILE of(@NonNull Resource resource, @Nullable MediaType type) {
     val name = requireNonNull(resource.getFilename());
     try {
       return new FILEImpl(name, resource.getInputStream(), type);

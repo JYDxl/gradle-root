@@ -22,12 +22,14 @@ class FILEImpl implements FILE {
   }
 
   @Override
-  public @NonNull String get() {
+  @NonNull
+  public String get() {
     return name;
   }
 
   @Override
-  public @NonNull MediaType mediaType() {
+  @NonNull
+  public MediaType mediaType() {
     return firstNonNull(type, FILE.super.mediaType());
   }
 

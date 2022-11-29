@@ -30,29 +30,34 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
     return get();
   }
 
-  public @NonNull Collection<? extends E> getData() {
+  @NonNull
+  public Collection<? extends E> getData() {
     return data;
   }
 
   /** WITH data. */
-  public @NonNull JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
+  @NonNull
+  public JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
     setData(data);
     return this;
   }
 
   /** Generator. */
-  public static <V> @NonNull JSONArrayReturn<V> of() {
+  @NonNull
+  public static <V> JSONArrayReturn<V> of() {
     return new JSONArrayReturn<>();
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <T, R extends T> @NonNull JSONArrayReturn<R> of(@NonNull Collection<T> data) {
+  @NonNull
+  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data) {
     return new JSONArrayReturn(data);
   }
 
   /** Generator. */
-  public static <T, R extends T> @NonNull JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
+  @NonNull
+  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
     return new JSONArrayReturn<>(data.stream().map(mapper).collect(toImmutableList()));
   }
 }

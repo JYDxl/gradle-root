@@ -1,12 +1,10 @@
 package org.github.cache;
 
-import lombok.NonNull;
-import org.springframework.context.ApplicationEvent;
-
 import java.util.Collection;
-
-import static cn.hutool.core.date.LocalDateTimeUtil.of;
-import static com.google.common.base.MoreObjects.toStringHelper;
+import lombok.*;
+import org.springframework.context.ApplicationEvent;
+import static cn.hutool.core.date.LocalDateTimeUtil.*;
+import static com.google.common.base.MoreObjects.*;
 
 public class CacheEvent extends ApplicationEvent {
   private final @NonNull CacheStatus       status;
@@ -34,11 +32,13 @@ public class CacheEvent extends ApplicationEvent {
       .toString();
   }
 
-  public @NonNull CacheNameSupplier getName() {
+  @NonNull
+  public CacheNameSupplier getName() {
     return name;
   }
 
-  public @NonNull CacheStatus getStatus() {
+  @NonNull
+  public CacheStatus getStatus() {
     return status;
   }
 }

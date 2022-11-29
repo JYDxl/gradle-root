@@ -32,35 +32,41 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   }
 
   /** WITH total. */
-  public @NonNull JSONPageReturn<E> withTotal(long total) {
+  @NonNull
+  public JSONPageReturn<E> withTotal(long total) {
     setTotal(total);
     return this;
   }
 
   /** Generator. */
-  public static <V> @NonNull JSONPageReturn<V> of() {
+  @NonNull
+  public static <V> JSONPageReturn<V> of() {
     return new JSONPageReturn<>();
   }
 
   /** Generator. */
-  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page) {
+  @NonNull
+  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page) {
     return of(page.getTotal(), page.getRecords());
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <T, R extends T> @NonNull JSONPageReturn<R> of(long total, @NonNull Collection<T> data) {
+  @NonNull
+  public static <T, R extends T> JSONPageReturn<R> of(long total, @NonNull Collection<T> data) {
     return (JSONPageReturn) new JSONPageReturn<>(total).withData(data);
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
+  @NonNull
+  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
     return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).collect(toImmutableList()));
   }
 
   /** Generator. */
-  public static <T, R extends T> @NonNull JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Collection<R> data) {
+  @NonNull
+  public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Collection<R> data) {
     return of(page.getTotal(), data);
   }
 }

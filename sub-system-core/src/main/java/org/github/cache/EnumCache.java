@@ -53,12 +53,14 @@ public class EnumCache {
   }
 
   @SuppressWarnings("unchecked")
-  public <C, V> @NonNull Map<C,V> getAll(@NonNull String type) {
+  @NonNull
+  public <C, V> Map<C,V> getAll(@NonNull String type) {
     return (Map<C,V>) copyOf(table.row(type));
   }
 
   @SuppressWarnings("unchecked")
-  public <C, V> @NonNull List<Pair<C,V>> getList(@NonNull String type) {
+  @NonNull
+  public <C, V> List<Pair<C,V>> getList(@NonNull String type) {
     return ((Map<C,V>) table.row(type)).entrySet().stream().map(v -> new Pair<>(v.getKey(), v.getValue())).collect(toImmutableList());
   }
 }
