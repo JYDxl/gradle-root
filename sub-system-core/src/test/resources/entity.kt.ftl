@@ -99,15 +99,7 @@ open class ${entity} : Serializable {
     }
 
     override fun toString(): String {
-        return "${entity}{" +
-<#list table.fields as field>
-<#if field_index==0>
-        "${field.propertyName}=" + ${field.propertyName} +
-<#else>
-        ", ${field.propertyName}=" + ${field.propertyName} +
-</#if>
-</#list>
-        "}"
+        return get()
     }
 
 }

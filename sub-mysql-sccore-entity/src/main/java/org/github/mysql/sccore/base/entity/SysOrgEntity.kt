@@ -95,19 +95,7 @@ open class SysOrgEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysOrgEntity{" +
-        "id=" + id +
-        ", parentOrgCode=" + parentOrgCode +
-        ", orgName=" + orgName +
-        ", orgCode=" + orgCode +
-        ", orgType=" + orgType +
-        ", orgOrder=" + orgOrder +
-        ", useFlag=" + useFlag +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

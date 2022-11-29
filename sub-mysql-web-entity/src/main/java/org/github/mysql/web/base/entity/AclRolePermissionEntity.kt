@@ -62,14 +62,7 @@ open class AclRolePermissionEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "AclRolePermissionEntity{" +
-        "id=" + id +
-        ", roleId=" + roleId +
-        ", permissionId=" + permissionId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

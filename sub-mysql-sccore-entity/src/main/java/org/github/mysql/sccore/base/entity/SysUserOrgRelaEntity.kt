@@ -65,15 +65,7 @@ open class SysUserOrgRelaEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysUserOrgRelaEntity{" +
-        "id=" + id +
-        ", companyId=" + companyId +
-        ", userCode=" + userCode +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

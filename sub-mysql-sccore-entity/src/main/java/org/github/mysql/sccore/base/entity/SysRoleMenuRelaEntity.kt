@@ -71,15 +71,7 @@ open class SysRoleMenuRelaEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysRoleMenuRelaEntity{" +
-        "id=" + id +
-        ", menuId=" + menuId +
-        ", roleId=" + roleId +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

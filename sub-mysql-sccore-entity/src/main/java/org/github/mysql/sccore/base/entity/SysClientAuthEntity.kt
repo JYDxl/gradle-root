@@ -89,18 +89,7 @@ open class SysClientAuthEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysClientAuthEntity{" +
-        "id=" + id +
-        ", clientId=" + clientId +
-        ", loginFlag=" + loginFlag +
-        ", fsFlag=" + fsFlag +
-        ", fpFlag=" + fpFlag +
-        ", tsFlag=" + tsFlag +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

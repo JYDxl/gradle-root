@@ -150,28 +150,7 @@ open class HseCommunityEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "HseCommunityEntity{" +
-        "id=" + id +
-        ", name=" + name +
-        ", description=" + description +
-        ", provinceId=" + provinceId +
-        ", cityId=" + cityId +
-        ", areaId=" + areaId +
-        ", plateId=" + plateId +
-        ", address=" + address +
-        ", longitude=" + longitude +
-        ", latitude=" + latitude +
-        ", buildYears=" + buildYears +
-        ", propertyPrice=" + propertyPrice +
-        ", propertyCompany=" + propertyCompany +
-        ", developer=" + developer +
-        ", buildNum=" + buildNum +
-        ", houseNum=" + houseNum +
-        ", averagePrice=" + averagePrice +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

@@ -107,21 +107,7 @@ open class SysResourceEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysResourceEntity{" +
-        "id=" + id +
-        ", resourceName=" + resourceName +
-        ", resourceCode=" + resourceCode +
-        ", resourceType=" + resourceType +
-        ", appId=" + appId +
-        ", resourceDesc=" + resourceDesc +
-        ", resourceUri=" + resourceUri +
-        ", resourceMethod=" + resourceMethod +
-        ", useFlag=" + useFlag +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

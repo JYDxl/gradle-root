@@ -83,17 +83,7 @@ open class HseHouseUserEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "HseHouseUserEntity{" +
-        "id=" + id +
-        ", houseId=" + houseId +
-        ", name=" + name +
-        ", phone=" + phone +
-        ", sex=" + sex +
-        ", idNo=" + idNo +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

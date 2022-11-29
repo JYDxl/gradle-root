@@ -95,19 +95,7 @@ open class SysImportConfigEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysImportConfigEntity{" +
-        "id=" + id +
-        ", clientId=" + clientId +
-        ", importCode=" + importCode +
-        ", importName=" + importName +
-        ", importDesc=" + importDesc +
-        ", importType=" + importType +
-        ", templateJson=" + templateJson +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

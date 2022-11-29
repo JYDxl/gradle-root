@@ -2,6 +2,7 @@ val mybatisPlus: String by System.getProperties()
 
 dependencies {
   api(project(":sub-mysql-web-entity"))
+  api(project(":sub-mysql-sccore-entity"))
 
   compileOnly(project(":sub-system-core"))
 

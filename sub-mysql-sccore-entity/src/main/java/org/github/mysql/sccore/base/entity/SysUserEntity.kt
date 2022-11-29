@@ -83,17 +83,7 @@ open class SysUserEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysUserEntity{" +
-        "id=" + id +
-        ", userName=" + userName +
-        ", userPwd=" + userPwd +
-        ", secretAlgorithm=" + secretAlgorithm +
-        ", secretKey=" + secretKey +
-        ", creatorName=" + creatorName +
-        ", createdTime=" + createdTime +
-        ", updaterName=" + updaterName +
-        ", updatedTime=" + updatedTime +
-        "}"
+        return get()
     }
 
 }

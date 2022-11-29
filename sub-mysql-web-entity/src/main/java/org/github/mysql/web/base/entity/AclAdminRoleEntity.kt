@@ -65,14 +65,7 @@ open class AclAdminRoleEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "AclAdminRoleEntity{" +
-        "id=" + id +
-        ", roleId=" + roleId +
-        ", adminId=" + adminId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

@@ -42,9 +42,9 @@ open class AclRoleEntity : Entity() {
     @TableField("update_time")
     open var updateTime: LocalDateTime? = null
 
-    /** 删除标记（0:不可用 1:可用） */
-    @TableField("is_deleted")
-    open var isDeleted: Byte? = null
+    /** 删除标记（Y:不可用 N:可用） */
+    @TableField("deleted")
+    open var deleted: String? = null
 
     companion object {
 
@@ -62,7 +62,7 @@ open class AclRoleEntity : Entity() {
 
         const val UPDATE_TIME : String = "update_time"
 
-        const val IS_DELETED : String = "is_deleted"
+        const val DELETED : String = "deleted"
 
     }
 
@@ -71,15 +71,7 @@ open class AclRoleEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "AclRoleEntity{" +
-        "id=" + id +
-        ", roleName=" + roleName +
-        ", roleCode=" + roleCode +
-        ", description=" + description +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

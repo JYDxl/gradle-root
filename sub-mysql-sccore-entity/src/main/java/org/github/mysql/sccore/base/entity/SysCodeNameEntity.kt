@@ -77,16 +77,7 @@ open class SysCodeNameEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysCodeNameEntity{" +
-        "id=" + id +
-        ", codeId=" + codeId +
-        ", codeLanguage=" + codeLanguage +
-        ", codeName=" + codeName +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

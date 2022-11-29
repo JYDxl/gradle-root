@@ -163,30 +163,7 @@ open class HseHouseEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "HseHouseEntity{" +
-        "id=" + id +
-        ", communityId=" + communityId +
-        ", name=" + name +
-        ", description=" + description +
-        ", totalPrice=" + totalPrice +
-        ", unitPrice=" + unitPrice +
-        ", buildArea=" + buildArea +
-        ", insideArea=" + insideArea +
-        ", houseTypeId=" + houseTypeId +
-        ", floorId=" + floorId +
-        ", buildStructureId=" + buildStructureId +
-        ", directionId=" + directionId +
-        ", decorationId=" + decorationId +
-        ", houseUseId=" + houseUseId +
-        ", elevatorRatio=" + elevatorRatio +
-        ", listingDate=" + listingDate +
-        ", lastTradeDate=" + lastTradeDate +
-        ", defaultImageUrl=" + defaultImageUrl +
-        ", status=" + status +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

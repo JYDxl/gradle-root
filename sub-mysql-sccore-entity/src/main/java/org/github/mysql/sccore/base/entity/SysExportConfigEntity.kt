@@ -95,19 +95,7 @@ open class SysExportConfigEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysExportConfigEntity{" +
-        "id=" + id +
-        ", clientId=" + clientId +
-        ", exportCode=" + exportCode +
-        ", exportName=" + exportName +
-        ", exportDesc=" + exportDesc +
-        ", exportType=" + exportType +
-        ", templateJson=" + templateJson +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

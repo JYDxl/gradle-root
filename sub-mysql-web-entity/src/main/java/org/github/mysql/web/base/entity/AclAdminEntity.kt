@@ -89,18 +89,7 @@ open class AclAdminEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "AclAdminEntity{" +
-        "id=" + id +
-        ", username=" + username +
-        ", password=" + password +
-        ", name=" + name +
-        ", phone=" + phone +
-        ", headUrl=" + headUrl +
-        ", description=" + description +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

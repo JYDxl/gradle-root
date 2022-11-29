@@ -77,16 +77,7 @@ open class UserInfoEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "UserInfoEntity{" +
-        "id=" + id +
-        ", phone=" + phone +
-        ", password=" + password +
-        ", nickName=" + nickName +
-        ", status=" + status +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

@@ -48,12 +48,7 @@ open class SysDictEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysDictEntity{" +
-        "dictCode=" + dictCode +
-        ", dictName=" + dictName +
-        ", dictInfo=" + dictInfo +
-        ", revision=" + revision +
-        "}"
+        return get()
     }
 
 }

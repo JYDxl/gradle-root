@@ -71,15 +71,7 @@ open class HseDictEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "HseDictEntity{" +
-        "id=" + id +
-        ", parentId=" + parentId +
-        ", name=" + name +
-        ", dictCode=" + dictCode +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

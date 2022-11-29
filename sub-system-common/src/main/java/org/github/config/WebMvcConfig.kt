@@ -28,6 +28,6 @@ class WebMvcConfig: WebMvcConfigurer {
     registry
       .addInterceptor(SaInterceptor {checkLogin()})
       .addPathPatterns("/**")
-      .excludePathPatterns("/index/**", "/static/**", "/sso/**", "/main", "/role/", "/error", "/public/**", "/")
+      .excludePathPatterns("/index/**", "/static/**", "/sso/**", "/main", "/role/**", "/error", "/public/**", "/")
   }
 }

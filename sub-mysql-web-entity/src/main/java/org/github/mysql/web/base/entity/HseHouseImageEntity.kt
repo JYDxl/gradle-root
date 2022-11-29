@@ -77,16 +77,7 @@ open class HseHouseImageEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "HseHouseImageEntity{" +
-        "id=" + id +
-        ", houseId=" + houseId +
-        ", imageName=" + imageName +
-        ", imageUrl=" + imageUrl +
-        ", type=" + type +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

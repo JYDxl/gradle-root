@@ -77,16 +77,7 @@ open class HseHouseBrokerEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "HseHouseBrokerEntity{" +
-        "id=" + id +
-        ", houseId=" + houseId +
-        ", brokerId=" + brokerId +
-        ", brokerName=" + brokerName +
-        ", brokerHeadUrl=" + brokerHeadUrl +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }

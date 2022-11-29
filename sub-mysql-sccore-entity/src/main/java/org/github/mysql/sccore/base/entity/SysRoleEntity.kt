@@ -71,15 +71,7 @@ open class SysRoleEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysRoleEntity{" +
-        "id=" + id +
-        ", roleName=" + roleName +
-        ", roleCode=" + roleCode +
-        ", creatorName=" + creatorName +
-        ", createdTime=" + createdTime +
-        ", updaterName=" + updaterName +
-        ", updatedTime=" + updatedTime +
-        "}"
+        return get()
     }
 
 }

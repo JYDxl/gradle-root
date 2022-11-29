@@ -83,17 +83,7 @@ open class SysRoleGroupEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysRoleGroupEntity{" +
-        "id=" + id +
-        ", roleName=" + roleName +
-        ", roleCode=" + roleCode +
-        ", userCreate=" + userCreate +
-        ", useFlag=" + useFlag +
-        ", companyId=" + companyId +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

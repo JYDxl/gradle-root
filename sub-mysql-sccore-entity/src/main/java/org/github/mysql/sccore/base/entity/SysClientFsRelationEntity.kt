@@ -89,18 +89,7 @@ open class SysClientFsRelationEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysClientFsRelationEntity{" +
-        "id=" + id +
-        ", companyId=" + companyId +
-        ", fileStoreType=" + fileStoreType +
-        ", fileStoreSize=" + fileStoreSize +
-        ", autoDeleteFlag=" + autoDeleteFlag +
-        ", useFlag=" + useFlag +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

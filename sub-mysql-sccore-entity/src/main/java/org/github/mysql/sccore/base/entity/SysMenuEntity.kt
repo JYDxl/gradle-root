@@ -125,24 +125,7 @@ open class SysMenuEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysMenuEntity{" +
-        "id=" + id +
-        ", parentId=" + parentId +
-        ", menuName=" + menuName +
-        ", menuCode=" + menuCode +
-        ", appId=" + appId +
-        ", menuDesc=" + menuDesc +
-        ", menuUri=" + menuUri +
-        ", menuOrder=" + menuOrder +
-        ", menuType=" + menuType +
-        ", iconName=" + iconName +
-        ", menuOpenFlag=" + menuOpenFlag +
-        ", useFlag=" + useFlag +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

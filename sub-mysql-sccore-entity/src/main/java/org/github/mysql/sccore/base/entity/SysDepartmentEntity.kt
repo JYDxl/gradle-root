@@ -93,19 +93,7 @@ open class SysDepartmentEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysDepartmentEntity{" +
-        "id=" + id +
-        ", deptName=" + deptName +
-        ", deptDesc=" + deptDesc +
-        ", parentDeptId=" + parentDeptId +
-        ", orgCode=" + orgCode +
-        ", orgOrder=" + orgOrder +
-        ", userFlag=" + userFlag +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        "}"
+        return get()
     }
 
 }

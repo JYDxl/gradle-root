@@ -7,6 +7,7 @@ public enum Views implements VIEW {
   INDEX("frame/index"),
   MAIN("frame/main"),
   ROLE("frame/role/index"),
+  ROLE_CREATE("frame/role/create"),
   ;
   private final String view;
 

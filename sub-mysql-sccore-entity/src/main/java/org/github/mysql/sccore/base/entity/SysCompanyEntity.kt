@@ -107,21 +107,7 @@ open class SysCompanyEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "SysCompanyEntity{" +
-        "id=" + id +
-        ", companyName=" + companyName +
-        ", companyDesc=" + companyDesc +
-        ", companyCode=" + companyCode +
-        ", companyOrgId=" + companyOrgId +
-        ", companyAddress=" + companyAddress +
-        ", companyPerson=" + companyPerson +
-        ", companyTel=" + companyTel +
-        ", userCreate=" + userCreate +
-        ", createDatetime=" + createDatetime +
-        ", userModify=" + userModify +
-        ", modifyDatetime=" + modifyDatetime +
-        ", useFlag=" + useFlag +
-        "}"
+        return get()
     }
 
 }

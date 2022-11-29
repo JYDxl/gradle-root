@@ -65,14 +65,7 @@ open class UserFollowEntity : Entity() {
     }
 
     override fun toString(): String {
-        return "UserFollowEntity{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", houseId=" + houseId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", isDeleted=" + isDeleted +
-        "}"
+        return get()
     }
 
 }
