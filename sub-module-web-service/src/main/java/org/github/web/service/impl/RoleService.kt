@@ -21,12 +21,24 @@ class RoleService: IRoleService {
   private lateinit var commonService: ICommonService
 
   override fun save(bo: RoleSaveBo): JSONReturn {
-    aclRoleService.saveOrUpdate(bo)
+    aclRoleService.save(bo)
     return JSONReturn.ok()
   }
 
   override fun all(): List<RoleIndexVo> {
     val list: List<AclRoleEntity> = aclRoleService.list()
     return commonService.transCode(list, RoleIndexVo::class.java)
+  }
+
+  override fun getById(id: java.io.Serializable): AclRoleEntity {
+    return aclRoleService.getById(id)
+  }
+
+  override fun update(bo: AclRoleEntity) {
+    aclRoleService.updateById(bo)
+  }
+
+  override fun delete(id: String) {
+    aclRoleService.removeById(id)
   }
 }

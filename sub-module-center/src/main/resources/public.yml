@@ -63,9 +63,12 @@ spring:
 
 mybatis-plus:
   mapper-locations: classpath*:mappers/*.xml, classpath*:mappers/**/*.xml
-#  global-config:
-#    db-config:
-#      update-strategy: ignored
+  global-config:
+    db-config:
+      logic-delete-value: Y
+      logic-not-delete-value: N
+      logic-delete-field: deleted
+      update-strategy: ignored
 
 info:
   version: 1.0.0

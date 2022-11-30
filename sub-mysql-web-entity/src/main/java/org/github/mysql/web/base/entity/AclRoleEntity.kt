@@ -5,6 +5,7 @@ package org.github.mysql.web.base.entity
 import com.baomidou.mybatisplus.annotation.IdType
 import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
+import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
@@ -44,6 +45,7 @@ open class AclRoleEntity : Entity() {
 
     /** 删除标记（Y:不可用 N:可用） */
     @TableField("deleted")
+    @TableLogic
     open var deleted: String? = null
 
     companion object {

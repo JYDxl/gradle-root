@@ -81,6 +81,7 @@ fun mysqlWeb() {
       // .enableActiveRecord().superClass(Model::class.jvmName)
       .superClass(Entity::class.jvmName)
       .formatFileName("%sEntity")
+      .logicDeleteColumnName("deleted")
 
       .mapperBuilder()
       .superClass(IMapper::class.jvmName)
@@ -163,6 +164,7 @@ fun mysqlSccore() {
       // .enableActiveRecord().superClass(Model::class.jvmName)
       .superClass(Entity::class.jvmName)
       .formatFileName("%sEntity")
+      .logicDeleteColumnName("deleted")
 
       .mapperBuilder()
       .superClass(IMapper::class.jvmName)
