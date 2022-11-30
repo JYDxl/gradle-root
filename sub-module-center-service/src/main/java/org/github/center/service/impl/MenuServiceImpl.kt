@@ -4,7 +4,6 @@ import org.github.center.bo.QueryMenuListBO
 import org.github.center.mapper.IMenuMapper
 import org.github.center.service.IMenuService
 import org.github.center.vo.QueryMenuListVO
-import org.github.mybatis.ops.ktGetById
 import org.github.mysql.sccore.base.entity.SysMenuEntity
 import org.github.mysql.sccore.base.service.ISysMenuService
 import org.github.spring.restful.json.JSONArrayReturn
@@ -28,7 +27,7 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuInfo(menuId: Long): JSONDataReturn<SysMenuEntity?> {
-    val entity = sysMenuService.ktGetById(menuId)
+    val entity: SysMenuEntity? = sysMenuService.getById(menuId)
     return JSONDataReturn.of(entity)
   }
 
