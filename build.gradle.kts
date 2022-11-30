@@ -14,8 +14,10 @@ val protobuf: String by System.getProperties()
 val jackson: String by System.getProperties()
 val alibaba: String by System.getProperties()
 val aviator: String by System.getProperties()
+val okhttp3: String by System.getProperties()
 val lombok: String by System.getProperties()
 val hutool: String by System.getProperties()
+val forest: String by System.getProperties()
 val guava: String by System.getProperties()
 val guice: String by System.getProperties()
 val vertx: String by System.getProperties()
@@ -101,7 +103,6 @@ subprojects {
   configurations {
     all {
       exclude("io.netty", "netty-transport-native-kqueue")
-      // exclude("io.netty", "netty-resolver-dns-native-macos")
     }
   }
 
@@ -119,6 +120,8 @@ subprojects {
     implementation("cn.hutool:hutool-all:$hutool")
     implementation("com.googlecode.aviator:aviator:$aviator")
     implementation("com.gitee.jd-platform-opensource:asyncTool:$asyncTool")
+    implementation("com.dtflys.forest:forest-core:$forest")
+    implementation("com.squareup.okhttp3:okhttp:$okhttp3")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")

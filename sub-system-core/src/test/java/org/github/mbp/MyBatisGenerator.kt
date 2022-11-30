@@ -90,7 +90,7 @@ fun mysqlWeb() {
       .superServiceClass(IService::class.jvmName)
       .formatServiceFileName("I%sService")
       .superServiceImplClass(ServiceImpl::class.jvmName)
-      .formatServiceImplFileName("%sServiceImpl")
+      .formatServiceImplFileName("%sService")
   }
 
   generator.templateConfig {it: TemplateConfig.Builder ->
@@ -172,7 +172,7 @@ fun mysqlSccore() {
       .superServiceClass(IService::class.jvmName)
       .formatServiceFileName("I%sService")
       .superServiceImplClass(ServiceImpl::class.jvmName)
-      .formatServiceImplFileName("%sServiceImpl")
+      .formatServiceImplFileName("%sService")
   }
 
   generator.templateConfig {it: TemplateConfig.Builder ->
