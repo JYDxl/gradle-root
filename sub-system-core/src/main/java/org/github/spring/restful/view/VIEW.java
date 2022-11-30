@@ -1,11 +1,7 @@
 package org.github.spring.restful.view;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import org.github.spring.restful.Returnable;
-import com.google.common.net.MediaType;
-import static com.google.common.net.MediaType.*;
 
 /**
  * Top interface of view.
@@ -17,20 +13,6 @@ import static com.google.common.net.MediaType.*;
  */
 @FunctionalInterface
 public interface VIEW extends Returnable {
-  @Override
-  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  @NonNull String get();
-
-  @Override
-  @NonNull
-  default MediaType mediaType() {
-    return HTML_UTF_8;
-  }
-
   @Override
   default boolean terminated() {
     return false;
