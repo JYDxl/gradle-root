@@ -1,6 +1,5 @@
 package org.github.center.service.impl
 
-import org.github.base.Page
 import org.github.center.bo.QueryMenuListBO
 import org.github.center.mapper.IMenuMapper
 import org.github.center.service.IMenuService
@@ -34,7 +33,7 @@ class MenuServiceImpl: IMenuService {
   }
 
   override fun queryMenuPage(bo: QueryMenuListBO): JSONPageReturn<QueryMenuListVO> {
-    val page = menuMapper.queryPage(Page(bo), bo)
+    val page = menuMapper.queryPage(bo.page(), bo)
     return JSONPageReturn.of(page)
   }
 

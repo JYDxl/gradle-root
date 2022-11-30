@@ -1,8 +1,11 @@
 package org.github.web.service.impl
 
+import com.baomidou.mybatisplus.core.metadata.IPage
+import org.github.base.PageParam
 import org.github.mysql.web.base.entity.AclRoleEntity
 import org.github.mysql.web.base.service.IAclRoleService
 import org.github.service.ICommonService
+import org.github.spring.restful.json.JSONPageReturn
 import org.github.spring.restful.json.JSONReturn
 import org.github.web.model.bo.RoleSaveBo
 import org.github.web.model.vo.RoleIndexVo
@@ -25,9 +28,10 @@ class RoleService: IRoleService {
     return JSONReturn.ok()
   }
 
-  override fun all(): List<RoleIndexVo> {
-    val list: List<AclRoleEntity> = aclRoleService.list()
-    return commonService.transCode(list, RoleIndexVo::class.java)
+  override fun all(bo: PageParam): JSONPageReturn<RoleIndexVo> {
+    val temp: IPage<AclRoleEntity> = aclRoleService.page(bo.page())
+    val data = commonService.transCode(temp.records, RoleIndexVo::class.java)
+    return JSONPageReturn.of(temp.total, data)
   }
 
   override fun getById(id: java.io.Serializable): AclRoleEntity {

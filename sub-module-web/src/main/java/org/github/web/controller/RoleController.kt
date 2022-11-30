@@ -1,5 +1,6 @@
 package org.github.web.controller
 
+import org.github.base.PageParam
 import org.github.mysql.web.base.entity.AclRoleEntity
 import org.github.spring.restful.Returnable
 import org.github.spring.restful.view.VIEW
@@ -22,8 +23,8 @@ class RoleController {
   lateinit var roleService: IRoleService
 
   @GetMapping
-  fun index(map: MutableMap<String, Any>): Returnable {
-    val list = roleService.all()
+  fun index(bo: PageParam, map: MutableMap<String, Any>): Returnable {
+    val list = roleService.all(bo)
     map["list"] = list
     return ROLE
   }

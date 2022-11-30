@@ -28,9 +28,14 @@ public class PageParam extends Sort {
   /** 排序方式 */
   private @NonNull List<Sort> sortList = of();
 
-  @Override public void trim() {
+  @Override
+  public void trim() {
     super.trim();
     sortList.forEach(Sort::trim);
+  }
+
+  public <T> Page<T> page() {
+    return new Page<>(this);
   }
 
   protected @NonNull List<OrderItem> sortList() {
