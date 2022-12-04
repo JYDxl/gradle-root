@@ -36,7 +36,7 @@ open class SysUserEntity : Entity() {
 
     /** 秘钥 */
     @TableField("secret_key")
-    open var secretKey: String? = null
+    open var secretKey: ByteArray? = null
 
     /** 昵称 */
     @TableField("nice_name")

@@ -4,8 +4,8 @@ val saToken: String by System.getProperties()
 val forest: String by System.getProperties()
 
 dependencies {
-  compileOnly(project(":sub-module-center-api"))
-  compileOnly(project(":sub-system-core"))
+  api(project(":sub-module-center-api"))
+  api(project(":sub-system-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
