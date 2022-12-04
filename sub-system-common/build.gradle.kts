@@ -4,12 +4,12 @@ val saToken: String by System.getProperties()
 val forest: String by System.getProperties()
 
 dependencies {
-  api(project(":sub-module-center-api"))
-  api(project(":sub-system-core"))
+  compileOnly(project(":sub-module-center-api"))
+  compileOnly(project(":sub-system-core"))
 
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
-  implementation("com.dtflys.forest:forest-spring-boot-starter:$forest")
+  compileOnly("com.dtflys.forest:forest-spring-boot-starter:$forest")
 
   compileOnly("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
 

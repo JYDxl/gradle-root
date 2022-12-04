@@ -68,7 +68,7 @@ mybatis-plus:
       logic-delete-value: Y
       logic-not-delete-value: N
       logic-delete-field: deleted
-      update-strategy: ignored
+#      update-strategy: ignored
 
 info:
   version: 1.0.0
