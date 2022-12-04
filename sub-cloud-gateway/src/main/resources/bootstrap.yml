@@ -10,4 +10,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-#        group: server
+        shared-configs:
+          - data-id: public-${spring.profiles.active}.yml
+          - data-id: dynamic-${spring.profiles.active}.yml
+            refresh: true

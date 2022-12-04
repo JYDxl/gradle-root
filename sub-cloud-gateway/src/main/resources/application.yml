@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allow-credentials: true
+            allowed-origin-patterns: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+      routes:
+        - id: center
+          uri: lb://center-server
+          predicates:
+            - Path=/center/**
+          filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
+        - id: web
+          uri: lb://web-server
+          predicates:
+            - Path=/web/**
+          filters:
+            - StripPrefix=1
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
