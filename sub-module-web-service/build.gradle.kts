@@ -6,7 +6,7 @@ dependencies {
   compileOnly(project(":sub-system-common"))
 
   api(project(":sub-module-web-dto"))
-  api(project(":sub-mysql-web-service"))
+  api(project(":sub-mysql-course-service"))
 
   api(project(":sub-module-center-api"))
 

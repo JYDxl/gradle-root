@@ -20,11 +20,11 @@ include("sub-module-netty")
 
 include("sub-module-vertx")
 
-include("sub-mysql-web-entity")
-include("sub-mysql-web-service")
+include("sub-mysql-center-entity")
+include("sub-mysql-center-service")
 
-include("sub-mysql-sccore-entity")
-include("sub-mysql-sccore-service")
+include("sub-mysql-course-entity")
+include("sub-mysql-course-service")
 
 include("sub-module-web-service")
 include("sub-module-web-dto")

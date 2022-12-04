@@ -22,12 +22,12 @@ import java.lang.System.getProperty
 import kotlin.reflect.jvm.jvmName
 
 fun main() {
-  mysqlWeb()
-  mysqlSccore()
+  mysqlCourse()
+  mysqlCenter()
 }
 
-fun mysqlWeb() {
-  val url = "jdbc:mysql://frp:3306/web"
+fun mysqlCourse() {
+  val url = "jdbc:mysql://frp:3306/course"
   val username = "root"
   val password = "XLrootJYD713"
   val enableKotlin = true
@@ -41,9 +41,9 @@ fun mysqlWeb() {
     if (enableKotlin) it.enableKotlin()
   }
 
-  val parent = "org.github.mysql.web"
+  val parent = "org.github.mysql.course"
   val moduleName = "base"
-  val subName = "sub-mysql-web"
+  val subName = "sub-mysql-course"
   val subEntityName = "$subName-entity"
   val subMapperName = "$subName-service"
   val packageName = parent.replace('.', '/')
@@ -108,8 +108,8 @@ fun mysqlWeb() {
   generator.execute()
 }
 
-fun mysqlSccore() {
-  val url = "jdbc:mysql://frp:3306/sc_core"
+fun mysqlCenter() {
+  val url = "jdbc:mysql://frp:3306/center"
   val username = "root"
   val password = "XLrootJYD713"
   val enableKotlin = true
@@ -123,9 +123,9 @@ fun mysqlSccore() {
     if (enableKotlin) it.enableKotlin()
   }
 
-  val parent = "org.github.mysql.sccore"
+  val parent = "org.github.mysql.center"
   val moduleName = "base"
-  val subName = "sub-mysql-sccore"
+  val subName = "sub-mysql-center"
   val subEntityName = "$subName-entity"
   val subMapperName = "$subName-service"
   val packageName = parent.replace('.', '/')
