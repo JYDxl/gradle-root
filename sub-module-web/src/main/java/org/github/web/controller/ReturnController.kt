@@ -2,10 +2,7 @@ package org.github.web.controller
 
 import org.github.ops.info
 import org.github.ops.log
-import org.github.spring.ops.appCtx
-import org.github.spring.ops.ktGetResources
 import org.github.spring.restful.Returnable
-import org.github.spring.restful.file.FILE
 import org.github.spring.restful.json.JSON
 import org.github.spring.restful.json.JSONPReturn
 import org.github.spring.restful.json.JSONReturn
@@ -39,12 +36,6 @@ class ReturnController {
     log.info {view.toString()}
     log.info {view.get()}
     return view
-  }
-
-  @GetMapping("file")
-  fun file(): Returnable {
-    val resource = appCtx.ktGetResources("classpath*:spy.properties").first()
-    return FILE.of(resource)
   }
 
   @GetMapping("json")

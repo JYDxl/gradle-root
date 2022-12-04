@@ -11,10 +11,13 @@ val serverAddr: String by System.getProperties()
 application {
   mainClass.set("org.github.GatewayKt")
   applicationDefaultJvmArgs = listOf(
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15000",
+
     "-ea",
 
     "-Dspring.profiles.active=$activeProfiles",
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
+    "-Dserver.port=19000",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",

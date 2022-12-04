@@ -11,13 +11,13 @@ val serverAddr: String by System.getProperties()
 application {
   mainClass.set("org.github.center.CenterKt")
   applicationDefaultJvmArgs = listOf(
-    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15005",
+    "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15001",
 
     "-ea",
 
     "-Dspring.profiles.active=$activeProfiles",
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
-    "-Dserver.port=18080",
+    "-Dserver.port=19001",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",
@@ -113,9 +113,9 @@ dependencies {
   // implementation("com.alibaba.csp:sentinel-datasource-nacos")
   // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {exclude(group = "com.alibaba", module = "druid")}
   // implementation("io.seata:seata-spring-boot-starter:$seata") {exclude(group = "com.alibaba", module = "druid")}
-//  implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
+  // implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
-  testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
-//  testImplementation("org.springframework.security:spring-security-test")
-//  implementation("org.redisson:redisson:$redisson") {exclude(group = "io.netty")}
+  // testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
+  // testImplementation("org.springframework.security:spring-security-test")
+  // implementation("org.redisson:redisson:$redisson") {exclude(group = "io.netty")}
 }

@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static cn.hutool.core.bean.BeanUtil.*;
+import static java.util.stream.Collectors.*;
 
 @Service
 public class CommonService implements ICommonService {
@@ -19,7 +20,7 @@ public class CommonService implements ICommonService {
   @NotNull
   @Override
   public <T, R> List<R> transCode(@NotNull List<? extends T> list, @NotNull Class<R> clazz, @NotNull Function<T,R> func) {
-    return list.stream().map(func).peek(this::transCode).toList();
+    return list.stream().map(func).peek(this::transCode).collect(toList());
   }
 
   private <R> void transCode(R obj) {
