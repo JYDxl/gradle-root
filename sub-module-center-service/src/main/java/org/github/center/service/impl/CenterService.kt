@@ -9,8 +9,8 @@ import org.github.center.bo.LoginBo
 import org.github.center.bo.RegisterBo
 import org.github.center.service.ICenterService
 import org.github.exception.ExternalException
-import org.github.mysql.center.base.entity.SysUserEntity
-import org.github.mysql.center.base.service.ISysUserService
+import org.github.mysql.center.base.entity.SysUserMbpEntity
+import org.github.mysql.center.base.service.ISysUserMbpService
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn
 import org.springframework.stereotype.Service
@@ -21,7 +21,7 @@ import javax.annotation.Resource
 @Service
 class CenterService: ICenterService {
   @Resource
-  private lateinit var sysUserService: ISysUserService
+  private lateinit var sysUserMbpService: ISysUserMbpService
 
   override fun register(bo: RegisterBo): JSONReturn {
     val algorithm = bo.algorithm!!
@@ -30,19 +30,19 @@ class CenterService: ICenterService {
     val aes = SymmetricCrypto(symmetricAlgorithm, key)
     val password = aes.encryptHex(bo.password)!!
 
-    val entity = SysUserEntity().apply {
+    val entity = SysUserMbpEntity().apply {
       userName = bo.username
       userPwd = password
       secretAlgorithm = algorithm
       secretKey = key
     }
 
-    sysUserService.save(entity)
+    sysUserMbpService.save(entity)
     return JSONReturn.ok()
   }
 
   override fun token(bo: LoginBo): JSONDataReturn<String> {
-    val user = sysUserService.ktQuery().eq(SysUserEntity::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
+    val user = sysUserMbpService.ktQuery().eq(SysUserMbpEntity::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
     val symmetricAlgorithm = parseAlgorithm(user.secretAlgorithm!!)
     val crypto = SymmetricCrypto(symmetricAlgorithm, user.secretKey)
     val password = crypto.encryptHex(bo.password)!!
