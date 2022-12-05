@@ -80,18 +80,18 @@ fun mysqlCourse() {
       .idType(ASSIGN_ID)
       // .enableActiveRecord().superClass(Model::class.jvmName)
       .superClass(Entity::class.jvmName)
-      .formatFileName("%sEntity")
+      .formatFileName("%sMbpEntity")
       .logicDeleteColumnName("deleted")
 
       .mapperBuilder()
       .superClass(IMapper::class.jvmName)
-      .formatMapperFileName("I%sMapper")
+      .formatMapperFileName("I%sMbpMapper")
 
       .serviceBuilder()
       .superServiceClass(IService::class.jvmName)
-      .formatServiceFileName("I%sService")
+      .formatServiceFileName("I%sMbpService")
       .superServiceImplClass(ServiceImpl::class.jvmName)
-      .formatServiceImplFileName("%sService")
+      .formatServiceImplFileName("%sMbpService")
   }
 
   generator.templateConfig {it: TemplateConfig.Builder ->
@@ -163,18 +163,18 @@ fun mysqlCenter() {
       .idType(ASSIGN_ID)
       // .enableActiveRecord().superClass(Model::class.jvmName)
       .superClass(Entity::class.jvmName)
-      .formatFileName("%sEntity")
+      .formatFileName("%sMbpEntity")
       .logicDeleteColumnName("deleted")
 
       .mapperBuilder()
       .superClass(IMapper::class.jvmName)
-      .formatMapperFileName("I%sMapper")
+      .formatMapperFileName("I%sMbpMapper")
 
       .serviceBuilder()
       .superServiceClass(IService::class.jvmName)
-      .formatServiceFileName("I%sService")
+      .formatServiceFileName("I%sMbpService")
       .superServiceImplClass(ServiceImpl::class.jvmName)
-      .formatServiceImplFileName("%sService")
+      .formatServiceImplFileName("%sMbpService")
   }
 
   generator.templateConfig {it: TemplateConfig.Builder ->
