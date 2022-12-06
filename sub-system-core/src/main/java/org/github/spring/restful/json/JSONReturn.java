@@ -35,7 +35,7 @@ public class JSONReturn implements JSON {
   }
 
   @Override
-  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
     writeValue(this, res.getOutputStream());
   }

@@ -35,7 +35,7 @@ public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
     val resp  = requireNonNull(webRequest.getNativeResponse(HttpServletResponse.class));
     if (value.terminated()) {
       try {
-        value.collect(req, resp);
+        value.handle(req, resp);
       } catch (Exception e) {
         log.error(e.getMessage(), e);
         resp.sendError(SC_INTERNAL_SERVER_ERROR);

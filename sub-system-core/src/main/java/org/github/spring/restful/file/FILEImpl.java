@@ -17,7 +17,7 @@ class FILEImpl implements FILE {
   private final @Nullable MediaType   type;
 
   @Override
-  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) {
     write(res, input, mediaType().toString(), name);
   }
 

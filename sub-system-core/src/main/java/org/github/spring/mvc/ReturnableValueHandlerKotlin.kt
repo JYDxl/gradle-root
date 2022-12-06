@@ -30,7 +30,7 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
     val res = webRequest.getNativeResponse(HttpServletResponse::class.java)!!
     if (value.terminated()) {
       try {
-        value.collect(req, res)
+        value.handle(req, res)
       } catch (e: Exception) {
         log.error(e) {}
         res.sendError(SC_INTERNAL_SERVER_ERROR)

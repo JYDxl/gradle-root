@@ -20,7 +20,7 @@ import static com.google.common.net.MediaType.*;
 @FunctionalInterface
 public interface Returnable extends Serializable, Supplier<String> {
   /** 通过请求{@link HttpServletRequest}和响应{@link HttpServletResponse}处理数据. */
-  default void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  default void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     write(res, get(), mediaType().toString());
   }
 

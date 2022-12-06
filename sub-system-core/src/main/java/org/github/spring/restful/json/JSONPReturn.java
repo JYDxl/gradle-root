@@ -33,7 +33,7 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   private @NonNull String callback = "callback";
 
   @Override
-  public void collect(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) {
     if ("callback".equals(callback)) setCallback(firstNonNull(req.getParameter("callback"), "callback"));
     write(res, get(), mediaType().toString());
   }
