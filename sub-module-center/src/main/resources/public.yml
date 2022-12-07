@@ -139,3 +139,13 @@ jetcache:
       uri:
         - redis://${spring.redis.password}@${spring.redis.host}:${spring.redis.port}/0
       readFrom: masterPreferred
+
+xxl:
+  adminAddresses: http://TODO:8080/xxl-job-admin
+  accessToken:
+  appname: ${spring.application.name}
+  address:
+  ip:
+  port:
+  logPath:
+  logRetentionDays: 7
