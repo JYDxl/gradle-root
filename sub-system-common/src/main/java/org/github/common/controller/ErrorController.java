@@ -1,4 +1,4 @@
-package org.github.controller;
+package org.github.common.controller;
 
 import java.util.Map;
 import java.util.Objects;

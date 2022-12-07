@@ -1,4 +1,4 @@
-package org.github.service;
+package org.github.common.service;
 
 import java.util.List;
 import com.alicp.jetcache.anno.Cached;

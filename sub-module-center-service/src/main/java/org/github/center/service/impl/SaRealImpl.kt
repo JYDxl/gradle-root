@@ -4,7 +4,7 @@ import com.alicp.jetcache.anno.CacheType
 import com.alicp.jetcache.anno.Cached
 import org.github.CACHE_NAME_PERMISSION
 import org.github.CACHE_TIMEOUT
-import org.github.service.ISaInterface
+import org.github.common.service.ISaInterface
 import org.github.spring.ops.proxy
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component

@@ -1,4 +1,4 @@
-package org.github.service
+package org.github.common.service
 
 import org.github.spring.restful.json.JSONDataReturn
 import org.github.spring.restful.json.JSONReturn

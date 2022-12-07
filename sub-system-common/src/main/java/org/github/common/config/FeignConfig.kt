@@ -1,4 +1,4 @@
-package org.github.config
+package org.github.common.config
 
 import feign.Logger.Level.FULL
 import org.springframework.context.annotation.Bean

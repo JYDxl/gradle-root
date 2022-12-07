@@ -1,4 +1,4 @@
-package org.github.service
+package org.github.common.service
 
 import cn.hutool.core.bean.BeanUtil.copyProperties
 import java.util.function.Function

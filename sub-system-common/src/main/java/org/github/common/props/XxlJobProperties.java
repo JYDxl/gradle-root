@@ -1,4 +1,4 @@
-package org.github.props;
+package org.github.common.props;
 
 import com.xxl.job.core.executor.XxlJobExecutor;
 import org.springframework.boot.context.properties.ConfigurationProperties;

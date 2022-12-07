@@ -1,4 +1,4 @@
-package org.github.controller
+package org.github.common.controller
 
 import cn.dev33.satoken.exception.*
 import com.google.common.net.HttpHeaders.CONTENT_TYPE

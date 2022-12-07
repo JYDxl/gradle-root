@@ -1,4 +1,4 @@
-package org.github.config;
+package org.github.common.config;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

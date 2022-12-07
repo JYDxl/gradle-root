@@ -1,10 +1,10 @@
-package org.github.service.impl
+package org.github.common.service.impl
 
 import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import org.github.center.bo.PermissionsBo
 import org.github.center.bo.RolesBo
 import org.github.center.feign.ICenterServerAPI
-import org.github.service.ISaInterface
+import org.github.common.service.ISaInterface
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 

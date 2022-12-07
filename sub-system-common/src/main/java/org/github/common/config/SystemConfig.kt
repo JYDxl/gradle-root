@@ -1,4 +1,4 @@
-package org.github.config
+package org.github.common.config
 
 import org.github.logger.MethodInvokeLogger
 import org.springframework.context.annotation.Bean

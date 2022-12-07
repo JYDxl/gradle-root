@@ -1,4 +1,4 @@
-package org.github.config;
+package org.github.common.config;
 
 import lombok.val;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;

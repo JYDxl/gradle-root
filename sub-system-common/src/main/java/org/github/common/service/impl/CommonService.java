@@ -1,11 +1,11 @@
-package org.github.service.impl;
+package org.github.common.service.impl;
 
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Function;
 import org.github.base.CodeType;
 import org.github.cache.EnumCache;
-import org.github.service.ICommonService;
+import org.github.common.service.ICommonService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

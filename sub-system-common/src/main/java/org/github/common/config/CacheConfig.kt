@@ -1,4 +1,4 @@
-package org.github.config
+package org.github.common.config
 
 import com.alicp.jetcache.anno.config.EnableMethodCache
 import org.github.cache.EnumCache

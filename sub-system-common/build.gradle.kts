@@ -3,6 +3,7 @@ val jetcache: String by System.getProperties()
 val saToken: String by System.getProperties()
 val forest: String by System.getProperties()
 val xxljob: String by System.getProperties()
+val minio: String by System.getProperties()
 
 dependencies {
   api(project(":sub-module-center-api"))
@@ -15,6 +16,7 @@ dependencies {
   compileOnly("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
 
   compileOnly("com.xuxueli:xxl-job-core:$xxljob")
+  compileOnly("io.minio:minio:$minio")
 
   compileOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
 

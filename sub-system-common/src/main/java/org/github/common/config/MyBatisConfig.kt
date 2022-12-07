@@ -1,4 +1,4 @@
-package org.github.config
+package org.github.common.config
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler
 import com.baomidou.mybatisplus.core.incrementer.DefaultIdentifierGenerator
