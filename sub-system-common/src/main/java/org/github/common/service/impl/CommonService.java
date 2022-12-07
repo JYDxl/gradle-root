@@ -1,16 +1,19 @@
 package org.github.common.service.impl;
 
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.function.Function;
+import org.github.common.service.ICommonService;
 import org.github.core.base.CodeType;
 import org.github.core.cache.EnumCache;
-import org.github.common.service.ICommonService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.function.Function;
+
 import static cn.hutool.core.bean.BeanUtil.*;
-import static java.util.stream.Collectors.*;
+import static cn.hutool.core.text.CharSequenceUtil.toCamelCase;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class CommonService implements ICommonService {
@@ -33,7 +36,8 @@ public class CommonService implements ICommonService {
   private <R> void transCode(R obj, Field field) {
     CodeType type = field.getAnnotation(CodeType.class);
     if (type == null) return;
-    Object code = getFieldValue(obj, type.field());
+    String from = type.underLine() ? toCamelCase(type.field()) : type.field();
+    Object code = getFieldValue(obj, from);
     if (code == null) return;
     Object name = enumCache.get(type.type(), code);
     if (name == null) return;
