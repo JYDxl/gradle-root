@@ -7,6 +7,7 @@ val byteman: String by System.getProperties()
 val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
+val minio: String by System.getProperties()
 val jwt: String by System.getProperties()
 
 plugins {
@@ -58,6 +59,8 @@ dependencies {
   compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
 
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
+
+  compileOnly("io.minio:minio:$minio")
 
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   compileOnly("io.netty:netty-all:$netty")

@@ -5,12 +5,19 @@ import org.github.common.props.XxlJobProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static cn.hutool.core.bean.BeanUtil.copyProperties;
-
 @Configuration
 public class XxlJobConfig {
     @Bean
-    public XxlJobSpringExecutor xxlJobExecutor(XxlJobProperties xxlJobProperties) {
-        return copyProperties(xxlJobProperties, XxlJobSpringExecutor.class);
+    public XxlJobSpringExecutor xxlJobExecutor(XxlJobProperties props) {
+        XxlJobSpringExecutor executor = new XxlJobSpringExecutor();
+        executor.setAdminAddresses(props.getAdminAddresses());
+        executor.setAccessToken(props.getAccessToken());
+        executor.setAppname(props.getAppname());
+        executor.setAddress(props.getAddress());
+        executor.setIp(props.getIp());
+        executor.setPort(props.getPort());
+        executor.setLogPath(props.getLogPath());
+        executor.setLogRetentionDays(props.getLogRetentionDays());
+        return executor;
     }
 }
