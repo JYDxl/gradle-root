@@ -2,7 +2,7 @@ package org.github.web.module.index;
 
 import javax.validation.constraints.NotNull;
 import lombok.*;
-import org.github.base.IParam;
+import org.github.core.base.IParam;
 import static cn.hutool.crypto.symmetric.SymmetricAlgorithm.*;
 
 @Data

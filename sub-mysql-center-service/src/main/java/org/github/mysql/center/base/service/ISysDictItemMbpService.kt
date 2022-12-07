@@ -3,7 +3,7 @@
 package org.github.mysql.center.base.service;
 
 import org.github.mysql.center.base.entity.SysDictItemMbpEntity;
-import org.github.base.IService;
+import org.github.core.base.IService;
 
 /**
  * 码值条目 服务类

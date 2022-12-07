@@ -8,11 +8,11 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto
 import org.github.center.bo.LoginBo
 import org.github.center.bo.RegisterBo
 import org.github.center.service.ICenterService
-import org.github.exception.ExternalException
+import org.github.core.exception.ExternalException
 import org.github.mysql.center.base.entity.SysUserMbpEntity
 import org.github.mysql.center.base.service.ISysUserMbpService
-import org.github.spring.restful.json.JSONDataReturn
-import org.github.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONDataReturn
+import org.github.core.spring.restful.json.JSONReturn
 import org.springframework.stereotype.Service
 import org.springframework.validation.annotation.Validated
 import javax.annotation.Resource

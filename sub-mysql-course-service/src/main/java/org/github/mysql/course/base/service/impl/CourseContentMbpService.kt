@@ -5,7 +5,7 @@ package org.github.mysql.course.base.service.impl;
 import org.github.mysql.course.base.entity.CourseContentMbpEntity;
 import org.github.mysql.course.base.mapper.ICourseContentMbpMapper;
 import org.github.mysql.course.base.service.ICourseContentMbpService;
-import org.github.base.ServiceImpl;
+import org.github.core.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

@@ -3,7 +3,7 @@
 package org.github.mysql.course.base.service;
 
 import org.github.mysql.course.base.entity.TeacherMbpEntity;
-import org.github.base.IService;
+import org.github.core.base.IService;
 
 /**
  * 讲师 服务类

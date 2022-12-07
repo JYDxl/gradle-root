@@ -3,7 +3,7 @@
 package org.github.mysql.course.base.service;
 
 import org.github.mysql.course.base.entity.MemberMbpEntity;
-import org.github.base.IService;
+import org.github.core.base.IService;
 
 /**
  * 会员 服务类

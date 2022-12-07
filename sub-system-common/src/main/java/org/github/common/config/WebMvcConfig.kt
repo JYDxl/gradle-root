@@ -2,7 +2,7 @@ package org.github.common.config
 
 import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of
-import org.github.spring.mvc.ReturnableValueHandlerKotlin
+import org.github.core.spring.mvc.ReturnableValueHandlerKotlin
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler

@@ -6,8 +6,8 @@ import io.vertx.core.VertxOptions
 import io.vertx.ext.web.common.WebEnvironment.SYSTEM_PROPERTY_NAME
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import org.github.ops.deploySupplier
-import org.github.verticle.WebSocketServerVerticle
+import org.github.vertx.ops.deploySupplier
+import org.github.vertx.verticle.WebSocketServerVerticle
 import java.lang.System.setProperty
 
 suspend fun main() = coroutineScope {
@@ -36,7 +36,7 @@ suspend fun main() = coroutineScope {
   //  vertx.deploy(FileServerVerticle())
   //  vertx.deploy(AsyncVerticle())
   // launch { vertx.deploy(HttpServerVerticle()) }
-  launch {vertx.deploySupplier({WebSocketServerVerticle()}, deploymentOptions)}
+  launch {vertx.deploySupplier({ WebSocketServerVerticle() }, deploymentOptions)}
   // launch { vertx.deploy(NetClientVerticle("docker.for.mac.localhost", 10000)) }
   //    launch { vertx.deploySupplier(Supplier { NetClientVerticle("localhost", 3000) }, deploymentOptions) }
   return@coroutineScope

@@ -3,8 +3,8 @@
 package org.github.mysql.center.base.mapper;
 
 import org.github.mysql.center.base.entity.RoleUserMbpEntity;
-import org.github.base.IMapper;
-import org.github.mybatis.MyBatisMapper;
+import org.github.core.base.IMapper;
+import org.github.core.mybatis.MyBatisMapper;
 
 /**
  * 角色用户关联 Mapper 接口

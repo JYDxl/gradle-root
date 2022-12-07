@@ -2,7 +2,7 @@
 
 package org.github.mysql.center.base.dict
 
-import org.github.base.BaseEnum
+import org.github.core.base.BaseEnum
 
 /**
  * 性别 

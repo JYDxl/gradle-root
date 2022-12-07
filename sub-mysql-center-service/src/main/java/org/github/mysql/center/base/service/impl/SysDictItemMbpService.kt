@@ -5,7 +5,7 @@ package org.github.mysql.center.base.service.impl;
 import org.github.mysql.center.base.entity.SysDictItemMbpEntity;
 import org.github.mysql.center.base.mapper.ISysDictItemMbpMapper;
 import org.github.mysql.center.base.service.ISysDictItemMbpService;
-import org.github.base.ServiceImpl;
+import org.github.core.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

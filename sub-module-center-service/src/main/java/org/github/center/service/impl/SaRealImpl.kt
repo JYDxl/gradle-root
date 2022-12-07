@@ -2,10 +2,10 @@ package org.github.center.service.impl
 
 import com.alicp.jetcache.anno.CacheType
 import com.alicp.jetcache.anno.Cached
-import org.github.CACHE_NAME_PERMISSION
-import org.github.CACHE_TIMEOUT
+import org.github.core.CACHE_NAME_PERMISSION
+import org.github.core.CACHE_TIMEOUT
 import org.github.common.service.ISaInterface
-import org.github.spring.ops.proxy
+import org.github.core.spring.ops.proxy
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 

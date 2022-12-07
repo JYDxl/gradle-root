@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
-import org.github.base.Entity
+import org.github.core.base.Entity
 
 /**
  * 讲师

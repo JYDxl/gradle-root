@@ -2,7 +2,7 @@ package org.github.web.model.vo;
 
 import javax.annotation.Nullable;
 import lombok.*;
-import org.github.util.tree.DefaultTreeNode;
+import org.github.core.util.tree.DefaultTreeNode;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

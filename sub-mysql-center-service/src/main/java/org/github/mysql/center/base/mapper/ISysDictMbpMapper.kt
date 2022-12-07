@@ -3,8 +3,8 @@
 package org.github.mysql.center.base.mapper;
 
 import org.github.mysql.center.base.entity.SysDictMbpEntity;
-import org.github.base.IMapper;
-import org.github.mybatis.MyBatisMapper;
+import org.github.core.base.IMapper;
+import org.github.core.mybatis.MyBatisMapper;
 
 /**
  * 码值类型 Mapper 接口

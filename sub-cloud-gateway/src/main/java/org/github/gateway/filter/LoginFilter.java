@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.github.ConstKt.TOKEN_NAME;
+import static org.github.core.ConstKt.TOKEN_NAME;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static reactor.core.publisher.Mono.just;
 

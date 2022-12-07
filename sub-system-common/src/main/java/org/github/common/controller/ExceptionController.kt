@@ -2,13 +2,13 @@ package org.github.common.controller
 
 import cn.dev33.satoken.exception.*
 import com.google.common.net.HttpHeaders.CONTENT_TYPE
-import org.github.exception.ExternalException
-import org.github.exception.InternalException
-import org.github.exception.RemoteException
-import org.github.ops.error
-import org.github.ops.log
-import org.github.spring.restful.json.JSONReturn
-import org.github.spring.restful.json.JSONReturn.*
+import org.github.core.exception.ExternalException
+import org.github.core.exception.InternalException
+import org.github.core.exception.RemoteException
+import org.github.core.ops.error
+import org.github.core.ops.log
+import org.github.core.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONReturn.*
 import org.springframework.http.HttpEntity
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.HttpRequestMethodNotSupportedException

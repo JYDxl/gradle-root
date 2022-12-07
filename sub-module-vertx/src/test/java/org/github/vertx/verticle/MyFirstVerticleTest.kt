@@ -9,9 +9,9 @@ import io.vertx.ext.web.client.WebClient
 import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.junit5.VertxExtension
 import io.vertx.junit5.VertxTestContext
-import org.github.ops.error
-import org.github.ops.log
-import org.github.ops.warn
+import org.github.core.ops.error
+import org.github.core.ops.log
+import org.github.core.ops.warn
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance

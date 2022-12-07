@@ -2,7 +2,7 @@ package org.github.center.bo;
 
 import javax.annotation.Nullable;
 import lombok.*;
-import org.github.base.PageParam;
+import org.github.core.base.PageParam;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

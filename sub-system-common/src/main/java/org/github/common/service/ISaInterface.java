@@ -4,13 +4,12 @@ import java.util.List;
 import com.alicp.jetcache.anno.Cached;
 import cn.dev33.satoken.stp.StpInterface;
 import static com.alicp.jetcache.anno.CacheType.*;
-import static org.github.ConstKt.*;
 
 public interface ISaInterface extends StpInterface {
   @Override
   List<String> getPermissionList(Object loginId, String loginType);
 
-  @Cached(name = CACHE_NAME_ROLE, expire = CACHE_TIMEOUT, cacheType = BOTH)
+  @Cached(name = org.github.core.ConstKt.CACHE_NAME_ROLE, expire = org.github.core.ConstKt.CACHE_TIMEOUT, cacheType = BOTH)
   @Override
   List<String> getRoleList(Object loginId, String loginType);
 }

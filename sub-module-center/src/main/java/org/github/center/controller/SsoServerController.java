@@ -2,7 +2,7 @@ package org.github.center.controller;
 
 import org.github.center.bo.LoginBo;
 import org.github.center.service.ICenterService;
-import org.github.spring.restful.json.JSONReturn;
+import org.github.core.spring.restful.json.JSONReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

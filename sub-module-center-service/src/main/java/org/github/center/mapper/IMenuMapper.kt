@@ -3,7 +3,7 @@
 // import org.github.base.IPage
 // import org.github.center.bo.QueryMenuListBO
 // import org.github.center.vo.QueryMenuListVO
-// import org.github.mybatis.MyBatisMapper
+// import org.github.core.MyBatisMapper
 //
 // @MyBatisMapper
 // interface IMenuMapper {

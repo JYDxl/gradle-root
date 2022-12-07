@@ -1,8 +1,8 @@
 package org.github.common.service.impl
 
 import org.github.common.service.ISystemService
-import org.github.spring.restful.json.JSONDataReturn
-import org.github.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONDataReturn
+import org.github.core.spring.restful.json.JSONReturn
 import org.springframework.stereotype.Service
 
 @Service

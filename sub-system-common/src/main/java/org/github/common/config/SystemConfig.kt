@@ -1,6 +1,6 @@
 package org.github.common.config
 
-import org.github.logger.MethodInvokeLogger
+import org.github.core.logger.MethodInvokeLogger
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

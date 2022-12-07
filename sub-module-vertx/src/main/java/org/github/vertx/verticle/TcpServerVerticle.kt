@@ -6,8 +6,8 @@ import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.NetServer
 import io.vertx.core.net.NetServerOptions
 import io.vertx.core.net.NetSocket
-import org.github.ops.info
-import org.github.ops.log
+import org.github.core.ops.info
+import org.github.core.ops.log
 
 class TcpServerVerticle: AbstractVerticle() {
 

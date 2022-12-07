@@ -2,7 +2,7 @@ package org.github.center.bo;
 
 import javax.validation.constraints.NotBlank;
 import lombok.*;
-import org.github.base.IParam;
+import org.github.core.base.IParam;
 
 @AllArgsConstructor
 @NoArgsConstructor

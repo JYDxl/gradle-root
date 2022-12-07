@@ -1,7 +1,7 @@
 package org.github.web;
 
 import lombok.*;
-import org.github.spring.restful.view.VIEW;
+import org.github.core.spring.restful.view.VIEW;
 
 public enum Views implements VIEW {
   INDEX("frame/index"),

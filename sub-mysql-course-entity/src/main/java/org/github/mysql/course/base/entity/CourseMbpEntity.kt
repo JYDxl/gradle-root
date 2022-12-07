@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import org.github.base.Entity
+import org.github.core.base.Entity
 
 /**
  * 课程

@@ -6,7 +6,7 @@ package ${package.Mapper};
 
 import ${package.Entity}.${entity};
 import ${superMapperClassPackage};
-import org.github.mybatis.MyBatisMapper;
+import org.github.core.MyBatisMapper;
 
 /**
  * ${table.comment!} Mapper 接口

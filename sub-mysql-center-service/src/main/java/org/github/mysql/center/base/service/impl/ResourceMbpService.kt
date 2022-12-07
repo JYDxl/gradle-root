@@ -5,7 +5,7 @@ package org.github.mysql.center.base.service.impl;
 import org.github.mysql.center.base.entity.ResourceMbpEntity;
 import org.github.mysql.center.base.mapper.IResourceMbpMapper;
 import org.github.mysql.center.base.service.IResourceMbpService;
-import org.github.base.ServiceImpl;
+import org.github.core.base.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

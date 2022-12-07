@@ -4,9 +4,9 @@ import io.vertx.core.AbstractVerticle
 import io.vertx.core.AsyncResult
 import io.vertx.core.http.HttpServer
 import io.vertx.core.http.HttpServerRequest
-import org.github.ops.debug
-import org.github.ops.error
-import org.github.ops.log
+import org.github.core.ops.debug
+import org.github.core.ops.error
+import org.github.core.ops.log
 
 class MyFirstVerticle(private val port: Int): AbstractVerticle() {
   /** log. */

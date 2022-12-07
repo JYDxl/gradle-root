@@ -1,8 +1,8 @@
 package org.github.netty
 
 import io.netty.buffer.Unpooled
-import org.github.ops.debug
-import org.github.ops.log
+import org.github.core.ops.debug
+import org.github.core.ops.log
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

@@ -1,7 +1,7 @@
 package org.github.center.bo;
 
 import lombok.*;
-import org.github.base.IParam;
+import org.github.core.base.IParam;
 
 @AllArgsConstructor
 @NoArgsConstructor

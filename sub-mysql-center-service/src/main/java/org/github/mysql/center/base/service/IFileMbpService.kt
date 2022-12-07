@@ -3,7 +3,7 @@
 package org.github.mysql.center.base.service;
 
 import org.github.mysql.center.base.entity.FileMbpEntity;
-import org.github.base.IService;
+import org.github.core.base.IService;
 
 /**
  * 文件 服务类

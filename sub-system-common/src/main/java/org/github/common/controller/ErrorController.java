@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.*;
 import lombok.extern.slf4j.*;
-import org.github.spring.restful.json.JSONReturn;
+import org.github.core.spring.restful.json.JSONReturn;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;

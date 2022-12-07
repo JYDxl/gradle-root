@@ -1,6 +1,6 @@
 package org.github.web.feign
 
-import org.github.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONReturn
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestHeader

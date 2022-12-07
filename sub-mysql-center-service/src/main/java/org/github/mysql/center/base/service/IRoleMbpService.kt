@@ -3,7 +3,7 @@
 package org.github.mysql.center.base.service;
 
 import org.github.mysql.center.base.entity.RoleMbpEntity;
-import org.github.base.IService;
+import org.github.core.base.IService;
 
 /**
  * 角色 服务类

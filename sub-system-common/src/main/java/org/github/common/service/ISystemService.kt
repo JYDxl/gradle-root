@@ -1,7 +1,7 @@
 package org.github.common.service
 
-import org.github.spring.restful.json.JSONDataReturn
-import org.github.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONDataReturn
+import org.github.core.spring.restful.json.JSONReturn
 
 interface ISystemService {
   fun login(): JSONDataReturn<String?>

@@ -1,7 +1,7 @@
 package org.github.web.model.bo;
 
 import lombok.*;
-import org.github.base.PageParam;
+import org.github.core.base.PageParam;
 import javax.annotation.Nullable;
 
 @EqualsAndHashCode(callSuper = true)

@@ -1,12 +1,12 @@
 package org.github.web.controller
 
-import org.github.ops.info
-import org.github.ops.log
-import org.github.spring.restful.Returnable
-import org.github.spring.restful.json.JSON
-import org.github.spring.restful.json.JSONPReturn
-import org.github.spring.restful.json.JSONReturn
-import org.github.spring.restful.view.VIEW
+import org.github.core.ops.info
+import org.github.core.ops.log
+import org.github.core.spring.restful.Returnable
+import org.github.core.spring.restful.json.JSON
+import org.github.core.spring.restful.json.JSONPReturn
+import org.github.core.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.view.VIEW
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
