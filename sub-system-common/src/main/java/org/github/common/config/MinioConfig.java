@@ -17,8 +17,8 @@ public class MinioConfig {
                 .retryOnConnectionFailure(true)
                 .build();
 
-        MinioClient minioClient = MinioClient
-                .builder().httpClient(httpClient)
+        MinioClient minioClient = MinioClient.builder()
+                .httpClient(httpClient)
                 .endpoint(props.getUrl())
                 .credentials(props.getAccessKey(), props.getSecretKey())
                 .build();
