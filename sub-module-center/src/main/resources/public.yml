@@ -146,6 +146,6 @@ xxl:
   appname: ${spring.application.name}
   address:
   ip:
-  port:
+  port: 0
   logPath:
-  logRetentionDays: 7
+  logRetentionDays: 30

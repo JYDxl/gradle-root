@@ -52,6 +52,8 @@ tasks.getByName<Task>("bootDistZip") {enabled = false}
 val netty: String by System.getProperties()
 
 dependencies {
+  api(project(":sub-system-core"))
+
   implementation("io.netty:netty-all:$netty")
 
   // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
@@ -62,7 +64,8 @@ dependencies {
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
   implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
-  implementation("org.springframework.cloud:spring-cloud-starter-gateway") {exclude(group = "io.netty")}
+  implementation("org.springframework.cloud:spring-cloud-starter-gateway") { exclude(group = "io.netty") }
+  implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
   implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
 
   implementation("org.springframework.boot:spring-boot-starter-actuator")

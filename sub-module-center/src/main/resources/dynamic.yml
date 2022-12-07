@@ -1,0 +1,7 @@
+dynamic:
+  whiteList:
+    - /index/**
+    - /static/**
+    - /sso/**
+    - /error
+    - /public/**
