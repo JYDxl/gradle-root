@@ -2,7 +2,7 @@
 
 package ${pack}
 
-import org.github.base.BaseEnum
+import org.github.core.base.BaseEnum
 
 /**
  * ${type.dictName} ${type.dictInfo}

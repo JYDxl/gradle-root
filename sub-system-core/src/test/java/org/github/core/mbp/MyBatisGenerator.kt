@@ -41,8 +41,8 @@ fun mysqlCourse() {
     if (enableKotlin) it.enableKotlin()
   }
 
-  val parent = "org.github.mysql.course"
-  val moduleName = "base"
+  val parent = "org.github.mysql"
+  val moduleName = "course"
   val subName = "sub-mysql-course"
   val subEntityName = "$subName-entity"
   val subMapperName = "$subName-service"
@@ -57,7 +57,7 @@ fun mysqlCourse() {
       .moduleName(moduleName)
       .pathInfo(
         mapOf(
-          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/po",
+          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
 
           controller to "$path/$subMapperName/src/main/java/$packageName/$moduleName/controller",
           mapper to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",
@@ -123,8 +123,8 @@ fun mysqlCenter() {
     if (enableKotlin) it.enableKotlin()
   }
 
-  val parent = "org.github.mysql.center"
-  val moduleName = "base"
+  val parent = "org.github.mysql"
+  val moduleName = "center"
   val subName = "sub-mysql-center"
   val subEntityName = "$subName-entity"
   val subMapperName = "$subName-service"
@@ -139,7 +139,7 @@ fun mysqlCenter() {
       .moduleName(moduleName)
       .pathInfo(
         mapOf(
-          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/po",
+          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
 
           controller to "$path/$subMapperName/src/main/java/$packageName/$moduleName/controller",
           mapper to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",

@@ -1,0 +1,17 @@
+@file:Suppress("RedundantSemicolon")
+
+package org.github.mysql.course.service.impl;
+
+import org.github.mysql.course.entity.CourseContentFileMbpPo;
+import org.github.mysql.course.mapper.ICourseContentFileMbpMapper;
+import org.github.mysql.course.service.ICourseContentFileMbpService;
+import org.github.core.base.ServiceImpl;
+import org.springframework.stereotype.Service;
+
+/**
+ * 课程内容文件 服务实现类
+ *
+ * @author JYD_XL
+ */
+@Service
+open class CourseContentFileMbpService : ServiceImpl<ICourseContentFileMbpMapper, CourseContentFileMbpPo>(), ICourseContentFileMbpService
