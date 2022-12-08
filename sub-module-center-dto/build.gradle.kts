@@ -5,9 +5,9 @@ dependencies {
 
   compileOnly(project(":sub-system-core"))
 
+  compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("org.springframework.boot:spring-boot")
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
-  compileOnly("javax.servlet:javax.servlet-api")
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
 
   compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisPlus")

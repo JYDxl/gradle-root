@@ -49,22 +49,18 @@ tasks.getByName<Task>("distZip") {enabled = false}
 tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
-val netty: String by System.getProperties()
-
 dependencies {
-  api(project(":sub-system-core"))
+  implementation(project(":sub-system-core"))
 
   // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
   // implementation("com.alibaba.cloud:spring-cloud-alibaba-sentinel-gateway")
   // implementation("com.alibaba.csp:sentinel-datasource-nacos")
 
+  implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
   implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
-  implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
-
+  implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
   implementation("org.springframework.cloud:spring-cloud-starter-gateway") { exclude(group = "io.netty") }
   implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
-  implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
-
   implementation("org.springframework.boot:spring-boot-starter-actuator")
 }

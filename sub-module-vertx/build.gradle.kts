@@ -1,8 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
-val netty: String by System.getProperties()
-val guice: String by System.getProperties()
-
 plugins {
   application
   id("com.github.johnrengelman.shadow")
@@ -79,8 +76,6 @@ dependencies {
   implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
   implementation("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}
   implementation("io.vertx:vertx-lang-kotlin-coroutines") {exclude(group = "io.netty")}
-
-  implementation("com.google.inject:guice:$guice")
 
   testImplementation("io.vertx:vertx-junit5") {exclude(group = "io.netty")}
 

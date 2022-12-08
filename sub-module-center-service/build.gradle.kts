@@ -2,12 +2,11 @@ val jetcache: String by System.getProperties()
 val saToken: String by System.getProperties()
 
 dependencies {
+  api(project(":sub-module-center-dto"))
+  api(project(":sub-mysql-center-service"))
+
   compileOnly(project(":sub-system-core"))
   compileOnly(project(":sub-system-common"))
-
-  api(project(":sub-module-center-dto"))
-
-  api(project(":sub-mysql-center-service"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
   compileOnly("org.springframework.boot:spring-boot-starter-jdbc")

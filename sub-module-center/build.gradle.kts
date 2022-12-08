@@ -53,60 +53,22 @@ tasks.getByName<Task>("distZip") {enabled = false}
 tasks.getByName<Task>("bootDistTar") {enabled = false}
 tasks.getByName<Task>("bootDistZip") {enabled = false}
 
-val commonsPool2: String by System.getProperties()
-val mybatisPlus: String by System.getProperties()
-val retrofit: String by System.getProperties()
-val redisson: String by System.getProperties()
-val jetcache: String by System.getProperties()
-val saToken: String by System.getProperties()
-val dynamic: String by System.getProperties()
-val okhttp3: String by System.getProperties()
 val mysql: String by System.getProperties()
-val p6spy: String by System.getProperties()
-val netty: String by System.getProperties()
-val seata: String by System.getProperties()
-val jwt: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-system-common"))
-  implementation(project(":sub-system-core"))
-
   implementation(project(":sub-module-center-service"))
 
-  implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
-  implementation("org.apache.commons:commons-pool2:$commonsPool2")
-  implementation("com.squareup.retrofit2:retrofit:$retrofit")
-  implementation("com.squareup.okhttp3:okhttp:$okhttp3")
-  implementation("mysql:mysql-connector-java:$mysql")
-  implementation("p6spy:p6spy:$p6spy")
-  implementation("com.auth0:java-jwt:$jwt")
-  implementation("com.baomidou:dynamic-datasource-spring-boot-starter:$dynamic")
-  implementation("cn.dev33:sa-token-spring-boot-starter:$saToken")
-  implementation("cn.dev33:sa-token-dao-redis-jackson:$saToken")
-  implementation("cn.dev33:sa-token-alone-redis:$saToken")
-  implementation("cn.dev33:sa-token-sso:$saToken")
-  implementation("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache")
-
-  implementation("org.springframework.boot:spring-boot-starter-actuator")
   implementation("org.springframework.boot:spring-boot-starter-amqp")
-  implementation("org.springframework.boot:spring-boot-starter-aop")
-  implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("org.springframework.boot:spring-boot-starter-validation")
-  implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+  implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple");exclude(group = "joda-time")}
-
   implementation("org.springframework.kafka:spring-kafka") {exclude(group = "io.netty")}
+  implementation("mysql:mysql-connector-java:$mysql")
 
   implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
   implementation("org.springframework.cloud:spring-cloud-sleuth-zipkin")
-  implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
-  implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-  implementation("org.springframework.cloud:spring-cloud-starter-loadbalancer")
-
-  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
-  implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
   // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel") {exclude(group = "io.netty")}
   // implementation("com.alibaba.csp:sentinel-datasource-nacos")
   // implementation("com.alibaba.cloud:spring-cloud-starter-alibaba-seata") {exclude(group = "com.alibaba", module = "druid")}
