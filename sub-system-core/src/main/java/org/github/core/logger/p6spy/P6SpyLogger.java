@@ -1,8 +1,7 @@
 package org.github.core.logger.p6spy;
 
 import com.p6spy.engine.spy.appender.MessageFormattingStrategy;
-
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class P6SpyLogger implements MessageFormattingStrategy {
   @Override
