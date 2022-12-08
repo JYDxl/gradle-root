@@ -22,12 +22,3 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
-  redis:
-    port: 6379
-    timeout: 10s
-    lettuce:
-      pool:
-        max-active: 24
-        max-idle: 12
-    host: frp
-    password: XLrootJYD713

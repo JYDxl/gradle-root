@@ -61,7 +61,6 @@ dependencies {
 
   implementation("org.springframework.boot:spring-boot-starter-amqp")
   implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-  implementation("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple");exclude(group = "joda-time")}
   implementation("org.springframework.kafka:spring-kafka") {exclude(group = "io.netty")}
   implementation("mysql:mysql-connector-java:$mysql")

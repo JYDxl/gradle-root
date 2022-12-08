@@ -4,10 +4,8 @@ dependencies {
   api(project(":sub-mysql-course-entity"))
 
   compileOnly(project(":sub-system-core"))
-  compileOnly(project(":sub-system-common"))
 
   compileOnly("org.springframework.boot:spring-boot-starter")
 
-  compileOnly("com.baomidou:mybatis-plus-annotation:$mybatisPlus")
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
 }

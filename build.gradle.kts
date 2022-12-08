@@ -111,9 +111,9 @@ subprojects {
     implementation("ch.qos.logback:logback-classic")
 
     implementation("org.apache.commons:commons-lang3:$commonsLang3")
-    implementation("com.google.inject:guice:$guice")
     implementation("com.google.guava:guava:$guava")
     implementation("cn.hutool:hutool-all:$hutool")
+    implementation("com.google.inject:guice:$guice")
     implementation("com.googlecode.aviator:aviator:$aviator")
     implementation("com.gitee.jd-platform-opensource:asyncTool:$asyncTool")
     implementation("com.dtflys.forest:forest-core:$forest")
