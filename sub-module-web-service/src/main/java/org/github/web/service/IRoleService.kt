@@ -1,6 +1,6 @@
 // package org.github.web.service
 //
-// import org.github.base.PageParam
+// import org.github.base.PageBo
 // import org.github.mysql.web.base.entity.AclRoleEntity
 // import org.github.spring.restful.json.JSONPageReturn
 // import org.github.spring.restful.json.JSONReturn
@@ -11,7 +11,7 @@
 // interface IRoleService {
 //   fun save(@Valid bo: RoleSaveBo): JSONReturn
 //
-//   fun all(bo: PageParam): JSONPageReturn<RoleIndexVo>
+//   fun all(bo: PageBo): JSONPageReturn<RoleIndexVo>
 //
 //   fun getById(id: java.io.Serializable): AclRoleEntity
 //   fun update(bo: AclRoleEntity)

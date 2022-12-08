@@ -1,7 +1,7 @@
 // package org.github.web.service.impl
 //
 // import com.baomidou.mybatisplus.core.metadata.IPage
-// import org.github.base.PageParam
+// import org.github.base.PageBo
 // import org.github.mysql.web.base.entity.AclRoleEntity
 // import org.github.mysql.web.base.service.IAclRoleService
 // import org.github.service.ICommonService
@@ -28,7 +28,7 @@
 //     return JSONReturn.ok()
 //   }
 //
-//   override fun all(bo: PageParam): JSONPageReturn<RoleIndexVo> {
+//   override fun all(bo: PageBo): JSONPageReturn<RoleIndexVo> {
 //     val temp: IPage<AclRoleEntity> = aclRoleService.page(bo.page())
 //     val data = commonService.transCode(temp.records, RoleIndexVo::class.java)
 //     return JSONPageReturn.of(temp.total, data)

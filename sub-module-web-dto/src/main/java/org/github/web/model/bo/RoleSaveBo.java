@@ -2,13 +2,13 @@
 //
 // import javax.validation.constraints.NotBlank;
 // import lombok.*;
-// import org.github.base.IParam;
+// import org.github.base.IBo;
 // import org.github.mysql.web.base.entity.AclRoleEntity;
 // import org.jetbrains.annotations.NotNull;
 //
 // @EqualsAndHashCode(callSuper = true)
 // @Data
-// public class RoleSaveBo extends AclRoleEntity implements IParam {
+// public class RoleSaveBo extends AclRoleEntity implements IBo {
 //   @NotBlank(message = "角色名称不能为空")
 //   @Override
 //   public String getRoleName() {

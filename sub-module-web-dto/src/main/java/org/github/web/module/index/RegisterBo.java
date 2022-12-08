@@ -2,11 +2,11 @@ package org.github.web.module.index;
 
 import javax.validation.constraints.NotNull;
 import lombok.*;
-import org.github.core.base.IParam;
+import org.github.core.base.IBo;
 import static cn.hutool.crypto.symmetric.SymmetricAlgorithm.*;
 
 @Data
-public class RegisterBo implements IParam {
+public class RegisterBo implements IBo {
   /** 用户名 */
   @NotNull(message = "用户名不能为空")
   private String username;

@@ -1,9 +1,11 @@
 package org.github.core.spring.restful.json;
 
-import lombok.*;
-import org.github.core.spring.restful.Returnable;
 import com.google.common.net.MediaType;
-import static com.google.common.net.MediaType.*;
+import lombok.NonNull;
+import org.github.core.spring.restful.Returnable;
+
+import static com.google.common.net.MediaType.JSON_UTF_8;
+import static org.github.core.spring.ops.SpringKt.json;
 
 /**
  * Top interface of json.
@@ -23,14 +25,14 @@ public interface JSON extends Returnable {
 
   /** Generator. */
   @NonNull
-  static JSON of(@NonNull Object json) {
-    return of(org.github.core.spring.ops.SpringKt.json(json));
+  static JSON of(@NonNull Object data) {
+    return of(json(data));
   }
 
   /** Generator. */
   @NonNull
-  static JSON of(@NonNull String json) {
-    return json::toString;
+  static JSON of(@NonNull String data) {
+    return data::toString;
   }
 
   /** Generator. */

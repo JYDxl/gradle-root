@@ -16,9 +16,9 @@ import static io.minio.http.Method.GET;
 public class MinioWrapper {
     private final MinioClient minioClient;
 
-    public void upload(MinioUploadParam param) {
+    public void upload(MinioUploadBo param) {
         long objSize = param.getObjSize();
-        Size size = objSize == -1 ? new Size(-1, parse("16MB")) : new Size(objSize, -1);
+        Size size = objSize == -1 ? new Size(-1, parse("8MB")) : new Size(objSize, -1);
         PutObjectArgs args = PutObjectArgs.builder().bucket(param.getBucket()).object(param.getFullName()).stream(param.getInput(), size.getItemSize(), size.getPartSize()).build();
         try {
             minioClient.putObject(args);
@@ -28,7 +28,7 @@ public class MinioWrapper {
         }
     }
 
-    public InputStream download(MinioQueryParam param) {
+    public InputStream download(MinioQueryBo param) {
         GetObjectArgs args = GetObjectArgs.builder().bucket(param.getBucket()).object(param.getFullName()).build();
         try {
             return minioClient.getObject(args);
@@ -38,7 +38,7 @@ public class MinioWrapper {
         }
     }
 
-    public String getUrl(MinioQueryParam param) {
+    public String getUrl(MinioQueryBo param) {
         GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder().method(GET).bucket(param.getBucket()).object(param.getFullName()).build();
         try {
             return minioClient.getPresignedObjectUrl(args);
@@ -48,7 +48,7 @@ public class MinioWrapper {
         }
     }
 
-    public String copy(MinioQueryParam source, MinioQueryParam target) {
+    public String copy(MinioQueryBo source, MinioQueryBo target) {
         CopySource from = CopySource.builder().bucket(source.getBucket()).object(source.getFullName()).build();
         CopyObjectArgs args = CopyObjectArgs.builder().source(from).bucket(target.getBucket()).object(target.getFullName()).build();
         try {
@@ -60,7 +60,7 @@ public class MinioWrapper {
         }
     }
 
-    public void remove(MinioQueryParam param) {
+    public void remove(MinioQueryBo param) {
         RemoveObjectArgs args = RemoveObjectArgs.builder().bucket(param.getBucket()).object(param.getFullName()).build();
         try {
             minioClient.removeObject(args);

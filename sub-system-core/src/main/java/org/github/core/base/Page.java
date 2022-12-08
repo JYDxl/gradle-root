@@ -5,17 +5,17 @@ import lombok.*;
 import static com.google.common.base.MoreObjects.*;
 
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T> {
-  public Page(PageParam param) {
+  public Page(PageBo param) {
     super(param.getPageNum(), param.getPageSize(), param.isSearchCount());
     this.sort(param).sortList(param);
   }
 
-  protected void sortList(PageParam param) {
+  protected void sortList(PageBo param) {
     val list = param.sortList();
     super.addOrder(list);
   }
 
-  protected Page<T> sort(PageParam param) {
+  protected Page<T> sort(PageBo param) {
     val sort = param.sort();
     if (sort != null) super.addOrder(sort);
     return this;

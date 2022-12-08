@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MinioUploadParam extends MinioQueryParam {
+public class MinioUploadBo extends MinioQueryBo {
     private InputStream input;
 
     private long objSize = -1;

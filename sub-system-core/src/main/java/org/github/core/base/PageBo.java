@@ -13,13 +13,14 @@ import static com.google.common.collect.ImmutableList.*;
 @ToString(callSuper = true)
 @Accessors(chain = true)
 @Data
-public class PageParam extends Sort {
+public class PageBo extends Sort {
   /** 当前页 */
   @Min(value = 1, message = "当前页至少为第1页")
   private int pageNum = 1;
 
   /** 每页条数 */
   @Max(value = 100, message = "每页最多展示100条数据")
+  @Min(value = 10, message = "每页最少展示10条数据")
   private int pageSize = 10;
 
   /** 是否搜索总条数 */

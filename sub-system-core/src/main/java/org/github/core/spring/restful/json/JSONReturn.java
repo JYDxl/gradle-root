@@ -7,6 +7,7 @@ import org.github.core.spring.restful.Returnable;
 import org.github.core.exception.RemoteException;
 import org.github.core.spring.restful.ops.Result;
 import static cn.hutool.core.text.CharSequenceUtil.*;
+import static org.github.core.spring.ops.SpringKt.json;
 import static org.github.core.spring.restful.ops.Result.*;
 
 /**
@@ -43,7 +44,7 @@ public class JSONReturn implements JSON {
   @Override
   @NonNull
   public String get() {
-    return org.github.core.spring.ops.SpringKt.json(this);
+    return json(this);
   }
 
   @Override

@@ -10,7 +10,7 @@ import static com.baomidou.mybatisplus.core.metadata.OrderItem.*;
 
 @Accessors(chain = true)
 @Data
-public class Sort implements IParam {
+public class Sort implements IBo {
   /** 是否使用下划线模式 */
   private boolean underLine = true;
 
@@ -27,7 +27,7 @@ public class Sort implements IParam {
 
   public void setSortOrder(@NonNull String sortOrder) {
     val order = sortOrder.toLowerCase();
-    if (!order.equals("asc") && !order.equals("desc")) return;
+    if (!(order.equals("asc") || order.equals("desc"))) return;
     this.sortOrder = order;
   }
 
