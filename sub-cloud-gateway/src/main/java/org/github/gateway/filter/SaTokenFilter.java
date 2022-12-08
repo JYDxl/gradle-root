@@ -43,7 +43,7 @@ public class SaTokenFilter implements GlobalFilter, Ordered {
     if (allow) return just(true);
     String token = request.getHeaders().getFirst(TOKEN_NAME);
     if (isBlank(token)) return just(false);
-    return reactiveStringRedisTemplate.hasKey("token:login:token:" + token);
+    return reactiveStringRedisTemplate.hasKey(SA_TOKEN_PREFIX + token);
   }
 
   private Mono<Void> handle(Boolean exists, ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -57,4 +57,6 @@ public class SaTokenFilter implements GlobalFilter, Ordered {
   public int getOrder() {
     return HIGHEST_PRECEDENCE;
   }
+
+  private static final String SA_TOKEN_PREFIX = "token:login:token:";
 }
