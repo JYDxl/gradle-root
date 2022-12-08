@@ -16,6 +16,7 @@ spring:
         max-idle: 12
     host: frp
     password: XLrootJYD713
+    database: 0
   rabbitmq:
     username: root
     password: XLrootJYD713
@@ -141,7 +142,7 @@ jetcache:
       readFrom: masterPreferred
 
 xxl:
-  adminAddresses: http://TODO:8080/xxl-job-admin
+  adminAddresses: http://frp:8080/xxl-job-admin
   accessToken:
   appname: ${spring.application.name}
   address:
@@ -149,3 +150,8 @@ xxl:
   port: 0
   logPath:
   logRetentionDays: 30
+
+minio:
+  url: http://frp:9000/
+  accessKey: minio
+  secretKey: XLrootJYD713
