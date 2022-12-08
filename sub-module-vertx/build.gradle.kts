@@ -75,8 +75,6 @@ tasks.withType<Test> {
 dependencies {
   implementation(project(":sub-system-core"))
 
-  implementation("io.netty:netty-all:$netty")
-
   implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
   implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
   implementation("io.vertx:vertx-lang-kotlin") {exclude(group = "io.netty")}

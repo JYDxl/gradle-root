@@ -73,8 +73,6 @@ dependencies {
 
   implementation(project(":sub-module-center-service"))
 
-  implementation("io.netty:netty-all:$netty")
-
   implementation("com.baomidou:mybatis-plus-boot-starter:$mybatisPlus")
   implementation("org.apache.commons:commons-pool2:$commonsPool2")
   implementation("com.squareup.retrofit2:retrofit:$retrofit")

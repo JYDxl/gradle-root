@@ -107,12 +107,8 @@ subprojects {
   }
 
   dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.slf4j:jul-to-slf4j")
+    implementation("ch.qos.logback:logback-classic")
 
     implementation("org.apache.commons:commons-lang3:$commonsLang3")
     implementation("com.google.inject:guice:$guice")
@@ -122,6 +118,16 @@ subprojects {
     implementation("com.gitee.jd-platform-opensource:asyncTool:$asyncTool")
     implementation("com.dtflys.forest:forest-core:$forest")
     implementation("com.squareup.okhttp3:okhttp:$okhttp3")
+    implementation("io.netty:netty-all:$netty")
+    implementation("com.alibaba:fastjson:$fastjson")
+    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
+    implementation("com.google.protobuf:protobuf-java:$protobuf")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")
@@ -140,10 +146,6 @@ subprojects {
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jackson")
-
-    implementation("com.alibaba:fastjson:$fastjson")
-    implementation("com.github.ben-manes.caffeine:caffeine:$caffeine")
-    implementation("com.google.protobuf:protobuf-java:$protobuf")
 
     implementation("commons-io:commons-io:2.11.0")
     implementation("org.ow2.asm:asm:9.4")

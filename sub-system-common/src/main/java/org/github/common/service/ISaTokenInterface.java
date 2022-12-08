@@ -5,7 +5,7 @@ import com.alicp.jetcache.anno.Cached;
 import cn.dev33.satoken.stp.StpInterface;
 import static com.alicp.jetcache.anno.CacheType.*;
 
-public interface ISaInterface extends StpInterface {
+public interface ISaTokenInterface extends StpInterface {
   @Override
   List<String> getPermissionList(Object loginId, String loginType);
 

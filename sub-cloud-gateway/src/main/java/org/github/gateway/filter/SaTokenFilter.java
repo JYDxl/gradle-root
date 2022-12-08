@@ -21,7 +21,7 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static reactor.core.publisher.Mono.just;
 
 @Component
-public class LoginFilter implements GlobalFilter, Ordered {
+public class SaTokenFilter implements GlobalFilter, Ordered {
     private final AntPathMatcher matcher = new AntPathMatcher();
     @Resource
     private ReactiveStringRedisTemplate reactiveStringRedisTemplate;
