@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.dev33.satoken.config.SaSsoConfig;
 import cn.dev33.satoken.sso.SaSsoProcessor;
 
+import javax.annotation.Resource;
+
 @RestController
 public class SsoServerController {
-  @Autowired
+  @Resource
   private ICenterService centerService;
 
   @Autowired

@@ -5,12 +5,12 @@ import org.github.center.bo.PermissionsBo
 import org.github.center.bo.RolesBo
 import org.github.center.feign.ICenterServerAPI
 import org.github.common.service.ISaInterface
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import javax.annotation.Resource
 
 @Component
 class SaRemoteImpl: ISaInterface {
-  @Autowired
+  @Resource
   private lateinit var centerServerAPI: ICenterServerAPI
 
   override fun getPermissionList(loginId: Any?, loginType: String?): List<String> {

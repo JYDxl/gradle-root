@@ -57,7 +57,7 @@ fun mysqlCourse() {
       .moduleName(moduleName)
       .pathInfo(
         mapOf(
-          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
+          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/po",
 
           controller to "$path/$subMapperName/src/main/java/$packageName/$moduleName/controller",
           mapper to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",
@@ -80,7 +80,7 @@ fun mysqlCourse() {
       .idType(ASSIGN_ID)
       // .enableActiveRecord().superClass(Model::class.jvmName)
       .superClass(Entity::class.jvmName)
-      .formatFileName("%sMbpEntity")
+      .formatFileName("%sMbpPo")
       .logicDeleteColumnName("deleted")
 
       .mapperBuilder()
@@ -139,7 +139,7 @@ fun mysqlCenter() {
       .moduleName(moduleName)
       .pathInfo(
         mapOf(
-          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/entity",
+          entity to "$path/$subEntityName/src/main/java/$packageName/$moduleName/po",
 
           controller to "$path/$subMapperName/src/main/java/$packageName/$moduleName/controller",
           mapper to "$path/$subMapperName/src/main/java/$packageName/$moduleName/mapper",
@@ -163,7 +163,7 @@ fun mysqlCenter() {
       .idType(ASSIGN_ID)
       // .enableActiveRecord().superClass(Model::class.jvmName)
       .superClass(Entity::class.jvmName)
-      .formatFileName("%sMbpEntity")
+      .formatFileName("%sMbpPo")
       .logicDeleteColumnName("deleted")
 
       .mapperBuilder()

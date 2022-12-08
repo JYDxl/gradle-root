@@ -2,7 +2,6 @@ package org.github.gateway.filter;
 
 import cn.hutool.core.text.AntPathMatcher;
 import org.github.gateway.props.WhiteListProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.Resource;
 import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -23,9 +23,9 @@ import static reactor.core.publisher.Mono.just;
 @Component
 public class LoginFilter implements GlobalFilter, Ordered {
     private final AntPathMatcher matcher = new AntPathMatcher();
-    @Autowired
+    @Resource
     private ReactiveStringRedisTemplate reactiveStringRedisTemplate;
-    @Autowired
+    @Resource
     private WhiteListProperties whiteListProperties;
 
     @Override

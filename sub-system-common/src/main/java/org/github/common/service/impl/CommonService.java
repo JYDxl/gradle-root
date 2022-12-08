@@ -4,9 +4,9 @@ import org.github.common.service.ICommonService;
 import org.github.core.base.CodeType;
 import org.github.core.cache.EnumCache;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Function;
@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 public class CommonService implements ICommonService {
-  @Autowired
+  @Resource
   private EnumCache enumCache;
 
   @NotNull
