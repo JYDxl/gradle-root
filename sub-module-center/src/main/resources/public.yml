@@ -143,7 +143,7 @@ jetcache:
 
 xxl:
   adminAddresses: http://frp:8080/xxl-job-admin
-  accessToken:
+  accessToken: XLrootJYD713
   appname: ${spring.application.name}
   address:
   ip:
