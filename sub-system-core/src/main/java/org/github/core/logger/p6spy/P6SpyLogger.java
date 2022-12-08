@@ -6,6 +6,6 @@ import static org.apache.commons.lang3.StringUtils.*;
 public class P6SpyLogger implements MessageFormattingStrategy {
   @Override
   public String formatMessage(int connectionId, String now, long elapsed, String category, String prepared, String sql, String url) {
-    return isNotBlank(sql) ? " Consume Time：" + elapsed + " ms " + now + "\n  Source URL：" + url + "\n Execute SQL：" + sql.replaceAll("[\\s]+", " ") + "\n" : "";
+    return isNotBlank(sql) ? "Consume Time：" + elapsed + " ms\n   JDBC URL：" + url + "\nExecute SQL：" + sql.replaceAll("\\s+", " ") + "\n" : "";
   }
 }
