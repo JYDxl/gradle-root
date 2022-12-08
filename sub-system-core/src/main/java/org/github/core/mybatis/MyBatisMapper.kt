@@ -6,6 +6,5 @@ import kotlin.annotation.AnnotationTarget.CLASS
 
 @Target(CLASS)
 @Retention(RUNTIME)
-@MustBeDocumented
 @Component
 annotation class MyBatisMapper

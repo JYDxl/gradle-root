@@ -75,6 +75,5 @@ dependencies {
   // implementation("com.alibaba.cloud:spring-cloud-starter-dubbo") {exclude(group = "io.netty")}
 
   // testImplementation("org.springframework.kafka:spring-kafka-test") {exclude(group = "io.netty");exclude(group = "net.sf.jopt-simple")}
-  // testImplementation("org.springframework.security:spring-security-test")
   // implementation("org.redisson:redisson:$redisson") {exclude(group = "io.netty")}
 }

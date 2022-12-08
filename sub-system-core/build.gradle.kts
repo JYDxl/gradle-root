@@ -55,21 +55,10 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
 
-  compileOnly("org.springframework.cloud:spring-cloud-starter-openfeign")
-
-  compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
-
-  compileOnly("io.minio:minio:$minio")
-
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
-  compileOnly("io.netty:netty-all:$netty")
-  compileOnly("com.auth0:java-jwt:$jwt")
+  compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
+  compileOnly("io.minio:minio:$minio")
   compileOnly("p6spy:p6spy:$p6spy")
-
-  testImplementation("commons-codec:commons-codec:$commonsCodec")
-  testImplementation("org.jboss.byteman:byteman:$byteman")
-  testImplementation("org.javassist:javassist:$javassist")
-  testImplementation("io.netty:netty-all:$netty")
 
   testImplementation("com.baomidou:mybatis-plus-generator:3.5.3")
   testImplementation("com.baomidou:mybatis-plus-extension:$mybatisPlus")
