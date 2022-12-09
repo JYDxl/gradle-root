@@ -1,18 +1,16 @@
 package org.github.gateway.props;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.github.core.props.DynamicProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
-
+@EqualsAndHashCode(callSuper = true)
 @ConfigurationProperties("dynamic")
 @RefreshScope
 @Component
 @Data
-public class WhiteListProperties {
-    private List<String> whiteList = newArrayList();
+public class GatewayDynamicProperties extends DynamicProperties {
 }
