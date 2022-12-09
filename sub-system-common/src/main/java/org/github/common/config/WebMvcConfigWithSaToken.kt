@@ -2,8 +2,9 @@ package org.github.common.config
 
 import cn.dev33.satoken.`fun`.SaFunction
 import cn.dev33.satoken.interceptor.SaInterceptor
-import cn.dev33.satoken.router.SaRouter.match
-import cn.dev33.satoken.stp.StpUtil.checkLogin
+import cn.dev33.satoken.jwt.StpLogicJwtForSimple
+import cn.dev33.satoken.router.SaRouter.notMatch
+import cn.dev33.satoken.stp.StpUtil.*
 import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of
 import org.github.common.props.CommonDynamicProperties
@@ -19,22 +20,25 @@ import javax.annotation.Resource
 
 
 @Configuration
-class WebMvcConfigWithSaToken : WebMvcConfigurer {
-    @Resource
-    private lateinit var commonDynamicProperties: CommonDynamicProperties
+class WebMvcConfigWithSaToken: WebMvcConfigurer {
+  @Resource
+  private lateinit var commonDynamicProperties: CommonDynamicProperties
 
-    override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
-    }
+  override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
+    registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
+  }
 
-    @Bean
-    fun returnableValueHandler(adapter: RequestMappingHandlerAdapter) = ReturnableValueHandlerKotlin.apply {
-        adapter.returnValueHandlers = builder<HandlerMethodReturnValueHandler>().add(this).addAll(adapter.returnValueHandlers ?: of()).build()
-    }
+  @Bean
+  fun returnableValueHandler(adapter: RequestMappingHandlerAdapter) = ReturnableValueHandlerKotlin.apply {
+    adapter.returnValueHandlers = builder<HandlerMethodReturnValueHandler>().add(this).addAll(adapter.returnValueHandlers ?: of()).build()
+  }
 
-    override fun addInterceptors(registry: InterceptorRegistry) {
-        registry
-            .addInterceptor(SaInterceptor { match("/**").notMatch { commonDynamicProperties.whiteList.contains(it) }.check(SaFunction { checkLogin() }) })
-            .addPathPatterns("/**")
-    }
+  @Bean
+  fun stpLogicJwt() = StpLogicJwtForSimple(TYPE).apply {
+    setStpLogic(this)
+  }
+
+  override fun addInterceptors(registry: InterceptorRegistry) {
+    registry.addInterceptor(SaInterceptor {notMatch(commonDynamicProperties.whiteList).check(SaFunction {checkLogin()})}).addPathPatterns("/**")
+  }
 }

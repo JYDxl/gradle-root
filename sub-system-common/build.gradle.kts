@@ -32,6 +32,7 @@ dependencies {
   api("cn.dev33:sa-token-dao-redis-jackson:$saToken")
   api("cn.dev33:sa-token-alone-redis:$saToken")
   api("cn.dev33:sa-token-sso:$saToken")
+  api("cn.dev33:sa-token-jwt:$saToken")
 
   api("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache")
   api("com.dtflys.forest:forest-spring-boot-starter:$forest")

@@ -8,7 +8,6 @@ val netty: String by System.getProperties()
 val mysql: String by System.getProperties()
 val p6spy: String by System.getProperties()
 val minio: String by System.getProperties()
-val jwt: String by System.getProperties()
 
 plugins {
   `maven-publish`

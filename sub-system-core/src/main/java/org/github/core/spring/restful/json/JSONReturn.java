@@ -3,11 +3,14 @@ package org.github.core.spring.restful.json;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
-import org.github.core.spring.restful.Returnable;
 import org.github.core.exception.RemoteException;
+import org.github.core.spring.restful.Returnable;
 import org.github.core.spring.restful.ops.Result;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import static cn.hutool.core.text.CharSequenceUtil.*;
-import static org.github.core.spring.ops.SpringKt.json;
+import static org.github.core.spring.ops.SpringKt.*;
 import static org.github.core.spring.restful.ops.Result.*;
 
 /**
@@ -54,6 +57,10 @@ public class JSONReturn implements JSON {
 
   public void setCode(int code) {
     this.code = code;
+  }
+
+  public HttpEntity<String> status() {
+    return new ResponseEntity<>(msg, HttpStatus.valueOf(code));
   }
 
   public void throwIfFailed() throws RemoteException {
@@ -122,5 +129,12 @@ public class JSONReturn implements JSON {
   public
   static JSONReturn call(String msg) {
     return of(CALL_ERROR, msg);
+  }
+
+  /** Generator. */
+  @NonNull
+  public
+  static JSONReturn path(String msg) {
+    return of(PATH_ERROR, msg);
   }
 }

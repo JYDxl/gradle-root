@@ -108,8 +108,8 @@ feign:
     enabled: true
 
 sa-token:
+  jwt-secret-key: XLrootJYD713
   token-name: token
-  token-style: tik
   alone-redis:
     database: 15
     host: ${spring.redis.host}
