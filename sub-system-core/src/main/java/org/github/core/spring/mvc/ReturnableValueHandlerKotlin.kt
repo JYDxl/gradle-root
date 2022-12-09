@@ -39,6 +39,6 @@ object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
       mavContainer.viewName = value.get()
     }
     mavContainer.isRequestHandled = value.terminated()
-    value.apply { log.debug {"Writing [${mediaType()}] ====> ${get()}"}}
+    value.apply {log.debug {"Writing [${mediaType()}] ====> ${get()}"}}
   }
 }
