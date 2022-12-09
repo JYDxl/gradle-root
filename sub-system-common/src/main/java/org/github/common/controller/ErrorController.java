@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import lombok.*;
 import lombok.extern.slf4j.*;
+import org.github.core.spring.restful.json.JSONReturn;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
@@ -12,11 +13,9 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import cn.dev33.satoken.exception.NotLoginException;
 import static cn.hutool.core.text.CharSequenceUtil.*;
 import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.*;
 import static org.springframework.http.HttpStatus.*;
@@ -35,13 +34,14 @@ public class ErrorController extends AbstractErrorController {
   }
 
   @RequestMapping
-  public HttpEntity<String> error(HttpServletRequest request) {
+  public JSONReturn error(HttpServletRequest request) {
     Map<String,Object> body  = getErrorAttributes(request, getErrorAttributeOptions(request));
     Object             trace = body.get("trace");
     if (trace != null) {
       return ex(trace);
     } else {
-      return ResponseEntity.status(getStatus(request)).build();
+      HttpStatus status = getStatus(request);
+      return JSONReturn.of(status, null);
     }
   }
 
@@ -63,15 +63,17 @@ public class ErrorController extends AbstractErrorController {
   }
 
   @NotNull
-  private ResponseEntity<String> ex(Object trace) {
+  private JSONReturn ex(Object trace) {
     String info = trace.toString().lines().findFirst().orElse("");
     if (isNotBlank(info)) {
-      String ex = info.split(":", 2)[0];
-      if (Objects.equals(NotLoginException.class.getName(), ex)) {
-        return ResponseEntity.status(UNAUTHORIZED).build();
+      String[] split = info.split(":", 2);
+      String   ex    = split[0];
+      String   msg   = split[1];
+      if (Objects.equals("cn.dev33.satoken.exception.NotLoginException", ex)) {
+        return JSONReturn.of(UNAUTHORIZED, msg);
       }
     }
-    return ResponseEntity.status(INTERNAL_SERVER_ERROR).build();
+    return JSONReturn.of(INTERNAL_SERVER_ERROR, null);
   }
 
   protected boolean isIncludeStackTrace(HttpServletRequest request) {

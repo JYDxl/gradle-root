@@ -14,6 +14,7 @@ spring:
           predicates:
             - Path=/center/**
           filters:
+            - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: web
           uri: lb://web-server

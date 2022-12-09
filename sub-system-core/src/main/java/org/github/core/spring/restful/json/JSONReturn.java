@@ -1,17 +1,17 @@
 package org.github.core.spring.restful.json;
 
+import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import org.github.core.exception.RemoteException;
 import org.github.core.spring.restful.Returnable;
-import org.github.core.spring.restful.ops.Result;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static cn.hutool.core.text.CharSequenceUtil.*;
 import static org.github.core.spring.ops.SpringKt.*;
-import static org.github.core.spring.restful.ops.Result.*;
+import static org.springframework.http.HttpStatus.*;
 
 /**
  * JSON of basic.
@@ -30,7 +30,7 @@ public class JSONReturn implements JSON {
   private @NonNull String msg;
 
   public JSONReturn() {
-    this(SUCCESS.getCode(), SUCCESS.getMsg());
+    this(OK.value(), OK.name());
   }
 
   private JSONReturn(int code, @NonNull String msg) {
@@ -41,7 +41,7 @@ public class JSONReturn implements JSON {
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
-    org.github.core.spring.ops.SpringKt.writeValue(this, res.getOutputStream());
+    writeValue(this, res.getOutputStream());
   }
 
   @Override
@@ -72,7 +72,7 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return code == SUCCESS.getCode();
+    return code == OK.value();
   }
 
   /** WITH msg. */
@@ -84,57 +84,18 @@ public class JSONReturn implements JSON {
 
   /** Generator. */
   @NonNull
-  public
-  static JSONReturn internal(String msg) {
-    return of(SYSTEM_ERROR, msg);
+  public static JSONReturn ok() {
+    return of(OK, null);
   }
 
   /** Generator. */
   @NonNull
-  public
-  static JSONReturn of(Result result, String msg) {
-    return new JSONReturn(result.getCode(), firstNonBlank(msg, result.getMsg()));
+  public static JSONReturn of(HttpStatus status, @Nullable String msg) {
+    return of(status.value(), firstNonBlank(msg, status.name()));
   }
 
-  /** Generator. */
   @NonNull
-  public
-  static JSONReturn ok() {
-    return of(SUCCESS, null);
-  }
-
-  /** Generator. */
-  @NonNull
-  public
-  static JSONReturn external(String msg) {
-    return of(PARAMS_ERROR, msg);
-  }
-
-  /** Generator. */
-  @NonNull
-  public
-  static JSONReturn auth(String msg) {
-    return of(AUTH_ERROR, msg);
-  }
-
-  /** Generator. */
-  @NonNull
-  public
-  static JSONReturn perm(String msg) {
-    return of(PERM_ERROR, msg);
-  }
-
-  /** Generator. */
-  @NonNull
-  public
-  static JSONReturn call(String msg) {
-    return of(CALL_ERROR, msg);
-  }
-
-  /** Generator. */
-  @NonNull
-  public
-  static JSONReturn path(String msg) {
-    return of(PATH_ERROR, msg);
+  public static JSONReturn of(int code, @Nullable String msg) {
+    return new JSONReturn(code, firstNonNull(msg, ""));
   }
 }

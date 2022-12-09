@@ -8,7 +8,7 @@ import cn.hutool.crypto.symmetric.SymmetricCrypto
 import org.github.center.bo.LoginBo
 import org.github.center.bo.RegisterBo
 import org.github.center.service.ICenterService
-import org.github.core.exception.ExternalException
+import org.github.core.exception.ClientException
 import org.github.core.spring.restful.json.JSONDataReturn
 import org.github.core.spring.restful.json.JSONReturn
 import org.github.mysql.center.entity.SysUserMbpPo
@@ -42,12 +42,12 @@ class CenterService: ICenterService {
   }
 
   override fun token(bo: LoginBo): JSONDataReturn<String> {
-    val user = sysUserMbpService.ktQuery().eq(SysUserMbpPo::userName, bo.username).one() ?: throw ExternalException("用户名或密码错误")
+    val user = sysUserMbpService.ktQuery().eq(SysUserMbpPo::userName, bo.username).one() ?: throw ClientException("用户名或密码错误")
     val symmetricAlgorithm = parseAlgorithm(user.secretAlgorithm!!)
     val crypto = SymmetricCrypto(symmetricAlgorithm, user.secretKey)
     val password = crypto.encryptHex(bo.password)!!
     if (password != user.userPwd) {
-      throw ExternalException("用户名或密码错误")
+      throw ClientException("用户名或密码错误")
     }
     login(user.userName)
     val token = getTokenValue()!!
@@ -58,7 +58,7 @@ class CenterService: ICenterService {
     try {
       return SymmetricAlgorithm.valueOf(algorithm)
     } catch (ignore: Exception) {
-      throw ExternalException("不受支持的加密方式：$algorithm")
+      throw ClientException("不受支持的加密方式：$algorithm")
     }
   }
 }
