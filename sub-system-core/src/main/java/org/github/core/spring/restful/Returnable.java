@@ -6,9 +6,13 @@ import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.*;
+import org.springframework.http.HttpEntity;
 import com.google.common.net.MediaType;
 import static cn.hutool.extra.servlet.ServletUtil.*;
+import static com.google.common.net.HttpHeaders.*;
 import static com.google.common.net.MediaType.*;
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.ResponseEntity.*;
 
 /**
  * Top interface of all.
@@ -33,6 +37,11 @@ public interface Returnable extends Serializable, Supplier<String> {
   @NonNull
   default MediaType mediaType() {
     return PLAIN_TEXT_UTF_8;
+  }
+
+  /** 转为http格式. */
+  default HttpEntity<String> http() {
+    return status(OK.value()).header(CONTENT_TYPE, mediaType().toString()).body(get());
   }
 
   /** 数据已被完全处理? 未处理完毕的数据将交由Spring继续处理(现阶段只对视图有效). */

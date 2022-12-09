@@ -6,13 +6,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import static cn.dev33.satoken.sso.SaSsoProcessor.*;
 import static cn.dev33.satoken.sso.SaSsoUtil.*;
+import static cn.dev33.satoken.stp.StpUtil.*;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 public class SsoClientController {
+  @RequestMapping("/sso/doLoginByTicket")
+  public JSONReturn doLoginByTicket(String ticket) {
+    Object loginId = instance.checkTicket(ticket, "/sso/doLoginByTicket");
+    if (loginId == null) return JSONReturn.of(UNAUTHORIZED, "无效ticket：" + ticket);
+    login(loginId);
+    String token = getTokenValue();
+    return JSONDataReturn.of(token);
+  }
+
   @RequestMapping("/sso/getSsoAuthUrl")
   public JSONReturn getSsoAuthUrl(String clientLoginUrl) {
     String serverAuthUrl = buildServerAuthUrl(clientLoginUrl, "");
     return JSONDataReturn.of(serverAuthUrl);
+  }
+
+  @RequestMapping("/sso/hasLogin")
+  public Object hasLogin() {
+    boolean flag = isLogin();
+    return JSONDataReturn.of(flag);
   }
 
   @RequestMapping("/sso/*")

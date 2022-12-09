@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,15 +34,15 @@ public class ErrorController extends AbstractErrorController {
     this.errorProperties = serverProperties.getError();
   }
 
-  @RequestMapping
-  public JSONReturn error(HttpServletRequest request) {
+  @RequestMapping(produces = "application/json;charset=UTF-8")
+  public HttpEntity<String> error(HttpServletRequest request) {
     Map<String,Object> body  = getErrorAttributes(request, getErrorAttributeOptions(request));
     Object             trace = body.get("trace");
     if (trace != null) {
-      return ex(trace);
+      return ex(trace).http();
     } else {
       HttpStatus status = getStatus(request);
-      return JSONReturn.of(status, null);
+      return JSONReturn.of(status, null).http();
     }
   }
 

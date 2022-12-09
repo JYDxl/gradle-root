@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.*;
 import org.github.core.exception.RemoteException;
 import org.github.core.spring.restful.Returnable;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import static cn.hutool.core.text.CharSequenceUtil.*;
 import static org.github.core.spring.ops.SpringKt.*;
 import static org.springframework.http.HttpStatus.*;
@@ -57,10 +55,6 @@ public class JSONReturn implements JSON {
 
   public void setCode(int code) {
     this.code = code;
-  }
-
-  public HttpEntity<String> status() {
-    return new ResponseEntity<>(msg, HttpStatus.valueOf(code));
   }
 
   public void throwIfFailed() throws RemoteException {
