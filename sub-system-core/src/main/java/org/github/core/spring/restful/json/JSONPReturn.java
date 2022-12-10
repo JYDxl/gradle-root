@@ -1,17 +1,18 @@
 package org.github.core.spring.restful.json;
 
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.servlet.ServletUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.net.MediaType;
+import java.util.Optional;
 import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.net.MediaType;
-import org.github.core.spring.restful.Returnable;
-
-import static cn.hutool.extra.servlet.ServletUtil.*;
-import static com.google.common.base.MoreObjects.*;
-import static com.google.common.net.MediaType.*;
-import static java.util.Optional.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * JSON of jsonp.
@@ -20,10 +21,6 @@ import static java.util.Optional.*;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see Returnable
- * @see JSON
- * @see JSONReturn
- * @see JSONDataReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -31,19 +28,18 @@ import static java.util.Optional.*;
 @Data
 public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** 回调 */
-  @JsonIgnore
-  private @NonNull String callback = "callback";
+  @JsonIgnore private @NonNull String callback = "callback";
 
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) {
-    if ("callback".equals(callback)) setCallback(firstNonNull(req.getParameter("callback"), "callback"));
-    write(res, get(), mediaType().toString());
+    if ("callback".equals(callback)) setCallback(StrUtil.firstNonBlank(req.getParameter("callback"), "callback"));
+    ServletUtil.write(res, get(), mediaType().toString());
   }
 
   @Override
   @NonNull
   public MediaType mediaType() {
-    return JAVASCRIPT_UTF_8;
+    return MediaType.JAVASCRIPT_UTF_8;
   }
 
   @Override
@@ -72,7 +68,7 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** Generator. */
   @NonNull
   public static <T, R extends T> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
-    return of(ofNullable(data).map(mapper).orElse(null));
+    return of(Optional.ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */

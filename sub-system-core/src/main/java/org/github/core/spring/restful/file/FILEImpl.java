@@ -1,13 +1,15 @@
 package org.github.core.spring.restful.file;
 
+import cn.hutool.extra.servlet.ServletUtil;
+import com.google.common.base.MoreObjects;
+import com.google.common.net.MediaType;
 import java.io.InputStream;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.*;
-import com.google.common.net.MediaType;
-import static cn.hutool.extra.servlet.ServletUtil.*;
-import static com.google.common.base.MoreObjects.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NonNull;
 
 @AllArgsConstructor
 @Data
@@ -18,7 +20,7 @@ class FILEImpl implements FILE {
 
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) {
-    write(res, input, mediaType().toString(), name);
+    ServletUtil.write(res, input, mediaType().toString(), name);
   }
 
   @Override
@@ -30,7 +32,7 @@ class FILEImpl implements FILE {
   @Override
   @NonNull
   public MediaType mediaType() {
-    return firstNonNull(type, FILE.super.mediaType());
+    return MoreObjects.firstNonNull(type, FILE.super.mediaType());
   }
 
   @Override

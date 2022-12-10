@@ -1,12 +1,14 @@
 package org.github.core.spring.restful.json;
 
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.function.Function;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import org.github.core.base.IPage;
-import org.github.core.spring.restful.Returnable;
-
-import static com.google.common.collect.ImmutableList.*;
 
 /**
  * JSON of page.
@@ -15,10 +17,6 @@ import static com.google.common.collect.ImmutableList.*;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see Returnable
- * @see JSON
- * @see JSONReturn
- * @see JSONArrayReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -63,7 +61,7 @@ public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
   @SuppressWarnings({"unchecked", "rawtypes"})
   @NonNull
   public static <T, R extends T> JSONPageReturn<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
-    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).collect(toImmutableList()));
+    return (JSONPageReturn) new JSONPageReturn<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).collect(ImmutableList.toImmutableList()));
   }
 
   /** Generator. */

@@ -1,15 +1,15 @@
 package org.github.core.spring.restful.json;
 
+import cn.hutool.core.util.StrUtil;
+import com.google.common.base.MoreObjects;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
 import org.github.core.exception.RemoteException;
-import org.github.core.spring.restful.Returnable;
+import org.github.core.spring.ops.SpringKt;
 import org.springframework.http.HttpStatus;
-import static cn.hutool.core.text.CharSequenceUtil.*;
-import static org.github.core.spring.ops.SpringKt.*;
-import static org.springframework.http.HttpStatus.*;
 
 /**
  * JSON of basic.
@@ -17,8 +17,6 @@ import static org.springframework.http.HttpStatus.*;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see Returnable
- * @see JSON
  */
 @Data
 public class JSONReturn implements JSON {
@@ -28,7 +26,7 @@ public class JSONReturn implements JSON {
   private @NonNull String msg;
 
   public JSONReturn() {
-    this(OK.value(), OK.name());
+    this(HttpStatus.OK.value(), HttpStatus.OK.name());
   }
 
   private JSONReturn(int code, @NonNull String msg) {
@@ -39,13 +37,13 @@ public class JSONReturn implements JSON {
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
-    writeValue(this, res.getOutputStream());
+    SpringKt.writeValue(this, res.getOutputStream());
   }
 
   @Override
   @NonNull
   public String get() {
-    return json(this);
+    return SpringKt.json(this);
   }
 
   @Override
@@ -66,7 +64,7 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return code == OK.value();
+    return code == HttpStatus.OK.value();
   }
 
   /** WITH msg. */
@@ -79,17 +77,17 @@ public class JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static JSONReturn ok() {
-    return of(OK, null);
+    return of(HttpStatus.OK, null);
   }
 
   /** Generator. */
   @NonNull
   public static JSONReturn of(HttpStatus status, @Nullable String msg) {
-    return of(status.value(), firstNonBlank(msg, status.name()));
+    return of(status.value(), StrUtil.firstNonBlank(msg, status.name()));
   }
 
   @NonNull
   public static JSONReturn of(int code, @Nullable String msg) {
-    return new JSONReturn(code, firstNonNull(msg, ""));
+    return new JSONReturn(code, MoreObjects.firstNonNull(msg, ""));
   }
 }

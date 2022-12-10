@@ -1,11 +1,10 @@
 package org.github.core.spring.restful.file;
 
+import com.google.common.net.MediaType;
 import java.io.InputStream;
 import javax.annotation.Nullable;
-import lombok.*;
+import lombok.NonNull;
 import org.github.core.spring.restful.Returnable;
-import com.google.common.net.MediaType;
-import static com.google.common.net.MediaType.*;
 
 /**
  * Top interface of file.
@@ -13,13 +12,12 @@ import static com.google.common.net.MediaType.*;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see Returnable
  */
 public interface FILE extends Returnable {
   @Override
   @NonNull
   default MediaType mediaType() {
-    return OCTET_STREAM;
+    return MediaType.OCTET_STREAM;
   }
 
   /**

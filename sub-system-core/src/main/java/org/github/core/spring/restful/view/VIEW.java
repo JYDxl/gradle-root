@@ -1,6 +1,6 @@
 package org.github.core.spring.restful.view;
 
-import lombok.*;
+import lombok.NonNull;
 import org.github.core.spring.restful.Returnable;
 
 /**
@@ -9,7 +9,6 @@ import org.github.core.spring.restful.Returnable;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see Returnable
  */
 @FunctionalInterface
 public interface VIEW extends Returnable {

@@ -1,11 +1,13 @@
 package org.github.core.spring.restful.json;
 
+import java.util.Optional;
 import java.util.function.Function;
 import javax.annotation.Nullable;
-import lombok.*;
-import org.github.core.spring.restful.Returnable;
-
-import static java.util.Optional.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * JSON of data.
@@ -14,9 +16,6 @@ import static java.util.Optional.*;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see Returnable
- * @see JSON
- * @see JSONReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -46,7 +45,7 @@ public class JSONDataReturn<T> extends JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static <T, R extends T> JSONDataReturn<R> of(T data, @NonNull Function<T,R> mapper) {
-    return of(ofNullable(data).map(mapper).orElse(null));
+    return of(Optional.ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */

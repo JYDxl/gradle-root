@@ -1,12 +1,14 @@
 package org.github.core.spring.restful.json;
 
-import lombok.*;
-
+import com.google.common.collect.ImmutableList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.function.Function;
-
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static java.util.Collections.emptyList;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * JSON of array.
@@ -15,9 +17,6 @@ import static java.util.Collections.emptyList;
  * @author JYD_XL
  * @see java.io.Serializable
  * @see java.util.function.Supplier
- * @see org.github.core.spring.restful.Returnable
- * @see org.github.core.spring.restful.json.JSON
- * @see org.github.core.spring.restful.json.JSONReturn
  */
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
@@ -25,7 +24,7 @@ import static java.util.Collections.emptyList;
 @Data
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** 数据 */
-  private @NonNull Collection<? extends E> data = emptyList();
+  private @NonNull Collection<? extends E> data = Collections.emptyList();
 
   @Override
   public String toString() {
@@ -60,6 +59,6 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
-    return new JSONArrayReturn<>(data.stream().map(mapper).collect(toImmutableList()));
+    return new JSONArrayReturn<>(data.stream().map(mapper).collect(ImmutableList.toImmutableList()));
   }
 }
