@@ -1,12 +1,15 @@
 package org.github.core.minio;
 
+import io.minio.BucketExistsArgs;
 import io.minio.CopyObjectArgs;
 import io.minio.CopySource;
 import io.minio.GetObjectArgs;
 import io.minio.GetPresignedObjectUrlArgs;
+import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
+import io.minio.RemoveBucketArgs;
 import io.minio.RemoveObjectArgs;
 import java.io.InputStream;
 import lombok.AllArgsConstructor;
@@ -19,54 +22,79 @@ import static io.minio.http.Method.GET;
 @AllArgsConstructor
 @Slf4j
 public class MinioWrapper {
-  private final MinioClient minioClient;
+  private final MinioClient minio;
 
   public String copy(MinioQueryBo source, MinioQueryBo target) {
+    createBucket(target);
     CopySource     from = CopySource.builder().bucket(source.getBucket()).object(source.getFullName()).build();
     CopyObjectArgs args = CopyObjectArgs.builder().source(from).bucket(target.getBucket()).object(target.getFullName()).build();
     try {
-      ObjectWriteResponse writeResponse = minioClient.copyObject(args);
+      ObjectWriteResponse writeResponse = minio.copyObject(args);
       return writeResponse.etag();
     } catch (Exception e) {
-      throw new ServerException("在minio复制数据失败：" + e.getMessage());
+      throw new ServerException("复制数据失败", e);
     }
   }
 
-  public InputStream download(MinioQueryBo param) {
-    GetObjectArgs args = GetObjectArgs.builder().bucket(param.getBucket()).object(param.getFullName()).build();
+  public void createBucket(MinioQueryBo bo) {
+    boolean exists;
     try {
-      return minioClient.getObject(args);
+      exists = minio.bucketExists(BucketExistsArgs.builder().bucket(bo.getBucket()).build());
     } catch (Exception e) {
-      throw new ServerException("从minio获取数据失败：" + e.getMessage());
+      throw new ServerException("获取数据失败", e);
     }
-  }
-
-  public String getUrl(MinioQueryBo param) {
-    GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder().method(GET).bucket(param.getBucket()).object(param.getFullName()).build();
+    if (exists) return;
     try {
-      return minioClient.getPresignedObjectUrl(args);
+      minio.makeBucket(MakeBucketArgs.builder().bucket(bo.getBucket()).build());
     } catch (Exception e) {
-      throw new ServerException("从minio获取下载地址失败：" + e.getMessage());
+      throw new ServerException("创建仓库失败", e);
     }
   }
 
-  public void remove(MinioQueryBo param) {
-    RemoveObjectArgs args = RemoveObjectArgs.builder().bucket(param.getBucket()).object(param.getFullName()).build();
+  public InputStream download(MinioQueryBo bo) {
+    GetObjectArgs args = GetObjectArgs.builder().bucket(bo.getBucket()).object(bo.getFullName()).build();
     try {
-      minioClient.removeObject(args);
+      return minio.getObject(args);
     } catch (Exception e) {
-      throw new ServerException("在minio删除数据失败：" + e.getMessage());
+      throw new ServerException("下载数据失败", e);
     }
   }
 
-  public void upload(MinioUploadBo param) {
-    long          objSize = param.getObjSize();
+  public String getUrl(MinioQueryBo bo) {
+    GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder().method(GET).bucket(bo.getBucket()).object(bo.getFullName()).build();
+    try {
+      return minio.getPresignedObjectUrl(args);
+    } catch (Exception e) {
+      throw new ServerException("获取地址失败");
+    }
+  }
+
+  public void remove(MinioQueryBo bo) {
+    RemoveObjectArgs args = RemoveObjectArgs.builder().bucket(bo.getBucket()).object(bo.getFullName()).build();
+    try {
+      minio.removeObject(args);
+    } catch (Exception e) {
+      throw new ServerException("删除数据失败", e);
+    }
+  }
+
+  public void removeBucket(MinioQueryBo bo) {
+    try {
+      minio.removeBucket(RemoveBucketArgs.builder().bucket(bo.getBucket()).build());
+    } catch (Exception e) {
+      throw new ServerException("删除仓库失败", e);
+    }
+  }
+
+  public void upload(MinioUploadBo bo) {
+    createBucket(bo);
+    long          objSize = bo.getObjSize();
     Size          size    = objSize == -1 ? new Size(-1, parse("8MB")) : new Size(objSize, -1);
-    PutObjectArgs args    = PutObjectArgs.builder().bucket(param.getBucket()).object(param.getFullName()).stream(param.getInput(), size.getItemSize(), size.getPartSize()).build();
+    PutObjectArgs args    = PutObjectArgs.builder().bucket(bo.getBucket()).object(bo.getFullName()).stream(bo.getInput(), size.getItemSize(), size.getPartSize()).build();
     try {
-      minioClient.putObject(args);
+      minio.putObject(args);
     } catch (Exception e) {
-      throw new ServerException("向minio上传数据失败：" + e.getMessage());
+      throw new ServerException("上传数据失败", e);
     }
   }
 
