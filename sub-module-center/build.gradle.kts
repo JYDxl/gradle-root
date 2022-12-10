@@ -9,32 +9,17 @@ val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
 
 application {
-  mainClass.set("org.github.center.CenterKt")
+  mainClass.set("org.github.CenterKt")
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15001",
 
     "-ea",
 
-    "-Dspring.profiles.active=$activeProfiles",
-    "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
-    "-Dserver.port=19001",
+    "-Dspring.profiles.active=$activeProfiles", "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr", "-Dserver.port=19001",
 
-    "-Dio.netty.tryReflectionSetAccessible=true",
-    "-Dio.netty.leakDetection.level=advanced",
-    "-Djava.net.preferIPv4Stack=true",
+    "-Dio.netty.tryReflectionSetAccessible=true", "-Dio.netty.leakDetection.level=advanced", "-Djava.net.preferIPv4Stack=true",
 
-    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED",
-    "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED",
-    "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
-    "--add-opens=java.base/java.util=ALL-UNNAMED",
-    "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
-    "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
-    "--add-opens=java.base/java.lang=ALL-UNNAMED",
-    "--add-opens=java.base/java.math=ALL-UNNAMED",
-    "--add-opens=java.base/java.text=ALL-UNNAMED",
-    "--add-opens=java.base/java.time=ALL-UNNAMED",
-    "--add-opens=java.base/java.nio=ALL-UNNAMED",
-    "--add-opens=java.base/java.net=ALL-UNNAMED"
+    "--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED", "--add-exports=java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED", "--add-opens=java.base/java.util=ALL-UNNAMED", "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED", "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED", "--add-opens=java.base/java.lang=ALL-UNNAMED", "--add-opens=java.base/java.math=ALL-UNNAMED", "--add-opens=java.base/java.text=ALL-UNNAMED", "--add-opens=java.base/java.time=ALL-UNNAMED", "--add-opens=java.base/java.nio=ALL-UNNAMED", "--add-opens=java.base/java.net=ALL-UNNAMED"
   )
 }
 

@@ -2,6 +2,7 @@ package org.github.gateway.filter;
 
 import cn.hutool.core.text.AntPathMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.annotation.Resource;
 import lombok.SneakyThrows;
 import org.github.gateway.handler.Result;
 import org.github.gateway.props.GatewayDynamicProperties;
@@ -16,9 +17,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.netty.ByteBufFlux;
-
-import javax.annotation.Resource;
-
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.github.core.ConstKt.SA_TOKEN_PREFIX;
 import static org.github.core.ConstKt.TOKEN_NAME;
@@ -28,48 +26,46 @@ import static reactor.core.publisher.Mono.just;
 
 @Component
 public class SaTokenFilter implements GlobalFilter, Ordered {
-    private final AntPathMatcher matcher = new AntPathMatcher();
-    @Resource
-    private ReactiveStringRedisTemplate reactiveStringRedisTemplate;
-    @Resource
-    private GatewayDynamicProperties gatewayDynamicProperties;
-    @Resource
-    private ObjectMapper mapper;
+  private final AntPathMatcher              matcher = new AntPathMatcher();
+  @Resource
+  private       ReactiveStringRedisTemplate reactiveStringRedisTemplate;
+  @Resource
+  private       GatewayDynamicProperties    gatewayDynamicProperties;
+  @Resource
+  private       ObjectMapper                mapper;
 
-    @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpRequest request = exchange.getRequest();
-        return checkWhiteList(request)
-                .flatMap(v -> checkTokenExists(v, request))
-                .flatMap(v -> handle(v, exchange, chain));
-    }
+  @Override
+  public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    ServerHttpRequest request = exchange.getRequest();
+    return checkWhiteList(request).flatMap(v -> checkTokenExists(v, request)).flatMap(v -> handle(v, exchange, chain));
+  }
 
-    private Mono<Boolean> checkWhiteList(ServerHttpRequest request) {
-        String path = request.getPath().value();
-        for (String item : gatewayDynamicProperties.getWhiteList()) if (matcher.match("/*" + item, path)) return just(true);
-        return just(false);
-    }
+  private Mono<Boolean> checkWhiteList(ServerHttpRequest request) {
+    String path = request.getPath().value();
+    for (String item : gatewayDynamicProperties.getWhiteList()) if (matcher.match("/*" + item, path)) return just(true);
+    return just(false);
+  }
 
-    private Mono<Boolean> checkTokenExists(Boolean allow, ServerHttpRequest request) {
-        if (allow) return just(true);
-        String token = request.getHeaders().getFirst(TOKEN_NAME);
-        if (isBlank(token)) return just(false);
-        return reactiveStringRedisTemplate.hasKey(SA_TOKEN_PREFIX + token);
-    }
+  private Mono<Boolean> checkTokenExists(Boolean allow, ServerHttpRequest request) {
+    if (allow) return just(true);
+    String token = request.getHeaders().getFirst(TOKEN_NAME);
+    if (isBlank(token)) return just(false);
+    return reactiveStringRedisTemplate.hasKey(SA_TOKEN_PREFIX + token);
+  }
 
-    @SneakyThrows
-    private Mono<Void> handle(Boolean exists, ServerWebExchange exchange, GatewayFilterChain chain) {
-        if (exists) return chain.filter(exchange);
-        Result data = Result.of(UNAUTHORIZED, null);
-        byte[] bytes = mapper.writeValueAsBytes(data);
-        ServerHttpResponse response = exchange.getResponse();
-        response.getHeaders().setContentType(APPLICATION_JSON);
-        response.getHeaders().setContentLength(bytes.length);
-        return response.writeAndFlushWith(Flux.just(ByteBufFlux.just(response.bufferFactory().wrap(bytes))));
-    }
+  @SneakyThrows
+  private Mono<Void> handle(Boolean exists, ServerWebExchange exchange, GatewayFilterChain chain) {
+    if (exists) return chain.filter(exchange);
+    Result             data     = Result.of(UNAUTHORIZED, null);
+    byte[]             bytes    = mapper.writeValueAsBytes(data);
+    ServerHttpResponse response = exchange.getResponse();
+    response.getHeaders().setContentType(APPLICATION_JSON);
+    response.getHeaders().setContentLength(bytes.length);
+    return response.writeAndFlushWith(Flux.just(ByteBufFlux.just(response.bufferFactory().wrap(bytes))));
+  }
 
-    @Override
-    public int getOrder() {
-        return HIGHEST_PRECEDENCE;
-    }
+  @Override
+  public int getOrder() {
+    return HIGHEST_PRECEDENCE;
+  }
 }
