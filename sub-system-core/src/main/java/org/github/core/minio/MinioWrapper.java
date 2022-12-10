@@ -1,9 +1,5 @@
 package org.github.core.minio;
 
-import java.io.InputStream;
-import lombok.*;
-import lombok.extern.slf4j.*;
-import org.github.core.exception.ServerException;
 import io.minio.CopyObjectArgs;
 import io.minio.CopySource;
 import io.minio.GetObjectArgs;
@@ -12,8 +8,13 @@ import io.minio.MinioClient;
 import io.minio.ObjectWriteResponse;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveObjectArgs;
-import static cn.hutool.core.io.unit.DataSizeUtil.*;
-import static io.minio.http.Method.*;
+import java.io.InputStream;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.github.core.exception.ServerException;
+import static cn.hutool.core.io.unit.DataSizeUtil.parse;
+import static io.minio.http.Method.GET;
 
 @AllArgsConstructor
 @Slf4j

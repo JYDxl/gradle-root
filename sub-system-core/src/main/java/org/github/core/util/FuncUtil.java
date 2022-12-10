@@ -9,8 +9,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import javax.annotation.Nullable;
-import lombok.*;
-import static java.util.Optional.*;
+import lombok.NonNull;
+import static java.util.Optional.ofNullable;
 
 public abstract class FuncUtil {
   public static <T> BinaryOperator<T> throwing() {

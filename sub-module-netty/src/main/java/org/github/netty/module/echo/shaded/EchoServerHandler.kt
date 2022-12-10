@@ -1,17 +1,13 @@
 package org.github.netty.module.echo.shaded
 
 import io.netty.buffer.ByteBuf
-import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.SimpleChannelInboundHandler
 import io.netty.channel.group.ChannelGroup
-import org.github.core.ops.log
 
 @Sharable
 class EchoServerHandler(private val group: ChannelGroup): SimpleChannelInboundHandler<ByteBuf>() {
-  /** log. */
-  private val log = EchoServerHandler::class.log
-
   override fun channelRead0(ctx: ChannelHandlerContext, msg: ByteBuf) {
     group.writeAndFlush(msg.retain(group.size))
   }

@@ -5,10 +5,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import lombok.extern.slf4j.*;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import static java.util.stream.Collectors.*;
-import static java.util.stream.Stream.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.generate;
 
 @Slf4j
 public class FutureTaskTest {

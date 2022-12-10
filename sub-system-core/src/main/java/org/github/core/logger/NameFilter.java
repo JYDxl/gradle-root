@@ -1,11 +1,12 @@
 package org.github.core.logger;
 
-import java.util.List;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.filter.Filter;
 import ch.qos.logback.core.spi.FilterReply;
-import static ch.qos.logback.core.spi.FilterReply.*;
-import static com.google.common.collect.ImmutableList.*;
+import java.util.List;
+import static ch.qos.logback.core.spi.FilterReply.DENY;
+import static ch.qos.logback.core.spi.FilterReply.NEUTRAL;
+import static com.google.common.collect.ImmutableList.of;
 
 public class NameFilter extends Filter<ILoggingEvent> {
   private List<Class<?>> classes = of();

@@ -1,12 +1,15 @@
 package org.github.core.base;
 
-import javax.annotation.Nullable;
-import lombok.*;
-import lombok.experimental.*;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import static cn.hutool.core.lang.Validator.*;
-import static cn.hutool.core.text.CharSequenceUtil.*;
-import static com.baomidou.mybatisplus.core.metadata.OrderItem.*;
+import javax.annotation.Nullable;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
+import lombok.val;
+import static cn.hutool.core.lang.Validator.isGeneral;
+import static cn.hutool.core.text.CharSequenceUtil.toUnderlineCase;
+import static com.baomidou.mybatisplus.core.metadata.OrderItem.asc;
+import static com.baomidou.mybatisplus.core.metadata.OrderItem.desc;
 
 @Accessors(chain = true)
 @Data

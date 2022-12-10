@@ -1,8 +1,9 @@
 package org.github.web.model.bo;
 
-import lombok.*;
-import org.github.core.base.PageBo;
 import javax.annotation.Nullable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.github.core.base.PageBo;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

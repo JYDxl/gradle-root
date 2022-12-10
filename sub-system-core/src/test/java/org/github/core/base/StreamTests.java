@@ -8,16 +8,17 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
-import lombok.extern.slf4j.*;
-import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.junit.jupiter.api.Test;
-import static cn.hutool.core.lang.UUID.*;
-import static java.lang.Integer.*;
-import static java.lang.Runtime.*;
-import static java.util.Comparator.*;
-import static java.util.stream.Collector.Characteristics.*;
-import static java.util.stream.Collectors.*;
-import static java.util.stream.IntStream.*;
+import static cn.hutool.core.lang.UUID.randomUUID;
+import static java.lang.Integer.parseInt;
+import static java.lang.Runtime.getRuntime;
+import static java.util.Comparator.reverseOrder;
+import static java.util.stream.Collector.Characteristics.CONCURRENT;
+import static java.util.stream.Collector.Characteristics.UNORDERED;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.range;
 
 @Slf4j
 public class StreamTests {

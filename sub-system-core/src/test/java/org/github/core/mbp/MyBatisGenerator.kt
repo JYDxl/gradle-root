@@ -1,6 +1,8 @@
 package org.github.core.mbp
 
-import cn.hutool.core.io.FileUtil.*
+import cn.hutool.core.io.FileUtil.del
+import cn.hutool.core.io.FileUtil.readUtf8String
+import cn.hutool.core.io.FileUtil.writeUtf8String
 import cn.hutool.core.util.StrUtil.toCamelCase
 import cn.hutool.db.Db.use
 import cn.hutool.db.Entity.create
@@ -9,17 +11,26 @@ import cn.hutool.extra.template.TemplateEngine
 import cn.hutool.extra.template.TemplateUtil
 import com.baomidou.mybatisplus.annotation.IdType.ASSIGN_ID
 import com.baomidou.mybatisplus.generator.FastAutoGenerator
-import com.baomidou.mybatisplus.generator.config.*
-import com.baomidou.mybatisplus.generator.config.OutputFile.*
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig
+import com.baomidou.mybatisplus.generator.config.GlobalConfig
+import com.baomidou.mybatisplus.generator.config.OutputFile.controller
+import com.baomidou.mybatisplus.generator.config.OutputFile.entity
+import com.baomidou.mybatisplus.generator.config.OutputFile.mapper
+import com.baomidou.mybatisplus.generator.config.OutputFile.service
+import com.baomidou.mybatisplus.generator.config.OutputFile.serviceImpl
+import com.baomidou.mybatisplus.generator.config.OutputFile.xml
+import com.baomidou.mybatisplus.generator.config.PackageConfig
+import com.baomidou.mybatisplus.generator.config.StrategyConfig
+import com.baomidou.mybatisplus.generator.config.TemplateConfig
 import com.baomidou.mybatisplus.generator.config.TemplateType.CONTROLLER
 import com.baomidou.mybatisplus.generator.config.TemplateType.XML
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine
+import java.lang.System.getProperty
+import kotlin.reflect.jvm.jvmName
 import org.github.core.base.Entity
 import org.github.core.base.IMapper
 import org.github.core.base.IService
 import org.github.core.base.ServiceImpl
-import java.lang.System.getProperty
-import kotlin.reflect.jvm.jvmName
 
 fun main() {
   mysqlCourse()

@@ -1,5 +1,7 @@
 package org.github.web.ops
 
+import java.util.Random
+import java.util.stream.IntStream
 import org.github.core.ops.info
 import org.github.core.ops.log
 import org.github.core.spring.ops.json
@@ -8,8 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.util.*
-import java.util.stream.IntStream
 
 @ExtendWith(SpringExtension::class)
 @SpringBootTest

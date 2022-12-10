@@ -1,10 +1,10 @@
 package org.github.netty.module.cmd
 
 import io.netty.buffer.ByteBuf
-import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageDecoder
-import io.netty.util.CharsetUtil.*
+import io.netty.util.CharsetUtil.UTF_8
 
 @Sharable
 class CmdDecoder: MessageToMessageDecoder<ByteBuf>() {

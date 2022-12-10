@@ -4,16 +4,17 @@ import java.io.IOException;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.*;
-import lombok.extern.slf4j.*;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.github.core.spring.restful.Returnable;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
-import static java.util.Objects.*;
-import static javax.servlet.http.HttpServletResponse.*;
-import static org.github.core.spring.restful.Returnable.*;
+import static java.util.Objects.requireNonNull;
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static org.github.core.spring.restful.Returnable.nil;
 
 /**
  * Returnable返回类型解析器 Java版

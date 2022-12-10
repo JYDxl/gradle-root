@@ -6,7 +6,7 @@ import io.vertx.ext.web.Route
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.handler.BodyHandler
-import io.vertx.ext.web.handler.LoggerFormat.*
+import io.vertx.ext.web.handler.LoggerFormat.SHORT
 import io.vertx.ext.web.handler.LoggerHandler
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import io.vertx.kotlin.coroutines.await
@@ -67,17 +67,17 @@ class HttpServerVerticle(private val port: Int = 3000): CoroutineVerticle() {
     // router.route("/sleep").coroutineHandler(Handler::handler2Sleep)
 
     httpServer = vertx.createHttpServer(httpServerOptions).requestHandler(router).listen(port).await()
-    log.info { "HTTP服务启动成功,监听在[$port]端口" }
+    log.info {"HTTP服务启动成功,监听在[$port]端口"}
   }
 
   private fun Route.coroutineHandler(fn: CoroutineVertxRouteHandler) {
     val name = fn.name
-    handler { ctx: RoutingContext ->
+    handler {ctx: RoutingContext ->
       launch(ctx.vertx().dispatcher() + CoroutineName(name)) {
-        log.trace { "Touch $fn" }
+        log.trace {"Touch $fn"}
         try {
           fn(ctx)
-        } catch(e: Exception) {
+        } catch (e: Exception) {
           log.error(e) {}
           ctx.fail(e)
         }

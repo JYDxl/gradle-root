@@ -2,15 +2,18 @@ package org.github.core.ops;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.*;
-import lombok.extern.slf4j.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.github.core.util.FuncUtil;
 import org.junit.jupiter.api.Test;
-import static com.google.common.collect.ImmutableListMultimap.*;
-import static java.util.function.Function.*;
+import static com.google.common.collect.ImmutableListMultimap.toImmutableListMultimap;
+import static java.util.function.Function.identity;
 import static java.util.stream.Collector.of;
 import static java.util.stream.Stream.of;
-import static org.github.core.util.FuncUtil.*;
+import static org.github.core.util.FuncUtil.optional;
 
 @Slf4j
 class FuncUtilTest {

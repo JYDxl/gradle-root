@@ -1,7 +1,7 @@
 package org.github.web.module.index;
 
 import javax.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Data;
 import org.github.core.base.IBo;
 
 @Data

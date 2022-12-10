@@ -1,20 +1,20 @@
 package org.github.vertx.verticle
 
 import io.netty.buffer.ByteBuf
-import io.netty.buffer.ByteBufUtil.*
-import io.netty.util.ByteProcessor.*
+import io.netty.buffer.ByteBufUtil.getBytes
+import io.netty.util.ByteProcessor.FIND_LF
 import io.vertx.core.buffer.Buffer
-import io.vertx.core.buffer.Buffer.*
+import io.vertx.core.buffer.Buffer.buffer
 import io.vertx.core.net.NetClient
 import io.vertx.core.net.NetClientOptions
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import io.vertx.kotlin.coroutines.await
+import java.nio.charset.StandardCharsets.UTF_8
+import java.util.concurrent.TimeUnit.SECONDS
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.github.core.ops.info
 import org.github.vertx.ops.log
-import java.nio.charset.StandardCharsets.*
-import java.util.concurrent.TimeUnit.*
 
 class NetClientVerticle(private val host: String, private val port: Int): CoroutineVerticle() {
 
@@ -36,27 +36,27 @@ class NetClientVerticle(private val host: String, private val port: Int): Corout
 
   private suspend fun initNetClientBusiness() {
     val socket = netClient.connect(port, host).await()
-    log.info { "handlerID: ${socket.writeHandlerID()}" }
-    socket.handler { buf: Buffer ->
+    log.info {"handlerID: ${socket.writeHandlerID()}"}
+    socket.handler {buf: Buffer ->
       launch {
         buffer = buffer.appendBuffer(buf)
-        while(true) {
+        while (true) {
           val byteBuf = buffer.byteBuf
           val index = byteBuf.forEachByte(FIND_LF)
-          if(index == -1) return@launch
+          if (index == -1) return@launch
           val data = byteBuf.readSlice(index + 1)
           buffer = buffer(getBytes(byteBuf))
           handle(data)
         }
       }
     }
-    socket.closeHandler { _: Void? ->
+    socket.closeHandler {_: Void? ->
       launch {
-        while(true) {
+        while (true) {
           try {
             initNetClientBusiness()
             return@launch
-          } catch(e: Exception) {
+          } catch (e: Exception) {
             e.printStackTrace()
             delay(SECONDS.toMillis(1))
           }

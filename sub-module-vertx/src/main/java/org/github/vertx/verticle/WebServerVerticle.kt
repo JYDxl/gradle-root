@@ -1,6 +1,6 @@
 package org.github.vertx.verticle
 
-import io.netty.handler.codec.http.HttpHeaderValues.*
+import io.netty.handler.codec.http.HttpHeaderValues.TEXT_PLAIN
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.http.HttpServerOptions
 import io.vertx.ext.web.Router
@@ -18,14 +18,14 @@ class WebServerVerticle: AbstractVerticle() {
     router.route().handler(LoggerHandler.create())
     router.route().handler(BodyHandler.create().setDeleteUploadedFilesOnEnd(true))
     router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
-    router.route().produces(TEXT_PLAIN.toString()).handler { ctx: RoutingContext ->
+    router.route().produces(TEXT_PLAIN.toString()).handler {ctx: RoutingContext ->
       val req = ctx.request()
       val res = ctx.response()
       ctx.user()
-      log.info { "${req.path()} ${req.method()}" }
+      log.info {"${req.path()} ${req.method()}"}
       res.end("Hello world!")
     }
-    vertx.createHttpServer(HttpServerOptions().apply { logActivity = true }).requestHandler(router).listen(3000)
+    vertx.createHttpServer(HttpServerOptions().apply {logActivity = true}).requestHandler(router).listen(3000)
   }
 }
 

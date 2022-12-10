@@ -3,7 +3,7 @@ package org.github.netty.module.echo.client
 import io.netty.bootstrap.Bootstrap
 import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.util.concurrent.DefaultThreadFactory
 import org.github.core.netty.ops.eventLoopGroup
@@ -28,5 +28,5 @@ fun main() {
     .connect("mac", 10000)
     .channel()
     .closeFuture()
-    .addListener { group.shutdownGracefully() }
+    .addListener {group.shutdownGracefully()}
 }

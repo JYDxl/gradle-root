@@ -6,7 +6,7 @@ import io.netty.channel.socket.SocketChannel
 import io.netty.handler.codec.http.HttpObjectAggregator
 import io.netty.handler.codec.http.HttpServerCodec
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler
-import io.netty.handler.logging.LogLevel.*
+import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.stream.ChunkedWriteHandler
 import io.netty.util.concurrent.DefaultThreadFactory
@@ -44,5 +44,5 @@ fun main() {
     .sync()
     .channel()
     .closeFuture()
-    .addListener { boss.shutdownGracefully(); worker.shutdownGracefully() }
+    .addListener {boss.shutdownGracefully(); worker.shutdownGracefully()}
 }

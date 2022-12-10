@@ -1,8 +1,8 @@
 package org.github.core.leetcode;
 
-import lombok.extern.slf4j.*;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import static java.lang.String.*;
+import static java.lang.String.valueOf;
 
 @Slf4j
 public class NumArrayTests {

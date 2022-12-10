@@ -1,11 +1,11 @@
 package org.github.core.java;
 
-import java.util.stream.Stream;
-import lombok.extern.slf4j.*;
-import lombok.*;
-import org.junit.jupiter.api.Test;
 import cn.hutool.core.lang.Pair;
-import static java.util.stream.Collectors.*;
+import java.util.stream.Stream;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+import org.junit.jupiter.api.Test;
+import static java.util.stream.Collectors.joining;
 
 @Slf4j
 public class StreamTests {

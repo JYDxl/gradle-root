@@ -1,17 +1,19 @@
 package org.github.core.util.tree;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.TreeMultimap;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import lombok.*;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.TreeMultimap;
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Multimaps.*;
-import static java.util.Comparator.*;
-import static java.util.Optional.*;
-import static org.github.core.util.FuncUtil.*;
+import lombok.NonNull;
+import lombok.val;
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Multimaps.index;
+import static java.util.Comparator.naturalOrder;
+import static java.util.Comparator.nullsFirst;
+import static java.util.Optional.ofNullable;
+import static org.github.core.util.FuncUtil.optional;
 
 public abstract class TreeUtil {
   public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> List<T> buildTree(@NonNull List<T> list, I pid) {

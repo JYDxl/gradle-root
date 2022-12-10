@@ -1,6 +1,6 @@
 package org.github.netty.module.cmd
 
-import io.netty.channel.ChannelHandler.*
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.channel.ChannelInboundHandlerAdapter
 import org.github.core.ops.debug
@@ -10,7 +10,7 @@ import org.github.core.ops.log
 class CmdServerHandler: ChannelInboundHandlerAdapter() {
   override fun channelRead(ctx: ChannelHandlerContext, cmd: Any) {
     cmd as Cmd
-    log.debug { cmd }
+    log.debug {cmd}
   }
 
   companion object {

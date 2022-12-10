@@ -1,6 +1,6 @@
 package org.github.core.exception;
 
-import lombok.*;
+import lombok.NonNull;
 import org.github.core.spring.restful.json.JSONReturn;
 
 public class RemoteException extends RuntimeException {

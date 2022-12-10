@@ -1,5 +1,6 @@
 package org.github.center.controller;
 
+import cn.dev33.satoken.config.SaSsoConfig;
 import javax.annotation.Resource;
 import org.github.center.bo.LoginBo;
 import org.github.center.service.ICenterService;
@@ -8,14 +9,14 @@ import org.github.core.spring.restful.json.JSONReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import cn.dev33.satoken.config.SaSsoConfig;
-import static cn.dev33.satoken.sso.SaSsoConsts.*;
-import static cn.dev33.satoken.sso.SaSsoProcessor.*;
-import static cn.dev33.satoken.sso.SaSsoUtil.*;
+import static cn.dev33.satoken.sso.SaSsoConsts.MODE_SIMPLE;
+import static cn.dev33.satoken.sso.SaSsoProcessor.instance;
+import static cn.dev33.satoken.sso.SaSsoUtil.buildRedirectUrl;
+import static cn.dev33.satoken.sso.SaSsoUtil.checkRedirectUrl;
 import static cn.dev33.satoken.stp.StpUtil.getLoginId;
-import static cn.dev33.satoken.stp.StpUtil.*;
-import static cn.dev33.satoken.util.SaFoxUtil.*;
-import static org.springframework.http.HttpStatus.*;
+import static cn.dev33.satoken.stp.StpUtil.isLogin;
+import static cn.dev33.satoken.util.SaFoxUtil.decoderUrl;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestController
 public class SsoServerController {

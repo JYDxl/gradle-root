@@ -1,13 +1,14 @@
 package org.github.core.base;
 
+import cn.hutool.core.lang.Pair;
 import java.util.Comparator;
 import java.util.Set;
-import lombok.extern.slf4j.*;
-import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.junit.jupiter.api.Test;
-import cn.hutool.core.lang.Pair;
-import static com.google.common.collect.Sets.*;
-import static java.util.Comparator.*;
+import static com.google.common.collect.Sets.newTreeSet;
+import static java.util.Comparator.naturalOrder;
+import static java.util.Comparator.nullsFirst;
 
 @Slf4j
 public class ComparatorTests {

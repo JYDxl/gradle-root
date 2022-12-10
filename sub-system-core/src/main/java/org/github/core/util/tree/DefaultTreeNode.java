@@ -2,7 +2,8 @@ package org.github.core.util.tree;
 
 import java.util.Collection;
 import javax.annotation.Nullable;
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
 
 @Data
 public class DefaultTreeNode<I, E> implements TreeNode<I,E> {

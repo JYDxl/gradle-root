@@ -1,17 +1,17 @@
 package org.github.common.service.impl;
 
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.function.Function;
+import javax.annotation.Resource;
 import org.github.common.service.ICommonService;
 import org.github.core.base.CodeType;
 import org.github.core.cache.EnumCache;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.lang.reflect.Field;
-import java.util.List;
-import java.util.function.Function;
-
-import static cn.hutool.core.bean.BeanUtil.*;
+import static cn.hutool.core.bean.BeanUtil.edit;
+import static cn.hutool.core.bean.BeanUtil.getFieldValue;
+import static cn.hutool.core.bean.BeanUtil.setFieldValue;
 import static cn.hutool.core.text.CharSequenceUtil.toCamelCase;
 import static java.util.stream.Collectors.toList;
 

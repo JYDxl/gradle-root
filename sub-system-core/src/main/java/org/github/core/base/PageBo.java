@@ -1,13 +1,17 @@
 package org.github.core.base;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import lombok.*;
-import lombok.experimental.*;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
-import static com.google.common.collect.ImmutableList.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import static com.google.common.collect.ImmutableList.of;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

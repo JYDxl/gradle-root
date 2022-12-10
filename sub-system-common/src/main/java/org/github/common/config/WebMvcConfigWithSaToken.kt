@@ -4,9 +4,12 @@ import cn.dev33.satoken.`fun`.SaFunction
 import cn.dev33.satoken.interceptor.SaInterceptor
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple
 import cn.dev33.satoken.router.SaRouter.notMatch
-import cn.dev33.satoken.stp.StpUtil.*
+import cn.dev33.satoken.stp.StpUtil.TYPE
+import cn.dev33.satoken.stp.StpUtil.checkLogin
+import cn.dev33.satoken.stp.StpUtil.setStpLogic
 import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of
+import javax.annotation.Resource
 import org.github.common.props.CommonDynamicProperties
 import org.github.core.spring.mvc.ReturnableValueHandlerKotlin
 import org.springframework.context.annotation.Bean
@@ -16,8 +19,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter
-import javax.annotation.Resource
-
 
 @Configuration
 class WebMvcConfigWithSaToken: WebMvcConfigurer {

@@ -1,11 +1,11 @@
 package org.github.core.util;
 
-import lombok.extern.slf4j.*;
-import lombok.*;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.junit.jupiter.api.Test;
-import static io.netty.buffer.ByteBufUtil.*;
-import static io.netty.buffer.Unpooled.*;
-import static org.github.core.util.BufUtil.*;
+import static io.netty.buffer.ByteBufUtil.hexDump;
+import static io.netty.buffer.Unpooled.wrappedBuffer;
+import static org.github.core.util.BufUtil.beforeRelease;
 
 @Slf4j
 class BufUtilTest {

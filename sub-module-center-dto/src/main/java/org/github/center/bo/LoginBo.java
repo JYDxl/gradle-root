@@ -1,7 +1,9 @@
 package org.github.center.bo;
 
 import javax.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.github.core.base.IBo;
 
 @AllArgsConstructor

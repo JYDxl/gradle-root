@@ -5,10 +5,11 @@ import io.netty.channel.embedded.EmbeddedChannel
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.logging.LogLevel.TRACE
 import io.netty.handler.logging.LoggingHandler
-import org.github.core.netty.decoder.DelimiterDecoder
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
 import kotlin.text.Charsets.UTF_8
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 internal class DelimiterDecoderTest {
   @Test

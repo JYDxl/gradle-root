@@ -1,7 +1,11 @@
 package org.github.web.model.vo;
 
 import javax.annotation.Nullable;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 import org.github.core.util.tree.DefaultTreeNode;
 
 @EqualsAndHashCode(callSuper = true)

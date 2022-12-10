@@ -1,8 +1,9 @@
 package org.github.core.base;
 
 import java.util.List;
-import lombok.*;
-import static com.google.common.base.MoreObjects.*;
+import lombok.NonNull;
+import lombok.val;
+import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T> {
   public Page(PageBo param) {

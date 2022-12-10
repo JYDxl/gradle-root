@@ -1,9 +1,9 @@
 package org.github.web.module.index;
 
 import javax.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Data;
 import org.github.core.base.IBo;
-import static cn.hutool.crypto.symmetric.SymmetricAlgorithm.*;
+import static cn.hutool.crypto.symmetric.SymmetricAlgorithm.AES;
 
 @Data
 public class RegisterBo implements IBo {

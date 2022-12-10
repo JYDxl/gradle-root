@@ -2,13 +2,14 @@ package org.github.netty.module.line
 
 import io.netty.buffer.ByteBuf
 import io.netty.buffer.ByteBufAllocator
-import io.netty.buffer.ByteBufUtil.*
-import io.netty.buffer.Unpooled.*
-import io.netty.channel.ChannelHandler.*
+import io.netty.buffer.ByteBufUtil.encodeString
+import io.netty.buffer.Unpooled.directBuffer
+import io.netty.buffer.Unpooled.unreleasableBuffer
+import io.netty.channel.ChannelHandler.Sharable
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToMessageEncoder
-import io.netty.util.CharsetUtil.*
-import java.nio.CharBuffer.*
+import io.netty.util.CharsetUtil.UTF_8
+import java.nio.CharBuffer.wrap
 
 @Sharable
 class LineEncoder: MessageToMessageEncoder<CharSequence>() {
@@ -25,8 +26,8 @@ class LineEncoder: MessageToMessageEncoder<CharSequence>() {
 
     fun CharSequence.toByteBuf(alloc: ByteBufAllocator): ByteBuf {
       val data = toBuf(alloc)
-      if(endsWith(delimiter)) return data
-      return alloc.compositeBuffer(2).apply { addComponents(true, data, line) }
+      if (endsWith(delimiter)) return data
+      return alloc.compositeBuffer(2).apply {addComponents(true, data, line)}
     }
   }
 }

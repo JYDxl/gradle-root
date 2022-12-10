@@ -1,8 +1,8 @@
 package org.github.common.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import lombok.*;
-import lombok.extern.slf4j.*;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.github.core.spring.restful.json.JSONReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
@@ -13,7 +13,10 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.*;
+import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.BINDING_ERRORS;
+import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.EXCEPTION;
+import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.MESSAGE;
+import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.STACK_TRACE;
 
 @RestController
 @Getter

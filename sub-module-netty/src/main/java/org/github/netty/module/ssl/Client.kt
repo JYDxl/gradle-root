@@ -2,7 +2,11 @@ package org.github.netty.module.ssl
 
 import cn.hutool.core.io.FileUtil.file
 import io.netty.bootstrap.Bootstrap
-import io.netty.channel.*
+import io.netty.channel.Channel
+import io.netty.channel.ChannelFutureListener
+import io.netty.channel.ChannelHandlerContext
+import io.netty.channel.ChannelInboundHandlerAdapter
+import io.netty.channel.ChannelInitializer
 import io.netty.handler.codec.string.StringDecoder
 import io.netty.handler.codec.string.StringEncoder
 import io.netty.handler.logging.LogLevel.TRACE
@@ -10,12 +14,12 @@ import io.netty.handler.logging.LoggingHandler
 import io.netty.handler.ssl.SslContext
 import io.netty.handler.ssl.SslContextBuilder.forClient
 import io.netty.util.concurrent.DefaultThreadFactory
-import org.github.core.netty.decoder.LineDecoder
-import org.github.core.netty.ops.eventLoopGroup
-import org.github.core.netty.ops.socketChannel
 import java.io.File
 import java.util.concurrent.TimeUnit.SECONDS
 import kotlin.text.Charsets.UTF_8
+import org.github.core.netty.decoder.LineDecoder
+import org.github.core.netty.ops.eventLoopGroup
+import org.github.core.netty.ops.socketChannel
 
 fun main() {
   val ca: File = file("ssl/ca.crt")
