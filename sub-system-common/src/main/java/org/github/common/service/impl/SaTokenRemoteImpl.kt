@@ -1,12 +1,12 @@
 package org.github.common.service.impl
 
 import cn.dev33.satoken.stp.StpUtil.getTokenValue
+import javax.annotation.Resource
 import org.github.center.bo.PermissionsBo
 import org.github.center.bo.RolesBo
 import org.github.center.feign.ICenterServerAPI
 import org.github.common.service.ISaTokenInterface
 import org.springframework.stereotype.Component
-import javax.annotation.Resource
 
 @Component
 class SaTokenRemoteImpl: ISaTokenInterface {
