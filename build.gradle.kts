@@ -43,8 +43,8 @@ plugins {
 }
 
 allprojects {
-  tasks.register("cleanAll", Delete::class) {
-    delete = setOf("build", "out", "logs")
+  tasks.register("cleanAll",Delete::class) {
+    delete = setOf("build","out","logs")
   }
 }
 
@@ -92,19 +92,19 @@ subprojects {
   }
 
   tasks.withType<JavaCompile> {
-    options.compilerArgs.addAll(listOf("-Xlint:unchecked", "-parameters"))
+    options.compilerArgs.addAll(listOf("-Xlint:unchecked","-parameters"))
   }
 
   tasks.withType<Test> {
     useJUnitPlatform()
     testLogging {
-      events("PASSED", "FAILED", "SKIPPED")
+      events("PASSED","FAILED","SKIPPED")
     }
   }
 
   configurations {
     all {
-      exclude("io.netty", "netty-transport-native-kqueue")
+      exclude("io.netty","netty-transport-native-kqueue")
     }
   }
 
@@ -157,6 +157,7 @@ subprojects {
     implementation("org.objenesis:objenesis:3.3")
     implementation("org.javassist:javassist:3.29.2-GA")
     implementation("org.t-io:tio-core:3.8.3.v20220902-RELEASE")
+    implementation("io.swagger:swagger-annotations:1.6.9")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

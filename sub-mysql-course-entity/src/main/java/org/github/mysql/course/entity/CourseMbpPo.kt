@@ -10,6 +10,8 @@ import java.io.Serializable
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 课程
@@ -17,61 +19,62 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("course")
+@ApiModel("课程")
 open class CourseMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 名称 */
+    @ApiModelProperty("名称")
     @TableField("name")
     open var name: String? = null
 
-    /** 概述 */
+    @ApiModelProperty("概述")
     @TableField("summary")
     open var summary: String? = null
 
-    /** 时长|单位秒 */
+    @ApiModelProperty("时长|单位秒")
     @TableField("time")
     open var time: Int? = null
 
-    /** 价格（元） */
+    @ApiModelProperty("价格（元）")
     @TableField("price")
     open var price: BigDecimal? = null
 
-    /** 封面 */
+    @ApiModelProperty("封面")
     @TableField("image")
     open var image: String? = null
 
-    /** 级别|枚举[CourseLevelEnum]：ONE("1", "初级"),TWO("2", "中级"),THREE("3", "高级") */
+    @ApiModelProperty("级别|枚举[CourseLevelEnum]：ONE(\"1\", \"初级\"),TWO(\"2\", \"中级\"),THREE(\"3\", \"高级\")")
     @TableField("level")
     open var level: String? = null
 
-    /** 收费|枚举[CourseChargeEnum]：CHARGE("C", "收费"),FREE("F", "免费") */
+    @ApiModelProperty("收费|枚举[CourseChargeEnum]：CHARGE(\"C\", \"收费\"),FREE(\"F\", \"免费\")")
     @TableField("charge")
     open var charge: String? = null
 
-    /** 状态|枚举[CourseStatusEnum]：PUBLISH("P", "发布"),DRAFT("D", "草稿") */
+    @ApiModelProperty("状态|枚举[CourseStatusEnum]：PUBLISH(\"P\", \"发布\"),DRAFT(\"D\", \"草稿\")")
     @TableField("status")
     open var status: String? = null
 
-    /** 报名数 */
+    @ApiModelProperty("报名数")
     @TableField("enroll")
     open var enroll: Int? = null
 
-    /** 顺序 */
+    @ApiModelProperty("顺序")
     @TableField("sort")
     open var sort: Int? = null
 
-    /** 创建时间 */
+    @ApiModelProperty("创建时间")
     @TableField("created_at")
     open var createdAt: LocalDateTime? = null
 
-    /** 修改时间 */
+    @ApiModelProperty("修改时间")
     @TableField("updated_at")
     open var updatedAt: LocalDateTime? = null
 
-    /** 讲师|teacher.id */
+    @ApiModelProperty("讲师|teacher.id")
     @TableField("teacher_id")
     open var teacherId: String? = null
 

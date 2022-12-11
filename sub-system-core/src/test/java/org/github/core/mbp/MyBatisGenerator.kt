@@ -49,6 +49,7 @@ fun mysqlCourse() {
   generator.globalConfig {it: GlobalConfig.Builder ->
     it.author("JYD_XL")
       .disableOpenDir()
+      .enableSwagger()
     if (enableKotlin) it.enableKotlin()
   }
 
@@ -131,6 +132,7 @@ fun mysqlCenter() {
   generator.globalConfig {it: GlobalConfig.Builder ->
     it.author("JYD_XL")
       .disableOpenDir()
+      .enableSwagger()
     if (enableKotlin) it.enableKotlin()
   }
 

@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 课程分类
@@ -15,17 +17,18 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("course_category")
+@ApiModel("课程分类")
 open class CourseCategoryMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 课程|course.id */
+    @ApiModelProperty("课程|course.id")
     @TableField("course_id")
     open var courseId: String? = null
 
-    /** 分类|course.id */
+    @ApiModelProperty("分类|course.id")
     @TableField("category_id")
     open var categoryId: String? = null
 

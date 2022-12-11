@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 资源
@@ -15,25 +17,26 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("resource")
+@ApiModel("资源")
 open class ResourceMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 名称|菜单或按钮 */
+    @ApiModelProperty("名称|菜单或按钮")
     @TableField("name")
     open var name: String? = null
 
-    /** 页面|路由 */
+    @ApiModelProperty("页面|路由")
     @TableField("page")
     open var page: String? = null
 
-    /** 请求|接口 */
+    @ApiModelProperty("请求|接口")
     @TableField("request")
     open var request: String? = null
 
-    /** 父id */
+    @ApiModelProperty("父id")
     @TableField("parent")
     open var parent: String? = null
 

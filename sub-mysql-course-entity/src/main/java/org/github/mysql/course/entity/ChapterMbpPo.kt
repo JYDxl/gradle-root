@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 大章
@@ -15,17 +17,18 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("chapter")
+@ApiModel("大章")
 open class ChapterMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 课程id */
+    @ApiModelProperty("课程id")
     @TableField("course_id")
     open var courseId: String? = null
 
-    /** 名称 */
+    @ApiModelProperty("名称")
     @TableField("name")
     open var name: String? = null
 

@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 课程内容文件
@@ -15,25 +17,26 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("course_content_file")
+@ApiModel("课程内容文件")
 open class CourseContentFileMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 课程id */
+    @ApiModelProperty("课程id")
     @TableField("course_id")
     open var courseId: String? = null
 
-    /** 地址 */
+    @ApiModelProperty("地址")
     @TableField("url")
     open var url: String? = null
 
-    /** 文件名 */
+    @ApiModelProperty("文件名")
     @TableField("name")
     open var name: String? = null
 
-    /** 大小|字节b */
+    @ApiModelProperty("大小|字节b")
     @TableField("size")
     open var size: Int? = null
 

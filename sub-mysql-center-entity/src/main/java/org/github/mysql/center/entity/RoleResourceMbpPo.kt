@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 角色资源关联
@@ -15,17 +17,18 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("role_resource")
+@ApiModel("角色资源关联")
 open class RoleResourceMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 角色|id */
+    @ApiModelProperty("角色|id")
     @TableField("role_id")
     open var roleId: String? = null
 
-    /** 资源|id */
+    @ApiModelProperty("资源|id")
     @TableField("resource_id")
     open var resourceId: String? = null
 

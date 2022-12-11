@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 小节
@@ -16,49 +18,50 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("section")
+@ApiModel("小节")
 open class SectionMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 标题 */
+    @ApiModelProperty("标题")
     @TableField("title")
     open var title: String? = null
 
-    /** 课程|course.id */
+    @ApiModelProperty("课程|course.id")
     @TableField("course_id")
     open var courseId: String? = null
 
-    /** 大章|chapter.id */
+    @ApiModelProperty("大章|chapter.id")
     @TableField("chapter_id")
     open var chapterId: String? = null
 
-    /** 视频 */
+    @ApiModelProperty("视频")
     @TableField("video")
     open var video: String? = null
 
-    /** 时长|单位秒 */
+    @ApiModelProperty("时长|单位秒")
     @TableField("time")
     open var time: Int? = null
 
-    /** 收费|C 收费；F 免费 */
+    @ApiModelProperty("收费|C 收费；F 免费")
     @TableField("charge")
     open var charge: String? = null
 
-    /** 顺序 */
+    @ApiModelProperty("顺序")
     @TableField("sort")
     open var sort: Int? = null
 
-    /** 创建时间 */
+    @ApiModelProperty("创建时间")
     @TableField("created_at")
     open var createdAt: LocalDateTime? = null
 
-    /** 修改时间 */
+    @ApiModelProperty("修改时间")
     @TableField("updated_at")
     open var updatedAt: LocalDateTime? = null
 
-    /** vod|阿里云vod */
+    @ApiModelProperty("vod|阿里云vod")
     @TableField("vod")
     open var vod: String? = null
 

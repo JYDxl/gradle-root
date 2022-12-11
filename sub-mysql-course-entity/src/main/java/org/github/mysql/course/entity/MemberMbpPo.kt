@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 会员
@@ -16,29 +18,30 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("member")
+@ApiModel("会员")
 open class MemberMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 手机号 */
+    @ApiModelProperty("手机号")
     @TableField("mobile")
     open var mobile: String? = null
 
-    /** 密码 */
+    @ApiModelProperty("密码")
     @TableField("password")
     open var password: String? = null
 
-    /** 昵称 */
+    @ApiModelProperty("昵称")
     @TableField("name")
     open var name: String? = null
 
-    /** 头像url */
+    @ApiModelProperty("头像url")
     @TableField("photo")
     open var photo: String? = null
 
-    /** 注册时间 */
+    @ApiModelProperty("注册时间")
     @TableField("register_time")
     open var registerTime: LocalDateTime? = null
 

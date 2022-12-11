@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 会员课程报名
@@ -16,21 +18,22 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("member_course")
+@ApiModel("会员课程报名")
 open class MemberCourseMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 会员id */
+    @ApiModelProperty("会员id")
     @TableField("member_id")
     open var memberId: String? = null
 
-    /** 课程id */
+    @ApiModelProperty("课程id")
     @TableField("course_id")
     open var courseId: String? = null
 
-    /** 报名时间 */
+    @ApiModelProperty("报名时间")
     @TableField("at")
     open var at: LocalDateTime? = null
 

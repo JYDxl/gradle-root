@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 用户
@@ -16,45 +18,46 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("t_sys_user")
+@ApiModel("用户")
 open class SysUserMbpPo : Entity() {
 
-    /** 主键 */
+    @ApiModelProperty("主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: Long? = null
 
-    /** 登录用户名 */
+    @ApiModelProperty("登录用户名")
     @TableField("user_name")
     open var userName: String? = null
 
-    /** 登录密码 */
+    @ApiModelProperty("登录密码")
     @TableField("user_pwd")
     open var userPwd: String? = null
 
-    /** 加密方式 */
+    @ApiModelProperty("加密方式")
     @TableField("secret_algorithm")
     open var secretAlgorithm: String? = null
 
-    /** 秘钥 */
+    @ApiModelProperty("秘钥")
     @TableField("secret_key")
     open var secretKey: ByteArray? = null
 
-    /** 昵称 */
+    @ApiModelProperty("昵称")
     @TableField("nice_name")
     open var niceName: String? = null
 
-    /** 创建人 */
+    @ApiModelProperty("创建人")
     @TableField("creator_name")
     open var creatorName: String? = null
 
-    /** 创建时间 */
+    @ApiModelProperty("创建时间")
     @TableField("created_time")
     open var createdTime: LocalDateTime? = null
 
-    /** 修改人 */
+    @ApiModelProperty("修改人")
     @TableField("updater_name")
     open var updaterName: String? = null
 
-    /** 修改时间 */
+    @ApiModelProperty("修改时间")
     @TableField("updated_time")
     open var updatedTime: LocalDateTime? = null
 

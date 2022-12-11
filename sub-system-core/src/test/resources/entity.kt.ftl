@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty
 @TableName("${schemaName}${table.name}")
 </#if>
 <#if swagger>
-@ApiModel(value = "${entity}对象", description = "${table.comment!}")
+@ApiModel("${table.comment!}")
 </#if>
 <#if superEntityClass??>
 open class ${entity} : ${superEntityClass}<#if activeRecord><${entity}></#if>() {
@@ -34,11 +34,8 @@ open class ${entity} : Serializable {
     <#assign keyPropertyName="${field.propertyName}"/>
 </#if>
 
-<#if field.comment!?length gt 0>
-    /** ${field.comment} */
 <#if swagger>
-    @ApiModelProperty(value = "${field.comment}")
-</#if>
+    @ApiModelProperty("${field.comment}")
 </#if>
 <#if field.keyFlag>
 <#-- 主键 -->

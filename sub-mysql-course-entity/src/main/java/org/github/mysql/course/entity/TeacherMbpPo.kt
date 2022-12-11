@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 讲师
@@ -15,33 +17,34 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("teacher")
+@ApiModel("讲师")
 open class TeacherMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 姓名 */
+    @ApiModelProperty("姓名")
     @TableField("name")
     open var name: String? = null
 
-    /** 昵称 */
+    @ApiModelProperty("昵称")
     @TableField("nickname")
     open var nickname: String? = null
 
-    /** 头像 */
+    @ApiModelProperty("头像")
     @TableField("image")
     open var image: String? = null
 
-    /** 职位 */
+    @ApiModelProperty("职位")
     @TableField("position")
     open var position: String? = null
 
-    /** 座右铭 */
+    @ApiModelProperty("座右铭")
     @TableField("motto")
     open var motto: String? = null
 
-    /** 简介 */
+    @ApiModelProperty("简介")
     @TableField("intro")
     open var intro: String? = null
 

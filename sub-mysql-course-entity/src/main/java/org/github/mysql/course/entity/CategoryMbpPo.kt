@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 分类
@@ -15,21 +17,22 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("category")
+@ApiModel("分类")
 open class CategoryMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 父id */
+    @ApiModelProperty("父id")
     @TableField("parent")
     open var parent: String? = null
 
-    /** 名称 */
+    @ApiModelProperty("名称")
     @TableField("name")
     open var name: String? = null
 
-    /** 顺序 */
+    @ApiModelProperty("顺序")
     @TableField("sort")
     open var sort: Int? = null
 

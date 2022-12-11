@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName
 import com.baomidou.mybatisplus.annotation.Version
 import java.io.Serializable
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 码值条目
@@ -14,23 +16,30 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("t_sys_dict_item")
+@ApiModel("码值条目")
 open class SysDictItemMbpPo : Entity() {
 
+    @ApiModelProperty("")
     @TableField("dict_code")
     open var dictCode: String? = null
 
+    @ApiModelProperty("")
     @TableField("item_code")
     open var itemCode: String? = null
 
+    @ApiModelProperty("")
     @TableField("item_name")
     open var itemName: String? = null
 
+    @ApiModelProperty("")
     @TableField("item_info")
     open var itemInfo: String? = null
 
+    @ApiModelProperty("")
     @TableField("sort")
     open var sort: Int? = null
 
+    @ApiModelProperty("")
     @TableField("revision")
     @Version
     open var revision: Int? = null

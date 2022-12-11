@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 import java.time.LocalDateTime
 import org.github.core.base.Entity
+import io.swagger.annotations.ApiModel
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * 短信验证码
@@ -16,29 +18,30 @@ import org.github.core.base.Entity
  * @author JYD_XL
  */
 @TableName("sms")
+@ApiModel("短信验证码")
 open class SmsMbpPo : Entity() {
 
-    /** id */
+    @ApiModelProperty("id")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     open var id: String? = null
 
-    /** 手机号 */
+    @ApiModelProperty("手机号")
     @TableField("mobile")
     open var mobile: String? = null
 
-    /** 验证码 */
+    @ApiModelProperty("验证码")
     @TableField("code")
     open var code: String? = null
 
-    /** 用途|枚举[SmsUseEnum]：REGISTER("R", "注册"), FORGET("F", "忘记密码") */
+    @ApiModelProperty("用途|枚举[SmsUseEnum]：REGISTER(\"R\", \"注册\"), FORGET(\"F\", \"忘记密码\")")
     @TableField("use")
     open var use: String? = null
 
-    /** 生成时间 */
+    @ApiModelProperty("生成时间")
     @TableField("at")
     open var at: LocalDateTime? = null
 
-    /** 用途|枚举[SmsStatusEnum]：USED("U", "已使用"), NOT_USED("N", "未使用") */
+    @ApiModelProperty("用途|枚举[SmsStatusEnum]：USED(\"U\", \"已使用\"), NOT_USED(\"N\", \"未使用\")")
     @TableField("status")
     open var status: String? = null
 
