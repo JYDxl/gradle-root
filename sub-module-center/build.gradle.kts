@@ -9,7 +9,7 @@ val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
 
 application {
-  mainClass.set("org.github.center.CenterKt")
+  mainClass.set("org.github.CenterKt")
   applicationDefaultJvmArgs = listOf(
     "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:15001",
 
