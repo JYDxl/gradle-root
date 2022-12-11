@@ -1,27 +1,33 @@
 package org.github.core.base;
 
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import javax.annotation.Nullable;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.experimental.Accessors;
 import lombok.val;
 import static cn.hutool.core.lang.Validator.isGeneral;
 import static cn.hutool.core.text.CharSequenceUtil.toUnderlineCase;
 import static com.baomidou.mybatisplus.core.metadata.OrderItem.asc;
 import static com.baomidou.mybatisplus.core.metadata.OrderItem.desc;
 
-@Accessors(chain = true)
+@ApiModel("排序参数")
 @Data
 public class Sort implements IBo {
-  /** 是否使用下划线模式 */
+  @ApiModelProperty(value = "使用下划线模式", example = "true")
   private boolean underLine = true;
 
-  /** 排序字段 */
+  @ApiModelProperty(value = "排序字段")
   private @Nullable String sortName;
 
-  /** 排序方式 */
+  @ApiModelProperty(value = "排序方式", example = "asc")
   private @NonNull String sortOrder = "asc";
+
+  @Override
+  public String toString() {
+    return get();
+  }
 
   public void setSortName(@Nullable String sortName) {
     if (!isGeneral(sortName)) return;
