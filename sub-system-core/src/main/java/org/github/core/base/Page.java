@@ -6,18 +6,18 @@ import lombok.val;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
 public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> implements IPage<T> {
-  public Page(PageBo param) {
-    super(param.getPageNum(), param.getPageSize(), param.isSearchCount());
-    this.sort(param).sortList(param);
+  public Page(PageBo bo) {
+    super(bo.getPageNum(), bo.getPageSize(), bo.isSearchCount());
+    this.sort(bo).sortList(bo);
   }
 
-  protected void sortList(PageBo param) {
-    val list = param.sortList();
+  protected void sortList(PageBo bo) {
+    val list = bo.sortList();
     super.addOrder(list);
   }
 
-  protected Page<T> sort(PageBo param) {
-    val sort = param.sort();
+  protected Page<T> sort(PageBo bo) {
+    val sort = bo.sort();
     if (sort != null) super.addOrder(sort);
     return this;
   }

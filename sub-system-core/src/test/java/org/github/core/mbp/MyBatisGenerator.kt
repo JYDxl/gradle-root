@@ -215,7 +215,7 @@ fun mysqlCenter() {
   val map: Map<String, List<Item>> = itemList.groupBy(Item::dictCode)
   map.forEach {(dictName, list) ->
     val name = toCamelCase(dictName).replaceFirstChar {it.uppercase()}
-    val params = mapOf(
+    val args = mapOf(
       "name" to name,
       "list" to list,
       "type" to index[dictName],
@@ -223,7 +223,7 @@ fun mysqlCenter() {
     )
     val fileName = if (enableKotlin) "$name.kt" else "$name.java"
     val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
-    val content: String = engine.getTemplate(readUtf8String(template)).render(params)
+    val content: String = engine.getTemplate(readUtf8String(template)).render(args)
     writeUtf8String(content, "$path/$subEntityName/src/main/java/$packageName/$moduleName/dict/$fileName")
   }
 }
