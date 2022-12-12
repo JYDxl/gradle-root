@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package ${package.Entity}
 
@@ -97,6 +97,23 @@ open class ${entity} : Serializable {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is ${entity}) return false
+        <#list table.fields as field>
+        if (${field.name} != other.${field.name}) return false
+        </#list>
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        <#list table.fields as field>
+        result = 31 * result + (${field.name}?.hashCode() ?: 0)
+        </#list>
+        return result
     }
 
 }
