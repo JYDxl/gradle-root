@@ -106,14 +106,14 @@ open class SectionMbpPo : Entity() {
         if (other !is SectionMbpPo) return false
         if (id != other.id) return false
         if (title != other.title) return false
-        if (course_id != other.course_id) return false
-        if (chapter_id != other.chapter_id) return false
+        if (courseId != other.courseId) return false
+        if (chapterId != other.chapterId) return false
         if (video != other.video) return false
         if (time != other.time) return false
         if (charge != other.charge) return false
         if (sort != other.sort) return false
-        if (created_at != other.created_at) return false
-        if (updated_at != other.updated_at) return false
+        if (createdAt != other.createdAt) return false
+        if (updatedAt != other.updatedAt) return false
         if (vod != other.vod) return false
         return true
     }
@@ -122,14 +122,14 @@ open class SectionMbpPo : Entity() {
         var result = 0
         result = 31 * result + (id?.hashCode() ?: 0)
         result = 31 * result + (title?.hashCode() ?: 0)
-        result = 31 * result + (course_id?.hashCode() ?: 0)
-        result = 31 * result + (chapter_id?.hashCode() ?: 0)
+        result = 31 * result + (courseId?.hashCode() ?: 0)
+        result = 31 * result + (chapterId?.hashCode() ?: 0)
         result = 31 * result + (video?.hashCode() ?: 0)
         result = 31 * result + (time?.hashCode() ?: 0)
         result = 31 * result + (charge?.hashCode() ?: 0)
         result = 31 * result + (sort?.hashCode() ?: 0)
-        result = 31 * result + (created_at?.hashCode() ?: 0)
-        result = 31 * result + (updated_at?.hashCode() ?: 0)
+        result = 31 * result + (createdAt?.hashCode() ?: 0)
+        result = 31 * result + (updatedAt?.hashCode() ?: 0)
         result = 31 * result + (vod?.hashCode() ?: 0)
         return result
     }

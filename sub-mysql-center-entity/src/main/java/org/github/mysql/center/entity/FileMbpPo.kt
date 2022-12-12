@@ -122,11 +122,11 @@ open class FileMbpPo : Entity() {
         if (suffix != other.suffix) return false
         if (size != other.size) return false
         if (use != other.use) return false
-        if (created_at != other.created_at) return false
-        if (updated_at != other.updated_at) return false
-        if (shard_index != other.shard_index) return false
-        if (shard_size != other.shard_size) return false
-        if (shard_total != other.shard_total) return false
+        if (createdAt != other.createdAt) return false
+        if (updatedAt != other.updatedAt) return false
+        if (shardIndex != other.shardIndex) return false
+        if (shardSize != other.shardSize) return false
+        if (shardTotal != other.shardTotal) return false
         if (key != other.key) return false
         if (vod != other.vod) return false
         return true
@@ -140,11 +140,11 @@ open class FileMbpPo : Entity() {
         result = 31 * result + (suffix?.hashCode() ?: 0)
         result = 31 * result + (size?.hashCode() ?: 0)
         result = 31 * result + (use?.hashCode() ?: 0)
-        result = 31 * result + (created_at?.hashCode() ?: 0)
-        result = 31 * result + (updated_at?.hashCode() ?: 0)
-        result = 31 * result + (shard_index?.hashCode() ?: 0)
-        result = 31 * result + (shard_size?.hashCode() ?: 0)
-        result = 31 * result + (shard_total?.hashCode() ?: 0)
+        result = 31 * result + (createdAt?.hashCode() ?: 0)
+        result = 31 * result + (updatedAt?.hashCode() ?: 0)
+        result = 31 * result + (shardIndex?.hashCode() ?: 0)
+        result = 31 * result + (shardSize?.hashCode() ?: 0)
+        result = 31 * result + (shardTotal?.hashCode() ?: 0)
         result = 31 * result + (key?.hashCode() ?: 0)
         result = 31 * result + (vod?.hashCode() ?: 0)
         return result

@@ -56,16 +56,16 @@ open class RoleResourceMbpPo : Entity() {
         if (this === other) return true
         if (other !is RoleResourceMbpPo) return false
         if (id != other.id) return false
-        if (role_id != other.role_id) return false
-        if (resource_id != other.resource_id) return false
+        if (roleId != other.roleId) return false
+        if (resourceId != other.resourceId) return false
         return true
     }
 
     override fun hashCode(): Int {
         var result = 0
         result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + (role_id?.hashCode() ?: 0)
-        result = 31 * result + (resource_id?.hashCode() ?: 0)
+        result = 31 * result + (roleId?.hashCode() ?: 0)
+        result = 31 * result + (resourceId?.hashCode() ?: 0)
         return result
     }
 

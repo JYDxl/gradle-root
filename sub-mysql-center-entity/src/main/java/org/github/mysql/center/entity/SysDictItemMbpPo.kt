@@ -73,10 +73,10 @@ open class SysDictItemMbpPo : Entity() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is SysDictItemMbpPo) return false
-        if (dict_code != other.dict_code) return false
-        if (item_code != other.item_code) return false
-        if (item_name != other.item_name) return false
-        if (item_info != other.item_info) return false
+        if (dictCode != other.dictCode) return false
+        if (itemCode != other.itemCode) return false
+        if (itemName != other.itemName) return false
+        if (itemInfo != other.itemInfo) return false
         if (sort != other.sort) return false
         if (revision != other.revision) return false
         return true
@@ -84,10 +84,10 @@ open class SysDictItemMbpPo : Entity() {
 
     override fun hashCode(): Int {
         var result = 0
-        result = 31 * result + (dict_code?.hashCode() ?: 0)
-        result = 31 * result + (item_code?.hashCode() ?: 0)
-        result = 31 * result + (item_name?.hashCode() ?: 0)
-        result = 31 * result + (item_info?.hashCode() ?: 0)
+        result = 31 * result + (dictCode?.hashCode() ?: 0)
+        result = 31 * result + (itemCode?.hashCode() ?: 0)
+        result = 31 * result + (itemName?.hashCode() ?: 0)
+        result = 31 * result + (itemInfo?.hashCode() ?: 0)
         result = 31 * result + (sort?.hashCode() ?: 0)
         result = 31 * result + (revision?.hashCode() ?: 0)
         return result

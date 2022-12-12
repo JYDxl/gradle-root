@@ -62,7 +62,7 @@ open class UserMbpPo : Entity() {
         if (this === other) return true
         if (other !is UserMbpPo) return false
         if (id != other.id) return false
-        if (login_name != other.login_name) return false
+        if (loginName != other.loginName) return false
         if (name != other.name) return false
         if (password != other.password) return false
         return true
@@ -71,7 +71,7 @@ open class UserMbpPo : Entity() {
     override fun hashCode(): Int {
         var result = 0
         result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + (login_name?.hashCode() ?: 0)
+        result = 31 * result + (loginName?.hashCode() ?: 0)
         result = 31 * result + (name?.hashCode() ?: 0)
         result = 31 * result + (password?.hashCode() ?: 0)
         return result

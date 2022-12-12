@@ -99,30 +99,30 @@ open class SysUserMbpPo : Entity() {
         if (this === other) return true
         if (other !is SysUserMbpPo) return false
         if (id != other.id) return false
-        if (user_name != other.user_name) return false
-        if (user_pwd != other.user_pwd) return false
-        if (secret_algorithm != other.secret_algorithm) return false
-        if (secret_key != other.secret_key) return false
-        if (nice_name != other.nice_name) return false
-        if (creator_name != other.creator_name) return false
-        if (created_time != other.created_time) return false
-        if (updater_name != other.updater_name) return false
-        if (updated_time != other.updated_time) return false
+        if (userName != other.userName) return false
+        if (userPwd != other.userPwd) return false
+        if (secretAlgorithm != other.secretAlgorithm) return false
+        if (secretKey != other.secretKey) return false
+        if (niceName != other.niceName) return false
+        if (creatorName != other.creatorName) return false
+        if (createdTime != other.createdTime) return false
+        if (updaterName != other.updaterName) return false
+        if (updatedTime != other.updatedTime) return false
         return true
     }
 
     override fun hashCode(): Int {
         var result = 0
         result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + (user_name?.hashCode() ?: 0)
-        result = 31 * result + (user_pwd?.hashCode() ?: 0)
-        result = 31 * result + (secret_algorithm?.hashCode() ?: 0)
-        result = 31 * result + (secret_key?.hashCode() ?: 0)
-        result = 31 * result + (nice_name?.hashCode() ?: 0)
-        result = 31 * result + (creator_name?.hashCode() ?: 0)
-        result = 31 * result + (created_time?.hashCode() ?: 0)
-        result = 31 * result + (updater_name?.hashCode() ?: 0)
-        result = 31 * result + (updated_time?.hashCode() ?: 0)
+        result = 31 * result + (userName?.hashCode() ?: 0)
+        result = 31 * result + (userPwd?.hashCode() ?: 0)
+        result = 31 * result + (secretAlgorithm?.hashCode() ?: 0)
+        result = 31 * result + (secretKey?.hashCode() ?: 0)
+        result = 31 * result + (niceName?.hashCode() ?: 0)
+        result = 31 * result + (creatorName?.hashCode() ?: 0)
+        result = 31 * result + (createdTime?.hashCode() ?: 0)
+        result = 31 * result + (updaterName?.hashCode() ?: 0)
+        result = 31 * result + (updatedTime?.hashCode() ?: 0)
         return result
     }
 

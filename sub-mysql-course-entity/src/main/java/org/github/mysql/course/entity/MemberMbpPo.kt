@@ -79,7 +79,7 @@ open class MemberMbpPo : Entity() {
         if (password != other.password) return false
         if (name != other.name) return false
         if (photo != other.photo) return false
-        if (register_time != other.register_time) return false
+        if (registerTime != other.registerTime) return false
         return true
     }
 
@@ -90,7 +90,7 @@ open class MemberMbpPo : Entity() {
         result = 31 * result + (password?.hashCode() ?: 0)
         result = 31 * result + (name?.hashCode() ?: 0)
         result = 31 * result + (photo?.hashCode() ?: 0)
-        result = 31 * result + (register_time?.hashCode() ?: 0)
+        result = 31 * result + (registerTime?.hashCode() ?: 0)
         return result
     }
 

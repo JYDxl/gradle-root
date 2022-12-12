@@ -61,18 +61,18 @@ open class SysDictMbpPo : Entity() {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is SysDictMbpPo) return false
-        if (dict_code != other.dict_code) return false
-        if (dict_name != other.dict_name) return false
-        if (dict_info != other.dict_info) return false
+        if (dictCode != other.dictCode) return false
+        if (dictName != other.dictName) return false
+        if (dictInfo != other.dictInfo) return false
         if (revision != other.revision) return false
         return true
     }
 
     override fun hashCode(): Int {
         var result = 0
-        result = 31 * result + (dict_code?.hashCode() ?: 0)
-        result = 31 * result + (dict_name?.hashCode() ?: 0)
-        result = 31 * result + (dict_info?.hashCode() ?: 0)
+        result = 31 * result + (dictCode?.hashCode() ?: 0)
+        result = 31 * result + (dictName?.hashCode() ?: 0)
+        result = 31 * result + (dictInfo?.hashCode() ?: 0)
         result = 31 * result + (revision?.hashCode() ?: 0)
         return result
     }

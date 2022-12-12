@@ -134,9 +134,9 @@ open class CourseMbpPo : Entity() {
         if (status != other.status) return false
         if (enroll != other.enroll) return false
         if (sort != other.sort) return false
-        if (created_at != other.created_at) return false
-        if (updated_at != other.updated_at) return false
-        if (teacher_id != other.teacher_id) return false
+        if (createdAt != other.createdAt) return false
+        if (updatedAt != other.updatedAt) return false
+        if (teacherId != other.teacherId) return false
         return true
     }
 
@@ -153,9 +153,9 @@ open class CourseMbpPo : Entity() {
         result = 31 * result + (status?.hashCode() ?: 0)
         result = 31 * result + (enroll?.hashCode() ?: 0)
         result = 31 * result + (sort?.hashCode() ?: 0)
-        result = 31 * result + (created_at?.hashCode() ?: 0)
-        result = 31 * result + (updated_at?.hashCode() ?: 0)
-        result = 31 * result + (teacher_id?.hashCode() ?: 0)
+        result = 31 * result + (createdAt?.hashCode() ?: 0)
+        result = 31 * result + (updatedAt?.hashCode() ?: 0)
+        result = 31 * result + (teacherId?.hashCode() ?: 0)
         return result
     }
 

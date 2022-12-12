@@ -68,7 +68,7 @@ open class CourseContentFileMbpPo : Entity() {
         if (this === other) return true
         if (other !is CourseContentFileMbpPo) return false
         if (id != other.id) return false
-        if (course_id != other.course_id) return false
+        if (courseId != other.courseId) return false
         if (url != other.url) return false
         if (name != other.name) return false
         if (size != other.size) return false
@@ -78,7 +78,7 @@ open class CourseContentFileMbpPo : Entity() {
     override fun hashCode(): Int {
         var result = 0
         result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + (course_id?.hashCode() ?: 0)
+        result = 31 * result + (courseId?.hashCode() ?: 0)
         result = 31 * result + (url?.hashCode() ?: 0)
         result = 31 * result + (name?.hashCode() ?: 0)
         result = 31 * result + (size?.hashCode() ?: 0)

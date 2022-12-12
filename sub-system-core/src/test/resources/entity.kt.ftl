@@ -103,7 +103,7 @@ open class ${entity} : Serializable {
         if (this === other) return true
         if (other !is ${entity}) return false
         <#list table.fields as field>
-        if (${field.name} != other.${field.name}) return false
+        if (${field.propertyName} != other.${field.propertyName}) return false
         </#list>
         return true
     }
@@ -111,7 +111,7 @@ open class ${entity} : Serializable {
     override fun hashCode(): Int {
         var result = 0
         <#list table.fields as field>
-        result = 31 * result + (${field.name}?.hashCode() ?: 0)
+        result = 31 * result + (${field.propertyName}?.hashCode() ?: 0)
         </#list>
         return result
     }

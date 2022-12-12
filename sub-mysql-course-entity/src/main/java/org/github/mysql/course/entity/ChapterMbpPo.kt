@@ -56,7 +56,7 @@ open class ChapterMbpPo : Entity() {
         if (this === other) return true
         if (other !is ChapterMbpPo) return false
         if (id != other.id) return false
-        if (course_id != other.course_id) return false
+        if (courseId != other.courseId) return false
         if (name != other.name) return false
         return true
     }
@@ -64,7 +64,7 @@ open class ChapterMbpPo : Entity() {
     override fun hashCode(): Int {
         var result = 0
         result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + (course_id?.hashCode() ?: 0)
+        result = 31 * result + (courseId?.hashCode() ?: 0)
         result = 31 * result + (name?.hashCode() ?: 0)
         return result
     }
