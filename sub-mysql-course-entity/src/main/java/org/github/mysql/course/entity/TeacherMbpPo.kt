@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package org.github.mysql.course.entity
 
@@ -74,6 +74,31 @@ open class TeacherMbpPo : Entity() {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is TeacherMbpPo) return false
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (nickname != other.nickname) return false
+        if (image != other.image) return false
+        if (position != other.position) return false
+        if (motto != other.motto) return false
+        if (intro != other.intro) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (nickname?.hashCode() ?: 0)
+        result = 31 * result + (image?.hashCode() ?: 0)
+        result = 31 * result + (position?.hashCode() ?: 0)
+        result = 31 * result + (motto?.hashCode() ?: 0)
+        result = 31 * result + (intro?.hashCode() ?: 0)
+        return result
     }
 
 }

@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package org.github.mysql.center.entity
 
@@ -62,6 +62,27 @@ open class ResourceMbpPo : Entity() {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is ResourceMbpPo) return false
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (page != other.page) return false
+        if (request != other.request) return false
+        if (parent != other.parent) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (page?.hashCode() ?: 0)
+        result = 31 * result + (request?.hashCode() ?: 0)
+        result = 31 * result + (parent?.hashCode() ?: 0)
+        return result
     }
 
 }

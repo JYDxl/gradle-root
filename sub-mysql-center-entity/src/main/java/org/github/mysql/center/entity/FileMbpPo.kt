@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package org.github.mysql.center.entity
 
@@ -111,6 +111,43 @@ open class FileMbpPo : Entity() {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is FileMbpPo) return false
+        if (id != other.id) return false
+        if (path != other.path) return false
+        if (name != other.name) return false
+        if (suffix != other.suffix) return false
+        if (size != other.size) return false
+        if (use != other.use) return false
+        if (created_at != other.created_at) return false
+        if (updated_at != other.updated_at) return false
+        if (shard_index != other.shard_index) return false
+        if (shard_size != other.shard_size) return false
+        if (shard_total != other.shard_total) return false
+        if (key != other.key) return false
+        if (vod != other.vod) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + (path?.hashCode() ?: 0)
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (suffix?.hashCode() ?: 0)
+        result = 31 * result + (size?.hashCode() ?: 0)
+        result = 31 * result + (use?.hashCode() ?: 0)
+        result = 31 * result + (created_at?.hashCode() ?: 0)
+        result = 31 * result + (updated_at?.hashCode() ?: 0)
+        result = 31 * result + (shard_index?.hashCode() ?: 0)
+        result = 31 * result + (shard_size?.hashCode() ?: 0)
+        result = 31 * result + (shard_total?.hashCode() ?: 0)
+        result = 31 * result + (key?.hashCode() ?: 0)
+        result = 31 * result + (vod?.hashCode() ?: 0)
+        return result
     }
 
 }

@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package org.github.mysql.center.entity
 
@@ -56,6 +56,25 @@ open class SysDictMbpPo : Entity() {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is SysDictMbpPo) return false
+        if (dict_code != other.dict_code) return false
+        if (dict_name != other.dict_name) return false
+        if (dict_info != other.dict_info) return false
+        if (revision != other.revision) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        result = 31 * result + (dict_code?.hashCode() ?: 0)
+        result = 31 * result + (dict_name?.hashCode() ?: 0)
+        result = 31 * result + (dict_info?.hashCode() ?: 0)
+        result = 31 * result + (revision?.hashCode() ?: 0)
+        return result
     }
 
 }

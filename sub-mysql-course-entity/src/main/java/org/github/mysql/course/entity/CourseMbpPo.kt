@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package org.github.mysql.course.entity
 
@@ -118,6 +118,45 @@ open class CourseMbpPo : Entity() {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is CourseMbpPo) return false
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (summary != other.summary) return false
+        if (time != other.time) return false
+        if (price != other.price) return false
+        if (image != other.image) return false
+        if (level != other.level) return false
+        if (charge != other.charge) return false
+        if (status != other.status) return false
+        if (enroll != other.enroll) return false
+        if (sort != other.sort) return false
+        if (created_at != other.created_at) return false
+        if (updated_at != other.updated_at) return false
+        if (teacher_id != other.teacher_id) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (summary?.hashCode() ?: 0)
+        result = 31 * result + (time?.hashCode() ?: 0)
+        result = 31 * result + (price?.hashCode() ?: 0)
+        result = 31 * result + (image?.hashCode() ?: 0)
+        result = 31 * result + (level?.hashCode() ?: 0)
+        result = 31 * result + (charge?.hashCode() ?: 0)
+        result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (enroll?.hashCode() ?: 0)
+        result = 31 * result + (sort?.hashCode() ?: 0)
+        result = 31 * result + (created_at?.hashCode() ?: 0)
+        result = 31 * result + (updated_at?.hashCode() ?: 0)
+        result = 31 * result + (teacher_id?.hashCode() ?: 0)
+        return result
     }
 
 }

@@ -1,4 +1,4 @@
-@file:Suppress("UnusedImport", "unused")
+@file:Suppress("UnusedImport", "unused", "KotlinConstantConditions")
 
 package org.github.mysql.center.entity
 
@@ -93,6 +93,37 @@ open class SysUserMbpPo : Entity() {
 
     override fun toString(): String {
         return get()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is SysUserMbpPo) return false
+        if (id != other.id) return false
+        if (user_name != other.user_name) return false
+        if (user_pwd != other.user_pwd) return false
+        if (secret_algorithm != other.secret_algorithm) return false
+        if (secret_key != other.secret_key) return false
+        if (nice_name != other.nice_name) return false
+        if (creator_name != other.creator_name) return false
+        if (created_time != other.created_time) return false
+        if (updater_name != other.updater_name) return false
+        if (updated_time != other.updated_time) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = 0
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + (user_name?.hashCode() ?: 0)
+        result = 31 * result + (user_pwd?.hashCode() ?: 0)
+        result = 31 * result + (secret_algorithm?.hashCode() ?: 0)
+        result = 31 * result + (secret_key?.hashCode() ?: 0)
+        result = 31 * result + (nice_name?.hashCode() ?: 0)
+        result = 31 * result + (creator_name?.hashCode() ?: 0)
+        result = 31 * result + (created_time?.hashCode() ?: 0)
+        result = 31 * result + (updater_name?.hashCode() ?: 0)
+        result = 31 * result + (updated_time?.hashCode() ?: 0)
+        return result
     }
 
 }
