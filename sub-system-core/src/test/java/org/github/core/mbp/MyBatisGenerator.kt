@@ -291,6 +291,7 @@ fun mysqlCenter() {
 
   // 重新生成枚举
   val subDictName = "sub-module-center-dict"
+  val subDictPack = "org/github/center"
   del("$path/$subDictName/src/main/java/$packageName/$moduleName/dict")
   val ds = SimpleDataSource(url, username, password)
 
@@ -307,12 +308,12 @@ fun mysqlCenter() {
       "name" to name,
       "list" to list,
       "type" to index[dictName],
-      "pack" to "$packageName/$moduleName/dict".replace('/', '.')
+      "pack" to "$subDictPack/dict".replace('/', '.')
     )
     val fileName = if (enableKotlin) "$name.kt" else "$name.java"
     val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
     val content: String = engine.getTemplate(readUtf8String(template)).render(args)
-    writeUtf8String(content, "$path/$subDictName/src/main/java/$packageName/$moduleName/dict/$fileName")
+    writeUtf8String(content, "$path/$subDictName/src/main/java/$subDictPack/dict/$fileName")
   }
 }
 

@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package org.github.mysql.center.dict
+package org.github.center.dict
 
 import org.github.core.base.BaseEnum
 
