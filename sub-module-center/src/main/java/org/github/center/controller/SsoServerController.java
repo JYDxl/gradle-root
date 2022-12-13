@@ -28,7 +28,7 @@ public class SsoServerController {
     // 配置：未登录时返回的View
     sso.setNotLoginView(() -> JSONReturn.of(UNAUTHORIZED, null));
     // 配置：登录处理函数
-    sso.setDoLoginHandle((name, pwd) -> centerService.token(new LoginBo(name, pwd)));
+    sso.setDoLoginHandle((name, pwd) -> centerService.login(new LoginBo(name, pwd)));
   }
 
   @RequestMapping("/sso/getRedirectUrl")
