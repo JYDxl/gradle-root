@@ -4,7 +4,6 @@ import cn.dev33.satoken.`fun`.SaFunction
 import cn.dev33.satoken.interceptor.SaInterceptor
 import cn.dev33.satoken.jwt.StpLogicJwtForSimple
 import cn.dev33.satoken.router.SaRouter.notMatch
-import cn.dev33.satoken.stp.StpUtil.TYPE
 import cn.dev33.satoken.stp.StpUtil.checkLogin
 import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of
@@ -34,7 +33,7 @@ class WebMvcConfigWithSaToken: WebMvcConfigurer {
   }
 
   @Bean
-  fun stpLogicJwt() = StpLogicJwtForSimple(TYPE)
+  fun stpLogicJwt() = StpLogicJwtForSimple()
 
   override fun addInterceptors(registry: InterceptorRegistry) {
     registry.addInterceptor(SaInterceptor {notMatch(commonDynamicProperties.whiteList).check(SaFunction {checkLogin()})}).addPathPatterns("/**")
