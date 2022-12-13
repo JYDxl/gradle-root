@@ -2,19 +2,25 @@ package org.github.center.service.impl
 
 import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import cn.dev33.satoken.stp.StpUtil.login
+import cn.hutool.core.util.HexUtil.decodeHex
+import cn.hutool.core.util.HexUtil.encodeHexStr
 import cn.hutool.crypto.SecureUtil.generateKey
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm.AES
 import cn.hutool.crypto.symmetric.SymmetricCrypto
 import javax.annotation.Resource
+import org.github.center.SERVER_CENTER_NAME
 import org.github.center.bo.LoginBo
 import org.github.center.service.ICenterService
 import org.github.core.exception.ClientException
+import org.github.core.minio.MinioUploadBo
+import org.github.core.minio.MinioWrapper
 import org.github.core.spring.restful.json.JSONDataReturn
 import org.github.core.spring.restful.json.JSONReturn
 import org.github.mysql.center.entity.SysUserMbpPo
 import org.github.mysql.center.service.ISysUserMbpService
 import org.springframework.stereotype.Service
 import org.springframework.validation.annotation.Validated
+import org.springframework.web.multipart.MultipartFile
 
 @Validated
 @Service
@@ -22,15 +28,19 @@ class CenterService: ICenterService {
   @Resource
   private lateinit var sysUserMbpService: ISysUserMbpService
 
+  @Resource
+  private lateinit var minioWrapper: MinioWrapper
+
   override fun register(bo: LoginBo): JSONReturn {
     val key = generateKey(AES.value).encoded!!
     val aes = SymmetricCrypto(AES, key)
-    val password = aes.encryptHex(bo.password)!!
+    val password = aes.encryptHex(bo.pwd)!!
 
     val entity = SysUserMbpPo().apply {
-      userName = bo.username
+      userName = bo.name
+      niceName = userName
+      secretKey = encodeHexStr(key)
       userPwd = password
-      secretKey = key.decodeToString()
     }
 
     sysUserMbpService.save(entity)
@@ -39,9 +49,9 @@ class CenterService: ICenterService {
 
   override fun login(bo: LoginBo): JSONDataReturn<String> {
     val msg = "用户名或密码错误"
-    val user = sysUserMbpService.ktQuery().eq(SysUserMbpPo::userName, bo.username).one() ?: throw ClientException(msg)
-    val crypto = SymmetricCrypto(AES, user.secretKey!!.encodeToByteArray())
-    val password = crypto.encryptHex(bo.password)!!
+    val user = sysUserMbpService.ktQuery().eq(SysUserMbpPo::userName, bo.name).one() ?: throw ClientException(msg)
+    val crypto = SymmetricCrypto(AES, decodeHex(user.secretKey))
+    val password = crypto.encryptHex(bo.pwd)!!
     if (password != user.userPwd) throw ClientException(msg)
 
     login(user.userName)
@@ -51,5 +61,18 @@ class CenterService: ICenterService {
 
   override fun refresh(): JSONDataReturn<String> {
     TODO("Not yet implemented")
+  }
+
+  override fun upload(file: MultipartFile): JSONDataReturn<String> {
+    val bo = MinioUploadBo().apply {
+      bucket = SERVER_CENTER_NAME
+      name = file.originalFilename
+      input = file.inputStream
+      objSize = file.size
+    }
+
+    minioWrapper.upload(bo)
+    val url = minioWrapper.getUrl(bo)!!
+    return JSONDataReturn.of(url)
   }
 }

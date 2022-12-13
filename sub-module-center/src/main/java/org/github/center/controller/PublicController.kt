@@ -1,33 +1,31 @@
 package org.github.center.controller
 
-import org.github.center.SERVER_CENTER_NAME
-import org.github.core.minio.MinioUploadBo
-import org.github.core.minio.MinioWrapper
+import io.swagger.annotations.Api
+import io.swagger.annotations.ApiOperation
+import javax.annotation.Resource
+import org.github.center.bo.LoginBo
+import org.github.center.service.ICenterService
 import org.github.core.spring.restful.Returnable
-import org.github.core.spring.restful.json.JSONReturn
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
-import javax.annotation.Resource
 
+@Api("共通功能")
 @RestController
 @RequestMapping("/public/")
 class PublicController {
   @Resource
-  private lateinit var minioWrapper: MinioWrapper
+  private lateinit var centerService: ICenterService
 
-  @PostMapping("save")
-  fun save(file: MultipartFile): Returnable {
-    val bo = MinioUploadBo().apply {
-      bucket = SERVER_CENTER_NAME
-      name = file.originalFilename
-      input = file.inputStream
-      objSize = file.size
-      path = ""
-    }
-
-    minioWrapper.upload(bo)
-    return JSONReturn.ok()
+  @ApiOperation("共通功能-上传")
+  @PostMapping("upload")
+  fun upload(file: MultipartFile): Returnable {
+    return centerService.upload(file)
   }
+
+  @ApiOperation("共通功能-注册")
+  @PostMapping("register")
+  fun register(@RequestBody bo: LoginBo) = centerService.register(bo.apply {trim()})
 }
