@@ -9,7 +9,7 @@ spring:
             allowed-methods: "*"
             allowed-headers: "*"
       routes:
-        - id: auth
+        - id: base
           uri: lb://center-server
           predicates:
             - Path=/*/sso/doLogin,/*/auth/**,/*/public/**

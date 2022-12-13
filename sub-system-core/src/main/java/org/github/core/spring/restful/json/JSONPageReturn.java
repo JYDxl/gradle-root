@@ -1,6 +1,7 @@
 package org.github.core.spring.restful.json;
 
 import com.google.common.collect.ImmutableList;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Collection;
 import java.util.function.Function;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ import org.github.core.base.IPage;
 @NoArgsConstructor
 @Data
 public class JSONPageReturn<E> extends JSONArrayReturn<E> implements JSON {
-  /** 总数 */
+  @ApiModelProperty("总数")
   private long total = 0L;
 
   @Override

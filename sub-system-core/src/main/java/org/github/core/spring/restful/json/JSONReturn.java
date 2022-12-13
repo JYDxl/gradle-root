@@ -2,6 +2,7 @@ package org.github.core.spring.restful.json;
 
 import cn.hutool.core.util.StrUtil;
 import com.google.common.base.MoreObjects;
+import io.swagger.annotations.ApiModelProperty;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +21,9 @@ import org.springframework.http.HttpStatus;
  */
 @Data
 public class JSONReturn implements JSON {
-  /** 状态 */
+  @ApiModelProperty("状态")
   private          int    code;
-  /** 信息 */
+  @ApiModelProperty("信息")
   private @NonNull String msg;
 
   public JSONReturn() {

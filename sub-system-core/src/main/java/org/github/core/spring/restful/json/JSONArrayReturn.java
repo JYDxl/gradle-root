@@ -1,6 +1,7 @@
 package org.github.core.spring.restful.json;
 
 import com.google.common.collect.ImmutableList;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Function;
@@ -23,7 +24,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Data
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
-  /** 数据 */
+  @ApiModelProperty("数据")
   private @NonNull Collection<? extends E> data = Collections.emptyList();
 
   @Override
