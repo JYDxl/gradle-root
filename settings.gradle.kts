@@ -26,6 +26,9 @@ include("sub-mysql-center-service")
 include("sub-mysql-course-entity")
 include("sub-mysql-course-service")
 
+include("sub-mysql-blog-entity")
+include("sub-mysql-blog-service")
+
 include("sub-module-web-service")
 include("sub-module-web-dto")
 include("sub-module-web-api")
