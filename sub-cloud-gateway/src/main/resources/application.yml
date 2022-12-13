@@ -9,6 +9,13 @@ spring:
             allowed-methods: "*"
             allowed-headers: "*"
       routes:
+        - id: auth
+          uri: lb://center-server
+          predicates:
+            - Path=/*/sso/doLogin,/*/auth/**
+          filters:
+            - StripPrefix=1
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
         - id: center
           uri: lb://center-server
           predicates:

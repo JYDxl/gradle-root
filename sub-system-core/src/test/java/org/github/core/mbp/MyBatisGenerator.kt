@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil.del
 import cn.hutool.core.io.FileUtil.readUtf8String
 import cn.hutool.core.io.FileUtil.writeUtf8String
 import cn.hutool.core.util.StrUtil.toCamelCase
+import cn.hutool.core.util.StrUtil.toUnderlineCase
 import cn.hutool.db.Db.use
 import cn.hutool.db.Entity.create
 import cn.hutool.db.ds.simple.SimpleDataSource
@@ -301,6 +302,7 @@ fun mysqlCenter() {
   map.forEach {(dictName, list) ->
     val name = toCamelCase(dictName).replaceFirstChar {it.uppercase()}
     val args = mapOf(
+      "const" to toUnderlineCase(name).uppercase(),
       "name" to name,
       "list" to list,
       "type" to index[dictName],

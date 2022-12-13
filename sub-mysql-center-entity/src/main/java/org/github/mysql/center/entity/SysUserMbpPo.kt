@@ -33,9 +33,17 @@ open class SysUserMbpPo : Entity() {
     @TableField("user_pwd")
     open var userPwd: String? = null
 
+    @ApiModelProperty("密钥")
+    @TableField("secret_key")
+    open var secretKey: String? = null
+
     @ApiModelProperty("昵称")
     @TableField("nice_name")
     open var niceName: String? = null
+
+    @ApiModelProperty("账号状态")
+    @TableField("account_status")
+    open var accountStatus: String? = null
 
     @ApiModelProperty("创建人")
     @TableField("creator_name")
@@ -53,10 +61,6 @@ open class SysUserMbpPo : Entity() {
     @TableField("updated_time")
     open var updatedTime: LocalDateTime? = null
 
-    @ApiModelProperty("密钥")
-    @TableField("secret_key")
-    open var secretKey: String? = null
-
     companion object {
 
         private const val serialVersionUID = 1L
@@ -67,7 +71,11 @@ open class SysUserMbpPo : Entity() {
 
         const val USER_PWD : String = "user_pwd"
 
+        const val SECRET_KEY : String = "secret_key"
+
         const val NICE_NAME : String = "nice_name"
+
+        const val ACCOUNT_STATUS : String = "account_status"
 
         const val CREATOR_NAME : String = "creator_name"
 
@@ -76,8 +84,6 @@ open class SysUserMbpPo : Entity() {
         const val UPDATER_NAME : String = "updater_name"
 
         const val UPDATED_TIME : String = "updated_time"
-
-        const val SECRET_KEY : String = "secret_key"
 
     }
 
@@ -95,12 +101,13 @@ open class SysUserMbpPo : Entity() {
         if (id != other.id) return false
         if (userName != other.userName) return false
         if (userPwd != other.userPwd) return false
+        if (secretKey != other.secretKey) return false
         if (niceName != other.niceName) return false
+        if (accountStatus != other.accountStatus) return false
         if (creatorName != other.creatorName) return false
         if (createdTime != other.createdTime) return false
         if (updaterName != other.updaterName) return false
         if (updatedTime != other.updatedTime) return false
-        if (secretKey != other.secretKey) return false
         return true
     }
 
@@ -109,12 +116,13 @@ open class SysUserMbpPo : Entity() {
         result = 31 * result + (id?.hashCode() ?: 0)
         result = 31 * result + (userName?.hashCode() ?: 0)
         result = 31 * result + (userPwd?.hashCode() ?: 0)
+        result = 31 * result + (secretKey?.hashCode() ?: 0)
         result = 31 * result + (niceName?.hashCode() ?: 0)
+        result = 31 * result + (accountStatus?.hashCode() ?: 0)
         result = 31 * result + (creatorName?.hashCode() ?: 0)
         result = 31 * result + (createdTime?.hashCode() ?: 0)
         result = 31 * result + (updaterName?.hashCode() ?: 0)
         result = 31 * result + (updatedTime?.hashCode() ?: 0)
-        result = 31 * result + (secretKey?.hashCode() ?: 0)
         return result
     }
 
