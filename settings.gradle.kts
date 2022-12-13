@@ -40,6 +40,7 @@ include("sub-module-blog-api")
 include("sub-module-blog")
 
 include("sub-module-center-service")
+include("sub-module-center-dict")
 include("sub-module-center-dto")
 include("sub-module-center-api")
 include("sub-module-center")

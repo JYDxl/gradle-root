@@ -30,5 +30,12 @@ spring:
           filters:
             - StripPrefix=1
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
+        - id: blog
+          uri: lb://blog-server
+          predicates:
+            - Path=/blog/**
+          filters:
+            - StripPrefix=1
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials Vary
   redis:
     database: 15

@@ -290,7 +290,8 @@ fun mysqlCenter() {
   generator.execute()
 
   // 重新生成枚举
-  del("$path/$subEntityName/src/main/java/$packageName/$moduleName/dict")
+  val subDictName = "sub-module-center-dict"
+  del("$path/$subDictName/src/main/java/$packageName/$moduleName/dict")
   val ds = SimpleDataSource(url, username, password)
 
   val dictList: MutableList<Dict> = use(ds).findAll(create("t_sys_dict"), Dict::class.java)
@@ -311,7 +312,7 @@ fun mysqlCenter() {
     val fileName = if (enableKotlin) "$name.kt" else "$name.java"
     val template = if (enableKotlin) "enum.kt.ftl" else "enum.java.ftl"
     val content: String = engine.getTemplate(readUtf8String(template)).render(args)
-    writeUtf8String(content, "$path/$subEntityName/src/main/java/$packageName/$moduleName/dict/$fileName")
+    writeUtf8String(content, "$path/$subDictName/src/main/java/$packageName/$moduleName/dict/$fileName")
   }
 }
 
