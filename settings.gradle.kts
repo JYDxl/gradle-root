@@ -34,6 +34,11 @@ include("sub-module-web-dto")
 include("sub-module-web-api")
 include("sub-module-web")
 
+include("sub-module-blog-service")
+include("sub-module-blog-dto")
+include("sub-module-blog-api")
+include("sub-module-blog")
+
 include("sub-module-center-service")
 include("sub-module-center-dto")
 include("sub-module-center-api")

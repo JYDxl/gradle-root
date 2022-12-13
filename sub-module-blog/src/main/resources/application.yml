@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          url: jdbc:mysql://frp:3306/blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&rewriteBatchedStatements=true
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          username: root
+          password: XLrootJYD713
+          type: com.zaxxer.hikari.HikariDataSource
+          pool-name: hikari-cp
+          hikari:
+            minimum-idle: 6
+            maximum-pool-size: 12

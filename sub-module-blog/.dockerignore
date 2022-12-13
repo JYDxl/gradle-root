@@ -1,0 +1,3 @@
+*
+!build/libs/blog-boot.jar
+!build/bootScripts/sub-module-blog
