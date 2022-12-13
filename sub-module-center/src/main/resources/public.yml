@@ -110,7 +110,7 @@ feign:
 sa-token:
   jwt-secret-key: XLrootJYD713
   token-name: token
-  timeout: 1800
+  activity-timeout: 1800
   is-log: true
   alone-redis:
     database: 15

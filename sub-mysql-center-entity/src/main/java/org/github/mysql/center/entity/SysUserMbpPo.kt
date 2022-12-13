@@ -39,7 +39,7 @@ open class SysUserMbpPo : Entity() {
 
     @ApiModelProperty("秘钥")
     @TableField("secret_key")
-    open var secretKey: ByteArray? = null
+    open var secretKey: String? = null
 
     @ApiModelProperty("昵称")
     @TableField("nice_name")
