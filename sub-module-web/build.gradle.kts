@@ -57,6 +57,7 @@ val mysql: String by System.getProperties()
 
 dependencies {
   implementation(project(":sub-system-common"))
+  implementation(project(":sub-system-sso"))
   implementation(project(":sub-module-center-service"))
 
   implementation("org.springframework.boot:spring-boot-starter-amqp")

@@ -10,6 +10,8 @@ rootProject.name = "gradle-root"
 
 include("sub-system-core")
 
+include("sub-system-sso")
+
 include("sub-system-common")
 
 include("sub-cloud-gateway")

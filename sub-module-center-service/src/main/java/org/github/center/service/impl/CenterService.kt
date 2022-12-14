@@ -1,5 +1,6 @@
 package org.github.center.service.impl
 
+import cn.dev33.satoken.stp.StpUtil.getTokenInfo
 import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import cn.dev33.satoken.stp.StpUtil.login
 import cn.hutool.core.util.HexUtil.decodeHex
@@ -24,55 +25,58 @@ import org.springframework.web.multipart.MultipartFile
 
 @Validated
 @Service
-class CenterService: ICenterService {
-  @Resource
-  private lateinit var sysUserMbpService: ISysUserMbpService
+class CenterService : ICenterService {
+    @Resource
+    private lateinit var sysUserMbpService: ISysUserMbpService
 
-  @Resource
-  private lateinit var minioWrapper: MinioWrapper
+    @Resource
+    private lateinit var minioWrapper: MinioWrapper
 
-  override fun register(bo: LoginBo): JSONReturn {
-    val key = generateKey(AES.value).encoded!!
-    val aes = SymmetricCrypto(AES, key)
-    val password = aes.encryptHex(bo.pwd)!!
+    override fun register(bo: LoginBo): JSONReturn {
+        val key = generateKey(AES.value).encoded!!
+        val aes = SymmetricCrypto(AES, key)
+        val password = aes.encryptHex(bo.password)!!
 
-    val entity = SysUserMbpPo().apply {
-      userName = bo.name
-      niceName = userName
-      secretKey = encodeHexStr(key)
-      userPwd = password
+        val entity = SysUserMbpPo().apply {
+            userName = bo.username
+            niceName = userName
+            secretKey = encodeHexStr(key)
+            userPwd = password
+        }
+
+        sysUserMbpService.save(entity)
+        return JSONReturn.ok()
     }
 
-    sysUserMbpService.save(entity)
-    return JSONReturn.ok()
-  }
+    override fun login(bo: LoginBo): JSONDataReturn<String> {
+        val msg = "用户名或密码错误"
+        val user = sysUserMbpService.ktQuery().eq(SysUserMbpPo::userName, bo.username).one() ?: throw ClientException(msg)
+        val crypto = SymmetricCrypto(AES, decodeHex(user.secretKey))
+        val password = crypto.encryptHex(bo.password)!!
+        if (password != user.userPwd) throw ClientException(msg)
 
-  override fun login(bo: LoginBo): JSONDataReturn<String> {
-    val msg = "用户名或密码错误"
-    val user = sysUserMbpService.ktQuery().eq(SysUserMbpPo::userName, bo.name).one() ?: throw ClientException(msg)
-    val crypto = SymmetricCrypto(AES, decodeHex(user.secretKey))
-    val password = crypto.encryptHex(bo.pwd)!!
-    if (password != user.userPwd) throw ClientException(msg)
-
-    login(user.userName)
-    val token = getTokenValue()!!
-    return JSONDataReturn.of(token)
-  }
-
-  override fun refresh(): JSONDataReturn<String> {
-    TODO("Not yet implemented")
-  }
-
-  override fun upload(file: MultipartFile): JSONDataReturn<String> {
-    val bo = MinioUploadBo().apply {
-      bucket = SERVER_CENTER_NAME
-      name = file.originalFilename
-      input = file.inputStream
-      objSize = file.size
+        login(user.userName)
+        val token = getTokenValue()!!
+        return JSONDataReturn.of(token)
     }
 
-    minioWrapper.upload(bo)
-    val url = minioWrapper.getUrl(bo)!!
-    return JSONDataReturn.of(url)
-  }
+    override fun refresh(): JSONDataReturn<String> {
+        val tokenInfo = getTokenInfo()!!
+        login(tokenInfo.loginId)
+        val token = getTokenValue()!!
+        return JSONDataReturn.of(token)
+    }
+
+    override fun upload(file: MultipartFile): JSONDataReturn<String> {
+        val bo = MinioUploadBo().apply {
+            bucket = SERVER_CENTER_NAME
+            name = file.originalFilename
+            input = file.inputStream
+            objSize = file.size
+        }
+
+        minioWrapper.upload(bo)
+        val url = minioWrapper.getUrl(bo)!!
+        return JSONDataReturn.of(url)
+    }
 }

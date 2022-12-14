@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList.builder
 import com.google.common.collect.ImmutableList.of
 import javax.annotation.Resource
 import org.github.common.props.CommonDynamicProperties
+import org.github.core.TOKEN_NAME
 import org.github.core.spring.mvc.ReturnableValueHandlerKotlin
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -33,7 +34,7 @@ class WebMvcConfigWithSaToken: WebMvcConfigurer {
   }
 
   @Bean
-  fun stpLogicJwt() = StpLogicJwtForSimple()
+  fun stpLogicJwt() = StpLogicJwtForSimple(TOKEN_NAME)
 
   override fun addInterceptors(registry: InterceptorRegistry) {
     registry.addInterceptor(SaInterceptor {notMatch(commonDynamicProperties.whiteList).check(SaFunction {checkLogin()})}).addPathPatterns("/**")
