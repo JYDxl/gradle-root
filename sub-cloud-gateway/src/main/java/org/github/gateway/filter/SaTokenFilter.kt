@@ -1,72 +1,70 @@
-package org.github.gateway.filter;
+package org.github.gateway.filter
 
-import cn.hutool.core.text.AntPathMatcher;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.annotation.Resource;
-import lombok.SneakyThrows;
-import org.github.gateway.handler.Result;
-import org.github.gateway.props.GatewayDynamicProperties;
-import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.core.Ordered;
-import org.springframework.data.redis.core.ReactiveStringRedisTemplate;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.stereotype.Component;
-import org.springframework.web.server.ServerWebExchange;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-import reactor.netty.ByteBufFlux;
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.github.core.ConstKt.SA_TOKEN_PREFIX;
-import static org.github.core.ConstKt.TOKEN_NAME;
-import static org.springframework.http.HttpStatus.UNAUTHORIZED;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+import cn.hutool.core.text.AntPathMatcher
+import com.fasterxml.jackson.databind.ObjectMapper
+import javax.annotation.Resource
+import org.apache.commons.lang3.StringUtils.isBlank
+import org.github.core.SA_TOKEN_PREFIX
+import org.github.core.TOKEN_NAME
+import org.github.core.props.DynamicProperties
+import org.github.gateway.dto.Result
+import org.springframework.cloud.gateway.filter.GatewayFilterChain
+import org.springframework.cloud.gateway.filter.GlobalFilter
+import org.springframework.core.Ordered
+import org.springframework.core.Ordered.HIGHEST_PRECEDENCE
+import org.springframework.data.redis.core.ReactiveStringRedisTemplate
+import org.springframework.http.HttpStatus.UNAUTHORIZED
+import org.springframework.http.MediaType.APPLICATION_JSON
+import org.springframework.http.server.reactive.ServerHttpRequest
+import org.springframework.stereotype.Component
+import org.springframework.web.server.ServerWebExchange
+import reactor.core.publisher.Mono
+import reactor.core.publisher.Mono.just
+import reactor.core.publisher.Flux.just as fluxJust
 
 @Component
-public class SaTokenFilter implements GlobalFilter, Ordered {
-  private final AntPathMatcher              matcher = new AntPathMatcher();
-  @Resource
-  private       ReactiveStringRedisTemplate reactiveStringRedisTemplate;
-  @Resource
-  private       GatewayDynamicProperties    gatewayDynamicProperties;
-  @Resource
-  private       ObjectMapper                mapper;
+class SaTokenFilter : GlobalFilter, Ordered {
+    private val matcher = AntPathMatcher()
 
-  @Override
-  public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-    ServerHttpRequest request = exchange.getRequest();
-    return checkWhiteList(request)
-      .flatMap(v -> checkTokenExists(v, request))
-      .flatMap(v -> handle(v, exchange, chain));
-  }
+    @Resource
+    private lateinit var reactiveStringRedisTemplate: ReactiveStringRedisTemplate
 
-  private Mono<Boolean> checkWhiteList(ServerHttpRequest request) {
-    String path = request.getPath().value();
-    for (String item : gatewayDynamicProperties.getWhiteList()) if (matcher.match("/*" + item, path)) return Mono.just(true);
-    return Mono.just(false);
-  }
+    @Resource
+    private lateinit var gatewayDynamicProperties: DynamicProperties
 
-  private Mono<Boolean> checkTokenExists(Boolean allow, ServerHttpRequest request) {
-    if (allow) return Mono.just(true);
-    String token = request.getHeaders().getFirst(TOKEN_NAME);
-    if (isBlank(token)) return Mono.just(false);
-    return reactiveStringRedisTemplate.hasKey(SA_TOKEN_PREFIX + token);
-  }
+    @Resource
+    private lateinit var mapper: ObjectMapper
 
-  @SneakyThrows
-  private Mono<Void> handle(Boolean exists, ServerWebExchange exchange, GatewayFilterChain chain) {
-    if (exists) return chain.filter(exchange);
-    Result             data     = Result.of(UNAUTHORIZED, null);
-    byte[]             bytes    = mapper.writeValueAsBytes(data);
-    ServerHttpResponse response = exchange.getResponse();
-    response.getHeaders().setContentType(APPLICATION_JSON);
-    response.getHeaders().setContentLength(bytes.length);
-    return response.writeAndFlushWith(Flux.just(ByteBufFlux.just(response.bufferFactory().wrap(bytes))));
-  }
+    override fun filter(exchange: ServerWebExchange, chain: GatewayFilterChain): Mono<Void> {
+        val request = exchange.request
+        return checkWhiteList(request)
+            .flatMap { v: Boolean -> checkTokenExists(v, request) }
+            .flatMap { v: Boolean -> handle(v, exchange, chain) }
+    }
 
-  @Override
-  public int getOrder() {
-    return HIGHEST_PRECEDENCE;
-  }
+    private fun checkWhiteList(request: ServerHttpRequest): Mono<Boolean> {
+        val path = request.path.value()
+        for (item: String in gatewayDynamicProperties.whiteList) if (matcher.match("/*$item", path)) return just(true)
+        return just(false)
+    }
+
+    private fun checkTokenExists(allow: Boolean, request: ServerHttpRequest): Mono<Boolean> {
+        if (allow) return just(true)
+        val token = request.headers.getFirst(TOKEN_NAME)
+        return if (isBlank(token)) just(false) else reactiveStringRedisTemplate.hasKey(SA_TOKEN_PREFIX + token)
+    }
+
+    private fun handle(exists: Boolean, exchange: ServerWebExchange, chain: GatewayFilterChain): Mono<Void> {
+        if (exists) return chain.filter(exchange)
+        val data = Result(UNAUTHORIZED)
+        val bytes = mapper.writeValueAsBytes(data)
+        val response = exchange.response
+        response.headers.contentType = APPLICATION_JSON
+        response.headers.contentLength = bytes.size.toLong()
+        return response.writeAndFlushWith(fluxJust(fluxJust(response.bufferFactory().wrap(bytes))))
+    }
+
+    override fun getOrder(): Int {
+        return HIGHEST_PRECEDENCE
+    }
 }

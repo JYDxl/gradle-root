@@ -1,23 +1,14 @@
-package org.github.gateway.handler;
+package org.github.gateway.dto
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.springframework.http.HttpStatus;
-import static cn.hutool.core.text.CharSequenceUtil.firstNonBlank;
-import static org.springframework.http.HttpStatus.OK;
+import org.springframework.http.HttpStatus
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
-public class Result {
-  private int code = OK.value();
+class Result(status: HttpStatus, reason: String? = null) {
+    private val code: Int
 
-  @NonNull
-  private String msg = OK.name();
+    private val msg: String
 
-  public static Result of(HttpStatus status, String msg) {
-    return new Result(status.value(), firstNonBlank(msg, status.name()));
-  }
+    init {
+        code = status.value()
+        msg = reason ?: status.name
+    }
 }

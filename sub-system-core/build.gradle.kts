@@ -53,6 +53,7 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-aop")
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
+  compileOnly("org.springframework.cloud:spring-cloud-context")
 
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")

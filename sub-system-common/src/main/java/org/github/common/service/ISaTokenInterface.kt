@@ -1,16 +1,13 @@
-package org.github.common.service;
+package org.github.common.service
 
-import cn.dev33.satoken.stp.StpInterface;
-import com.alicp.jetcache.anno.Cached;
-import java.util.List;
-import static org.github.core.ConstKt.CACHE_NAME_ROLE;
-import static org.github.core.ConstKt.CACHE_TIMEOUT;
+import cn.dev33.satoken.stp.StpInterface
+import com.alicp.jetcache.anno.Cached
+import org.github.core.CACHE_NAME_ROLE
+import org.github.core.CACHE_TIMEOUT
 
-public interface ISaTokenInterface extends StpInterface {
-    @Override
-    List<String> getPermissionList(Object loginId, String loginType);
+interface ISaTokenInterface : StpInterface {
+    override fun getPermissionList(loginId: Any, loginType: String): List<String>
 
     @Cached(name = CACHE_NAME_ROLE, expire = CACHE_TIMEOUT, key = "#loginId")
-    @Override
-    List<String> getRoleList(Object loginId, String loginType);
+    override fun getRoleList(loginId: Any, loginType: String): List<String>
 }

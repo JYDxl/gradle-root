@@ -1,4 +1,4 @@
-package org.github.common.props;
+package org.github.core.props;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,7 +1,7 @@
 package org.github.common.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
-import org.github.common.props.XxlJobProperties;
+import org.github.core.props.XxlJobProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
