@@ -5,6 +5,7 @@ import cn.dev33.satoken.sso.SaSsoUtil.buildServerAuthUrl
 import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import cn.dev33.satoken.stp.StpUtil.isLogin
 import cn.dev33.satoken.stp.StpUtil.login
+import org.github.core.DEVICE_TYPE_PC
 import org.github.core.spring.restful.json.JSONDataReturn
 import org.github.core.spring.restful.json.JSONReturn
 import org.springframework.http.HttpStatus.UNAUTHORIZED
@@ -16,7 +17,7 @@ class SsoClientController {
     @RequestMapping("/sso/doLoginByTicket")
     fun doLoginByTicket(ticket: String): JSONReturn {
         val loginId = instance.checkTicket(ticket, "/sso/doLoginByTicket") ?: return JSONReturn.of(UNAUTHORIZED, "无效ticket：$ticket")
-        login(loginId)
+        login(loginId, DEVICE_TYPE_PC)
         val token = getTokenValue()!!
         return JSONDataReturn.of(token)
     }

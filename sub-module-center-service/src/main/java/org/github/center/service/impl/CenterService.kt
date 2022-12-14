@@ -12,6 +12,7 @@ import javax.annotation.Resource
 import org.github.center.SERVER_CENTER_NAME
 import org.github.center.bo.LoginBo
 import org.github.center.service.ICenterService
+import org.github.core.DEVICE_TYPE_PC
 import org.github.core.exception.ClientException
 import org.github.core.minio.MinioUploadBo
 import org.github.core.minio.MinioWrapper
@@ -55,14 +56,14 @@ class CenterService : ICenterService {
         val password = crypto.encryptHex(bo.password)!!
         if (password != user.userPwd) throw ClientException(msg)
 
-        login(user.userName)
+        login(user.userName, DEVICE_TYPE_PC)
         val token = getTokenValue()!!
         return JSONDataReturn.of(token)
     }
 
     override fun refresh(): JSONDataReturn<String> {
         val tokenInfo = getTokenInfo()!!
-        login(tokenInfo.loginId)
+        login(tokenInfo.loginId, tokenInfo.loginDevice)
         val token = getTokenValue()!!
         return JSONDataReturn.of(token)
     }
