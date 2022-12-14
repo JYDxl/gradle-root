@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:17.0.5-jre-headless
+FROM azul/zulu-openjdk-alpine:17.0.5-17.38.21-jre-headless
 
 RUN apk add tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -9,4 +9,4 @@ COPY build/libs/vertx-boot.jar /lib/vertx-boot.jar
 COPY build/scriptsShadow/sub-vertx /script/runner
 CMD ./script/runner
 
-EXPOSE 8080 5005
+EXPOSE 19005 15005

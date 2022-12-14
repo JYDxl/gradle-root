@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk-alpine:17.0.5-jre-headless
+FROM azul/zulu-openjdk-alpine:17.0.5-17.38.21-jre-headless
 
 RUN apk add tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -9,4 +9,4 @@ COPY build/libs/gateway-boot.jar /lib/gateway-boot.jar
 COPY build/bootScripts/sub-cloud-gateway /script/runner
 CMD ./script/runner
 
-EXPOSE 8080 5005
+EXPOSE 19000 15000

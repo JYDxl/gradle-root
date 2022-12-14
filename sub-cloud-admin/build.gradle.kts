@@ -5,6 +5,7 @@ plugins {
   application
 }
 
+val activeProfiles: String by System.getProperties()
 val serverAddr: String by System.getProperties()
 
 application {
@@ -12,7 +13,9 @@ application {
   applicationDefaultJvmArgs = listOf(
     "-ea",
 
+    "-Dspring.profiles.active=$activeProfiles",
     "-Dspring.cloud.nacos.discovery.server-addr=$serverAddr",
+    "-Dserver.port=18999",
 
     "-Dio.netty.tryReflectionSetAccessible=true",
     "-Dio.netty.leakDetection.level=advanced",

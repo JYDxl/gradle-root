@@ -20,6 +20,7 @@ val okhttp3: String by System.getProperties()
 val lombok: String by System.getProperties()
 val hutool: String by System.getProperties()
 val forest: String by System.getProperties()
+val kotlin: String by System.getProperties()
 val guava: String by System.getProperties()
 val guice: String by System.getProperties()
 val vertx: String by System.getProperties()
@@ -61,6 +62,8 @@ subprojects {
     sourceCompatibility = VERSION_17
     targetCompatibility = VERSION_17
   }
+
+  ext["kotlin.version"] = kotlin
 
   configure<DependencyManagementExtension> {
     imports {

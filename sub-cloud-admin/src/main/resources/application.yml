@@ -24,3 +24,15 @@ logging:
     rollingpolicy:
       max-file-size: 1GB
       max-history: 30
+  level:
+    org:
+      springframework:
+        transaction: debug
+        web: debug
+      github: trace
+    com:
+      baomidou: debug
+    io:
+      netty: debug
+      vertx: debug
+    root: info
