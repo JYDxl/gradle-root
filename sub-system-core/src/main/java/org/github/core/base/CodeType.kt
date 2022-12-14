@@ -1,20 +1,8 @@
-package org.github.core.base;
+package org.github.core.base
 
-import lombok.NonNull;
+import kotlin.annotation.AnnotationRetention.RUNTIME
+import kotlin.annotation.AnnotationTarget.FIELD
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface CodeType {
-    @NonNull
-    String type();
-
-    @NonNull
-    String field();
-
-    boolean underLine() default true;
-}
+@Target(FIELD)
+@Retention(RUNTIME)
+annotation class CodeType(val type: String, val field: String, val underLine: Boolean = true)
