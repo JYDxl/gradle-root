@@ -82,7 +82,7 @@ class CenterService : ICenterService {
         }
 
         minioWrapper.upload(bo)
-        val url = minioWrapper.getUrl(bo)!!
+        val url = minioWrapper.getUrl(bo)
         return JSONDataReturn.of(url)
     }
 
