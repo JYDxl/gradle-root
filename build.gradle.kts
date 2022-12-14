@@ -29,6 +29,7 @@ val netty: String by System.getProperties()
 plugins {
   val dependencyManagement: String by System.getProperties()
   val springBoot: String by System.getProperties()
+  val freefair: String by System.getProperties()
   val benmanes: String by System.getProperties()
   val kotlin: String by System.getProperties()
   val shadow: String by System.getProperties()
@@ -40,12 +41,14 @@ plugins {
   id("io.spring.dependency-management") version dependencyManagement apply false
   id("org.jetbrains.kotlin.jvm") version kotlin apply false
   id("org.jetbrains.kotlin.plugin.spring") version kotlin apply false
+  id("org.jetbrains.kotlin.plugin.lombok") version kotlin apply false
   id("com.github.ben-manes.versions") version benmanes apply false
+  id("io.freefair.lombok") version freefair apply false
 }
 
 allprojects {
-  tasks.register("cleanAll",Delete::class) {
-    delete = setOf("build","out","logs")
+  tasks.register("cleanAll", Delete::class) {
+    delete = setOf("build", "out", "logs")
   }
 }
 
@@ -53,8 +56,10 @@ subprojects {
   group = "org.github"
   version = "0.0.1"
 
+  apply(plugin = "org.jetbrains.kotlin.plugin.lombok")
   apply(plugin = "io.spring.dependency-management")
   apply(plugin = "com.github.ben-manes.versions")
+  apply(plugin = "io.freefair.lombok")
   apply(plugin = "kotlin")
   apply(plugin = "kotlin-spring")
 
@@ -95,19 +100,19 @@ subprojects {
   }
 
   tasks.withType<JavaCompile> {
-    options.compilerArgs.addAll(listOf("-Xlint:unchecked","-parameters"))
+    options.compilerArgs.addAll(listOf("-Xlint:unchecked", "-parameters"))
   }
 
   tasks.withType<Test> {
     useJUnitPlatform()
     testLogging {
-      events("PASSED","FAILED","SKIPPED")
+      events("PASSED", "FAILED", "SKIPPED")
     }
   }
 
   configurations {
     all {
-      exclude("io.netty","netty-transport-native-kqueue")
+      exclude("io.netty", "netty-transport-native-kqueue")
     }
   }
 
