@@ -1,7 +1,5 @@
 package org.github.core.spring.restful.json;
 
-import cn.hutool.core.util.StrUtil;
-import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModelProperty;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +7,12 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.Data;
 import lombok.NonNull;
 import org.github.core.exception.RemoteException;
-import org.github.core.spring.ops.SpringKt;
 import org.springframework.http.HttpStatus;
+import static cn.hutool.core.text.CharSequenceUtil.firstNonBlank;
+import static com.google.common.base.MoreObjects.firstNonNull;
+import static org.github.core.spring.ops.SpringKt.json;
+import static org.github.core.spring.ops.SpringKt.writeValue;
+import static org.springframework.http.HttpStatus.OK;
 
 /**
  * JSON of basic.
@@ -27,7 +29,7 @@ public class JSONReturn implements JSON {
   private @NonNull String msg;
 
   public JSONReturn() {
-    this(HttpStatus.OK.value(), HttpStatus.OK.name());
+    this(OK.value(), OK.name());
   }
 
   private JSONReturn(int code, @NonNull String msg) {
@@ -38,13 +40,13 @@ public class JSONReturn implements JSON {
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
-    SpringKt.writeValue(this, res.getOutputStream());
+    writeValue(this, res.getOutputStream());
   }
 
   @Override
   @NonNull
   public String get() {
-    return SpringKt.json(this);
+    return json(this);
   }
 
   @Override
@@ -65,7 +67,7 @@ public class JSONReturn implements JSON {
   }
 
   public boolean success() {
-    return code == HttpStatus.OK.value();
+    return code == OK.value();
   }
 
   /** WITH msg. */
@@ -78,17 +80,17 @@ public class JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static JSONReturn ok() {
-    return of(HttpStatus.OK, null);
+    return of(OK, null);
   }
 
   /** Generator. */
   @NonNull
   public static JSONReturn of(HttpStatus status, @Nullable String msg) {
-    return of(status.value(), StrUtil.firstNonBlank(msg, status.name()));
+    return of(status.value(), firstNonBlank(msg, status.name()));
   }
 
   @NonNull
   public static JSONReturn of(int code, @Nullable String msg) {
-    return new JSONReturn(code, MoreObjects.firstNonNull(msg, ""));
+    return new JSONReturn(code, firstNonNull(msg, ""));
   }
 }
