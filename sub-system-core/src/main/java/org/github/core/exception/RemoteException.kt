@@ -1,5 +1,5 @@
 package org.github.core.exception
 
-import org.github.core.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONBase
 
-class RemoteException(val data: JSONReturn) : RuntimeException()
+class RemoteException(val data: JSONBase): RuntimeException()

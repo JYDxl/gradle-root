@@ -4,8 +4,8 @@ import org.github.core.ops.info
 import org.github.core.ops.log
 import org.github.core.spring.restful.Returnable
 import org.github.core.spring.restful.json.JSON
-import org.github.core.spring.restful.json.JSONPReturn
-import org.github.core.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONBase
+import org.github.core.spring.restful.json.JSONP
 import org.github.core.spring.restful.view.VIEW
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -53,15 +53,15 @@ class ReturnController {
 
   @GetMapping("jsonp")
   fun jsonpReturn(): Returnable {
-    val jsonp = JSONPReturn<Any?>()
+    val jsonp = JSONP<Any?>()
     log.info {jsonp.toString()}
     log.info {jsonp.get()}
     return jsonp
   }
 
   @GetMapping("json/basic")
-  fun jsonBasic() = JSONReturn()
+  fun jsonBasic() = JSONBase()
 
   @GetMapping("json/callback")
-  fun jsonCallback() = JSONPReturn<Any?>()
+  fun jsonCallback() = JSONP<Any?>()
 }

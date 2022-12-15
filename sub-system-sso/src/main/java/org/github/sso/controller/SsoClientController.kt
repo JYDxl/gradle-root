@@ -6,31 +6,30 @@ import cn.dev33.satoken.stp.StpUtil.getTokenValue
 import cn.dev33.satoken.stp.StpUtil.isLogin
 import cn.dev33.satoken.stp.StpUtil.login
 import org.github.core.DEVICE_TYPE_PC
-import org.github.core.spring.restful.json.JSONDataReturn
-import org.github.core.spring.restful.json.JSONReturn
-import org.springframework.http.HttpStatus.UNAUTHORIZED
+import org.github.core.exception.ClientException
+import org.github.core.spring.restful.json.JSONData
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class SsoClientController {
-    @RequestMapping("/sso/doLoginByTicket")
-    fun doLoginByTicket(ticket: String): JSONReturn {
-        val loginId = instance.checkTicket(ticket, "/sso/doLoginByTicket") ?: return JSONReturn.of(UNAUTHORIZED, "无效ticket：$ticket")
-        login(loginId, DEVICE_TYPE_PC)
-        val token = getTokenValue()!!
-        return JSONDataReturn.of(token)
-    }
+  @RequestMapping("/sso/doLoginByTicket")
+  fun doLoginByTicket(ticket: String): JSONData<String> {
+    val loginId = instance.checkTicket(ticket, "/sso/doLoginByTicket") ?: throw ClientException("无效ticket：$ticket")
+    login(loginId, DEVICE_TYPE_PC)
+    val token = getTokenValue()!!
+    return JSONData.of(token)
+  }
 
-    @RequestMapping("/sso/getSsoAuthUrl")
-    fun getSsoAuthUrl(clientLoginUrl: String): JSONReturn {
-        val serverAuthUrl = buildServerAuthUrl(clientLoginUrl, "")!!
-        return JSONDataReturn.of(serverAuthUrl)
-    }
+  @RequestMapping("/sso/getSsoAuthUrl")
+  fun getSsoAuthUrl(clientLoginUrl: String): JSONData<String> {
+    val serverAuthUrl = buildServerAuthUrl(clientLoginUrl, "")!!
+    return JSONData.of(serverAuthUrl)
+  }
 
-    @RequestMapping("/sso/hasLogin")
-    fun hasLogin(): JSONDataReturn<Boolean> = JSONDataReturn.of(isLogin())
+  @RequestMapping("/sso/hasLogin")
+  fun hasLogin(): JSONData<Boolean> = JSONData.of(isLogin())
 
-    @RequestMapping("/sso/*")
-    fun ssoRequest(): Any = instance.clientDister()
+  @RequestMapping("/sso/*")
+  fun ssoRequest(): Any = instance.clientDister()
 }

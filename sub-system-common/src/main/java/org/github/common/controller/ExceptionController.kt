@@ -12,7 +12,7 @@ import org.github.core.ops.error
 import org.github.core.ops.info
 import org.github.core.ops.log
 import org.github.core.ops.warn
-import org.github.core.spring.restful.json.JSONReturn.of
+import org.github.core.spring.restful.json.JSONBase.of
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.FORBIDDEN
 import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR

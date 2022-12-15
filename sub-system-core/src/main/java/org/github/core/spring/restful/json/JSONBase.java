@@ -22,18 +22,18 @@ import static org.springframework.http.HttpStatus.OK;
  * @see java.util.function.Supplier
  */
 @Data
-public class JSONReturn implements JSON {
+public class JSONBase implements JSON {
   @ApiModelProperty("状态")
   private int    code;
   @ApiModelProperty("信息")
   @NonNull
   private String msg;
 
-  public JSONReturn() {
+  public JSONBase() {
     this(OK.value(), OK.name());
   }
 
-  private JSONReturn(int code, @NonNull String msg) {
+  private JSONBase(int code, @NonNull String msg) {
     this.code = code;
     this.msg  = msg;
   }
@@ -73,25 +73,25 @@ public class JSONReturn implements JSON {
 
   /** WITH msg. */
   @NonNull
-  public JSONReturn withMsg(@NonNull String msg) {
+  public JSONBase withMsg(@NonNull String msg) {
     setMsg(msg);
     return this;
   }
 
   /** Generator. */
   @NonNull
-  public static JSONReturn ok() {
+  public static JSONBase ok() {
     return of(OK, null);
   }
 
   /** Generator. */
   @NonNull
-  public static JSONReturn of(HttpStatus status, @Nullable String msg) {
+  public static JSONBase of(HttpStatus status, @Nullable String msg) {
     return of(status.value(), firstNonBlank(msg, status.name()));
   }
 
   @NonNull
-  public static JSONReturn of(int code, @Nullable String msg) {
-    return new JSONReturn(code, firstNonNull(msg, ""));
+  public static JSONBase of(int code, @Nullable String msg) {
+    return new JSONBase(code, firstNonNull(msg, ""));
   }
 }

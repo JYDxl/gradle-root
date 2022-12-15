@@ -23,7 +23,7 @@ import static java.util.Collections.emptyList;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class JSONArrayReturn<E> extends JSONReturn implements JSON {
+public class JSONArray<E> extends JSONBase implements JSON {
   @ApiModelProperty("数据")
   @NonNull
   private Collection<? extends E> data = emptyList();
@@ -40,27 +40,27 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
 
   /** WITH data. */
   @NonNull
-  public JSONArrayReturn<E> withData(@NonNull Collection<? extends E> data) {
+  public JSONArray<E> withData(@NonNull Collection<? extends E> data) {
     setData(data);
     return this;
   }
 
   /** Generator. */
   @NonNull
-  public static <V> JSONArrayReturn<V> of() {
-    return new JSONArrayReturn<>();
+  public static <V> JSONArray<V> of() {
+    return new JSONArray<>();
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
   @NonNull
-  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data) {
-    return new JSONArrayReturn(data);
+  public static <T, R extends T> JSONArray<R> of(@NonNull Collection<T> data) {
+    return new JSONArray(data);
   }
 
   /** Generator. */
   @NonNull
-  public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
-    return new JSONArrayReturn<>(data.stream().map(mapper).collect(toImmutableList()));
+  public static <T, R extends T> JSONArray<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
+    return new JSONArray<>(data.stream().map(mapper).collect(toImmutableList()));
   }
 }

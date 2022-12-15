@@ -7,7 +7,7 @@ import org.github.core.ops.error
 import org.github.core.ops.log
 import org.github.core.spring.restful.Returnable
 import org.github.core.spring.restful.Returnable.nil
-import org.github.core.spring.restful.json.JSONReturn.of
+import org.github.core.spring.restful.json.JSONBase.of
 import org.springframework.core.MethodParameter
 import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR
 import org.springframework.web.context.request.NativeWebRequest

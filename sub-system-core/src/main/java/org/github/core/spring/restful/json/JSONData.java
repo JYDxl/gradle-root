@@ -22,7 +22,7 @@ import static java.util.Optional.ofNullable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class JSONDataReturn<T> extends JSONReturn implements JSON {
+public class JSONData<T> extends JSONBase implements JSON {
   @ApiModelProperty("数据")
   @Nullable
   private T data;
@@ -33,26 +33,26 @@ public class JSONDataReturn<T> extends JSONReturn implements JSON {
   }
 
   /** WITH data. */
-  public JSONDataReturn<T> withData(T data) {
+  public JSONData<T> withData(T data) {
     setData(data);
     return this;
   }
 
   /** Generator. */
   @NonNull
-  public static <V> JSONDataReturn<V> of() {
-    return new JSONDataReturn<>();
+  public static <V> JSONData<V> of() {
+    return new JSONData<>();
   }
 
   /** Generator. */
   @NonNull
-  public static <T, R extends T> JSONDataReturn<R> of(T data, @NonNull Function<T,R> mapper) {
+  public static <T, R extends T> JSONData<R> of(T data, @NonNull Function<T,R> mapper) {
     return of(ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */
   @NonNull
-  public static <V> JSONDataReturn<V> of(V data) {
-    return new JSONDataReturn<>(data);
+  public static <V> JSONData<V> of(V data) {
+    return new JSONData<>(data);
   }
 }

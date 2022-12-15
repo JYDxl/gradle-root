@@ -21,9 +21,9 @@ import org.github.core.DEVICE_TYPE_PC
 import org.github.core.exception.ClientException
 import org.github.core.minio.MinioUploadBo
 import org.github.core.minio.MinioWrapper
-import org.github.core.spring.restful.json.JSONArrayReturn
-import org.github.core.spring.restful.json.JSONDataReturn
-import org.github.core.spring.restful.json.JSONReturn
+import org.github.core.spring.restful.json.JSONArray
+import org.github.core.spring.restful.json.JSONBase
+import org.github.core.spring.restful.json.JSONData
 import org.github.mysql.center.entity.SysUserMbpPo
 import org.github.mysql.center.entity.SysUserMbpPo.Companion.SECRET_KEY_PROP
 import org.github.mysql.center.entity.SysUserMbpPo.Companion.USER_PWD_PROP
@@ -47,7 +47,7 @@ class CenterService: ICenterService {
   @Resource
   private lateinit var saTokenMapper: SaTokenMapper
 
-  override fun register(bo: LoginBo): JSONReturn {
+  override fun register(bo: LoginBo): JSONBase {
     val key = generateKey(AES.value).encoded!!
     val aes = SymmetricCrypto(AES, key)
     val password = aes.encryptHex(bo.password)!!
@@ -60,10 +60,10 @@ class CenterService: ICenterService {
     }
 
     sysUserMbpService.save(entity)
-    return JSONReturn.ok()
+    return JSONBase.ok()
   }
 
-  override fun login(bo: LoginBo): JSONDataReturn<LoginVo> {
+  override fun login(bo: LoginBo): JSONData<LoginVo> {
     val msg = "用户名或密码错误"
     val user = sysUserMbpService.ktQuery()
       .eq(SysUserMbpPo::userName, bo.username)
@@ -75,17 +75,17 @@ class CenterService: ICenterService {
 
     login(user.userName, DEVICE_TYPE_PC)
     val vo = commonService.trans(user, LoginVo::class.java) {copyProperties(user, LoginVo::class.java, USER_PWD_PROP, SECRET_KEY_PROP)!!.apply {token = getTokenValue()}}
-    return JSONDataReturn.of(vo)
+    return JSONData.of(vo)
   }
 
-  override fun refresh(): JSONDataReturn<String> {
+  override fun refresh(): JSONData<String> {
     val tokenInfo = getTokenInfo()!!
     login(tokenInfo.loginId, tokenInfo.loginDevice)
     val token = getTokenValue()!!
-    return JSONDataReturn.of(token)
+    return JSONData.of(token)
   }
 
-  override fun upload(file: MultipartFile, repo: String): JSONDataReturn<String> {
+  override fun upload(file: MultipartFile, repo: String): JSONData<String> {
     val bo = MinioUploadBo().apply {
       bucket = repo
       name = file.originalFilename
@@ -95,13 +95,13 @@ class CenterService: ICenterService {
 
     minioWrapper.upload(bo)
     val url = minioWrapper.getUrl(bo)
-    return JSONDataReturn.of(url)
+    return JSONData.of(url)
   }
 
-  override fun menuList(): JSONArrayReturn<String> {
+  override fun menuList(): JSONArray<String> {
     val roleList: MutableList<String> = getRoleList()
-    if (roleList.isEmpty()) return JSONArrayReturn.of()
+    if (roleList.isEmpty()) return JSONArray.of()
     val menuList = saTokenMapper.getMenuList(roleList)
-    return JSONArrayReturn.of(menuList)
+    return JSONArray.of(menuList)
   }
 }
