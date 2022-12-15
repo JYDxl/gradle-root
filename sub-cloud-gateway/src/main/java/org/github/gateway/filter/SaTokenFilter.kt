@@ -30,7 +30,7 @@ class SaTokenFilter : GlobalFilter, Ordered {
     private lateinit var reactiveStringRedisTemplate: ReactiveStringRedisTemplate
 
     @Resource
-    private lateinit var gatewayDynamicProperties: DynamicProperties
+    private lateinit var dynamicProperties: DynamicProperties
 
     @Resource
     private lateinit var mapper: ObjectMapper
@@ -44,7 +44,7 @@ class SaTokenFilter : GlobalFilter, Ordered {
 
     private fun checkWhiteList(request: ServerHttpRequest): Mono<Boolean> {
         val path = request.path.value()
-        for (item: String in gatewayDynamicProperties.whiteList) if (matcher.match("/*$item", path)) return just(true)
+        for (item: String in dynamicProperties.whiteList) if (matcher.match("/*$item", path)) return just(true)
         return just(false)
     }
 

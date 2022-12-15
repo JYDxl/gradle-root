@@ -23,7 +23,8 @@ import lombok.NonNull;
 @Data
 public class JSONDataReturn<T> extends JSONReturn implements JSON {
   /** 数据 */
-  private @Nullable T data;
+  @Nullable
+  private T data;
 
   @Override
   public String toString() {

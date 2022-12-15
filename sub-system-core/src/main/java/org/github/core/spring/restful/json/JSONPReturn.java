@@ -28,7 +28,9 @@ import lombok.NonNull;
 @Data
 public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** 回调 */
-  @JsonIgnore private @NonNull String callback = "callback";
+  @JsonIgnore
+  @NonNull
+  private String callback = "callback";
 
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) {

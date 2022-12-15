@@ -29,13 +29,13 @@ class ExceptionController {
   fun handleThrowable(e: Throwable) = of(INTERNAL_SERVER_ERROR, null).apply {log.error(e) {}}
 
   @ExceptionHandler(ClientException::class)
-  fun handleClientException(e: Exception) = of(BAD_REQUEST, e.message).apply {log.warn {e.cause?.message}}
+  fun handleClientException(e: Exception) = of(BAD_REQUEST, e.message).apply {log.warn {"${e.message}：${e.cause?.message}"}}
 
   @ExceptionHandler(HttpRequestMethodNotSupportedException::class)
   fun handleHttpRequestMethodNotSupportedException(e: Exception) = of(BAD_REQUEST, e.message)
 
   @ExceptionHandler(ServerException::class)
-  fun handleServerException(e: ServerException) = of(INTERNAL_SERVER_ERROR, e.message).apply {log.warn {e.cause?.message}}
+  fun handleServerException(e: ServerException) = of(INTERNAL_SERVER_ERROR, e.message).apply {log.warn {"${e.message}：${e.cause?.message}"}}
 
   @ExceptionHandler(RemoteException::class)
   fun handleRemoteException(e: RemoteException) = e.data

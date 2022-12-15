@@ -3,13 +3,13 @@ package org.github.core.spring.restful.json;
 import com.google.common.collect.ImmutableList;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.function.Function;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import static java.util.Collections.emptyList;
 
 /**
  * JSON of array.
@@ -25,7 +25,8 @@ import lombok.NonNull;
 @Data
 public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   @ApiModelProperty("数据")
-  private @NonNull Collection<? extends E> data = Collections.emptyList();
+  @NonNull
+  private Collection<? extends E> data = emptyList();
 
   @Override
   public String toString() {

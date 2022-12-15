@@ -26,7 +26,8 @@ public class JSONReturn implements JSON {
   @ApiModelProperty("状态")
   private          int    code;
   @ApiModelProperty("信息")
-  private @NonNull String msg;
+  @NonNull
+  private String msg;
 
   public JSONReturn() {
     this(OK.value(), OK.name());

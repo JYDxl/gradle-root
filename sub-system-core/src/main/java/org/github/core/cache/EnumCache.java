@@ -48,7 +48,8 @@ public class EnumCache {
   }
 
   @SuppressWarnings("unchecked")
-  public @Nullable <C, V> V get(@NonNull String type, @Nullable C code) {
+  @Nullable
+  public <C, V> V get(@NonNull String type, @Nullable C code) {
     if (code == null) return null;
     val value = table.get(type, code);
     if (value == null) log.warn("在常量枚举[{}]中发现了未知的类型编码: {}", type, code);
