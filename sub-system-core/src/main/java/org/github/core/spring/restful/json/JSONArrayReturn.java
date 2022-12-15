@@ -1,6 +1,5 @@
 package org.github.core.spring.restful.json;
 
-import com.google.common.collect.ImmutableList;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Collection;
 import java.util.function.Function;
@@ -9,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.Collections.emptyList;
 
 /**
@@ -61,6 +61,6 @@ public class JSONArrayReturn<E> extends JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static <T, R extends T> JSONArrayReturn<R> of(@NonNull Collection<T> data, @NonNull Function<T,R> mapper) {
-    return new JSONArrayReturn<>(data.stream().map(mapper).collect(ImmutableList.toImmutableList()));
+    return new JSONArrayReturn<>(data.stream().map(mapper).collect(toImmutableList()));
   }
 }

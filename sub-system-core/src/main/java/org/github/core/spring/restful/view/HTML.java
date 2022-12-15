@@ -3,6 +3,7 @@ package org.github.core.spring.restful.view;
 import com.google.common.net.MediaType;
 import lombok.NonNull;
 import org.github.core.spring.restful.Returnable;
+import static com.google.common.net.MediaType.HTML_UTF_8;
 
 /**
  * Top interface of html.
@@ -16,7 +17,7 @@ public interface HTML extends Returnable {
   @Override
   @NonNull
   default MediaType mediaType() {
-    return MediaType.HTML_UTF_8;
+    return HTML_UTF_8;
   }
 
   /** Generator. */

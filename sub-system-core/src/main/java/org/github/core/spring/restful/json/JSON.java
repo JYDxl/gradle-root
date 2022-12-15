@@ -2,8 +2,9 @@ package org.github.core.spring.restful.json;
 
 import com.google.common.net.MediaType;
 import lombok.NonNull;
-import org.github.core.spring.ops.SpringKt;
 import org.github.core.spring.restful.Returnable;
+import static com.google.common.net.MediaType.JSON_UTF_8;
+import static org.github.core.spring.ops.SpringKt.json;
 
 /**
  * Top interface of json.
@@ -17,13 +18,13 @@ public interface JSON extends Returnable {
   @Override
   @NonNull
   default MediaType mediaType() {
-    return MediaType.JSON_UTF_8;
+    return JSON_UTF_8;
   }
 
   /** Generator. */
   @NonNull
   static JSON of(@NonNull Object data) {
-    return of(SpringKt.json(data));
+    return of(json(data));
   }
 
   /** Generator. */

@@ -1,10 +1,8 @@
 package org.github.core.spring.restful.json;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.servlet.ServletUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.net.MediaType;
-import java.util.Optional;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +11,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import static cn.hutool.core.text.CharSequenceUtil.firstNonBlank;
+import static cn.hutool.extra.servlet.ServletUtil.write;
+import static com.google.common.net.MediaType.JAVASCRIPT_UTF_8;
+import static java.util.Optional.ofNullable;
 
 /**
  * JSON of jsonp.
@@ -27,21 +29,21 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Data
 public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
-  /** 回调 */
+  @ApiModelProperty("回调函数")
   @JsonIgnore
   @NonNull
   private String callback = "callback";
 
   @Override
   public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) {
-    if ("callback".equals(callback)) setCallback(StrUtil.firstNonBlank(req.getParameter("callback"), "callback"));
-    ServletUtil.write(res, get(), mediaType().toString());
+    if ("callback".equals(callback)) setCallback(firstNonBlank(req.getParameter("callback"), "callback"));
+    write(res, get(), mediaType().toString());
   }
 
   @Override
   @NonNull
   public MediaType mediaType() {
-    return MediaType.JAVASCRIPT_UTF_8;
+    return JAVASCRIPT_UTF_8;
   }
 
   @Override
@@ -70,7 +72,7 @@ public class JSONPReturn<T> extends JSONDataReturn<T> implements JSON {
   /** Generator. */
   @NonNull
   public static <T, R extends T> JSONPReturn<R> of(T data, @NonNull Function<T,R> mapper) {
-    return of(Optional.ofNullable(data).map(mapper).orElse(null));
+    return of(ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */

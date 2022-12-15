@@ -5,6 +5,7 @@ import java.io.InputStream;
 import javax.annotation.Nullable;
 import lombok.NonNull;
 import org.github.core.spring.restful.Returnable;
+import static com.google.common.net.MediaType.OCTET_STREAM;
 
 /**
  * Top interface of file.
@@ -17,7 +18,7 @@ public interface FILE extends Returnable {
   @Override
   @NonNull
   default MediaType mediaType() {
-    return MediaType.OCTET_STREAM;
+    return OCTET_STREAM;
   }
 
   /**

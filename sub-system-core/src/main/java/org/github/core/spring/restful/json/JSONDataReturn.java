@@ -1,6 +1,6 @@
 package org.github.core.spring.restful.json;
 
-import java.util.Optional;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.function.Function;
 import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import static java.util.Optional.ofNullable;
 
 /**
  * JSON of data.
@@ -22,7 +23,7 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Data
 public class JSONDataReturn<T> extends JSONReturn implements JSON {
-  /** 数据 */
+  @ApiModelProperty("数据")
   @Nullable
   private T data;
 
@@ -46,7 +47,7 @@ public class JSONDataReturn<T> extends JSONReturn implements JSON {
   /** Generator. */
   @NonNull
   public static <T, R extends T> JSONDataReturn<R> of(T data, @NonNull Function<T,R> mapper) {
-    return of(Optional.ofNullable(data).map(mapper).orElse(null));
+    return of(ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */

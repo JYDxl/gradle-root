@@ -24,7 +24,7 @@ import static org.springframework.http.HttpStatus.OK;
 @Data
 public class JSONReturn implements JSON {
   @ApiModelProperty("状态")
-  private          int    code;
+  private int    code;
   @ApiModelProperty("信息")
   @NonNull
   private String msg;

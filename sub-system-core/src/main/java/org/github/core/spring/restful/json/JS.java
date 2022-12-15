@@ -3,6 +3,7 @@ package org.github.core.spring.restful.json;
 import com.google.common.net.MediaType;
 import lombok.NonNull;
 import org.github.core.spring.restful.Returnable;
+import static com.google.common.net.MediaType.JAVASCRIPT_UTF_8;
 
 /**
  * Top interface of js.
@@ -16,7 +17,7 @@ public interface JS extends Returnable {
   @Override
   @NonNull
   default MediaType mediaType() {
-    return MediaType.JAVASCRIPT_UTF_8;
+    return JAVASCRIPT_UTF_8;
   }
 
   /** Generator. */
