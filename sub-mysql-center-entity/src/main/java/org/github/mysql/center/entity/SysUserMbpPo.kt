@@ -62,8 +62,8 @@ open class SysUserMbpPo : Entity() {
     open var updatedTime: LocalDateTime? = null
 
     @ApiModelProperty("头像地址")
-    @TableField("profile_url")
-    open var profileUrl: String? = null
+    @TableField("circle_url")
+    open var circleUrl: String? = null
 
     companion object {
 
@@ -109,9 +109,9 @@ open class SysUserMbpPo : Entity() {
 
         const val UPDATED_TIME_PROP : String = "updatedTime"
 
-        const val PROFILE_URL : String = "profile_url"
+        const val CIRCLE_URL : String = "circle_url"
 
-        const val PROFILE_URL_PROP : String = "profileUrl"
+        const val CIRCLE_URL_PROP : String = "circleUrl"
 
     }
 
@@ -136,7 +136,7 @@ open class SysUserMbpPo : Entity() {
         if (createdTime != other.createdTime) return false
         if (updaterName != other.updaterName) return false
         if (updatedTime != other.updatedTime) return false
-        if (profileUrl != other.profileUrl) return false
+        if (circleUrl != other.circleUrl) return false
         return true
     }
 
@@ -152,7 +152,7 @@ open class SysUserMbpPo : Entity() {
         result = 31 * result + (createdTime?.hashCode() ?: 0)
         result = 31 * result + (updaterName?.hashCode() ?: 0)
         result = 31 * result + (updatedTime?.hashCode() ?: 0)
-        result = 31 * result + (profileUrl?.hashCode() ?: 0)
+        result = 31 * result + (circleUrl?.hashCode() ?: 0)
         return result
     }
 

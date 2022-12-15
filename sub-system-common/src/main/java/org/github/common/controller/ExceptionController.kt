@@ -9,6 +9,7 @@ import org.github.core.exception.ClientException
 import org.github.core.exception.RemoteException
 import org.github.core.exception.ServerException
 import org.github.core.ops.error
+import org.github.core.ops.info
 import org.github.core.ops.log
 import org.github.core.ops.warn
 import org.github.core.spring.restful.json.JSONReturn.of
@@ -29,13 +30,13 @@ class ExceptionController {
   fun handleThrowable(e: Throwable) = of(INTERNAL_SERVER_ERROR, null).apply {log.error(e) {}}
 
   @ExceptionHandler(ClientException::class)
-  fun handleClientException(e: Exception) = of(BAD_REQUEST, e.message).apply {log.warn {"${e.message}：${e.cause?.message}"}}
+  fun handleClientException(e: Exception) = of(BAD_REQUEST, e.message).apply {log.info {if (e.cause == null) e.message else "${e.message}：${e.cause?.message}}"}}
 
   @ExceptionHandler(HttpRequestMethodNotSupportedException::class)
   fun handleHttpRequestMethodNotSupportedException(e: Exception) = of(BAD_REQUEST, e.message)
 
   @ExceptionHandler(ServerException::class)
-  fun handleServerException(e: ServerException) = of(INTERNAL_SERVER_ERROR, e.message).apply {log.warn {"${e.message}：${e.cause?.message}"}}
+  fun handleServerException(e: ServerException) = of(INTERNAL_SERVER_ERROR, e.message).apply {log.warn {if (e.cause == null) e.message else "${e.message}：${e.cause?.message}}"}}
 
   @ExceptionHandler(RemoteException::class)
   fun handleRemoteException(e: RemoteException) = e.data
