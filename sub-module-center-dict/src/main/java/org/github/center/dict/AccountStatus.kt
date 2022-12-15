@@ -17,6 +17,6 @@ enum class AccountStatus(override val code: String, override val value: String):
   ;
 
   companion object {
-    const val ACCOUNT_STATUS : String = "AccountStatus"
+    const val ACCOUNT_STATUS_DICT : String = "AccountStatus"
   }
 }

@@ -38,9 +38,15 @@ open class RoleResourceMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val ROLE_ID : String = "role_id"
 
+        const val ROLE_ID_PROP : String = "roleId"
+
         const val RESOURCE_ID : String = "resource_id"
+
+        const val RESOURCE_ID_PROP : String = "resourceId"
 
     }
 

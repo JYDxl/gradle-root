@@ -38,9 +38,15 @@ open class CourseCategoryMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val COURSE_ID : String = "course_id"
 
+        const val COURSE_ID_PROP : String = "courseId"
+
         const val CATEGORY_ID : String = "category_id"
+
+        const val CATEGORY_ID_PROP : String = "categoryId"
 
     }
 

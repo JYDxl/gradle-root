@@ -42,11 +42,19 @@ open class UserMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val LOGIN_NAME : String = "login_name"
+
+        const val LOGIN_NAME_PROP : String = "loginName"
 
         const val NAME : String = "name"
 
+        const val NAME_PROP : String = "name"
+
         const val PASSWORD : String = "password"
+
+        const val PASSWORD_PROP : String = "password"
 
     }
 

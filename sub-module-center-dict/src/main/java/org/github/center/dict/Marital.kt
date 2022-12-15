@@ -23,6 +23,6 @@ enum class Marital(override val code: String, override val value: String): BaseE
   ;
 
   companion object {
-    const val MARITAL : String = "Marital"
+    const val MARITAL_DICT : String = "Marital"
   }
 }

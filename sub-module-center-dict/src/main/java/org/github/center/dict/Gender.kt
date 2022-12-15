@@ -19,6 +19,6 @@ enum class Gender(override val code: String, override val value: String): BaseEn
   ;
 
   companion object {
-    const val GENDER : String = "Gender"
+    const val GENDER_DICT : String = "Gender"
   }
 }

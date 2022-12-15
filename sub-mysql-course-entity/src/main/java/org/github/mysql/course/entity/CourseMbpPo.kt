@@ -84,31 +84,59 @@ open class CourseMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val NAME : String = "name"
+
+        const val NAME_PROP : String = "name"
 
         const val SUMMARY : String = "summary"
 
+        const val SUMMARY_PROP : String = "summary"
+
         const val TIME : String = "time"
+
+        const val TIME_PROP : String = "time"
 
         const val PRICE : String = "price"
 
+        const val PRICE_PROP : String = "price"
+
         const val IMAGE : String = "image"
+
+        const val IMAGE_PROP : String = "image"
 
         const val LEVEL : String = "level"
 
+        const val LEVEL_PROP : String = "level"
+
         const val CHARGE : String = "charge"
+
+        const val CHARGE_PROP : String = "charge"
 
         const val STATUS : String = "status"
 
+        const val STATUS_PROP : String = "status"
+
         const val ENROLL : String = "enroll"
+
+        const val ENROLL_PROP : String = "enroll"
 
         const val SORT : String = "sort"
 
+        const val SORT_PROP : String = "sort"
+
         const val CREATED_AT : String = "created_at"
+
+        const val CREATED_AT_PROP : String = "createdAt"
 
         const val UPDATED_AT : String = "updated_at"
 
+        const val UPDATED_AT_PROP : String = "updatedAt"
+
         const val TEACHER_ID : String = "teacher_id"
+
+        const val TEACHER_ID_PROP : String = "teacherId"
 
     }
 

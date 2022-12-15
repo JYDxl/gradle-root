@@ -15,6 +15,6 @@ enum class BlogStatus(override val code: String, override val value: String): Ba
   ;
 
   companion object {
-    const val BLOG_STATUS : String = "BlogStatus"
+    const val BLOG_STATUS_DICT : String = "BlogStatus"
   }
 }

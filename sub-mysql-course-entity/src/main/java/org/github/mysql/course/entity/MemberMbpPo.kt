@@ -51,15 +51,27 @@ open class MemberMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val MOBILE : String = "mobile"
+
+        const val MOBILE_PROP : String = "mobile"
 
         const val PASSWORD : String = "password"
 
+        const val PASSWORD_PROP : String = "password"
+
         const val NAME : String = "name"
+
+        const val NAME_PROP : String = "name"
 
         const val PHOTO : String = "photo"
 
+        const val PHOTO_PROP : String = "photo"
+
         const val REGISTER_TIME : String = "register_time"
+
+        const val REGISTER_TIME_PROP : String = "registerTime"
 
     }
 

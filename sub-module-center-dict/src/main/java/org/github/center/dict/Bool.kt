@@ -17,6 +17,6 @@ enum class Bool(override val code: String, override val value: String): BaseEnum
   ;
 
   companion object {
-    const val BOOL : String = "Bool"
+    const val BOOL_DICT : String = "Bool"
   }
 }

@@ -43,11 +43,19 @@ open class MemberCourseMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val MEMBER_ID : String = "member_id"
+
+        const val MEMBER_ID_PROP : String = "memberId"
 
         const val COURSE_ID : String = "course_id"
 
+        const val COURSE_ID_PROP : String = "courseId"
+
         const val AT : String = "at"
+
+        const val AT_PROP : String = "at"
 
     }
 

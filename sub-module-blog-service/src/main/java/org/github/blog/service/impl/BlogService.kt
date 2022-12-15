@@ -55,10 +55,10 @@ class BlogService: IBlogService {
   }
 
   private fun transDetail(po: BlogMbpPo): BlogDetailVo {
-    return commonService.transCode(singletonList(po), BlogDetailVo::class.java).first()
+    return commonService.trans(singletonList(po), BlogDetailVo::class.java).first()
   }
 
   private fun transPage(records: List<BlogPageVo>): List<BlogPageVo> {
-    return commonService.transCode(records, BlogPageVo::class.java, identity())
+    return commonService.trans(records, BlogPageVo::class.java, identity())
   }
 }

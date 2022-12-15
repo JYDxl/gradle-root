@@ -82,6 +82,8 @@ open class ${entity} : Serializable {
 <#list table.fields as field>
 
         const val ${field.name?upper_case} : String = "${field.name}"
+
+        const val ${field.name?upper_case}_PROP : String = "${field.propertyName}"
 </#list>
 </#if>
 

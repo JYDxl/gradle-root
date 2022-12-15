@@ -50,15 +50,27 @@ open class SysDictItemMbpPo : Entity() {
 
         const val DICT_CODE : String = "dict_code"
 
+        const val DICT_CODE_PROP : String = "dictCode"
+
         const val ITEM_CODE : String = "item_code"
+
+        const val ITEM_CODE_PROP : String = "itemCode"
 
         const val ITEM_NAME : String = "item_name"
 
+        const val ITEM_NAME_PROP : String = "itemName"
+
         const val ITEM_INFO : String = "item_info"
+
+        const val ITEM_INFO_PROP : String = "itemInfo"
 
         const val SORT : String = "sort"
 
+        const val SORT_PROP : String = "sort"
+
         const val REVISION : String = "revision"
+
+        const val REVISION_PROP : String = "revision"
 
     }
 

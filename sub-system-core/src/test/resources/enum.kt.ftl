@@ -17,6 +17,6 @@ enum class ${name}(override val code: String, override val value: String): BaseE
   ;
 
   companion object {
-    const val ${const} : String = "${name}"
+    const val ${const}_DICT : String = "${name}"
   }
 }

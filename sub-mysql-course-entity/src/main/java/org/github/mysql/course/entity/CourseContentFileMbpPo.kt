@@ -46,13 +46,23 @@ open class CourseContentFileMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val COURSE_ID : String = "course_id"
+
+        const val COURSE_ID_PROP : String = "courseId"
 
         const val URL : String = "url"
 
+        const val URL_PROP : String = "url"
+
         const val NAME : String = "name"
 
+        const val NAME_PROP : String = "name"
+
         const val SIZE : String = "size"
+
+        const val SIZE_PROP : String = "size"
 
     }
 

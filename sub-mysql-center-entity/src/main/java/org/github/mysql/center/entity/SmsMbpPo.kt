@@ -51,15 +51,27 @@ open class SmsMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val MOBILE : String = "mobile"
+
+        const val MOBILE_PROP : String = "mobile"
 
         const val CODE : String = "code"
 
+        const val CODE_PROP : String = "code"
+
         const val USE : String = "use"
+
+        const val USE_PROP : String = "use"
 
         const val AT : String = "at"
 
+        const val AT_PROP : String = "at"
+
         const val STATUS : String = "status"
+
+        const val STATUS_PROP : String = "status"
 
     }
 

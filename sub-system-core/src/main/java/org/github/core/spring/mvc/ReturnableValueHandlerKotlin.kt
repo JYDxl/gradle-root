@@ -20,26 +20,26 @@ import org.springframework.web.method.support.ModelAndViewContainer
  * @author JYD_XL
  * @see HandlerMethodReturnValueHandler
  */
-object ReturnableValueHandlerKotlin : HandlerMethodReturnValueHandler {
-    private val log = ReturnableValueHandlerKotlin::class.log
+object ReturnableValueHandlerKotlin: HandlerMethodReturnValueHandler {
+  private val log = ReturnableValueHandlerKotlin::class.log
 
-    override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.parameterType)
+  override fun supportsReturnType(returnType: MethodParameter) = Returnable::class.java.isAssignableFrom(returnType.parameterType)
 
-    override fun handleReturnValue(returnValue: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
-        val value = (returnValue ?: nil()) as Returnable
-        val req = webRequest.getNativeRequest(HttpServletRequest::class.java)!!
-        val res = webRequest.getNativeResponse(HttpServletResponse::class.java)!!
-        if (value.terminated()) {
-            try {
-                value.handle(req, res)
-            } catch (e: Exception) {
-                log.error(e) {}
-                of(INTERNAL_SERVER_ERROR, null).handle(req, res)
-            }
-        } else {
-            mavContainer.viewName = value.get()
-        }
-        mavContainer.isRequestHandled = value.terminated()
-        value.apply { log.debug { "Writing [${mediaType()}] ====> ${get()}" } }
+  override fun handleReturnValue(returnValue: Any?, returnType: MethodParameter, mavContainer: ModelAndViewContainer, webRequest: NativeWebRequest) {
+    val value = (returnValue ?: nil()) as Returnable
+    val req = webRequest.getNativeRequest(HttpServletRequest::class.java)!!
+    val res = webRequest.getNativeResponse(HttpServletResponse::class.java)!!
+    if (value.terminated()) {
+      try {
+        value.handle(req, res)
+      } catch (e: Exception) {
+        log.error(e) {}
+        of(INTERNAL_SERVER_ERROR, null).handle(req, res)
+      }
+    } else {
+      mavContainer.viewName = value.get()
     }
+    mavContainer.isRequestHandled = value.terminated()
+    value.apply {log.debug {"Writing [${mediaType()}] ====> ${get()}"}}
+  }
 }

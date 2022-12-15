@@ -38,9 +38,15 @@ open class ChapterMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val COURSE_ID : String = "course_id"
 
+        const val COURSE_ID_PROP : String = "courseId"
+
         const val NAME : String = "name"
+
+        const val NAME_PROP : String = "name"
 
     }
 

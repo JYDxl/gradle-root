@@ -71,25 +71,47 @@ open class SectionMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val TITLE : String = "title"
+
+        const val TITLE_PROP : String = "title"
 
         const val COURSE_ID : String = "course_id"
 
+        const val COURSE_ID_PROP : String = "courseId"
+
         const val CHAPTER_ID : String = "chapter_id"
+
+        const val CHAPTER_ID_PROP : String = "chapterId"
 
         const val VIDEO : String = "video"
 
+        const val VIDEO_PROP : String = "video"
+
         const val TIME : String = "time"
+
+        const val TIME_PROP : String = "time"
 
         const val CHARGE : String = "charge"
 
+        const val CHARGE_PROP : String = "charge"
+
         const val SORT : String = "sort"
+
+        const val SORT_PROP : String = "sort"
 
         const val CREATED_AT : String = "created_at"
 
+        const val CREATED_AT_PROP : String = "createdAt"
+
         const val UPDATED_AT : String = "updated_at"
 
+        const val UPDATED_AT_PROP : String = "updatedAt"
+
         const val VOD : String = "vod"
+
+        const val VOD_PROP : String = "vod"
 
     }
 

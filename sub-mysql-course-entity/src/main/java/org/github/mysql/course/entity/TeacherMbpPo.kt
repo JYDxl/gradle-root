@@ -54,17 +54,31 @@ open class TeacherMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val NAME : String = "name"
+
+        const val NAME_PROP : String = "name"
 
         const val NICKNAME : String = "nickname"
 
+        const val NICKNAME_PROP : String = "nickname"
+
         const val IMAGE : String = "image"
+
+        const val IMAGE_PROP : String = "image"
 
         const val POSITION : String = "position"
 
+        const val POSITION_PROP : String = "position"
+
         const val MOTTO : String = "motto"
 
+        const val MOTTO_PROP : String = "motto"
+
         const val INTRO : String = "intro"
+
+        const val INTRO_PROP : String = "intro"
 
     }
 

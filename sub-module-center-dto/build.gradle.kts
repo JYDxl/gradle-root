@@ -2,6 +2,7 @@ val mybatisPlus: String by System.getProperties()
 
 dependencies {
   api(project(":sub-mysql-center-entity"))
+  api(project(":sub-module-center-dict"))
 
   compileOnly(project(":sub-system-core"))
 

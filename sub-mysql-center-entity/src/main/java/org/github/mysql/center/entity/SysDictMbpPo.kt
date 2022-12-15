@@ -42,11 +42,19 @@ open class SysDictMbpPo : Entity() {
 
         const val DICT_CODE : String = "dict_code"
 
+        const val DICT_CODE_PROP : String = "dictCode"
+
         const val DICT_NAME : String = "dict_name"
+
+        const val DICT_NAME_PROP : String = "dictName"
 
         const val DICT_INFO : String = "dict_info"
 
+        const val DICT_INFO_PROP : String = "dictInfo"
+
         const val REVISION : String = "revision"
+
+        const val REVISION_PROP : String = "revision"
 
     }
 

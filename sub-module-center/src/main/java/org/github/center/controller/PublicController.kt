@@ -16,16 +16,16 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/public/")
 class PublicController {
-    @Resource
-    private lateinit var centerService: ICenterService
+  @Resource
+  private lateinit var centerService: ICenterService
 
-    @ApiOperation("共通功能-上传")
-    @PostMapping("upload")
-    fun upload(file: MultipartFile, repo: String): Returnable {
-        return centerService.upload(file, repo)
-    }
+  @ApiOperation("共通功能-上传")
+  @PostMapping("upload")
+  fun upload(file: MultipartFile, repo: String): Returnable {
+    return centerService.upload(file, repo)
+  }
 
-    @ApiOperation("共通功能-注册")
-    @PostMapping("register")
-    fun register(@RequestBody bo: LoginBo) = centerService.register(bo.apply { trim() })
+  @ApiOperation("共通功能-注册")
+  @PostMapping("register")
+  fun register(@RequestBody bo: LoginBo) = centerService.register(bo.apply {trim()})
 }

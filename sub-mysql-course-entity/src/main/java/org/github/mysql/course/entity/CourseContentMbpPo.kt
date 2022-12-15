@@ -34,7 +34,11 @@ open class CourseContentMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val CONTENT : String = "content"
+
+        const val CONTENT_PROP : String = "content"
 
     }
 

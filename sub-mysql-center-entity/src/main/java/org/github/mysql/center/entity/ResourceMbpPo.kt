@@ -46,13 +46,23 @@ open class ResourceMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val NAME : String = "name"
+
+        const val NAME_PROP : String = "name"
 
         const val PAGE : String = "page"
 
+        const val PAGE_PROP : String = "page"
+
         const val REQUEST : String = "request"
 
+        const val REQUEST_PROP : String = "request"
+
         const val PARENT : String = "parent"
+
+        const val PARENT_PROP : String = "parent"
 
     }
 

@@ -50,15 +50,27 @@ open class BlogMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val USER_ID : String = "user_id"
+
+        const val USER_ID_PROP : String = "userId"
 
         const val TITLE : String = "title"
 
+        const val TITLE_PROP : String = "title"
+
         const val DESCRIPTION : String = "description"
+
+        const val DESCRIPTION_PROP : String = "description"
 
         const val CONTENT : String = "content"
 
+        const val CONTENT_PROP : String = "content"
+
         const val STATUS : String = "status"
+
+        const val STATUS_PROP : String = "status"
 
     }
 

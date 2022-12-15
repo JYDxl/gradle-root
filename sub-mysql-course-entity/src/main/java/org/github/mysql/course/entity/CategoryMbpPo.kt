@@ -42,11 +42,19 @@ open class CategoryMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val PARENT : String = "parent"
+
+        const val PARENT_PROP : String = "parent"
 
         const val NAME : String = "name"
 
+        const val NAME_PROP : String = "name"
+
         const val SORT : String = "sort"
+
+        const val SORT_PROP : String = "sort"
 
     }
 

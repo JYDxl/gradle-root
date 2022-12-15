@@ -79,29 +79,55 @@ open class FileMbpPo : Entity() {
 
         const val ID : String = "id"
 
+        const val ID_PROP : String = "id"
+
         const val PATH : String = "path"
+
+        const val PATH_PROP : String = "path"
 
         const val NAME : String = "name"
 
+        const val NAME_PROP : String = "name"
+
         const val SUFFIX : String = "suffix"
+
+        const val SUFFIX_PROP : String = "suffix"
 
         const val SIZE : String = "size"
 
+        const val SIZE_PROP : String = "size"
+
         const val USE : String = "use"
+
+        const val USE_PROP : String = "use"
 
         const val CREATED_AT : String = "created_at"
 
+        const val CREATED_AT_PROP : String = "createdAt"
+
         const val UPDATED_AT : String = "updated_at"
+
+        const val UPDATED_AT_PROP : String = "updatedAt"
 
         const val SHARD_INDEX : String = "shard_index"
 
+        const val SHARD_INDEX_PROP : String = "shardIndex"
+
         const val SHARD_SIZE : String = "shard_size"
+
+        const val SHARD_SIZE_PROP : String = "shardSize"
 
         const val SHARD_TOTAL : String = "shard_total"
 
+        const val SHARD_TOTAL_PROP : String = "shardTotal"
+
         const val KEY : String = "key"
 
+        const val KEY_PROP : String = "key"
+
         const val VOD : String = "vod"
+
+        const val VOD_PROP : String = "vod"
 
     }
 
