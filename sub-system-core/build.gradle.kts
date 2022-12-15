@@ -1,14 +1,3 @@
-val commonsCodec: String by System.getProperties()
-val mybatisPlus: String by System.getProperties()
-val postgresql: String by System.getProperties()
-val javassist: String by System.getProperties()
-val saToken: String by System.getProperties()
-val byteman: String by System.getProperties()
-val netty: String by System.getProperties()
-val mysql: String by System.getProperties()
-val p6spy: String by System.getProperties()
-val minio: String by System.getProperties()
-
 plugins {
   `maven-publish`
 }
@@ -48,12 +37,33 @@ tasks.withType<Test> {
   )
 }
 
+val commonsCodec: String by System.getProperties()
+val mybatisPlus: String by System.getProperties()
+val postgresql: String by System.getProperties()
+val asyncTool: String by System.getProperties()
+val protobuf: String by System.getProperties()
+val saToken: String by System.getProperties()
+val byteman: String by System.getProperties()
+val aviator: String by System.getProperties()
+val mysql: String by System.getProperties()
+val p6spy: String by System.getProperties()
+val minio: String by System.getProperties()
+val guice: String by System.getProperties()
+
 dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-web")
   compileOnly("org.springframework.boot:spring-boot-starter-aop")
   compileOnly("org.springframework.boot:spring-boot-starter-data-redis") {exclude(group = "io.netty")}
   compileOnly("org.springframework.boot:spring-boot-starter-validation")
   compileOnly("org.springframework.cloud:spring-cloud-context")
+
+  compileOnly("com.google.inject:guice:$guice")
+  compileOnly("com.googlecode.aviator:aviator:$aviator")
+  compileOnly("com.gitee.jd-platform-opensource:asyncTool:$asyncTool")
+  compileOnly("commons-codec:commons-codec:$commonsCodec")
+  compileOnly("org.jboss.byteman:byteman:$byteman")
+
+  compileOnly("org.t-io:tio-core:3.8.3.v20220902-RELEASE") {exclude(group = "com.alibaba")}
 
   compileOnly("com.baomidou:mybatis-plus-extension:$mybatisPlus")
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")

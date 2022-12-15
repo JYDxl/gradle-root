@@ -14,5 +14,5 @@ dependencies {
   compileOnly("org.springframework.boot:spring-boot-starter-data-mongodb")
   compileOnly("cn.dev33:sa-token-spring-boot-starter:$saToken")
   compileOnly("jakarta.validation:jakarta.validation-api")
-  compileOnly("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache")
+  compileOnly("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache") {exclude(group = "com.alibaba.fastjson2")}
 }

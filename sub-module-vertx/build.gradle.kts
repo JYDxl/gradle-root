@@ -69,8 +69,16 @@ tasks.withType<Test> {
   )
 }
 
+val kotlinxCoroutines: String by System.getProperties()
+
 dependencies {
   implementation(project(":sub-system-core"))
+
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:$kotlinxCoroutines")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:$kotlinxCoroutines")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-slf4j:$kotlinxCoroutines")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinxCoroutines")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutines")
 
   implementation("io.vertx:vertx-web") {exclude(group = "io.netty")}
   implementation("io.vertx:vertx-web-client") {exclude(group = "io.netty")}
