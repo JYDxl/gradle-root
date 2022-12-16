@@ -8,6 +8,7 @@ val forest: String by System.getProperties()
 val xxlJob: String by System.getProperties()
 val minio: String by System.getProperties()
 val p6spy: String by System.getProperties()
+val kryo5: String by System.getProperties()
 
 dependencies {
   api(project(":sub-system-core"))
@@ -35,6 +36,7 @@ dependencies {
   api("cn.dev33:sa-token-jwt:$saToken") {exclude(group = "cn.hutool")}
 
   api("com.alicp.jetcache:jetcache-starter-redis-lettuce:$jetcache") {exclude(group = "com.alibaba.fastjson2")}
+  api("com.esotericsoftware.kryo:kryo5:$kryo5")
   api("com.dtflys.forest:forest-spring-boot-starter:$forest")
   api("org.apache.commons:commons-pool2:$commonsPool2")
   api("com.squareup.retrofit2:retrofit:$retrofit")

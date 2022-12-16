@@ -12,8 +12,8 @@ spring:
     timeout: 10s
     lettuce:
       pool:
-        max-active: 24
-        max-idle: 12
+        max-active: 32
+        max-idle: 16
     host: frp
     password: XLrootJYD713
     database: 0
@@ -32,11 +32,11 @@ spring:
   task:
     scheduling:
       pool:
-        size: 12
+        size: 16
     execution:
       pool:
-        core-size: 12
-        max-size: 24
+        core-size: 16
+        max-size: 32
         allow-core-thread-timeout: false
   data:
     mongodb:
@@ -122,6 +122,7 @@ sa-token:
 jetcache:
   statIntervalMinutes: 15
   areaInCacheName: false
+  hidePackages: org.github
   local:
     default:
       type: caffeine
@@ -133,15 +134,9 @@ jetcache:
       type: redis.lettuce
       keyConvertor: jackson
       broadcastChannel: jetcache
-      valueEncoder: java
-      valueDecoder: java
-      poolConfig:
-        minIdle: 5
-        maxIdle: 20
-        maxTotal: 50
-      uri:
-        - redis://${spring.redis.password}@${spring.redis.host}:${spring.redis.port}/0
-      readFrom: masterPreferred
+      valueEncoder: kryo5
+      valueDecoder: kryo5
+      uri: redis://${spring.redis.password}@${spring.redis.host}:${spring.redis.port}/${spring.redis.database}
 
 xxl:
   adminAddresses: http://frp:8080/xxl-job-admin
