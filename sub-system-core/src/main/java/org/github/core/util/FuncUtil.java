@@ -8,8 +8,8 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
-import lombok.NonNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import static java.util.Optional.ofNullable;
 
 public abstract class FuncUtil {
@@ -17,19 +17,19 @@ public abstract class FuncUtil {
     return (t1, t2) -> {throw new UnsupportedOperationException();};
   }
 
-  public static <T, R> Function<T,Optional<R>> optional(@NonNull Function<T,R> function) {
+  public static <T, R> Function<T,Optional<R>> optional(@NotNull Function<T,R> function) {
     return (t) -> ofNullable(t).map(function);
   }
 
-  public static <T, R> Function<T,R> optional(@NonNull Function<T,R> function, @Nullable R defaultValue) {
+  public static <T, R> Function<T,R> optional(@NotNull Function<T,R> function, @Nullable R defaultValue) {
     return (t) -> ofNullable(t).map(function).orElse(defaultValue);
   }
 
-  public static <T, R> R map(@Nullable T t, @NonNull Map<T,R> map) {
+  public static <T, R> R map(@Nullable T t, @NotNull Map<T,R> map) {
     return map(t, map, null);
   }
 
-  public static <T, R> R map(@Nullable T t, @NonNull Map<T,R> map, @Nullable R defaultValue) {
+  public static <T, R> R map(@Nullable T t, @NotNull Map<T,R> map, @Nullable R defaultValue) {
     return ofNullable(t).map(map::get).orElse(defaultValue);
   }
 

@@ -1,7 +1,7 @@
 package org.github.core.spring.restful.json;
 
 import com.google.common.net.MediaType;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.spring.restful.Returnable;
 import static com.google.common.net.MediaType.JAVASCRIPT_UTF_8;
 
@@ -15,14 +15,14 @@ import static com.google.common.net.MediaType.JAVASCRIPT_UTF_8;
 @FunctionalInterface
 public interface JS extends Returnable {
   @Override
-  @NonNull
+  @NotNull
   default MediaType mediaType() {
     return JAVASCRIPT_UTF_8;
   }
 
   /** Generator. */
-  @NonNull
-  static JS of(@NonNull String js) {
+  @NotNull
+  static JS of(@NotNull String js) {
     return js::toString;
   }
 }

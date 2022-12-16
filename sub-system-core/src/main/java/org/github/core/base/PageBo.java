@@ -10,7 +10,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NonNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -49,7 +48,7 @@ public class PageBo extends Sort {
     return new Page<>(this);
   }
 
-  @NonNull
+  @NotNull
   protected List<OrderItem> sortList() {
     return sortList.stream().map(Sort::sort).filter(Objects::nonNull).collect(toImmutableList());
   }

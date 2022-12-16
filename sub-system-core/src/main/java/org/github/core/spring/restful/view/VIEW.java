@@ -1,6 +1,6 @@
 package org.github.core.spring.restful.view;
 
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.spring.restful.Returnable;
 
 /**
@@ -18,14 +18,14 @@ public interface VIEW extends Returnable {
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   static VIEW of() {
     return of("/");
   }
 
   /** Generator. */
-  @NonNull
-  static VIEW of(@NonNull String view) {
+  @NotNull
+  static VIEW of(@NotNull String view) {
     return view::toString;
   }
 }

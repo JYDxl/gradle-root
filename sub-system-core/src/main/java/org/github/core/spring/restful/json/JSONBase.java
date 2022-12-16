@@ -1,11 +1,11 @@
 package org.github.core.spring.restful.json;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.Data;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.exception.RemoteException;
 import org.springframework.http.HttpStatus;
 import static cn.hutool.core.text.CharSequenceUtil.firstNonBlank;
@@ -26,26 +26,26 @@ public class JSONBase implements JSON {
   @ApiModelProperty("状态")
   private int    code;
   @ApiModelProperty("信息")
-  @NonNull
+  @NotNull
   private String msg;
 
   public JSONBase() {
     this(OK.value(), OK.name());
   }
 
-  private JSONBase(int code, @NonNull String msg) {
+  private JSONBase(int code, @NotNull String msg) {
     this.code = code;
     this.msg  = msg;
   }
 
   @Override
-  public void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  public void handle(@NotNull HttpServletRequest req, @NotNull HttpServletResponse res) throws Exception {
     res.setContentType(mediaType().toString());
     writeValue(this, res.getOutputStream());
   }
 
   @Override
-  @NonNull
+  @NotNull
   public String get() {
     return json(this);
   }
@@ -72,25 +72,25 @@ public class JSONBase implements JSON {
   }
 
   /** WITH msg. */
-  @NonNull
-  public JSONBase withMsg(@NonNull String msg) {
+  @NotNull
+  public JSONBase withMsg(@NotNull String msg) {
     setMsg(msg);
     return this;
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   public static JSONBase ok() {
     return of(OK, null);
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   public static JSONBase of(HttpStatus status, @Nullable String msg) {
     return of(status.value(), firstNonBlank(msg, status.name()));
   }
 
-  @NonNull
+  @NotNull
   public static JSONBase of(int code, @Nullable String msg) {
     return new JSONBase(code, firstNonNull(msg, ""));
   }

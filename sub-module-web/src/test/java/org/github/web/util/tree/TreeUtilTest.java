@@ -30,13 +30,13 @@
 //   @Autowired
 //   ITabSafeQuestionDataService safeQuestionDataService;
 //
-//   @NonNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NonNull TabSafeQuestionDataEntity data) {
+//   @NotNull TreeVO applyTabSafeQuestionDataEntity2TreeVO(@NotNull TabSafeQuestionDataEntity data) {
 //     val vo = new TreeVO(data.getQuestionTypeId(), requireNonNull(data.getId()), requireNonNull(data.getCheckContent()));
 //     vo.setLeaf(true);
 //     return vo;
 //   }
 //
-//   @NonNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NonNull TabSafeQuestionTypeEntity type) {
+//   @NotNull TreeVO applyTabSafeQuestionTypeEntity2TreeVO(@NotNull TabSafeQuestionTypeEntity type) {
 //     val vo = new TreeVO(type.getParentId(), requireNonNull(type.getId()), requireNonNull(type.getTypeName()));
 //     vo.setLeaf(false);
 //     return vo;

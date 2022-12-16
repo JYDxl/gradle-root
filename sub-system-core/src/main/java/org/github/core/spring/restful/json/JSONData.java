@@ -2,12 +2,12 @@ package org.github.core.spring.restful.json;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.function.Function;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import static java.util.Optional.ofNullable;
 
 /**
@@ -39,19 +39,19 @@ public class JSONData<T> extends JSONBase implements JSON {
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   public static <V> JSONData<V> of() {
     return new JSONData<>();
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONData<R> of(T data, @NonNull Function<T,R> mapper) {
+  @NotNull
+  public static <T, R extends T> JSONData<R> of(T data, @NotNull Function<T,R> mapper) {
     return of(ofNullable(data).map(mapper).orElse(null));
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   public static <V> JSONData<V> of(V data) {
     return new JSONData<>(data);
   }

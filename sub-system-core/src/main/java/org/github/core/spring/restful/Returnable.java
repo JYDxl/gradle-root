@@ -3,10 +3,10 @@ package org.github.core.spring.restful;
 import com.google.common.net.MediaType;
 import java.io.Serializable;
 import java.util.function.Supplier;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import static cn.hutool.extra.servlet.ServletUtil.write;
 import static com.google.common.net.MediaType.PLAIN_TEXT_UTF_8;
 
@@ -20,7 +20,7 @@ import static com.google.common.net.MediaType.PLAIN_TEXT_UTF_8;
 @FunctionalInterface
 public interface Returnable extends Serializable, Supplier<String> {
   /** 通过请求和响应处理数据. */
-  default void handle(@NonNull HttpServletRequest req, @NonNull HttpServletResponse res) throws Exception {
+  default void handle(@NotNull HttpServletRequest req, @NotNull HttpServletResponse res) throws Exception {
     write(res, get(), mediaType().toString());
   }
 
@@ -30,7 +30,7 @@ public interface Returnable extends Serializable, Supplier<String> {
   String get();
 
   /** 获取返回类型. */
-  @NonNull
+  @NotNull
   default MediaType mediaType() {
     return PLAIN_TEXT_UTF_8;
   }
@@ -41,19 +41,19 @@ public interface Returnable extends Serializable, Supplier<String> {
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   static Returnable of() {
     return of("");
   }
 
   /** Generator. */
-  @NonNull
-  static Returnable of(@NonNull Object data) {
+  @NotNull
+  static Returnable of(@NotNull Object data) {
     return data::toString;
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   static Returnable nil() {
     return () -> null;
   }

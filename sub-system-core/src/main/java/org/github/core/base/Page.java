@@ -1,7 +1,7 @@
 package org.github.core.base;
 
 import java.util.List;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import lombok.val;
 import static com.google.common.base.MoreObjects.toStringHelper;
 
@@ -23,7 +23,7 @@ public class Page<T> extends com.baomidou.mybatisplus.extension.plugins.paginati
   }
 
   @Override
-  @NonNull
+  @NotNull
   public List<T> getRecords() {
     return super.getRecords();
   }

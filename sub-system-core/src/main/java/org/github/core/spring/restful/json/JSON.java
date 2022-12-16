@@ -1,7 +1,7 @@
 package org.github.core.spring.restful.json;
 
 import com.google.common.net.MediaType;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.spring.restful.Returnable;
 import static com.google.common.net.MediaType.JSON_UTF_8;
 import static org.github.core.spring.ops.SpringKt.json;
@@ -16,31 +16,31 @@ import static org.github.core.spring.ops.SpringKt.json;
 @FunctionalInterface
 public interface JSON extends Returnable {
   @Override
-  @NonNull
+  @NotNull
   default MediaType mediaType() {
     return JSON_UTF_8;
   }
 
   /** Generator. */
-  @NonNull
-  static JSON of(@NonNull Object data) {
+  @NotNull
+  static JSON of(@NotNull Object data) {
     return of(json(data));
   }
 
   /** Generator. */
-  @NonNull
-  static JSON of(@NonNull String data) {
+  @NotNull
+  static JSON of(@NotNull String data) {
     return data::toString;
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   static JSON of() {
     return of("{}");
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   static JSON nil() {
     return () -> null;
   }

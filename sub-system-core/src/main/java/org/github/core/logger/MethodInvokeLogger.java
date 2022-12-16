@@ -1,7 +1,7 @@
 package org.github.core.logger;
 
 import java.util.Arrays;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.aspectj.lang.JoinPoint;

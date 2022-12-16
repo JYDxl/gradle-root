@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import lombok.val;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Multimaps.index;
@@ -16,11 +16,11 @@ import static java.util.Optional.ofNullable;
 import static org.github.core.util.FuncUtil.optional;
 
 public abstract class TreeUtil {
-  public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> List<T> buildTree(@NonNull List<T> list, I pid) {
+  public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> List<T> buildTree(@NotNull List<T> list, I pid) {
     return buildTree(list, pid, null);
   }
 
-  public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> List<T> buildTree(@NonNull List<T> list, I pid, Comparator<T> valueComparator) {
+  public static <T extends TreeNode<I,E>, I extends Comparable<? super I>, E> List<T> buildTree(@NotNull List<T> list, I pid, Comparator<T> valueComparator) {
     val fun   = optional(T::getPid);
     val tmp   = index(list, fun::apply);
     val index = valueComparator == null ? tmp : sort(valueComparator, tmp);

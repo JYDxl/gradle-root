@@ -1,7 +1,7 @@
 package org.github.core.spring.restful.view;
 
 import com.google.common.net.MediaType;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.spring.restful.Returnable;
 import static com.google.common.net.MediaType.HTML_UTF_8;
 
@@ -15,14 +15,14 @@ import static com.google.common.net.MediaType.HTML_UTF_8;
 @FunctionalInterface
 public interface HTML extends Returnable {
   @Override
-  @NonNull
+  @NotNull
   default MediaType mediaType() {
     return HTML_UTF_8;
   }
 
   /** Generator. */
-  @NonNull
-  static HTML of(@NonNull String html) {
+  @NotNull
+  static HTML of(@NotNull String html) {
     return html::toString;
   }
 }

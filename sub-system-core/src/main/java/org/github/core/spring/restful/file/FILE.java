@@ -2,8 +2,8 @@ package org.github.core.spring.restful.file;
 
 import com.google.common.net.MediaType;
 import java.io.InputStream;
-import javax.annotation.Nullable;
-import lombok.NonNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.spring.restful.Returnable;
 import static com.google.common.net.MediaType.OCTET_STREAM;
 
@@ -16,7 +16,7 @@ import static com.google.common.net.MediaType.OCTET_STREAM;
  */
 public interface FILE extends Returnable {
   @Override
-  @NonNull
+  @NotNull
   default MediaType mediaType() {
     return OCTET_STREAM;
   }
@@ -24,16 +24,16 @@ public interface FILE extends Returnable {
   /**
    * Generator.
    */
-  @NonNull
-  static FILE of(@NonNull String name, @NonNull InputStream input) {
+  @NotNull
+  static FILE of(@NotNull String name, @NotNull InputStream input) {
     return of(name, input, null);
   }
 
   /**
    * Generator.
    */
-  @NonNull
-  static FILE of(@NonNull String name, @NonNull InputStream input, @Nullable MediaType type) {
+  @NotNull
+  static FILE of(@NotNull String name, @NotNull InputStream input, @Nullable MediaType type) {
     return new FILEImpl(name, input, type);
   }
 }

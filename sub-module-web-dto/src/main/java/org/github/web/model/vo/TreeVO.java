@@ -1,9 +1,9 @@
 package org.github.web.model.vo;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.github.core.util.tree.DefaultTreeNode;
@@ -15,7 +15,7 @@ import org.github.core.util.tree.DefaultTreeNode;
 public class TreeVO extends DefaultTreeNode<String,Object> {
   private boolean leaf;
 
-  public TreeVO(@Nullable String pid, @NonNull String id, @NonNull String name) {
+  public TreeVO(@Nullable String pid, @NotNull String id, @NotNull String name) {
     super(pid, id, name);
   }
 }

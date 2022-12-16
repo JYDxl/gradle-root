@@ -3,7 +3,7 @@ package org.github.core.base;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.val;

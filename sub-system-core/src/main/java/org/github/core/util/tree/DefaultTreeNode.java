@@ -1,24 +1,24 @@
 package org.github.core.util.tree;
 
 import java.util.Collection;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import lombok.Data;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 @Data
 public class DefaultTreeNode<I, E> implements TreeNode<I, E> {
     @Nullable
     private I pid;
-    @NonNull
+    @NotNull
     private I id;
-    @NonNull
+    @NotNull
     private String name;
     @Nullable
     private E extra;
     @Nullable
     private Collection<? extends TreeNode<I, E>> child;
 
-    public DefaultTreeNode(@Nullable I pid, @NonNull I id, @NonNull String name) {
+    public DefaultTreeNode(@Nullable I pid, @NotNull I id, @NotNull String name) {
         this.pid = pid;
         this.id = id;
         this.name = name;

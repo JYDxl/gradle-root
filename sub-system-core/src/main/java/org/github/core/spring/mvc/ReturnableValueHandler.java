@@ -1,10 +1,10 @@
 package org.github.core.spring.mvc;
 
 import java.io.IOException;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.github.core.spring.restful.Returnable;
@@ -25,12 +25,12 @@ import static org.github.core.spring.restful.Returnable.nil;
 @Slf4j
 public class ReturnableValueHandler implements HandlerMethodReturnValueHandler {
   @Override
-  public boolean supportsReturnType(@NonNull MethodParameter returnType) {
+  public boolean supportsReturnType(@NotNull MethodParameter returnType) {
     return Returnable.class.isAssignableFrom(returnType.getParameterType());
   }
 
   @Override
-  public void handleReturnValue(@Nullable Object returnValue, @NonNull MethodParameter returnType, @NonNull ModelAndViewContainer mavContainer, @NonNull NativeWebRequest webRequest) throws IOException {
+  public void handleReturnValue(@Nullable Object returnValue, @NotNull MethodParameter returnType, @NotNull ModelAndViewContainer mavContainer, @NotNull NativeWebRequest webRequest) throws IOException {
     val value = returnValue == null ? nil() : ((Returnable) returnValue);
     val req   = requireNonNull(webRequest.getNativeRequest(HttpServletRequest.class));
     val resp  = requireNonNull(webRequest.getNativeResponse(HttpServletResponse.class));

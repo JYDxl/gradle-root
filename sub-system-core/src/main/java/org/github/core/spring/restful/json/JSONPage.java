@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 import org.github.core.base.IPage;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
@@ -33,41 +33,41 @@ public class JSONPage<E> extends JSONArray<E> implements JSON {
   }
 
   /** WITH total. */
-  @NonNull
+  @NotNull
   public JSONPage<E> withTotal(long total) {
     setTotal(total);
     return this;
   }
 
   /** Generator. */
-  @NonNull
+  @NotNull
   public static <V> JSONPage<V> of() {
     return new JSONPage<>();
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONPage<R> of(@NonNull IPage<T> page) {
+  @NotNull
+  public static <T, R extends T> JSONPage<R> of(@NotNull IPage<T> page) {
     return of(page.getTotal(), page.getRecords());
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  @NonNull
-  public static <T, R extends T> JSONPage<R> of(long total, @NonNull Collection<T> data) {
+  @NotNull
+  public static <T, R extends T> JSONPage<R> of(long total, @NotNull Collection<T> data) {
     return (JSONPage) new JSONPage<>(total).withData(data);
   }
 
   /** Generator. */
   @SuppressWarnings({"unchecked", "rawtypes"})
-  @NonNull
-  public static <T, R extends T> JSONPage<R> of(@NonNull IPage<T> page, @NonNull Function<T,R> mapper) {
+  @NotNull
+  public static <T, R extends T> JSONPage<R> of(@NotNull IPage<T> page, @NotNull Function<T,R> mapper) {
     return (JSONPage) new JSONPage<>(page.getTotal()).withData(page.getRecords().stream().map(mapper).collect(toImmutableList()));
   }
 
   /** Generator. */
-  @NonNull
-  public static <T, R extends T> JSONPage<R> of(@NonNull IPage<T> page, @NonNull Collection<R> data) {
+  @NotNull
+  public static <T, R extends T> JSONPage<R> of(@NotNull IPage<T> page, @NotNull Collection<R> data) {
     return of(page.getTotal(), data);
   }
 }
