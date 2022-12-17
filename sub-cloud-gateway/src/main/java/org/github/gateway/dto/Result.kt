@@ -2,13 +2,14 @@ package org.github.gateway.dto
 
 import org.springframework.http.HttpStatus
 
+@Suppress("MemberVisibilityCanBePrivate")
 class Result(status: HttpStatus, reason: String? = null) {
-    private val code: Int
+  val code: Int
 
-    private val msg: String
+  val msg: String
 
-    init {
-        code = status.value()
-        msg = reason ?: status.name
-    }
+  init {
+    code = status.value()
+    msg = reason ?: status.name
+  }
 }

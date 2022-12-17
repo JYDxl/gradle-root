@@ -8,7 +8,8 @@
       title,
       description,
       content,
-      status
+      status,
+      publish_time
     FROM m_blog mb
   </select>
 </mapper>

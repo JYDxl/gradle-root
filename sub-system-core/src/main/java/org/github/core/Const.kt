@@ -8,7 +8,9 @@ const val CACHE_NAME_PERMISSION = "cache_name_permission"
 
 const val CACHE_TIMEOUT = 30 * 60
 
-const val SA_TOKEN_PREFIX = "token:login:token:"
+const val LOGIN_TYPE_NAME = "center"
+
+const val SA_TOKEN_PREFIX = "token:$LOGIN_TYPE_NAME:token:"
 
 const val DEVICE_TYPE_PC = "PC"
 

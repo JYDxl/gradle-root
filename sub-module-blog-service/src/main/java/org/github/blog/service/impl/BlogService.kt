@@ -45,7 +45,7 @@ class BlogService: IBlogService {
   }
 
   override fun edit(bo: BlogEditBo): JSONBase {
-    blogMbpService.updateById(bo)
+    blogMbpService.saveOrUpdate(bo)
     return JSONBase.ok()
   }
 

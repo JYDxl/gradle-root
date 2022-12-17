@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
+import java.time.LocalDateTime
 import org.github.core.base.Entity
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -44,6 +45,10 @@ open class BlogMbpPo : Entity() {
     @TableField("status")
     open var status: String? = null
 
+    @ApiModelProperty("发布日期")
+    @TableField("publish_time")
+    open var publishTime: LocalDateTime? = null
+
     companion object {
 
         private const val serialVersionUID = 1L
@@ -72,6 +77,10 @@ open class BlogMbpPo : Entity() {
 
         const val STATUS_PROP : String = "status"
 
+        const val PUBLISH_TIME : String = "publish_time"
+
+        const val PUBLISH_TIME_PROP : String = "publishTime"
+
     }
 
     override fun pkVal(): Serializable? {
@@ -91,6 +100,7 @@ open class BlogMbpPo : Entity() {
         if (description != other.description) return false
         if (content != other.content) return false
         if (status != other.status) return false
+        if (publishTime != other.publishTime) return false
         return true
     }
 
@@ -102,6 +112,7 @@ open class BlogMbpPo : Entity() {
         result = 31 * result + (description?.hashCode() ?: 0)
         result = 31 * result + (content?.hashCode() ?: 0)
         result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (publishTime?.hashCode() ?: 0)
         return result
     }
 

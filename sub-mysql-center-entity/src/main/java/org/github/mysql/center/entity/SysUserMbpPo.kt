@@ -38,8 +38,8 @@ open class SysUserMbpPo : Entity() {
     open var secretKey: String? = null
 
     @ApiModelProperty("昵称")
-    @TableField("nice_name")
-    open var niceName: String? = null
+    @TableField("nick_name")
+    open var nickName: String? = null
 
     @ApiModelProperty("账号状态")
     @TableField("account_status")
@@ -85,9 +85,9 @@ open class SysUserMbpPo : Entity() {
 
         const val SECRET_KEY_PROP : String = "secretKey"
 
-        const val NICE_NAME : String = "nice_name"
+        const val NICK_NAME : String = "nick_name"
 
-        const val NICE_NAME_PROP : String = "niceName"
+        const val NICK_NAME_PROP : String = "nickName"
 
         const val ACCOUNT_STATUS : String = "account_status"
 
@@ -130,7 +130,7 @@ open class SysUserMbpPo : Entity() {
         if (userName != other.userName) return false
         if (userPwd != other.userPwd) return false
         if (secretKey != other.secretKey) return false
-        if (niceName != other.niceName) return false
+        if (nickName != other.nickName) return false
         if (accountStatus != other.accountStatus) return false
         if (creatorName != other.creatorName) return false
         if (createdTime != other.createdTime) return false
@@ -146,7 +146,7 @@ open class SysUserMbpPo : Entity() {
         result = 31 * result + (userName?.hashCode() ?: 0)
         result = 31 * result + (userPwd?.hashCode() ?: 0)
         result = 31 * result + (secretKey?.hashCode() ?: 0)
-        result = 31 * result + (niceName?.hashCode() ?: 0)
+        result = 31 * result + (nickName?.hashCode() ?: 0)
         result = 31 * result + (accountStatus?.hashCode() ?: 0)
         result = 31 * result + (creatorName?.hashCode() ?: 0)
         result = 31 * result + (createdTime?.hashCode() ?: 0)

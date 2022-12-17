@@ -108,10 +108,11 @@ feign:
     enabled: true
 
 sa-token:
+  timeout: 1800
   jwt-secret-key: XLrootJYD713
   token-name: token
-  activity-timeout: 1800
-  is-log: true
+  isShare: false
+  maxLoginCount: 16
   alone-redis:
     database: 15
     host: ${spring.redis.host}

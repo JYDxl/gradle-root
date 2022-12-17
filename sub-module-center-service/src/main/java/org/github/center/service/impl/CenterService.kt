@@ -54,7 +54,7 @@ class CenterService: ICenterService {
 
     val entity = SysUserMbpPo().apply {
       userName = bo.username
-      niceName = userName
+      nickName = userName
       secretKey = encodeHexStr(key)
       userPwd = password
     }
