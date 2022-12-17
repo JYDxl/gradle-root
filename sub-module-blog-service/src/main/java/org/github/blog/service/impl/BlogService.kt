@@ -54,6 +54,11 @@ class BlogService: IBlogService {
     return JSONArray.of(list)
   }
 
+  override fun remove(id: Long): JSONBase {
+    blogMbpService.removeById(id)
+    return JSONBase.ok()
+  }
+
   private fun transDetail(po: BlogMbpPo): BlogDetailVo {
     return commonService.trans(singletonList(po), BlogDetailVo::class.java).first()
   }

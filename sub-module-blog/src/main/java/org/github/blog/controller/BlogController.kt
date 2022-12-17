@@ -28,6 +28,10 @@ class BlogController {
   @GetMapping("detail/{id}")
   fun detail(@PathVariable id: Long) = blogService.detail(id)
 
+  @ApiOperation("博客相关-删除")
+  @PostMapping("remove/{id}")
+  fun remove(@PathVariable id: Long) = blogService.remove(id)
+
   @ApiOperation("博客相关-编辑")
   @PostMapping("edit")
   fun edit(@RequestBody bo: BlogEditBo) = blogService.edit(bo.apply {trim()})

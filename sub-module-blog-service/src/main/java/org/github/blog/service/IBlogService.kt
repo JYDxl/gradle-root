@@ -19,4 +19,6 @@ interface IBlogService {
   fun edit(@Valid bo: BlogEditBo): JSONBase
 
   fun all(): JSONArray<BlogMbpPo>
+
+  fun remove(id: Long): JSONBase
 }
